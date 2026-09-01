@@ -1,0 +1,15 @@
+---
+pagetitle: "Design of Complex Integrated Circuits"
+---
+
+# Design of Complex Integrated Circuits
+
+**(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)**
+
+This is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 ("VL Entwurf komplexer integrierter Schaltungen"). Follow this [link to access the material](dcic.qmd).
+
+The course covers how integrated circuits are built (MOSFET operation, CMOS technology, layout, packaging, testing, and the economics of chip making) and how they are designed (design methodology, ESD protection, latch-up, robust design techniques, and circuit simulation).
+
+All course material is made publicly available and shared under the Apache-2.0 license.
+
+**We happily accept pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue!**
