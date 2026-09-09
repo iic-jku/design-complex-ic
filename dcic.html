@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
-<meta name="dcterms.date" content="2026-09-01">
+<meta name="dcterms.date" content="2026-09-09">
 
 <title>Design of Complex Integrated Circuits</title>
 <style>
@@ -28,7 +28,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,9 +69,12 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-88ddd8fe8f2e149ce738a858b302aa08.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-faf7545d7cd7f7fe51aac140dbe160a3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-88ddd8fe8f2e149ce738a858b302aa08.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3f686e3780fb05a2389bee263982c3c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-04ba2179d13fc1125eaa5c7782862b67.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-3f686e3780fb05a2389bee263982c3c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -81,6 +103,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -291,8 +342,18 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link active" data-scroll-target="#sec-intro"><span class="header-section-number">1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#sec-intro-scale" id="toc-sec-intro-scale" class="nav-link" data-scroll-target="#sec-intro-scale"><span class="header-section-number">1.1</span> How Small Is a Nanometer?</a></li>
+  <li><a href="#sec-intro-history" id="toc-sec-intro-history" class="nav-link" data-scroll-target="#sec-intro-history"><span class="header-section-number">1.2</span> A Brief History of Semiconductors</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -326,7 +387,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 1, 2026</p>
+      <p class="date">September 9, 2026</p>
     </div>
   </div>
   
@@ -338,11 +399,104 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>TBD</p>
+<div class="hidden">
+
+</div>
+<section id="sec-intro" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p><a href="https://en.wikipedia.org/wiki/Integrated_circuit">Integrated circuits</a> (ICs) are ubiquitous in our modern society. The extremely high density of functions (computation, storage, signal processing, digitization, energy conversion) offered by microelectronics enables all the devices and infrastructure that we depend on: the control of factories and energy generation, computation in server farms, personal computers and mobile devices, communication by wires, optics, or wireless links, and sensing of the environment. All of these are driven by integrated circuits, implemented in various semiconductor technologies.</p>
+<p>This course looks at integrated circuits from two complementary angles. In the first part, we discuss how ICs are <strong>built</strong>: the operation of the MOSFET, the CMOS manufacturing technology, the physical layout, packaging, production testing, and the economics of chip making. In the second part, we discuss how complex ICs are <strong>designed</strong>: design methodologies for digital and mixed-signal circuits, protection against electrostatic discharge and latch-up, robust design techniques, and the inner workings of circuit simulators.</p>
+<p>It is assumed that readers are familiar with the contents of our <a href="https://iic-jku.github.io/analog-circuit-design/aicd.html">Analog Circuit Design</a> course; basic knowledge of digital and analog circuit design is a prerequisite for the later chapters.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All course material (source code of this document, Python code for all figures, etc.) is made publicly available on GitHub and shared under the Apache-2.0 license.</p>
+<p>Please feel free to submit pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue.</p>
+<p>The production of this document would be impossible without these (and many more) great open-source software products: <code>VS Code</code>, <code>Quarto</code>, <code>Pandoc</code>, <code>LaTeX</code>, <code>Jupyter Notebook</code>, <code>Python</code>, <code>schemdraw</code>, <code>Numpy</code>, <code>Matplotlib</code>, <code>Pandas</code>, <code>Git</code>, …</p>
+</div>
+</div>
+<section id="sec-intro-scale" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-intro-scale"><span class="header-section-number">1.1</span> How Small Is a Nanometer?</h2>
+<p>Modern CMOS technologies pattern structures with dimensions of a few nanometers. To develop a feeling for how small these dimensions really are, <a href="#fig-length-scales" class="quarto-xref">Figure&nbsp;1</a> compares the feature sizes of integrated circuits with a few familiar objects: a human hair is roughly <span class="math inline">\(70\,\mu\text{m}\)</span> thick, a red blood cell has a diameter of about <span class="math inline">\(8\,\mu\text{m}\)</span>, a virus measures around <span class="math inline">\(150\,\text{nm}\)</span>, and the distance between two silicon atoms in the crystal lattice is only <span class="math inline">\(0.24\,\text{nm}\)</span>. The minimum feature sizes of leading-edge CMOS processes are thus much smaller than a virus, and only about one order of magnitude away from the atomic spacing of the silicon crystal itself!</p>
+<div id="cell-fig-length-scales" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div id="fig-length-scales" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-length-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-length-scales-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Length scales of integrated-circuit structures compared to familiar objects, on a logarithmic axis."><img src="dcic_files/figure-html/fig-length-scales-output-1.png" width="662" height="297" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-length-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Length scales of integrated-circuit structures compared to familiar objects, on a logarithmic axis.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-intro-history" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="sec-intro-history"><span class="header-section-number">1.2</span> A Brief History of Semiconductors</h2>
+<p>The history of semiconductor electronics spans not even one century from the first observation of semiconductor rectification to today’s chips with billions of transistors. <a href="#fig-history-timeline" class="quarto-xref">Figure&nbsp;2</a> summarizes the key milestones which we briefly discuss in the following.</p>
+<div id="cell-fig-history-timeline" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div id="fig-history-timeline" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-history-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-history-timeline-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Timeline of key milestones in semiconductor history."><img src="dcic_files/figure-html/fig-history-timeline-output-1.png" width="745" height="355" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-history-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Timeline of key milestones in semiconductor history.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>1874, the diode:</strong> Karl Ferdinand Braun discovers the <strong>rectifying effect</strong> of a particular type of mineral (galena, “Bleiglanz”). This effect is later exploited in radio receivers in the form of the <a href="https://en.wikipedia.org/wiki/Crystal_detector">crystal detector</a> (the “cat’s whisker”), which is the first semiconductor electronic device.</p>
+<p><strong>1926, the field-effect transistor (FET):</strong> <a href="https://en.wikipedia.org/wiki/Julius_Edgar_Lilienfeld">Julius Lilienfeld</a> patents the <strong>field-effect transistor</strong>. Unfortunately, it takes several decades before such a device can actually be manufactured, as surface charges at the semiconductor interface cause malfunction of the early devices. Only in 1960 do Dawon Kahng and Mohamed Atalla finally demonstrate the <a href="https://en.wikipedia.org/wiki/MOSFET">metal-oxide-semiconductor field-effect transistor</a> (MOSFET).</p>
+<p><strong>1947, the bipolar junction transistor (BJT):</strong> John Bardeen, William Shockley, and Walter Brattain demonstrate the first <strong>semiconductor transistor</strong> (using germanium) at Bell Labs. This was a big step towards the replacement of vacuum tubes. In the first <a href="https://en.wikipedia.org/wiki/Point-contact_transistor">point-contact transistor</a>, the bottom piece of germanium formed the base terminal, hence the name “base.”</p>
+<p><strong>1958/1960, the first integrated circuit:</strong> After the first solid-state circuit demonstrated by Jack Kilby in 1958, Robert Noyce and his team at Fairchild build the first <strong>monolithic integrated circuit</strong> with pn-junction isolation in 1960: a flip-flop in transistor-resistor logic, integrated onto a wafer with 3 mm diameter.</p>
+<p><strong>1963, complementary MOS (CMOS):</strong> In an ISSCC paper, Frank Wanlass and Chih-Tang Sah of Fairchild Semiconductor show that logic built from p-channel and n-channel MOSFETs draws very little standby power—the invention of <a href="https://en.wikipedia.org/wiki/CMOS">CMOS</a> <span class="citation" data-cites="Wanlass_Sah_1963">(<a href="#ref-Wanlass_Sah_1963" role="doc-biblioref">Wanlass and Sah 1963</a>)</span>.</p>
+<p><strong>1964, analog integrated circuits:</strong> Robert J. Widlar, the “Father of Analog Integrated Circuits,” designs the first integrated operational amplifier, the µA702.</p>
+<p><strong>1965, Moore’s law:</strong> Gordon E. Moore, based on only a handful of data points, makes a bold prediction about the growth of the number of components per integrated circuit, which would eventually become known as <a href="https://en.wikipedia.org/wiki/Moore%27s_law"><strong>“Moore’s law”</strong></a> <span class="citation" data-cites="Moore_1965">(<a href="#ref-Moore_1965" role="doc-biblioref">Moore 1965</a>)</span>. <a href="#fig-moores-law" class="quarto-xref">Figure&nbsp;3</a> shows the data available to Moore in 1965 together with his famous extrapolation: a doubling of the number of components per chip every year (later revised to a doubling every two years)—an exponential growth trend that the industry has followed for decades.</p>
+<div id="cell-fig-moores-law" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div id="fig-moores-law" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-moores-law-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-moores-law-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: Moore’s law: the number of components per integrated circuit versus time. The blue points reproduce the data available to Moore in 1965; the dashed red line is his extrapolation of a doubling every year (data after Moore, ‘Cramming more components onto integrated circuits,’ Electronics, 1965)."><img src="dcic_files/figure-html/fig-moores-law-output-1.png" width="566" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-moores-law-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Moore’s law: the number of components per integrated circuit versus time. The blue points reproduce the data available to Moore in 1965; the dashed red line is his extrapolation of a doubling every year (data after Moore, ‘Cramming more components onto integrated circuits,’ Electronics, 1965).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>2006, the first billion-transistor logic chip:</strong> Intel announces the first microprocessor with more than one billion transistors, the <a href="https://en.wikipedia.org/wiki/Itanium">Intel Itanium 2</a>. The chip is manufactured in a 90 nm CMOS process and contains 1.72 billion transistors on a die with an area of 374 mm². The first demonstrated chip with one billion transistors is a 1 Gbit DRAM presented by NEC in 1995, manufactured in 0.25 µm technology <span class="citation" data-cites="NEC_1Gbit_DRAM_1995">(<a href="#ref-NEC_1Gbit_DRAM_1995" role="doc-biblioref">Sugibayashi et al. 1995</a>)</span>.</p>
+<p>For an excellent, much more detailed account of semiconductor history, visit the <a href="https://www.computerhistory.org/siliconengine/timeline/">Silicon Engine timeline of the Computer History Museum</a>.</p>
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section></div></main> <!-- /main -->
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Moore_1965" class="csl-entry" role="listitem">
+Moore, Gordon E. 1965. <span>“Cramming More Components onto Integrated Circuits.”</span> <em>Electronics</em> 38 (8): 114–17.
+</div>
+<div id="ref-NEC_1Gbit_DRAM_1995" class="csl-entry" role="listitem">
+Sugibayashi, T., I. Naritake, S. Utsugi, et al. 1995. <span>“A 1-<span>Gb</span> <span>DRAM</span> for File Applications.”</span> <em>IEEE Journal of Solid-State Circuits</em> 30 (11): 1277–80. <a href="https://doi.org/10.1109/4.475716">https://doi.org/10.1109/4.475716</a>.
+</div>
+<div id="ref-Wanlass_Sah_1963" class="csl-entry" role="listitem">
+Wanlass, Frank M., and Chih-Tang Sah. 1963. <span>“Nanowatt Logic Using Field-Effect Metal-Oxide Semiconductor Triodes.”</span> <em>IEEE International Solid-State Circuits Conference (ISSCC), Digest of Technical Papers</em>, 32–33.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -770,6 +924,38 @@ ul.task-list li input[type="checkbox"] {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
