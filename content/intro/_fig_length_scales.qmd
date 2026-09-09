@@ -1,0 +1,55 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-length-scales
+#| echo: false
+#| fig-cap: "Length scales of integrated-circuit structures compared to familiar objects, on a logarithmic axis."
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+items = [
+    ('Si lattice spacing', 0.24e-9),
+    ('SiO$_2$ gate oxide', 2e-9),
+    ('Leading-edge feature size', 15e-9),
+    ('MOSFET gate (130 nm node)', 130e-9),
+    ('Virus', 150e-9),
+    ('Visible light wavelength', 550e-9),
+    ('Red blood cell', 8e-6),
+    ('Human hair', 70e-6),
+    ('This letter "m"', 2e-3),
+]
+
+fig, ax = plt.subplots(figsize=(7, 3.2))
+y = np.arange(len(items))
+sizes = [s for _, s in items]
+ax.hlines(y, 1e-10, sizes, color='lightgray', lw=1)
+ax.plot(sizes, y, 'o', color='tab:blue')
+for yi, (name, s) in zip(y, items):
+    ax.text(s * 1.6, yi, name, va='center', fontsize=9)
+
+ax.set_xscale('log')
+ax.set_xlim(1e-10, 3e-1)
+ax.set_ylim(-0.7, len(items) - 0.3)
+ax.set_xlabel('Size (m)')
+ax.set_yticks([])
+ax.grid(axis='x', alpha=0.3)
+for spine in ['left', 'right', 'top']:
+    ax.spines[spine].set_visible(False)
+plt.tight_layout()
+plt.show()
+```

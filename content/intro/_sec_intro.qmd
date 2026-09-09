@@ -1,0 +1,63 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# Introduction {#sec-intro}
+
+[Integrated circuits](https://en.wikipedia.org/wiki/Integrated_circuit) (ICs) are ubiquitous in our modern society. The extremely high density of functions (computation, storage, signal processing, digitization, energy conversion) offered by microelectronics enables all the devices and infrastructure that we depend on: the control of factories and energy generation, computation in server farms, personal computers and mobile devices, communication by wires, optics, or wireless links, and sensing of the environment. All of these are driven by integrated circuits, implemented in various semiconductor technologies.
+
+This course looks at integrated circuits from two complementary angles. In the first part, we discuss how ICs are **built**: the operation of the MOSFET, the CMOS manufacturing technology, the physical layout, packaging, production testing, and the economics of chip making. In the second part, we discuss how complex ICs are **designed**: design methodologies for digital and mixed-signal circuits, protection against electrostatic discharge and latch-up, robust design techniques, and the inner workings of circuit simulators.
+
+It is assumed that readers are familiar with the contents of our [Analog Circuit Design](https://iic-jku.github.io/analog-circuit-design/aicd.html) course; basic knowledge of digital and analog circuit design is a prerequisite for the later chapters.
+
+::: {.callout-important}
+All course material (source code of this document, Python code for all figures, etc.) is made publicly available on GitHub and shared under the Apache-2.0 license.
+
+Please feel free to submit pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue.
+
+The production of this document would be impossible without these (and many more) great open-source software products: `VS Code`, `Quarto`, `Pandoc`, `LaTeX`, `Jupyter Notebook`, `Python`, `schemdraw`, `Numpy`, `Matplotlib`, `Pandas`, `Git`, ...
+:::
+
+## How Small Is a Nanometer? {#sec-intro-scale}
+
+Modern CMOS technologies pattern structures with dimensions of a few nanometers. To develop a feeling for how small these dimensions really are, @fig-length-scales compares the feature sizes of integrated circuits with a few familiar objects: a human hair is roughly $70\,\mu\text{m}$ thick, a red blood cell has a diameter of about $8\,\mu\text{m}$, a virus measures around $150\,\text{nm}$, and the distance between two silicon atoms in the crystal lattice is only $0.24\,\text{nm}$. The minimum feature sizes of leading-edge CMOS processes are thus much smaller than a virus, and only about one order of magnitude away from the atomic spacing of the silicon crystal itself!
+
+{{< include /content/intro/_fig_length_scales.qmd >}}
+
+## A Brief History of Semiconductors {#sec-intro-history}
+
+The history of semiconductor electronics spans not even one century from the first observation of semiconductor rectification to today's chips with billions of transistors. @fig-history-timeline summarizes the key milestones which we briefly discuss in the following.
+
+{{< include /content/intro/_fig_history_timeline.qmd >}}
+
+**1874, the diode:** Karl Ferdinand Braun discovers the **rectifying effect** of a particular type of mineral (galena, "Bleiglanz"). This effect is later exploited in radio receivers in the form of the [crystal detector](https://en.wikipedia.org/wiki/Crystal_detector) (the "cat's whisker"), which is the first semiconductor electronic device.
+
+**1926, the field-effect transistor (FET):** [Julius Lilienfeld](https://en.wikipedia.org/wiki/Julius_Edgar_Lilienfeld) patents the **field-effect transistor**. Unfortunately, it takes several decades before such a device can actually be manufactured, as surface charges at the semiconductor interface cause malfunction of the early devices. Only in 1960 do Dawon Kahng and Mohamed Atalla finally demonstrate the [metal-oxide-semiconductor field-effect transistor](https://en.wikipedia.org/wiki/MOSFET) (MOSFET).
+
+**1947, the bipolar junction transistor (BJT):** John Bardeen, William Shockley, and Walter Brattain demonstrate the first **semiconductor transistor** (using germanium) at Bell Labs. This was a big step towards the replacement of vacuum tubes. In the first [point-contact transistor](https://en.wikipedia.org/wiki/Point-contact_transistor), the bottom piece of germanium formed the base terminal, hence the name "base."
+
+**1958/1960, the first integrated circuit:** After the first solid-state circuit demonstrated by Jack Kilby in 1958, Robert Noyce and his team at Fairchild build the first **monolithic integrated circuit** with pn-junction isolation in 1960: a flip-flop in transistor-resistor logic, integrated onto a wafer with 3 mm diameter.
+
+**1963, complementary MOS (CMOS):** In an ISSCC paper, Frank Wanlass and Chih-Tang Sah of Fairchild Semiconductor show that logic built from p-channel and n-channel MOSFETs draws very little standby power---the invention of [CMOS](https://en.wikipedia.org/wiki/CMOS) [@Wanlass_Sah_1963].
+
+**1964, analog integrated circuits:** Robert J. Widlar, the "Father of Analog Integrated Circuits," designs the first integrated operational amplifier, the µA702.
+
+**1965, Moore's law:** Gordon E. Moore, based on only a handful of data points, makes a bold prediction about the growth of the number of components per integrated circuit, which would eventually become known as [**"Moore's law"**](https://en.wikipedia.org/wiki/Moore%27s_law) [@Moore_1965]. @fig-moores-law shows the data available to Moore in 1965 together with his famous extrapolation: a doubling of the number of components per chip every year (later revised to a doubling every two years)—an exponential growth trend that the industry has followed for decades.
+
+{{< include /content/intro/_fig_moores_law.qmd >}}
+
+**2006, the first billion-transistor logic chip:** Intel announces the first microprocessor with more than one billion transistors, the [Intel Itanium 2](https://en.wikipedia.org/wiki/Itanium). The chip is manufactured in a 90 nm CMOS process and contains 1.72 billion transistors on a die with an area of 374 mm². The first demonstrated chip with one billion transistors is a 1 Gbit DRAM presented by NEC in 1995, manufactured in 0.25 µm technology [@NEC_1Gbit_DRAM_1995].
+
+For an excellent, much more detailed account of semiconductor history, visit the [Silicon Engine timeline of the Computer History Museum](https://www.computerhistory.org/siliconengine/timeline/).

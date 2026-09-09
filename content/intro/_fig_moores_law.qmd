@@ -1,0 +1,46 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-moores-law
+#| echo: false
+#| fig-cap: "Moore's law: the number of components per integrated circuit versus time. The blue points reproduce the data available to Moore in 1965; the dashed red line is his extrapolation of a doubling every year (data after Moore, 'Cramming more components onto integrated circuits,' Electronics, 1965)."
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# data points as published by Moore in 1965 (log2 of components vs. year)
+years = np.array([1959, 1962, 1963, 1964, 1965])
+components = np.array([1, 8, 16, 32, 64])
+
+# extrapolation: doubling every year until 1975
+years_ext = np.arange(1959, 1976)
+components_ext = 2.0 ** (years_ext - 1959)
+
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.semilogy(years_ext, components_ext, 'r--', lw=1.5,
+            label='Extrapolation (2$\\times$ per year)')
+ax.semilogy(years, components, 'o', color='tab:blue', ms=6,
+            label='Data (Moore, 1965)')
+
+ax.set_xlabel('Year')
+ax.set_ylabel('Components per integrated circuit')
+ax.set_xlim(1958, 1976)
+ax.grid(True, which='both', alpha=0.3)
+ax.legend(loc='upper left')
+plt.tight_layout()
+plt.show()
+```

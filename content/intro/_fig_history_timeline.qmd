@@ -1,0 +1,55 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-history-timeline
+#| echo: false
+#| fig-cap: "Timeline of key milestones in semiconductor history."
+
+import matplotlib.pyplot as plt
+
+events = [
+    (1874, 'Braun discovers\nrectification (diode)', 0.5, 'center'),
+    (1926, 'Lilienfeld patents\nthe FET', -0.5, 'center'),
+    (1947, 'First transistor (BJT)\nat Bell Labs', 1.0, 'center'),
+    (1958, 'Kilby: first\nsolid-state circuit', -1.0, 'right'),
+    (1960, 'Noyce: first monolithic IC;\nKahng/Atalla: first MOSFET', 1.7,
+     'right'),
+    (1963, 'Wanlass/Sah\ninvent CMOS', -1.2, 'left'),
+    (1964, 'Widlar: first integrated\nop-amp (µA702)', 1.15, 'left'),
+    (1965, "Moore's law", -0.6, 'left'),
+    (2006, "First billion-transistor\nchip (Intel Itanium 2)", 0.8, 'center'),
+]
+
+fig, ax = plt.subplots(figsize=(8 , 3.8))
+ax.axhline(0, color='k', lw=1.2)
+for year, label, y, ha in events:
+    up = (y > 0)
+    ax.plot([year, year], [0, y], color='tab:blue', lw=1)
+    ax.plot(year, 0, 'o', color='tab:blue', ms=5)
+    dx = {'center': 0, 'left': 1.5, 'right': -1.5}[ha]
+    ax.text(year + dx, y + (0.08 if up else -0.08), f'{year}\n{label}',
+            ha=ha, va='bottom' if up else 'top', fontsize=8)
+
+ax.set_xlim(1865, 2010)
+ax.set_ylim(-2.1, 2.5)
+ax.set_yticks([])
+ax.set_xticks([1875, 1900, 1925, 1950, 1975, 2000])
+ax.spines[['left', 'right', 'top']].set_visible(False)
+ax.set_xlabel('Year')
+plt.tight_layout()
+plt.show()
+```

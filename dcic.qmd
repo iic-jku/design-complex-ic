@@ -24,4 +24,5 @@ format:
     toc-expand: 2
 ---
 
-TBD
+{{< include /content/_abbrv.qmd >}}
+{{< include /content/intro/_sec_intro.qmd >}}
