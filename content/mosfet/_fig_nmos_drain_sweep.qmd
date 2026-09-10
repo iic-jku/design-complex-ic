@@ -1,0 +1,39 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-nmos-drain-sweep
+#| echo: false
+#| fig-cap: "Cross section of an NMOS transistor in inversion for increasing drain voltage: (a) triode region, where the inversion layer extends from source to drain, and (b) saturation, where the channel is pinched off at the drain side."
+
+import matplotlib.pyplot as plt
+from pyutil.mosfig import draw_nmos
+
+panels = [
+    ('triode', r'$V_\mathrm{G} > V_\mathrm{th}$',
+     r'$0 < V_\mathrm{D} < V_\mathrm{GS} - V_\mathrm{th}$', '(a)'),
+    ('saturation', r'$V_\mathrm{G} > V_\mathrm{th}$',
+     r'$V_\mathrm{D} > V_\mathrm{GS} - V_\mathrm{th}$', '(b)'),
+]
+
+fig, axs = plt.subplots(2, 1, figsize=(8, 6))
+for ax, (state, vg, vd, tag) in zip(axs.flat, panels):
+    draw_nmos(ax, state, vg, vd)
+    ax.set_ylim(-0.3, 6.1)
+    ax.text(-1.2, 5.9, tag, fontsize=10, fontweight='bold')
+plt.tight_layout()
+plt.show()
+```

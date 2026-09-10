@@ -1,0 +1,45 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-supply-trend
+#| echo: false
+#| fig-cap: "Nominal core supply voltage versus CMOS technology node. Below roughly 90 nm, the supply voltage no longer scales with the feature size but flattens out around 1 V, limited by the subthreshold leakage (data after Stillmaker and Baas, 2017)."
+
+import matplotlib.pyplot as plt
+
+# Stillmaker, A., & Baas, B. (2017). Scaling equations for the accurate
+# prediction of CMOS device performance from 180 nm to 7 nm.
+# Integration, 58, 74-81.
+data = [
+    (1.0, 5), (0.8, 5), (0.5, 5), (0.35, 3.3), (0.25, 2.5), (0.18, 1.8),
+    (0.13, 1.2), (0.090, 1.1), (0.065, 1.1), (0.045, 1.1), (0.032, 0.97),
+    (0.020, 0.9), (0.016, 0.86), (0.010, 0.83), (0.007, 0.8),
+]
+
+feat = [d[0] for d in data]
+vdd = [d[1] for d in data]
+
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.semilogx(feat, vdd, 'o-', color='tab:blue', lw=2, ms=5)
+ax.invert_xaxis()
+ax.set_xlabel('Feature size (µm)')
+ax.set_ylabel('Supply voltage $V_\\mathrm{DD}$ (V)')
+ax.set_ylim(0, 6)
+ax.grid(True, which='both', alpha=0.3)
+plt.tight_layout()
+plt.show()
+```

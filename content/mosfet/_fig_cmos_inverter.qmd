@@ -1,0 +1,171 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-cmos-inverter
+#| echo: false
+#| fig-cap: "The CMOS inverter: (a) schematic and (b) the same circuit in the cross-section of the wafer. The PMOS pulls the output $Y$ up when the input $A$ is low, the NMOS pulls it down when the input is high, so in the static state no dc current flows from $V_\\mathrm{DD}$ to $V_\\mathrm{SS}$. The bulk of the PMOS (its $n$-well) is tied to $V_\\mathrm{DD}$, the bulk of the NMOS (the $p$-substrate) to $V_\\mathrm{SS}$. In (b) the hop marks a wire crossing without contact, which in a real chip is realized on two different metal layers."
+
+import matplotlib.pyplot as plt
+import schemdraw as sd
+import schemdraw.elements as elm
+from matplotlib.patches import Arc, Rectangle
+
+fig, (ax_s, ax_x) = plt.subplots(
+    1, 2, figsize=(8, 4.4), gridspec_kw=dict(width_ratios=[1, 2.3]))
+
+# ---------------------------------------------------------------- schematic
+with sd.Drawing(canvas=ax_s) as d:
+    d.config(unit=2, fontsize=11, lw=1.2)
+
+    # PMOS pull-up: source at VDD, drain at the output node
+    mp = d.add(elm.AnalogPFet(bulk=True).at((0, 0)).reverse())
+    # NMOS pull-down: drain at the output node, source at VSS
+    mn = d.add(elm.AnalogNFet(bulk=True).at((0, -3.0)).reverse())
+    d += elm.Label().at((2.5, mp.center[1])).label('$M_\\mathrm{P}$')
+    d += elm.Label().at((2.5, mn.center[1])).label('$M_\\mathrm{N}$')
+
+    # supply rails
+    d += elm.Line().endpoints(mp.source, (0, 1.0))
+    d += elm.Vdd().at((0, 1.0)).label('$V_\\mathrm{DD}$')
+    d += elm.Line().endpoints(mn.source, (0, -5.4))
+    d += elm.Ground().at((0, -5.4)).label('$V_\\mathrm{SS}$', 'bottom')
+
+    # bulk connections: PMOS bulk to VDD, NMOS bulk to VSS
+    d += elm.Line().endpoints(mp.bulk, (1.6, mp.bulk[1]))
+    d += elm.Line().endpoints((1.6, mp.bulk[1]), (1.6, 0.6))
+    d += elm.Line().endpoints((1.6, 0.6), (0, 0.6))
+    d += elm.Dot().at((0, 0.6))
+    d += elm.Line().endpoints(mn.bulk, (1.6, mn.bulk[1]))
+    d += elm.Line().endpoints((1.6, mn.bulk[1]), (1.6, -5.0))
+    d += elm.Line().endpoints((1.6, -5.0), (0, -5.0))
+    d += elm.Dot().at((0, -5.0))
+
+    # output node between the two drains
+    d += elm.Line().endpoints(mp.drain, mn.drain)
+    y_out = (mp.drain[1] + mn.drain[1]) / 2
+    d += elm.Line().endpoints((0, y_out), (3.4, y_out))
+    d += elm.Dot().at((0, y_out))
+    d += elm.Dot(open=True).at((3.4, y_out)).label('$Y$', 'right')
+
+    # common gate node driven by the input
+    d += elm.Line().endpoints(mp.gate, (-1.9, mp.gate[1]))
+    d += elm.Line().endpoints(mn.gate, (-1.9, mn.gate[1]))
+    d += elm.Line().endpoints((-1.9, mp.gate[1]), (-1.9, mn.gate[1]))
+    d += elm.Line().endpoints((-1.9, y_out), (-3.2, y_out))
+    d += elm.Dot().at((-1.9, y_out))
+    d += elm.Dot(open=True).at((-3.2, y_out)).label('$A$', 'left')
+
+ax_s.set_aspect('equal')
+ax_s.axis('off')
+# extra headroom so the VDD symbol clears the subfigure title
+y_lo, y_hi = ax_s.get_ylim()
+ax_s.set_ylim(y_lo, y_hi + 1.0)
+
+# ------------------------------------------------------------ cross section
+C = dict(sub='#f5e9d0', nwell='#aacdea', ox='#c7dff2', poly='#c46262',
+         nplus='#4a7fb5', pplus='#d1862c')
+SURF = 3.0
+POLY = SURF + 0.55          # top of the poly gate
+ax_x.add_patch(Rectangle((0, 0), 14, SURF, fc=C['sub'], ec='k', lw=0.8))
+ax_x.add_patch(Rectangle((7.2, 1.2), 6.4, SURF - 1.2, fc=C['nwell'],
+                         ec='k', lw=0.8))
+ax_x.text(3.5, 0.4, '$p$-substrate', ha='center', fontsize=9)
+ax_x.text(10.4, 1.6, '$n$-well', ha='center', fontsize=9)
+
+
+def diff(x0, w, typ):
+    fc = C['nplus'] if typ == 'n' else C['pplus']
+    ax_x.add_patch(Rectangle((x0, SURF - 0.5), w, 0.5, fc=fc, ec='k', lw=0.6))
+    ax_x.text(x0 + w / 2, SURF - 0.25, f'${typ}^+$', ha='center',
+              va='center', fontsize=8, color='white')
+
+
+def gate(x0, w):
+    ax_x.add_patch(Rectangle((x0, SURF), w, 0.15, fc=C['ox'], ec='k', lw=0.5))
+    ax_x.add_patch(Rectangle((x0, SURF + 0.15), w, 0.4, fc=C['poly'],
+                             ec='k', lw=0.5))
+
+
+diff(0.5, 1.0, 'p')         # substrate contact
+diff(2.3, 1.2, 'n')         # NMOS source
+gate(3.6, 0.8)
+diff(4.5, 1.2, 'n')         # NMOS drain
+diff(7.8, 1.2, 'p')         # PMOS drain
+gate(9.1, 0.8)
+diff(10.0, 1.2, 'p')        # PMOS source
+diff(12.0, 1.0, 'n')        # well contact
+
+X_SUB, X_NS, X_NG, X_ND = 1.0, 2.9, 4.0, 5.1
+X_PD, X_PG, X_PS, X_WELL = 8.4, 9.5, 10.6, 12.5
+Y_RAIL, Y_OUT, Y_IN = 3.7, 4.2, 4.9
+W = dict(color='k', lw=1.2, solid_capstyle='butt')
+
+
+def wire(xs, ys):
+    ax_x.plot(xs, ys, **W)
+
+
+def dot(x, y):
+    ax_x.plot([x], [y], 'o', ms=4, color='k', zorder=5)
+
+
+# VSS rail: substrate contact and NMOS source
+wire([X_SUB, X_SUB], [SURF, Y_RAIL])
+wire([X_NS, X_NS], [SURF, Y_RAIL])
+wire([0.25, X_NS], [Y_RAIL, Y_RAIL])
+dot(X_SUB, Y_RAIL)
+ax_x.text(0.15, Y_RAIL, '$V_\\mathrm{SS}$', ha='right', va='center',
+          fontsize=9)
+
+# VDD rail: PMOS source and well contact
+wire([X_PS, X_PS], [SURF, Y_RAIL])
+wire([X_WELL, X_WELL], [SURF, Y_RAIL])
+wire([X_PS, 13.75], [Y_RAIL, Y_RAIL])
+dot(X_WELL, Y_RAIL)
+ax_x.text(13.85, Y_RAIL, '$V_\\mathrm{DD}$', ha='left', va='center',
+          fontsize=9)
+
+# output: the two drains are tied together and routed up between the gates
+wire([X_ND, X_ND], [SURF, Y_OUT])
+wire([X_PD, X_PD], [SURF, Y_OUT])
+wire([X_ND, X_PD], [Y_OUT, Y_OUT])
+x_o = (X_ND + X_PD) / 2
+wire([x_o, x_o], [Y_OUT, 5.6])
+dot(x_o, Y_OUT)
+ax_x.text(x_o, 5.75, '$Y$', ha='center', va='bottom', fontsize=9)
+
+# input: both gates tied together, hopping over the output wire
+wire([X_NG, X_NG], [POLY, Y_IN])
+wire([X_PG, X_PG], [POLY, Y_IN])
+wire([X_NG, x_o - 0.22], [Y_IN, Y_IN])
+wire([x_o + 0.22, X_PG], [Y_IN, Y_IN])
+ax_x.add_patch(Arc((x_o, Y_IN), 0.44, 0.44, theta1=0, theta2=180,
+                   ec='k', lw=1.2))
+wire([0.25, X_NG], [Y_IN, Y_IN])
+dot(X_NG, Y_IN)
+ax_x.text(0.15, Y_IN, '$A$', ha='right', va='center', fontsize=9)
+
+ax_x.set_xlim(-1.3, 14.6)
+ax_x.set_ylim(-0.9, 6.4)
+ax_x.set_aspect('equal')
+ax_x.axis('off')
+
+ax_s.set_title('(a) schematic', fontsize=10)
+ax_x.set_title('(b) cross section', fontsize=10)
+plt.tight_layout()
+plt.show()
+```

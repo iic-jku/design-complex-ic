@@ -31,6 +31,7 @@ limitations under the License.
 \newcommand{\gmb}[1][]{g_\mathrm{mb#1}}
 \newcommand{\gmid}{g_\mathrm{m}/I_\mathrm{D}}
 \newcommand{\gds}[1][]{g_\mathrm{ds#1}}
+\newcommand{\rout}[1][]{r_\mathrm{o#1}}
 \newcommand{\CGG}[1][]{C_\mathrm{GG#1}}
 \newcommand{\Cgg}[1][]{C_\mathrm{gg#1}}
 \newcommand{\Cox}[1][]{C'_\mathrm{ox#1}}

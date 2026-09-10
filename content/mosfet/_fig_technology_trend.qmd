@@ -1,0 +1,77 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-technology-trend
+#| echo: false
+#| fig-cap: "CMOS technology scaling trend: minimum feature size (node name) versus year of first volume production, with key technology innovations annotated (data compiled from public sources, e.g., [wikichip.org](https://en.wikichip.org/wiki/technology_node))."
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+nodes = [
+    (1971, 10000), (1974, 6000), (1977, 3000), (1981, 1500), (1984, 1000),
+    (1987, 800), (1990, 600), (1993, 350), (1996, 250), (1999, 180),
+    (2001, 130), (2003, 90), (2005, 65), (2007, 45), (2009, 32),
+    (2010, 28), (2012, 22), (2014, 14), (2016, 10), (2018, 7),
+    (2020, 5), (2022, 3), (2025, 2), (2027, 1.6),
+]
+annotations = [
+    (1971, 10000, 'silicon gate, PMOS (10 µm)', 'rt'),
+    (1984, 1000, 'CMOS replaces NMOS logic (1 µm)', 'r'),
+    (1990, 600, '200 mm wafer (600 nm)', 'r'),
+    (2001, 130, '193 nm litho, 300 mm wafer (130 nm)', 'l'),
+    (2007, 45, 'high-k/metal gate, immersion litho (45 nm)', 'l'),
+    (2012, 22, 'FinFET, double patterning (22 nm)', 'l'),
+    (2018, 7, '13.5 nm EUV litho (7 nm)', 'l'),
+    (2022, 3, 'GAA, nanosheet MOSFET (3 nm)', 'l'),
+    (2025, 2, 'backside power (2 nm)', 'rb'),
+]
+
+years = np.array([n[0] for n in nodes])
+sizes = np.array([n[1] for n in nodes])
+
+fig, ax = plt.subplots(figsize=(7, 5))
+ax.semilogy(years, sizes, 'o-', color='tab:blue', lw=1.5, ms=4)
+# ideal scaling reference line
+ax.semilogy([1971, 2027], [10000, 1.6], 'r-', lw=1, alpha=0.7)
+
+for yr, sz, txt, side in annotations:
+    if side == 'r':
+        ax.annotate(txt, xy=(yr, sz), xytext=(yr + 2, sz * 1.4),
+                    fontsize=7, arrowprops=dict(arrowstyle='-', lw=0.6))
+    elif side == 'rt':
+        # right and slightly below, in the empty area above the curve
+        ax.annotate(txt, xy=(yr, sz), xytext=(yr + 9, sz * 0.9),
+                    fontsize=7, arrowprops=dict(arrowstyle='-', lw=0.6))
+    elif side == 'rb':
+        # right-aligned and below, in the empty area under the curve end
+        ax.annotate(txt, xy=(yr, sz), xytext=(yr + 11, sz * 0.5),
+                    fontsize=7, ha='right', va='center',
+                    arrowprops=dict(arrowstyle='-', lw=0.6))
+    else:
+        ax.annotate(txt, xy=(yr, sz), xytext=(yr - 2, sz * 0.5),
+                    fontsize=7, ha='right',
+                    arrowprops=dict(arrowstyle='-', lw=0.6))
+
+ax.set_xlabel('Year')
+ax.set_ylabel('Feature size (nm)')
+ax.set_xlim(1950, 2040)
+ax.set_ylim(0.6, 13000)
+ax.grid(True, which='both', alpha=0.3)
+plt.tight_layout()
+plt.show()
+```

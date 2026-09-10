@@ -1,0 +1,821 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# The MOSFET {#sec-mosfet}
+
+This chapter on the metal-oxide-semiconductor field-effect transistor (MOSFET) is largely based on [@Hu_ModernDevices; @Razavi_Fundamentals; @Tsividis_MOS], which are also recommended as further reading. In contrast to our [Analog Circuit Design](https://iic-jku.github.io/analog-circuit-design/aicd.html) course, where we treated the MOSFET essentially as a numerically-characterized black box, we will derive a simple, first-order model of the MOSFET from the physics of the device, and then discuss the most important second-order effects. The goal is to understand the basic operation of the MOSFET and its $I$/$V$ characteristic, which will be used in later chapters for circuit design.
+
+## MOSFET Operation in a Nutshell {#sec-mosfet-nutshell}
+
+The basic MOSFET structure consists of a gate (terminal $G$) that is insulated from a doped semiconductor and controls the surface charge in the semiconductor channel below, between the source (terminal $S$) and the drain (terminal $D$). The source provides the charge carriers, and an electric field pulls them toward the drain (hence a semiconductor device based on drift current). The electric potential of the semiconductor bulk (terminal $B$) acts on the channel as well and is the fourth terminal of the MOSFET. Ideally, the effect of the bulk is negligible.
+
+Two complementary flavors of the device exist: the $n$-type MOSFET ("NMOS") has $n^+$-doped source/drain regions on a $p$-type substrate and usually an $n^{++}$-doped gate, while the $p$-type MOSFET ("PMOS") has $p^+$-doped source/drain regions in an $n$-type well and usually a $p^{++}$-doped gate.
+
+::: {.callout-note title="Doping Notation"}
+In the doping notation, $+$ indicates a higher doping concentration than the surrounding material, while $++$ indicates an even higher doping concentration. For example, $n^+$-doped regions have a higher electron concentration than the $n$-type substrate, and $n^{++}$-doped gates have an even higher electron concentration than the $n^+$-doped source/drain regions.
+:::
+
+To understand the operation of the NMOS transistor, it is instructive to follow the conditions in the semiconductor while the gate voltage is swept upwards, as illustrated in @fig-nmos-gate-sweep:
+
+{{< include /content/mosfet/_fig_nmos_gate_sweep.qmd >}}
+
+- **Flatband (a):** When the gate is at a specific negative voltage (the flatband voltage $V_\mathrm{fb}$), and all other terminals are at $0\,\text{V}$, a depletion zone forms only around the drain and source junctions. No current can flow, since drain and source are $n^+$-doped while the substrate is $p$-type, so the two junctions form back-to-back diodes.
+- **Zero gate voltage (b):** When the gate voltage is increased to $0\,\text{V}$, a depletion zone also forms below the gate. The $p$-type acceptor ions in this region have captured an electron and are thus immobile, negatively charged sites (illustrated by the circled minus symbols)—still, no current can flow.
+- **Below threshold (c):** When the gate voltage increases further (but stays below the threshold voltage), the depletion zone below the gate deepens, reaching a maximum depletion width $\Wdep$ when $\VGS = \Vth$. There is still no conduction between drain and source, because there are no (or at least very few) free electrons in the channel region.
+- **Inversion (d):** When the gate voltage rises above the threshold voltage $\Vth$, **inversion** occurs: a thin layer of free electrons forms directly below the gate oxide, creating a conducting channel of electrons between drain and source. The source of the electrons in the inversion layer is the $n^+$-doped source region, which is connected to ground. The electrons are pulled from the source into the channel by the positive gate voltage, and they can now flow to the drain if a drain voltage is applied.
+
+Once the channel exists, the drain voltage determines the mode of conduction, as shown in @fig-nmos-drain-sweep:
+
+{{< include /content/mosfet/_fig_nmos_drain_sweep.qmd >}}
+
+- **Triode (a):** If a small voltage is applied between drain and source, a current flows, and the depletion zone around the drain widens. The drain current is a function of both $\VGS$ and $\VDS$; the device operates in the **triode** region. The MOSFET operates like a *voltage-controlled resistor* in this region.
+- **Saturation (b):** If the drain-source voltage is increased beyond $\VDS > \VGS - \Vth$, the channel is pinched off at the drain side, and the drain current is (to first order) no longer a function of $\VDS$, only of $\VGS$—the device is now in **saturation**. The MOSFET operates like a *voltage-controlled current source* in this region.
+
+### An Exemplary 130 nm Process Technology
+
+Throughout this text we will use typical parameters of a 0.13 µm CMOS process technology, specifically IHP SG13 [(process specification)](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf), for exemplary calculations. The key parameters are listed in @tbl-ihp130-parameters.
+
+| Parameter | Symbol | Typical value |
+|:----------|:-----:|:-------------:|
+| Nominal supply voltage | $\VDD$ | 1.2 V (digital) / **1.5 V** (analog) |
+| Minimum gate length | $L_\mathrm{min}$ | 130 nm |
+| Oxide thickness | $\tox$ | 2 nm |
+| Threshold voltage NMOS \| PMOS | $\Vth[,n]$ \| $\Vth[,p]$ | 0.5 V \| −0.47 V |
+| Maximum voltage | $|\VGS[,max]|$, $|\VDS[,max]|$ | 2 V |
+| Gate capacitance | $\Cox$ | 17.3 fF/µm² |
+| Process constant $K_\mathrm{n}$ \| $K_\mathrm{p}$ | $\mun \Cox$ \| $\mup \Cox$ | 280 µA/V² \| 130 µA/V² |
+: Typical parameters of the IHP SG13 130 nm CMOS technology {#tbl-ihp130-parameters}
+
+## Basic I/V Characteristic of the MOSFET {#sec-mosfet-iv}
+
+### The MOS Capacitor and the Threshold Voltage
+
+If source, drain, and substrate are grounded ($V_\mathrm{S} = V_\mathrm{D} = V_\mathrm{B} = 0\,\text{V}$), and a positive voltage $\VGS = V_\mathrm{G}$ is applied to the gate, then positive charge accumulates on the gate and negative charge in the $p$-type substrate, forming a depletion layer in the substrate.
+
+If we assume a uniform charge density $\rho = -q \Na$ across this layer with $\Na$ being the doping concentration of the $p$-type substrate (in a practical device, this charge density is not uniform), then we can use Poisson's equation. Note that with the boundary conditions assuming $\Phi(0) = 0$ and $d\Phi(0)/dy = 0$, $y=0$ is the point where the depletion layer starts in the depth of the substrate, and $y = \Wdep$ is the point where the depletion layer ends (the depletion width) at the substrate-oxide interface ($\epssi$ is the permittivity of silicon):
+
+$$
+\frac{d^2 \Phi(y)}{d y^2} = -\frac{\rho(y)}{\epssi} = \frac{q \Na}{\epssi} \quad \rightarrow \quad \Phi(y) = \frac{q \Na}{2 \epssi} y^2
+$$ {#eq-mosfet-poisson}
+
+The surface potential $\PhiS = \Phi(\Wdep)$ at the oxide-silicon interface is then related to the depletion width $\Wdep$ by
+
+$$
+\Wdep = \sqrt{\frac{2 \epssi \PhiS}{q \Na}}.
+$$ {#eq-mosfet-depletion-width}
+
+With $\Wdep$ we can also calculate the corresponding depletion capacitance (per unit area, indicated with the prime):
+
+$$
+\Cdep = \frac{\epssi}{\Wdep} = \sqrt{\frac{q \Na \epssi}{2 \PhiS}}
+$$ {#eq-mosfet-depletion-cap}
+
+The charge per unit area $Q'_\mathrm{dep}$ in this region is (negative, because of the captured electrons)
+
+$$
+Q'_\mathrm{dep} = - q \Na \Wdep = - \sqrt{2 q \Na \epssi \PhiS}
+$$ {#eq-mosfet-qdep}
+
+The gate voltage is the result of the sum of the flatband voltage, the surface potential, and the voltage across the oxide
+
+$$
+V_\mathrm{G} = \Phifb + \PhiS + V_\mathrm{ox} = \Phi_\mathrm{fb0} + \frac{-Q'_\mathrm{ss}}{\Cox} + \PhiS + \frac{-Q'_\mathrm{sub}}{\Cox}
+$$ {#eq-mosfet-gate-voltage}
+
+where $\Phifb$ is the work-function difference between the gate and the substrate material (the flatband voltage $V_\mathrm{fb}$ used in @fig-nmos-gate-sweep). Note that the negative sign in the last term arises because voltage and charge are taken from different electrodes of the gate capacitor: the voltage $V_\mathrm{ox}$ at the top, and the substrate charge $Q'_\mathrm{sub}$ as well as the interface charge $Q'_\mathrm{ss}$ at the bottom.
+
+An interface charge $Q'_\mathrm{ss}$ can be present at the SiO~2~-Si interface due to crystal discontinuities. This interface charge can be accounted for by adapting the flatband voltage $\Phi_\mathrm{fb0}$ to $\Phifb$ (going forward, we will just use $\Phifb$).
+
+Using @eq-mosfet-depletion-width to express $\PhiS = q \Na \Wdep^2 / (2 \epssi)$ and @eq-mosfet-qdep for $Q'_\mathrm{sub} = Q'_\mathrm{dep}$, @eq-mosfet-gate-voltage can be written as
+
+$$
+V_\mathrm{G} = \Phifb + \frac{q \Na \Wdep^2}{2 \epssi} + \frac{q \Na \Wdep}{\Cox}
+$$ {#eq-mosfet-surface-potential}
+
+From @eq-mosfet-surface-potential, the depletion width $\Wdep$ can be calculated as a function of $V_\mathrm{G}$, and from this $\PhiS = f(V_\mathrm{G})$ using @eq-mosfet-depletion-width.
+
+If the surface potential $\PhiS$ reaches a critical level of twice the Fermi potential $\PhiB$, then **inversion** occurs: a thin layer of electrons is induced directly under the oxide. The gate voltage that is minimally required to produce this inversion layer is called the [**threshold voltage**](https://en.wikipedia.org/wiki/Threshold_voltage) $\Vth = V_\mathrm{G}(\PhiS = 2 \PhiB)$.
+
+$$
+\Vth = \Phifb + 2 \PhiB + \frac{-Q'_\mathrm{dep}}{\Cox} = \Phifb + 2 \PhiB + \frac{\sqrt{2 q \Na \epssi \cdot 2 \PhiB}}{\Cox}
+$$ {#eq-mosfet-vth}
+
+with the Fermi potential
+
+$$
+\PhiB = \frac{k T}{q} \ln \frac{\Na}{n_\mathrm{i}}.
+$$ {#eq-mosfet-phib}
+
+@fig-band-diagram illustrates the flatband and the threshold condition in terms of the energy bands of the MOS structure.
+
+{{< include /content/mosfet/_fig_band_diagram.qmd >}}
+
+::: {#nte-vth-calculation .callout-note}
+## Example Calculation of the Threshold Voltage
+
+Let us assume a substrate doping level of $\Na = 3 \times 10^{18}\,\text{cm}^{-3}$. The Fermi potential can be calculated with @eq-mosfet-phib (using the intrinsic carrier concentration of silicon $n_\mathrm{i} = 1.5 \times 10^{10}\,\text{cm}^{-3}$ at room temperature $T = 300\,\text{K}$):
+
+$$
+\PhiB = \frac{k T}{q} \ln \frac{\Na}{n_\mathrm{i}} = 0.49\,\text{V}
+$$
+
+We further use $\Cox = \epsox / \tox = 17.3\,\text{fF}/\mu\text{m}^2$ for a $\tox = 2\,\text{nm}$ gate oxide. The flatband voltage for an $n^+$-polysilicon gate on the $p$-substrate with doping $\Na$ is (with the silicon band-gap voltage $\Phi_\mathrm{bg} = 1.12\,\text{V}$)
+
+$$
+\Phifb = -\frac{\Phi_\mathrm{bg}}{2} - \PhiB = -1.05\,\text{V}
+$$
+
+The resulting threshold voltage is thus (*beware of units!*)
+
+$$
+\Vth = \Phifb + 2 \PhiB + \frac{\sqrt{2 q \Na \epssi \cdot 2 \PhiB}}{\Cox} = 0.51\,\text{V}
+$$
+
+Using these values, we can also calculate the depletion width $\Wdep$ in inversion, and the corresponding $\Cdep$ (compare $\Wdep$ to $\tox$, and $\Cdep$ to $\Cox$):
+
+$$
+\Wdep = \sqrt{\frac{2 \epssi \cdot 2 \PhiB}{q \Na}} = 20.8\,\text{nm}
+\quad \text{and} \quad
+\Cdep = \frac{\epssi}{\Wdep} = 5.1\,\text{fF}/\mu\text{m}^2
+$$
+:::
+
+Using @eq-mosfet-surface-potential and @eq-mosfet-depletion-width we can now visualize the depletion width $\Wdep$ and the surface potential $\PhiS$ as a function of the gate potential $V_\mathrm{G}$, shown in @fig-wdep-phis. Note how the surface potential saturates at $2\PhiB$ once inversion is reached: any additional gate charge is then mirrored by electrons in the inversion layer rather than by a deeper depletion region.
+
+{{< include /content/mosfet/_fig_wdep_phis.qmd >}}
+
+### Derivation of the I/V Characteristic
+
+If we now apply a small $\VDS$, then a sufficiently large $\VGS > \Vth$ builds up the inversion charge $Q'_\mathrm{inv} = \Cox (\VGS - \Vth)$ in the channel below the gate, which is then moved from source to drain by the electric field caused by $\VDS$, resulting in the drift current $\ID$ ($\mun$ is the electron mobility):
+
+$$
+\ID = W Q'_\mathrm{inv} v = W Q'_\mathrm{inv} \mun E = W Q'_\mathrm{inv} \mun \frac{\VDS}{L}
+= \mun \Cox \frac{W}{L} (\VGS - \Vth) \VDS
+$$ {#eq-mosfet-drift}
+
+If $\VDS$ increases further, the channel charge $Q'_\mathrm{inv}(x)$ becomes a function of the position in the channel, because the drain current causes a potential gradient $dV_\mathrm{cs}/dx$ along the channel (we assume that $\VDS$ is small enough so that the whole channel is still inverted). $x=0$ is the source end of the channel, and $x=L$ is the drain end.
+
+$$
+\ID = W Q'_\mathrm{inv}(x) v = W \Cox ( \VGS - V_\mathrm{cs} - \Vth) \mun \frac{dV_\mathrm{cs}}{dx}
+$$
+
+Integrating along the channel from source to drain,
+
+$$
+\int_{0}^{L} \ID \, dx = \mun \Cox W \int_{0}^{\VDS} ( \VGS - V_\mathrm{cs} - \Vth) \, dV_\mathrm{cs},
+$$
+
+yields the well-known **square-law** characteristic
+
+$$
+\ID = \mun \Cox \frac{W}{L} \left[ ( \VGS - \Vth) \VDS - \frac{1}{2} \VDS^2 \right].
+$$ {#eq-mosfet-square-law}
+
+Note that this simple derivation of the MOSFET I/V characteristic is only valid for long-channel devices ($L > 1\,\mu\text{m}$) and does not account for second-order effects such as channel-length modulation, body effect, velocity saturation, mobility degradation with the vertical field, and subthreshold conduction. These effects will be discussed in the next section.
+
+### Triode Region
+
+@eq-mosfet-square-law is valid only for classical, long-channel ($L > 1\,\mu\text{m}$) devices, and only as long as $\VDS \leq \VGS - \Vth = \Vod$; this range of operation is the so-called **triode region**. The **overdrive voltage**
+
+$$
+\Vod = \VGS - \Vth
+$$ {#eq-mosfet-overdrive}
+
+is a frequently used quantity. The ratio $W/L$ is a dimensionless quantity called the **aspect ratio** of the MOSFET—note that only the relative sizing of $W$ and $L$ impacts the transistor's $I$/$V$ characteristic!
+
+For $\VDS \ll \VGS - \Vth$, we can simplify @eq-mosfet-square-law and see that the MOSFET behaves like a voltage-controlled resistor:
+
+$$
+\ID \approx \mun \Cox \frac{W}{L} ( \VGS - \Vth) \VDS \quad \rightarrow \quad \gds = \frac{1}{\rout}= \frac{\partial \ID}{\partial \VDS} = \mun \Cox \frac{W}{L} ( \VGS - \Vth)
+$$ {#eq-mosfet-triode}
+
+@fig-nmos-triode shows the resulting output characteristic in the triode region for three different gate voltages.
+
+{{< include /content/mosfet/_fig_nmos_triode.qmd >}}
+
+### Saturation Region
+
+If $\VDS > \VGS - \Vth$, the assumption of a completely inverted channel leading up to @eq-mosfet-square-law is no longer valid. The channel gets **pinched off** at the drain side; this happens at $\VDS[,sat] = \VGS - \Vth$, leading to a maximum (saturated) value of the drain current. Substituting $\VDS = V_\mathrm{DS,sat}$ into @eq-mosfet-square-law gives the drain current in the **saturation region**:
+
+$$
+\ID = \ID[S,sat] = \frac{1}{2} \mun \Cox \frac{W}{L} ( \VGS - \Vth)^2
+$$ {#eq-mosfet-sat}
+
+In the saturation region, the MOSFET behaves like a voltage-controlled current source, so it is useful to define the transconductance
+
+$$
+\gm = \frac{\partial \ID}{\partial \VGS},
+$$
+
+which can be expressed in various forms:
+
+$$
+\gm = \mun \Cox \frac{W}{L} (\VGS-\Vth) = \sqrt{2 \mun \Cox \frac{W}{L} \ID} = \frac{2 \ID}{\VGS-\Vth}
+$$ {#eq-mosfet-gm}
+
+We see that $\gm$ is a linear function of the overdrive $\Vod = \VGS - \Vth$ (leading to a quadratic rise of the drain current), or a square-root function of $\ID$, or simply the drain current divided by half the overdrive voltage. Note that for a BJT $\gm = I_\mathrm{C} / \VT$, so the MOSFET offers more degrees of freedom. @fig-nmos-full shows the complete output characteristic including the boundary between triode and saturation.
+
+{{< include /content/mosfet/_fig_nmos_full.qmd >}}
+
+### Complementary MOS (CMOS)
+
+In CMOS technologies, both NMOS and PMOS devices are needed and fabricated on the same wafer, as shown in @fig-cmos-cross-section. Usually, the PMOS is located in a local $n$-well, and this $n$-well is tied to the most positive supply voltage ($\VDD$), while the $p$-substrate is tied to ground ($\VSS$). The substrate contacts are realized with $p^+$-diffusions in the $p$-substrate (forming an ohmic contact), and the well contacts are realized with $n^+$-diffusions in the $n$-well.
+
+For increased isolation (especially for analog applications), a triple-well (or "deep $n$-well," DNW) option is sometimes available; the NMOS is then located in a local $p$-well which is fully enclosed by an $n$-well and thus isolated from the common substrate.
+
+{{< include /content/mosfet/_fig_cmos_cross_section.qmd >}}
+
+In @fig-cmos-inverter, we see a simple CMOS inverter consisting of a PMOS and an NMOS transistor. The PMOS is connected to the positive supply voltage $\VDD$, while the NMOS is connected to ground $\VSS$. The gates of both transistors are tied together and form the input $A$ of the inverter, while the drains are also tied together and form the output $Y$. When the input is low, the PMOS is on and the NMOS is off, pulling the output high. Conversely, when the input is high, the PMOS is off and the NMOS is on, pulling the output low.
+
+{{< include /content/mosfet/_fig_cmos_inverter.qmd >}}
+
+Note that in the CMOS technology shown in @fig-cmos-inverter, the bulk nodes of all the NMOS transistors are tied to the common substrate ($\VSS$), while the bulk nodes of all the PMOS transistors are tied to the $n$-well ($\VDD$). Since the $n$-wells are  separated from the substrate (and can be separated between different PMOS devices), the bulk nodes of selected PMOS can be tied to different potentials than $\VDD$ (e.g., to the source of the PMOS), which is called **body biasing**. This can be used to adjust the threshold voltage of the PMOS transistors or to avoid the bulk effect (see @sec-mosfet-body-effect).
+
+## Second-Order Effects in the MOSFET {#sec-mosfet-second-order}
+
+The simple MOSFET model developed so far is only valid to first order for long-channel devices ($L_\mathrm{min} > 1\,\mu\text{m}$) under idealistic conditions. In the following, we discuss the most important second-order effects: the body effect, channel-length modulation, velocity saturation, mobility degradation with the vertical field, and subthreshold conduction.
+
+### Body Effect {#sec-mosfet-body-effect}
+
+In the derivation of @eq-mosfet-vth we tied source, drain, and bulk together. Note that the inversion charge is a function of the bulk (substrate) potential $V_\mathrm{B}$ versus the gate potential $V_\mathrm{G}$, so when the source potential $V_\mathrm{S}$ differs from $V_\mathrm{B}$, the apparent $\Vth$ becomes a function of $\VSB$, because inversion is reached at a surface potential of $2 \PhiB + \VSB$ instead of $2 \PhiB$.
+
+This is the so-called **body effect** (or "back-gate effect"). The effective threshold voltage is given by ($\Vth[0]$ is the threshold voltage with $\VSB = 0$)
+
+$$
+\Vth = \Vth[0] + \gamma \left( \sqrt{2 \PhiB + \VSB} - \sqrt{2 \PhiB} \right)
+$$ {#eq-mosfet-body-effect}
+
+with the body-effect coefficient $\gamma$ (the factor $n$ will be introduced in @sec-mosfet-subthreshold)
+
+$$
+\gamma = \frac{\sqrt{2 q \Na \epssi}}{\Cox} = 2 (n - 1) \sqrt{2 \PhiB}.
+$$ {#eq-mosfet-gamma}
+
+Note that for $n = 1$ (no body effect), $\gamma = 0$ and thus $\Vth = \Vth[0]$.
+
+::: {#nte-body-effect .callout-note}
+## Example Calculation of the Body Effect (NMOS)
+
+Starting with the previously used values ($\Na = 3 \times 10^{18}\,\text{cm}^{-3}$, $\Cox = 17.3\,\text{fF}/\mu\text{m}^2$, $\PhiB = 0.49\,\text{V}$), we get
+
+$$
+\gamma = \frac{\sqrt{2 q \Na \epssi}}{\Cox} = 0.58\,\text{V}^{1/2}
+$$
+
+Let us consider the originally calculated $\Vth[0] = 0.51\,\text{V}$ and assume the bulk is tied to $\VSS = V_\mathrm{B} = 0\,\text{V}$ while the source sits at $V_\mathrm{S} = 0.5\,\text{V}$ (so $\VSB = 0.5\,\text{V}$). Using @eq-mosfet-body-effect:
+
+$$
+\Vth = 0.51 + 0.58 \left( \sqrt{2 \cdot 0.49 + 0.5} - \sqrt{2 \cdot 0.49} \right) = 0.64\,\text{V}
+$$
+
+In this case, the threshold voltage has been **increased by 130 mV**. Conversely, by tying the bulk to a higher potential than the source, the threshold voltage can also be **decreased**, but beware of the risk of forward-biasing the source-bulk pn-junction (see @fig-cmos-cross-section)!
+:::
+
+### Channel-Length Modulation
+
+In the derivation of the saturation current (@eq-mosfet-sat), we assumed that the channel is pinched off exactly at the drain when $\VDS = \VGS - \Vth$. When $\VDS$ is increased further, this pinch-off point moves away from the drain towards the source. This can be viewed as an effective **channel-length reduction**, $L_\mathrm{eff} = f(\VDS) < L$, and we have to use $L_\mathrm{eff}$ instead of $L$ in @eq-mosfet-sat. Avoiding a direct calculation of $L_\mathrm{eff}$, it is common to set $1/L_\mathrm{eff} \approx (1 + \Delta L / L)/L$ with $\Delta L/L = \lambda \VDS$, so that
+
+$$
+\ID = \frac{1}{2} \mun \Cox \frac{W}{L} ( \VGS - \Vth)^2 (1 + \lambda \VDS)
+$$ {#eq-mosfet-clm}
+
+This so-called **channel-length modulation** leads to a reduced output impedance of the MOSFET, i.e., a nonzero output conductance (ideally, $\lambda = 0$ and thus $\gds = 0$):
+
+$$
+\gds = \frac{\partial \ID}{\partial \VDS} = \ID\rvert_{\lambda = 0} \cdot \lambda
+$$ {#eq-mosfet-gds}
+
+Since $\lambda \propto 1/L$, the output resistance can be improved by increasing $L$ beyond the minimum length, which is usually done when using the MOSFET as a current source. By scaling $W$ along with $L$, the aspect ratio can be kept constant. @fig-nmos-clm shows the output characteristic including channel-length modulation; note the finite slope of the curves in saturation.
+
+{{< include /content/mosfet/_fig_nmos_clm.qmd >}}
+
+### Velocity Saturation
+
+In the derivation of @eq-mosfet-drift, we assumed that the velocity of the carriers in the channel is given by $v = \mun E_\mathrm{DS}$. This is only true up to a certain speed limit of the carriers in silicon, which is around $v_\mathrm{sat} = 10^7\,\text{cm/s}$. To take this [**velocity saturation**](https://en.wikipedia.org/wiki/Saturation_velocity) into account, the following empirical model for the effective velocity can be used in the derivation:
+
+$$
+v_\mathrm{eff} =
+\begin{cases}
+\dfrac{\mun E_\mathrm{DS}}{1 + {E_\mathrm{DS}}/{E_\mathrm{sat}}} & \text{if } E_\mathrm{DS} \leq E_\mathrm{sat} = {2 v_\mathrm{sat}}/{\mun} \\[1ex]
+v_\mathrm{sat} & \text{otherwise}
+\end{cases}
+$$ {#eq-mosfet-vsat-model}
+
+If the MOSFET enters the velocity-saturation regime, the square-law relation no longer holds, and the drain current is given by
+
+$$
+\ID = v_\mathrm{sat} \Cox W (\VGS - \Vth).
+$$ {#eq-mosfet-vsat}
+
+In velocity saturation, $\ID$ is not a quadratic but a linear function of the overdrive voltage, and the transconductance hence saturates at
+
+$$
+\gm[,sat] = v_\mathrm{sat} \Cox W
+$$ {#eq-mosfet-gmsat}
+
+This result means that increasing the drain current beyond the velocity-saturation point does not result in an increased $\gm$, which is usually not useful.
+
+In sub-micron technologies, it is relatively easy to reach velocity saturation: with $\mun = 280\,\text{cm}^2/(\text{V}\cdot\text{s})$, the resulting critical field is $E_\mathrm{sat} = 7.1\,\text{V}/\mu\text{m}$, which is reached in a 0.13 µm CMOS technology at an overdrive of $\Vod \approx 0.9\,\text{V}$—achievable with a supply voltage of $\VDD = 1.5\,\text{V}$ and $\Vth = 0.5\,\text{V}$! Note that the stated $\mun$ is considerably lower than the mobility of pure silicon, because doping reduces mobility—yet another trade-off.[^mun-kn]
+
+[^mun-kn]: The mobility value used here is not fully consistent with the process constant $K_\mathrm{n} = \mun \Cox = 280\,\mu\text{A/V}^2$ in @tbl-ihp130-parameters, which (with $\Cox = 17.3\,\text{fF/µm}^2$) would imply an effective $\mun \approx 160\,\text{cm}^2/(\text{V}\cdot\text{s})$. The effective mobility depends strongly on the vertical field and thus on bias; such spread between simple hand-calculation parameters is normal and is one more reason to verify all sizing choices by simulation.
+
+### Mobility Degradation with Vertical Field
+
+With high $\VGS$, the channel is confined to a narrow region at the surface, leading to more carrier scattering and thus lower mobility (remember that at the SiO$_2$-silicon interface, scattering is more pronounced). We can model this effect empirically by setting
+
+$$
+\mu_\mathrm{n,eff} = \frac{\mun}{1 + \Theta (\VGS - \Vth)}
+$$ {#eq-mosfet-mobility-degradation}
+
+and using this $\mu_\mathrm{n,eff}$ instead of $\mun$ in the saturation current (@eq-mosfet-sat):
+
+$$
+\ID = \frac{1}{2} \frac{\mun \Cox}{1 + \Theta \Vod}  \frac{W}{L}  \Vod^2 \approx \frac{1}{2} \mun \Cox \frac{W}{L}  ( \Vod^2 - \Theta \Vod^3 )
+$$ {#eq-mosfet-mobility-cubic}
+
+This introduces a *cubic* nonlinearity into an otherwise quadratic relationship, which can be relevant for precision analog and high-frequency circuits, with $\Theta \approx (10^{-9}\,\text{m/V}) / \tox = 0.5\,\text{V}^{-1}$ for $\tox = 2\,\text{nm}$.
+
+### Subthreshold Conduction {#sec-mosfet-subthreshold}
+
+In the derivation of @eq-mosfet-vth, we assumed that inversion sets in *abruptly* when the surface potential reaches $2 \PhiB$. However, even before reaching this level, there are already electrons present in the channel (for the NMOS; holes for the PMOS), which lead to conduction between drain and source even for $\VGS < \Vth$.
+
+This mode of operation is called [**subthreshold conduction**](https://en.wikipedia.org/wiki/Subthreshold_conduction), and it leads to a leakage current based on diffusion when the MOSFET should be off. The drain current in this regime is described by
+
+$$
+\ID = I_0 \frac{W}{L} e^{\frac{\VGS}{n \VT}} \left( 1 - e^{-\frac{\VDS}{\VT}} \right) = \mun \Cox \frac{W}{L} \, 2 n \VT^2 \, e^{\frac{\VGS - \Vth}{n \VT}} \left( 1 - e^{-\frac{\VDS}{\VT}} \right).
+$$ {#eq-mosfet-subthreshold}
+
+The nonideality factor (or slope factor) $n$ is defined by (see @eq-mosfet-gamma)
+
+$$
+n = 1 + \frac{\Cdep}{\Cox}
+$$ {#eq-mosfet-n}
+
+and is on the order of 1 (perfect MOSFET) to 2 (pretty bad). Using the values of $\Cox$ and $\Cdep$ from the previous examples, we get $n = 1.29$. $\VT = k T / q$ is the well-known thermal voltage of $25.8\,\text{mV}$ at $300\,\text{K}$, and
+
+$$
+I_0 = \mun \Cox \, 2 n \VT^2 \, e^{-\frac{\Vth}{n \VT}}.
+$$
+
+Note that the depletion capacitance $\Cdep$ is given by @eq-mosfet-depletion-cap evaluated at $\PhiS = 2\PhiB$:
+
+$$
+\Cdep = \sqrt{\frac{q \Na \epssi}{2 \cdot 2 \PhiB}}
+$$
+
+The inversion condition used in the derivation of the threshold voltage in @eq-mosfet-vth is the point where *the electron concentration at the surface equals the bulk doping concentration* $\Na$—but even before this condition is met, there are electrons in the channel. Another way to look at this is that the surface potential effectively forward-biases the channel-source junction (since the channel region is $p$-type and the source is $n^+$), which can be seen in the plot of $\PhiS$ in @fig-wdep-phis. When the forward bias of this junction is gradually increased, electrons are injected into the channel area (similar to a BJT), moving across the channel by diffusion, and collected by the drain. At the point where the channel switches from $p$- to $n$-type due to inversion, this "diode" approaches an ohmic connection linking drain and source.
+
+Although this **weak inversion** mode of the MOSFET is generally unwanted in digital circuits (as it leads to leakage currents), it is very useful for low-power analog (and digital) operation. Assuming $\VDS > 4 \VT \approx 100\,\text{mV}$, then
+
+$$
+\ID \approx I_0 \frac{W}{L} e^{\frac{\VGS}{n \VT}}
+$$
+
+and the resulting transconductance is
+
+$$
+\gm = \frac{\partial \ID}{\partial \VGS} = \frac{\ID}{n \VT}
+$$ {#eq-mosfet-gm-weak}
+
+This transconductance in weak inversion is similar to that of a BJT, except for the reduction by the factor $n$!
+
+### MOSFET I/V Characteristic Including the Body Effect
+
+In the earlier derivation of the square law (@eq-mosfet-square-law), we made a deliberate error: when the channel potential $V_\mathrm{cs}$ departs from $V_\mathrm{S}$ towards $V_\mathrm{D}$, we need to take the body effect along the channel into account by using $n V_\mathrm{cs}$ instead of $V_\mathrm{cs}$, so $Q'_\mathrm{inv}(x) = \Cox (\VGS - n V_\mathrm{cs} - \Vth)$. The corrected derivation is then
+
+$$
+\int_{0}^{L} \ID \, dx = \mun \Cox W \int_{0}^{\VDS} ( \VGS - n V_\mathrm{cs} - \Vth) \, dV_\mathrm{cs}
+$$
+
+resulting in
+
+$$
+\ID = \mun \Cox \frac{W}{L} \left[ ( \VGS - \Vth) \VDS - \frac{n}{2} \VDS^2 \right]
+$$ {#eq-mosfet-square-law-correct}
+
+In the deep-triode region, there is no difference from the previous result, as the term $n \VDS^2 / 2$ vanishes for small $\VDS$. The saturation voltage is now $\VDS[,sat] = (\VGS - \Vth) / n$, and the drain current in saturation becomes (compare to @eq-mosfet-sat)
+
+$$
+\ID = \ID[S,sat] = \frac{1}{2 n} \mun \Cox \frac{W}{L} (\VGS - \Vth)^2.
+$$ {#eq-mosfet-sat-correct}
+
+The corrected expressions for the transconductance are
+
+$$
+\gm = \mun \Cox \frac{W}{L} \frac{\VGS - \Vth}{n} = \sqrt{\frac{2}{n} \mun\Cox \frac{W}{L} \ID} = \frac{2 \ID}{\VGS - \Vth}.
+$$ {#eq-mosfet-gm-correct}
+
+## MOSFET AC Operation {#sec-mosfet-ac}
+
+So far, we have only considered the dc operation of the MOSFET, but the physical construction of the transistor leads to unwanted capacitances and resistances, which need to be accounted for in dynamic operation. The most important capacitive elements are:
+
+- The oxide capacitance between the gate and the channel, $\Cgg = \Cox W L$.
+- The gate-drain and gate-source overlap capacitances $C_\mathrm{ov} = C'_\mathrm{ov} W$.
+- The junction capacitance between drain/source and substrate, $C_\mathrm{j} = C_\mathrm{j0} / (1 + V_\mathrm{DB | SB} / \PhiB)^m$ with $m \approx 0.3 \ldots 0.4$. $C_\mathrm{j0}$ is defined by the area and perimeter of the drain/source regions.
+- The depletion capacitance between the channel (the inversion layer) and the substrate, $C_\mathrm{dep} = \Cdep W L$.
+
+To identify the dominant capacitive elements between gate-source ($\CGS$) and gate-drain ($\CGD$), we need to distinguish between the triode and the saturation region, see @tbl-mosfet-caps.
+
+| Operating region | $\CGS$ | $\CGD$ |
+|:-----------------|:------:|:------:|
+| Triode | $\frac{1}{2} \Cgg + C_\mathrm{ov}$ | $\frac{1}{2} \Cgg + C_\mathrm{ov}$ |
+| Saturation | $\frac{2}{3} \Cgg + C_\mathrm{ov}$ | $C_\mathrm{ov}$ |
+: Dominant gate capacitances of the MOSFET in the triode and saturation regions {#tbl-mosfet-caps}
+
+In addition to these capacitances, the resistance of the gate connection is usually dominant among the parasitic resistances. The end-to-end resistance of the gate stripe is $R_\square \cdot W / L$ (with the sheet resistance $R_\square$ set by the gate material). Due to the distributed nature of the gate along the width of the transistor, a reasonable lumped model for a single-sided gate contact is
+
+$$
+R_\mathrm{G} = \frac{1}{3} R_\square \frac{W}{L}
+$$ {#eq-mosfet-gate-res}
+
+Using a **double-sided gate contact**, the effective gate resistance is reduced to
+
+$$
+R_\mathrm{G} = \left( \frac{1}{3} R_\square \frac{W}{2 \cdot L} \right) \parallel \left( \frac{1}{3} R_\square \frac{W}{2 \cdot L} \right) = \frac{1}{12} R_\square \frac{W}{L}
+$$ {#eq-mosfet-gate-res-double}
+
+The impact of $R_\mathrm{G}$ on performance can be further minimized by constructing a large transistor out of $m$ smaller transistors connected in parallel ("fingers"). If the total width is $W = m W'$ (with each finger having width $W'$), the gates of all unit transistors are connected in parallel, and the effective single-sided gate resistance becomes
+
+$$
+R_\mathrm{G,eff} = \frac{R'_\mathrm{G}}{m} = \frac{\frac{1}{3} R_\square \frac{W}{m \cdot L}}{m} = \frac{1}{m^2} R_\mathrm{G}
+$$ {#eq-mosfet-gate-res-fingers}
+
+A typical analog/RF layout therefore splits a wide transistor into several fingers of limited length (a few µm), uses double-sided gate contacts, and surrounds the device with a closed well-contact ring; the multi-finger layout technique is discussed in detail in @sec-layout-analog.
+
+## MOSFET Small-Signal Model {#sec-mosfet-ssm}
+
+The complete small-signal model of a MOSFET in saturation is shown in @fig-mosfet-ssm. The transconductance $\gm$ is modeled by a voltage-controlled current source, as is the body effect, which contributes a back-gate transconductance
+
+$$
+\gmb = \gm \frac{\gamma}{2 \sqrt{2 \PhiB + \VSB}}.
+$$
+
+{{< include /content/mosfet/_fig_mosfet_ssm.qmd >}}
+
+### High-Frequency Operation
+
+For high-frequency operation, the definition of the transit frequency $\Ftran$ is useful; this is the frequency where the magnitude of the current gain $|I_\mathrm{ds}| / |I_\mathrm{gs}|$ falls to one. The ac drain current can be calculated based on the small-signal model:
+
+$$
+I_\mathrm{ds} (j \omega)= I_\mathrm{gs}(j \omega) \frac{\gm - j \omega \CGD}{j \omega (\CGS + \CGD)}
+$$
+
+The transit frequency is thus (extrapolating the low-frequency transfer function)
+
+$$
+\omega_\mathrm{T} = 2 \pi \Ftran \approx \frac{\gm}{\CGS + \CGD} \approx \frac{\gm}{\CGG} \approx \frac{3}{2 n} \frac{\mu}{L^2} (\VGS - \Vth).
+$$ {#eq-mosfet-ft}
+
+In addition, the maximum oscillation frequency $f_\mathrm{max}$ is a useful metric; it is the frequency where the maximum available power gain drops to one ($\text{MAG} = 0\,\text{dB}$):
+
+$$
+f_\mathrm{max} \approx \sqrt{\frac{\Ftran}{8 \pi R_\mathrm{G} \CGD}}
+$$ {#eq-mosfet-fmax}
+
+### Simplified Small-Signal Models
+
+In most cases, a simplified model is sufficient for hand calculations. Neglecting most model elements, the two models shown in @fig-mosfet-ssm-simple can be used in the saturation region. The left π-model is usually better suited for circuits with the signal input at the gate (like in a common-source or common-drain amplifier), whereas the right $\tau$-model is advantageous when the input is at the source (like in a common-gate amplifier).
+
+{{< include /content/mosfet/_fig_mosfet_ssm_simple.qmd >}}
+
+## MOSFET Scaling {#sec-mosfet-scaling}
+
+Making MOSFETs smaller has benefits for power, performance, and area (PPA). Traditionally, every 2--3 years a scaled (= smaller) CMOS technology node has been introduced. In @fig-technology-trend, the technology nodes are plotted versus their year of first volume production; note the logarithmic axis!
+
+In the beginning, the node name stated the minimum feature size of the given technology, which is usually the minimum gate length ($L_\mathrm{min}$): in a 130 nm technology, $L_\mathrm{min} = 130\,\text{nm}$. This holds well down to about the 90 nm node; from there on the printed gate length is already shorter than the node name (the 65 nm node used a physical gate length of roughly 35 nm), and from the 22/20 nm node onwards the technology name is merely a "label." Since traditionally a scaling factor of $\sqrt{2}$ has been used, the node names reflect this: 350 → 250 → 180 → 130 → 90 → 65 → 45 → 32/28 → 22/20 → 16/14 → 10 → 7 → 5 → 3 → 2 → 1.6 nm.
+
+{{< include /content/mosfet/_fig_technology_trend.qmd >}}
+
+### Scaling Theory
+
+The ideal scaling theory follows three rules, formulated by R. Dennard in 1974 [@Dennard_1974], to generate the next CMOS technology node from the current one:
+
+1. Reduce all lateral and vertical dimensions by $\alpha$ ($\alpha = \sqrt{2}$ for classical scaling; the area of a MOSFET thus *shrinks* by $\alpha^2 = 2$).
+2. Reduce the threshold voltage $\Vth$ and the supply voltage $\VDD$ by $\alpha$.
+3. Increase all doping levels by $\alpha$.
+
+This scaling is called [**constant-field scaling**](https://en.wikipedia.org/wiki/Dennard_scaling). If we apply these rules, the MOSFET parameters in the shrunken technology (marked by $^*$) scale as follows. The drain saturation current is reduced by $\alpha$:
+
+$$
+I^*_\mathrm{D} = \frac{1}{2} \mun (\alpha \Cox) \frac{W / \alpha}{L / \alpha} \left( \frac{\VGS}{\alpha} - \frac{\Vth}{\alpha} \right)^2 = \frac{1}{\alpha} \ID
+$$
+
+This is offset by the fact that the input capacitance is also reduced:
+
+$$
+C^*_\mathrm{gg} = \frac{W}{\alpha} \frac{L}{\alpha} (\alpha \Cox) = \frac{1}{\alpha} \Cgg
+$$
+
+To estimate the scaling of the gate delay of logic gates built from scaled devices, we use the simple model $T_\mathrm{d} \propto \Cgg \VDD / \ID$, which relates the gate delay to the time it takes to charge or discharge the load capacitance of a driven gate between the supply rails. The scaled delay is
+
+$$
+T^*_\mathrm{d} = \frac{\Cgg / \alpha}{\ID / \alpha} \frac{\VDD}{\alpha} = \frac{1}{\alpha} T_\mathrm{d}
+$$
+
+The speed of digital circuits thus benefits from scaling, as the gate delay shrinks in each new technology node! Using a simple model for the dynamic power consumption of CMOS logic, $P_\mathrm{dyn} = f_\mathrm{clk} C_\mathrm{dyn} \VDD^2$ (where $f_\mathrm{clk}$ is the clock frequency and $C_\mathrm{dyn} \propto \Cgg$ is the total switched capacitance), we see that
+
+$$
+P^*_\mathrm{dyn} = f_\mathrm{clk} \frac{C_\mathrm{dyn}}{\alpha} \left( \frac{\VDD}{\alpha} \right)^2 = \frac{1}{\alpha^3} P_\mathrm{dyn}
+$$
+
+so the dynamic power consumption of a scaled logic circuit benefits dramatically. Note that the power per function, clocked at the same frequency, scales by $\alpha^{-3}$—but since we can also increase the clock frequency by $\alpha$, and can integrate $\alpha^2$ more gates per area, the total power consumption would stay constant if we fully exploited the scaling benefit. To improve power, performance, *and* area (PPA) simultaneously, a trade-off has to be found.
+
+### Analog Scaling
+
+While there is a clear scaling benefit for digital circuits, the benefits for analog circuits are less clear. Generally, the reduction of $\VDD$ is a drawback, since it likely reduces the dynamic range when processing voltage signals. The transconductance scales like
+
+$$
+g^*_\mathrm{m} = \mun (\alpha \Cox) \frac{W / \alpha}{L / \alpha} \frac{\VGS - \Vth}{\alpha} = \gm
+$$
+
+so it seems to be scale-invariant. However, there is a benefit in device speed, as the transit frequency scales like
+
+$$
+f^*_\mathrm{T} = \frac{1}{2 \pi} \frac{\gm}{\Cgg / \alpha} = \alpha \Ftran
+$$
+
+so the speed of the MOSFET increases, opening the door to better analog and RF performance, albeit at lower supply voltages.
+
+### Scaling Summary
+
+@tbl-mosfet-scaling summarizes the constant-field scaling factors derived above. Scaling equations fitted to real technology data from 180 nm down to 7 nm can be found in [@Stillmaker_2017].
+
+| Parameter | Symbol | Scaling factor |
+|:----------|:------:|:--------------:|
+| Gate length | $L_\mathrm{min}$ | $\alpha^{-1}$ |
+| MOSFET area | $W L$ | $\alpha^{-2}$ |
+| Gate oxide thickness | $\tox$ | $\alpha^{-1}$ |
+| Substrate doping | $\Na$ | $\alpha$ |
+| Drain current in saturation | $\ID$ | $\alpha^{-1}$ |
+| Gate capacitance | $\CGS$ | $\alpha^{-1}$ |
+| Supply voltage | $\VDD$ | $\alpha^{-1}$ |
+| Threshold voltage | $\Vth$ | $\alpha^{-1}$ |
+| Gate delay | $T_\mathrm{d}$ | $\alpha^{-1}$ |
+| Clock frequency | $f_\mathrm{clk}$ | $\alpha$ |
+| Dynamic power consumption per gate | $P_\mathrm{dyn}$ | $\alpha^{-3}$ |
+: Constant-field (Dennard) scaling of MOSFET parameters {#tbl-mosfet-scaling}
+
+### Interconnect Scaling
+
+As the MOSFETs get smaller, the metal wiring also needs to scale to finer dimensions. We assume that, along with the lateral dimensions, the metal thickness and the dielectric inter-metal insulation scale down as well. The resistance per length of a scaled metal wire (with thickness $t$ and width $w$) scales as
+
+$$
+\frac{R^*}{l} = \rho \frac{1}{(t / \alpha) (w / \alpha)} = \alpha^2 \frac{R}{l}
+$$
+
+so the wires get significantly more resistive! The wire-to-wire fringe capacitance per length for a minimum-width wire with minimum spacing $s$ scales as
+
+$$
+\frac{C^*_\mathrm{f}}{l} = \epsox \frac{t / \alpha}{s / \alpha} = \frac{C_\mathrm{f}}{l}
+$$
+
+and the vertical coupling capacitance per length (with insulator thickness $h$) scales as
+
+$$
+\frac{C^*_\mathrm{p}}{l} = \epsox \frac{w / \alpha}{h / \alpha} = \frac{C_\mathrm{p}}{l}
+$$
+
+so both capacitance values are, to first order, *invariant to scaling*. The RC wire delay per squared length is thus
+
+$$
+\frac{T^*_\mathrm{wire}}{l^2} \propto \frac{R^*}{l} \left( \frac{C^*_\mathrm{f}}{l} + \frac{C^*_\mathrm{p}}{l} \right) = \alpha^2 \frac{T_\mathrm{wire}}{l^2}
+$$
+
+For short routes, this increased relative delay is offset by the length scaling, so that
+
+$$
+T^*_\mathrm{wire} \propto \left( \frac{l}{\alpha} \right)^2 \frac{T^*_\mathrm{wire}}{l^2} = T_\mathrm{wire}
+$$
+
+For long routes, however, the wire delay increases significantly. To cope with this delay, other solutions are needed: using multiple wiring levels (lower metals levels scaled for density, higher ones un-scaled for speed), or adapting the architecture, e.g., pipelining long-range data transfers.
+
+## MOSFET Short-Channel Effects {#sec-mosfet-sce}
+
+As the MOSFET gate length is scaled below $1\,\mu\text{m}$, various imperfections kick in. We discuss subthreshold conduction and leakage, gate oxide leakage, and drain-induced barrier lowering (DIBL). Other effects, like random dopant fluctuation (RDF), poly depletion, or quantum-mechanical effects, are not covered here.
+
+### Subthreshold Leakage
+
+Revisiting @eq-mosfet-subthreshold and neglecting the $\VDS$-dependent term, we can re-formulate the subthreshold drain current as
+
+$$
+\ID = 100\,\text{nA} \cdot \frac{W}{L} \, e^{\frac{\VGS - \Vth}{n \VT}}
+$$ {#eq-mosfet-subthreshold-simple}
+
+Here, $\Vth$ has been re-defined as the $\VGS$ at which $\ID = 100\,\text{nA} \cdot W / L$, which is a quite practical definition for leakage current discussions. The nonideality factor can also be written as
+
+$$
+n = 1 + \frac{\Cdep}{\Cox} = 1 + \underbrace{\frac{\epssi}{\epsox}}_{\approx 3} \frac{\tox}{\Wdep}
+$$ {#eq-mosfet-n-tox}
+
+Using @eq-mosfet-subthreshold-simple, we see that the leakage current in the off-state ($\VGS = 0$) is impacted by only *two* parameters ($W/L$ is usually fixed by the circuit design):
+
+$$
+I_\mathrm{leak} = 100\,\text{nA} \cdot \frac{W}{L} \, e^{-\frac{\Vth}{n \VT}}
+$$ {#eq-mosfet-leakage}
+
+1. The threshold voltage $\Vth$: a lower $\Vth$ increases the overdrive when the MOSFET is turned on and thus reduces the gate delay, but it exponentially increases the leakage current.
+2. The nonideality factor $n$ (ideally, $n = 1$).
+
+### Subthreshold Slope
+
+To quantify the "turn-off" behavior of a MOSFET, the **subthreshold slope** $S$ is defined, starting from @eq-mosfet-subthreshold-simple, and consisting of the two only parameters $\VT$ and $n$:
+
+$$
+S = \left[ \frac{\partial (\log_{10} \ID)}{\partial \VGS} \right]^{-1} = \frac{n \VT}{\log_{10}(e)} = 2.3 \, n \VT
+$$ {#eq-mosfet-slope}
+
+The subthreshold slope expresses which change of $\VGS$ lowers (or increases) the drain current by a factor of ten. Ideally, $S$ should be as small as possible, meaning that the MOSFET can be turned off rapidly with a small change of $\VGS$:
+
+- The lower bound is $S = 2.3 \VT = 59.4\,\text{mV/dec}$ at $300\,\text{K}$.
+- Using $n = 1.29$ from the previous example, $S = 76.6\,\text{mV/dec}$, which is a good value; $S$ for bulk CMOS is in the range of 80 to 120 mV/dec.
+
+The impact of the subthreshold slope essentially stopped the scaling of $\VDD$ and $\Vth$, as the leakage current would otherwise become impractically large. This issue is exacerbated by the temperature dependence of the threshold voltage of $\approx -1\,\text{mV/K}$ and its process variation on the order of $\pm 50\,\text{mV}$. A threshold-voltage shift of a hundred millivolts may not sound like much, but it enters the leakage exponentially and thus has a drastic impact! @fig-supply-trend shows how the supply voltage stopped scaling at around 0.8 V.
+
+{{< include /content/mosfet/_fig_supply_trend.qmd >}}
+
+### Gate Oxide Leakage
+
+As can be seen in @eq-mosfet-n-tox, to minimize $n$ (and thus the subthreshold slope), and also to increase the drain current in saturation, $\Cox$ needs to be maximized. This has driven the scaling down of the gate oxide thickness, as discussed in the scaling rules. Over the years, the oxide thickness has been reduced from 300 nm to 1.2 nm, but severe issues appear once the oxide is only a few nanometers thick:
+
+- The breakdown voltage of the oxide is reduced, mandating a low $\VDD$.
+- The gate leakage current increases dramatically due to quantum-mechanical tunneling.
+
+An alternative is needed to increase $\Cox$ without further reducing $\tox$: the introduction of alternative gate dielectrics with increased permittivity, the so-called [**high-k gate dielectrics**](https://en.wikipedia.org/wiki/High-kappa_dielectric). One suitable material is hafnium dioxide: while SiO~2~ has $\varepsilon_\mathrm{r} = 3.9$, HfO~2~ offers $\varepsilon_\mathrm{r} = 24$. However, there are potential manufacturing issues, like chemical reactions with the silicon substrate and the gate material, reliability concerns, and reduced surface mobility. Still, high-k dielectrics are now widely used in modern CMOS processes.
+
+### Drain-Induced Barrier Lowering (DIBL)
+
+In scaled MOSFETs, there exists another parasitic effect that lowers $\Vth$ as a function of $L$, called [**drain-induced barrier lowering (DIBL)**](https://en.wikipedia.org/wiki/Drain-induced_barrier_lowering). (Remember that lowering $\Vth$ has an exponential effect on the leakage current!) This lowering of $\Vth$ with *decreasing* $L$ is also called the short-channel effect (SCE). Note that there is also a *reverse* short-channel effect (RSCE), which *increases* $\Vth$ with decreasing $L$, caused by halo implants around drain and source in modern CMOS processes. Effectively, $\Vth = f(L)$ can be a wild function of the MOSFET length, so devices will only match if constructed with the same $L$! Note that $\Vth$ also depends on $\VDS$ due to DIBL, and on device $W$, as well as temperature, and other second-order effects, so ultimately $\Vth = f(L, W, \VDS, T)$!
+
+The impact of $L$ and $\VDS$ on $\Vth$ can be modeled by
+
+$$
+\Delta \Vth = - (\VDS + 0.4\,\text{V}) \, e^{-L/l_\mathrm{d}}
+$$ {#eq-mosfet-dibl}
+
+and is illustrated in @fig-dibl. The DIBL characteristic length is $l_\mathrm{d} \propto \sqrt[3]{\tox \Wdep X_\mathrm{j}}$. To reduce $l_\mathrm{d}$, one or all of these parameters must be reduced:
+
+- The oxide thickness $\tox$, which has already been discussed in the context of gate leakage.
+- The depletion width $\Wdep$.
+- The drain junction depth $X_\mathrm{j}$.
+
+{{< include /content/mosfet/_fig_dibl.qmd >}}
+
+Reducing the depletion width and the junction depth requires increasing $\Na$ (see @eq-mosfet-depletion-width). However, increasing $\Na$ also increases $\Vth$ (see @eq-mosfet-vth), which must be counteracted by increasing $\Cox$—but there are limits due to gate leakage and breakdown, as discussed before. In addition, increasing $\Na$ increases the subthreshold slope (see @eq-mosfet-n-tox) and lowers the mobility due to dopant scattering. So an alternative to ever-increasing substrate doping had to be found.
+
+### Solving DIBL: The Ultra-Thin-Body MOSFET
+
+As scaling up $\Na$ to constrain the *vertical* dimensions has reached its limits, an alternative solution is to *remove the silicon* under the channel to *physically* constrain $\Wdep$ and $X_\mathrm{j}$. In the ultra-thin-body (UTB) MOSFET, the silicon channel is realized on top of a layer of SiO~2~, so the depletion and junction depths are limited to the silicon film thickness $t_\mathrm{si} \leq L/4$. This is called [**silicon-on-insulator (SOI)**](https://en.wikipedia.org/wiki/Silicon_on_insulator) technology; the structure is shown in @fig-utb-finfet (a). Additional advantages are:
+
+- Since much less body doping $\Na$ is needed, the carrier mobility is higher.
+- There is no (or only a small) body effect, since the body is floating and fully depleted.
+- The drain/source-to-bulk capacitance is largely reduced and almost **constant**.
+
+The disadvantage is the higher cost of the SOI wafers, as manufacturing the Si-SiO~2~-Si stack is expensive.
+
+### Solving DIBL: FinFET and Nanosheet
+
+Another alternative is to tilt the silicon channel by 90°, so that it sticks out of the wafer like a "fin," and to wrap the gate around this fin on three sides: the [**FinFET**](https://en.wikipedia.org/wiki/Fin_field-effect_transistor) (or tri-gate MOSFET), shown in @fig-utb-finfet (b). FinFETs have a few important differences compared to bulk MOSFETs:
+
+- The device width is quantized, with $W = W_\mathrm{F} + 2 H_\mathrm{F}$ per fin ($W_\mathrm{F}$ is the width and $H_\mathrm{F}$ the height of the fin), so the circuit design style must be adapted (the design parameter is the number of fins $N_\mathrm{F}$ instead of $W$).
+- Drain and source are contacted at the ends of the fin, so the series resistances $R_\mathrm{S}$ and $R_\mathrm{D}$ are higher, degrading the transconductance due to series feedback: $g_\mathrm{m,eff} = \gm / (1 + \gm R_\mathrm{S})$.
+- Since the subthreshold slope is improved (smaller), the leakage current is lower, which allows lowering $\Vth$ and $\VDD$.
+- DIBL and thus $\gds$ are lower, so the MOSFET self-gain $\gm / \gds$ is high.
+- There is practically no body effect, and due to the low channel doping the mobility is high, leading to improved $\gmid$ and $\mun \approx \mup$.
+- The silicon fins are isolated and surrounded by SiO~2~, so self-heating of the fin can be an issue.
+- The 3D structure increases the coupling capacitance $C_\mathrm{ov}$.
+- A drawback is that SRAM and digital standard cells often use minimum-size transistors, and for yield reasons a minimum-sized FinFET requires two fins—a strong constraint when, e.g., the PMOS needs to be sized differently from the NMOS (the next step up is three fins, a large quantization step).
+
+{{< include /content/mosfet/_fig_utb_finfet.qmd >}}
+
+The evolution of the FinFET is the **nanosheet MOSFET**, first introduced at the 3 nm node (and used by all foundries at 2 nm) and shown in @fig-utb-finfet (c). One advantage is the even better electrostatic control of the gate over the channel, as the stacked channels are completely wrapped by the gate—hence also called [gate-all-around (GAA) MOSFET](https://en.wikipedia.org/wiki/Multigate_device). In addition, the stacked channels can be either $n$- or $p$-type (or mixed), and could even use different materials, like SiGe or GaAs, opening the door to 3D integration.
+
+## Simulated Characteristics in IHP SG13 {#sec-mosfet-ihp}
+
+To connect the simple models we derived earlier to reality, @fig-nmos-iv-lin to @fig-pmos-id-log show simulated I/V characteristics of NMOS and PMOS devices ($W = 1.3\,\mu\text{m}$, $L = 0.13\,\mu\text{m}$, $\VSB = 0$) in the IHP SG13 130 nm CMOS technology, using the foundry's PSP models. The output characteristics show the triode and saturation regions including channel-length modulation, while the logarithmic transfer characteristics clearly show the exponential subthreshold region and the drain-current dependence on $\VDS$ caused by DIBL.
+
+{{< include /content/mosfet/_fig_nmos_iv_lin.qmd >}}
+
+{{< include /content/mosfet/_fig_nmos_id_log.qmd >}}
+
+{{< include /content/mosfet/_fig_pmos_iv_lin.qmd >}}
+
+{{< include /content/mosfet/_fig_pmos_id_log.qmd >}}
+
+## MOSFET Sizing {#sec-mosfet-sizing}
+
+### The $\gmid$ Method
+
+When designing a circuit with MOSFETs, how should one select the parameters like $\ID$, $\VGS$, $W$, and $L$? For digital designs, this is relatively straightforward: $L$ is (usually) set to the minimum length, $W$ is sized according to the driving requirements of the logic circuit, $\VGS$ swings between $\VSS$ and $\VDD$, and no static drain current flows. For analog, mixed-signal, and RF designs, the sizing question is more involved.
+
+In the [Analog Circuit Design](https://iic-jku.github.io/analog-circuit-design/aicd.html) course, the $\gmid$ method is used to find the proper sizing of a MOSFET depending on the circuit requirements. This method is the "go-to" method, as it uses numerical data found by evaluating the PDK models in a circuit simulator, and it describes the MOSFET correctly in all operating regions.
+
+### The Inversion-Coefficient Method
+
+Despite the practical advantages of the $\gmid$ method, alternative approaches exist, and they can be helpful by providing relatively simple and unified analytical equations which are valid in all MOSFET operating regions. One such method is based on the **inversion coefficient**, which has been popularized as a design methodology by W. Sansen [@Sansen_2015; @Sansen_AnalogEssentials]. Let us define a specific current
+
+$$
+I_\mathrm{S} = \mu \Cox \frac{W}{L} \cdot 2 n \VT^2.
+$$ {#eq-mosfet-is}
+
+Then, the inversion coefficient $\IC$ is defined as
+
+$$
+\IC = \frac{\ID}{I_\mathrm{S}} = \left[ \ln \left( 1 + e^{\frac{\VGS - \Vth}{2 n \VT}} \right) \right]^2
+$$ {#eq-mosfet-ic}
+
+The beauty of this approach is that these equations work all the way from weak inversion (subthreshold operation, $\IC < 0.1$) through moderate inversion ($\IC \approx 1$) to strong inversion ($\IC > 10$). Based on the selected $\IC$, the important device properties can be calculated. The drain current is
+
+$$
+\ID = I_\mathrm{S} \cdot \IC
+$$ {#eq-mosfet-ic-id}
+
+the transconductance is given by
+
+$$
+\gm = \frac{\ID}{n \VT} \frac{1 - e^{-\sqrt{\IC}}}{\sqrt{\IC}}
+$$ {#eq-mosfet-ic-gm}
+
+and the speed of the MOSFET is
+
+$$
+\Ftran = \frac{1}{2 \pi} \frac{3}{2} \frac{\mu}{L^2} \VT \left( \sqrt{1 + 4 \, \IC} -1 \right)
+$$ {#eq-mosfet-ic-ft}
+
+Let us check the asymptotic behavior of these equations against the earlier results (see @tbl-mosfet-ic-asymptotic).
+
+| Equation | $\VGS \ll \Vth$ (weak inversion) | $\VGS \gg \Vth$ (strong inversion) |
+|:---------|:---------------------------------:|:----------------------------------:|
+| @eq-mosfet-ic | $\IC = e^{\frac{\VGS - \Vth}{n \VT}}$ | $\IC = \left( \frac{\VGS - \Vth}{2 n \VT} \right)^2$ |
+| @eq-mosfet-ic-id | $\ID = \mu \Cox \frac{W}{L} 2 n \VT^2 e^{\frac{\VGS - \Vth}{n \VT}}$ | $\ID = \frac{1}{2 n} \mu \Cox \frac{W}{L} \left( \VGS - \Vth \right)^2$ |
+| @eq-mosfet-ic-gm | $\gm = \frac{\ID}{n \VT}$ | $\gm = \frac{2 \ID}{\VGS - \Vth}$ |
+| @eq-mosfet-ic-ft | $\Ftran = \frac{1}{2 \pi} \frac{3}{2} \frac{\mu}{L^2} 2 \VT e^{\frac{\VGS - \Vth}{n \VT}}$ | $\Ftran = \frac{1}{2 \pi} \frac{3}{2 n} \frac{\mu}{L^2} \left( \VGS - \Vth \right)$ |
+: Asymptotic behavior of the inversion-coefficient equations in weak and strong inversion {#tbl-mosfet-ic-asymptotic}
+
+The asymptotes match the subthreshold model (@eq-mosfet-subthreshold) and the corrected square-law model (@eq-mosfet-sat-correct), respectively.
+
+Plotting @eq-mosfet-ic-gm and @eq-mosfet-ic-ft versus $\IC$, as done in @fig-ic-tradeoff, reveals the classical trade-off between $\gm$-efficiency ($\gmid$) and speed ($\Ftran$). Note that velocity saturation is not represented in this simple model, so $\Ftran$ does not saturate at high $\IC$ in the plot.
+
+{{< include /content/mosfet/_fig_ic_tradeoff.qmd >}}
+
+@fig-ic-ihp shows the same trade-off extracted from simulation data of an NMOS ($W/L = 1.3\,\mu\text{m}/0.13\,\mu\text{m}$) in IHP SG13. The simulation matches the analytical model well for $\gmid$; the simulated $\Ftran$ comes out higher than the simple model predicts, since the model pessimistically assumes the full $\frac{2}{3} \Cox W L$ gate capacitance at all bias points, while at high $\IC$ velocity saturation causes the simulated $\Ftran$ to flatten.
+
+{{< include /content/mosfet/_fig_ic_ihp.qmd >}}
+
+### Sizing Procedure
+
+The design procedure using the inversion coefficient is as follows:
+
+1. Depending on the trade-off between low power (high $\gmid$) and high speed (high $\Ftran$), select the $\IC$ (often, $\IC \approx 1$ is a reasonable compromise).
+2. Choose either the bias current or the required $\gm$, and calculate the other one using @eq-mosfet-ic-gm.
+3. Using @eq-mosfet-ic-id, calculate $I_\mathrm{S}$ from the known $\ID$.
+4. Depending on the requirements for transistor speed (minimum $L$), matching (large $W \cdot L$), or small $\gds$ (large $L$), choose the appropriate $L$; use @eq-mosfet-is to calculate the corresponding $W$.
+5. Finally, estimate $\Ftran$ using @eq-mosfet-ic-ft. From $\Ftran$, the required bandwidth of the circuit can be estimated, and the sizing can be iterated if necessary.
+
+Now the most important transistor parameters ($W$, $L$, $\ID$, $\gm$, $\VGS$, and $\Ftran$) are selected and known.
+
+## Summary {#sec-mosfet-summary}
+
+The MOSFET is a very versatile device, which can, depending on the bias conditions, work as a:
+
+- **Switch** (for small $\VDS$ and large $\VGS$).
+- **Voltage-controlled resistor** (since $\gds = f(\VGS)$ in the triode region).
+- **Voltage-controlled current source** (since $\ID = f(\VGS)$ in the saturation region).
+- **Diode** (since the MOSFET is off for $\VGS < \Vth$ and on otherwise).
+- **Variable capacitor** (using the gate oxide or drain/source junction capacitance).
+
+This versatility is nicely illustrated by the collection of two-transistor circuits in [@Pretl_Eberlein_2021]; the paper, plus posters showing all fifty circuits, is available at the [Fifty Nifty Variations of Two-Transistor Circuits](https://iic-jku.github.io/fifty-nifty-circuits/) homepage.
+
+When making the MOSFET physically small by scaling $L \ll 1\,\mu\text{m}$ to improve power, performance, and area, various imperfections kick in (like DIBL), causing increased leakage currents and degraded output conductance—so alternative device constructions like SOI, FinFET, and nanosheet MOSFETs have been introduced.
+
+## Appendix: Silicon Material Properties {#sec-mosfet-si-properties}
+
+@tbl-si-properties collects the physical properties of silicon used throughout this text.
+
+| Physical parameter of Si | Symbol | Typical value |
+|:-------------------------|:------:|:-------------:|
+| Lattice constant | | 0.54 nm |
+| Density | | $5.0 \times 10^{22}\,\text{cm}^{-3}$ |
+| Relative permittivity of Si | $\varepsilon_\mathrm{r,si}$ | 11.9 |
+| Relative permittivity of SiO~2~ | $\varepsilon_\mathrm{r,ox}$ | 3.9 |
+| Band gap at 300 K | $E_\mathrm{bg}$ | 1.12 eV |
+| Intrinsic carrier concentration at 300 K | $n_\mathrm{i} = p_\mathrm{i}$ | $1.5 \times 10^{10}\,\text{cm}^{-3}$ |
+| Linear coefficient of thermal expansion | CTE | $2.6 \times 10^{-6}\,\text{K}^{-1}$ |
+| Melting point | | 1415 °C |
+| Mobility of electrons at 300 K | $\mun$ | 1500 cm²/(V s) |
+| Mobility of holes at 300 K | $\mup$ | 450 cm²/(V s) |
+| Thermal conductivity | | 1.5 W/(cm K) |
+| Breakdown field | $E_\mathrm{crit}$ | $3 \times 10^{5}\,\text{V/cm}$ |
+: Physical material properties of silicon {#tbl-si-properties}

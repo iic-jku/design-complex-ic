@@ -1,0 +1,90 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-mosfet-ssm
+#| echo: false
+#| fig-cap: "Complete small-signal model of the MOSFET in saturation, including the gate resistance, the capacitances to all terminals, the transconductance $g_\\mathrm{m}$, the back-gate transconductance $g_\\mathrm{mb}$, and the output conductance $g_\\mathrm{ds}$."
+
+import schemdraw as sd
+import schemdraw.elements as elm
+
+sd.svgconfig.svg2 = False
+
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2, fontsize=11)
+
+    # gate branch
+    d += elm.Dot(open=True).at((0, 3)).label('G', 'left')
+    d += elm.Resistor().endpoints((0, 3), (2.5, 3)).label('$R_\\mathrm{G}$')
+    d += elm.Line().endpoints((2.5, 3), (4, 3))
+    d += elm.Dot().at((3, 3))
+
+    # CGS between gate node and source rail
+    d += elm.Capacitor().endpoints((3, 3), (3, 0)).label(
+        '$C_\\mathrm{GS}$', loc='bottom')
+    # vgs annotation
+    d += elm.Gap().endpoints((2.2, 3), (2.2, 0)).label(
+        ['+', '$v_\\mathrm{gs}$', '$-$'])
+
+    # CGD along the top towards the drain rail
+    d += elm.Capacitor().endpoints((4, 3), (6, 3)).label('$C_\\mathrm{GD}$')
+    d += elm.Line().endpoints((6, 3), (13.8, 3))
+
+    # source rail
+    d += elm.Line().endpoints((3, 0), (11.3, 0))
+    d += elm.Dot(open=True).at((5, -2.5)).label('B', 'left')
+
+    # gm source, gds, gmb between drain and source rail
+    d += elm.SourceI().endpoints((7, 3), (7, 0)).label(
+        '$g_\\mathrm{m} v_\\mathrm{gs}$', loc='bottom')
+    d += elm.Dot().at((7, 3))
+    d += elm.Dot().at((7, 0))
+    d += elm.Resistor().endpoints((9.3, 3), (9.3, 0)).label(
+        '$g_\\mathrm{ds}$', loc='bottom')
+    d += elm.Dot().at((9.3, 3))
+    d += elm.Dot().at((9.3, 0))
+    d += elm.SourceI().endpoints((11.3, 3), (11.3, 0)).label(
+        '$g_\\mathrm{mb} v_\\mathrm{bs}$', loc='bottom')
+    d += elm.Dot().at((11.3, 3))
+
+    # bulk rail with CGB, CSB, CDB
+    d += elm.Line().endpoints((5, -2.5), (13.3, -2.5))
+    d += elm.Capacitor().endpoints((6, 0), (6, -2.5)).label(
+        '$C_\\mathrm{SB}$', loc='bottom')
+    d += elm.Dot().at((6, 0))
+    d += elm.Dot().at((6, -2.5))
+    # vbs annotation
+    d += elm.Gap().endpoints((5.3, 0), (5.3, -2.5)).label(
+        ['$-$', '$v_\\mathrm{bs}$', '+'])
+    d += elm.Capacitor().endpoints((13.3, 3), (13.3, -2.5)).label(
+        '$C_\\mathrm{DB}$', loc='bottom')
+    d += elm.Dot().at((13.3, 3))
+    d += elm.Dot().at((13.3, -2.5))
+
+    # CGB from gate node up and around to the bulk rail
+    d += elm.Line().endpoints((3, 3), (3, 4.5))
+    d += elm.Line().endpoints((3, 4.5), (15.3, 4.5))
+    d += elm.Line().endpoints((15.3, 4.5), (15.3, -1))
+    d += elm.Capacitor().endpoints((15.3, -1), (15.3, -2.5)).label(
+        '$C_\\mathrm{GB}$', loc='top')
+    d += elm.Line().endpoints((15.3, -2.5), (13.3, -2.5))
+
+    # terminals
+    d += elm.Dot(open=True).at((13.8, 3)).label('D', 'right')
+    d += elm.Line().endpoints((7, 0), (7, -1))
+    d += elm.Dot(open=True).at((7, -1)).label('S', 'right')
+```

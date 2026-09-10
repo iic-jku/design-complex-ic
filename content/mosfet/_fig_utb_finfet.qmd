@@ -1,0 +1,106 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-utb-finfet
+#| echo: false
+#| fig-cap: "Advanced MOSFET structures with improved electrostatic gate control: (a) ultra-thin-body (UTB) SOI MOSFET shown along the channel, (b) FinFET shown perpendicular to the channel (the gate wraps around the fin on three sides), and (c) nanosheet (gate-all-around) MOSFET, where stacked channels are completely surrounded by the gate."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, Polygon
+
+C = dict(sub='#f5e9d0', si='#e8b96f', box='#c7dff2', ox='#a7cbe8',
+         poly='#c46262', nplus='#4a7fb5')
+
+fig, axs = plt.subplots(3, 1, figsize=(8, 8))
+
+# (a) UTB SOI MOSFET (along the channel)
+ax = axs[0]
+ax.add_patch(Rectangle((0, 0), 10, 2.2, fc=C['sub'], ec='k', lw=0.8))
+ax.text(5, 0.8, 'Si substrate', ha='center', fontsize=8)
+ax.add_patch(Rectangle((0, 2.2), 10, 1.2, fc=C['box'], ec='k', lw=0.8))
+ax.text(5, 2.8, 'buried oxide (BOX)', ha='center', fontsize=8)
+ax.add_patch(Rectangle((0, 3.4), 10, 0.55, fc=C['si'], ec='k', lw=0.8))
+ax.add_patch(Rectangle((0, 3.4), 3.2, 0.55, fc=C['nplus'], ec='k', lw=0.8))
+ax.add_patch(Rectangle((6.8, 3.4), 3.2, 0.55, fc=C['nplus'], ec='k',
+                       lw=0.8))
+ax.text(1.6, 3.67, 'S', ha='center', va='center', fontsize=8,
+        color='white')
+ax.text(8.4, 3.67, 'D', ha='center', va='center', fontsize=8,
+        color='white')
+ax.text(5, 3.67, '$t_\\mathrm{si}$', ha='center', va='center', fontsize=8)
+ax.add_patch(Rectangle((3.2, 3.95), 3.6, 0.18, fc=C['ox'], ec='k', lw=0.6))
+ax.add_patch(Rectangle((3.2, 4.13), 3.6, 0.8, fc=C['poly'], ec='k',
+                       lw=0.8))
+ax.text(5, 4.53, 'gate', ha='center', va='center', fontsize=8,
+        color='white')
+ax.set_title('(a) UTB SOI', fontsize=9)
+ax.set_xlim(-0.3, 10.3); ax.set_ylim(-0.3, 5.6)
+ax.set_aspect('equal'); ax.axis('off')
+
+# (b) FinFET (cross section perpendicular to the channel)
+ax = axs[1]
+ax.add_patch(Rectangle((0, 0), 10, 2.2, fc=C['sub'], ec='k', lw=0.8))
+ax.text(5, 0.8, 'Si substrate', ha='center', fontsize=8)
+ax.add_patch(Rectangle((0, 2.2), 10, 0.8, fc=C['box'], ec='k', lw=0.8))
+ax.text(1.6, 2.6, 'STI oxide', ha='center', fontsize=7)
+# fin
+ax.add_patch(Rectangle((4.4, 2.2), 1.2, 2.6, fc=C['si'], ec='k', lw=0.8))
+ax.text(5, 3.5, 'fin', ha='center', fontsize=8)
+# gate wrapping the fin (single U-shaped electrode, three sides)
+ax.add_patch(Polygon([(3.6, 3.0), (4.2, 3.0), (4.2, 5.0), (5.8, 5.0),
+                      (5.8, 3.0), (6.4, 3.0), (6.4, 5.6), (3.6, 5.6)],
+                     closed=True, fc=C['poly'], ec='k', lw=0.8))
+ax.text(5, 5.3, 'gate', ha='center', va='center', fontsize=8,
+        color='white')
+# gate oxide lines
+ax.add_patch(Rectangle((4.2, 3.0), 0.2, 1.8, fc=C['ox'], ec='none'))
+ax.add_patch(Rectangle((5.6, 3.0), 0.2, 1.8, fc=C['ox'], ec='none'))
+ax.add_patch(Rectangle((4.2, 4.8), 1.6, 0.2, fc=C['ox'], ec='none'))
+# dimensions
+ax.annotate('', xy=(4.4, 6.0), xytext=(5.6, 6.0),
+            arrowprops=dict(arrowstyle='<->', lw=0.8))
+ax.text(5, 6.25, '$W_\\mathrm{F}$', ha='center', fontsize=8)
+ax.annotate('', xy=(7.0, 3.0), xytext=(7.0, 4.8),
+            arrowprops=dict(arrowstyle='<->', lw=0.8))
+ax.text(7.3, 3.9, '$H_\\mathrm{F}$', fontsize=8)
+ax.set_title('(b) FinFET', fontsize=9)
+ax.set_xlim(-0.3, 10.3); ax.set_ylim(-0.3, 6.9)
+ax.set_aspect('equal'); ax.axis('off')
+
+# (c) nanosheet / GAA (cross section perpendicular to the channel)
+ax = axs[2]
+ax.add_patch(Rectangle((0, 0), 10, 2.2, fc=C['sub'], ec='k', lw=0.8))
+ax.text(5, 0.8, 'Si substrate', ha='center', fontsize=8)
+ax.add_patch(Rectangle((3.0, 2.2), 4.0, 4.2, fc=C['poly'], ec='k', lw=0.8))
+for i in range(3):
+    y = 2.9 + i * 1.1
+    # gate oxide surrounding each nanosheet
+    ax.add_patch(Rectangle((3.3, y - 0.2), 3.4, 0.85, fc=C['ox'], ec='k',
+                           lw=0.6))
+    ax.add_patch(Rectangle((3.5, y), 3.0, 0.45, fc=C['si'], ec='k', lw=0.8))
+ax.text(5, 6.0, 'gate', ha='center', va='center', fontsize=8,
+        color='white')
+ax.text(8.4, 4.0, 'stacked\nnanosheets', ha='center', fontsize=8)
+ax.annotate('', xy=(6.3, 4.22), xytext=(7.5, 4.1),
+            arrowprops=dict(arrowstyle='->', lw=0.8))
+ax.set_title('(c) Nanosheet (GAA)', fontsize=9)
+ax.set_xlim(-0.3, 10.3); ax.set_ylim(-0.3, 6.9)
+ax.set_aspect('equal'); ax.axis('off')
+
+plt.tight_layout()
+plt.show()
+```

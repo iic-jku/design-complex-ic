@@ -1,0 +1,81 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-cmos-cross-section
+#| echo: false
+#| fig-cap: "NMOS and PMOS transistors integrated on a single wafer: the NMOS sits directly in the p-substrate, the PMOS in a local n-well. The p$^+$ substrate contact ties the substrate to $V_\\mathrm{SS}$, the n$^+$ well contact ties the n-well to $V_\\mathrm{DD}$."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+C = dict(sub='#f5e9d0', nwell='#aacdea', ox='#c7dff2', poly='#c46262',
+         nplus='#4a7fb5', pplus='#d1862c', metal='#a0a0a0')
+
+fig, ax = plt.subplots(figsize=(8.5, 3.2))
+SURF = 3.0
+
+# substrate and n-well
+ax.add_patch(Rectangle((0, 0), 14, SURF, fc=C['sub'], ec='k', lw=0.8))
+ax.add_patch(Rectangle((7.2, 1.2), 6.4, SURF - 1.2, fc=C['nwell'],
+                       ec='k', lw=0.8))
+ax.text(3.5, 0.4, 'p-substrate', ha='center', fontsize=9)
+ax.text(10.4, 1.5, 'n-well', ha='center', fontsize=9)
+
+
+def diff(x0, w, typ):
+    fc = C['nplus'] if typ == 'n' else C['pplus']
+    ax.add_patch(Rectangle((x0, SURF - 0.5), w, 0.5, fc=fc, ec='k', lw=0.6))
+    ax.text(x0 + w / 2, SURF - 0.25, f'${typ}^+$', ha='center',
+            va='center', fontsize=8, color='white')
+
+
+def gate(x0, w):
+    ax.add_patch(Rectangle((x0, SURF), w, 0.15, fc=C['ox'], ec='k', lw=0.5))
+    ax.add_patch(Rectangle((x0, SURF + 0.15), w, 0.4, fc=C['poly'],
+                           ec='k', lw=0.5))
+
+
+# substrate contact, NMOS, PMOS, well contact
+diff(0.5, 1.0, 'p')
+diff(2.3, 1.2, 'n')
+gate(3.6, 0.8)
+diff(4.5, 1.2, 'n')
+diff(7.8, 1.2, 'p')
+gate(9.1, 0.8)
+diff(10.0, 1.2, 'p')
+diff(12.0, 1.0, 'n')
+
+labels = [(1.0, '$V_\\mathrm{SS}$\n(sub)'), (2.9, 'S'), (4.0, 'G'),
+          (5.1, 'D'), (8.4, 'D'), (9.5, 'G'), (10.6, 'S'),
+          (12.5, '$V_\\mathrm{DD}$\n(well)')]
+for x, t in labels:
+    # gate leads end on top of the poly, all others on the diffusion surface
+    y_end = SURF + 0.55 if t == 'G' else SURF
+    ax.annotate(t, xy=(x, y_end), xytext=(x, SURF + 1.3),
+                fontsize=9, ha='center',
+                arrowprops=dict(arrowstyle='-', lw=0.8))
+
+ax.text(4.0, -0.5, 'NMOS', ha='center', fontsize=10, fontweight='bold')
+ax.text(9.5, -0.5, 'PMOS', ha='center', fontsize=10, fontweight='bold')
+
+ax.set_xlim(-0.2, 14.2)
+ax.set_ylim(-0.9, 5.2)
+ax.set_aspect('equal')
+ax.axis('off')
+plt.tight_layout()
+plt.show()
+```

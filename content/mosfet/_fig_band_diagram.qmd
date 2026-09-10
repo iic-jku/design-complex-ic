@@ -1,0 +1,104 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-band-diagram
+#| echo: false
+#| fig-cap: "Simplified energy-band diagram of the MOS structure ($n^{++}$-poly gate, oxide, $p$-substrate): (a) at the flatband condition, where the bands in the silicon are flat, and (b) at the threshold condition, where the bands at the surface are bent down by $2\\Phi_\\mathrm{B}$ and inversion sets in (band bending shown qualitatively). The green arrow marks the applied gate voltage $V_\\mathrm{G}$, which shifts the gate Fermi level by $-qV_\\mathrm{G}$ against the bulk Fermi level; in (a) $V_\\mathrm{G} = V_\\mathrm{FB} < 0$, in (b) $V_\\mathrm{G} = V_\\mathrm{th} > 0$. The blue shading in (b) marks the inversion layer of electrons at the surface."
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+Ebg = 1.12       # silicon band gap (eV)
+phib = 0.49      # Fermi potential (V)
+x_ox0, x_ox1 = 0.0, 0.25   # oxide region
+x_si1 = 2.2                # silicon bulk extent
+x_g0 = -0.8                # gate extent
+
+fig, axs = plt.subplots(1, 2, figsize=(8, 3.6), sharey=True)
+
+for ax, bend in zip(axs, [0.0, 2 * phib]):
+    # silicon band bending (parabolic in the depletion region)
+    wdep = 1.2
+    x = np.linspace(x_ox1, x_si1, 300)
+    phi = np.where(x < x_ox1 + wdep,
+                   bend * (1 - (x - x_ox1) / wdep) ** 2, 0.0)
+    # bulk band positions (energies in eV, Ei at 0)
+    Ec_b, Ev_b = Ebg / 2, -Ebg / 2
+    Ef = -phib  # p-type bulk Fermi level below midgap
+    ax.plot(x, Ec_b - phi, 'b-', lw=1.5)
+    ax.plot(x, -phi, 'k-.', lw=0.8)          # intrinsic level
+    ax.plot(x, Ev_b - phi, 'b-', lw=1.5)
+    ax.plot([x_ox1, x_si1], [Ef, Ef], 'r--', lw=1.2)
+
+    # inversion layer: electrons fill the potential well formed by the
+    # downward-bent conduction band, shown as a shaded sliver at the surface
+    if bend > 0:
+        x_e = np.linspace(x_ox1, x_ox1 + 0.3, 100)
+        Ec_e = Ec_b - bend * (1 - (x_e - x_ox1) / wdep) ** 2
+        cap = Ec_b - bend + 0.3
+        ax.fill_between(x_e, Ec_e, cap, where=Ec_e < cap, color='tab:blue',
+                        alpha=0.6, lw=0)
+        ax.annotate('inversion layer\n(electrons)',
+                    xy=(x_ox1 + 0.09, cap - 0.06),
+                    xytext=(x_ox1 + 0.03, 0.55), fontsize=8,
+                    color='darkblue',
+                    arrowprops=dict(arrowstyle='->', lw=0.8,
+                                    color='darkblue'))
+
+    # oxide barrier
+    ax.fill_between([x_ox0, x_ox1], -2.0, 1.5, color='#c7dff2')
+    # gate (n+ poly): Fermi level at the conduction band edge (flatband);
+    # at threshold the gate level is pulled down by q(Vth - Vfb) ≈ 1.56 eV
+    Ef_g = Ec_b if bend == 0 else Ec_b - 1.56
+    ax.plot([x_g0, x_ox0], [Ef_g, Ef_g], 'r--', lw=1.2)
+    ax.plot([x_g0, x_ox0], [Ef_g, Ef_g], 'b-', lw=1.5)
+
+    # applied gate voltage: the gate Fermi level is shifted by -q*V_G with
+    # respect to the bulk Fermi level, the arrow shows the direction
+    x_arr = x_g0 + 0.45
+    ax.plot([x_g0, x_ox0], [Ef, Ef], ':', color='gray', lw=0.8)
+    ax.annotate('', xy=(x_arr, Ef), xytext=(x_arr, Ef_g),
+                arrowprops=dict(arrowstyle='->', lw=0.9, color='g'))
+    ax.text(x_arr + 0.06, (Ef_g + Ef) / 2, '$qV_\\mathrm{G}$', fontsize=9,
+            color='g', va='center')
+
+    ax.text(x_g0 + 0.05, Ef_g + 0.15, 'gate', fontsize=8)
+    ax.text((x_ox0 + x_ox1) / 2, 1.25, 'oxide', fontsize=8, ha='center')
+    ax.text(x_si1 - 0.05, Ec_b + 0.1, '$E_\\mathrm{c}$', fontsize=9,
+            ha='right')
+    ax.text(x_si1 - 0.05, Ev_b - 0.28, '$E_\\mathrm{v}$', fontsize=9,
+            ha='right')
+    ax.text(x_si1 - 0.05, Ef + 0.1, '$E_\\mathrm{F}$', fontsize=9,
+            ha='right', color='r')
+    ax.text(x_si1 - 0.05, 0.07, '$E_\\mathrm{i}$', fontsize=9, ha='right')
+    ax.set_xlim(x_g0, x_si1)
+    ax.set_ylim(-2.0, 1.5)
+    ax.axis('off')
+
+axs[0].set_title('(a) flatband', fontsize=10)
+axs[1].set_title('(b) threshold ($\\Phi_\\mathrm{S} = 2\\Phi_\\mathrm{B}$)',
+                 fontsize=10)
+# annotate the band bending in (b)
+x_bb = 0.62
+axs[1].plot([x_ox1, x_bb], [-2 * phib, -2 * phib], ':', color='gray', lw=0.8)
+axs[1].plot([x_bb, 1.5], [0, 0], ':', color='gray', lw=0.8)
+axs[1].annotate('', xy=(x_bb, -2 * phib), xytext=(x_bb, 0),
+                arrowprops=dict(arrowstyle='<->', lw=0.9))
+axs[1].text(x_bb + 0.06, -1.5 * phib, '$2\\Phi_\\mathrm{B}$', fontsize=9)
+plt.tight_layout()
+plt.show()
+```

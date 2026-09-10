@@ -1,0 +1,48 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-nmos-clm
+#| echo: false
+#| fig-cap: "NMOS output characteristic including channel-length modulation ($\\mu_\\mathrm{n} C'_\\mathrm{ox} = 280\\,\\mathrm{\\mu A/V^2}$, $W/L = 10$, $V_\\mathrm{th} = 0.5\\,$V, $\\lambda = 0.1\\,\\mathrm{V}^{-1}$). The curves in saturation now exhibit a finite slope, corresponding to a nonzero output conductance."
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+k = 2800e-6
+vth = 0.5
+lam = 0.1
+
+fig, ax = plt.subplots(figsize=(6, 4))
+for vgs in [0.6, 0.7, 0.9]:
+    vod = vgs - vth
+    vds_t = np.linspace(0, vod, 50)
+    id_t = k * (vod * vds_t - vds_t**2 / 2) * (1 + lam * vds_t) * 1e6
+    vds_s = np.linspace(vod, 1.5, 50)
+    id_s = 0.5 * k * vod**2 * (1 + lam * vds_s) * 1e6
+    ax.plot(np.concatenate([vds_t, vds_s]),
+            np.concatenate([id_t, id_s]), 'b-', lw=2)
+    ax.annotate(f'$V_\\mathrm{{GS}} = {vgs}\\,$V', xy=(1.5, id_s[-1]),
+                xytext=(1.52, id_s[-1]), fontsize=9, va='center')
+
+ax.set_xlabel('$V_\\mathrm{DS}$ (V)')
+ax.set_ylabel('$I_\\mathrm{D}$ (µA)')
+ax.set_xlim(0, 2.0)
+ax.set_ylim(0, 300)
+ax.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+```

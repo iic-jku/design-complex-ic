@@ -1,0 +1,79 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-mosfet-ssm-simple
+#| echo: false
+#| fig-cap: "Simplified small-signal models of the MOSFET in saturation for hand calculations: $\\pi$-model (left), preferred when the input is at the gate, and $\\tau$-model (right), preferred when the input is at the source. In the $\\tau$-model, the current through the resistor $1/g_\\mathrm{m}$ equals $i_\\mathrm{ds}$, which is mirrored by the controlled source into the drain."
+
+import schemdraw as sd
+import schemdraw.elements as elm
+
+sd.svgconfig.svg2 = False
+
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2, fontsize=11)
+
+    # --- pi model ---
+    d += elm.Dot(open=True).at((0, 3)).label('G', 'left')
+    d += elm.Line().endpoints((0, 3), (2, 3))
+    d += elm.Capacitor().endpoints((2, 3), (2, 0)).label(
+        '$C_\\mathrm{GS}$', loc='bottom')
+    d += elm.Gap().endpoints((1.2, 3), (1.2, 0)).label(
+        ['+', '$v_\\mathrm{gs}$', '$-$'])
+    d += elm.Line().endpoints((2, 0), (6.3, 0))
+    d += elm.SourceI().endpoints((4, 3), (4, 0)).label(
+        '$g_\\mathrm{m} v_\\mathrm{gs}$', loc='bottom')
+    d += elm.Line().endpoints((4, 3), (7.3, 3))
+    d += elm.Dot().at((4, 0))
+    d += elm.Resistor().endpoints((6.3, 3), (6.3, 0)).label(
+        '$g_\\mathrm{ds}$', loc='bottom')
+    d += elm.Dot().at((6.3, 3))
+    d += elm.Dot(open=True).at((7.3, 3)).label('D', 'right')
+    d += elm.Line().endpoints((4, 0), (4, -1))
+    d += elm.Dot(open=True).at((4, -1)).label('S', 'bottom')
+
+    # --- T model ---
+    x0 = 10
+    d += elm.Dot(open=True).at((x0, 3)).label('G', 'left')
+    d += elm.Line().endpoints((x0, 3), (x0 + 2, 3))
+    d += elm.Capacitor().endpoints((x0 + 2, 3), (x0 + 2, 0)).label(
+        '$C_\\mathrm{GS}$', loc='bottom')
+    d += elm.Dot().at((x0 + 2, 3))
+    r_gm = elm.Resistor().endpoints((x0 + 3.5, 3), (x0 + 3.5, 0)).label(
+        '$1/g_\\mathrm{m}$', loc='bottom')
+    d += r_gm
+    d += elm.CurrentLabelInline(direction='in').at(r_gm).label(
+        '$i_\\mathrm{ds}$', loc='bottom')
+    d += elm.Dot().at((x0 + 3.5, 3))
+    d += elm.Line().endpoints((x0 + 2, 0), (x0 + 3.5, 0))
+    d += elm.Line().endpoints((x0 + 2, 3), (x0 + 3.5, 3))
+    d += elm.SourceI().endpoints((x0 + 3.5, 5.5),
+                                           (x0 + 3.5, 3)).label(
+        '$i_\\mathrm{ds}$', loc='bottom')
+    d += elm.Resistor().endpoints((x0 + 5.5, 5.5), (x0 + 5.5, 3)).label(
+        '$g_\\mathrm{ds}$', loc='bottom')
+    d += elm.Line().endpoints((x0 + 3.5, 5.5), (x0 + 5.5, 5.5))
+    d += elm.Line().endpoints((x0 + 5.5, 3), (x0 + 5.5, 0))
+    d += elm.Line().endpoints((x0 + 5.5, 0), (x0 + 3.5, 0))
+    d += elm.Dot().at((x0 + 3.5, 5.5))
+    d += elm.Dot().at((x0 + 3.5, 3))
+    d += elm.Dot().at((x0 + 3.5, 0))
+    d += elm.Line().endpoints((x0 + 3.5, 5.5), (x0 + 3.5, 6.5))
+    d += elm.Dot(open=True).at((x0 + 3.5, 6.5)).label('D', 'top')
+    d += elm.Line().endpoints((x0 + 3.5, 0), (x0 + 3.5, -1))
+    d += elm.Dot(open=True).at((x0 + 3.5, -1)).label('S', 'bottom')
+```

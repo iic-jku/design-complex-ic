@@ -1,0 +1,39 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-nmos-gate-sweep
+#| echo: false
+#| fig-cap: "Cross section of an NMOS transistor for increasing gate voltage (drain and source grounded): (a) flatband condition, (b) gate at 0 V, (c) gate below the threshold voltage, and (d) inversion. The dashed line marks the depletion-region boundary, circled minus signs are ionized acceptors, plus signs are holes, and the dark blue layer in (d) is the electron inversion layer."
+
+import matplotlib.pyplot as plt
+from pyutil.mosfig import draw_nmos
+
+panels = [
+    ('flatband', r'$V_\mathrm{G} = V_\mathrm{fb} < 0\,$V', r'$V_\mathrm{D} = 0\,$V', '(a)'),
+    ('zero', r'$V_\mathrm{G} = 0\,$V', r'$V_\mathrm{D} = 0\,$V', '(b)'),
+    ('depletion', r'$0\,\mathrm{V} < V_\mathrm{G} < V_\mathrm{th}$', r'$V_\mathrm{D} = 0\,$V', '(c)'),
+    ('inversion', r'$V_\mathrm{G} > V_\mathrm{th}$', r'$V_\mathrm{D} = 0\,$V', '(d)'),
+]
+
+fig, axs = plt.subplots(4, 1, figsize=(8, 10))
+for ax, (state, vg, vd, tag) in zip(axs.flat, panels):
+    draw_nmos(ax, state, vg, vd)
+    ax.set_ylim(-0.3, 6.1)
+    ax.text(-1.2, 5.9, tag, fontsize=10, fontweight='bold')
+plt.tight_layout()
+plt.show()
+```

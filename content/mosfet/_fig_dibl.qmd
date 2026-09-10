@@ -1,0 +1,40 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-dibl
+#| echo: false
+#| fig-cap: "Threshold-voltage shift $\\Delta V_\\mathrm{th}$ due to DIBL as a function of gate length, calculated with the model of @eq-mosfet-dibl for a characteristic length $l_\\mathrm{d} = 15\\,$nm. For short gate lengths and high drain voltages, the threshold voltage drops rapidly (compare, e.g., the measured data for a 65 nm technology in [@Goto_2003])."
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+ld = 15e-9
+L = np.linspace(20e-9, 200e-9, 300)
+
+fig, ax = plt.subplots(figsize=(6, 4))
+for vds, style in [(0.05, 'b--'), (1.2, 'b-')]:
+    dvth = -(vds + 0.4) * np.exp(-L / ld)
+    ax.plot(L / 1e-9, dvth * 1e3, style, lw=2,
+            label=f'$V_\\mathrm{{DS}} = {vds}\\,$V')
+
+ax.set_xlabel('Gate length $L$ (nm)')
+ax.set_ylabel('$\\Delta V_\\mathrm{th}$ (mV)')
+ax.legend(loc='lower right')
+ax.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
