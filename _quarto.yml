@@ -16,6 +16,9 @@ website:
         text: "About"
       - href: dcic.qmd
         text: "Course Material"
+      - icon: bi-filetype-pdf
+        text: PDF
+        href: dcic.pdf
     right:
       - icon: github
         href: "{{< meta var.url-repo >}}"

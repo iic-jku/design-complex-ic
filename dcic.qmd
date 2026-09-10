@@ -22,6 +22,15 @@ format:
     number-sections: true
     toc: true
     toc-expand: 2
+  typst:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    section-numbering: 1.1.1
+    lang: en
+    fig-align: center
+    bib: references.bib
+    papersize: a4
 ---
 
 {{< include /content/_abbrv.qmd >}}
