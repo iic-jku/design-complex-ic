@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
-<meta name="dcterms.date" content="2026-09-09">
+<meta name="dcterms.date" content="2026-09-10">
 
 <title>Design of Complex Integrated Circuits</title>
 <style>
@@ -352,6 +352,61 @@ window.Quarto = {
   <li><a href="#sec-intro-scale" id="toc-sec-intro-scale" class="nav-link" data-scroll-target="#sec-intro-scale"><span class="header-section-number">1.1</span> How Small Is a Nanometer?</a></li>
   <li><a href="#sec-intro-history" id="toc-sec-intro-history" class="nav-link" data-scroll-target="#sec-intro-history"><span class="header-section-number">1.2</span> A Brief History of Semiconductors</a></li>
   </ul></li>
+  <li><a href="#sec-mosfet" id="toc-sec-mosfet" class="nav-link" data-scroll-target="#sec-mosfet"><span class="header-section-number">2</span> The MOSFET</a>
+  <ul class="collapse">
+  <li><a href="#sec-mosfet-nutshell" id="toc-sec-mosfet-nutshell" class="nav-link" data-scroll-target="#sec-mosfet-nutshell"><span class="header-section-number">2.1</span> MOSFET Operation in a Nutshell</a>
+  <ul class="collapse">
+  <li><a href="#an-exemplary-130-nm-process-technology" id="toc-an-exemplary-130-nm-process-technology" class="nav-link" data-scroll-target="#an-exemplary-130-nm-process-technology"><span class="header-section-number">2.1.1</span> An Exemplary 130 nm Process Technology</a></li>
+  </ul></li>
+  <li><a href="#sec-mosfet-iv" id="toc-sec-mosfet-iv" class="nav-link" data-scroll-target="#sec-mosfet-iv"><span class="header-section-number">2.2</span> Basic I/V Characteristic of the MOSFET</a>
+  <ul class="collapse">
+  <li><a href="#the-mos-capacitor-and-the-threshold-voltage" id="toc-the-mos-capacitor-and-the-threshold-voltage" class="nav-link" data-scroll-target="#the-mos-capacitor-and-the-threshold-voltage"><span class="header-section-number">2.2.1</span> The MOS Capacitor and the Threshold Voltage</a></li>
+  <li><a href="#derivation-of-the-iv-characteristic" id="toc-derivation-of-the-iv-characteristic" class="nav-link" data-scroll-target="#derivation-of-the-iv-characteristic"><span class="header-section-number">2.2.2</span> Derivation of the I/V Characteristic</a></li>
+  <li><a href="#triode-region" id="toc-triode-region" class="nav-link" data-scroll-target="#triode-region"><span class="header-section-number">2.2.3</span> Triode Region</a></li>
+  <li><a href="#saturation-region" id="toc-saturation-region" class="nav-link" data-scroll-target="#saturation-region"><span class="header-section-number">2.2.4</span> Saturation Region</a></li>
+  <li><a href="#complementary-mos-cmos" id="toc-complementary-mos-cmos" class="nav-link" data-scroll-target="#complementary-mos-cmos"><span class="header-section-number">2.2.5</span> Complementary MOS (CMOS)</a></li>
+  </ul></li>
+  <li><a href="#sec-mosfet-second-order" id="toc-sec-mosfet-second-order" class="nav-link" data-scroll-target="#sec-mosfet-second-order"><span class="header-section-number">2.3</span> Second-Order Effects in the MOSFET</a>
+  <ul class="collapse">
+  <li><a href="#sec-mosfet-body-effect" id="toc-sec-mosfet-body-effect" class="nav-link" data-scroll-target="#sec-mosfet-body-effect"><span class="header-section-number">2.3.1</span> Body Effect</a></li>
+  <li><a href="#channel-length-modulation" id="toc-channel-length-modulation" class="nav-link" data-scroll-target="#channel-length-modulation"><span class="header-section-number">2.3.2</span> Channel-Length Modulation</a></li>
+  <li><a href="#velocity-saturation" id="toc-velocity-saturation" class="nav-link" data-scroll-target="#velocity-saturation"><span class="header-section-number">2.3.3</span> Velocity Saturation</a></li>
+  <li><a href="#mobility-degradation-with-vertical-field" id="toc-mobility-degradation-with-vertical-field" class="nav-link" data-scroll-target="#mobility-degradation-with-vertical-field"><span class="header-section-number">2.3.4</span> Mobility Degradation with Vertical Field</a></li>
+  <li><a href="#sec-mosfet-subthreshold" id="toc-sec-mosfet-subthreshold" class="nav-link" data-scroll-target="#sec-mosfet-subthreshold"><span class="header-section-number">2.3.5</span> Subthreshold Conduction</a></li>
+  <li><a href="#mosfet-iv-characteristic-including-the-body-effect" id="toc-mosfet-iv-characteristic-including-the-body-effect" class="nav-link" data-scroll-target="#mosfet-iv-characteristic-including-the-body-effect"><span class="header-section-number">2.3.6</span> MOSFET I/V Characteristic Including the Body Effect</a></li>
+  </ul></li>
+  <li><a href="#sec-mosfet-ac" id="toc-sec-mosfet-ac" class="nav-link" data-scroll-target="#sec-mosfet-ac"><span class="header-section-number">2.4</span> MOSFET AC Operation</a></li>
+  <li><a href="#sec-mosfet-ssm" id="toc-sec-mosfet-ssm" class="nav-link" data-scroll-target="#sec-mosfet-ssm"><span class="header-section-number">2.5</span> MOSFET Small-Signal Model</a>
+  <ul class="collapse">
+  <li><a href="#high-frequency-operation" id="toc-high-frequency-operation" class="nav-link" data-scroll-target="#high-frequency-operation"><span class="header-section-number">2.5.1</span> High-Frequency Operation</a></li>
+  <li><a href="#simplified-small-signal-models" id="toc-simplified-small-signal-models" class="nav-link" data-scroll-target="#simplified-small-signal-models"><span class="header-section-number">2.5.2</span> Simplified Small-Signal Models</a></li>
+  </ul></li>
+  <li><a href="#sec-mosfet-scaling" id="toc-sec-mosfet-scaling" class="nav-link" data-scroll-target="#sec-mosfet-scaling"><span class="header-section-number">2.6</span> MOSFET Scaling</a>
+  <ul class="collapse">
+  <li><a href="#scaling-theory" id="toc-scaling-theory" class="nav-link" data-scroll-target="#scaling-theory"><span class="header-section-number">2.6.1</span> Scaling Theory</a></li>
+  <li><a href="#analog-scaling" id="toc-analog-scaling" class="nav-link" data-scroll-target="#analog-scaling"><span class="header-section-number">2.6.2</span> Analog Scaling</a></li>
+  <li><a href="#scaling-summary" id="toc-scaling-summary" class="nav-link" data-scroll-target="#scaling-summary"><span class="header-section-number">2.6.3</span> Scaling Summary</a></li>
+  <li><a href="#interconnect-scaling" id="toc-interconnect-scaling" class="nav-link" data-scroll-target="#interconnect-scaling"><span class="header-section-number">2.6.4</span> Interconnect Scaling</a></li>
+  </ul></li>
+  <li><a href="#sec-mosfet-sce" id="toc-sec-mosfet-sce" class="nav-link" data-scroll-target="#sec-mosfet-sce"><span class="header-section-number">2.7</span> MOSFET Short-Channel Effects</a>
+  <ul class="collapse">
+  <li><a href="#subthreshold-leakage" id="toc-subthreshold-leakage" class="nav-link" data-scroll-target="#subthreshold-leakage"><span class="header-section-number">2.7.1</span> Subthreshold Leakage</a></li>
+  <li><a href="#subthreshold-slope" id="toc-subthreshold-slope" class="nav-link" data-scroll-target="#subthreshold-slope"><span class="header-section-number">2.7.2</span> Subthreshold Slope</a></li>
+  <li><a href="#gate-oxide-leakage" id="toc-gate-oxide-leakage" class="nav-link" data-scroll-target="#gate-oxide-leakage"><span class="header-section-number">2.7.3</span> Gate Oxide Leakage</a></li>
+  <li><a href="#drain-induced-barrier-lowering-dibl" id="toc-drain-induced-barrier-lowering-dibl" class="nav-link" data-scroll-target="#drain-induced-barrier-lowering-dibl"><span class="header-section-number">2.7.4</span> Drain-Induced Barrier Lowering (DIBL)</a></li>
+  <li><a href="#solving-dibl-the-ultra-thin-body-mosfet" id="toc-solving-dibl-the-ultra-thin-body-mosfet" class="nav-link" data-scroll-target="#solving-dibl-the-ultra-thin-body-mosfet"><span class="header-section-number">2.7.5</span> Solving DIBL: The Ultra-Thin-Body MOSFET</a></li>
+  <li><a href="#solving-dibl-finfet-and-nanosheet" id="toc-solving-dibl-finfet-and-nanosheet" class="nav-link" data-scroll-target="#solving-dibl-finfet-and-nanosheet"><span class="header-section-number">2.7.6</span> Solving DIBL: FinFET and Nanosheet</a></li>
+  </ul></li>
+  <li><a href="#sec-mosfet-ihp" id="toc-sec-mosfet-ihp" class="nav-link" data-scroll-target="#sec-mosfet-ihp"><span class="header-section-number">2.8</span> Simulated Characteristics in IHP SG13</a></li>
+  <li><a href="#sec-mosfet-sizing" id="toc-sec-mosfet-sizing" class="nav-link" data-scroll-target="#sec-mosfet-sizing"><span class="header-section-number">2.9</span> MOSFET Sizing</a>
+  <ul class="collapse">
+  <li><a href="#the-g_mathrmmi_mathrmd-method" id="toc-the-g_mathrmmi_mathrmd-method" class="nav-link" data-scroll-target="#the-g_mathrmmi_mathrmd-method"><span class="header-section-number">2.9.1</span> The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> Method</a></li>
+  <li><a href="#the-inversion-coefficient-method" id="toc-the-inversion-coefficient-method" class="nav-link" data-scroll-target="#the-inversion-coefficient-method"><span class="header-section-number">2.9.2</span> The Inversion-Coefficient Method</a></li>
+  <li><a href="#sizing-procedure" id="toc-sizing-procedure" class="nav-link" data-scroll-target="#sizing-procedure"><span class="header-section-number">2.9.3</span> Sizing Procedure</a></li>
+  </ul></li>
+  <li><a href="#sec-mosfet-summary" id="toc-sec-mosfet-summary" class="nav-link" data-scroll-target="#sec-mosfet-summary"><span class="header-section-number">2.10</span> Summary</a></li>
+  <li><a href="#sec-mosfet-si-properties" id="toc-sec-mosfet-si-properties" class="nav-link" data-scroll-target="#sec-mosfet-si-properties"><span class="header-section-number">2.11</span> Appendix: Silicon Material Properties</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -387,7 +442,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 9, 2026</p>
+      <p class="date">September 10, 2026</p>
     </div>
   </div>
   
@@ -480,23 +535,1230 @@ Figure&nbsp;3: Moore’s law: the number of components per integrated circuit ve
 </div>
 <p><strong>2006, the first billion-transistor logic chip:</strong> Intel announces the first microprocessor with more than one billion transistors, the <a href="https://en.wikipedia.org/wiki/Itanium">Intel Itanium 2</a>. The chip is manufactured in a 90 nm CMOS process and contains 1.72 billion transistors on a die with an area of 374 mm². The first demonstrated chip with one billion transistors is a 1 Gbit DRAM presented by NEC in 1995, manufactured in 0.25 µm technology <span class="citation" data-cites="NEC_1Gbit_DRAM_1995">(<a href="#ref-NEC_1Gbit_DRAM_1995" role="doc-biblioref">Sugibayashi et al. 1995</a>)</span>.</p>
 <p>For an excellent, much more detailed account of semiconductor history, visit the <a href="https://www.computerhistory.org/siliconengine/timeline/">Silicon Engine timeline of the Computer History Museum</a>.</p>
+</section>
+</section>
+<section id="sec-mosfet" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> The MOSFET</h1>
+<p>This chapter on the metal-oxide-semiconductor field-effect transistor (MOSFET) is largely based on <span class="citation" data-cites="Hu_ModernDevices Razavi_Fundamentals Tsividis_MOS">(<a href="#ref-Hu_ModernDevices" role="doc-biblioref">Hu 2010</a>; <a href="#ref-Razavi_Fundamentals" role="doc-biblioref">Razavi 2014</a>; <a href="#ref-Tsividis_MOS" role="doc-biblioref">Tsividis and McAndrew 2011</a>)</span>, which are also recommended as further reading. In contrast to our <a href="https://iic-jku.github.io/analog-circuit-design/aicd.html">Analog Circuit Design</a> course, where we treated the MOSFET essentially as a numerically-characterized black box, we will derive a simple, first-order model of the MOSFET from the physics of the device, and then discuss the most important second-order effects. The goal is to understand the basic operation of the MOSFET and its <span class="math inline">\(I\)</span>/<span class="math inline">\(V\)</span> characteristic, which will be used in later chapters for circuit design.</p>
+<section id="sec-mosfet-nutshell" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-mosfet-nutshell"><span class="header-section-number">2.1</span> MOSFET Operation in a Nutshell</h2>
+<p>The basic MOSFET structure consists of a gate (terminal <span class="math inline">\(G\)</span>) that is insulated from a doped semiconductor and controls the surface charge in the semiconductor channel below, between the source (terminal <span class="math inline">\(S\)</span>) and the drain (terminal <span class="math inline">\(D\)</span>). The source provides the charge carriers, and an electric field pulls them toward the drain (hence a semiconductor device based on drift current). The electric potential of the semiconductor bulk (terminal <span class="math inline">\(B\)</span>) acts on the channel as well and is the fourth terminal of the MOSFET. Ideally, the effect of the bulk is negligible.</p>
+<p>Two complementary flavors of the device exist: the <span class="math inline">\(n\)</span>-type MOSFET (“NMOS”) has <span class="math inline">\(n^+\)</span>-doped source/drain regions on a <span class="math inline">\(p\)</span>-type substrate and usually an <span class="math inline">\(n^{++}\)</span>-doped gate, while the <span class="math inline">\(p\)</span>-type MOSFET (“PMOS”) has <span class="math inline">\(p^+\)</span>-doped source/drain regions in an <span class="math inline">\(n\)</span>-type well and usually a <span class="math inline">\(p^{++}\)</span>-doped gate.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Doping Notation">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Doping Notation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the doping notation, <span class="math inline">\(+\)</span> indicates a higher doping concentration than the surrounding material, while <span class="math inline">\(++\)</span> indicates an even higher doping concentration. For example, <span class="math inline">\(n^+\)</span>-doped regions have a higher electron concentration than the <span class="math inline">\(n\)</span>-type substrate, and <span class="math inline">\(n^{++}\)</span>-doped gates have an even higher electron concentration than the <span class="math inline">\(n^+\)</span>-doped source/drain regions.</p>
+</div>
+</div>
+<p>To understand the operation of the NMOS transistor, it is instructive to follow the conditions in the semiconductor while the gate voltage is swept upwards, as illustrated in <a href="#fig-nmos-gate-sweep" class="quarto-xref">Figure&nbsp;4</a>:</p>
+<div id="cell-fig-nmos-gate-sweep" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div id="fig-nmos-gate-sweep" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nmos-gate-sweep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-nmos-gate-sweep-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Cross section of an NMOS transistor for increasing gate voltage (drain and source grounded): (a) flatband condition, (b) gate at 0 V, (c) gate below the threshold voltage, and (d) inversion. The dashed line marks the depletion-region boundary, circled minus signs are ionized acceptors, plus signs are holes, and the dark blue layer in (d) is the electron inversion layer."><img src="dcic_files/figure-html/fig-nmos-gate-sweep-output-1.png" width="473" height="949" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nmos-gate-sweep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Cross section of an NMOS transistor for increasing gate voltage (drain and source grounded): (a) flatband condition, (b) gate at 0 V, (c) gate below the threshold voltage, and (d) inversion. The dashed line marks the depletion-region boundary, circled minus signs are ionized acceptors, plus signs are holes, and the dark blue layer in (d) is the electron inversion layer.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Flatband (a):</strong> When the gate is at a specific negative voltage (the flatband voltage <span class="math inline">\(V_\mathrm{fb}\)</span>), and all other terminals are at <span class="math inline">\(0\,\text{V}\)</span>, a depletion zone forms only around the drain and source junctions. No current can flow, since drain and source are <span class="math inline">\(n^+\)</span>-doped while the substrate is <span class="math inline">\(p\)</span>-type, so the two junctions form back-to-back diodes.</li>
+<li><strong>Zero gate voltage (b):</strong> When the gate voltage is increased to <span class="math inline">\(0\,\text{V}\)</span>, a depletion zone also forms below the gate. The <span class="math inline">\(p\)</span>-type acceptor ions in this region have captured an electron and are thus immobile, negatively charged sites (illustrated by the circled minus symbols)—still, no current can flow.</li>
+<li><strong>Below threshold (c):</strong> When the gate voltage increases further (but stays below the threshold voltage), the depletion zone below the gate deepens, reaching a maximum depletion width <span class="math inline">\(W_\mathrm{dep}\)</span> when <span class="math inline">\(V_\mathrm{GS}= V_\mathrm{th}\)</span>. There is still no conduction between drain and source, because there are no (or at least very few) free electrons in the channel region.</li>
+<li><strong>Inversion (d):</strong> When the gate voltage rises above the threshold voltage <span class="math inline">\(V_\mathrm{th}\)</span>, <strong>inversion</strong> occurs: a thin layer of free electrons forms directly below the gate oxide, creating a conducting channel of electrons between drain and source. The source of the electrons in the inversion layer is the <span class="math inline">\(n^+\)</span>-doped source region, which is connected to ground. The electrons are pulled from the source into the channel by the positive gate voltage, and they can now flow to the drain if a drain voltage is applied.</li>
+</ul>
+<p>Once the channel exists, the drain voltage determines the mode of conduction, as shown in <a href="#fig-nmos-drain-sweep" class="quarto-xref">Figure&nbsp;5</a>:</p>
+<div id="cell-fig-nmos-drain-sweep" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div id="fig-nmos-drain-sweep" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nmos-drain-sweep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-nmos-drain-sweep-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: Cross section of an NMOS transistor in inversion for increasing drain voltage: (a) triode region, where the inversion layer extends from source to drain, and (b) saturation, where the channel is pinched off at the drain side."><img src="dcic_files/figure-html/fig-nmos-drain-sweep-output-1.png" width="569" height="565" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nmos-drain-sweep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Cross section of an NMOS transistor in inversion for increasing drain voltage: (a) triode region, where the inversion layer extends from source to drain, and (b) saturation, where the channel is pinched off at the drain side.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Triode (a):</strong> If a small voltage is applied between drain and source, a current flows, and the depletion zone around the drain widens. The drain current is a function of both <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>; the device operates in the <strong>triode</strong> region. The MOSFET operates like a <em>voltage-controlled resistor</em> in this region.</li>
+<li><strong>Saturation (b):</strong> If the drain-source voltage is increased beyond <span class="math inline">\(V_\mathrm{DS}&gt; V_\mathrm{GS}- V_\mathrm{th}\)</span>, the channel is pinched off at the drain side, and the drain current is (to first order) no longer a function of <span class="math inline">\(V_\mathrm{DS}\)</span>, only of <span class="math inline">\(V_\mathrm{GS}\)</span>—the device is now in <strong>saturation</strong>. The MOSFET operates like a <em>voltage-controlled current source</em> in this region.</li>
+</ul>
+<section id="an-exemplary-130-nm-process-technology" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="an-exemplary-130-nm-process-technology"><span class="header-section-number">2.1.1</span> An Exemplary 130 nm Process Technology</h3>
+<p>Throughout this text we will use typical parameters of a 0.13 µm CMOS process technology, specifically IHP SG13 <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">(process specification)</a>, for exemplary calculations. The key parameters are listed in <a href="#tbl-ihp130-parameters" class="quarto-xref">Table&nbsp;1</a>.</p>
+<div id="tbl-ihp130-parameters" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ihp130-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Typical parameters of the IHP SG13 130 nm CMOS technology
+</figcaption>
+<div aria-describedby="tbl-ihp130-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 21%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: center;">Symbol</th>
+<th style="text-align: center;">Typical value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Nominal supply voltage</td>
+<td style="text-align: center;"><span class="math inline">\(V_\mathrm{DD}\)</span></td>
+<td style="text-align: center;">1.2 V (digital) / <strong>1.5 V</strong> (analog)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Minimum gate length</td>
+<td style="text-align: center;"><span class="math inline">\(L_\mathrm{min}\)</span></td>
+<td style="text-align: center;">130 nm</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Oxide thickness</td>
+<td style="text-align: center;"><span class="math inline">\(t_\mathrm{ox}\)</span></td>
+<td style="text-align: center;">2 nm</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Threshold voltage NMOS | PMOS</td>
+<td style="text-align: center;"><span class="math inline">\(V_\mathrm{th,n}\)</span> | <span class="math inline">\(V_\mathrm{th,p}\)</span></td>
+<td style="text-align: center;">0.5 V | −0.47 V</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maximum voltage</td>
+<td style="text-align: center;"><span class="math inline">\(|V_\mathrm{GS,max}|\)</span>, <span class="math inline">\(|V_\mathrm{DS,max}|\)</span></td>
+<td style="text-align: center;">2 V</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gate capacitance</td>
+<td style="text-align: center;"><span class="math inline">\(C'_\mathrm{ox}\)</span></td>
+<td style="text-align: center;">17.3 fF/µm²</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Process constant <span class="math inline">\(K_\mathrm{n}\)</span> | <span class="math inline">\(K_\mathrm{p}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_\mathrm{n}C'_\mathrm{ox}\)</span> | <span class="math inline">\(\mu_\mathrm{p}C'_\mathrm{ox}\)</span></td>
+<td style="text-align: center;">280 µA/V² | 130 µA/V²</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-mosfet-iv" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-mosfet-iv"><span class="header-section-number">2.2</span> Basic I/V Characteristic of the MOSFET</h2>
+<section id="the-mos-capacitor-and-the-threshold-voltage" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="the-mos-capacitor-and-the-threshold-voltage"><span class="header-section-number">2.2.1</span> The MOS Capacitor and the Threshold Voltage</h3>
+<p>If source, drain, and substrate are grounded (<span class="math inline">\(V_\mathrm{S} = V_\mathrm{D} = V_\mathrm{B} = 0\,\text{V}\)</span>), and a positive voltage <span class="math inline">\(V_\mathrm{GS}= V_\mathrm{G}\)</span> is applied to the gate, then positive charge accumulates on the gate and negative charge in the <span class="math inline">\(p\)</span>-type substrate, forming a depletion layer in the substrate.</p>
+<p>If we assume a uniform charge density <span class="math inline">\(\rho = -q N_\mathrm{a}\)</span> across this layer with <span class="math inline">\(N_\mathrm{a}\)</span> being the doping concentration of the <span class="math inline">\(p\)</span>-type substrate (in a practical device, this charge density is not uniform), then we can use Poisson’s equation. Note that with the boundary conditions assuming <span class="math inline">\(\Phi(0) = 0\)</span> and <span class="math inline">\(d\Phi(0)/dy = 0\)</span>, <span class="math inline">\(y=0\)</span> is the point where the depletion layer starts in the depth of the substrate, and <span class="math inline">\(y = W_\mathrm{dep}\)</span> is the point where the depletion layer ends (the depletion width) at the substrate-oxide interface (<span class="math inline">\(\varepsilon_\mathrm{si}\)</span> is the permittivity of silicon):</p>
+<p><span id="eq-mosfet-poisson"><span class="math display">\[
+\frac{d^2 \Phi(y)}{d y^2} = -\frac{\rho(y)}{\varepsilon_\mathrm{si}} = \frac{q N_\mathrm{a}}{\varepsilon_\mathrm{si}} \quad \rightarrow \quad \Phi(y) = \frac{q N_\mathrm{a}}{2 \varepsilon_\mathrm{si}} y^2
+\tag{1}\]</span></span></p>
+<p>The surface potential <span class="math inline">\(\Phi_\mathrm{S}= \Phi(W_\mathrm{dep})\)</span> at the oxide-silicon interface is then related to the depletion width <span class="math inline">\(W_\mathrm{dep}\)</span> by</p>
+<p><span id="eq-mosfet-depletion-width"><span class="math display">\[
+W_\mathrm{dep}= \sqrt{\frac{2 \varepsilon_\mathrm{si}\Phi_\mathrm{S}}{q N_\mathrm{a}}}.
+\tag{2}\]</span></span></p>
+<p>With <span class="math inline">\(W_\mathrm{dep}\)</span> we can also calculate the corresponding depletion capacitance (per unit area, indicated with the prime):</p>
+<p><span id="eq-mosfet-depletion-cap"><span class="math display">\[
+C'_\mathrm{dep}= \frac{\varepsilon_\mathrm{si}}{W_\mathrm{dep}} = \sqrt{\frac{q N_\mathrm{a}\varepsilon_\mathrm{si}}{2 \Phi_\mathrm{S}}}
+\tag{3}\]</span></span></p>
+<p>The charge per unit area <span class="math inline">\(Q'_\mathrm{dep}\)</span> in this region is (negative, because of the captured electrons)</p>
+<p><span id="eq-mosfet-qdep"><span class="math display">\[
+Q'_\mathrm{dep} = - q N_\mathrm{a}W_\mathrm{dep}= - \sqrt{2 q N_\mathrm{a}\varepsilon_\mathrm{si}\Phi_\mathrm{S}}
+\tag{4}\]</span></span></p>
+<p>The gate voltage is the result of the sum of the flatband voltage, the surface potential, and the voltage across the oxide</p>
+<p><span id="eq-mosfet-gate-voltage"><span class="math display">\[
+V_\mathrm{G} = \Phi_\mathrm{fb}+ \Phi_\mathrm{S}+ V_\mathrm{ox} = \Phi_\mathrm{fb0} + \frac{-Q'_\mathrm{ss}}{C'_\mathrm{ox}} + \Phi_\mathrm{S}+ \frac{-Q'_\mathrm{sub}}{C'_\mathrm{ox}}
+\tag{5}\]</span></span></p>
+<p>where <span class="math inline">\(\Phi_\mathrm{fb}\)</span> is the work-function difference between the gate and the substrate material (the flatband voltage <span class="math inline">\(V_\mathrm{fb}\)</span> used in <a href="#fig-nmos-gate-sweep" class="quarto-xref">Figure&nbsp;4</a>). Note that the negative sign in the last term arises because voltage and charge are taken from different electrodes of the gate capacitor: the voltage <span class="math inline">\(V_\mathrm{ox}\)</span> at the top, and the substrate charge <span class="math inline">\(Q'_\mathrm{sub}\)</span> as well as the interface charge <span class="math inline">\(Q'_\mathrm{ss}\)</span> at the bottom.</p>
+<p>An interface charge <span class="math inline">\(Q'_\mathrm{ss}\)</span> can be present at the SiO<sub>2</sub>-Si interface due to crystal discontinuities. This interface charge can be accounted for by adapting the flatband voltage <span class="math inline">\(\Phi_\mathrm{fb0}\)</span> to <span class="math inline">\(\Phi_\mathrm{fb}\)</span> (going forward, we will just use <span class="math inline">\(\Phi_\mathrm{fb}\)</span>).</p>
+<p>Using <a href="#eq-mosfet-depletion-width" class="quarto-xref">Equation&nbsp;2</a> to express <span class="math inline">\(\Phi_\mathrm{S}= q N_\mathrm{a}W_\mathrm{dep}^2 / (2 \varepsilon_\mathrm{si})\)</span> and <a href="#eq-mosfet-qdep" class="quarto-xref">Equation&nbsp;4</a> for <span class="math inline">\(Q'_\mathrm{sub} = Q'_\mathrm{dep}\)</span>, <a href="#eq-mosfet-gate-voltage" class="quarto-xref">Equation&nbsp;5</a> can be written as</p>
+<p><span id="eq-mosfet-surface-potential"><span class="math display">\[
+V_\mathrm{G} = \Phi_\mathrm{fb}+ \frac{q N_\mathrm{a}W_\mathrm{dep}^2}{2 \varepsilon_\mathrm{si}} + \frac{q N_\mathrm{a}W_\mathrm{dep}}{C'_\mathrm{ox}}
+\tag{6}\]</span></span></p>
+<p>From <a href="#eq-mosfet-surface-potential" class="quarto-xref">Equation&nbsp;6</a>, the depletion width <span class="math inline">\(W_\mathrm{dep}\)</span> can be calculated as a function of <span class="math inline">\(V_\mathrm{G}\)</span>, and from this <span class="math inline">\(\Phi_\mathrm{S}= f(V_\mathrm{G})\)</span> using <a href="#eq-mosfet-depletion-width" class="quarto-xref">Equation&nbsp;2</a>.</p>
+<p>If the surface potential <span class="math inline">\(\Phi_\mathrm{S}\)</span> reaches a critical level of twice the Fermi potential <span class="math inline">\(\Phi_\mathrm{B}\)</span>, then <strong>inversion</strong> occurs: a thin layer of electrons is induced directly under the oxide. The gate voltage that is minimally required to produce this inversion layer is called the <a href="https://en.wikipedia.org/wiki/Threshold_voltage"><strong>threshold voltage</strong></a> <span class="math inline">\(V_\mathrm{th}= V_\mathrm{G}(\Phi_\mathrm{S}= 2 \Phi_\mathrm{B})\)</span>.</p>
+<p><span id="eq-mosfet-vth"><span class="math display">\[
+V_\mathrm{th}= \Phi_\mathrm{fb}+ 2 \Phi_\mathrm{B}+ \frac{-Q'_\mathrm{dep}}{C'_\mathrm{ox}} = \Phi_\mathrm{fb}+ 2 \Phi_\mathrm{B}+ \frac{\sqrt{2 q N_\mathrm{a}\varepsilon_\mathrm{si}\cdot 2 \Phi_\mathrm{B}}}{C'_\mathrm{ox}}
+\tag{7}\]</span></span></p>
+<p>with the Fermi potential</p>
+<p><span id="eq-mosfet-phib"><span class="math display">\[
+\Phi_\mathrm{B}= \frac{k T}{q} \ln \frac{N_\mathrm{a}}{n_\mathrm{i}}.
+\tag{8}\]</span></span></p>
+<p><a href="#fig-band-diagram" class="quarto-xref">Figure&nbsp;6</a> illustrates the flatband and the threshold condition in terms of the energy bands of the MOS structure.</p>
+<div id="cell-fig-band-diagram" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div id="fig-band-diagram" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-band-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-band-diagram-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;6: Simplified energy-band diagram of the MOS structure (n^{++}-poly gate, oxide, p-substrate): (a) at the flatband condition, where the bands in the silicon are flat, and (b) at the threshold condition, where the bands at the surface are bent down by 2\Phi_\mathrm{B} and inversion sets in (band bending shown qualitatively). The green arrow marks the applied gate voltage V_\mathrm{G}, which shifts the gate Fermi level by -qV_\mathrm{G} against the bulk Fermi level; in (a) V_\mathrm{G} = V_\mathrm{FB} < 0, in (b) V_\mathrm{G} = V_\mathrm{th} > 0. The blue shading in (b) marks the inversion layer of electrons at the surface."><img src="dcic_files/figure-html/fig-band-diagram-output-1.png" width="758" height="336" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-band-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Simplified energy-band diagram of the MOS structure (<span class="math inline">\(n^{++}\)</span>-poly gate, oxide, <span class="math inline">\(p\)</span>-substrate): (a) at the flatband condition, where the bands in the silicon are flat, and (b) at the threshold condition, where the bands at the surface are bent down by <span class="math inline">\(2\Phi_\mathrm{B}\)</span> and inversion sets in (band bending shown qualitatively). The green arrow marks the applied gate voltage <span class="math inline">\(V_\mathrm{G}\)</span>, which shifts the gate Fermi level by <span class="math inline">\(-qV_\mathrm{G}\)</span> against the bulk Fermi level; in (a) <span class="math inline">\(V_\mathrm{G} = V_\mathrm{FB} &lt; 0\)</span>, in (b) <span class="math inline">\(V_\mathrm{G} = V_\mathrm{th} &gt; 0\)</span>. The blue shading in (b) marks the inversion layer of electrons at the surface.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="nte-vth-calculation" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note&nbsp;1: Example Calculation of the Threshold Voltage
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let us assume a substrate doping level of <span class="math inline">\(N_\mathrm{a}= 3 \times 10^{18}\,\text{cm}^{-3}\)</span>. The Fermi potential can be calculated with <a href="#eq-mosfet-phib" class="quarto-xref">Equation&nbsp;8</a> (using the intrinsic carrier concentration of silicon <span class="math inline">\(n_\mathrm{i} = 1.5 \times 10^{10}\,\text{cm}^{-3}\)</span> at room temperature <span class="math inline">\(T = 300\,\text{K}\)</span>):</p>
+<p><span class="math display">\[
+\Phi_\mathrm{B}= \frac{k T}{q} \ln \frac{N_\mathrm{a}}{n_\mathrm{i}} = 0.49\,\text{V}
+\]</span></p>
+<p>We further use <span class="math inline">\(C'_\mathrm{ox}= \varepsilon_\mathrm{ox}/ t_\mathrm{ox}= 17.3\,\text{fF}/\mu\text{m}^2\)</span> for a <span class="math inline">\(t_\mathrm{ox}= 2\,\text{nm}\)</span> gate oxide. The flatband voltage for an <span class="math inline">\(n^+\)</span>-polysilicon gate on the <span class="math inline">\(p\)</span>-substrate with doping <span class="math inline">\(N_\mathrm{a}\)</span> is (with the silicon band-gap voltage <span class="math inline">\(\Phi_\mathrm{bg} = 1.12\,\text{V}\)</span>)</p>
+<p><span class="math display">\[
+\Phi_\mathrm{fb}= -\frac{\Phi_\mathrm{bg}}{2} - \Phi_\mathrm{B}= -1.05\,\text{V}
+\]</span></p>
+<p>The resulting threshold voltage is thus (<em>beware of units!</em>)</p>
+<p><span class="math display">\[
+V_\mathrm{th}= \Phi_\mathrm{fb}+ 2 \Phi_\mathrm{B}+ \frac{\sqrt{2 q N_\mathrm{a}\varepsilon_\mathrm{si}\cdot 2 \Phi_\mathrm{B}}}{C'_\mathrm{ox}} = 0.51\,\text{V}
+\]</span></p>
+<p>Using these values, we can also calculate the depletion width <span class="math inline">\(W_\mathrm{dep}\)</span> in inversion, and the corresponding <span class="math inline">\(C'_\mathrm{dep}\)</span> (compare <span class="math inline">\(W_\mathrm{dep}\)</span> to <span class="math inline">\(t_\mathrm{ox}\)</span>, and <span class="math inline">\(C'_\mathrm{dep}\)</span> to <span class="math inline">\(C'_\mathrm{ox}\)</span>):</p>
+<p><span class="math display">\[
+W_\mathrm{dep}= \sqrt{\frac{2 \varepsilon_\mathrm{si}\cdot 2 \Phi_\mathrm{B}}{q N_\mathrm{a}}} = 20.8\,\text{nm}
+\quad \text{and} \quad
+C'_\mathrm{dep}= \frac{\varepsilon_\mathrm{si}}{W_\mathrm{dep}} = 5.1\,\text{fF}/\mu\text{m}^2
+\]</span></p>
+</div>
+</div>
+<p>Using <a href="#eq-mosfet-surface-potential" class="quarto-xref">Equation&nbsp;6</a> and <a href="#eq-mosfet-depletion-width" class="quarto-xref">Equation&nbsp;2</a> we can now visualize the depletion width <span class="math inline">\(W_\mathrm{dep}\)</span> and the surface potential <span class="math inline">\(\Phi_\mathrm{S}\)</span> as a function of the gate potential <span class="math inline">\(V_\mathrm{G}\)</span>, shown in <a href="#fig-wdep-phis" class="quarto-xref">Figure&nbsp;7</a>. Note how the surface potential saturates at <span class="math inline">\(2\Phi_\mathrm{B}\)</span> once inversion is reached: any additional gate charge is then mirrored by electrons in the inversion layer rather than by a deeper depletion region.</p>
+<div id="cell-fig-wdep-phis" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div id="fig-wdep-phis" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wdep-phis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-wdep-phis-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;7: Depletion width W_\mathrm{dep} (left) and surface potential \Phi_\mathrm{S} (right) as a function of the gate potential V_\mathrm{G}, calculated with the depletion approximation for N_\mathrm{a} = 3 \times 10^{18}\,\mathrm{cm}^{-3}, t_\mathrm{ox} = 2\,nm, and \Phi_\mathrm{fb} = -1.05\,V. Once inversion is reached at \Phi_\mathrm{S} = 2\Phi_\mathrm{B} (at V_\mathrm{G} = V_\mathrm{th} \approx 0.5\,V), both quantities saturate."><img src="dcic_files/figure-html/fig-wdep-phis-output-1.png" width="759" height="316" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wdep-phis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Depletion width <span class="math inline">\(W_\mathrm{dep}\)</span> (left) and surface potential <span class="math inline">\(\Phi_\mathrm{S}\)</span> (right) as a function of the gate potential <span class="math inline">\(V_\mathrm{G}\)</span>, calculated with the depletion approximation for <span class="math inline">\(N_\mathrm{a} = 3 \times 10^{18}\,\mathrm{cm}^{-3}\)</span>, <span class="math inline">\(t_\mathrm{ox} = 2\,\)</span>nm, and <span class="math inline">\(\Phi_\mathrm{fb} = -1.05\,\)</span>V. Once inversion is reached at <span class="math inline">\(\Phi_\mathrm{S} = 2\Phi_\mathrm{B}\)</span> (at <span class="math inline">\(V_\mathrm{G} = V_\mathrm{th} \approx 0.5\,\)</span>V), both quantities saturate.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="derivation-of-the-iv-characteristic" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="derivation-of-the-iv-characteristic"><span class="header-section-number">2.2.2</span> Derivation of the I/V Characteristic</h3>
+<p>If we now apply a small <span class="math inline">\(V_\mathrm{DS}\)</span>, then a sufficiently large <span class="math inline">\(V_\mathrm{GS}&gt; V_\mathrm{th}\)</span> builds up the inversion charge <span class="math inline">\(Q'_\mathrm{inv} = C'_\mathrm{ox}(V_\mathrm{GS}- V_\mathrm{th})\)</span> in the channel below the gate, which is then moved from source to drain by the electric field caused by <span class="math inline">\(V_\mathrm{DS}\)</span>, resulting in the drift current <span class="math inline">\(I_\mathrm{D}\)</span> (<span class="math inline">\(\mu_\mathrm{n}\)</span> is the electron mobility):</p>
+<p><span id="eq-mosfet-drift"><span class="math display">\[
+I_\mathrm{D}= W Q'_\mathrm{inv} v = W Q'_\mathrm{inv} \mu_\mathrm{n}E = W Q'_\mathrm{inv} \mu_\mathrm{n}\frac{V_\mathrm{DS}}{L}
+= \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} (V_\mathrm{GS}- V_\mathrm{th}) V_\mathrm{DS}
+\tag{9}\]</span></span></p>
+<p>If <span class="math inline">\(V_\mathrm{DS}\)</span> increases further, the channel charge <span class="math inline">\(Q'_\mathrm{inv}(x)\)</span> becomes a function of the position in the channel, because the drain current causes a potential gradient <span class="math inline">\(dV_\mathrm{cs}/dx\)</span> along the channel (we assume that <span class="math inline">\(V_\mathrm{DS}\)</span> is small enough so that the whole channel is still inverted). <span class="math inline">\(x=0\)</span> is the source end of the channel, and <span class="math inline">\(x=L\)</span> is the drain end.</p>
+<p><span class="math display">\[
+I_\mathrm{D}= W Q'_\mathrm{inv}(x) v = W C'_\mathrm{ox}( V_\mathrm{GS}- V_\mathrm{cs} - V_\mathrm{th}) \mu_\mathrm{n}\frac{dV_\mathrm{cs}}{dx}
+\]</span></p>
+<p>Integrating along the channel from source to drain,</p>
+<p><span class="math display">\[
+\int_{0}^{L} I_\mathrm{D}\, dx = \mu_\mathrm{n}C'_\mathrm{ox}W \int_{0}^{V_\mathrm{DS}} ( V_\mathrm{GS}- V_\mathrm{cs} - V_\mathrm{th}) \, dV_\mathrm{cs},
+\]</span></p>
+<p>yields the well-known <strong>square-law</strong> characteristic</p>
+<p><span id="eq-mosfet-square-law"><span class="math display">\[
+I_\mathrm{D}= \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} \left[ ( V_\mathrm{GS}- V_\mathrm{th}) V_\mathrm{DS}- \frac{1}{2} V_\mathrm{DS}^2 \right].
+\tag{10}\]</span></span></p>
+<p>Note that this simple derivation of the MOSFET I/V characteristic is only valid for long-channel devices (<span class="math inline">\(L &gt; 1\,\mu\text{m}\)</span>) and does not account for second-order effects such as channel-length modulation, body effect, velocity saturation, mobility degradation with the vertical field, and subthreshold conduction. These effects will be discussed in the next section.</p>
+</section>
+<section id="triode-region" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="triode-region"><span class="header-section-number">2.2.3</span> Triode Region</h3>
+<p><a href="#eq-mosfet-square-law" class="quarto-xref">Equation&nbsp;10</a> is valid only for classical, long-channel (<span class="math inline">\(L &gt; 1\,\mu\text{m}\)</span>) devices, and only as long as <span class="math inline">\(V_\mathrm{DS}\leq V_\mathrm{GS}- V_\mathrm{th}= V_\mathrm{od}\)</span>; this range of operation is the so-called <strong>triode region</strong>. The <strong>overdrive voltage</strong></p>
+<p><span id="eq-mosfet-overdrive"><span class="math display">\[
+V_\mathrm{od}= V_\mathrm{GS}- V_\mathrm{th}
+\tag{11}\]</span></span></p>
+<p>is a frequently used quantity. The ratio <span class="math inline">\(W/L\)</span> is a dimensionless quantity called the <strong>aspect ratio</strong> of the MOSFET—note that only the relative sizing of <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> impacts the transistor’s <span class="math inline">\(I\)</span>/<span class="math inline">\(V\)</span> characteristic!</p>
+<p>For <span class="math inline">\(V_\mathrm{DS}\ll V_\mathrm{GS}- V_\mathrm{th}\)</span>, we can simplify <a href="#eq-mosfet-square-law" class="quarto-xref">Equation&nbsp;10</a> and see that the MOSFET behaves like a voltage-controlled resistor:</p>
+<p><span id="eq-mosfet-triode"><span class="math display">\[
+I_\mathrm{D}\approx \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} ( V_\mathrm{GS}- V_\mathrm{th}) V_\mathrm{DS}\quad \rightarrow \quad g_\mathrm{ds}= \frac{1}{r_\mathrm{o}}= \frac{\partial I_\mathrm{D}}{\partial V_\mathrm{DS}} = \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} ( V_\mathrm{GS}- V_\mathrm{th})
+\tag{12}\]</span></span></p>
+<p><a href="#fig-nmos-triode" class="quarto-xref">Figure&nbsp;8</a> shows the resulting output characteristic in the triode region for three different gate voltages.</p>
+<div id="cell-fig-nmos-triode" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div id="fig-nmos-triode" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nmos-triode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-nmos-triode-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;8: NMOS output characteristic in the triode region according to the square-law model (\mu_\mathrm{n} C'_\mathrm{ox} = 280\,\mathrm{\mu A/V^2}, W/L = 10, V_\mathrm{th} = 0.5\,V). Each curve ends at the edge of saturation, V_\mathrm{DS} = V_\mathrm{GS} - V_\mathrm{th}."><img src="dcic_files/figure-html/fig-nmos-triode-output-1.png" width="568" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nmos-triode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: NMOS output characteristic in the triode region according to the square-law model (<span class="math inline">\(\mu_\mathrm{n} C'_\mathrm{ox} = 280\,\mathrm{\mu A/V^2}\)</span>, <span class="math inline">\(W/L = 10\)</span>, <span class="math inline">\(V_\mathrm{th} = 0.5\,\)</span>V). Each curve ends at the edge of saturation, <span class="math inline">\(V_\mathrm{DS} = V_\mathrm{GS} - V_\mathrm{th}\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="saturation-region" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="saturation-region"><span class="header-section-number">2.2.4</span> Saturation Region</h3>
+<p>If <span class="math inline">\(V_\mathrm{DS}&gt; V_\mathrm{GS}- V_\mathrm{th}\)</span>, the assumption of a completely inverted channel leading up to <a href="#eq-mosfet-square-law" class="quarto-xref">Equation&nbsp;10</a> is no longer valid. The channel gets <strong>pinched off</strong> at the drain side; this happens at <span class="math inline">\(V_\mathrm{DS,sat} = V_\mathrm{GS}- V_\mathrm{th}\)</span>, leading to a maximum (saturated) value of the drain current. Substituting <span class="math inline">\(V_\mathrm{DS}= V_\mathrm{DS,sat}\)</span> into <a href="#eq-mosfet-square-law" class="quarto-xref">Equation&nbsp;10</a> gives the drain current in the <strong>saturation region</strong>:</p>
+<p><span id="eq-mosfet-sat"><span class="math display">\[
+I_\mathrm{D}= I_\mathrm{DS,sat} = \frac{1}{2} \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} ( V_\mathrm{GS}- V_\mathrm{th})^2
+\tag{13}\]</span></span></p>
+<p>In the saturation region, the MOSFET behaves like a voltage-controlled current source, so it is useful to define the transconductance</p>
+<p><span class="math display">\[
+g_\mathrm{m}= \frac{\partial I_\mathrm{D}}{\partial V_\mathrm{GS}},
+\]</span></p>
+<p>which can be expressed in various forms:</p>
+<p><span id="eq-mosfet-gm"><span class="math display">\[
+g_\mathrm{m}= \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} (V_\mathrm{GS}-V_\mathrm{th}) = \sqrt{2 \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} I_\mathrm{D}} = \frac{2 I_\mathrm{D}}{V_\mathrm{GS}-V_\mathrm{th}}
+\tag{14}\]</span></span></p>
+<p>We see that <span class="math inline">\(g_\mathrm{m}\)</span> is a linear function of the overdrive <span class="math inline">\(V_\mathrm{od}= V_\mathrm{GS}- V_\mathrm{th}\)</span> (leading to a quadratic rise of the drain current), or a square-root function of <span class="math inline">\(I_\mathrm{D}\)</span>, or simply the drain current divided by half the overdrive voltage. Note that for a BJT <span class="math inline">\(g_\mathrm{m}= I_\mathrm{C} / V_\mathrm{T}\)</span>, so the MOSFET offers more degrees of freedom. <a href="#fig-nmos-full" class="quarto-xref">Figure&nbsp;9</a> shows the complete output characteristic including the boundary between triode and saturation.</p>
+<div id="cell-fig-nmos-full" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div id="fig-nmos-full" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nmos-full-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-nmos-full-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;9: Complete NMOS output characteristic according to the square-law model (\mu_\mathrm{n} C'_\mathrm{ox} = 280\,\mathrm{\mu A/V^2}, W/L = 10, V_\mathrm{th} = 0.5\,V). The dashed red line marks the boundary V_\mathrm{DS} = V_\mathrm{GS} - V_\mathrm{th} between the triode and the saturation region."><img src="dcic_files/figure-html/fig-nmos-full-output-1.png" width="568" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nmos-full-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Complete NMOS output characteristic according to the square-law model (<span class="math inline">\(\mu_\mathrm{n} C'_\mathrm{ox} = 280\,\mathrm{\mu A/V^2}\)</span>, <span class="math inline">\(W/L = 10\)</span>, <span class="math inline">\(V_\mathrm{th} = 0.5\,\)</span>V). The dashed red line marks the boundary <span class="math inline">\(V_\mathrm{DS} = V_\mathrm{GS} - V_\mathrm{th}\)</span> between the triode and the saturation region.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="complementary-mos-cmos" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="complementary-mos-cmos"><span class="header-section-number">2.2.5</span> Complementary MOS (CMOS)</h3>
+<p>In CMOS technologies, both NMOS and PMOS devices are needed and fabricated on the same wafer, as shown in <a href="#fig-cmos-cross-section" class="quarto-xref">Figure&nbsp;10</a>. Usually, the PMOS is located in a local <span class="math inline">\(n\)</span>-well, and this <span class="math inline">\(n\)</span>-well is tied to the most positive supply voltage (<span class="math inline">\(V_\mathrm{DD}\)</span>), while the <span class="math inline">\(p\)</span>-substrate is tied to ground (<span class="math inline">\(V_\mathrm{SS}\)</span>). The substrate contacts are realized with <span class="math inline">\(p^+\)</span>-diffusions in the <span class="math inline">\(p\)</span>-substrate (forming an ohmic contact), and the well contacts are realized with <span class="math inline">\(n^+\)</span>-diffusions in the <span class="math inline">\(n\)</span>-well.</p>
+<p>For increased isolation (especially for analog applications), a triple-well (or “deep <span class="math inline">\(n\)</span>-well,” DNW) option is sometimes available; the NMOS is then located in a local <span class="math inline">\(p\)</span>-well which is fully enclosed by an <span class="math inline">\(n\)</span>-well and thus isolated from the common substrate.</p>
+<div id="cell-fig-cmos-cross-section" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div id="fig-cmos-cross-section" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cmos-cross-section-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-cmos-cross-section-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;10: NMOS and PMOS transistors integrated on a single wafer: the NMOS sits directly in the p-substrate, the PMOS in a local n-well. The p^+ substrate contact ties the substrate to V_\mathrm{SS}, the n^+ well contact ties the n-well to V_\mathrm{DD}."><img src="dcic_files/figure-html/fig-cmos-cross-section-output-1.png" width="676" height="298" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cmos-cross-section-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: NMOS and PMOS transistors integrated on a single wafer: the NMOS sits directly in the p-substrate, the PMOS in a local n-well. The p<span class="math inline">\(^+\)</span> substrate contact ties the substrate to <span class="math inline">\(V_\mathrm{SS}\)</span>, the n<span class="math inline">\(^+\)</span> well contact ties the n-well to <span class="math inline">\(V_\mathrm{DD}\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In <a href="#fig-cmos-inverter" class="quarto-xref">Figure&nbsp;11</a>, we see a simple CMOS inverter consisting of a PMOS and an NMOS transistor. The PMOS is connected to the positive supply voltage <span class="math inline">\(V_\mathrm{DD}\)</span>, while the NMOS is connected to ground <span class="math inline">\(V_\mathrm{SS}\)</span>. The gates of both transistors are tied together and form the input <span class="math inline">\(A\)</span> of the inverter, while the drains are also tied together and form the output <span class="math inline">\(Y\)</span>. When the input is low, the PMOS is on and the NMOS is off, pulling the output high. Conversely, when the input is high, the PMOS is off and the NMOS is on, pulling the output low.</p>
+<div id="cell-fig-cmos-inverter" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div id="fig-cmos-inverter" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cmos-inverter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-cmos-inverter-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;11: The CMOS inverter: (a) schematic and (b) the same circuit in the cross-section of the wafer. The PMOS pulls the output Y up when the input A is low, the NMOS pulls it down when the input is high, so in the static state no dc current flows from V_\mathrm{DD} to V_\mathrm{SS}. The bulk of the PMOS (its n-well) is tied to V_\mathrm{DD}, the bulk of the NMOS (the p-substrate) to V_\mathrm{SS}. In (b) the hop marks a wire crossing without contact, which in a real chip is realized on two different metal layers."><img src="dcic_files/figure-html/fig-cmos-inverter-output-1.png" width="752" height="311" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cmos-inverter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: The CMOS inverter: (a) schematic and (b) the same circuit in the cross-section of the wafer. The PMOS pulls the output <span class="math inline">\(Y\)</span> up when the input <span class="math inline">\(A\)</span> is low, the NMOS pulls it down when the input is high, so in the static state no dc current flows from <span class="math inline">\(V_\mathrm{DD}\)</span> to <span class="math inline">\(V_\mathrm{SS}\)</span>. The bulk of the PMOS (its <span class="math inline">\(n\)</span>-well) is tied to <span class="math inline">\(V_\mathrm{DD}\)</span>, the bulk of the NMOS (the <span class="math inline">\(p\)</span>-substrate) to <span class="math inline">\(V_\mathrm{SS}\)</span>. In (b) the hop marks a wire crossing without contact, which in a real chip is realized on two different metal layers.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that in the CMOS technology shown in <a href="#fig-cmos-inverter" class="quarto-xref">Figure&nbsp;11</a>, the bulk nodes of all the NMOS transistors are tied to the common substrate (<span class="math inline">\(V_\mathrm{SS}\)</span>), while the bulk nodes of all the PMOS transistors are tied to the <span class="math inline">\(n\)</span>-well (<span class="math inline">\(V_\mathrm{DD}\)</span>). Since the <span class="math inline">\(n\)</span>-wells are separated from the substrate (and can be separated between different PMOS devices), the bulk nodes of selected PMOS can be tied to different potentials than <span class="math inline">\(V_\mathrm{DD}\)</span> (e.g., to the source of the PMOS), which is called <strong>body biasing</strong>. This can be used to adjust the threshold voltage of the PMOS transistors or to avoid the bulk effect (see <a href="#sec-mosfet-body-effect" class="quarto-xref">Section&nbsp;2.3.1</a>).</p>
+</section>
+</section>
+<section id="sec-mosfet-second-order" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-mosfet-second-order"><span class="header-section-number">2.3</span> Second-Order Effects in the MOSFET</h2>
+<p>The simple MOSFET model developed so far is only valid to first order for long-channel devices (<span class="math inline">\(L_\mathrm{min} &gt; 1\,\mu\text{m}\)</span>) under idealistic conditions. In the following, we discuss the most important second-order effects: the body effect, channel-length modulation, velocity saturation, mobility degradation with the vertical field, and subthreshold conduction.</p>
+<section id="sec-mosfet-body-effect" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="sec-mosfet-body-effect"><span class="header-section-number">2.3.1</span> Body Effect</h3>
+<p>In the derivation of <a href="#eq-mosfet-vth" class="quarto-xref">Equation&nbsp;7</a> we tied source, drain, and bulk together. Note that the inversion charge is a function of the bulk (substrate) potential <span class="math inline">\(V_\mathrm{B}\)</span> versus the gate potential <span class="math inline">\(V_\mathrm{G}\)</span>, so when the source potential <span class="math inline">\(V_\mathrm{S}\)</span> differs from <span class="math inline">\(V_\mathrm{B}\)</span>, the apparent <span class="math inline">\(V_\mathrm{th}\)</span> becomes a function of <span class="math inline">\(V_\mathrm{SB}\)</span>, because inversion is reached at a surface potential of <span class="math inline">\(2 \Phi_\mathrm{B}+ V_\mathrm{SB}\)</span> instead of <span class="math inline">\(2 \Phi_\mathrm{B}\)</span>.</p>
+<p>This is the so-called <strong>body effect</strong> (or “back-gate effect”). The effective threshold voltage is given by (<span class="math inline">\(V_\mathrm{th0}\)</span> is the threshold voltage with <span class="math inline">\(V_\mathrm{SB}= 0\)</span>)</p>
+<p><span id="eq-mosfet-body-effect"><span class="math display">\[
+V_\mathrm{th}= V_\mathrm{th0} + \gamma \left( \sqrt{2 \Phi_\mathrm{B}+ V_\mathrm{SB}} - \sqrt{2 \Phi_\mathrm{B}} \right)
+\tag{15}\]</span></span></p>
+<p>with the body-effect coefficient <span class="math inline">\(\gamma\)</span> (the factor <span class="math inline">\(n\)</span> will be introduced in <a href="#sec-mosfet-subthreshold" class="quarto-xref">Section&nbsp;2.3.5</a>)</p>
+<p><span id="eq-mosfet-gamma"><span class="math display">\[
+\gamma = \frac{\sqrt{2 q N_\mathrm{a}\varepsilon_\mathrm{si}}}{C'_\mathrm{ox}} = 2 (n - 1) \sqrt{2 \Phi_\mathrm{B}}.
+\tag{16}\]</span></span></p>
+<p>Note that for <span class="math inline">\(n = 1\)</span> (no body effect), <span class="math inline">\(\gamma = 0\)</span> and thus <span class="math inline">\(V_\mathrm{th}= V_\mathrm{th0}\)</span>.</p>
+<div id="nte-body-effect" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note&nbsp;2: Example Calculation of the Body Effect (NMOS)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Starting with the previously used values (<span class="math inline">\(N_\mathrm{a}= 3 \times 10^{18}\,\text{cm}^{-3}\)</span>, <span class="math inline">\(C'_\mathrm{ox}= 17.3\,\text{fF}/\mu\text{m}^2\)</span>, <span class="math inline">\(\Phi_\mathrm{B}= 0.49\,\text{V}\)</span>), we get</p>
+<p><span class="math display">\[
+\gamma = \frac{\sqrt{2 q N_\mathrm{a}\varepsilon_\mathrm{si}}}{C'_\mathrm{ox}} = 0.58\,\text{V}^{1/2}
+\]</span></p>
+<p>Let us consider the originally calculated <span class="math inline">\(V_\mathrm{th0} = 0.51\,\text{V}\)</span> and assume the bulk is tied to <span class="math inline">\(V_\mathrm{SS}= V_\mathrm{B} = 0\,\text{V}\)</span> while the source sits at <span class="math inline">\(V_\mathrm{S} = 0.5\,\text{V}\)</span> (so <span class="math inline">\(V_\mathrm{SB}= 0.5\,\text{V}\)</span>). Using <a href="#eq-mosfet-body-effect" class="quarto-xref">Equation&nbsp;15</a>:</p>
+<p><span class="math display">\[
+V_\mathrm{th}= 0.51 + 0.58 \left( \sqrt{2 \cdot 0.49 + 0.5} - \sqrt{2 \cdot 0.49} \right) = 0.64\,\text{V}
+\]</span></p>
+<p>In this case, the threshold voltage has been <strong>increased by 130 mV</strong>. Conversely, by tying the bulk to a higher potential than the source, the threshold voltage can also be <strong>decreased</strong>, but beware of the risk of forward-biasing the source-bulk pn-junction (see <a href="#fig-cmos-cross-section" class="quarto-xref">Figure&nbsp;10</a>)!</p>
+</div>
+</div>
+</section>
+<section id="channel-length-modulation" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="channel-length-modulation"><span class="header-section-number">2.3.2</span> Channel-Length Modulation</h3>
+<p>In the derivation of the saturation current (<a href="#eq-mosfet-sat" class="quarto-xref">Equation&nbsp;13</a>), we assumed that the channel is pinched off exactly at the drain when <span class="math inline">\(V_\mathrm{DS}= V_\mathrm{GS}- V_\mathrm{th}\)</span>. When <span class="math inline">\(V_\mathrm{DS}\)</span> is increased further, this pinch-off point moves away from the drain towards the source. This can be viewed as an effective <strong>channel-length reduction</strong>, <span class="math inline">\(L_\mathrm{eff} = f(V_\mathrm{DS}) &lt; L\)</span>, and we have to use <span class="math inline">\(L_\mathrm{eff}\)</span> instead of <span class="math inline">\(L\)</span> in <a href="#eq-mosfet-sat" class="quarto-xref">Equation&nbsp;13</a>. Avoiding a direct calculation of <span class="math inline">\(L_\mathrm{eff}\)</span>, it is common to set <span class="math inline">\(1/L_\mathrm{eff} \approx (1 + \Delta L / L)/L\)</span> with <span class="math inline">\(\Delta L/L = \lambda V_\mathrm{DS}\)</span>, so that</p>
+<p><span id="eq-mosfet-clm"><span class="math display">\[
+I_\mathrm{D}= \frac{1}{2} \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} ( V_\mathrm{GS}- V_\mathrm{th})^2 (1 + \lambda V_\mathrm{DS})
+\tag{17}\]</span></span></p>
+<p>This so-called <strong>channel-length modulation</strong> leads to a reduced output impedance of the MOSFET, i.e., a nonzero output conductance (ideally, <span class="math inline">\(\lambda = 0\)</span> and thus <span class="math inline">\(g_\mathrm{ds}= 0\)</span>):</p>
+<p><span id="eq-mosfet-gds"><span class="math display">\[
+g_\mathrm{ds}= \frac{\partial I_\mathrm{D}}{\partial V_\mathrm{DS}} = I_\mathrm{D}\rvert_{\lambda = 0} \cdot \lambda
+\tag{18}\]</span></span></p>
+<p>Since <span class="math inline">\(\lambda \propto 1/L\)</span>, the output resistance can be improved by increasing <span class="math inline">\(L\)</span> beyond the minimum length, which is usually done when using the MOSFET as a current source. By scaling <span class="math inline">\(W\)</span> along with <span class="math inline">\(L\)</span>, the aspect ratio can be kept constant. <a href="#fig-nmos-clm" class="quarto-xref">Figure&nbsp;12</a> shows the output characteristic including channel-length modulation; note the finite slope of the curves in saturation.</p>
+<div id="cell-fig-nmos-clm" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div id="fig-nmos-clm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nmos-clm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-nmos-clm-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;12: NMOS output characteristic including channel-length modulation (\mu_\mathrm{n} C'_\mathrm{ox} = 280\,\mathrm{\mu A/V^2}, W/L = 10, V_\mathrm{th} = 0.5\,V, \lambda = 0.1\,\mathrm{V}^{-1}). The curves in saturation now exhibit a finite slope, corresponding to a nonzero output conductance."><img src="dcic_files/figure-html/fig-nmos-clm-output-1.png" width="568" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nmos-clm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: NMOS output characteristic including channel-length modulation (<span class="math inline">\(\mu_\mathrm{n} C'_\mathrm{ox} = 280\,\mathrm{\mu A/V^2}\)</span>, <span class="math inline">\(W/L = 10\)</span>, <span class="math inline">\(V_\mathrm{th} = 0.5\,\)</span>V, <span class="math inline">\(\lambda = 0.1\,\mathrm{V}^{-1}\)</span>). The curves in saturation now exhibit a finite slope, corresponding to a nonzero output conductance.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="velocity-saturation" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="velocity-saturation"><span class="header-section-number">2.3.3</span> Velocity Saturation</h3>
+<p>In the derivation of <a href="#eq-mosfet-drift" class="quarto-xref">Equation&nbsp;9</a>, we assumed that the velocity of the carriers in the channel is given by <span class="math inline">\(v = \mu_\mathrm{n}E_\mathrm{DS}\)</span>. This is only true up to a certain speed limit of the carriers in silicon, which is around <span class="math inline">\(v_\mathrm{sat} = 10^7\,\text{cm/s}\)</span>. To take this <a href="https://en.wikipedia.org/wiki/Saturation_velocity"><strong>velocity saturation</strong></a> into account, the following empirical model for the effective velocity can be used in the derivation:</p>
+<p><span id="eq-mosfet-vsat-model"><span class="math display">\[
+v_\mathrm{eff} =
+\begin{cases}
+\dfrac{\mu_\mathrm{n}E_\mathrm{DS}}{1 + {E_\mathrm{DS}}/{E_\mathrm{sat}}} &amp; \text{if } E_\mathrm{DS} \leq E_\mathrm{sat} = {2 v_\mathrm{sat}}/{\mu_\mathrm{n}} \\[1ex]
+v_\mathrm{sat} &amp; \text{otherwise}
+\end{cases}
+\tag{19}\]</span></span></p>
+<p>If the MOSFET enters the velocity-saturation regime, the square-law relation no longer holds, and the drain current is given by</p>
+<p><span id="eq-mosfet-vsat"><span class="math display">\[
+I_\mathrm{D}= v_\mathrm{sat} C'_\mathrm{ox}W (V_\mathrm{GS}- V_\mathrm{th}).
+\tag{20}\]</span></span></p>
+<p>In velocity saturation, <span class="math inline">\(I_\mathrm{D}\)</span> is not a quadratic but a linear function of the overdrive voltage, and the transconductance hence saturates at</p>
+<p><span id="eq-mosfet-gmsat"><span class="math display">\[
+g_\mathrm{m,sat} = v_\mathrm{sat} C'_\mathrm{ox}W
+\tag{21}\]</span></span></p>
+<p>This result means that increasing the drain current beyond the velocity-saturation point does not result in an increased <span class="math inline">\(g_\mathrm{m}\)</span>, which is usually not useful.</p>
+<p>In sub-micron technologies, it is relatively easy to reach velocity saturation: with <span class="math inline">\(\mu_\mathrm{n}= 280\,\text{cm}^2/(\text{V}\cdot\text{s})\)</span>, the resulting critical field is <span class="math inline">\(E_\mathrm{sat} = 7.1\,\text{V}/\mu\text{m}\)</span>, which is reached in a 0.13 µm CMOS technology at an overdrive of <span class="math inline">\(V_\mathrm{od}\approx 0.9\,\text{V}\)</span>—achievable with a supply voltage of <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span> and <span class="math inline">\(V_\mathrm{th}= 0.5\,\text{V}\)</span>! Note that the stated <span class="math inline">\(\mu_\mathrm{n}\)</span> is considerably lower than the mobility of pure silicon, because doping reduces mobility—yet another trade-off.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</section>
+<section id="mobility-degradation-with-vertical-field" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="mobility-degradation-with-vertical-field"><span class="header-section-number">2.3.4</span> Mobility Degradation with Vertical Field</h3>
+<p>With high <span class="math inline">\(V_\mathrm{GS}\)</span>, the channel is confined to a narrow region at the surface, leading to more carrier scattering and thus lower mobility (remember that at the SiO<span class="math inline">\(_2\)</span>-silicon interface, scattering is more pronounced). We can model this effect empirically by setting</p>
+<p><span id="eq-mosfet-mobility-degradation"><span class="math display">\[
+\mu_\mathrm{n,eff} = \frac{\mu_\mathrm{n}}{1 + \Theta (V_\mathrm{GS}- V_\mathrm{th})}
+\tag{22}\]</span></span></p>
+<p>and using this <span class="math inline">\(\mu_\mathrm{n,eff}\)</span> instead of <span class="math inline">\(\mu_\mathrm{n}\)</span> in the saturation current (<a href="#eq-mosfet-sat" class="quarto-xref">Equation&nbsp;13</a>):</p>
+<p><span id="eq-mosfet-mobility-cubic"><span class="math display">\[
+I_\mathrm{D}= \frac{1}{2} \frac{\mu_\mathrm{n}C'_\mathrm{ox}}{1 + \Theta V_\mathrm{od}}  \frac{W}{L}  V_\mathrm{od}^2 \approx \frac{1}{2} \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L}  ( V_\mathrm{od}^2 - \Theta V_\mathrm{od}^3 )
+\tag{23}\]</span></span></p>
+<p>This introduces a <em>cubic</em> nonlinearity into an otherwise quadratic relationship, which can be relevant for precision analog and high-frequency circuits, with <span class="math inline">\(\Theta \approx (10^{-9}\,\text{m/V}) / t_\mathrm{ox}= 0.5\,\text{V}^{-1}\)</span> for <span class="math inline">\(t_\mathrm{ox}= 2\,\text{nm}\)</span>.</p>
+</section>
+<section id="sec-mosfet-subthreshold" class="level3" data-number="2.3.5">
+<h3 data-number="2.3.5" class="anchored" data-anchor-id="sec-mosfet-subthreshold"><span class="header-section-number">2.3.5</span> Subthreshold Conduction</h3>
+<p>In the derivation of <a href="#eq-mosfet-vth" class="quarto-xref">Equation&nbsp;7</a>, we assumed that inversion sets in <em>abruptly</em> when the surface potential reaches <span class="math inline">\(2 \Phi_\mathrm{B}\)</span>. However, even before reaching this level, there are already electrons present in the channel (for the NMOS; holes for the PMOS), which lead to conduction between drain and source even for <span class="math inline">\(V_\mathrm{GS}&lt; V_\mathrm{th}\)</span>.</p>
+<p>This mode of operation is called <a href="https://en.wikipedia.org/wiki/Subthreshold_conduction"><strong>subthreshold conduction</strong></a>, and it leads to a leakage current based on diffusion when the MOSFET should be off. The drain current in this regime is described by</p>
+<p><span id="eq-mosfet-subthreshold"><span class="math display">\[
+I_\mathrm{D}= I_0 \frac{W}{L} e^{\frac{V_\mathrm{GS}}{n V_\mathrm{T}}} \left( 1 - e^{-\frac{V_\mathrm{DS}}{V_\mathrm{T}}} \right) = \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} \, 2 n V_\mathrm{T}^2 \, e^{\frac{V_\mathrm{GS}- V_\mathrm{th}}{n V_\mathrm{T}}} \left( 1 - e^{-\frac{V_\mathrm{DS}}{V_\mathrm{T}}} \right).
+\tag{24}\]</span></span></p>
+<p>The nonideality factor (or slope factor) <span class="math inline">\(n\)</span> is defined by (see <a href="#eq-mosfet-gamma" class="quarto-xref">Equation&nbsp;16</a>)</p>
+<p><span id="eq-mosfet-n"><span class="math display">\[
+n = 1 + \frac{C'_\mathrm{dep}}{C'_\mathrm{ox}}
+\tag{25}\]</span></span></p>
+<p>and is on the order of 1 (perfect MOSFET) to 2 (pretty bad). Using the values of <span class="math inline">\(C'_\mathrm{ox}\)</span> and <span class="math inline">\(C'_\mathrm{dep}\)</span> from the previous examples, we get <span class="math inline">\(n = 1.29\)</span>. <span class="math inline">\(V_\mathrm{T}= k T / q\)</span> is the well-known thermal voltage of <span class="math inline">\(25.8\,\text{mV}\)</span> at <span class="math inline">\(300\,\text{K}\)</span>, and</p>
+<p><span class="math display">\[
+I_0 = \mu_\mathrm{n}C'_\mathrm{ox}\, 2 n V_\mathrm{T}^2 \, e^{-\frac{V_\mathrm{th}}{n V_\mathrm{T}}}.
+\]</span></p>
+<p>Note that the depletion capacitance <span class="math inline">\(C'_\mathrm{dep}\)</span> is given by <a href="#eq-mosfet-depletion-cap" class="quarto-xref">Equation&nbsp;3</a> evaluated at <span class="math inline">\(\Phi_\mathrm{S}= 2\Phi_\mathrm{B}\)</span>:</p>
+<p><span class="math display">\[
+C'_\mathrm{dep}= \sqrt{\frac{q N_\mathrm{a}\varepsilon_\mathrm{si}}{2 \cdot 2 \Phi_\mathrm{B}}}
+\]</span></p>
+<p>The inversion condition used in the derivation of the threshold voltage in <a href="#eq-mosfet-vth" class="quarto-xref">Equation&nbsp;7</a> is the point where <em>the electron concentration at the surface equals the bulk doping concentration</em> <span class="math inline">\(N_\mathrm{a}\)</span>—but even before this condition is met, there are electrons in the channel. Another way to look at this is that the surface potential effectively forward-biases the channel-source junction (since the channel region is <span class="math inline">\(p\)</span>-type and the source is <span class="math inline">\(n^+\)</span>), which can be seen in the plot of <span class="math inline">\(\Phi_\mathrm{S}\)</span> in <a href="#fig-wdep-phis" class="quarto-xref">Figure&nbsp;7</a>. When the forward bias of this junction is gradually increased, electrons are injected into the channel area (similar to a BJT), moving across the channel by diffusion, and collected by the drain. At the point where the channel switches from <span class="math inline">\(p\)</span>- to <span class="math inline">\(n\)</span>-type due to inversion, this “diode” approaches an ohmic connection linking drain and source.</p>
+<p>Although this <strong>weak inversion</strong> mode of the MOSFET is generally unwanted in digital circuits (as it leads to leakage currents), it is very useful for low-power analog (and digital) operation. Assuming <span class="math inline">\(V_\mathrm{DS}&gt; 4 V_\mathrm{T}\approx 100\,\text{mV}\)</span>, then</p>
+<p><span class="math display">\[
+I_\mathrm{D}\approx I_0 \frac{W}{L} e^{\frac{V_\mathrm{GS}}{n V_\mathrm{T}}}
+\]</span></p>
+<p>and the resulting transconductance is</p>
+<p><span id="eq-mosfet-gm-weak"><span class="math display">\[
+g_\mathrm{m}= \frac{\partial I_\mathrm{D}}{\partial V_\mathrm{GS}} = \frac{I_\mathrm{D}}{n V_\mathrm{T}}
+\tag{26}\]</span></span></p>
+<p>This transconductance in weak inversion is similar to that of a BJT, except for the reduction by the factor <span class="math inline">\(n\)</span>!</p>
+</section>
+<section id="mosfet-iv-characteristic-including-the-body-effect" class="level3" data-number="2.3.6">
+<h3 data-number="2.3.6" class="anchored" data-anchor-id="mosfet-iv-characteristic-including-the-body-effect"><span class="header-section-number">2.3.6</span> MOSFET I/V Characteristic Including the Body Effect</h3>
+<p>In the earlier derivation of the square law (<a href="#eq-mosfet-square-law" class="quarto-xref">Equation&nbsp;10</a>), we made a deliberate error: when the channel potential <span class="math inline">\(V_\mathrm{cs}\)</span> departs from <span class="math inline">\(V_\mathrm{S}\)</span> towards <span class="math inline">\(V_\mathrm{D}\)</span>, we need to take the body effect along the channel into account by using <span class="math inline">\(n V_\mathrm{cs}\)</span> instead of <span class="math inline">\(V_\mathrm{cs}\)</span>, so <span class="math inline">\(Q'_\mathrm{inv}(x) = C'_\mathrm{ox}(V_\mathrm{GS}- n V_\mathrm{cs} - V_\mathrm{th})\)</span>. The corrected derivation is then</p>
+<p><span class="math display">\[
+\int_{0}^{L} I_\mathrm{D}\, dx = \mu_\mathrm{n}C'_\mathrm{ox}W \int_{0}^{V_\mathrm{DS}} ( V_\mathrm{GS}- n V_\mathrm{cs} - V_\mathrm{th}) \, dV_\mathrm{cs}
+\]</span></p>
+<p>resulting in</p>
+<p><span id="eq-mosfet-square-law-correct"><span class="math display">\[
+I_\mathrm{D}= \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} \left[ ( V_\mathrm{GS}- V_\mathrm{th}) V_\mathrm{DS}- \frac{n}{2} V_\mathrm{DS}^2 \right]
+\tag{27}\]</span></span></p>
+<p>In the deep-triode region, there is no difference from the previous result, as the term <span class="math inline">\(n V_\mathrm{DS}^2 / 2\)</span> vanishes for small <span class="math inline">\(V_\mathrm{DS}\)</span>. The saturation voltage is now <span class="math inline">\(V_\mathrm{DS,sat} = (V_\mathrm{GS}- V_\mathrm{th}) / n\)</span>, and the drain current in saturation becomes (compare to <a href="#eq-mosfet-sat" class="quarto-xref">Equation&nbsp;13</a>)</p>
+<p><span id="eq-mosfet-sat-correct"><span class="math display">\[
+I_\mathrm{D}= I_\mathrm{DS,sat} = \frac{1}{2 n} \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} (V_\mathrm{GS}- V_\mathrm{th})^2.
+\tag{28}\]</span></span></p>
+<p>The corrected expressions for the transconductance are</p>
+<p><span id="eq-mosfet-gm-correct"><span class="math display">\[
+g_\mathrm{m}= \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} \frac{V_\mathrm{GS}- V_\mathrm{th}}{n} = \sqrt{\frac{2}{n} \mu_\mathrm{n}C'_\mathrm{ox}\frac{W}{L} I_\mathrm{D}} = \frac{2 I_\mathrm{D}}{V_\mathrm{GS}- V_\mathrm{th}}.
+\tag{29}\]</span></span></p>
+</section>
+</section>
+<section id="sec-mosfet-ac" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-mosfet-ac"><span class="header-section-number">2.4</span> MOSFET AC Operation</h2>
+<p>So far, we have only considered the dc operation of the MOSFET, but the physical construction of the transistor leads to unwanted capacitances and resistances, which need to be accounted for in dynamic operation. The most important capacitive elements are:</p>
+<ul>
+<li>The oxide capacitance between the gate and the channel, <span class="math inline">\(C_\mathrm{gg}= C'_\mathrm{ox}W L\)</span>.</li>
+<li>The gate-drain and gate-source overlap capacitances <span class="math inline">\(C_\mathrm{ov} = C'_\mathrm{ov} W\)</span>.</li>
+<li>The junction capacitance between drain/source and substrate, <span class="math inline">\(C_\mathrm{j} = C_\mathrm{j0} / (1 + V_\mathrm{DB | SB} / \Phi_\mathrm{B})^m\)</span> with <span class="math inline">\(m \approx 0.3 \ldots 0.4\)</span>. <span class="math inline">\(C_\mathrm{j0}\)</span> is defined by the area and perimeter of the drain/source regions.</li>
+<li>The depletion capacitance between the channel (the inversion layer) and the substrate, <span class="math inline">\(C_\mathrm{dep} = C'_\mathrm{dep}W L\)</span>.</li>
+</ul>
+<p>To identify the dominant capacitive elements between gate-source (<span class="math inline">\(C_\mathrm{GS}\)</span>) and gate-drain (<span class="math inline">\(C_\mathrm{GD}\)</span>), we need to distinguish between the triode and the saturation region, see <a href="#tbl-mosfet-caps" class="quarto-xref">Table&nbsp;2</a>.</p>
+<div id="tbl-mosfet-caps" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mosfet-caps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Dominant gate capacitances of the MOSFET in the triode and saturation regions
+</figcaption>
+<div aria-describedby="tbl-mosfet-caps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 52%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operating region</th>
+<th style="text-align: center;"><span class="math inline">\(C_\mathrm{GS}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(C_\mathrm{GD}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Triode</td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{2} C_\mathrm{gg}+ C_\mathrm{ov}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{2} C_\mathrm{gg}+ C_\mathrm{ov}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Saturation</td>
+<td style="text-align: center;"><span class="math inline">\(\frac{2}{3} C_\mathrm{gg}+ C_\mathrm{ov}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(C_\mathrm{ov}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>In addition to these capacitances, the resistance of the gate connection is usually dominant among the parasitic resistances. The end-to-end resistance of the gate stripe is <span class="math inline">\(R_\square \cdot W / L\)</span> (with the sheet resistance <span class="math inline">\(R_\square\)</span> set by the gate material). Due to the distributed nature of the gate along the width of the transistor, a reasonable lumped model for a single-sided gate contact is</p>
+<p><span id="eq-mosfet-gate-res"><span class="math display">\[
+R_\mathrm{G} = \frac{1}{3} R_\square \frac{W}{L}
+\tag{30}\]</span></span></p>
+<p>Using a <strong>double-sided gate contact</strong>, the effective gate resistance is reduced to</p>
+<p><span id="eq-mosfet-gate-res-double"><span class="math display">\[
+R_\mathrm{G} = \left( \frac{1}{3} R_\square \frac{W}{2 \cdot L} \right) \parallel \left( \frac{1}{3} R_\square \frac{W}{2 \cdot L} \right) = \frac{1}{12} R_\square \frac{W}{L}
+\tag{31}\]</span></span></p>
+<p>The impact of <span class="math inline">\(R_\mathrm{G}\)</span> on performance can be further minimized by constructing a large transistor out of <span class="math inline">\(m\)</span> smaller transistors connected in parallel (“fingers”). If the total width is <span class="math inline">\(W = m W'\)</span> (with each finger having width <span class="math inline">\(W'\)</span>), the gates of all unit transistors are connected in parallel, and the effective single-sided gate resistance becomes</p>
+<p><span id="eq-mosfet-gate-res-fingers"><span class="math display">\[
+R_\mathrm{G,eff} = \frac{R'_\mathrm{G}}{m} = \frac{\frac{1}{3} R_\square \frac{W}{m \cdot L}}{m} = \frac{1}{m^2} R_\mathrm{G}
+\tag{32}\]</span></span></p>
+<p>A typical analog/RF layout therefore splits a wide transistor into several fingers of limited length (a few µm), uses double-sided gate contacts, and surrounds the device with a closed well-contact ring; the multi-finger layout technique is discussed in detail in <strong>?@sec-layout-analog</strong>.</p>
+</section>
+<section id="sec-mosfet-ssm" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="sec-mosfet-ssm"><span class="header-section-number">2.5</span> MOSFET Small-Signal Model</h2>
+<p>The complete small-signal model of a MOSFET in saturation is shown in <a href="#fig-mosfet-ssm" class="quarto-xref">Figure&nbsp;13</a>. The transconductance <span class="math inline">\(g_\mathrm{m}\)</span> is modeled by a voltage-controlled current source, as is the body effect, which contributes a back-gate transconductance</p>
+<p><span class="math display">\[
+g_\mathrm{mb}= g_\mathrm{m}\frac{\gamma}{2 \sqrt{2 \Phi_\mathrm{B}+ V_\mathrm{SB}}}.
+\]</span></p>
+<div id="cell-fig-mosfet-ssm" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div id="fig-mosfet-ssm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosfet-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-mosfet-ssm-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;13: Complete small-signal model of the MOSFET in saturation, including the gate resistance, the capacitances to all terminals, the transconductance g_\mathrm{m}, the back-gate transconductance g_\mathrm{mb}, and the output conductance g_\mathrm{ds}."><img src="dcic_files/figure-html/fig-mosfet-ssm-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: Complete small-signal model of the MOSFET in saturation, including the gate resistance, the capacitances to all terminals, the transconductance <span class="math inline">\(g_\mathrm{m}\)</span>, the back-gate transconductance <span class="math inline">\(g_\mathrm{mb}\)</span>, and the output conductance <span class="math inline">\(g_\mathrm{ds}\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="high-frequency-operation" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="high-frequency-operation"><span class="header-section-number">2.5.1</span> High-Frequency Operation</h3>
+<p>For high-frequency operation, the definition of the transit frequency <span class="math inline">\(f_\mathrm{T}\)</span> is useful; this is the frequency where the magnitude of the current gain <span class="math inline">\(|I_\mathrm{ds}| / |I_\mathrm{gs}|\)</span> falls to one. The ac drain current can be calculated based on the small-signal model:</p>
+<p><span class="math display">\[
+I_\mathrm{ds} (j \omega)= I_\mathrm{gs}(j \omega) \frac{g_\mathrm{m}- j \omega C_\mathrm{GD}}{j \omega (C_\mathrm{GS}+ C_\mathrm{GD})}
+\]</span></p>
+<p>The transit frequency is thus (extrapolating the low-frequency transfer function)</p>
+<p><span id="eq-mosfet-ft"><span class="math display">\[
+\omega_\mathrm{T} = 2 \pi f_\mathrm{T}\approx \frac{g_\mathrm{m}}{C_\mathrm{GS}+ C_\mathrm{GD}} \approx \frac{g_\mathrm{m}}{C_\mathrm{GG}} \approx \frac{3}{2 n} \frac{\mu}{L^2} (V_\mathrm{GS}- V_\mathrm{th}).
+\tag{33}\]</span></span></p>
+<p>In addition, the maximum oscillation frequency <span class="math inline">\(f_\mathrm{max}\)</span> is a useful metric; it is the frequency where the maximum available power gain drops to one (<span class="math inline">\(\text{MAG} = 0\,\text{dB}\)</span>):</p>
+<p><span id="eq-mosfet-fmax"><span class="math display">\[
+f_\mathrm{max} \approx \sqrt{\frac{f_\mathrm{T}}{8 \pi R_\mathrm{G} C_\mathrm{GD}}}
+\tag{34}\]</span></span></p>
+</section>
+<section id="simplified-small-signal-models" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="simplified-small-signal-models"><span class="header-section-number">2.5.2</span> Simplified Small-Signal Models</h3>
+<p>In most cases, a simplified model is sufficient for hand calculations. Neglecting most model elements, the two models shown in <a href="#fig-mosfet-ssm-simple" class="quarto-xref">Figure&nbsp;14</a> can be used in the saturation region. The left π-model is usually better suited for circuits with the signal input at the gate (like in a common-source or common-drain amplifier), whereas the right <span class="math inline">\(\tau\)</span>-model is advantageous when the input is at the source (like in a common-gate amplifier).</p>
+<div id="cell-fig-mosfet-ssm-simple" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div id="fig-mosfet-ssm-simple" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosfet-ssm-simple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-mosfet-ssm-simple-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;14: Simplified small-signal models of the MOSFET in saturation for hand calculations: \pi-model (left), preferred when the input is at the gate, and \tau-model (right), preferred when the input is at the source. In the \tau-model, the current through the resistor 1/g_\mathrm{m} equals i_\mathrm{ds}, which is mirrored by the controlled source into the drain."><img src="dcic_files/figure-html/fig-mosfet-ssm-simple-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-ssm-simple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14: Simplified small-signal models of the MOSFET in saturation for hand calculations: <span class="math inline">\(\pi\)</span>-model (left), preferred when the input is at the gate, and <span class="math inline">\(\tau\)</span>-model (right), preferred when the input is at the source. In the <span class="math inline">\(\tau\)</span>-model, the current through the resistor <span class="math inline">\(1/g_\mathrm{m}\)</span> equals <span class="math inline">\(i_\mathrm{ds}\)</span>, which is mirrored by the controlled source into the drain.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-mosfet-scaling" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="sec-mosfet-scaling"><span class="header-section-number">2.6</span> MOSFET Scaling</h2>
+<p>Making MOSFETs smaller has benefits for power, performance, and area (PPA). Traditionally, every 2–3 years a scaled (= smaller) CMOS technology node has been introduced. In <a href="#fig-technology-trend" class="quarto-xref">Figure&nbsp;15</a>, the technology nodes are plotted versus their year of first volume production; note the logarithmic axis!</p>
+<p>In the beginning, the node name stated the minimum feature size of the given technology, which is usually the minimum gate length (<span class="math inline">\(L_\mathrm{min}\)</span>): in a 130 nm technology, <span class="math inline">\(L_\mathrm{min} = 130\,\text{nm}\)</span>. This holds well down to about the 90 nm node; from there on the printed gate length is already shorter than the node name (the 65 nm node used a physical gate length of roughly 35 nm), and from the 22/20 nm node onwards the technology name is merely a “label.” Since traditionally a scaling factor of <span class="math inline">\(\sqrt{2}\)</span> has been used, the node names reflect this: 350 → 250 → 180 → 130 → 90 → 65 → 45 → 32/28 → 22/20 → 16/14 → 10 → 7 → 5 → 3 → 2 → 1.6 nm.</p>
+<div id="cell-fig-technology-trend" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div id="fig-technology-trend" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-technology-trend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-technology-trend-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;15: CMOS technology scaling trend: minimum feature size (node name) versus year of first volume production, with key technology innovations annotated (data compiled from public sources, e.g., wikichip.org)."><img src="dcic_files/figure-html/fig-technology-trend-output-1.png" width="662" height="470" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-technology-trend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15: CMOS technology scaling trend: minimum feature size (node name) versus year of first volume production, with key technology innovations annotated (data compiled from public sources, e.g., <a href="https://en.wikichip.org/wiki/technology_node">wikichip.org</a>).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="scaling-theory" class="level3" data-number="2.6.1">
+<h3 data-number="2.6.1" class="anchored" data-anchor-id="scaling-theory"><span class="header-section-number">2.6.1</span> Scaling Theory</h3>
+<p>The ideal scaling theory follows three rules, formulated by R. Dennard in 1974 <span class="citation" data-cites="Dennard_1974">(<a href="#ref-Dennard_1974" role="doc-biblioref">Dennard et al. 1974</a>)</span>, to generate the next CMOS technology node from the current one:</p>
+<ol type="1">
+<li>Reduce all lateral and vertical dimensions by <span class="math inline">\(\alpha\)</span> (<span class="math inline">\(\alpha = \sqrt{2}\)</span> for classical scaling; the area of a MOSFET thus <em>shrinks</em> by <span class="math inline">\(\alpha^2 = 2\)</span>).</li>
+<li>Reduce the threshold voltage <span class="math inline">\(V_\mathrm{th}\)</span> and the supply voltage <span class="math inline">\(V_\mathrm{DD}\)</span> by <span class="math inline">\(\alpha\)</span>.</li>
+<li>Increase all doping levels by <span class="math inline">\(\alpha\)</span>.</li>
+</ol>
+<p>This scaling is called <a href="https://en.wikipedia.org/wiki/Dennard_scaling"><strong>constant-field scaling</strong></a>. If we apply these rules, the MOSFET parameters in the shrunken technology (marked by <span class="math inline">\(^*\)</span>) scale as follows. The drain saturation current is reduced by <span class="math inline">\(\alpha\)</span>:</p>
+<p><span class="math display">\[
+I^*_\mathrm{D} = \frac{1}{2} \mu_\mathrm{n}(\alpha C'_\mathrm{ox}) \frac{W / \alpha}{L / \alpha} \left( \frac{V_\mathrm{GS}}{\alpha} - \frac{V_\mathrm{th}}{\alpha} \right)^2 = \frac{1}{\alpha} I_\mathrm{D}
+\]</span></p>
+<p>This is offset by the fact that the input capacitance is also reduced:</p>
+<p><span class="math display">\[
+C^*_\mathrm{gg} = \frac{W}{\alpha} \frac{L}{\alpha} (\alpha C'_\mathrm{ox}) = \frac{1}{\alpha} C_\mathrm{gg}
+\]</span></p>
+<p>To estimate the scaling of the gate delay of logic gates built from scaled devices, we use the simple model <span class="math inline">\(T_\mathrm{d} \propto C_\mathrm{gg}V_\mathrm{DD}/ I_\mathrm{D}\)</span>, which relates the gate delay to the time it takes to charge or discharge the load capacitance of a driven gate between the supply rails. The scaled delay is</p>
+<p><span class="math display">\[
+T^*_\mathrm{d} = \frac{C_\mathrm{gg}/ \alpha}{I_\mathrm{D}/ \alpha} \frac{V_\mathrm{DD}}{\alpha} = \frac{1}{\alpha} T_\mathrm{d}
+\]</span></p>
+<p>The speed of digital circuits thus benefits from scaling, as the gate delay shrinks in each new technology node! Using a simple model for the dynamic power consumption of CMOS logic, <span class="math inline">\(P_\mathrm{dyn} = f_\mathrm{clk} C_\mathrm{dyn} V_\mathrm{DD}^2\)</span> (where <span class="math inline">\(f_\mathrm{clk}\)</span> is the clock frequency and <span class="math inline">\(C_\mathrm{dyn} \propto C_\mathrm{gg}\)</span> is the total switched capacitance), we see that</p>
+<p><span class="math display">\[
+P^*_\mathrm{dyn} = f_\mathrm{clk} \frac{C_\mathrm{dyn}}{\alpha} \left( \frac{V_\mathrm{DD}}{\alpha} \right)^2 = \frac{1}{\alpha^3} P_\mathrm{dyn}
+\]</span></p>
+<p>so the dynamic power consumption of a scaled logic circuit benefits dramatically. Note that the power per function, clocked at the same frequency, scales by <span class="math inline">\(\alpha^{-3}\)</span>—but since we can also increase the clock frequency by <span class="math inline">\(\alpha\)</span>, and can integrate <span class="math inline">\(\alpha^2\)</span> more gates per area, the total power consumption would stay constant if we fully exploited the scaling benefit. To improve power, performance, <em>and</em> area (PPA) simultaneously, a trade-off has to be found.</p>
+</section>
+<section id="analog-scaling" class="level3" data-number="2.6.2">
+<h3 data-number="2.6.2" class="anchored" data-anchor-id="analog-scaling"><span class="header-section-number">2.6.2</span> Analog Scaling</h3>
+<p>While there is a clear scaling benefit for digital circuits, the benefits for analog circuits are less clear. Generally, the reduction of <span class="math inline">\(V_\mathrm{DD}\)</span> is a drawback, since it likely reduces the dynamic range when processing voltage signals. The transconductance scales like</p>
+<p><span class="math display">\[
+g^*_\mathrm{m} = \mu_\mathrm{n}(\alpha C'_\mathrm{ox}) \frac{W / \alpha}{L / \alpha} \frac{V_\mathrm{GS}- V_\mathrm{th}}{\alpha} = g_\mathrm{m}
+\]</span></p>
+<p>so it seems to be scale-invariant. However, there is a benefit in device speed, as the transit frequency scales like</p>
+<p><span class="math display">\[
+f^*_\mathrm{T} = \frac{1}{2 \pi} \frac{g_\mathrm{m}}{C_\mathrm{gg}/ \alpha} = \alpha f_\mathrm{T}
+\]</span></p>
+<p>so the speed of the MOSFET increases, opening the door to better analog and RF performance, albeit at lower supply voltages.</p>
+</section>
+<section id="scaling-summary" class="level3" data-number="2.6.3">
+<h3 data-number="2.6.3" class="anchored" data-anchor-id="scaling-summary"><span class="header-section-number">2.6.3</span> Scaling Summary</h3>
+<p><a href="#tbl-mosfet-scaling" class="quarto-xref">Table&nbsp;3</a> summarizes the constant-field scaling factors derived above. Scaling equations fitted to real technology data from 180 nm down to 7 nm can be found in <span class="citation" data-cites="Stillmaker_2017">(<a href="#ref-Stillmaker_2017" role="doc-biblioref">Stillmaker and Baas 2017</a>)</span>.</p>
+<div id="tbl-mosfet-scaling" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mosfet-scaling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Constant-field (Dennard) scaling of MOSFET parameters
+</figcaption>
+<div aria-describedby="tbl-mosfet-scaling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 22%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: center;">Symbol</th>
+<th style="text-align: center;">Scaling factor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Gate length</td>
+<td style="text-align: center;"><span class="math inline">\(L_\mathrm{min}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MOSFET area</td>
+<td style="text-align: center;"><span class="math inline">\(W L\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha^{-2}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gate oxide thickness</td>
+<td style="text-align: center;"><span class="math inline">\(t_\mathrm{ox}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Substrate doping</td>
+<td style="text-align: center;"><span class="math inline">\(N_\mathrm{a}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Drain current in saturation</td>
+<td style="text-align: center;"><span class="math inline">\(I_\mathrm{D}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gate capacitance</td>
+<td style="text-align: center;"><span class="math inline">\(C_\mathrm{GS}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha^{-1}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Supply voltage</td>
+<td style="text-align: center;"><span class="math inline">\(V_\mathrm{DD}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Threshold voltage</td>
+<td style="text-align: center;"><span class="math inline">\(V_\mathrm{th}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha^{-1}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gate delay</td>
+<td style="text-align: center;"><span class="math inline">\(T_\mathrm{d}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Clock frequency</td>
+<td style="text-align: center;"><span class="math inline">\(f_\mathrm{clk}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dynamic power consumption per gate</td>
+<td style="text-align: center;"><span class="math inline">\(P_\mathrm{dyn}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha^{-3}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="interconnect-scaling" class="level3" data-number="2.6.4">
+<h3 data-number="2.6.4" class="anchored" data-anchor-id="interconnect-scaling"><span class="header-section-number">2.6.4</span> Interconnect Scaling</h3>
+<p>As the MOSFETs get smaller, the metal wiring also needs to scale to finer dimensions. We assume that, along with the lateral dimensions, the metal thickness and the dielectric inter-metal insulation scale down as well. The resistance per length of a scaled metal wire (with thickness <span class="math inline">\(t\)</span> and width <span class="math inline">\(w\)</span>) scales as</p>
+<p><span class="math display">\[
+\frac{R^*}{l} = \rho \frac{1}{(t / \alpha) (w / \alpha)} = \alpha^2 \frac{R}{l}
+\]</span></p>
+<p>so the wires get significantly more resistive! The wire-to-wire fringe capacitance per length for a minimum-width wire with minimum spacing <span class="math inline">\(s\)</span> scales as</p>
+<p><span class="math display">\[
+\frac{C^*_\mathrm{f}}{l} = \varepsilon_\mathrm{ox}\frac{t / \alpha}{s / \alpha} = \frac{C_\mathrm{f}}{l}
+\]</span></p>
+<p>and the vertical coupling capacitance per length (with insulator thickness <span class="math inline">\(h\)</span>) scales as</p>
+<p><span class="math display">\[
+\frac{C^*_\mathrm{p}}{l} = \varepsilon_\mathrm{ox}\frac{w / \alpha}{h / \alpha} = \frac{C_\mathrm{p}}{l}
+\]</span></p>
+<p>so both capacitance values are, to first order, <em>invariant to scaling</em>. The RC wire delay per squared length is thus</p>
+<p><span class="math display">\[
+\frac{T^*_\mathrm{wire}}{l^2} \propto \frac{R^*}{l} \left( \frac{C^*_\mathrm{f}}{l} + \frac{C^*_\mathrm{p}}{l} \right) = \alpha^2 \frac{T_\mathrm{wire}}{l^2}
+\]</span></p>
+<p>For short routes, this increased relative delay is offset by the length scaling, so that</p>
+<p><span class="math display">\[
+T^*_\mathrm{wire} \propto \left( \frac{l}{\alpha} \right)^2 \frac{T^*_\mathrm{wire}}{l^2} = T_\mathrm{wire}
+\]</span></p>
+<p>For long routes, however, the wire delay increases significantly. To cope with this delay, other solutions are needed: using multiple wiring levels (lower metals levels scaled for density, higher ones un-scaled for speed), or adapting the architecture, e.g., pipelining long-range data transfers.</p>
+</section>
+</section>
+<section id="sec-mosfet-sce" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="sec-mosfet-sce"><span class="header-section-number">2.7</span> MOSFET Short-Channel Effects</h2>
+<p>As the MOSFET gate length is scaled below <span class="math inline">\(1\,\mu\text{m}\)</span>, various imperfections kick in. We discuss subthreshold conduction and leakage, gate oxide leakage, and drain-induced barrier lowering (DIBL). Other effects, like random dopant fluctuation (RDF), poly depletion, or quantum-mechanical effects, are not covered here.</p>
+<section id="subthreshold-leakage" class="level3" data-number="2.7.1">
+<h3 data-number="2.7.1" class="anchored" data-anchor-id="subthreshold-leakage"><span class="header-section-number">2.7.1</span> Subthreshold Leakage</h3>
+<p>Revisiting <a href="#eq-mosfet-subthreshold" class="quarto-xref">Equation&nbsp;24</a> and neglecting the <span class="math inline">\(V_\mathrm{DS}\)</span>-dependent term, we can re-formulate the subthreshold drain current as</p>
+<p><span id="eq-mosfet-subthreshold-simple"><span class="math display">\[
+I_\mathrm{D}= 100\,\text{nA} \cdot \frac{W}{L} \, e^{\frac{V_\mathrm{GS}- V_\mathrm{th}}{n V_\mathrm{T}}}
+\tag{35}\]</span></span></p>
+<p>Here, <span class="math inline">\(V_\mathrm{th}\)</span> has been re-defined as the <span class="math inline">\(V_\mathrm{GS}\)</span> at which <span class="math inline">\(I_\mathrm{D}= 100\,\text{nA} \cdot W / L\)</span>, which is a quite practical definition for leakage current discussions. The nonideality factor can also be written as</p>
+<p><span id="eq-mosfet-n-tox"><span class="math display">\[
+n = 1 + \frac{C'_\mathrm{dep}}{C'_\mathrm{ox}} = 1 + \underbrace{\frac{\varepsilon_\mathrm{si}}{\varepsilon_\mathrm{ox}}}_{\approx 3} \frac{t_\mathrm{ox}}{W_\mathrm{dep}}
+\tag{36}\]</span></span></p>
+<p>Using <a href="#eq-mosfet-subthreshold-simple" class="quarto-xref">Equation&nbsp;35</a>, we see that the leakage current in the off-state (<span class="math inline">\(V_\mathrm{GS}= 0\)</span>) is impacted by only <em>two</em> parameters (<span class="math inline">\(W/L\)</span> is usually fixed by the circuit design):</p>
+<p><span id="eq-mosfet-leakage"><span class="math display">\[
+I_\mathrm{leak} = 100\,\text{nA} \cdot \frac{W}{L} \, e^{-\frac{V_\mathrm{th}}{n V_\mathrm{T}}}
+\tag{37}\]</span></span></p>
+<ol type="1">
+<li>The threshold voltage <span class="math inline">\(V_\mathrm{th}\)</span>: a lower <span class="math inline">\(V_\mathrm{th}\)</span> increases the overdrive when the MOSFET is turned on and thus reduces the gate delay, but it exponentially increases the leakage current.</li>
+<li>The nonideality factor <span class="math inline">\(n\)</span> (ideally, <span class="math inline">\(n = 1\)</span>).</li>
+</ol>
+</section>
+<section id="subthreshold-slope" class="level3" data-number="2.7.2">
+<h3 data-number="2.7.2" class="anchored" data-anchor-id="subthreshold-slope"><span class="header-section-number">2.7.2</span> Subthreshold Slope</h3>
+<p>To quantify the “turn-off” behavior of a MOSFET, the <strong>subthreshold slope</strong> <span class="math inline">\(S\)</span> is defined, starting from <a href="#eq-mosfet-subthreshold-simple" class="quarto-xref">Equation&nbsp;35</a>, and consisting of the two only parameters <span class="math inline">\(V_\mathrm{T}\)</span> and <span class="math inline">\(n\)</span>:</p>
+<p><span id="eq-mosfet-slope"><span class="math display">\[
+S = \left[ \frac{\partial (\log_{10} I_\mathrm{D})}{\partial V_\mathrm{GS}} \right]^{-1} = \frac{n V_\mathrm{T}}{\log_{10}(e)} = 2.3 \, n V_\mathrm{T}
+\tag{38}\]</span></span></p>
+<p>The subthreshold slope expresses which change of <span class="math inline">\(V_\mathrm{GS}\)</span> lowers (or increases) the drain current by a factor of ten. Ideally, <span class="math inline">\(S\)</span> should be as small as possible, meaning that the MOSFET can be turned off rapidly with a small change of <span class="math inline">\(V_\mathrm{GS}\)</span>:</p>
+<ul>
+<li>The lower bound is <span class="math inline">\(S = 2.3 V_\mathrm{T}= 59.4\,\text{mV/dec}\)</span> at <span class="math inline">\(300\,\text{K}\)</span>.</li>
+<li>Using <span class="math inline">\(n = 1.29\)</span> from the previous example, <span class="math inline">\(S = 76.6\,\text{mV/dec}\)</span>, which is a good value; <span class="math inline">\(S\)</span> for bulk CMOS is in the range of 80 to 120 mV/dec.</li>
+</ul>
+<p>The impact of the subthreshold slope essentially stopped the scaling of <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{th}\)</span>, as the leakage current would otherwise become impractically large. This issue is exacerbated by the temperature dependence of the threshold voltage of <span class="math inline">\(\approx -1\,\text{mV/K}\)</span> and its process variation on the order of <span class="math inline">\(\pm 50\,\text{mV}\)</span>. A threshold-voltage shift of a hundred millivolts may not sound like much, but it enters the leakage exponentially and thus has a drastic impact! <a href="#fig-supply-trend" class="quarto-xref">Figure&nbsp;16</a> shows how the supply voltage stopped scaling at around 0.8 V.</p>
+<div id="cell-fig-supply-trend" class="cell" data-execution_count="16">
+<div class="cell-output cell-output-display">
+<div id="fig-supply-trend" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-supply-trend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-supply-trend-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;16: Nominal core supply voltage versus CMOS technology node. Below roughly 90 nm, the supply voltage no longer scales with the feature size but flattens out around 1 V, limited by the subthreshold leakage (data after Stillmaker and Baas, 2017)."><img src="dcic_files/figure-html/fig-supply-trend-output-1.png" width="566" height="373" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-supply-trend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16: Nominal core supply voltage versus CMOS technology node. Below roughly 90 nm, the supply voltage no longer scales with the feature size but flattens out around 1 V, limited by the subthreshold leakage (data after Stillmaker and Baas, 2017).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="gate-oxide-leakage" class="level3" data-number="2.7.3">
+<h3 data-number="2.7.3" class="anchored" data-anchor-id="gate-oxide-leakage"><span class="header-section-number">2.7.3</span> Gate Oxide Leakage</h3>
+<p>As can be seen in <a href="#eq-mosfet-n-tox" class="quarto-xref">Equation&nbsp;36</a>, to minimize <span class="math inline">\(n\)</span> (and thus the subthreshold slope), and also to increase the drain current in saturation, <span class="math inline">\(C'_\mathrm{ox}\)</span> needs to be maximized. This has driven the scaling down of the gate oxide thickness, as discussed in the scaling rules. Over the years, the oxide thickness has been reduced from 300 nm to 1.2 nm, but severe issues appear once the oxide is only a few nanometers thick:</p>
+<ul>
+<li>The breakdown voltage of the oxide is reduced, mandating a low <span class="math inline">\(V_\mathrm{DD}\)</span>.</li>
+<li>The gate leakage current increases dramatically due to quantum-mechanical tunneling.</li>
+</ul>
+<p>An alternative is needed to increase <span class="math inline">\(C'_\mathrm{ox}\)</span> without further reducing <span class="math inline">\(t_\mathrm{ox}\)</span>: the introduction of alternative gate dielectrics with increased permittivity, the so-called <a href="https://en.wikipedia.org/wiki/High-kappa_dielectric"><strong>high-k gate dielectrics</strong></a>. One suitable material is hafnium dioxide: while SiO<sub>2</sub> has <span class="math inline">\(\varepsilon_\mathrm{r} = 3.9\)</span>, HfO<sub>2</sub> offers <span class="math inline">\(\varepsilon_\mathrm{r} = 24\)</span>. However, there are potential manufacturing issues, like chemical reactions with the silicon substrate and the gate material, reliability concerns, and reduced surface mobility. Still, high-k dielectrics are now widely used in modern CMOS processes.</p>
+</section>
+<section id="drain-induced-barrier-lowering-dibl" class="level3" data-number="2.7.4">
+<h3 data-number="2.7.4" class="anchored" data-anchor-id="drain-induced-barrier-lowering-dibl"><span class="header-section-number">2.7.4</span> Drain-Induced Barrier Lowering (DIBL)</h3>
+<p>In scaled MOSFETs, there exists another parasitic effect that lowers <span class="math inline">\(V_\mathrm{th}\)</span> as a function of <span class="math inline">\(L\)</span>, called <a href="https://en.wikipedia.org/wiki/Drain-induced_barrier_lowering"><strong>drain-induced barrier lowering (DIBL)</strong></a>. (Remember that lowering <span class="math inline">\(V_\mathrm{th}\)</span> has an exponential effect on the leakage current!) This lowering of <span class="math inline">\(V_\mathrm{th}\)</span> with <em>decreasing</em> <span class="math inline">\(L\)</span> is also called the short-channel effect (SCE). Note that there is also a <em>reverse</em> short-channel effect (RSCE), which <em>increases</em> <span class="math inline">\(V_\mathrm{th}\)</span> with decreasing <span class="math inline">\(L\)</span>, caused by halo implants around drain and source in modern CMOS processes. Effectively, <span class="math inline">\(V_\mathrm{th}= f(L)\)</span> can be a wild function of the MOSFET length, so devices will only match if constructed with the same <span class="math inline">\(L\)</span>! Note that <span class="math inline">\(V_\mathrm{th}\)</span> also depends on <span class="math inline">\(V_\mathrm{DS}\)</span> due to DIBL, and on device <span class="math inline">\(W\)</span>, as well as temperature, and other second-order effects, so ultimately <span class="math inline">\(V_\mathrm{th}= f(L, W, V_\mathrm{DS}, T)\)</span>!</p>
+<p>The impact of <span class="math inline">\(L\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> on <span class="math inline">\(V_\mathrm{th}\)</span> can be modeled by</p>
+<p><span id="eq-mosfet-dibl"><span class="math display">\[
+\Delta V_\mathrm{th}= - (V_\mathrm{DS}+ 0.4\,\text{V}) \, e^{-L/l_\mathrm{d}}
+\tag{39}\]</span></span></p>
+<p>and is illustrated in <a href="#fig-dibl" class="quarto-xref">Figure&nbsp;17</a>. The DIBL characteristic length is <span class="math inline">\(l_\mathrm{d} \propto \sqrt[3]{t_\mathrm{ox}W_\mathrm{dep}X_\mathrm{j}}\)</span>. To reduce <span class="math inline">\(l_\mathrm{d}\)</span>, one or all of these parameters must be reduced:</p>
+<ul>
+<li>The oxide thickness <span class="math inline">\(t_\mathrm{ox}\)</span>, which has already been discussed in the context of gate leakage.</li>
+<li>The depletion width <span class="math inline">\(W_\mathrm{dep}\)</span>.</li>
+<li>The drain junction depth <span class="math inline">\(X_\mathrm{j}\)</span>.</li>
+</ul>
+<div id="cell-fig-dibl" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display">
+<div id="fig-dibl" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dibl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-dibl-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;17: Threshold-voltage shift \Delta V_\mathrm{th} due to DIBL as a function of gate length, calculated with the model of Equation&nbsp;39 for a characteristic length l_\mathrm{d} = 15\,nm. For short gate lengths and high drain voltages, the threshold voltage drops rapidly (compare, e.g., the measured data for a 65 nm technology in [@Goto_2003])."><img src="dcic_files/figure-html/fig-dibl-output-1.png" width="568" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dibl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17: Threshold-voltage shift <span class="math inline">\(\Delta V_\mathrm{th}\)</span> due to DIBL as a function of gate length, calculated with the model of <a href="#eq-mosfet-dibl" class="quarto-xref">Equation&nbsp;39</a> for a characteristic length <span class="math inline">\(l_\mathrm{d} = 15\,\)</span>nm. For short gate lengths and high drain voltages, the threshold voltage drops rapidly (compare, e.g., the measured data for a 65 nm technology in <span class="citation" data-cites="Goto_2003">(<a href="#ref-Goto_2003" role="doc-biblioref"><span class="nocase">Goto et al.</span> 2003</a>)</span>).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Reducing the depletion width and the junction depth requires increasing <span class="math inline">\(N_\mathrm{a}\)</span> (see <a href="#eq-mosfet-depletion-width" class="quarto-xref">Equation&nbsp;2</a>). However, increasing <span class="math inline">\(N_\mathrm{a}\)</span> also increases <span class="math inline">\(V_\mathrm{th}\)</span> (see <a href="#eq-mosfet-vth" class="quarto-xref">Equation&nbsp;7</a>), which must be counteracted by increasing <span class="math inline">\(C'_\mathrm{ox}\)</span>—but there are limits due to gate leakage and breakdown, as discussed before. In addition, increasing <span class="math inline">\(N_\mathrm{a}\)</span> increases the subthreshold slope (see <a href="#eq-mosfet-n-tox" class="quarto-xref">Equation&nbsp;36</a>) and lowers the mobility due to dopant scattering. So an alternative to ever-increasing substrate doping had to be found.</p>
+</section>
+<section id="solving-dibl-the-ultra-thin-body-mosfet" class="level3" data-number="2.7.5">
+<h3 data-number="2.7.5" class="anchored" data-anchor-id="solving-dibl-the-ultra-thin-body-mosfet"><span class="header-section-number">2.7.5</span> Solving DIBL: The Ultra-Thin-Body MOSFET</h3>
+<p>As scaling up <span class="math inline">\(N_\mathrm{a}\)</span> to constrain the <em>vertical</em> dimensions has reached its limits, an alternative solution is to <em>remove the silicon</em> under the channel to <em>physically</em> constrain <span class="math inline">\(W_\mathrm{dep}\)</span> and <span class="math inline">\(X_\mathrm{j}\)</span>. In the ultra-thin-body (UTB) MOSFET, the silicon channel is realized on top of a layer of SiO<sub>2</sub>, so the depletion and junction depths are limited to the silicon film thickness <span class="math inline">\(t_\mathrm{si} \leq L/4\)</span>. This is called <a href="https://en.wikipedia.org/wiki/Silicon_on_insulator"><strong>silicon-on-insulator (SOI)</strong></a> technology; the structure is shown in <a href="#fig-utb-finfet" class="quarto-xref">Figure&nbsp;18</a> (a). Additional advantages are:</p>
+<ul>
+<li>Since much less body doping <span class="math inline">\(N_\mathrm{a}\)</span> is needed, the carrier mobility is higher.</li>
+<li>There is no (or only a small) body effect, since the body is floating and fully depleted.</li>
+<li>The drain/source-to-bulk capacitance is largely reduced and almost <strong>constant</strong>.</li>
+</ul>
+<p>The disadvantage is the higher cost of the SOI wafers, as manufacturing the Si-SiO<sub>2</sub>-Si stack is expensive.</p>
+</section>
+<section id="solving-dibl-finfet-and-nanosheet" class="level3" data-number="2.7.6">
+<h3 data-number="2.7.6" class="anchored" data-anchor-id="solving-dibl-finfet-and-nanosheet"><span class="header-section-number">2.7.6</span> Solving DIBL: FinFET and Nanosheet</h3>
+<p>Another alternative is to tilt the silicon channel by 90°, so that it sticks out of the wafer like a “fin,” and to wrap the gate around this fin on three sides: the <a href="https://en.wikipedia.org/wiki/Fin_field-effect_transistor"><strong>FinFET</strong></a> (or tri-gate MOSFET), shown in <a href="#fig-utb-finfet" class="quarto-xref">Figure&nbsp;18</a> (b). FinFETs have a few important differences compared to bulk MOSFETs:</p>
+<ul>
+<li>The device width is quantized, with <span class="math inline">\(W = W_\mathrm{F} + 2 H_\mathrm{F}\)</span> per fin (<span class="math inline">\(W_\mathrm{F}\)</span> is the width and <span class="math inline">\(H_\mathrm{F}\)</span> the height of the fin), so the circuit design style must be adapted (the design parameter is the number of fins <span class="math inline">\(N_\mathrm{F}\)</span> instead of <span class="math inline">\(W\)</span>).</li>
+<li>Drain and source are contacted at the ends of the fin, so the series resistances <span class="math inline">\(R_\mathrm{S}\)</span> and <span class="math inline">\(R_\mathrm{D}\)</span> are higher, degrading the transconductance due to series feedback: <span class="math inline">\(g_\mathrm{m,eff} = g_\mathrm{m}/ (1 + g_\mathrm{m}R_\mathrm{S})\)</span>.</li>
+<li>Since the subthreshold slope is improved (smaller), the leakage current is lower, which allows lowering <span class="math inline">\(V_\mathrm{th}\)</span> and <span class="math inline">\(V_\mathrm{DD}\)</span>.</li>
+<li>DIBL and thus <span class="math inline">\(g_\mathrm{ds}\)</span> are lower, so the MOSFET self-gain <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> is high.</li>
+<li>There is practically no body effect, and due to the low channel doping the mobility is high, leading to improved <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(\mu_\mathrm{n}\approx \mu_\mathrm{p}\)</span>.</li>
+<li>The silicon fins are isolated and surrounded by SiO<sub>2</sub>, so self-heating of the fin can be an issue.</li>
+<li>The 3D structure increases the coupling capacitance <span class="math inline">\(C_\mathrm{ov}\)</span>.</li>
+<li>A drawback is that SRAM and digital standard cells often use minimum-size transistors, and for yield reasons a minimum-sized FinFET requires two fins—a strong constraint when, e.g., the PMOS needs to be sized differently from the NMOS (the next step up is three fins, a large quantization step).</li>
+</ul>
+<div id="cell-fig-utb-finfet" class="cell" data-execution_count="18">
+<div class="cell-output cell-output-display">
+<div id="fig-utb-finfet" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-utb-finfet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-utb-finfet-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;18: Advanced MOSFET structures with improved electrostatic gate control: (a) ultra-thin-body (UTB) SOI MOSFET shown along the channel, (b) FinFET shown perpendicular to the channel (the gate wraps around the fin on three sides), and (c) nanosheet (gate-all-around) MOSFET, where stacked channels are completely surrounded by the gate."><img src="dcic_files/figure-html/fig-utb-finfet-output-1.png" width="412" height="758" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-utb-finfet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18: Advanced MOSFET structures with improved electrostatic gate control: (a) ultra-thin-body (UTB) SOI MOSFET shown along the channel, (b) FinFET shown perpendicular to the channel (the gate wraps around the fin on three sides), and (c) nanosheet (gate-all-around) MOSFET, where stacked channels are completely surrounded by the gate.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The evolution of the FinFET is the <strong>nanosheet MOSFET</strong>, first introduced at the 3 nm node (and used by all foundries at 2 nm) and shown in <a href="#fig-utb-finfet" class="quarto-xref">Figure&nbsp;18</a> (c). One advantage is the even better electrostatic control of the gate over the channel, as the stacked channels are completely wrapped by the gate—hence also called <a href="https://en.wikipedia.org/wiki/Multigate_device">gate-all-around (GAA) MOSFET</a>. In addition, the stacked channels can be either <span class="math inline">\(n\)</span>- or <span class="math inline">\(p\)</span>-type (or mixed), and could even use different materials, like SiGe or GaAs, opening the door to 3D integration.</p>
+</section>
+</section>
+<section id="sec-mosfet-ihp" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="sec-mosfet-ihp"><span class="header-section-number">2.8</span> Simulated Characteristics in IHP SG13</h2>
+<p>To connect the simple models we derived earlier to reality, <a href="#fig-nmos-iv-lin" class="quarto-xref">Figure&nbsp;19</a> to <a href="#fig-pmos-id-log" class="quarto-xref">Figure&nbsp;22</a> show simulated I/V characteristics of NMOS and PMOS devices (<span class="math inline">\(W = 1.3\,\mu\text{m}\)</span>, <span class="math inline">\(L = 0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{SB}= 0\)</span>) in the IHP SG13 130 nm CMOS technology, using the foundry’s PSP models. The output characteristics show the triode and saturation regions including channel-length modulation, while the logarithmic transfer characteristics clearly show the exponential subthreshold region and the drain-current dependence on <span class="math inline">\(V_\mathrm{DS}\)</span> caused by DIBL.</p>
+<div id="cell-fig-nmos-iv-lin" class="cell" data-execution_count="19">
+<div class="cell-output cell-output-display">
+<div id="fig-nmos-iv-lin" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nmos-iv-lin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-nmos-iv-lin-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Figure&nbsp;19: Simulated output characteristic of an NMOS in IHP SG13 (W = 1.3\,\mathrm{\mu m}, L = 0.13\,\mathrm{\mu m}, V_\mathrm{SB} = 0) for different gate-source voltages."><img src="dcic_files/figure-html/fig-nmos-iv-lin-output-1.png" width="615" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nmos-iv-lin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19: Simulated output characteristic of an NMOS in IHP SG13 (<span class="math inline">\(W = 1.3\,\mathrm{\mu m}\)</span>, <span class="math inline">\(L = 0.13\,\mathrm{\mu m}\)</span>, <span class="math inline">\(V_\mathrm{SB} = 0\)</span>) for different gate-source voltages.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-fig-nmos-id-log" class="cell" data-execution_count="20">
+<div class="cell-output cell-output-display">
+<div id="fig-nmos-id-log" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nmos-id-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-nmos-id-log-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20" title="Figure&nbsp;20: Simulated transfer characteristic of an NMOS in IHP SG13 (W = 1.3\,\mathrm{\mu m}, L = 0.13\,\mathrm{\mu m}, V_\mathrm{SB} = 0) on a logarithmic current axis. The exponential subthreshold region is clearly visible, as is the drain-voltage dependence caused by DIBL."><img src="dcic_files/figure-html/fig-nmos-id-log-output-1.png" width="613" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nmos-id-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20: Simulated transfer characteristic of an NMOS in IHP SG13 (<span class="math inline">\(W = 1.3\,\mathrm{\mu m}\)</span>, <span class="math inline">\(L = 0.13\,\mathrm{\mu m}\)</span>, <span class="math inline">\(V_\mathrm{SB} = 0\)</span>) on a logarithmic current axis. The exponential subthreshold region is clearly visible, as is the drain-voltage dependence caused by DIBL.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-fig-pmos-iv-lin" class="cell" data-execution_count="21">
+<div class="cell-output cell-output-display">
+<div id="fig-pmos-iv-lin" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pmos-iv-lin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-pmos-iv-lin-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="Figure&nbsp;21: Simulated output characteristic of a PMOS in IHP SG13 (W = 1.3\,\mathrm{\mu m}, L = 0.13\,\mathrm{\mu m}, V_\mathrm{SB} = 0) for different gate-source voltages. Note the lower current level compared to the NMOS due to the lower hole mobility."><img src="dcic_files/figure-html/fig-pmos-iv-lin-output-1.png" width="615" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pmos-iv-lin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21: Simulated output characteristic of a PMOS in IHP SG13 (<span class="math inline">\(W = 1.3\,\mathrm{\mu m}\)</span>, <span class="math inline">\(L = 0.13\,\mathrm{\mu m}\)</span>, <span class="math inline">\(V_\mathrm{SB} = 0\)</span>) for different gate-source voltages. Note the lower current level compared to the NMOS due to the lower hole mobility.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-fig-pmos-id-log" class="cell" data-execution_count="22">
+<div class="cell-output cell-output-display">
+<div id="fig-pmos-id-log" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pmos-id-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-pmos-id-log-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22" title="Figure&nbsp;22: Simulated transfer characteristic of a PMOS in IHP SG13 (W = 1.3\,\mathrm{\mu m}, L = 0.13\,\mathrm{\mu m}, V_\mathrm{SB} = 0) on a logarithmic current axis."><img src="dcic_files/figure-html/fig-pmos-id-log-output-1.png" width="613" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pmos-id-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;22: Simulated transfer characteristic of a PMOS in IHP SG13 (<span class="math inline">\(W = 1.3\,\mathrm{\mu m}\)</span>, <span class="math inline">\(L = 0.13\,\mathrm{\mu m}\)</span>, <span class="math inline">\(V_\mathrm{SB} = 0\)</span>) on a logarithmic current axis.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-mosfet-sizing" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="sec-mosfet-sizing"><span class="header-section-number">2.9</span> MOSFET Sizing</h2>
+<section id="the-g_mathrmmi_mathrmd-method" class="level3" data-number="2.9.1">
+<h3 data-number="2.9.1" class="anchored" data-anchor-id="the-g_mathrmmi_mathrmd-method"><span class="header-section-number">2.9.1</span> The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> Method</h3>
+<p>When designing a circuit with MOSFETs, how should one select the parameters like <span class="math inline">\(I_\mathrm{D}\)</span>, <span class="math inline">\(V_\mathrm{GS}\)</span>, <span class="math inline">\(W\)</span>, and <span class="math inline">\(L\)</span>? For digital designs, this is relatively straightforward: <span class="math inline">\(L\)</span> is (usually) set to the minimum length, <span class="math inline">\(W\)</span> is sized according to the driving requirements of the logic circuit, <span class="math inline">\(V_\mathrm{GS}\)</span> swings between <span class="math inline">\(V_\mathrm{SS}\)</span> and <span class="math inline">\(V_\mathrm{DD}\)</span>, and no static drain current flows. For analog, mixed-signal, and RF designs, the sizing question is more involved.</p>
+<p>In the <a href="https://iic-jku.github.io/analog-circuit-design/aicd.html">Analog Circuit Design</a> course, the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method is used to find the proper sizing of a MOSFET depending on the circuit requirements. This method is the “go-to” method, as it uses numerical data found by evaluating the PDK models in a circuit simulator, and it describes the MOSFET correctly in all operating regions.</p>
+</section>
+<section id="the-inversion-coefficient-method" class="level3" data-number="2.9.2">
+<h3 data-number="2.9.2" class="anchored" data-anchor-id="the-inversion-coefficient-method"><span class="header-section-number">2.9.2</span> The Inversion-Coefficient Method</h3>
+<p>Despite the practical advantages of the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method, alternative approaches exist, and they can be helpful by providing relatively simple and unified analytical equations which are valid in all MOSFET operating regions. One such method is based on the <strong>inversion coefficient</strong>, which has been popularized as a design methodology by W. Sansen <span class="citation" data-cites="Sansen_2015 Sansen_AnalogEssentials">(<a href="#ref-Sansen_2015" role="doc-biblioref">Sansen 2015</a>; <a href="#ref-Sansen_AnalogEssentials" role="doc-biblioref">Sansen 2006</a>)</span>. Let us define a specific current</p>
+<p><span id="eq-mosfet-is"><span class="math display">\[
+I_\mathrm{S} = \mu C'_\mathrm{ox}\frac{W}{L} \cdot 2 n V_\mathrm{T}^2.
+\tag{40}\]</span></span></p>
+<p>Then, the inversion coefficient <span class="math inline">\(\mathrm{IC}\)</span> is defined as</p>
+<p><span id="eq-mosfet-ic"><span class="math display">\[
+\mathrm{IC}= \frac{I_\mathrm{D}}{I_\mathrm{S}} = \left[ \ln \left( 1 + e^{\frac{V_\mathrm{GS}- V_\mathrm{th}}{2 n V_\mathrm{T}}} \right) \right]^2
+\tag{41}\]</span></span></p>
+<p>The beauty of this approach is that these equations work all the way from weak inversion (subthreshold operation, <span class="math inline">\(\mathrm{IC}&lt; 0.1\)</span>) through moderate inversion (<span class="math inline">\(\mathrm{IC}\approx 1\)</span>) to strong inversion (<span class="math inline">\(\mathrm{IC}&gt; 10\)</span>). Based on the selected <span class="math inline">\(\mathrm{IC}\)</span>, the important device properties can be calculated. The drain current is</p>
+<p><span id="eq-mosfet-ic-id"><span class="math display">\[
+I_\mathrm{D}= I_\mathrm{S} \cdot \mathrm{IC}
+\tag{42}\]</span></span></p>
+<p>the transconductance is given by</p>
+<p><span id="eq-mosfet-ic-gm"><span class="math display">\[
+g_\mathrm{m}= \frac{I_\mathrm{D}}{n V_\mathrm{T}} \frac{1 - e^{-\sqrt{\mathrm{IC}}}}{\sqrt{\mathrm{IC}}}
+\tag{43}\]</span></span></p>
+<p>and the speed of the MOSFET is</p>
+<p><span id="eq-mosfet-ic-ft"><span class="math display">\[
+f_\mathrm{T}= \frac{1}{2 \pi} \frac{3}{2} \frac{\mu}{L^2} V_\mathrm{T}\left( \sqrt{1 + 4 \, \mathrm{IC}} -1 \right)
+\tag{44}\]</span></span></p>
+<p>Let us check the asymptotic behavior of these equations against the earlier results (see <a href="#tbl-mosfet-ic-asymptotic" class="quarto-xref">Table&nbsp;4</a>).</p>
+<div id="tbl-mosfet-ic-asymptotic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mosfet-ic-asymptotic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Asymptotic behavior of the inversion-coefficient equations in weak and strong inversion
+</figcaption>
+<div aria-describedby="tbl-mosfet-ic-asymptotic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 43%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Equation</th>
+<th style="text-align: center;"><span class="math inline">\(V_\mathrm{GS}\ll V_\mathrm{th}\)</span> (weak inversion)</th>
+<th style="text-align: center;"><span class="math inline">\(V_\mathrm{GS}\gg V_\mathrm{th}\)</span> (strong inversion)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a href="#eq-mosfet-ic" class="quarto-xref">Equation&nbsp;41</a></td>
+<td style="text-align: center;"><span class="math inline">\(\mathrm{IC}= e^{\frac{V_\mathrm{GS}- V_\mathrm{th}}{n V_\mathrm{T}}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathrm{IC}= \left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2 n V_\mathrm{T}} \right)^2\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="#eq-mosfet-ic-id" class="quarto-xref">Equation&nbsp;42</a></td>
+<td style="text-align: center;"><span class="math inline">\(I_\mathrm{D}= \mu C'_\mathrm{ox}\frac{W}{L} 2 n V_\mathrm{T}^2 e^{\frac{V_\mathrm{GS}- V_\mathrm{th}}{n V_\mathrm{T}}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(I_\mathrm{D}= \frac{1}{2 n} \mu C'_\mathrm{ox}\frac{W}{L} \left( V_\mathrm{GS}- V_\mathrm{th}\right)^2\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="#eq-mosfet-ic-gm" class="quarto-xref">Equation&nbsp;43</a></td>
+<td style="text-align: center;"><span class="math inline">\(g_\mathrm{m}= \frac{I_\mathrm{D}}{n V_\mathrm{T}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(g_\mathrm{m}= \frac{2 I_\mathrm{D}}{V_\mathrm{GS}- V_\mathrm{th}}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="#eq-mosfet-ic-ft" class="quarto-xref">Equation&nbsp;44</a></td>
+<td style="text-align: center;"><span class="math inline">\(f_\mathrm{T}= \frac{1}{2 \pi} \frac{3}{2} \frac{\mu}{L^2} 2 V_\mathrm{T}e^{\frac{V_\mathrm{GS}- V_\mathrm{th}}{n V_\mathrm{T}}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(f_\mathrm{T}= \frac{1}{2 \pi} \frac{3}{2 n} \frac{\mu}{L^2} \left( V_\mathrm{GS}- V_\mathrm{th}\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The asymptotes match the subthreshold model (<a href="#eq-mosfet-subthreshold" class="quarto-xref">Equation&nbsp;24</a>) and the corrected square-law model (<a href="#eq-mosfet-sat-correct" class="quarto-xref">Equation&nbsp;28</a>), respectively.</p>
+<p>Plotting <a href="#eq-mosfet-ic-gm" class="quarto-xref">Equation&nbsp;43</a> and <a href="#eq-mosfet-ic-ft" class="quarto-xref">Equation&nbsp;44</a> versus <span class="math inline">\(\mathrm{IC}\)</span>, as done in <a href="#fig-ic-tradeoff" class="quarto-xref">Figure&nbsp;23</a>, reveals the classical trade-off between <span class="math inline">\(g_\mathrm{m}\)</span>-efficiency (<span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>) and speed (<span class="math inline">\(f_\mathrm{T}\)</span>). Note that velocity saturation is not represented in this simple model, so <span class="math inline">\(f_\mathrm{T}\)</span> does not saturate at high <span class="math inline">\(\mathrm{IC}\)</span> in the plot.</p>
+<div id="cell-fig-ic-tradeoff" class="cell" data-execution_count="23">
+<div class="cell-output cell-output-display">
+<div id="fig-ic-tradeoff" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ic-tradeoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-ic-tradeoff-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23" title="Figure&nbsp;23: Transconductance efficiency g_\mathrm{m}/I_\mathrm{D} (blue, left axis) and transit frequency f_\mathrm{T} (red, right axis) versus the inversion coefficient IC, calculated with the analytical model (n = 1.3, L = 0.13\,\mathrm{\mu m}, \mu = 280\,\mathrm{cm^2/(V\,s)}). Weak inversion offers the best efficiency, strong inversion the highest speed."><img src="dcic_files/figure-html/fig-ic-tradeoff-output-1.png" width="612" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ic-tradeoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;23: Transconductance efficiency <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> (blue, left axis) and transit frequency <span class="math inline">\(f_\mathrm{T}\)</span> (red, right axis) versus the inversion coefficient IC, calculated with the analytical model (<span class="math inline">\(n = 1.3\)</span>, <span class="math inline">\(L = 0.13\,\mathrm{\mu m}\)</span>, <span class="math inline">\(\mu = 280\,\mathrm{cm^2/(V\,s)}\)</span>). Weak inversion offers the best efficiency, strong inversion the highest speed.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-ic-ihp" class="quarto-xref">Figure&nbsp;24</a> shows the same trade-off extracted from simulation data of an NMOS (<span class="math inline">\(W/L = 1.3\,\mu\text{m}/0.13\,\mu\text{m}\)</span>) in IHP SG13. The simulation matches the analytical model well for <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>; the simulated <span class="math inline">\(f_\mathrm{T}\)</span> comes out higher than the simple model predicts, since the model pessimistically assumes the full <span class="math inline">\(\frac{2}{3} C'_\mathrm{ox}W L\)</span> gate capacitance at all bias points, while at high <span class="math inline">\(\mathrm{IC}\)</span> velocity saturation causes the simulated <span class="math inline">\(f_\mathrm{T}\)</span> to flatten.</p>
+<div id="cell-fig-ic-ihp" class="cell" data-execution_count="24">
+<div class="cell-output cell-output-display">
+<div id="fig-ic-ihp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ic-ihp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-ic-ihp-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24" title="Figure&nbsp;24: Transconductance efficiency g_\mathrm{m}/I_\mathrm{D} (blue, left axis) and transit frequency f_\mathrm{T} = g_\mathrm{m}/(2 \pi C_\mathrm{gg}) (red, right axis) versus inversion coefficient, extracted from a simulation of an NMOS (W/L = 1.3\,\mathrm{\mu m}/0.13\,\mathrm{\mu m}) in IHP SG13, using a specific current of I_\mathrm{S} = 6\,\mathrm{\mu A} extracted from the simulation data. The thin dashed lines show the analytical model (Equation&nbsp;43 and Equation&nbsp;44) with n = 1.3, L = 0.13\,\mathrm{\mu m}, and \mu = 280\,\mathrm{cm^2/(V\,s)}."><img src="dcic_files/figure-html/fig-ic-ihp-output-1.png" width="612" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ic-ihp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;24: Transconductance efficiency <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> (blue, left axis) and transit frequency <span class="math inline">\(f_\mathrm{T} = g_\mathrm{m}/(2 \pi C_\mathrm{gg})\)</span> (red, right axis) versus inversion coefficient, extracted from a simulation of an NMOS (<span class="math inline">\(W/L = 1.3\,\mathrm{\mu m}/0.13\,\mathrm{\mu m}\)</span>) in IHP SG13, using a specific current of <span class="math inline">\(I_\mathrm{S} = 6\,\mathrm{\mu A}\)</span> extracted from the simulation data. The thin dashed lines show the analytical model (<a href="#eq-mosfet-ic-gm" class="quarto-xref">Equation&nbsp;43</a> and <a href="#eq-mosfet-ic-ft" class="quarto-xref">Equation&nbsp;44</a>) with <span class="math inline">\(n = 1.3\)</span>, <span class="math inline">\(L = 0.13\,\mathrm{\mu m}\)</span>, and <span class="math inline">\(\mu = 280\,\mathrm{cm^2/(V\,s)}\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sizing-procedure" class="level3" data-number="2.9.3">
+<h3 data-number="2.9.3" class="anchored" data-anchor-id="sizing-procedure"><span class="header-section-number">2.9.3</span> Sizing Procedure</h3>
+<p>The design procedure using the inversion coefficient is as follows:</p>
+<ol type="1">
+<li>Depending on the trade-off between low power (high <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>) and high speed (high <span class="math inline">\(f_\mathrm{T}\)</span>), select the <span class="math inline">\(\mathrm{IC}\)</span> (often, <span class="math inline">\(\mathrm{IC}\approx 1\)</span> is a reasonable compromise).</li>
+<li>Choose either the bias current or the required <span class="math inline">\(g_\mathrm{m}\)</span>, and calculate the other one using <a href="#eq-mosfet-ic-gm" class="quarto-xref">Equation&nbsp;43</a>.</li>
+<li>Using <a href="#eq-mosfet-ic-id" class="quarto-xref">Equation&nbsp;42</a>, calculate <span class="math inline">\(I_\mathrm{S}\)</span> from the known <span class="math inline">\(I_\mathrm{D}\)</span>.</li>
+<li>Depending on the requirements for transistor speed (minimum <span class="math inline">\(L\)</span>), matching (large <span class="math inline">\(W \cdot L\)</span>), or small <span class="math inline">\(g_\mathrm{ds}\)</span> (large <span class="math inline">\(L\)</span>), choose the appropriate <span class="math inline">\(L\)</span>; use <a href="#eq-mosfet-is" class="quarto-xref">Equation&nbsp;40</a> to calculate the corresponding <span class="math inline">\(W\)</span>.</li>
+<li>Finally, estimate <span class="math inline">\(f_\mathrm{T}\)</span> using <a href="#eq-mosfet-ic-ft" class="quarto-xref">Equation&nbsp;44</a>. From <span class="math inline">\(f_\mathrm{T}\)</span>, the required bandwidth of the circuit can be estimated, and the sizing can be iterated if necessary.</li>
+</ol>
+<p>Now the most important transistor parameters (<span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, <span class="math inline">\(I_\mathrm{D}\)</span>, <span class="math inline">\(g_\mathrm{m}\)</span>, <span class="math inline">\(V_\mathrm{GS}\)</span>, and <span class="math inline">\(f_\mathrm{T}\)</span>) are selected and known.</p>
+</section>
+</section>
+<section id="sec-mosfet-summary" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="sec-mosfet-summary"><span class="header-section-number">2.10</span> Summary</h2>
+<p>The MOSFET is a very versatile device, which can, depending on the bias conditions, work as a:</p>
+<ul>
+<li><strong>Switch</strong> (for small <span class="math inline">\(V_\mathrm{DS}\)</span> and large <span class="math inline">\(V_\mathrm{GS}\)</span>).</li>
+<li><strong>Voltage-controlled resistor</strong> (since <span class="math inline">\(g_\mathrm{ds}= f(V_\mathrm{GS})\)</span> in the triode region).</li>
+<li><strong>Voltage-controlled current source</strong> (since <span class="math inline">\(I_\mathrm{D}= f(V_\mathrm{GS})\)</span> in the saturation region).</li>
+<li><strong>Diode</strong> (since the MOSFET is off for <span class="math inline">\(V_\mathrm{GS}&lt; V_\mathrm{th}\)</span> and on otherwise).</li>
+<li><strong>Variable capacitor</strong> (using the gate oxide or drain/source junction capacitance).</li>
+</ul>
+<p>This versatility is nicely illustrated by the collection of two-transistor circuits in <span class="citation" data-cites="Pretl_Eberlein_2021">(<a href="#ref-Pretl_Eberlein_2021" role="doc-biblioref">Pretl and Eberlein 2021</a>)</span>; the paper, plus posters showing all fifty circuits, is available at the <a href="https://iic-jku.github.io/fifty-nifty-circuits/">Fifty Nifty Variations of Two-Transistor Circuits</a> homepage.</p>
+<p>When making the MOSFET physically small by scaling <span class="math inline">\(L \ll 1\,\mu\text{m}\)</span> to improve power, performance, and area, various imperfections kick in (like DIBL), causing increased leakage currents and degraded output conductance—so alternative device constructions like SOI, FinFET, and nanosheet MOSFETs have been introduced.</p>
+</section>
+<section id="sec-mosfet-si-properties" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="sec-mosfet-si-properties"><span class="header-section-number">2.11</span> Appendix: Silicon Material Properties</h2>
+<p><a href="#tbl-si-properties" class="quarto-xref">Table&nbsp;5</a> collects the physical properties of silicon used throughout this text.</p>
+<div id="tbl-si-properties" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-si-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Physical material properties of silicon
+</figcaption>
+<div aria-describedby="tbl-si-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 53%">
+<col style="width: 16%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Physical parameter of Si</th>
+<th style="text-align: center;">Symbol</th>
+<th style="text-align: center;">Typical value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Lattice constant</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.54 nm</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Density</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(5.0 \times 10^{22}\,\text{cm}^{-3}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Relative permittivity of Si</td>
+<td style="text-align: center;"><span class="math inline">\(\varepsilon_\mathrm{r,si}\)</span></td>
+<td style="text-align: center;">11.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Relative permittivity of SiO<sub>2</sub></td>
+<td style="text-align: center;"><span class="math inline">\(\varepsilon_\mathrm{r,ox}\)</span></td>
+<td style="text-align: center;">3.9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Band gap at 300 K</td>
+<td style="text-align: center;"><span class="math inline">\(E_\mathrm{bg}\)</span></td>
+<td style="text-align: center;">1.12 eV</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Intrinsic carrier concentration at 300 K</td>
+<td style="text-align: center;"><span class="math inline">\(n_\mathrm{i} = p_\mathrm{i}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1.5 \times 10^{10}\,\text{cm}^{-3}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Linear coefficient of thermal expansion</td>
+<td style="text-align: center;">CTE</td>
+<td style="text-align: center;"><span class="math inline">\(2.6 \times 10^{-6}\,\text{K}^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Melting point</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1415 °C</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mobility of electrons at 300 K</td>
+<td style="text-align: center;"><span class="math inline">\(\mu_\mathrm{n}\)</span></td>
+<td style="text-align: center;">1500 cm²/(V s)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mobility of holes at 300 K</td>
+<td style="text-align: center;"><span class="math inline">\(\mu_\mathrm{p}\)</span></td>
+<td style="text-align: center;">450 cm²/(V s)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Thermal conductivity</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1.5 W/(cm K)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Breakdown field</td>
+<td style="text-align: center;"><span class="math inline">\(E_\mathrm{crit}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(3 \times 10^{5}\,\text{V/cm}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
 
 
 
 </section>
 </section>
+
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Dennard_1974" class="csl-entry" role="listitem">
+Dennard, Robert H., Fritz H. Gaensslen, Hwa-Nien Yu, V. Leo Rideout, Ernest Bassous, and Andre R. LeBlanc. 1974. <span>“Design of Ion-Implanted <span>MOSFET</span>’s with Very Small Physical Dimensions.”</span> <em>IEEE Journal of Solid-State Circuits</em> 9 (5): 256–68.
+</div>
+<div id="ref-Goto_2003" class="csl-entry" role="listitem">
+<span class="nocase">Goto, Ken-ichi et al.</span> 2003. <span>“High Performance 25 <span class="nocase">nm</span> Gate <span>CMOSFETs</span> for 65 <span class="nocase">nm</span> Node High Speed <span>MPUs</span>.”</span> <em>IEEE International Electron Devices Meeting (IEDM)</em>.
+</div>
+<div id="ref-Hu_ModernDevices" class="csl-entry" role="listitem">
+Hu, Chenming. 2010. <em>Modern Semiconductor Devices for Integrated Circuits</em>. Pearson.
+</div>
 <div id="ref-Moore_1965" class="csl-entry" role="listitem">
 Moore, Gordon E. 1965. <span>“Cramming More Components onto Integrated Circuits.”</span> <em>Electronics</em> 38 (8): 114–17.
+</div>
+<div id="ref-Pretl_Eberlein_2021" class="csl-entry" role="listitem">
+Pretl, Harald, and Matthias Eberlein. 2021. <span>“Fifty Nifty Variations of Two-Transistor Circuits: A Tribute to the Versatility of <span>MOSFETs</span>.”</span> <em>IEEE Solid-State Circuits Magazine</em> 13 (3): 38–46. <a href="https://doi.org/10.1109/MSSC.2021.3088968">https://doi.org/10.1109/MSSC.2021.3088968</a>.
+</div>
+<div id="ref-Razavi_Fundamentals" class="csl-entry" role="listitem">
+Razavi, Behzad. 2014. <em>Fundamentals of Microelectronics</em>. 2nd ed. Wiley.
+</div>
+<div id="ref-Sansen_2015" class="csl-entry" role="listitem">
+Sansen, Willy. 2015. <span>“Minimum Power in Analog Amplifying Blocks: Presenting a Design Procedure.”</span> <em>IEEE Solid-State Circuits Magazine</em> 7 (4): 83–89. <a href="https://doi.org/10.1109/MSSC.2015.2474235">https://doi.org/10.1109/MSSC.2015.2474235</a>.
+</div>
+<div id="ref-Sansen_AnalogEssentials" class="csl-entry" role="listitem">
+Sansen, Willy M. C. 2006. <em>Analog Design Essentials</em>. Springer.
+</div>
+<div id="ref-Stillmaker_2017" class="csl-entry" role="listitem">
+Stillmaker, Aaron, and Bevan Baas. 2017. <span>“Scaling Equations for the Accurate Prediction of <span>CMOS</span> Device Performance from 180 <span class="nocase">nm</span> to 7 <span class="nocase">nm</span>.”</span> <em>Integration, the VLSI Journal</em> 58: 74–81. <a href="https://doi.org/10.1016/j.vlsi.2017.02.002">https://doi.org/10.1016/j.vlsi.2017.02.002</a>.
 </div>
 <div id="ref-NEC_1Gbit_DRAM_1995" class="csl-entry" role="listitem">
 Sugibayashi, T., I. Naritake, S. Utsugi, et al. 1995. <span>“A 1-<span>Gb</span> <span>DRAM</span> for File Applications.”</span> <em>IEEE Journal of Solid-State Circuits</em> 30 (11): 1277–80. <a href="https://doi.org/10.1109/4.475716">https://doi.org/10.1109/4.475716</a>.
 </div>
+<div id="ref-Tsividis_MOS" class="csl-entry" role="listitem">
+Tsividis, Yannis, and Colin McAndrew. 2011. <em>Operation and Modeling of the MOS Transistor</em>. 3rd ed. Oxford University Press.
+</div>
 <div id="ref-Wanlass_Sah_1963" class="csl-entry" role="listitem">
 Wanlass, Frank M., and Chih-Tang Sah. 1963. <span>“Nanowatt Logic Using Field-Effect Metal-Oxide Semiconductor Triodes.”</span> <em>IEEE International Solid-State Circuits Conference (ISSCC), Digest of Technical Papers</em>, 32–33.
 </div>
-</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section></div></main> <!-- /main -->
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The mobility value used here is not fully consistent with the process constant <span class="math inline">\(K_\mathrm{n} = \mu_\mathrm{n}C'_\mathrm{ox}= 280\,\mu\text{A/V}^2\)</span> in <a href="#tbl-ihp130-parameters" class="quarto-xref">Table&nbsp;1</a>, which (with <span class="math inline">\(C'_\mathrm{ox}= 17.3\,\text{fF/µm}^2\)</span>) would imply an effective <span class="math inline">\(\mu_\mathrm{n}\approx 160\,\text{cm}^2/(\text{V}\cdot\text{s})\)</span>. The effective mobility depends strongly on the vertical field and thus on bias; such spread between simple hand-calculation parameters is normal and is one more reason to verify all sizing choices by simulation.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
