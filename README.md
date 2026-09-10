@@ -1,6 +1,6 @@
 # Design of Complex Integrated Circuits
 
-**Course website: <https://iic-jku.github.io/design-complex-ic>**
+**Course website: <https://iic-jku.github.io/design-complex-ic/dcic.html>**
 
 **(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)**
 
