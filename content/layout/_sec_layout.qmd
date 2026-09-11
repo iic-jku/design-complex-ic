@@ -1,0 +1,230 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# The Layout {#sec-layout}
+
+The [**layout**](https://en.wikipedia.org/wiki/Integrated_circuit_layout) is the 2D representation of the IC manufacturing data. While the schematic captures the electrical intent of a design, the layout captures its physical realization: in the layout tools, the design is drawn on several **layers**, which are the foundation for the generation of the photomasks used in IC production. Commercial layout tools are, e.g., Cadence Virtuoso, Siemens L-Edit, and open-source tools are Magic and KLayout. The layers are usually manipulated before the geometries are transferred to the masks (shrink, enlarge, invert, combination of several layers into one mask layer, optical proximity correction, etc.).
+
+## Files and Tapeout {#sec-layout-tapeout}
+
+The layout is checked for compliance with the wafer-fab design rules in the [**design rule check (DRC)**](https://en.wikipedia.org/wiki/Design_rule_checking), and for conformance with the intended circuit in the [**layout-versus-schematic (LVS)**](https://en.wikipedia.org/wiki/Layout_versus_schematic) check, where a [netlist](https://en.wikipedia.org/wiki/Netlist) extracted from the layout is compared to the netlist of the original schematic. If all checks pass, the layout data is sent to mask production—this step is called [**tapeout**](https://en.wikipedia.org/wiki/Tape-out). The mask house processes the layout data and produces the photomasks used by the wafer fab (depending on technology complexity, between 10 and 80 masks).
+
+The standard file format for layout data is [**GDSII**](https://en.wikipedia.org/wiki/GDSII), a hierarchical database in a binary stream format. A newer format with more efficient storage is **OASIS**, but GDSII is still very common.
+
+## Generic Layer Definition {#sec-layout-layers}
+
+Different foundries use different layer names. The layer names defined in @tbl-layers are quite typical for a basic CMOS process technology and are used for the remainder of the text; the corresponding IHP SG13 names are given for reference.
+
+| Layer name | IHP SG13 | Purpose |
+|:----------:|:---------|:--------|
+| `RX` | `Activ` | $n^+$ (`RX`) or $p^+$ (`RX` in `BP`) diffusion regions (e.g., S/D of MOSFETs) |
+| `PC` | `GatPoly` | Polysilicon gate |
+| `NW` | `NWell` | $n$-well region |
+| `BP` | `pSD` | $p$-implant marker (i.e., blocks the $n$-implant) |
+| `OP` | `SalBlock` | Silicide blocking over `PC` and `RX` |
+| `CA` | `Cont` | Contact (connects `RX` or `PC` to `M1`) |
+| `M1` | `Metal1` | First-level metal |
+| `V1` | `Via1` | Via connecting `M1` to `M2` |
+| `M2` | `Metal2` | Second-level metal |
+| `V2` | `Via2` | Via connecting `M2` to `M3` |
+| `M3` | `Metal3` | Top metal, mostly aluminum, to facilitate wire-bond packages |
+| `PAD` | `Passiv` | Opening in the passivation to contact the top metal for pads |
+: Generic layer definition used in this text {#tbl-layers}
+
+## Devices {#sec-layout-devices}
+
+### NMOS and PMOS Transistors
+
+@fig-layout-mosfets shows the layout (mask top view) of an NMOS and a PMOS transistor. The following observations can be made:
+
+- The MOSFET is created by the intersection of `RX` and `PC`; this intersection defines $W$ and $L$ of the transistor. The areas of `RX` not covered by `PC` become the source and drain regions.
+- Whether a device is NMOS or PMOS is decided by whether the `RX` shape is contained inside a `BP` region (`RX` plus `BP` is $p^+$, `RX` without `BP` is $n^+$).
+- A $p^+$ substrate contact is created by drawing `RX` covered by `BP` (outside the n-well).
+- An $n^+$ well contact is created by drawing plain `RX` located inside `NW`.
+- The `NW` must surround the PMOS with sufficient margin.
+- The layer `BP` is a pure marking layer, assisting mask generation and device extraction from the layout.
+- `CA` contacts connect source/drain/gate as well as the $p^+$/$n^+$ contacts to `M1`.
+
+{{< include /content/layout/_fig_layout_mosfets.qmd >}}
+
+### Polysilicon Resistor
+
+The polysilicon resistor (@fig-layout-poly-resistor) uses the gate material (`PC`) as a resistive device. Since the gate poly is normally covered by silicide to lower its resistance, the silicide is suppressed with an `OP` shape; the intersection of `OP` with `PC` precisely defines the $L$ and $W$ of the resistor. Note that the existence of `OP` is a process option and might not be available in every technology. The gate polysilicon can be either $p$- or $n$-type; $p$-type poly resistors are often preferred, as they offer a lower temperature coefficient (thus the `PC` is marked with `BP`).
+
+The resistance value of the polysilicon resistor is given by ($R_\square$ is the sheet resistance in Ω/$\square$)
+
+$$
+R = \rho \frac{L}{t \cdot W} = R_\square \frac{L}{W}
+$$ {#eq-layout-resistor}
+
+{{< include /content/layout/_fig_layout_poly_resistor.qmd >}}
+
+Note that modern FinFET technologies might not support traditional planar polysilicon resistors, as the gate material is used to form the fins rather than a continuous sheet. In this case, often a metal resistor implemented in the back-end layers is used as an alternative.
+
+### Diffusion Resistor
+
+Diffusion resistors (@fig-layout-diff-resistor) use source/drain diffusions or wells (with or without silicide) and are available in basically all silicon technologies, but they are usually inferior to polysilicon resistors: they have larger tolerances and a relatively high voltage coefficient, which can cause nonlinearity, and the nonlinear parasitic junction capacitance to the substrate can be critical as well. In older technology nodes (> 0.25 µm), the matching of diffusion resistors was better than that of poly resistors. One clear advantage of diffusion resistors is reduced self-heating, as the resistor body is embedded in the silicon substrate, whereas poly resistors are isolated from the substrate by SiO~2~. So resistor with increased power dissipation can benefit from this property.
+
+{{< include /content/layout/_fig_layout_diff_resistor.qmd >}}
+
+The resistor types available in IHP SG13 are summarized in @tbl-ihp-resistors.
+
+| Type | $R_\square$ (Ω/$\square$) | Process tolerance ($\pm 4 \sigma$) | Matching | Temp. coefficient |
+|:-----|:---:|:---:|:---:|:---:|
+| Silicided $n^{++}$-poly (`rsil`) | 7 | ±12 % | 0.6 %µm | 0.3 %/K |
+| Blocked $p^+$-poly (`rppd`) | 260 | ±10 % | 1.5 %µm | 0.017 %/K |
+| Blocked compensated poly (`rhigh`) | 1360 | ±15 % | 4.8 %µm | −0.23 %/K |
+: Resistor types available in IHP SG13 {#tbl-ihp-resistors}
+
+### Capacitors
+
+Linear capacitors can be implemented using the metal stack, either as **vertical sandwich capacitors** (parallel plates on adjacent metal layers) or as **finger capacitors** (exploiting the lateral coupling between interdigitated fingers on the same layers); both are shown in @fig-layout-mom-cap. Depending on the design rules, the vertical or the lateral coupling capacitance might be more area-effective; such metal-oxide-metal (MOM) capacitors come for free in any technology. Due to the very tight lateral pitch is nm CMOS technologies, finger capacitors are often preferred for capacitor implementation (when a linear capacitor is required).
+
+{{< include /content/layout/_fig_layout_mom_cap.qmd >}}
+
+A few additional considerations for capacitors:
+
+- The density of MOM capacitors scales with smaller design rules and the number of metal layers. The lower metal layers should be skipped if the parasitic capacitance to the substrate is a concern.
+- The process may offer a specialized **metal-insulator-metal (MIM)** capacitor (density on the order of fF/µm²) using extra masks and processing steps, offering higher specific capacitance and low parasitics at extra cost.
+- For high capacitance density, or where nonlinearity is not critical, the **MOSFET gate capacitance** can be used, as the gate oxide is tightly controlled in manufacturing.
+- In IHP SG13, a MIM capacitor between `Metal5` and `TopMetal1` is available (ca. 1.5 fF/µm²); the MOM finger capacitor has ca. 0.3 fF/µm², so when using 4 metal layers the effective capacitance is comparable to the MIM capacitor.
+
+### Diodes
+
+Diodes are formed by the available pn-junctions ($n^+$ in substrate, $p^+$ in n-well, n-well in substrate). They are intended mainly for reverse-biased operation, as the forward operation is usually not modeled accurately and should be avoided. Note that forward operation might inject charge into parasitic structures and cause latch-up (see @sec-latchup)! Applications of reverse-biased diodes include ESD protection structures, antenna diodes, and varactors.
+
+### Bipolar Junction Transistors
+
+High-performance BJTs are available in bipolar and BiCMOS technologies, but at increased wafer cost compared to pure CMOS. In standard CMOS, a parasitic **vertical substrate PNP** can be implemented (@fig-layout-vpnp): the $p^+$ diffusion in the n-well forms the emitter, the n-well the base, and the common $p$-substrate the collector. The performance is limited ($\beta \approx 1 \ldots 10$), and the collector is tied to the substrate potential. Such a structure is mainly used in bandgap reference circuits where collector and base are shorted to $\VSS$ (ground), and the foundry usually supplies a fixed layout template that shall not be modified.
+
+{{< include /content/layout/_fig_layout_vpnp.qmd >}}
+
+## Design Rules {#sec-layout-drc}
+
+The **design rules (DRs)** are the interface between the mask designer (layout engineer) and the foundry. Complying with the layout design rules ensures manufacturability with a high yield:
+
+- The design rules are provided as a specification document and as a run set for layout verification tools (e.g., KLayout, Magic, Cadence Pegasus, or Siemens Calibre).
+- The rules are either given in relative dimensions ("lambda rules") for easy scaling, or in absolute dimensions ("micron rules").
+- Modern CMOS technologies typically involve several hundred to thousands of layout design rules.
+- Consider the relatively large spacing rule between `RX` and `NW`: it pays off to **group PMOS and NMOS transistors** together, respectively!
+
+The four basic geometric rule types—minimum width, minimum spacing, minimum enclosure, and minimum extension—are illustrated in @fig-layout-drc.
+
+{{< include /content/layout/_fig_layout_drc.qmd >}}
+
+### Density Rules
+
+Density rules require a minimum and a maximum layer density within a specified area; this is needed to avoid over-polishing during CMP and to achieve uniform etch rates. For example, `M1` might require 30 % minimum and 70 % maximum fill in any 1 mm × 1 mm window. For digital chips, density rules are satisfied automatically by fill programs. For analog chips, layout engineers have to add dummy structures manually (effort!) or with a fill program after the layout is finished; note that fill structures can cause asymmetries or reduced quality factor in inductors. Metal fill can also be put to good use as a ground plane.
+
+### Antenna Rules
+
+If a metal interconnect with a large area is tied to the small gate of a MOSFET, the metal area acts as an "antenna" during plasma etching: it collects ions and can rise to a high potential, and the gate oxide may break down! The remedies, shown in @fig-layout-antenna, are either a **discontinuity** in the charge-collecting metal (routing briefly through a higher metal layer, which is patterned only after the lower layer has been etched) or an **antenna diode** connected to the gate node (the processing is done at high temperatures, where the diode is quite conductive in either polarity, harmlessly draining the collected charge).
+
+{{< include /content/layout/_fig_layout_antenna.qmd >}}
+
+The complete layout rules of the open-source IHP SG13 PDK can be found in the [SG13G2 layout rules document](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf) and serve as a practical example of a production DRC rule set.
+
+## Analog Layout Techniques {#sec-layout-analog}
+
+Analog circuits, unlike digital ICs, do not primarily aim to maximize density, but demand the minimization of effects such as crosstalk, mismatch, and noise. Useful techniques are multi-finger transistors, matching and symmetry, and careful floor planning; further treatments of analog layout can be found in [@Razavi_AnalogCMOS; @Allen_Holberg], and an exemplary analog IC design employing these techniques is described in [@Schmickl_2020].
+
+### Multi-Finger Transistors
+
+A transistor with a large $W$ should be split into multiple parallel devices ("fingers") to make the layout structure compact, as shown in @fig-layout-multifinger. This splitting also reduces the gate resistance (see @eq-mosfet-gate-res-fingers; for RF, keep the resistance of each gate finger below $1/\gm$) and can lower the junction capacitance at the drain or source, since neighboring fingers share their diffusion regions.
+
+{{< include /content/layout/_fig_layout_multifinger.qmd >}}
+
+The layout of a cascode circuit (or any series connection of MOSFETs, e.g., in NAND/NOR gates) can be simplified if the stacked devices have equal widths: the drain of the bottom device and the source of the top device can then **share the same diffusion region**, which is small because it needs no contacts, as shown in @fig-layout-merged-diffusion.
+
+{{< include /content/layout/_fig_layout_merged_diffusion.qmd >}}
+
+### Matching
+
+Asymmetries lead to mismatch, which introduces input-referred offsets and limits the minimum processable signal level; common-mode and power-supply rejection are degraded as well. Good matching of integrated devices can only be achieved if the following conditions are met:
+
+- The devices are constructed from **identical unit devices**: a MOSFET with width $4W$ matches a transistor with width $2W$ only if both are constructed from unit transistors of equal width (and equal $L$—remember that $\Vth = f(L)$ due to SCE/RSCE)!
+- The devices are oriented in the **same direction**, and the **current flow** in all matched devices has the same direction—avoid mirroring or "snaking"!
+- The devices are **surrounded by similar structures**; to achieve this for edge devices, spend **dummy elements** (see @fig-layout-dummies).
+- To combat process gradients, place the matched devices on the symmetry line of the gradient (if known), or use **common-centroid** arrangements (see @fig-layout-common-centroid).
+- For ac symmetry, consider the wiring of $R$ and $C$, and make the **wiring parasitics** as symmetrical as possible.
+- Consider secondary effects: gate shadowing (implant variation due to topographical differences and tilted implant angle), mechanical stress from shallow-trench isolation, and non-uniform doping due to the **well-proximity effect** (dopants scattering off the well-mask edges cause doping variations, especially impacting PMOS).
+
+{{< include /content/layout/_fig_layout_dummies.qmd >}}
+
+The same reasoning applies to passive devices. @fig-layout-matched-resistors shows an array of four matched unit resistors: identical width and length, identical orientation, and a constant pitch, so that $R_1$ and $R_4$ at the edges see the same surroundings as $R_2$ and $R_3$ in the middle. Note that the dummy strips are not left floating, but are shorted and tied to ground to keep them at a defined potential.
+
+{{< include /content/layout/_fig_layout_matched_resistors.qmd >}}
+
+Gradients across a die can be caused by doping and film-thickness variations (well approximated by a linear gradient for devices in proximity), by temperature gradients originating from areas with large power dissipation, and by mechanical stress from packaging or metallization (avoid low-level metal routing over sensitive devices). A common-centroid arrangement cancels linear gradients to first order, as shown in @fig-layout-common-centroid: each component is decomposed into two or more parts that are placed diagonally opposite each other, so that all component centroids coincide.
+
+{{< include /content/layout/_fig_layout_common_centroid.qmd >}}
+
+The same principle applies to capacitors: @fig-layout-cap-matching shows a matched capacitor pair with a ratio of $C_1 = 8 C_2$, realized from identical unit capacitors with a common centroid and surrounded by dummy capacitors. If $C_1$ and $C_2$ are used, e.g., in a switched-capacitor amplifier, the voltage gain can be precisely set to $A_\mathrm{v} = C_1 / C_2 = 8$.
+
+{{< include /content/layout/_fig_layout_cap_matching.qmd >}}
+
+### Floor Planning
+
+Floor planning is an important task when constructing the overall IC layout. Things to consider are:
+
+- Locations of pins and interfaces; distribution of $\VDD$ and $\VSS$ pins; isolation of sensitive I/O signals.
+- Cell sizes and aspect ratios (allowing an area-efficient placement of the macros).
+- Isolation between different circuit blocks (e.g., keep sensitive analog blocks away from noisy digital blocks).
+- Power and clock distribution; wiring channels for signal buses.
+- The package type used (wire-bond or flip-chip).
+
+A common mistake: a great job laying out lots of cells, then running out of time, resulting in a big mess when placing and connecting them—**start with a top-down plan!**
+
+## Additional Layout and Mask Structures {#sec-layout-additional}
+
+In addition to the final chip layout, further structures are placed on the masks (usually by the wafer fab):
+
+- **Seal ring:** The seal ring runs along the circumference of the chip and seals the singulated die against moisture and other contamination. It also acts as a crack-stop, protecting the inner die from cracks formed while sawing the wafer into individual dice. Since the seal ring forms a closed metal loop around the chip, crosstalk considerations may suggest connecting it to a dedicated pin.
+- **Scribe line (kerf):** This is where the chip is cut with a diamond saw or a laser.
+- **Alignment marks:** Used to align the different masks during processing.
+- **Critical-dimension structures:** Measured after processing to verify proper polysilicon or metal etching, enabling closed-loop process control.
+- **Vernier structures ("Nonius"):** Closely spaced parallel lines on two different layers that allow judging the inter-layer alignment.
+- **Test structures:** Chains of contacts and vias, as well as test transistors, are used to evaluate contact resistance, transistor parameters, and other important process parameters. They are usually placed in the scribe lines or on dedicated **process control monitor (PCM)** test chips; the PCM measurement reports can often be obtained from the foundry.
+
+## Layout Checks {#sec-layout-checks}
+
+Three automated checks safeguard the layout before tapeout:
+
+- **DRC (design rule check):** a program/run set that automatically checks the layout data for compliance with the design rules of the wafer fab. All flagged errors must be corrected; otherwise, manufacturing issues can occur.
+- **LVS (layout versus schematic):** a netlist extracted from the layout data is compared against the schematic netlist, checking connectivity of signals and power as well as device sizes ($W$ and $L$ of transistors, dimensions of $R$ and $C$). Usually, all flagged errors must be corrected.
+- **ERC (electrical rule check):** additional checks not covered by DRC or LVS, such as floating MOSFET gates, floating wells, or antenna rules. Sometimes common mistakes (e.g., high-resistance connections) are covered in the ERC run set and checked automatically.
+
+## Layout Extraction {#sec-layout-extraction}
+
+The layout implementation has a large effect on the performance of the final circuit:
+
+- Wiring adds delays ($R$, $L$, $C$) and coupling ($k$, $C$) to the circuits.
+- **Layout-dependent effects (LDE)**, like well proximity, can only be modeled with information about the actual layout of the devices and their surroundings.
+- Substrate effects (like crosstalk) can only be extracted from the actual placement.
+
+Considering layout effects in simulation is paramount and usually requires iteration between circuit design and layout: circuit design and simulation → layout creation → parasitic extraction → re-simulation → circuit and/or layout refinement → repeat. In the digital flow, wiring delays extracted from the layout are added to the gate-level netlist for timing analysis, and voltage drops in the power network ($\VDD$/$\VSS$ droop and ripple) are extracted and considered as additional timing derating. For analog and high-performance circuits, simulation including layout parasitics is **mandatory** to guarantee the performance and functionality of the fabricated circuit!
+
+Different levels of extraction realism trade off accuracy against simulation speed:
+
+- **C-decoupled:** The parasitic capacitance of each node's wiring is added as a lumped capacitor to ground. There is almost no impact on simulation speed (no new nodes are introduced), but no crosstalk between nodes is captured. This extraction can be used on fairly large circuits to add a first level of realism.
+- **C-coupled:** Parasitic capacitances to the substrate *and between nodes* are added; capacitive crosstalk is modeled, but no inductive effects. Moderate impact on simulation speed (more elements in the circuit matrix).
+- **RC-extracted:** Parasitic $R$ and $C$ of the wiring are extracted and added to the netlist, yielding a realistic model of performance and crosstalk without inductive effects. This has a large impact on simulation speed, as many new nodes are introduced; this mode should be used for circuit blocks of moderate complexity.
+- **RLCK-extracted:** Parasitic $R$, $C$, $L$, and $k$ of the wiring are extracted, resulting in a very accurate simulation including the main crosstalk effects—but the circuit network gets much larger, impacting simulation time and convergence.
+- **EM simulation:** Highest accuracy; the resulting $S$-parameters are either used directly in frequency-domain simulations or transformed into equivalent lumped-element circuits. Huge simulation-time impact, but valid to very high frequencies (> 100 GHz); usually only suitable for individual circuit blocks.
+
+::: {.callout-note title="Parasitic Extraction with KLayout-PEX"}
+Our open-source parasitic extraction tool [**KLayout-PEX**](https://github.com/iic-jku/klayout-pex) (invoked as `kpex`) implements several of these extraction levels for KLayout, using different engines (an analytical 2.5D engine, a wrapper around MAGIC, and the FasterCap 3D field solver) that trade off speed against accuracy. Supported PDKs include IHP SG13G2 and SkyWater sky130A. Further information can be found in the [online documentation](https://iic-jku.github.io/klayout-pex-website/doc/doc.html).
+:::

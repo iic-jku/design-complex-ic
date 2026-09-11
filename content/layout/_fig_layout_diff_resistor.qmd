@@ -1,0 +1,48 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-layout-diff-resistor
+#| echo: false
+#| fig-cap: "Layout of a diffusion (n-well) resistor: the resistive body is the `NW` strip, contacted at both ends by $n^+$ diffusions (`RX`); the `OP` shape blocks the silicide over the body. The parasitic junction to the substrate makes this resistor nonlinear with the applied voltage."
+
+import matplotlib.pyplot as plt
+from pyutil import laygen as lg
+
+fig, ax = plt.subplots(figsize=(7, 3.0))
+
+# n-well strip forms the resistor body
+lg.rect(ax, 'NW', 0, -0.3, 8.6, 2.0)
+# n+ diffusion only at the contacted heads; the body is bare n-well
+lg.rect(ax, 'RX', 0.3, 0.0, 1.6, 1.4)
+lg.rect(ax, 'RX', 6.7, 0.0, 1.6, 1.4)
+# silicide block over the body, abutting but not overlapping the heads
+lg.rect(ax, 'OP', 1.9, -0.55, 4.8, 2.5)
+# contacts + metal
+lg.contacts(ax, 0.65, 0.25, 2, 2, pitch=0.55, size=0.35)
+lg.contacts(ax, 7.05, 0.25, 2, 2, pitch=0.55, size=0.35)
+lg.rect(ax, 'M1', 0.5, 0.1, 1.2, 1.2)
+lg.rect(ax, 'M1', 6.9, 0.1, 1.2, 1.2)
+
+ax.text(1.1, -1.0, 'terminal A', fontsize=8, ha='center')
+ax.text(7.5, -1.0, 'terminal B', fontsize=8, ha='center')
+ax.text(4.3, 0.7, 'n-well body', fontsize=8, ha='center', zorder=10)
+
+lg.legend(ax, ['NW', 'RX', 'OP', 'CA', 'M1'], loc='upper right')
+lg.finish(ax, (-0.4, 12.0), (-1.4, 2.6))
+plt.tight_layout()
+plt.show()
+```

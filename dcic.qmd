@@ -37,3 +37,4 @@ format:
 {{< include /content/intro/_sec_intro.qmd >}}
 {{< include /content/mosfet/_sec_mosfet.qmd >}}
 {{< include /content/technology/_sec_technology.qmd >}}
+{{< include /content/layout/_sec_layout.qmd >}}

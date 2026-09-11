@@ -1,0 +1,64 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-layout-common-centroid
+#| echo: false
+#| fig-cap: "Common-centroid arrangements of two matched devices A and B, each split into two halves: (a) cross-coupled 2×2 arrangement and (b) linear ABBA arrangement. In both cases, the centroids of A and B coincide, so a linear process gradient (illustrated by the color wedge) affects both devices equally."
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+CA, CB = '#64a0e8', '#e57373'
+
+fig, axs = plt.subplots(2, 1, figsize=(6.8, 6.4),
+                        gridspec_kw={'height_ratios': [4.6, 3.6]})
+
+# gradient background helper
+def gradient(ax, x0, x1, y0, y1):
+    g = np.linspace(0, 1, 100).reshape(1, -1)
+    ax.imshow(g, extent=[x0, x1, y0, y1], origin='lower', aspect='auto',
+              cmap='YlOrBr', alpha=0.35, zorder=0)
+
+# (a) cross-coupled
+ax = axs[0]
+gradient(ax, -0.3, 4.3, -0.3, 4.3)
+cells = [(0, 2, 'A', CA), (2, 2, 'B', CB), (0, 0, 'B', CB), (2, 0, 'A', CA)]
+for x, y, t, c in cells:
+    ax.add_patch(Rectangle((x + 0.1, y + 0.1), 1.8, 1.8, fc=c, ec='k',
+                           lw=1.0, zorder=2))
+    ax.text(x + 1.0, y + 1.0, t, fontsize=13, ha='center', va='center',
+            zorder=3)
+ax.set_title('(a) cross-coupled', fontsize=10)
+ax.set_xlim(-0.3, 4.3); ax.set_ylim(-0.3, 4.3)
+ax.set_aspect('equal'); ax.axis('off')
+
+# (b) linear ABBA
+ax = axs[1]
+gradient(ax, -0.3, 8.3, 0.4, 2.6)
+for i, (t, c) in enumerate([('A', CA), ('B', CB), ('B', CB), ('A', CA)]):
+    ax.add_patch(Rectangle((i * 2 + 0.1, 0.6), 1.8, 1.8, fc=c, ec='k',
+                           lw=1.0, zorder=2))
+    ax.text(i * 2 + 1.0, 1.5, t, fontsize=13, ha='center', va='center',
+            zorder=3)
+ax.set_title('(b) linear (ABBA)', fontsize=10)
+ax.set_xlim(-0.3, 8.3); ax.set_ylim(-0.4, 3.2)
+ax.set_aspect('equal'); ax.axis('off')
+
+plt.tight_layout()
+plt.show()
+```

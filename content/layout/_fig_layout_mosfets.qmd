@@ -1,0 +1,79 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-layout-mosfets
+#| echo: false
+#| fig-cap: "Layout (mask top view) of an NMOS (left) and a PMOS transistor (right). The transistor channel is formed where `PC` crosses `RX`; the `BP` marker turns the diffusion $p^+$, and the `NW` well surrounds the PMOS. The area where `PC` overlaps `RX` is the actual transistor channel, defining its $W$ and $L$. Next to each transistor sits the corresponding substrate or well contact. Note that `BP` acts as a marking layer, whereas `RX`, `PC`, and `NW` define the actual device regions on the silicon."
+
+import matplotlib.pyplot as plt
+from pyutil import laygen as lg
+
+fig, axs = plt.subplots(1, 2, figsize=(8, 4.6))
+
+def mosfet(ax, pmos=False):
+    if pmos:
+        lg.rect(ax, 'NW', -1.6, -1.6, 8.4, 6.4)   # n-well
+        lg.rect(ax, 'BP', -0.4, -0.4, 4.8, 3.0)   # p+ marker over RX
+    # active area
+    lg.rect(ax, 'RX', 0, 0, 4.0, 2.2)
+    # poly gate
+    lg.rect(ax, 'PC', 1.7, -0.8, 0.6, 3.8)
+    # contacts on S/D
+    lg.contacts(ax, 0.29, 0.18, 2, 3, pitch=0.72, size=0.4)
+    lg.contacts(ax, 2.59, 0.18, 2, 3, pitch=0.72, size=0.4)
+    # M1 straps
+    lg.rect(ax, 'M1', 0.2, 0.1, 1.3, 2.0)
+    lg.rect(ax, 'M1', 2.5, 0.1, 1.3, 2.0)
+    # gate contact
+    lg.contacts(ax, 1.8, -0.6, 1, 1, size=0.4)
+    lg.rect(ax, 'M1', 1.6, -0.75, 0.8, 0.7)
+    # substrate / well tap
+    if pmos:
+        lg.rect(ax, 'RX', 5.2, 0.4, 0.9, 1.4)     # n+ tap (no BP)
+    else:
+        lg.rect(ax, 'BP', 5.0, 0.2, 1.3, 1.8)
+        lg.rect(ax, 'RX', 5.2, 0.4, 0.9, 1.4)     # p+ tap in BP
+    lg.contacts(ax, 5.45, 0.55, 1, 2, pitch=0.7, size=0.4)
+    lg.rect(ax, 'M1', 5.3, 0.5, 0.7, 1.2)
+    # W/L annotations, kept clear of the BP boundary on the PMOS
+    wx, ly = (4.7, 2.9) if pmos else (4.4, 2.7)
+    ax.annotate('', xy=(wx, 0), xytext=(wx, 2.2),
+                arrowprops=dict(arrowstyle='<->', lw=0.8))
+    ax.text(wx + 0.15, 1.1, '$W$', fontsize=9, va='center')
+    ax.annotate('', xy=(1.7, ly), xytext=(2.3, ly),
+                arrowprops=dict(arrowstyle='<->', lw=0.8), zorder=10)
+    ax.text(2.45, ly - 0.1, '$L$', fontsize=9, zorder=10)
+    ax.text(0.85, -0.35, 'S', fontsize=9, ha='center')
+    ax.text(3.15, -0.35, 'D', fontsize=9, ha='center')
+    ax.text(2.0, 3.35, 'G', fontsize=9, ha='center')
+    ax.text(5.65, 2.15, 'well tap' if pmos else 'substrate tap',
+            fontsize=8, ha='center')
+
+mosfet(axs[0], pmos=False)
+axs[0].set_title('NMOS', fontsize=10)
+lg.legend(axs[0], ['RX', 'PC', 'BP', 'CA', 'M1'], loc='lower right')
+lg.finish(axs[0], (-2.0, 7.2), (-2.2, 5.2))
+
+mosfet(axs[1], pmos=True)
+axs[1].set_title('PMOS', fontsize=10)
+lg.legend(axs[1], ['NW', 'RX', 'PC', 'BP', 'CA', 'M1'], loc='lower right')
+lg.finish(axs[1], (-2.0, 7.2), (-2.2, 5.2))
+
+plt.tight_layout()
+lg.align_legend_tops(fig, axs[0], axs[1])
+plt.show()
+```

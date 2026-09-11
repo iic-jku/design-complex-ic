@@ -1,0 +1,96 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-layout-mom-cap
+#| echo: false
+#| fig-cap: "Metal-oxide-metal (MOM) capacitors: (a) vertical sandwich capacitor (cross section) using the plate capacitance between stacked metal layers, with alternating layers connected to the two terminals by via stacks; (b) finger capacitor (top view) using the lateral coupling capacitance between interdigitated fingers drawn in a single metal layer."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, Polygon
+
+M_COL = ['#7fb3d5', '#f0b27a', '#82c785', '#c39bd3']   # Metal1 .. Metal4
+VIA_COL = '#566573'                                    # vias
+
+fig, axs = plt.subplots(1, 2, figsize=(8, 3.6))
+
+# (a) sandwich capacitor cross section: each metal layer in its own color,
+# vias in a separate color to show that all of these are distinct layers
+ax = axs[0]
+n_layers = 4
+for i in range(n_layers):
+    y = i * 1.0
+    if i % 2 == 0:   # plates of terminal A, flush left
+        ax.add_patch(Rectangle((1.0, y), 5.0, 0.45, fc=M_COL[i], ec='k',
+                               lw=0.8))
+    else:            # plates of terminal B, flush right
+        ax.add_patch(Rectangle((2.0, y), 5.0, 0.45, fc=M_COL[i], ec='k',
+                               lw=0.8))
+    ax.text(0.3, y + 0.22, f'M{i + 1}', fontsize=8, color='0.35',
+            ha='center', va='center')
+
+# terminal via stacks: A at far left (where the B plates do not reach),
+# B at far right (where the A plates do not reach). Each stack connects the
+# plates i and i+2 and hence needs a landing pad on the layer in between.
+for (x, i0) in ((1.3, 0), (6.4, 1)):
+    y0 = i0 * 1.0 + 0.45
+    ax.add_patch(Rectangle((x, y0), 0.3, 0.55, fc=VIA_COL, ec='k', lw=0.6))
+    ax.add_patch(Rectangle((x, y0 + 0.55), 0.3, 0.45, fc=M_COL[i0 + 1],
+                           ec='k', lw=0.6))
+    ax.add_patch(Rectangle((x, y0 + 1.0), 0.3, 0.55, fc=VIA_COL, ec='k',
+                           lw=0.6))
+
+# terminal leads
+ax.plot([1.45, 1.45], [2.45, 4.0], color='k', lw=1.0)
+ax.plot([6.55, 6.55], [3.45, 4.0], color='k', lw=1.0)
+ax.text(1.45, 4.15, 'A', fontsize=11, ha='center', va='bottom')
+ax.text(6.55, 4.15, 'B', fontsize=11, ha='center', va='bottom')
+
+handles = [Rectangle((0, 0), 1, 1, fc=c, ec='k', lw=0.6) for c in M_COL]
+handles.append(Rectangle((0, 0), 1, 1, fc=VIA_COL, ec='k', lw=0.6))
+ax.legend(handles, ['M1', 'M2', 'M3', 'M4', 'via'], loc='upper center',
+          bbox_to_anchor=(0.5, 0.06), ncol=5, frameon=False, fontsize=8,
+          handlelength=1.0, handleheight=1.0, columnspacing=1.0,
+          handletextpad=0.4)
+
+ax.set_title('(a) sandwich capacitor', fontsize=10)
+ax.set_xlim(-0.2, 8.2); ax.set_ylim(-1.0, 5.4)
+ax.set_aspect('equal'); ax.axis('off')
+
+# (b) finger capacitor top view: one single metal layer, so both combs are
+# drawn as merged polygons in the very same color
+ax = axs[1]
+COMB_COL = M_COL[0]
+comb_a = [(0.5, 0.0), (0.5, 4.6), (1.1, 4.6),
+          (1.1, 4.35), (6.5, 4.35), (6.5, 3.85), (1.1, 3.85),
+          (1.1, 2.55), (6.5, 2.55), (6.5, 2.05), (1.1, 2.05),
+          (1.1, 0.75), (6.5, 0.75), (6.5, 0.25), (1.1, 0.25), (1.1, 0.0)]
+comb_b = [(7.7, 0.0), (7.7, 4.6), (7.1, 4.6),
+          (7.1, 3.45), (1.7, 3.45), (1.7, 2.95), (7.1, 2.95),
+          (7.1, 1.65), (1.7, 1.65), (1.7, 1.15), (7.1, 1.15), (7.1, 0.0)]
+for comb in (comb_a, comb_b):
+    ax.add_patch(Polygon(comb, closed=True, fc=COMB_COL, ec='k', lw=0.8))
+ax.text(0.8, 4.75, 'A', fontsize=11, ha='center', va='bottom')
+ax.text(7.4, 4.75, 'B', fontsize=11, ha='center', va='bottom')
+ax.text(4.1, -0.5, 'single metal layer (M1)', fontsize=8, color='0.35',
+        ha='center', va='center')
+ax.set_title('(b) finger capacitor', fontsize=10)
+ax.set_xlim(-0.2, 8.2); ax.set_ylim(-1.0, 5.4)
+ax.set_aspect('equal'); ax.axis('off')
+
+plt.tight_layout()
+plt.show()
+```

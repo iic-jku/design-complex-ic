@@ -1,0 +1,71 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-layout-matched-resistors
+#| echo: false
+#| fig-cap: "Array of four matched unit resistors $R_1 \\ldots R_4$: all strips have identical width and length, the same orientation, and the same pitch, and the silicide block `OP` runs across the whole array so that every resistor body sees the same edge. A dummy strip at each end gives the outer resistors the same neighborhood as the inner ones. The dummies are shorted by metal and tied to ground, so they sit at a defined potential instead of floating."
+
+import matplotlib.pyplot as plt
+from pyutil import laygen as lg
+
+fig, ax = plt.subplots(figsize=(7.4, 5.0))
+
+
+def gnd_symbol(ax, x, y, w=0.7):
+    ax.plot([x, x], [y, y - 0.3], color='k', lw=1.0, zorder=10)
+    for k in range(3):
+        ww = w * (1.0 - 0.38 * k)
+        yy = y - 0.3 - k * 0.13
+        ax.plot([x - ww / 2, x + ww / 2], [yy, yy], color='k', lw=1.0,
+                zorder=10)
+
+
+XS = [0.4 + i * 1.5 for i in range(6)]     # strip origins, width 0.8
+labels = ['dummy', '$R_1$', '$R_2$', '$R_3$', '$R_4$', 'dummy']
+
+for x, t in zip(XS, labels):
+    lg.rect(ax, 'PC', x, 0, 0.8, 4.8)
+    ax.text(x + 0.4, 5.4, t, fontsize=9, ha='center')
+lg.rect(ax, 'OP', 0.2, 1.5, 8.7, 1.8)      # silicide block, common to all
+
+# contacts on every strip, metal pads on the four matched resistors
+for x in XS:
+    lg.contacts(ax, x + 0.21, 0.25, 1, 2, pitch=0.62, size=0.38)
+    lg.contacts(ax, x + 0.21, 3.55, 1, 2, pitch=0.62, size=0.38)
+for x in XS[1:5]:
+    lg.rect(ax, 'M1', x - 0.05, 0.15, 0.9, 1.2)
+    lg.rect(ax, 'M1', x - 0.05, 3.45, 0.9, 1.2)
+
+# ground net: both dummies are shorted end to end and tied to a common bus,
+# all of it one piece of metal and hence a single merged polygon
+lg.poly(ax, 'M1', [
+    (0.35, -1.1), (8.75, -1.1),                                 # bus
+    (8.75, 1.35), (8.50, 1.35), (8.50, 3.45), (8.75, 3.45),     # right dummy
+    (8.75, 4.65), (7.85, 4.65), (7.85, 3.45), (8.10, 3.45),
+    (8.10, 1.35), (7.85, 1.35), (7.85, -0.80),
+    (1.25, -0.80), (1.25, 1.35), (1.00, 1.35), (1.00, 3.45),    # left dummy
+    (1.25, 3.45), (1.25, 4.65), (0.35, 4.65), (0.35, 3.45),
+    (0.60, 3.45), (0.60, 1.35), (0.35, 1.35)])
+gnd_symbol(ax, 4.55, -1.1)
+ax.text(4.55, -1.95, 'dummy resistors tied to ground', fontsize=8,
+        ha='center')
+
+lg.legend(ax, ['PC', 'OP', 'CA', 'M1'], loc='upper right')
+lg.finish(ax, (-0.5, 11.5), (-2.2, 5.9))
+plt.tight_layout()
+plt.show()
+```

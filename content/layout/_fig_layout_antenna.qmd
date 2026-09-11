@@ -1,0 +1,86 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-layout-antenna
+#| echo: false
+#| fig-cap: "The antenna effect and its fixes (cross sections): (a) a long `M1` wire connected to a gate collects charge during plasma etching and can destroy the gate oxide; (b) breaking the `M1` wire and bridging with `M2` limits the charge collected while `M1` is etched; (c) an antenna diode drains the collected charge harmlessly into the substrate."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, Polygon
+
+C = dict(sub='#f5e9d0', ox='#c7dff2', poly='#3e9c5c', metal='#8f8f8f',
+         m2='#5e5e5e', nplus='#4a7fb5')
+
+def base(ax, title):
+    ax.add_patch(Rectangle((0, 0), 12, 1.5, fc=C['sub'], ec='k', lw=0.8))
+    # gate stack
+    ax.add_patch(Rectangle((1.0, 1.5), 1.0, 0.12, fc=C['ox'], ec='k',
+                           lw=0.4))
+    ax.add_patch(Rectangle((1.0, 1.62), 1.0, 0.4, fc=C['poly'], ec='k',
+                           lw=0.5))
+    ax.text(1.5, 0.75, 'MOSFET\ngate', ha='center', fontsize=7)
+    # contact to M1
+    ax.add_patch(Rectangle((1.4, 2.02), 0.25, 0.5, fc=C['metal'], ec='k',
+                           lw=0.4))
+    ax.set_title(title, fontsize=9, loc='left')
+    ax.set_xlim(-0.2, 12.2)
+    ax.set_ylim(-0.2, 4.6)
+    ax.set_aspect('equal')
+    ax.axis('off')
+
+fig, axs = plt.subplots(3, 1, figsize=(7, 6.2))
+
+# (a) violation
+ax = axs[0]
+base(ax, '(a) antenna violation: large metal area tied to the gate')
+ax.add_patch(Rectangle((1.0, 2.52), 10.5, 0.4, fc=C['metal'], ec='k',
+                       lw=0.6))
+ax.text(6.5, 3.6, 'charge collected during plasma etching',
+        fontsize=8, ha='center', color='#8000c0')
+for x in [4, 6, 8, 10]:
+    ax.text(x, 3.15, '+', fontsize=10, color='#8000c0', ha='center')
+
+# (b) M2 bridge
+ax = axs[1]
+base(ax, '(b) fix: break M1 and bridge with M2')
+ax.add_patch(Rectangle((1.0, 2.52), 1.6, 0.4, fc=C['metal'], ec='k',
+                       lw=0.6))
+ax.add_patch(Rectangle((3.4, 2.52), 8.1, 0.4, fc=C['metal'], ec='k',
+                       lw=0.6))
+# vias and M2 bridge
+ax.add_patch(Rectangle((2.2, 2.92), 0.25, 0.5, fc=C['m2'], ec='k', lw=0.4))
+ax.add_patch(Rectangle((3.6, 2.92), 0.25, 0.5, fc=C['m2'], ec='k', lw=0.4))
+ax.add_patch(Rectangle((2.0, 3.42), 2.1, 0.4, fc=C['m2'], ec='k', lw=0.6))
+ax.text(3.05, 4.1, 'M2 bridge', fontsize=8, ha='center')
+
+# (c) antenna diode
+ax = axs[2]
+base(ax, '(c) fix: antenna diode drains the charge')
+ax.add_patch(Rectangle((1.0, 2.52), 10.5, 0.4, fc=C['metal'], ec='k',
+                       lw=0.6))
+# diode: n+ diffusion connected to the wire
+ax.add_patch(Rectangle((9.4, 1.1), 1.2, 0.4, fc=C['nplus'], ec='k',
+                       lw=0.5))
+ax.text(10.0, 1.3, '$n^+$', ha='center', va='center', fontsize=7,
+        color='white')
+ax.add_patch(Rectangle((9.85, 1.5), 0.25, 1.02, fc=C['metal'], ec='k',
+                       lw=0.4))
+ax.text(10.9, 1.7, 'antenna\ndiode', fontsize=8)
+
+plt.tight_layout()
+plt.show()
+```
