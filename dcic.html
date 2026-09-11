@@ -443,6 +443,34 @@ window.Quarto = {
   <li><a href="#sec-technology-ihp" id="toc-sec-technology-ihp" class="nav-link" data-scroll-target="#sec-technology-ihp"><span class="header-section-number">3.9</span> The Open-Source PDK IHP SG13</a></li>
   <li><a href="#sec-technology-qualification" id="toc-sec-technology-qualification" class="nav-link" data-scroll-target="#sec-technology-qualification"><span class="header-section-number">3.10</span> Technology Qualification</a></li>
   </ul></li>
+  <li><a href="#sec-layout" id="toc-sec-layout" class="nav-link" data-scroll-target="#sec-layout"><span class="header-section-number">4</span> The Layout</a>
+  <ul class="collapse">
+  <li><a href="#sec-layout-tapeout" id="toc-sec-layout-tapeout" class="nav-link" data-scroll-target="#sec-layout-tapeout"><span class="header-section-number">4.1</span> Files and Tapeout</a></li>
+  <li><a href="#sec-layout-layers" id="toc-sec-layout-layers" class="nav-link" data-scroll-target="#sec-layout-layers"><span class="header-section-number">4.2</span> Generic Layer Definition</a></li>
+  <li><a href="#sec-layout-devices" id="toc-sec-layout-devices" class="nav-link" data-scroll-target="#sec-layout-devices"><span class="header-section-number">4.3</span> Devices</a>
+  <ul class="collapse">
+  <li><a href="#nmos-and-pmos-transistors" id="toc-nmos-and-pmos-transistors" class="nav-link" data-scroll-target="#nmos-and-pmos-transistors"><span class="header-section-number">4.3.1</span> NMOS and PMOS Transistors</a></li>
+  <li><a href="#polysilicon-resistor" id="toc-polysilicon-resistor" class="nav-link" data-scroll-target="#polysilicon-resistor"><span class="header-section-number">4.3.2</span> Polysilicon Resistor</a></li>
+  <li><a href="#diffusion-resistor" id="toc-diffusion-resistor" class="nav-link" data-scroll-target="#diffusion-resistor"><span class="header-section-number">4.3.3</span> Diffusion Resistor</a></li>
+  <li><a href="#capacitors" id="toc-capacitors" class="nav-link" data-scroll-target="#capacitors"><span class="header-section-number">4.3.4</span> Capacitors</a></li>
+  <li><a href="#diodes" id="toc-diodes" class="nav-link" data-scroll-target="#diodes"><span class="header-section-number">4.3.5</span> Diodes</a></li>
+  <li><a href="#bipolar-junction-transistors" id="toc-bipolar-junction-transistors" class="nav-link" data-scroll-target="#bipolar-junction-transistors"><span class="header-section-number">4.3.6</span> Bipolar Junction Transistors</a></li>
+  </ul></li>
+  <li><a href="#sec-layout-drc" id="toc-sec-layout-drc" class="nav-link" data-scroll-target="#sec-layout-drc"><span class="header-section-number">4.4</span> Design Rules</a>
+  <ul class="collapse">
+  <li><a href="#density-rules" id="toc-density-rules" class="nav-link" data-scroll-target="#density-rules"><span class="header-section-number">4.4.1</span> Density Rules</a></li>
+  <li><a href="#antenna-rules" id="toc-antenna-rules" class="nav-link" data-scroll-target="#antenna-rules"><span class="header-section-number">4.4.2</span> Antenna Rules</a></li>
+  </ul></li>
+  <li><a href="#sec-layout-analog" id="toc-sec-layout-analog" class="nav-link" data-scroll-target="#sec-layout-analog"><span class="header-section-number">4.5</span> Analog Layout Techniques</a>
+  <ul class="collapse">
+  <li><a href="#multi-finger-transistors" id="toc-multi-finger-transistors" class="nav-link" data-scroll-target="#multi-finger-transistors"><span class="header-section-number">4.5.1</span> Multi-Finger Transistors</a></li>
+  <li><a href="#matching" id="toc-matching" class="nav-link" data-scroll-target="#matching"><span class="header-section-number">4.5.2</span> Matching</a></li>
+  <li><a href="#floor-planning" id="toc-floor-planning" class="nav-link" data-scroll-target="#floor-planning"><span class="header-section-number">4.5.3</span> Floor Planning</a></li>
+  </ul></li>
+  <li><a href="#sec-layout-additional" id="toc-sec-layout-additional" class="nav-link" data-scroll-target="#sec-layout-additional"><span class="header-section-number">4.6</span> Additional Layout and Mask Structures</a></li>
+  <li><a href="#sec-layout-checks" id="toc-sec-layout-checks" class="nav-link" data-scroll-target="#sec-layout-checks"><span class="header-section-number">4.7</span> Layout Checks</a></li>
+  <li><a href="#sec-layout-extraction" id="toc-sec-layout-extraction" class="nav-link" data-scroll-target="#sec-layout-extraction"><span class="header-section-number">4.8</span> Layout Extraction</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dcic.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -1116,7 +1144,7 @@ R_\mathrm{G} = \left( \frac{1}{3} R_\square \frac{W}{2 \cdot L} \right) \paralle
 <p><span id="eq-mosfet-gate-res-fingers"><span class="math display">\[
 R_\mathrm{G,eff} = \frac{R'_\mathrm{G}}{m} = \frac{\frac{1}{3} R_\square \frac{W}{m \cdot L}}{m} = \frac{1}{m^2} R_\mathrm{G}
 \tag{32}\]</span></span></p>
-<p>A typical analog/RF layout therefore splits a wide transistor into several fingers of limited length (a few µm), uses double-sided gate contacts, and surrounds the device with a closed well-contact ring; the multi-finger layout technique is discussed in detail in <strong>?@sec-layout-analog</strong>.</p>
+<p>A typical analog/RF layout therefore splits a wide transistor into several fingers of limited length (a few µm), uses double-sided gate contacts, and surrounds the device with a closed well-contact ring; the multi-finger layout technique is discussed in detail in <a href="#sec-layout-analog" class="quarto-xref">Section&nbsp;4.5</a>.</p>
 </section>
 <section id="sec-mosfet-ssm" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="sec-mosfet-ssm"><span class="header-section-number">2.5</span> MOSFET Small-Signal Model</h2>
@@ -2246,6 +2274,493 @@ Table&nbsp;7: Typical technology qualification tests
 <p><strong>Latch-up</strong> targets the parasitic thyristor that is inherent to every CMOS well structure: the source of a PMOS, the n-well, the p-substrate, and the source of a neighboring NMOS form a PNPN structure, equivalent to a pair of cross-coupled parasitic bipolar transistors. If enough current is injected into a well—by an I/O pin driven beyond a supply rail, or by a supply overshoot—the structure latches into a low-impedance state that shorts supply to ground and persists until the power is removed, usually destroying the chip. JESD78 therefore injects ±100 mA into the I/O pins and applies an overvoltage to the supplies, at the maximum operating temperature. The countermeasures are all layout measures: a generous number of well and substrate taps, which is why the flow above places one next to each transistor (<a href="#fig-process-implants" class="quarto-xref">Figure&nbsp;37</a>), guard rings around injecting circuits, and minimum-spacing rules between NMOS and PMOS.</p>
 <p><strong>Electrical test (ED)</strong> is not a stress test. It assesses the electrical parameters of devices from the manufacturing and test process being qualified, verifying that they meet every datasheet parameter across the specified supply-voltage and temperature range, and that they do so consistently across several production lots. This is what catches a systematic process shift that leaves the technology inside its own control limits, but the product outside its specification.</p>
 <p>A complete qualification also covers the package rather than the silicon, with temperature cycling, highly accelerated stress testing (HAST) for moisture resistance, and solder-reflow sensitivity.</p>
+</section>
+</section>
+<section id="sec-layout" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> The Layout</h1>
+<p>The <a href="https://en.wikipedia.org/wiki/Integrated_circuit_layout"><strong>layout</strong></a> is the 2D representation of the IC manufacturing data. While the schematic captures the electrical intent of a design, the layout captures its physical realization: in the layout tools, the design is drawn on several <strong>layers</strong>, which are the foundation for the generation of the photomasks used in IC production. Commercial layout tools are, e.g., Cadence Virtuoso, Siemens L-Edit, and open-source tools are Magic and KLayout. The layers are usually manipulated before the geometries are transferred to the masks (shrink, enlarge, invert, combination of several layers into one mask layer, optical proximity correction, etc.).</p>
+<section id="sec-layout-tapeout" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-layout-tapeout"><span class="header-section-number">4.1</span> Files and Tapeout</h2>
+<p>The layout is checked for compliance with the wafer-fab design rules in the <a href="https://en.wikipedia.org/wiki/Design_rule_checking"><strong>design rule check (DRC)</strong></a>, and for conformance with the intended circuit in the <a href="https://en.wikipedia.org/wiki/Layout_versus_schematic"><strong>layout-versus-schematic (LVS)</strong></a> check, where a <a href="https://en.wikipedia.org/wiki/Netlist">netlist</a> extracted from the layout is compared to the netlist of the original schematic. If all checks pass, the layout data is sent to mask production—this step is called <a href="https://en.wikipedia.org/wiki/Tape-out"><strong>tapeout</strong></a>. The mask house processes the layout data and produces the photomasks used by the wafer fab (depending on technology complexity, between 10 and 80 masks).</p>
+<p>The standard file format for layout data is <a href="https://en.wikipedia.org/wiki/GDSII"><strong>GDSII</strong></a>, a hierarchical database in a binary stream format. A newer format with more efficient storage is <strong>OASIS</strong>, but GDSII is still very common.</p>
+</section>
+<section id="sec-layout-layers" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sec-layout-layers"><span class="header-section-number">4.2</span> Generic Layer Definition</h2>
+<p>Different foundries use different layer names. The layer names defined in <a href="#tbl-layers" class="quarto-xref">Table&nbsp;8</a> are quite typical for a basic CMOS process technology and are used for the remainder of the text; the corresponding IHP SG13 names are given for reference.</p>
+<div id="tbl-layers" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8: Generic layer definition used in this text
+</figcaption>
+<div aria-describedby="tbl-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 32%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Layer name</th>
+<th style="text-align: left;">IHP SG13</th>
+<th style="text-align: left;">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>RX</code></td>
+<td style="text-align: left;"><code>Activ</code></td>
+<td style="text-align: left;"><span class="math inline">\(n^+\)</span> (<code>RX</code>) or <span class="math inline">\(p^+\)</span> (<code>RX</code> in <code>BP</code>) diffusion regions (e.g., S/D of MOSFETs)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>PC</code></td>
+<td style="text-align: left;"><code>GatPoly</code></td>
+<td style="text-align: left;">Polysilicon gate</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>NW</code></td>
+<td style="text-align: left;"><code>NWell</code></td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span>-well region</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>BP</code></td>
+<td style="text-align: left;"><code>pSD</code></td>
+<td style="text-align: left;"><span class="math inline">\(p\)</span>-implant marker (i.e., blocks the <span class="math inline">\(n\)</span>-implant)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>OP</code></td>
+<td style="text-align: left;"><code>SalBlock</code></td>
+<td style="text-align: left;">Silicide blocking over <code>PC</code> and <code>RX</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>CA</code></td>
+<td style="text-align: left;"><code>Cont</code></td>
+<td style="text-align: left;">Contact (connects <code>RX</code> or <code>PC</code> to <code>M1</code>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>M1</code></td>
+<td style="text-align: left;"><code>Metal1</code></td>
+<td style="text-align: left;">First-level metal</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>V1</code></td>
+<td style="text-align: left;"><code>Via1</code></td>
+<td style="text-align: left;">Via connecting <code>M1</code> to <code>M2</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>M2</code></td>
+<td style="text-align: left;"><code>Metal2</code></td>
+<td style="text-align: left;">Second-level metal</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>V2</code></td>
+<td style="text-align: left;"><code>Via2</code></td>
+<td style="text-align: left;">Via connecting <code>M2</code> to <code>M3</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>M3</code></td>
+<td style="text-align: left;"><code>Metal3</code></td>
+<td style="text-align: left;">Top metal, mostly aluminum, to facilitate wire-bond packages</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>PAD</code></td>
+<td style="text-align: left;"><code>Passiv</code></td>
+<td style="text-align: left;">Opening in the passivation to contact the top metal for pads</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="sec-layout-devices" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-layout-devices"><span class="header-section-number">4.3</span> Devices</h2>
+<section id="nmos-and-pmos-transistors" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="nmos-and-pmos-transistors"><span class="header-section-number">4.3.1</span> NMOS and PMOS Transistors</h3>
+<p><a href="#fig-layout-mosfets" class="quarto-xref">Figure&nbsp;41</a> shows the layout (mask top view) of an NMOS and a PMOS transistor. The following observations can be made:</p>
+<ul>
+<li>The MOSFET is created by the intersection of <code>RX</code> and <code>PC</code>; this intersection defines <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of the transistor. The areas of <code>RX</code> not covered by <code>PC</code> become the source and drain regions.</li>
+<li>Whether a device is NMOS or PMOS is decided by whether the <code>RX</code> shape is contained inside a <code>BP</code> region (<code>RX</code> plus <code>BP</code> is <span class="math inline">\(p^+\)</span>, <code>RX</code> without <code>BP</code> is <span class="math inline">\(n^+\)</span>).</li>
+<li>A <span class="math inline">\(p^+\)</span> substrate contact is created by drawing <code>RX</code> covered by <code>BP</code> (outside the n-well).</li>
+<li>An <span class="math inline">\(n^+\)</span> well contact is created by drawing plain <code>RX</code> located inside <code>NW</code>.</li>
+<li>The <code>NW</code> must surround the PMOS with sufficient margin.</li>
+<li>The layer <code>BP</code> is a pure marking layer, assisting mask generation and device extraction from the layout.</li>
+<li><code>CA</code> contacts connect source/drain/gate as well as the <span class="math inline">\(p^+\)</span>/<span class="math inline">\(n^+\)</span> contacts to <code>M1</code>.</li>
+</ul>
+<div id="cell-fig-layout-mosfets" class="cell" data-execution_count="40">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-mosfets" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-mosfets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-mosfets-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-41" title="Figure&nbsp;41: Layout (mask top view) of an NMOS (left) and a PMOS transistor (right). The transistor channel is formed where PC crosses RX; the BP marker turns the diffusion p^+, and the NW well surrounds the PMOS. The area where PC overlaps RX is the actual transistor channel, defining its W and L. Next to each transistor sits the corresponding substrate or well contact. Note that BP acts as a marking layer, whereas RX, PC, and NW define the actual device regions on the silicon."><img src="dcic_files/figure-html/fig-layout-mosfets-output-1.png" width="758" height="340" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-mosfets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;41: Layout (mask top view) of an NMOS (left) and a PMOS transistor (right). The transistor channel is formed where <code>PC</code> crosses <code>RX</code>; the <code>BP</code> marker turns the diffusion <span class="math inline">\(p^+\)</span>, and the <code>NW</code> well surrounds the PMOS. The area where <code>PC</code> overlaps <code>RX</code> is the actual transistor channel, defining its <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>. Next to each transistor sits the corresponding substrate or well contact. Note that <code>BP</code> acts as a marking layer, whereas <code>RX</code>, <code>PC</code>, and <code>NW</code> define the actual device regions on the silicon.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="polysilicon-resistor" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="polysilicon-resistor"><span class="header-section-number">4.3.2</span> Polysilicon Resistor</h3>
+<p>The polysilicon resistor (<a href="#fig-layout-poly-resistor" class="quarto-xref">Figure&nbsp;42</a>) uses the gate material (<code>PC</code>) as a resistive device. Since the gate poly is normally covered by silicide to lower its resistance, the silicide is suppressed with an <code>OP</code> shape; the intersection of <code>OP</code> with <code>PC</code> precisely defines the <span class="math inline">\(L\)</span> and <span class="math inline">\(W\)</span> of the resistor. Note that the existence of <code>OP</code> is a process option and might not be available in every technology. The gate polysilicon can be either <span class="math inline">\(p\)</span>- or <span class="math inline">\(n\)</span>-type; <span class="math inline">\(p\)</span>-type poly resistors are often preferred, as they offer a lower temperature coefficient (thus the <code>PC</code> is marked with <code>BP</code>).</p>
+<p>The resistance value of the polysilicon resistor is given by (<span class="math inline">\(R_\square\)</span> is the sheet resistance in Ω/<span class="math inline">\(\square\)</span>)</p>
+<p><span id="eq-layout-resistor"><span class="math display">\[
+R = \rho \frac{L}{t \cdot W} = R_\square \frac{L}{W}
+\tag{48}\]</span></span></p>
+<div id="cell-fig-layout-poly-resistor" class="cell" data-execution_count="41">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-poly-resistor" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-poly-resistor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-poly-resistor-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-42" title="Figure&nbsp;42: Layout of a polysilicon resistor: the silicide on the PC strip is blocked by the OP shape, whose intersection with PC defines the resistor body of length L and width W; the BP marker selects p-type poly. The silicided ends are contacted with CA and M1."><img src="dcic_files/figure-html/fig-layout-poly-resistor-output-1.png" width="662" height="232" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-poly-resistor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;42: Layout of a polysilicon resistor: the silicide on the <code>PC</code> strip is blocked by the <code>OP</code> shape, whose intersection with <code>PC</code> defines the resistor body of length <span class="math inline">\(L\)</span> and width <span class="math inline">\(W\)</span>; the <code>BP</code> marker selects <span class="math inline">\(p\)</span>-type poly. The silicided ends are contacted with <code>CA</code> and <code>M1</code>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that modern FinFET technologies might not support traditional planar polysilicon resistors, as the gate material is used to form the fins rather than a continuous sheet. In this case, often a metal resistor implemented in the back-end layers is used as an alternative.</p>
+</section>
+<section id="diffusion-resistor" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="diffusion-resistor"><span class="header-section-number">4.3.3</span> Diffusion Resistor</h3>
+<p>Diffusion resistors (<a href="#fig-layout-diff-resistor" class="quarto-xref">Figure&nbsp;43</a>) use source/drain diffusions or wells (with or without silicide) and are available in basically all silicon technologies, but they are usually inferior to polysilicon resistors: they have larger tolerances and a relatively high voltage coefficient, which can cause nonlinearity, and the nonlinear parasitic junction capacitance to the substrate can be critical as well. In older technology nodes (&gt; 0.25 µm), the matching of diffusion resistors was better than that of poly resistors. One clear advantage of diffusion resistors is reduced self-heating, as the resistor body is embedded in the silicon substrate, whereas poly resistors are isolated from the substrate by SiO<sub>2</sub>. So resistor with increased power dissipation can benefit from this property.</p>
+<div id="cell-fig-layout-diff-resistor" class="cell" data-execution_count="42">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-diff-resistor" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-diff-resistor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-diff-resistor-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-43" title="Figure&nbsp;43: Layout of a diffusion (n-well) resistor: the resistive body is the NW strip, contacted at both ends by n^+ diffusions (RX); the OP shape blocks the silicide over the body. The parasitic junction to the substrate makes this resistor nonlinear with the applied voltage."><img src="dcic_files/figure-html/fig-layout-diff-resistor-output-1.png" width="662" height="227" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-diff-resistor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;43: Layout of a diffusion (n-well) resistor: the resistive body is the <code>NW</code> strip, contacted at both ends by <span class="math inline">\(n^+\)</span> diffusions (<code>RX</code>); the <code>OP</code> shape blocks the silicide over the body. The parasitic junction to the substrate makes this resistor nonlinear with the applied voltage.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The resistor types available in IHP SG13 are summarized in <a href="#tbl-ihp-resistors" class="quarto-xref">Table&nbsp;9</a>.</p>
+<div id="tbl-ihp-resistors" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ihp-resistors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9: Resistor types available in IHP SG13
+</figcaption>
+<div aria-describedby="tbl-ihp-resistors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Type</th>
+<th style="text-align: center;"><span class="math inline">\(R_\square\)</span> (Ω/<span class="math inline">\(\square\)</span>)</th>
+<th style="text-align: center;">Process tolerance (<span class="math inline">\(\pm 4 \sigma\)</span>)</th>
+<th style="text-align: center;">Matching</th>
+<th style="text-align: center;">Temp. coefficient</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Silicided <span class="math inline">\(n^{++}\)</span>-poly (<code>rsil</code>)</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">±12 %</td>
+<td style="text-align: center;">0.6 %µm</td>
+<td style="text-align: center;">0.3 %/K</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Blocked <span class="math inline">\(p^+\)</span>-poly (<code>rppd</code>)</td>
+<td style="text-align: center;">260</td>
+<td style="text-align: center;">±10 %</td>
+<td style="text-align: center;">1.5 %µm</td>
+<td style="text-align: center;">0.017 %/K</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Blocked compensated poly (<code>rhigh</code>)</td>
+<td style="text-align: center;">1360</td>
+<td style="text-align: center;">±15 %</td>
+<td style="text-align: center;">4.8 %µm</td>
+<td style="text-align: center;">−0.23 %/K</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="capacitors" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="capacitors"><span class="header-section-number">4.3.4</span> Capacitors</h3>
+<p>Linear capacitors can be implemented using the metal stack, either as <strong>vertical sandwich capacitors</strong> (parallel plates on adjacent metal layers) or as <strong>finger capacitors</strong> (exploiting the lateral coupling between interdigitated fingers on the same layers); both are shown in <a href="#fig-layout-mom-cap" class="quarto-xref">Figure&nbsp;44</a>. Depending on the design rules, the vertical or the lateral coupling capacitance might be more area-effective; such metal-oxide-metal (MOM) capacitors come for free in any technology. Due to the very tight lateral pitch is nm CMOS technologies, finger capacitors are often preferred for capacitor implementation (when a linear capacitor is required).</p>
+<div id="cell-fig-layout-mom-cap" class="cell" data-execution_count="43">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-mom-cap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-mom-cap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-mom-cap-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-44" title="Figure&nbsp;44: Metal-oxide-metal (MOM) capacitors: (a) vertical sandwich capacitor (cross section) using the plate capacitance between stacked metal layers, with alternating layers connected to the two terminals by via stacks; (b) finger capacitor (top view) using the lateral coupling capacitance between interdigitated fingers drawn in a single metal layer."><img src="dcic_files/figure-html/fig-layout-mom-cap-output-1.png" width="758" height="322" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-mom-cap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;44: Metal-oxide-metal (MOM) capacitors: (a) vertical sandwich capacitor (cross section) using the plate capacitance between stacked metal layers, with alternating layers connected to the two terminals by via stacks; (b) finger capacitor (top view) using the lateral coupling capacitance between interdigitated fingers drawn in a single metal layer.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A few additional considerations for capacitors:</p>
+<ul>
+<li>The density of MOM capacitors scales with smaller design rules and the number of metal layers. The lower metal layers should be skipped if the parasitic capacitance to the substrate is a concern.</li>
+<li>The process may offer a specialized <strong>metal-insulator-metal (MIM)</strong> capacitor (density on the order of fF/µm²) using extra masks and processing steps, offering higher specific capacitance and low parasitics at extra cost.</li>
+<li>For high capacitance density, or where nonlinearity is not critical, the <strong>MOSFET gate capacitance</strong> can be used, as the gate oxide is tightly controlled in manufacturing.</li>
+<li>In IHP SG13, a MIM capacitor between <code>Metal5</code> and <code>TopMetal1</code> is available (ca. 1.5 fF/µm²); the MOM finger capacitor has ca. 0.3 fF/µm², so when using 4 metal layers the effective capacitance is comparable to the MIM capacitor.</li>
+</ul>
+</section>
+<section id="diodes" class="level3" data-number="4.3.5">
+<h3 data-number="4.3.5" class="anchored" data-anchor-id="diodes"><span class="header-section-number">4.3.5</span> Diodes</h3>
+<p>Diodes are formed by the available pn-junctions (<span class="math inline">\(n^+\)</span> in substrate, <span class="math inline">\(p^+\)</span> in n-well, n-well in substrate). They are intended mainly for reverse-biased operation, as the forward operation is usually not modeled accurately and should be avoided. Note that forward operation might inject charge into parasitic structures and cause latch-up (see <strong>?@sec-latchup</strong>)! Applications of reverse-biased diodes include ESD protection structures, antenna diodes, and varactors.</p>
+</section>
+<section id="bipolar-junction-transistors" class="level3" data-number="4.3.6">
+<h3 data-number="4.3.6" class="anchored" data-anchor-id="bipolar-junction-transistors"><span class="header-section-number">4.3.6</span> Bipolar Junction Transistors</h3>
+<p>High-performance BJTs are available in bipolar and BiCMOS technologies, but at increased wafer cost compared to pure CMOS. In standard CMOS, a parasitic <strong>vertical substrate PNP</strong> can be implemented (<a href="#fig-layout-vpnp" class="quarto-xref">Figure&nbsp;45</a>): the <span class="math inline">\(p^+\)</span> diffusion in the n-well forms the emitter, the n-well the base, and the common <span class="math inline">\(p\)</span>-substrate the collector. The performance is limited (<span class="math inline">\(\beta \approx 1 \ldots 10\)</span>), and the collector is tied to the substrate potential. Such a structure is mainly used in bandgap reference circuits where collector and base are shorted to <span class="math inline">\(V_\mathrm{SS}\)</span> (ground), and the foundry usually supplies a fixed layout template that shall not be modified.</p>
+<div id="cell-fig-layout-vpnp" class="cell" data-execution_count="44">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-vpnp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-vpnp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-vpnp-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-45" title="Figure&nbsp;45: Cross section of the vertical substrate PNP available in any CMOS technology: the p^+ diffusion in the n-well is the emitter, the n-well is the base, and the common p-substrate is the collector (contacted at the surface and tied to V_\mathrm{SS})."><img src="dcic_files/figure-html/fig-layout-vpnp-output-1.png" width="662" height="273" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-vpnp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;45: Cross section of the vertical substrate PNP available in any CMOS technology: the <span class="math inline">\(p^+\)</span> diffusion in the n-well is the emitter, the n-well is the base, and the common <span class="math inline">\(p\)</span>-substrate is the collector (contacted at the surface and tied to <span class="math inline">\(V_\mathrm{SS}\)</span>).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-layout-drc" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-layout-drc"><span class="header-section-number">4.4</span> Design Rules</h2>
+<p>The <strong>design rules (DRs)</strong> are the interface between the mask designer (layout engineer) and the foundry. Complying with the layout design rules ensures manufacturability with a high yield:</p>
+<ul>
+<li>The design rules are provided as a specification document and as a run set for layout verification tools (e.g., KLayout, Magic, Cadence Pegasus, or Siemens Calibre).</li>
+<li>The rules are either given in relative dimensions (“lambda rules”) for easy scaling, or in absolute dimensions (“micron rules”).</li>
+<li>Modern CMOS technologies typically involve several hundred to thousands of layout design rules.</li>
+<li>Consider the relatively large spacing rule between <code>RX</code> and <code>NW</code>: it pays off to <strong>group PMOS and NMOS transistors</strong> together, respectively!</li>
+</ul>
+<p>The four basic geometric rule types—minimum width, minimum spacing, minimum enclosure, and minimum extension—are illustrated in <a href="#fig-layout-drc" class="quarto-xref">Figure&nbsp;46</a>.</p>
+<div id="cell-fig-layout-drc" class="cell" data-execution_count="45">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-drc" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-drc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-drc-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-46" title="Figure&nbsp;46: The four basic geometric design-rule types: (a) minimum width of a shape, (b) minimum spacing between shapes, (c) minimum enclosure of one shape by another (e.g., RX in NW), and (d) minimum extension of one shape beyond another (e.g., the poly endcap over RX)."><img src="dcic_files/figure-html/fig-layout-drc-output-1.png" width="271" height="1142" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-drc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;46: The four basic geometric design-rule types: (a) minimum width of a shape, (b) minimum spacing between shapes, (c) minimum enclosure of one shape by another (e.g., <code>RX</code> in <code>NW</code>), and (d) minimum extension of one shape beyond another (e.g., the poly endcap over <code>RX</code>).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="density-rules" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="density-rules"><span class="header-section-number">4.4.1</span> Density Rules</h3>
+<p>Density rules require a minimum and a maximum layer density within a specified area; this is needed to avoid over-polishing during CMP and to achieve uniform etch rates. For example, <code>M1</code> might require 30 % minimum and 70 % maximum fill in any 1 mm × 1 mm window. For digital chips, density rules are satisfied automatically by fill programs. For analog chips, layout engineers have to add dummy structures manually (effort!) or with a fill program after the layout is finished; note that fill structures can cause asymmetries or reduced quality factor in inductors. Metal fill can also be put to good use as a ground plane.</p>
+</section>
+<section id="antenna-rules" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="antenna-rules"><span class="header-section-number">4.4.2</span> Antenna Rules</h3>
+<p>If a metal interconnect with a large area is tied to the small gate of a MOSFET, the metal area acts as an “antenna” during plasma etching: it collects ions and can rise to a high potential, and the gate oxide may break down! The remedies, shown in <a href="#fig-layout-antenna" class="quarto-xref">Figure&nbsp;47</a>, are either a <strong>discontinuity</strong> in the charge-collecting metal (routing briefly through a higher metal layer, which is patterned only after the lower layer has been etched) or an <strong>antenna diode</strong> connected to the gate node (the processing is done at high temperatures, where the diode is quite conductive in either polarity, harmlessly draining the collected charge).</p>
+<div id="cell-fig-layout-antenna" class="cell" data-execution_count="46">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-antenna" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-antenna-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-antenna-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-47" title="Figure&nbsp;47: The antenna effect and its fixes (cross sections): (a) a long M1 wire connected to a gate collects charge during plasma etching and can destroy the gate oxide; (b) breaking the M1 wire and bridging with M2 limits the charge collected while M1 is etched; (c) an antenna diode drains the collected charge harmlessly into the substrate."><img src="dcic_files/figure-html/fig-layout-antenna-output-1.png" width="436" height="585" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-antenna-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;47: The antenna effect and its fixes (cross sections): (a) a long <code>M1</code> wire connected to a gate collects charge during plasma etching and can destroy the gate oxide; (b) breaking the <code>M1</code> wire and bridging with <code>M2</code> limits the charge collected while <code>M1</code> is etched; (c) an antenna diode drains the collected charge harmlessly into the substrate.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The complete layout rules of the open-source IHP SG13 PDK can be found in the <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules document</a> and serve as a practical example of a production DRC rule set.</p>
+</section>
+</section>
+<section id="sec-layout-analog" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="sec-layout-analog"><span class="header-section-number">4.5</span> Analog Layout Techniques</h2>
+<p>Analog circuits, unlike digital ICs, do not primarily aim to maximize density, but demand the minimization of effects such as crosstalk, mismatch, and noise. Useful techniques are multi-finger transistors, matching and symmetry, and careful floor planning; further treatments of analog layout can be found in <span class="citation" data-cites="Razavi_AnalogCMOS Allen_Holberg">(<a href="#ref-Razavi_AnalogCMOS" role="doc-biblioref">Razavi 2017</a>; <a href="#ref-Allen_Holberg" role="doc-biblioref">Allen and Holberg 2012</a>)</span>, and an exemplary analog IC design employing these techniques is described in <span class="citation" data-cites="Schmickl_2020">(<a href="#ref-Schmickl_2020" role="doc-biblioref">Schmickl et al. 2020</a>)</span>.</p>
+<section id="multi-finger-transistors" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="multi-finger-transistors"><span class="header-section-number">4.5.1</span> Multi-Finger Transistors</h3>
+<p>A transistor with a large <span class="math inline">\(W\)</span> should be split into multiple parallel devices (“fingers”) to make the layout structure compact, as shown in <a href="#fig-layout-multifinger" class="quarto-xref">Figure&nbsp;48</a>. This splitting also reduces the gate resistance (see <a href="#eq-mosfet-gate-res-fingers" class="quarto-xref">Equation&nbsp;32</a>; for RF, keep the resistance of each gate finger below <span class="math inline">\(1/g_\mathrm{m}\)</span>) and can lower the junction capacitance at the drain or source, since neighboring fingers share their diffusion regions.</p>
+<div id="cell-fig-layout-multifinger" class="cell" data-execution_count="47">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-multifinger" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-multifinger-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-multifinger-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-48" title="Figure&nbsp;48: Multi-finger transistor: instead of a single device with a very large width (left), the transistor is split into four parallel fingers (right), which share their source/drain diffusions. The layout gets compact, the gate resistance drops, and the junction capacitance is reduced."><img src="dcic_files/figure-html/fig-layout-multifinger-output-1.png" width="615" height="393" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-multifinger-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;48: Multi-finger transistor: instead of a single device with a very large width (left), the transistor is split into four parallel fingers (right), which share their source/drain diffusions. The layout gets compact, the gate resistance drops, and the junction capacitance is reduced.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The layout of a cascode circuit (or any series connection of MOSFETs, e.g., in NAND/NOR gates) can be simplified if the stacked devices have equal widths: the drain of the bottom device and the source of the top device can then <strong>share the same diffusion region</strong>, which is small because it needs no contacts, as shown in <a href="#fig-layout-merged-diffusion" class="quarto-xref">Figure&nbsp;49</a>.</p>
+<div id="cell-fig-layout-merged-diffusion" class="cell" data-execution_count="48">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-merged-diffusion" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-merged-diffusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-merged-diffusion-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-49" title="Figure&nbsp;49: Merged diffusion in a series connection of two equally sized MOSFETs (e.g., a cascode): the drain of M_1 and the source of M_2 share the same diffusion region, which can be kept minimal because it carries no contacts—saving area and junction capacitance."><img src="dcic_files/figure-html/fig-layout-merged-diffusion-output-1.png" width="499" height="317" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-merged-diffusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;49: Merged diffusion in a series connection of two equally sized MOSFETs (e.g., a cascode): the drain of <span class="math inline">\(M_1\)</span> and the source of <span class="math inline">\(M_2\)</span> share the same diffusion region, which can be kept minimal because it carries no contacts—saving area and junction capacitance.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="matching" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="matching"><span class="header-section-number">4.5.2</span> Matching</h3>
+<p>Asymmetries lead to mismatch, which introduces input-referred offsets and limits the minimum processable signal level; common-mode and power-supply rejection are degraded as well. Good matching of integrated devices can only be achieved if the following conditions are met:</p>
+<ul>
+<li>The devices are constructed from <strong>identical unit devices</strong>: a MOSFET with width <span class="math inline">\(4W\)</span> matches a transistor with width <span class="math inline">\(2W\)</span> only if both are constructed from unit transistors of equal width (and equal <span class="math inline">\(L\)</span>—remember that <span class="math inline">\(V_\mathrm{th}= f(L)\)</span> due to SCE/RSCE)!</li>
+<li>The devices are oriented in the <strong>same direction</strong>, and the <strong>current flow</strong> in all matched devices has the same direction—avoid mirroring or “snaking”!</li>
+<li>The devices are <strong>surrounded by similar structures</strong>; to achieve this for edge devices, spend <strong>dummy elements</strong> (see <a href="#fig-layout-dummies" class="quarto-xref">Figure&nbsp;50</a>).</li>
+<li>To combat process gradients, place the matched devices on the symmetry line of the gradient (if known), or use <strong>common-centroid</strong> arrangements (see <a href="#fig-layout-common-centroid" class="quarto-xref">Figure&nbsp;52</a>).</li>
+<li>For ac symmetry, consider the wiring of <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>, and make the <strong>wiring parasitics</strong> as symmetrical as possible.</li>
+<li>Consider secondary effects: gate shadowing (implant variation due to topographical differences and tilted implant angle), mechanical stress from shallow-trench isolation, and non-uniform doping due to the <strong>well-proximity effect</strong> (dopants scattering off the well-mask edges cause doping variations, especially impacting PMOS).</li>
+</ul>
+<div id="cell-fig-layout-dummies" class="cell" data-execution_count="49">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-dummies" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-dummies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-dummies-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-50" title="Figure&nbsp;50: Dummy fingers for matching: the two matched transistors M_1 and M_2 are surrounded by unused dummy gate fingers, so that every active finger sees identical neighbors; this equalizes etch loading and STI stress. The dummy gates and the outer dummy diffusions are tied to ground so that they stay off and well defined. M_1 and M_2 share the center source diffusion, i.e., all source regions form one common node, which makes this arrangement directly usable as a differential pair or a current mirror."><img src="dcic_files/figure-html/fig-layout-dummies-output-1.png" width="682" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-dummies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;50: Dummy fingers for matching: the two matched transistors <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are surrounded by unused dummy gate fingers, so that every active finger sees identical neighbors; this equalizes etch loading and STI stress. The dummy gates and the outer dummy diffusions are tied to ground so that they stay off and well defined. <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> share the center source diffusion, i.e., all source regions form one common node, which makes this arrangement directly usable as a differential pair or a current mirror.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The same reasoning applies to passive devices. <a href="#fig-layout-matched-resistors" class="quarto-xref">Figure&nbsp;51</a> shows an array of four matched unit resistors: identical width and length, identical orientation, and a constant pitch, so that <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_4\)</span> at the edges see the same surroundings as <span class="math inline">\(R_2\)</span> and <span class="math inline">\(R_3\)</span> in the middle. Note that the dummy strips are not left floating, but are shorted and tied to ground to keep them at a defined potential.</p>
+<div id="cell-fig-layout-matched-resistors" class="cell" data-execution_count="50">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-matched-resistors" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-matched-resistors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-matched-resistors-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-51" title="Figure&nbsp;51: Array of four matched unit resistors R_1 \ldots R_4: all strips have identical width and length, the same orientation, and the same pitch, and the silicide block OP runs across the whole array so that every resistor body sees the same edge. A dummy strip at each end gives the outer resistors the same neighborhood as the inner ones. The dummies are shorted by metal and tied to ground, so they sit at a defined potential instead of floating."><img src="dcic_files/figure-html/fig-layout-matched-resistors-output-1.png" width="688" height="470" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-matched-resistors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;51: Array of four matched unit resistors <span class="math inline">\(R_1 \ldots R_4\)</span>: all strips have identical width and length, the same orientation, and the same pitch, and the silicide block <code>OP</code> runs across the whole array so that every resistor body sees the same edge. A dummy strip at each end gives the outer resistors the same neighborhood as the inner ones. The dummies are shorted by metal and tied to ground, so they sit at a defined potential instead of floating.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Gradients across a die can be caused by doping and film-thickness variations (well approximated by a linear gradient for devices in proximity), by temperature gradients originating from areas with large power dissipation, and by mechanical stress from packaging or metallization (avoid low-level metal routing over sensitive devices). A common-centroid arrangement cancels linear gradients to first order, as shown in <a href="#fig-layout-common-centroid" class="quarto-xref">Figure&nbsp;52</a>: each component is decomposed into two or more parts that are placed diagonally opposite each other, so that all component centroids coincide.</p>
+<div id="cell-fig-layout-common-centroid" class="cell" data-execution_count="51">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-common-centroid" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-common-centroid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-common-centroid-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-52" title="Figure&nbsp;52: Common-centroid arrangements of two matched devices A and B, each split into two halves: (a) cross-coupled 2×2 arrangement and (b) linear ABBA arrangement. In both cases, the centroids of A and B coincide, so a linear process gradient (illustrated by the color wedge) affects both devices equally."><img src="dcic_files/figure-html/fig-layout-common-centroid-output-1.png" width="578" height="604" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-common-centroid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;52: Common-centroid arrangements of two matched devices A and B, each split into two halves: (a) cross-coupled 2×2 arrangement and (b) linear ABBA arrangement. In both cases, the centroids of A and B coincide, so a linear process gradient (illustrated by the color wedge) affects both devices equally.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The same principle applies to capacitors: <a href="#fig-layout-cap-matching" class="quarto-xref">Figure&nbsp;53</a> shows a matched capacitor pair with a ratio of <span class="math inline">\(C_1 = 8 C_2\)</span>, realized from identical unit capacitors with a common centroid and surrounded by dummy capacitors. If <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> are used, e.g., in a switched-capacitor amplifier, the voltage gain can be precisely set to <span class="math inline">\(A_\mathrm{v} = C_1 / C_2 = 8\)</span>.</p>
+<div id="cell-fig-layout-cap-matching" class="cell" data-execution_count="52">
+<div class="cell-output cell-output-display">
+<div id="fig-layout-cap-matching" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layout-cap-matching-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-layout-cap-matching-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-53" title="Figure&nbsp;53: Precisely matched capacitor pair with C_1 = 8 C_2, built from identical unit capacitors: the single C_2 unit sits at the common centroid of the eight C_1 units, and a ring of grounded dummy capacitors (D) ensures that every active unit sees identical surroundings."><img src="dcic_files/figure-html/fig-layout-cap-matching-output-1.png" width="470" height="470" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layout-cap-matching-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;53: Precisely matched capacitor pair with <span class="math inline">\(C_1 = 8 C_2\)</span>, built from identical unit capacitors: the single <span class="math inline">\(C_2\)</span> unit sits at the common centroid of the eight <span class="math inline">\(C_1\)</span> units, and a ring of grounded dummy capacitors (D) ensures that every active unit sees identical surroundings.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="floor-planning" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="floor-planning"><span class="header-section-number">4.5.3</span> Floor Planning</h3>
+<p>Floor planning is an important task when constructing the overall IC layout. Things to consider are:</p>
+<ul>
+<li>Locations of pins and interfaces; distribution of <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span> pins; isolation of sensitive I/O signals.</li>
+<li>Cell sizes and aspect ratios (allowing an area-efficient placement of the macros).</li>
+<li>Isolation between different circuit blocks (e.g., keep sensitive analog blocks away from noisy digital blocks).</li>
+<li>Power and clock distribution; wiring channels for signal buses.</li>
+<li>The package type used (wire-bond or flip-chip).</li>
+</ul>
+<p>A common mistake: a great job laying out lots of cells, then running out of time, resulting in a big mess when placing and connecting them—<strong>start with a top-down plan!</strong></p>
+</section>
+</section>
+<section id="sec-layout-additional" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="sec-layout-additional"><span class="header-section-number">4.6</span> Additional Layout and Mask Structures</h2>
+<p>In addition to the final chip layout, further structures are placed on the masks (usually by the wafer fab):</p>
+<ul>
+<li><strong>Seal ring:</strong> The seal ring runs along the circumference of the chip and seals the singulated die against moisture and other contamination. It also acts as a crack-stop, protecting the inner die from cracks formed while sawing the wafer into individual dice. Since the seal ring forms a closed metal loop around the chip, crosstalk considerations may suggest connecting it to a dedicated pin.</li>
+<li><strong>Scribe line (kerf):</strong> This is where the chip is cut with a diamond saw or a laser.</li>
+<li><strong>Alignment marks:</strong> Used to align the different masks during processing.</li>
+<li><strong>Critical-dimension structures:</strong> Measured after processing to verify proper polysilicon or metal etching, enabling closed-loop process control.</li>
+<li><strong>Vernier structures (“Nonius”):</strong> Closely spaced parallel lines on two different layers that allow judging the inter-layer alignment.</li>
+<li><strong>Test structures:</strong> Chains of contacts and vias, as well as test transistors, are used to evaluate contact resistance, transistor parameters, and other important process parameters. They are usually placed in the scribe lines or on dedicated <strong>process control monitor (PCM)</strong> test chips; the PCM measurement reports can often be obtained from the foundry.</li>
+</ul>
+</section>
+<section id="sec-layout-checks" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="sec-layout-checks"><span class="header-section-number">4.7</span> Layout Checks</h2>
+<p>Three automated checks safeguard the layout before tapeout:</p>
+<ul>
+<li><strong>DRC (design rule check):</strong> a program/run set that automatically checks the layout data for compliance with the design rules of the wafer fab. All flagged errors must be corrected; otherwise, manufacturing issues can occur.</li>
+<li><strong>LVS (layout versus schematic):</strong> a netlist extracted from the layout data is compared against the schematic netlist, checking connectivity of signals and power as well as device sizes (<span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of transistors, dimensions of <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>). Usually, all flagged errors must be corrected.</li>
+<li><strong>ERC (electrical rule check):</strong> additional checks not covered by DRC or LVS, such as floating MOSFET gates, floating wells, or antenna rules. Sometimes common mistakes (e.g., high-resistance connections) are covered in the ERC run set and checked automatically.</li>
+</ul>
+</section>
+<section id="sec-layout-extraction" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="sec-layout-extraction"><span class="header-section-number">4.8</span> Layout Extraction</h2>
+<p>The layout implementation has a large effect on the performance of the final circuit:</p>
+<ul>
+<li>Wiring adds delays (<span class="math inline">\(R\)</span>, <span class="math inline">\(L\)</span>, <span class="math inline">\(C\)</span>) and coupling (<span class="math inline">\(k\)</span>, <span class="math inline">\(C\)</span>) to the circuits.</li>
+<li><strong>Layout-dependent effects (LDE)</strong>, like well proximity, can only be modeled with information about the actual layout of the devices and their surroundings.</li>
+<li>Substrate effects (like crosstalk) can only be extracted from the actual placement.</li>
+</ul>
+<p>Considering layout effects in simulation is paramount and usually requires iteration between circuit design and layout: circuit design and simulation → layout creation → parasitic extraction → re-simulation → circuit and/or layout refinement → repeat. In the digital flow, wiring delays extracted from the layout are added to the gate-level netlist for timing analysis, and voltage drops in the power network (<span class="math inline">\(V_\mathrm{DD}\)</span>/<span class="math inline">\(V_\mathrm{SS}\)</span> droop and ripple) are extracted and considered as additional timing derating. For analog and high-performance circuits, simulation including layout parasitics is <strong>mandatory</strong> to guarantee the performance and functionality of the fabricated circuit!</p>
+<p>Different levels of extraction realism trade off accuracy against simulation speed:</p>
+<ul>
+<li><strong>C-decoupled:</strong> The parasitic capacitance of each node’s wiring is added as a lumped capacitor to ground. There is almost no impact on simulation speed (no new nodes are introduced), but no crosstalk between nodes is captured. This extraction can be used on fairly large circuits to add a first level of realism.</li>
+<li><strong>C-coupled:</strong> Parasitic capacitances to the substrate <em>and between nodes</em> are added; capacitive crosstalk is modeled, but no inductive effects. Moderate impact on simulation speed (more elements in the circuit matrix).</li>
+<li><strong>RC-extracted:</strong> Parasitic <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span> of the wiring are extracted and added to the netlist, yielding a realistic model of performance and crosstalk without inductive effects. This has a large impact on simulation speed, as many new nodes are introduced; this mode should be used for circuit blocks of moderate complexity.</li>
+<li><strong>RLCK-extracted:</strong> Parasitic <span class="math inline">\(R\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(L\)</span>, and <span class="math inline">\(k\)</span> of the wiring are extracted, resulting in a very accurate simulation including the main crosstalk effects—but the circuit network gets much larger, impacting simulation time and convergence.</li>
+<li><strong>EM simulation:</strong> Highest accuracy; the resulting <span class="math inline">\(S\)</span>-parameters are either used directly in frequency-domain simulations or transformed into equivalent lumped-element circuits. Huge simulation-time impact, but valid to very high frequencies (&gt; 100 GHz); usually only suitable for individual circuit blocks.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Parasitic Extraction with KLayout-PEX">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Parasitic Extraction with KLayout-PEX
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Our open-source parasitic extraction tool <a href="https://github.com/iic-jku/klayout-pex"><strong>KLayout-PEX</strong></a> (invoked as <code>kpex</code>) implements several of these extraction levels for KLayout, using different engines (an analytical 2.5D engine, a wrapper around MAGIC, and the FasterCap 3D field solver) that trade off speed against accuracy. Supported PDKs include IHP SG13G2 and SkyWater sky130A. Further information can be found in the <a href="https://iic-jku.github.io/klayout-pex-website/doc/doc.html">online documentation</a>.</p>
+</div>
+</div>
 
 
 
@@ -2254,6 +2769,9 @@ Table&nbsp;7: Typical technology qualification tests
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Allen_Holberg" class="csl-entry" role="listitem">
+Allen, Phillip E., and Douglas R. Holberg. 2012. <em>CMOS Analog Circuit Design</em>. 3rd ed. Oxford University Press.
+</div>
 <div id="ref-Deal_Grove" class="csl-entry" role="listitem">
 Deal, Bruce E., and Andrew S. Grove. 1965. <span>“General Relationship for the Thermal Oxidation of Silicon.”</span> <em>Journal of Applied Physics</em> 36 (12): 3770–78.
 </div>
@@ -2275,11 +2793,17 @@ Pretl, Harald, and Matthias Eberlein. 2021. <span>“Fifty Nifty Variations of T
 <div id="ref-Razavi_Fundamentals" class="csl-entry" role="listitem">
 Razavi, Behzad. 2014. <em>Fundamentals of Microelectronics</em>. 2nd ed. Wiley.
 </div>
+<div id="ref-Razavi_AnalogCMOS" class="csl-entry" role="listitem">
+Razavi, Behzad. 2017. <em>Design of Analog CMOS Integrated Circuits</em>. 2nd ed. McGraw-Hill Education.
+</div>
 <div id="ref-Sansen_2015" class="csl-entry" role="listitem">
 Sansen, Willy. 2015. <span>“Minimum Power in Analog Amplifying Blocks: Presenting a Design Procedure.”</span> <em>IEEE Solid-State Circuits Magazine</em> 7 (4): 83–89. <a href="https://doi.org/10.1109/MSSC.2015.2474235">https://doi.org/10.1109/MSSC.2015.2474235</a>.
 </div>
 <div id="ref-Sansen_AnalogEssentials" class="csl-entry" role="listitem">
 Sansen, Willy M. C. 2006. <em>Analog Design Essentials</em>. Springer.
+</div>
+<div id="ref-Schmickl_2020" class="csl-entry" role="listitem">
+Schmickl, Stefan, Thomas Faseth, and Harald Pretl. 2020. <span>“A 350-<span class="nocase">nW</span> Low-Noise Amplifier with Reduced Flicker-Noise for Bio-Signal Acquisition.”</span> <em>Austrochip Workshop on Microelectronics</em>.
 </div>
 <div id="ref-Sproul_Green_1991" class="csl-entry" role="listitem">
 Sproul, Alistair B., and Martin A. Green. 1991. <span>“Improved Value for the Silicon Intrinsic Carrier Concentration from 275 to 375 <span>K</span>.”</span> <em>Journal of Applied Physics</em> 70 (2): 846–54. <a href="https://doi.org/10.1063/1.349645">https://doi.org/10.1063/1.349645</a>.
