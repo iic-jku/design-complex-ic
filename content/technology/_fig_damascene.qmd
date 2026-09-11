@@ -1,0 +1,127 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-damascene
+#| echo: false
+#| fig-cap: "The damascene process for copper interconnects: (a) trenches are etched into the dielectric, (b) a conformal diffusion-barrier liner is deposited, (c) copper is (electro-)deposited, overfilling the trenches, and (d) the excess copper and the liner on the field are removed by chemical-mechanical polishing (CMP), leaving metal only in the trenches."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Polygon, Rectangle
+
+CU = '#c87533'
+LINER = '#404040'
+DIEL = '#e0e8ee'
+
+XMAX = 12.0
+TRENCH = [(2.0, 4.0), (6.5, 9.5)]
+T_TOP, T_BOT = 3.0, 1.6
+W = 0.18          # liner thickness
+OVER = 0.7        # copper overfill above the field
+
+EDGE = dict(ec='k', lw=0.6, joinstyle='miter')
+
+
+def surface(offset=0.0):
+    """Top profile of the trench topography, left to right, offset
+    normal to the surface by `offset` (a conformal deposition)."""
+    p = [(0.0, T_TOP + offset)]
+    for x0, x1 in TRENCH:
+        p += [(x0 + offset, T_TOP + offset), (x0 + offset, T_BOT + offset),
+              (x1 - offset, T_BOT + offset), (x1 - offset, T_TOP + offset)]
+    p += [(XMAX, T_TOP + offset)]
+    return p
+
+
+def dielectric(ax):
+    ax.add_patch(Polygon(surface() + [(XMAX, 0.0), (0.0, 0.0)],
+                         fc=DIEL, **EDGE))
+
+
+def liner(ax, field=True):
+    if field:
+        # conformal deposition coats trenches and field alike; one
+        # continuous layer (the field part is removed again by CMP)
+        ax.add_patch(Polygon(surface() + surface(W)[::-1], fc=LINER, **EDGE))
+    else:
+        for x0, x1 in TRENCH:
+            ax.add_patch(Polygon(
+                [(x0, T_TOP), (x0, T_BOT), (x1, T_BOT), (x1, T_TOP),
+                 (x1 - W, T_TOP), (x1 - W, T_BOT + W), (x0 + W, T_BOT + W),
+                 (x0 + W, T_TOP)], fc=LINER, **EDGE))
+
+
+def copper(ax, overfill=True):
+    if overfill:
+        top = T_TOP + W + OVER
+        ax.add_patch(Polygon(surface(W) + [(XMAX, top), (0.0, top)],
+                             fc=CU, **EDGE))
+    else:
+        for x0, x1 in TRENCH:
+            ax.add_patch(Rectangle((x0 + W, T_BOT + W), x1 - x0 - 2 * W,
+                                   T_TOP - T_BOT - W, fc=CU, **EDGE))
+
+
+def label(ax, text, xy, xytext, **kw):
+    ax.annotate(text, xy=xy, xytext=xytext, fontsize=8,
+                arrowprops=dict(arrowstyle='-', lw=0.6,
+                                shrinkA=1, shrinkB=1), **kw)
+
+
+fig, axs = plt.subplots(4, 1, figsize=(6, 6.6))
+
+ax = axs[0]
+dielectric(ax)
+ax.text(5.25, 0.6, 'dielectric', fontsize=8, ha='center')
+label(ax, 'trench', (3.0, T_BOT + 0.3), (3.0, 4.4), ha='center')
+ax.set_title('(a) etch trenches into the dielectric', fontsize=9, loc='left')
+
+ax = axs[1]
+dielectric(ax)
+liner(ax, field=True)
+label(ax, 'liner (diffusion barrier)', (5.25, T_TOP + W), (5.25, 4.4),
+      ha='center')
+ax.set_title('(b) deposit the barrier liner', fontsize=9, loc='left')
+
+ax = axs[2]
+dielectric(ax)
+liner(ax, field=True)
+copper(ax, overfill=True)
+ax.plot([-0.1, XMAX + 0.1], [T_TOP, T_TOP], ls=(0, (4, 3)), lw=0.7,
+        color='k')
+label(ax, 'copper (overfill)', (5.25, T_TOP + W + OVER), (5.25, 4.4),
+      ha='center')
+ax.text(XMAX - 0.25, T_TOP - 0.12, 'CMP stop', fontsize=7, ha='right',
+        va='top', style='italic')
+ax.set_title('(c) electro-deposit copper, overfilling the trenches',
+             fontsize=9, loc='left')
+
+ax = axs[3]
+dielectric(ax)
+liner(ax, field=False)
+copper(ax, overfill=False)
+label(ax, 'copper wire', (3.0, T_TOP - 0.5), (3.0, 4.4), ha='center')
+ax.set_title('(d) remove the excess copper by CMP', fontsize=9, loc='left')
+
+for ax in axs:
+    ax.set_xlim(-0.3, XMAX + 0.3)
+    ax.set_ylim(-0.2, 5.0)
+    ax.set_aspect('equal')
+    ax.axis('off')
+
+plt.tight_layout()
+plt.show()
+```

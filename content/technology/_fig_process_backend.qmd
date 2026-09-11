@@ -1,0 +1,58 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-process-backend
+#| echo: false
+#| fig-cap: "CMOS process, steps 9 to 11—back-end: (a) inter-layer dielectric deposition, CMP, and contact formation, (b) first metal layer sputtered and patterned, and (c) inter-metal dielectric, vias, and second metal layer; the finished wafer is then passivated and opened at the pads."
+
+import matplotlib.pyplot as plt
+from pyutil import process as pr
+
+
+def feol(ax):
+    pr.wafer(ax, pwell=True, nwell=True, trenches=pr.STI_X)
+    pr.sti(ax, fox=pr.FOX_H)
+    pr.gate_stack(ax)
+    pr.implants(ax)
+    pr.spacers(ax)
+    pr.silicide(ax)
+
+
+fig, axs = plt.subplots(3, 1, figsize=(6.5, 7.0))
+
+ax = axs[0]
+feol(ax)
+pr.dielectric(ax)
+pr.contacts(ax)
+pr.setup(ax, '(a) inter-layer dielectric, CMP, and contacts', ymax=6.0)
+
+ax = axs[1]
+feol(ax)
+pr.dielectric(ax)
+pr.metal1(ax)
+pr.setup(ax, '(b) metal-1 sputtered (Al) and patterned', ymax=6.4)
+
+ax = axs[2]
+feol(ax)
+pr.dielectric(ax, top=pr.M2_Y)
+pr.metal1(ax)
+pr.via_metal2(ax)
+pr.setup(ax, '(c) inter-metal dielectric, via-12, and metal-2', ymax=7.4)
+
+plt.tight_layout()
+plt.show()
+```

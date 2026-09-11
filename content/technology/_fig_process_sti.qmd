@@ -1,0 +1,44 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-process-sti
+#| echo: false
+#| fig-cap: "CMOS process, step 1—shallow trench isolation: (a) a hard mask is grown and patterned by photolithography, (b) the isolation trenches are etched anisotropically into the silicon, and (c) the trenches are filled with oxide and the surface is planarized."
+
+import matplotlib.pyplot as plt
+from pyutil import process as pr
+
+fig, axs = plt.subplots(3, 1, figsize=(6.5, 5.4))
+
+ax = axs[0]
+pr.wafer(ax)
+pr.hard_mask(ax, openings=pr.STI_X)
+pr.setup(ax, '(a) hard mask grown and patterned', ymax=5.4)
+
+ax = axs[1]
+pr.wafer(ax, trenches=pr.STI_X)
+pr.hard_mask(ax, openings=pr.STI_X)
+pr.setup(ax, '(b) anisotropic etch of the isolation trenches', ymax=5.4)
+
+ax = axs[2]
+pr.wafer(ax, trenches=pr.STI_X)
+pr.sti(ax)
+pr.setup(ax, '(c) trenches filled with oxide, hard mask removed', ymax=5.4)
+
+plt.tight_layout()
+plt.show()
+```

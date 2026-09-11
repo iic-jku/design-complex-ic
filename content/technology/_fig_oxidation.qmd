@@ -1,0 +1,48 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-oxidation
+#| echo: false
+#| fig-cap: "Thermal oxide growth on silicon calculated with the Deal-Grove model, $x_\\mathrm{ox}^2 + A x_\\mathrm{ox} = B t$, for wet and dry oxidation at different temperatures. Wet oxidation is much faster and used for thick isolation oxides, dry oxidation for thin, high-quality gate oxides."
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Deal-Grove coefficients (approximate values for (111) Si):
+# (label, B in um^2/h, B/A in um/h, linestyle)
+params = [
+    ('wet, 1100 °C', 0.510, 4.64, 'b-'),
+    ('wet, 1000 °C', 0.287, 1.27, 'b--'),
+    ('dry, 1100 °C', 0.027, 0.30, 'r-'),
+    ('dry, 1000 °C', 0.0117, 0.071, 'r--'),
+]
+
+t = np.logspace(-1, 1.2, 200)   # hours
+
+fig, ax = plt.subplots(figsize=(6, 4))
+for label, B, BA, style in params:
+    A = B / BA
+    x = A / 2 * (np.sqrt(1 + 4 * B * t / A**2) - 1)
+    ax.loglog(t, x, style, lw=2, label=label)
+
+ax.set_xlabel('Oxidation time (h)')
+ax.set_ylabel('Oxide thickness (µm)')
+ax.grid(True, which='both', alpha=0.3)
+ax.legend(fontsize=9)
+plt.tight_layout()
+plt.show()
+```

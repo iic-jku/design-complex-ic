@@ -1,0 +1,64 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-doping-process
+#| echo: false
+#| fig-cap: "Selective doping using a hard mask: (a) the wafer is covered by a hard mask (e.g., SiO$_2$), (b) the hard mask is opened by photolithography and etching, (c) dopants are introduced through the opening (shown here by implantation), and (d) after annealing, the dopants have diffused into the silicon and the crystal damage is repaired."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, Ellipse
+from pyutil import process as pr
+
+MID = pr.XMAX / 2
+OPEN = [(MID - 2.0, MID + 2.0)]
+
+fig, axs = plt.subplots(4, 1, figsize=(6.5, 7.2))
+
+# (a) hard mask everywhere
+ax = axs[0]
+pr.wafer(ax)
+pr.hard_mask(ax, openings=None)
+pr.setup(ax, '(a) grow/deposit hard mask', ymax=5.6)
+
+# (b) patterned hard mask
+ax = axs[1]
+pr.wafer(ax)
+pr.hard_mask(ax, openings=OPEN)
+pr.setup(ax, '(b) open hard mask by lithography and etching', ymax=5.6)
+
+# (c) implant
+ax = axs[2]
+pr.wafer(ax)
+pr.hard_mask(ax, openings=OPEN)
+ax.add_patch(Rectangle((MID - 2.0, pr.SURF - 0.35), 4.0, 0.35, fc='#d1862c',
+                       ec='k', lw=0.5))
+pr.implant_arrows(ax, y0=5.4, y1=4.6, label='dopants')
+pr.setup(ax, '(c) introduce dopants', ymax=6.4)
+
+# (d) anneal / drive-in
+ax = axs[3]
+pr.wafer(ax)
+doped = Ellipse((MID, pr.SURF), 5.4, 2.4, fc='#d1862c', ec='k', lw=0.5)
+ax.add_patch(doped)
+clip = Rectangle((0, 0), pr.XMAX, pr.SURF, transform=ax.transData)
+doped.set_clip_path(clip)
+pr.hard_mask(ax, openings=OPEN)
+pr.setup(ax, '(d) anneal (dopants diffuse into the Si)', ymax=5.6)
+
+plt.tight_layout()
+plt.show()
+```

@@ -1,0 +1,76 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-photolithography
+#| echo: false
+#| fig-cap: "Patterning by photolithography: (a) the oxidized wafer is coated with photoresist and exposed through the photomask, (b) with a positive resist, the exposed resist dissolves during development, (c) the hard mask is etched through the resist opening and the resist is removed, and (d) a negative resist creates the inverse image."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+from pyutil import process as pr
+
+MID = pr.XMAX / 2
+MASK_OPEN = [(MID - 1.5, MID + 1.5)]   # transparent region of the photomask
+
+fig, axs = plt.subplots(4, 1, figsize=(6.5, 8.0))
+
+# (a) exposure
+ax = axs[0]
+pr.wafer(ax, label=False)
+ax.text(pr.XMAX / 2, 0.4, 'Si wafer', ha='center', fontsize=8)
+pr.hard_mask(ax, openings=None)                    # SiO2 hard mask
+pr.resist(ax, openings=None)                       # resist on top
+# photomask: glass with chromium except opening
+ax.add_patch(Rectangle((0, 6.3), pr.XMAX, 0.18, fc='#cfe8f7', ec='k',
+                       lw=0.5))
+for x0, x1 in [(0, MID - 1.5), (MID + 1.5, pr.XMAX)]:
+    ax.add_patch(Rectangle((x0, 6.15), x1 - x0, 0.15, fc='#333333',
+                           ec='none'))
+ax.text(pr.XMAX + 0.1, 6.3, 'photomask', fontsize=8, va='center')
+ax.text(pr.XMAX + 0.1, 4.9, 'photoresist', fontsize=8, va='center',
+        color=pr.C['resist'])
+ax.text(pr.XMAX + 0.1, pr.SURF + 0.1, 'SiO$_2$', fontsize=8, va='center')
+# UV light arrows through the mask opening
+for x in [MID - 1.05, MID - 0.35, MID + 0.35, MID + 1.05]:
+    ax.annotate('', xy=(x, 4.8), xytext=(x, 7.2),
+                arrowprops=dict(arrowstyle='->', lw=0.8, color='#8000c0'))
+ax.text(MID, 7.5, 'UV light', ha='center', fontsize=9, color='#8000c0')
+pr.setup(ax, '(a) resist coating and exposure', ymax=8.0)
+
+# (b) positive resist developed
+ax = axs[1]
+pr.wafer(ax, label=False)
+pr.hard_mask(ax, openings=None)
+pr.resist(ax, openings=MASK_OPEN)
+pr.setup(ax, '(b) development (positive resist: exposed area removed)',
+         ymax=6.2)
+
+# (c) etch + strip
+ax = axs[2]
+pr.wafer(ax, label=False)
+pr.hard_mask(ax, openings=MASK_OPEN)
+pr.setup(ax, '(c) hard-mask etch and resist strip', ymax=6.2)
+
+# (d) negative resist result
+ax = axs[3]
+pr.wafer(ax, label=False)
+pr.hard_mask(ax, openings=[(0, MID - 1.5), (MID + 1.5, pr.XMAX)])
+pr.setup(ax, '(d) result with negative resist (inverse image)', ymax=6.2)
+
+plt.tight_layout()
+plt.show()
+```

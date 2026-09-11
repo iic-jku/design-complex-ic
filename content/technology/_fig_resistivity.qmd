@@ -1,0 +1,44 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-resistivity
+#| echo: false
+#| fig-cap: "Resistivity of silicon at 300 K as a function of the doping concentration, calculated as $\\rho = 1/(q \\mu N)$ with doping-dependent carrier mobilities (Arora mobility fits). p-type silicon has a higher resistivity for the same doping level because of the lower hole mobility."
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+q = 1.602e-19
+N = np.logspace(13, 20, 300)   # doping in cm^-3
+
+# Arora mobility fits at 300 K (cm^2/Vs)
+mu_n = 92 + 1268 / (1 + (N / 1.3e17) ** 0.91)
+mu_p = 54.3 + 406.9 / (1 + (N / 2.35e17) ** 0.88)
+
+rho_n = 1 / (q * mu_n * N)
+rho_p = 1 / (q * mu_p * N)
+
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.loglog(N, rho_n, 'b-', lw=2, label='n-type (P, As)')
+ax.loglog(N, rho_p, 'r--', lw=2, label='p-type (B)')
+ax.set_xlabel('Doping concentration (cm$^{-3}$)')
+ax.set_ylabel('Resistivity (Ω cm)')
+ax.grid(True, which='both', alpha=0.3)
+ax.legend()
+plt.tight_layout()
+plt.show()
+```

@@ -1,0 +1,58 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-process-gate
+#| echo: false
+#| fig-cap: "CMOS process, steps 4 and 5—gate formation: (a) the field oxide is grown over the whole wafer, merging with the oxide already filling the trenches, (b) it is removed again over the active areas, (c) the thin gate oxide is grown by dry oxidation on the exposed active areas, (d) polysilicon is deposited by CVD over the whole wafer, following the topography of the field oxide, and (e) the gate stack is patterned by photolithography and etching."
+
+import matplotlib.pyplot as plt
+from pyutil import process as pr
+
+fig, axs = plt.subplots(5, 1, figsize=(6.5, 9.4))
+
+ax = axs[0]
+pr.wafer(ax, pwell=True, nwell=True, trenches=pr.STI_X)
+pr.field_oxide(ax)
+pr.setup(ax, '(a) field-oxide growth over the whole wafer', ymax=5.4)
+
+ax = axs[1]
+pr.wafer(ax, pwell=True, nwell=True, trenches=pr.STI_X)
+pr.sti(ax, fox=pr.FOX_H)
+pr.setup(ax, '(b) field oxide removed over the active areas', ymax=5.4)
+
+ax = axs[2]
+pr.wafer(ax, pwell=True, nwell=True, trenches=pr.STI_X)
+pr.sti(ax, fox=pr.FOX_H)
+pr.gate_stack(ax, oxide_everywhere=True, patterned=False, fox=pr.FOX_H)
+pr.setup(ax, '(c) gate-oxide growth (dry oxidation)', ymax=5.4)
+
+ax = axs[3]
+pr.wafer(ax, pwell=True, nwell=True, trenches=pr.STI_X)
+pr.sti(ax, fox=pr.FOX_H)
+pr.gate_stack(ax, oxide_everywhere=True, poly_everywhere=True,
+              patterned=False, fox=pr.FOX_H)
+pr.setup(ax, '(d) polysilicon deposition (CVD)', ymax=5.4)
+
+ax = axs[4]
+pr.wafer(ax, pwell=True, nwell=True, trenches=pr.STI_X)
+pr.sti(ax, fox=pr.FOX_H)
+pr.gate_stack(ax)
+pr.setup(ax, '(e) gate stack patterned', ymax=5.4)
+
+plt.tight_layout()
+plt.show()
+```

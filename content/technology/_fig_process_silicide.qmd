@@ -1,0 +1,46 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-process-silicide
+#| echo: false
+#| fig-cap: "CMOS process, step 8—spacer and silicide formation: (a) an oxide layer is deposited and anisotropically etched, leaving spacers at the gate edges, and (b) sputtered titanium reacts where it touches silicon, forming a low-resistance silicide (dark) on source/drain and gate; the unreacted metal is then removed."
+
+import matplotlib.pyplot as plt
+from pyutil import process as pr
+
+fig, axs = plt.subplots(2, 1, figsize=(6.5, 4.0))
+
+ax = axs[0]
+pr.wafer(ax, pwell=True, nwell=True, trenches=pr.STI_X)
+pr.sti(ax, fox=pr.FOX_H)
+pr.gate_stack(ax)
+pr.implants(ax)
+pr.spacers(ax)
+pr.setup(ax, '(a) spacer formation at the gate edges', ymax=5.4)
+
+ax = axs[1]
+pr.wafer(ax, pwell=True, nwell=True, trenches=pr.STI_X)
+pr.sti(ax, fox=pr.FOX_H)
+pr.gate_stack(ax)
+pr.implants(ax)
+pr.spacers(ax)
+pr.silicide(ax)
+pr.setup(ax, '(b) silicide (TiSi$_2$) on source/drain and gate', ymax=5.4)
+
+plt.tight_layout()
+plt.show()
+```

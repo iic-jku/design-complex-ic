@@ -1,0 +1,48 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-process-wells
+#| echo: false
+#| fig-cap: "CMOS process, steps 2 and 3—well formation: (a) a mask covers the right half of the wafer while boron is implanted to form the p-well, (b) the complementary mask is used for the phosphorus implant of the n-well, and (c) after annealing, both wells are formed."
+
+import matplotlib.pyplot as plt
+from pyutil import process as pr
+
+fig, axs = plt.subplots(3, 1, figsize=(6.5, 6.2))
+
+ax = axs[0]
+pr.wafer(ax, pwell=True, trenches=pr.STI_X)
+pr.sti(ax)
+pr.resist(ax, openings=[(0, pr.WELL_X)], y=pr.SURF)
+pr.implant_arrows(ax, y0=6.2, y1=5.2, label='boron implant')
+pr.setup(ax, '(a) p-well implant (mask over the n-well region)', ymax=7.2)
+
+ax = axs[1]
+pr.wafer(ax, pwell=True, nwell=True, trenches=pr.STI_X)
+pr.sti(ax)
+pr.resist(ax, openings=[(pr.WELL_X, pr.XMAX)], y=pr.SURF)
+pr.implant_arrows(ax, y0=6.2, y1=5.2, label='phosphorus implant')
+pr.setup(ax, '(b) n-well implant (mask over the p-well region)', ymax=7.2)
+
+ax = axs[2]
+pr.wafer(ax, pwell=True, nwell=True, trenches=pr.STI_X)
+pr.sti(ax)
+pr.setup(ax, '(c) after annealing and mask removal', ymax=5.4)
+
+plt.tight_layout()
+plt.show()
+```

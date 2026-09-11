@@ -1,0 +1,157 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-litho-scanner
+#| echo: false
+#| fig-cap: "The optical column of a projection lithography scanner: light from the source passes through the illuminator, which shapes its angular distribution, onto the reticle, and the projection optics image a demagnified copy of the reticle field into the photoresist. The scanner exposes the wafer field by field. Resolution and depth of focus both follow from the wavelength and the numerical aperture of the optics."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, Polygon, Ellipse, FancyBboxPatch
+
+# The drawing uses a fixed layout grid with y pointing downwards; the axes
+# fill the figure, so one drawing unit maps to a constant number of points
+# and the font sizes below are the ones of the layout grid.
+X0, X1 = 30.0, 900.0
+Y0, Y1 = 116.0, 610.0
+FIGW = 7.5
+
+C = {
+    'ink': '#1f2933',      # headings
+    'text': '#5b6672',     # annotations
+    'faint': '#7a828c',    # secondary notes
+    'rule': '#d6dbe1',     # panel border
+    'panel': '#f4f6f8',    # panel fill
+    'tick': '#b9bfc7',     # dimension lines
+    'dark': '#33383f',     # source housing, mask absorber
+    'beam': '#7fb3e0',     # light path
+    'lens': '#c9e1f0',     # lens elements
+    'lens_e': '#6e9dbe',
+    'glass': '#dce9f2',    # reticle blank
+    'glass_e': '#a9c4d6',
+    'resist': '#e7b24c',   # unexposed resist
+    'resist_e': '#c08f2e',
+    'exposed': '#f2dfa8',  # exposed resist
+    'sub': '#c2c7ce',      # wafer
+    'sub_e': '#9aa1aa',
+}
+
+ABSORB = [(165, 199), (237, 259), (305, 345)]   # reticle absorber runs
+
+
+def fs(size):
+    """Font size (in points) of a label given in layout units."""
+    return size * FIGW * 72.0 / (X1 - X0)
+
+
+def box(x, y, w, h, fc, ec=None, lw=1.0, alpha=1.0, z=2):
+    ax.add_patch(Rectangle((x, y), w, h, fc=fc, ec=ec or 'none',
+                           lw=lw if ec else 0, alpha=alpha, zorder=z))
+
+
+def label(x, y, s, size=13, color='text', ha='left', weight='normal'):
+    ax.text(x, y, s, fontsize=fs(size), color=C[color], ha=ha,
+            va='baseline', fontweight=weight, zorder=6)
+
+
+def beam(pts):
+    """Cone of light between two apertures, given as corner points."""
+    ax.add_patch(Polygon(pts, closed=True, fc=C['beam'], ec='none',
+                         alpha=0.26, zorder=1))
+
+
+def dim(x0, x1, y, s=4):
+    """Dimension line with end ticks."""
+    ax.plot([x0, x1], [y, y], color=C['tick'], lw=0.8, zorder=3)
+    for x in (x0, x1):
+        ax.plot([x, x], [y - s, y + s], color=C['tick'], lw=0.8, zorder=3)
+
+
+fig = plt.figure(figsize=(FIGW, FIGW * (Y1 - Y0) / (X1 - X0)))
+ax = fig.add_axes([0, 0, 1, 1])
+ax.set_xlim(X0, X1)
+ax.set_ylim(Y1, Y0)          # y grows downwards, as in the layout grid
+ax.set_aspect('equal')
+ax.axis('off')
+
+# light source
+box(205, 126, 120, 38, C['dark'], z=3)
+ax.text(265, 151, 'Source', fontsize=fs(14), color='white', ha='center',
+        va='baseline', fontweight='bold', zorder=6)
+label(195, 142, r'$\lambda = 193$ nm (ArF)', ha='right')
+label(195, 159, 'or 13.5 nm (EUV)', ha='right')
+
+# illuminator: shapes the angular spectrum of the light
+beam([(205, 164), (325, 164), (357, 192), (173, 192)])
+box(172, 192, 186, 26, C['lens'], C['lens_e'], lw=1.0)
+ax.text(265, 210, 'Illuminator', fontsize=fs(13), color='#2e4a5e',
+        ha='center', va='baseline', zorder=6)
+label(162, 200, r'shapes $\sigma$,', ha='right')
+label(162, 217, 'dipole / quasar', ha='right')
+box(175, 218, 180, 32, C['beam'], alpha=0.26, z=1)
+dim(145, 385, 238)
+
+# reticle: glass blank with a patterned absorber
+box(145, 250, 240, 11, C['glass'], C['glass_e'], lw=0.8)
+for x0, x1 in ABSORB:
+    box(x0, 261, x1 - x0, 10, C['dark'], z=3)
+label(135, 256, 'Reticle', ha='right')
+label(135, 273, r'features 4$\times$ larger', ha='right')
+
+# projection optics: two lens groups demagnifying the reticle image
+beam([(145, 271), (385, 271), (347, 310), (183, 310)])
+ax.add_patch(Ellipse((265, 322), 188, 34, fc=C['lens'], ec=C['lens_e'],
+                     lw=1.0, zorder=2))
+beam([(190, 336), (340, 336), (328, 366), (202, 366)])
+ax.add_patch(Ellipse((265, 380), 156, 30, fc=C['lens'], ec=C['lens_e'],
+                     lw=1.0, zorder=2))
+label(163, 318, 'Projection optics', ha='right')
+label(163, 335, r'4$\times$ reduction', ha='right')
+label(163, 352, 'NA 1.35 immersion', ha='right')
+label(163, 369, 'NA 0.33 / 0.55 EUV', ha='right')
+
+# wafer plane
+beam([(202, 394), (328, 394), (297, 500), (233, 500)])
+box(145, 500, 240, 18, C['resist'], C['resist_e'], lw=0.8)
+box(233, 500, 64, 18, C['exposed'], C['resist_e'], lw=0.8, z=3)
+box(145, 518, 240, 28, C['sub'], C['sub_e'], lw=0.8)
+label(135, 513, 'Photoresist', ha='right')
+label(135, 537, 'Wafer', ha='right')
+label(395, 513, 'exposed area')
+dim(233, 297, 560)
+label(265, 580, r'image demagnified 4$\times$', size=12.5, color='faint',
+      ha='center')
+label(265, 597, 'scanner steps this field across the wafer', size=12.5,
+      color='faint', ha='center')
+
+# what sets the limit
+ax.add_patch(FancyBboxPatch((430, 296), 460, 134, boxstyle='round,pad=0,'
+                            'rounding_size=6', fc=C['panel'], ec=C['rule'],
+                            lw=0.8, zorder=1))
+label(450, 321, 'What sets the limit', size=15, color='ink', weight='bold')
+label(450, 351, r'$R = k_1 \cdot \lambda\,/\,\mathrm{NA}$', size=17,
+      color='ink')
+label(640, 351, r'$\mathrm{DOF} = k_2 \cdot \lambda\,/\,\mathrm{NA}^2$',
+      size=17, color='ink')
+label(450, 380, r'Shorter $\lambda$ and larger NA both sharpen resolution, '
+      'but depth of')
+label(450, 398, 'focus collapses with NA$^2$, which is why resists are thin '
+      'and focus')
+label(450, 416, r'control is tight. A single exposure bottoms out near '
+      r'$k_1 = 0.25$.')
+
+plt.show()
+```

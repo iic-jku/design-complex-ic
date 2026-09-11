@@ -1,0 +1,48 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-doping-profiles
+#| echo: false
+#| fig-cap: "Doping depth profiles (normalized): diffusion always peaks at the wafer surface, following an erfc profile (infinite source) or a Gaussian profile (finite source), while ion implantation places the doping peak at the projected range $R$ below the surface (shown for $R = 100\\,$nm, $\\Delta R = 30\\,$nm)."
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.special import erfc
+
+x = np.linspace(0, 300, 400)   # depth in nm
+
+# diffusion profiles (characteristic depth 2*sqrt(D t) = 60 nm)
+Ldiff = 60.0
+prof_erfc = erfc(x / Ldiff)
+prof_gauss = np.exp(-(x / Ldiff) ** 2)
+
+# implantation profile
+R, dR = 100.0, 30.0
+prof_impl = np.exp(-(x - R) ** 2 / (2 * dR ** 2))
+
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.semilogy(x, prof_erfc, 'b-', lw=2, label='diffusion, erfc (infinite source)')
+ax.semilogy(x, prof_gauss, 'b--', lw=2, label='diffusion, Gaussian (finite source)')
+ax.semilogy(x, prof_impl, 'r-', lw=2, label='ion implantation')
+ax.set_xlabel('Depth from surface (nm)')
+ax.set_ylabel('Normalized doping concentration')
+ax.set_ylim(1e-4, 2)
+ax.grid(True, which='both', alpha=0.3)
+ax.legend(fontsize=8)
+plt.tight_layout()
+plt.show()
+```

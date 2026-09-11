@@ -1,0 +1,49 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-process-implants
+#| echo: false
+#| fig-cap: "CMOS process, steps 6 and 7—self-aligned source/drain implants: (a) with the PMOS and the p-well tap covered by resist, phosphorus is implanted; the polysilicon gate itself masks the channel, so the n$^+$ regions are self-aligned to the gate, and the same implant forms the n$^+$ tap contacting the n-well; (b) the complementary boron implant forms the p$^+$ source/drain regions of the PMOS and the p$^+$ tap contacting the p-well."
+
+import matplotlib.pyplot as plt
+from pyutil import process as pr
+
+fig, axs = plt.subplots(2, 1, figsize=(6.5, 4.6))
+
+ax = axs[0]
+pr.wafer(ax, pwell=True, nwell=True, trenches=pr.STI_X)
+pr.sti(ax, fox=pr.FOX_H)
+pr.gate_stack(ax)
+pr.implants(ax, ntype=True, ptype=False)
+pr.resist(ax, openings=pr.NPLUS_OPEN, y=pr.SURF, h=1.1)
+pr.implant_arrows(ax, y0=6.7, y1=5.7, label='phosphorus implant')
+pr.setup(ax, '(a) $n^+$ implant (self-aligned to the NMOS gate)',
+         ymax=7.6)
+
+ax = axs[1]
+pr.wafer(ax, pwell=True, nwell=True, trenches=pr.STI_X)
+pr.sti(ax, fox=pr.FOX_H)
+pr.gate_stack(ax)
+pr.implants(ax, ntype=True, ptype=True)
+pr.resist(ax, openings=pr.PPLUS_OPEN, y=pr.SURF, h=1.1)
+pr.implant_arrows(ax, y0=6.7, y1=5.7, label='boron implant')
+pr.setup(ax, '(b) $p^+$ implant (self-aligned to the PMOS gate)',
+         ymax=7.6)
+
+plt.tight_layout()
+plt.show()
+```

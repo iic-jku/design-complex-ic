@@ -1,0 +1,272 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# IC Technology {#sec-technology}
+
+This chapter walks through the manufacturing technology of integrated circuits: from the raw silicon wafer through the individual processing steps (doping, photolithography, etching, thin-film deposition, and interconnect formation) to a complete CMOS process flow. The treatment largely follows [@Hu_ModernDevices].
+
+## The Silicon Wafer {#sec-technology-wafer}
+
+The starting material for integrated-circuit production is, quite literally, sand: quartz sand (SiO~2~) is reduced with coal in an electric arc furnace at about 2000 °C to roughly 98 % purity, following the reaction $\text{SiO}_2 + 2\,\text{C} \rightarrow \text{Si} + 2\,\text{CO}$. This "metallurgical-grade" silicon is then chemically purified via trichlorosilane ($\text{Si} + 3\,\text{HCl} \rightleftharpoons \text{SiHCl}_3 + \text{H}_2$), which can be distilled and decomposed back into ultra-pure silicon.
+
+From the purified silicon, a large single crystal—the **ingot**—is grown by the [**Czochralski method**](https://en.wikipedia.org/wiki/Czochralski_method), illustrated in @fig-czochralski: a seed crystal is dipped into molten silicon and slowly pulled upwards while rotating, so that the melt crystallizes at the interface, continuing the crystal structure of the seed. Further purification can be achieved by zone refining, where a small molten zone is moved along the ingot, dragging impurities along; the final purity reaches 99.9999999 %, which is equivalent to one impurity atom per billion silicon atoms.
+
+{{< include /content/technology/_fig_czochralski.qmd >}}
+
+The ingot is then cut into [**wafers**](https://en.wikipedia.org/wiki/Wafer_(electronics)) using a saw, to a thickness of 0.3 to 0.8 mm, and the wafers are polished. The standard wafer diameters today are 150 mm (6"), 200 mm (8"), and 300 mm (12"). The resistivity of the wafer material, set by doping, is 0.1 to 20 Ω cm, with up to 1000 Ω cm for specialty processes. Wafers can be $n$- or $p$-type, and often epitaxial ("epi") wafers are used.
+
+### Doping
+
+The silicon atoms are spaced roughly 0.24 nm apart in the crystal lattice, resulting in about $5 \times 10^{22}\,\text{atoms/cm}^3$. The intrinsic carrier concentration is $n_\mathrm{i} = p_\mathrm{i} \approx 1.0 \times 10^{10}\,\text{cm}^{-3}$ at 300 K, with an exponential temperature dependence (older textbooks often quote $1.5 \times 10^{10}\,\text{cm}^{-3}$; the accepted measured value is $9.65 \times 10^{9}\,\text{cm}^{-3}$ [@Sproul_Green_1991]). By introducing doping materials in small quantities, the carrier concentration can be modulated strongly; see @tbl-doping ($\Nd$ and $\Na$ are given in $\text{cm}^{-3}$).
+
+| | $n$-type (donor materials) | $p$-type (acceptor materials) |
+|:--|:--------------------------|:------------------------------|
+| Effect | Introduces additional free electrons | Introduces a lack of electrons ("holes") |
+| Elements | Phosphorus (P), Arsenic (As) | Boron (B), Gallium (Ga), Indium (In) |
+| Carrier concentrations | $n_0 \approx \Nd$, $p_0 \approx n_\mathrm{i}^2 / \Nd$ | $p_0 \approx \Na$, $n_0 \approx n_\mathrm{i}^2 / \Na$ |
+: Overview of $n$-type and $p$-type doping of silicon {#tbl-doping}
+
+The resulting resistivity of doped silicon is shown in @fig-resistivity as a function of the doping concentration.
+
+{{< include /content/technology/_fig_resistivity.qmd >}}
+
+::: {#nte-wafer-resistivity .callout-note}
+## Example: Wafer Doping
+
+Let us assume a $p$-type wafer with 50 Ω cm resistivity (as used in IHP SG13 CMOS). Using @fig-resistivity, we find $\Na = p_0 \approx 2.7 \times 10^{14}\,\text{cm}^{-3}$, which results in $n_0 \approx n_\mathrm{i}^2 / \Na = 3.7 \times 10^{5}\,\text{cm}^{-3}$. This doping concentration equates to about one acceptor atom per 180 million silicon atoms!
+:::
+
+## Selective Doping {#sec-technology-selective-doping}
+
+To introduce dopants into the silicon wafer selectively, a masking process is used:
+
+- The picture from a photomask is optically transferred into a photoresist on the wafer, using a process called [**photolithography**](https://en.wikipedia.org/wiki/Photolithography).
+- This photoresist is developed and used to selectively etch a masking layer, like SiO~2~ (a "hard mask").
+- After this step, the silicon surface is opened at specific locations and covered otherwise, allowing the introduction of dopants into defined areas of the wafer.
+
+The complete sequence—hard-mask formation, lithography, etching, dopant introduction, and annealing (which removes defects from the crystal structure while the dopants diffuse into the silicon)—is shown in @fig-doping-process.
+
+{{< include /content/technology/_fig_doping_process.qmd >}}
+
+### Oxidation of Silicon
+
+Oxidation of silicon is done at elevated temperatures in a furnace, using either "dry" ($\text{Si} + \text{O}_2 \rightarrow \text{SiO}_2$) or "wet" ($\text{Si} + 2\,\text{H}_2\text{O} \rightarrow \text{SiO}_2 + 2\,\text{H}_2$) oxidation. The oxide growth follows the **Deal-Grove model** [@Deal_Grove]; the resulting growth curves are shown in @fig-oxidation. Wet oxidation is much faster, while dry oxidation yields denser, higher-quality oxides (used, e.g., for gate oxides).
+
+{{< include /content/technology/_fig_oxidation.qmd >}}
+
+The SiO~2~ is used for:
+
+- The gate dielectric of the MOSFET.
+- Hard masks for implantation or doping.
+- Device isolation and isolation of wiring.
+
+The growth of SiO~2~ consumes silicon; the silicon thickness is reduced by 44 % of the grown oxide thickness. Alternatively, [chemical vapour deposition](https://en.wikipedia.org/wiki/Chemical_vapor_deposition) (CVD) can be used for depositing SiO~2~ without consuming silicon. Local oxidation of silicon (LOCOS) can be used to laterally isolate active regions of an integrated circuit, but in modern CMOS technologies [shallow trench isolation](https://en.wikipedia.org/wiki/Shallow_trench_isolation) (STI) is used instead, for higher transistor density.
+
+## Photolithography {#sec-technology-litho}
+
+In photolithography, the wafer is first oxidized to create a hard-mask layer and then coated with photoresist. The photomask is imaged onto the photoresist with a projection lens system, the resist is developed and baked, and the hard mask is etched through the resist openings. There are two types of resist: with a **positive** resist, the exposed areas dissolve in the developer, transferring the mask image directly; with a **negative** resist, the exposed areas remain, creating an inverse image. After etching, the remaining photoresist is removed. The process is illustrated in @fig-photolithography.
+
+{{< include /content/technology/_fig_photolithography.qmd >}}
+
+### Photomasks
+
+Instead of a photomask which exposes the whole wafer at once, a **reticle** is mostly used, which is smaller than the wafer, with a field size of ca. 26 mm × 33 mm (limiting the maximum die size to 858 mm²). A **stepper** exposes the complete wafer field by field with the reticle. The photomask/reticle is usually made of a glass carrier with a structured chromium layer.
+
+The reticle must be protected from contamination, so a thin transparent membrane (called a **pellicle**) keeps particles out of the focal plane, away from the mask structures. The reticle can be the same size (1×) or larger (2× or 4×) than the structures on the wafer, and the photomask can touch the wafer ("contact printing") or be kept at a distance ("proximity printing")—modern lithography uses projection printing through a reduction lens.
+
+The complete exposure system is shown in @fig-litho-scanner. The light passes from the source through the **illuminator**, which shapes the angular distribution of the illumination (e.g. into a dipole or quasar pattern), onto the reticle; the projection optics then image a demagnified copy of the reticle field into the resist, and the scanner steps this field across the wafer, one exposure at a time.
+
+{{< include /content/technology/_fig_litho_scanner.qmd >}}
+
+### Resolution Limit
+
+As in any other optical system, the resolution limit of photolithography is given by the Rayleigh criterion:
+
+$$
+R = k_1 \frac{\lambda}{n \sin \Theta} = k_1 \frac{\lambda}{\mathrm{NA}}
+$$ {#eq-rayleigh}
+
+Here, $\lambda$ is the wavelength of the light source, and $k_1$ is a factor that captures various resolution-enhancement measures, like phase-shift masks or off-axis illumination ($0.25 \leq k_1 \leq 1$). $\mathrm{NA}$ is the numerical aperture of the lens system (in air, $\mathrm{NA} \leq 0.93$). The resulting half-pitch $R$ is the smallest pattern that can be printed on a wafer: $R = 100\,\text{nm}$ means that lines with a width of 100 nm and a spacing of 100 nm can be printed.
+
+Resolution is not free. The **depth of focus**, i.e. the range over which the projected image stays sharp, shrinks with the *square* of the numerical aperture:
+
+$$
+\mathrm{DOF} = k_2 \frac{n \lambda}{\mathrm{NA}^2}
+$$ {#eq-dof}
+
+Here, $k_2$ is the depth-of-focus counterpart of $k_1$: it captures how much image degradation the process still tolerates, set by resist contrast and thickness, feature type and illumination scheme ($0.5 \leq k_2 \leq 1$). The two factors pull against each other—the same off-axis illumination that buys a small $k_1$ also shrinks $k_2$, so pushing resolution costs focus budget twice. Note that the refractive index $n$ does not cancel here: raising $n$ recovers depth of focus at a given $\mathrm{NA}$.
+
+This is why resists are kept thin and why the wafer surface must be held in focus to within a few tens of nanometers while the field is scanned.
+
+### Light Sources
+
+In the 1980s, mercury lamps with $\lambda = 436\,\text{nm}$ (g-line) or $\lambda = 365\,\text{nm}$ (i-line) were used. Starting with 0.25 µm CMOS (until 180 nm), excimer lasers with $\lambda = 248\,\text{nm}$ were introduced, called deep-ultraviolet (DUV) light. Since 130 nm CMOS, ArF lasers with $\lambda = 193\,\text{nm}$ are used, which can be combined with multi-patterning to break the half-pitch limit of $R \approx 40\,\text{nm}$. Finally, [extreme-ultraviolet (EUV) lithography](https://en.wikipedia.org/wiki/EUV_lithography) was introduced at the 7 nm CMOS node, offering a huge reduction in wavelength to $\lambda = 13.5\,\text{nm}$—accompanied by an extreme cost impact due to the need for all-reflective optics.
+
+Note that there is only one company in the world that currently manufactures EUV lithography machines: ASML from the Netherlands. This gives ASML a unique position in the semiconductor equipment market, as EUV is critical for advanced nodes. Zeiss from Germany produces the high-precision optics required for these machines. Further, there is only one company in the world that makes the multi-beam mask writers needed for creating the EUV masks: IMS Nanofabrication from Austria.
+
+### Resolution Enhancements
+
+Various methods are used to reduce the half-pitch in @eq-rayleigh by compensating distortion due to diffraction and interference, modifying either the amplitude or the phase of the light:
+
+- **Optical proximity correction (OPC)** enhances the contrast of critical layout features like line ends and corners by pre-distorting the mask shapes.
+- **Phase-shift masks (PSM)** vary the thickness of the mask, so that phase changes of the light can be used for contrast enhancement.
+- **Immersion lithography** uses the refractive index of water ($n = 1.44$) between lens and wafer to achieve $\mathrm{NA} > 1$; per @eq-dof, the higher $n$ also restores part of the depth of focus lost to the larger $\mathrm{NA}$.
+
+Ultimately, using these techniques, structures considerably smaller than the wavelength of the used light can be printed.
+
+### EUV Lithography
+
+EUV light at 13.5 nm is created by firing laser pulses at molten tin droplets. There are no transmissive lens materials for EUV, so the optics are constructed from reflective mirrors with about 30 % loss per mirror. A first-generation EUV scanner is a 180-tonne machine using 0.5 MW of electrical power to create roughly 200 W of optical power at the wafer, processing about 200 wafers per hour. Comparing the achievable resolution:
+
+- ArF immersion lithography: $\lambda = 193\,\text{nm}$, $\mathrm{NA} = 1.35$, $k_1 = 0.27$ (with PSM) $\Rightarrow$ $R \approx 40\,\text{nm}$.
+- First-generation EUV (NXE): $\lambda = 13.5\,\text{nm}$, $\mathrm{NA} = 0.33$, $k_1 = 0.32$ $\Rightarrow$ $R \approx 13\,\text{nm}$.
+- Current high-NA EUV (EXE): $\lambda = 13.5\,\text{nm}$, $\mathrm{NA} = 0.55$, $k_1 = 0.32$ $\Rightarrow$ $R \approx 8\,\text{nm}$.
+
+## Etching {#sec-technology-etching}
+
+Etching is used to transfer the image from the photoresist into the hard mask (or from one layer into another layer) by selectively removing material. Etching can be isotropic or anisotropic, characterized by the anisotropy $A$; the selectivity $S$ measures the ratio of the etch rate of the film to the etch rate of the mask. An optimal etch has $A=1$ (only vertical etching, no lateral etch) and $S=\infty$ (the mask is not attacked). Two types of etches are used:
+
+- **Wet etching**, using liquid chemicals (typically isotropic).
+- **Dry etching**, using chemically active ionized gases in a plasma reactor (can be highly anisotropic).
+
+## Doping Techniques {#sec-technology-doping}
+
+Three methods of introducing dopants into the silicon can be used:
+
+- **Diffusion**: dopants move (by diffusion) from the wafer surface into the wafer material; the source of the dopants is a gas (e.g., POCl~3~ for phosphorus doping) or a solid film on the wafer surface.
+- [**Ion implantation**](https://en.wikipedia.org/wiki/Ion_implantation): dopants are ionized, accelerated, and shot into the wafer material.
+- [**Epitaxy**](https://en.wikipedia.org/wiki/Epitaxy): additional silicon is grown on the wafer surface and doped in situ while growing the silicon layer.
+
+### Diffusion
+
+Diffusion is the movement of impurity atoms from the surface into the bulk of the silicon, performed at high temperatures (900 to 1200 °C). There are two limiting cases:
+
+- **Infinite source** of impurities at the surface: the resulting doping profile follows a complementary error function (erfc).
+- **Finite source** of impurities at the surface: the resulting doping profile is a Gaussian, $N(x,t) = N_{0}/\sqrt{\pi D t} \cdot \exp(-x^{2} / (4 D t))$, with $x$ the distance from the wafer surface, $N_0$ the initial dopant dose per area, $D$ the diffusivity, and $t$ the diffusion time.
+
+The drawback of diffusion is that the doping concentration is always highest at the wafer surface and constrained to these profile shapes.
+
+### Ion Implantation
+
+Ion implantation lodges impurity ions into the target material at high velocity; implantation can even be done through surface layers (e.g., through the gate oxide for threshold-voltage adjustment). The resulting doping depth profile is
+
+$$
+N(x) = \frac{N_\mathrm{i}}{\sqrt{2 \pi} \, {\Delta R}} \, e^{-\frac{(x-R)^2}{2 {\Delta R}^2}}
+$$ {#eq-implant-profile}
+
+which peaks at the projected range $R$; the straggle $\Delta R$ is tied to $R$, so the achievable profiles are also constrained ($N_\mathrm{i}$ is the implanted dose per area). A subsequent anneal (typically a rapid thermal anneal at 900 to 1100 °C) is required to activate the impurities and to repair the damage to the crystal lattice. @fig-doping-profiles compares typical diffusion and implantation profiles.
+
+{{< include /content/technology/_fig_doping_profiles.qmd >}}
+
+### Epitaxy
+
+Epitaxial growth forms a layer of single-crystal silicon on the surface of the wafer, such that the crystal structure is continuous across the interface. The epi layer can be doped differently from the material where it is grown, with a typical thickness of 1 to 20 µm (patterned epitaxial growth using a mask is also possible).
+
+## Thin-Film Deposition {#sec-technology-thin-film}
+
+Various thin films are used in IC processing:
+
+- The gate dielectric of the MOSFET, like SiO~2~ (either thermally grown or deposited via CVD).
+- The gate material, polysilicon, which is also used for local interconnects and resistors.
+- Metal films for interconnects (metals like Al or Cu, and silicides like TiSi~2~, WSi~2~, TaSi~2~, NiSi~2~).
+- Contact and via materials, like W, Al, or Cu.
+- Dielectrics between metal layers and spacers, like SiO~2~ and Si~3~N~4~.
+
+These films are either **sputtered** or deposited from chemical gases in **chemical vapour deposition (CVD)**; both methods are sketched in @fig-cvd-sputter. Exemplary chemical reactions for CVD are:
+
+- Depositing polysilicon: $\text{SiH}_4 \rightarrow \text{Si} + 2\,\text{H}_2$
+- Depositing SiO~2~ (as an alternative to thermal oxidation): $\text{SiH}_4 + \text{O}_2 \rightarrow \text{SiO}_2 + 2\,\text{H}_2$ or $\text{SiH}_2\text{Cl}_2 + 2\,\text{N}_2\text{O} \rightarrow \text{SiO}_2 + 2\,\text{HCl} + 2\,\text{N}_2$
+- Depositing Si~3~N~4~: $3\,\text{SiH}_2\text{Cl}_2 + 4\,\text{NH}_3 \rightarrow \text{Si}_3\text{N}_4 + 6\,\text{HCl} + 6\,\text{H}_2$
+
+{{< include /content/technology/_fig_cvd_sputter.qmd >}}
+
+## Interconnects {#sec-technology-interconnect}
+
+In the so-called **back-end** of the process, the devices formed in the **front-end** (like MOSFETs and resistors) are connected by a sandwich of metallic and dielectric thin films. The metal layers are connected through the dielectric layers by **vias** (between metals) and **contacts** (from the lowest metal layer to the front-end devices).
+
+Historically, aluminum has been used as the interconnect metal, as it can be deposited by sputtering and then patterned by etching. However, Al is prone to void formation by [electromigration](https://en.wikipedia.org/wiki/Electromigration). In newer technologies, copper is used: its resistance is 40 % lower, and it has excellent electromigration reliability. However, dry etching of Cu is difficult, so a [**damascene**](https://en.wikipedia.org/wiki/Copper_interconnects) process is used, shown in @fig-damascene: the dielectric is structured, a liner and Cu are deposited into the trenches, and the excess metal is removed by [**chemical-mechanical polishing (CMP)**](https://en.wikipedia.org/wiki/Chemical-mechanical_polishing). The liner prevents the Cu from diffusing into the dielectric.
+
+{{< include /content/technology/_fig_damascene.qmd >}}
+
+The classic dielectric between the metal layers is SiO~2~, but in order to reduce capacitive parasitics, low-k dielectrics (e.g., F- or C-doped SiO~2~) are used in modern processes. Between processing steps, CMP is used to planarize the surfaces.
+
+## An Exemplary CMOS Process Flow {#sec-technology-cmos-flow}
+
+The following figures illustrate a simplified CMOS process flow, inspired by the openly documented [LibreSilicon](https://libresilicon.com) process; the cross sections show an NMOS (in the p-well) and a PMOS (in the n-well), each with its well tap on the outside, evolving through the process steps.
+
+**Step 1—Shallow trench isolation:** After an initial cleaning, a hard mask (SiO~2~ or Si~3~N~4~) is grown/deposited and patterned by photolithography. The isolation trenches are etched anisotropically and filled with oxide (@fig-process-sti).
+
+{{< include /content/technology/_fig_process_sti.qmd >}}
+
+**Steps 2 and 3—Well formation:** A hard mask is formed and opened over the p-well region, boron is implanted, and the wafer is annealed. The sequence is repeated with phosphorus for the n-well (@fig-process-wells).
+
+{{< include /content/technology/_fig_process_wells.qmd >}}
+
+**Steps 4 and 5—Gate formation:** A field oxide is grown and removed over the active areas; then the thin gate oxide is grown by dry oxidation, polysilicon is deposited by CVD, and the gate stack is patterned (@fig-process-gate).
+
+{{< include /content/technology/_fig_process_gate.qmd >}}
+
+**Steps 6 and 7—Source/drain implants:** With photoresist masking the PMOS area, phosphorus is implanted to form the NMOS source/drain regions (and the n-well contacts); the implant is **self-aligned** to the gate, which acts as an implantation mask for the channel region. The complementary boron implant forms the PMOS source/drain regions (and the p-well contacts). Each implant is followed by an anneal (@fig-process-implants).
+
+{{< include /content/technology/_fig_process_implants.qmd >}}
+
+**Step 8—Silicide formation:** An oxide/nitride layer is deposited and anisotropically etched, leaving **spacers** at the gate edges. Titanium is sputtered onto the wafer and reacts where it touches silicon, forming low-resistance TiSi~2~ on the source/drain areas and the gate; the unreacted metal is removed (@fig-process-silicide).
+
+{{< include /content/technology/_fig_process_silicide.qmd >}}
+
+**Steps 9 to 11—Contacts and metal stack:** An inter-layer dielectric is deposited and planarized by CMP, contact holes are etched and filled, and the first metal layer is deposited and patterned. Further levels of dielectric, vias, and metal follow; finally, the passivation is deposited and opened at the pads (@fig-process-backend).
+
+{{< include /content/technology/_fig_process_backend.qmd >}}
+
+## The Open-Source PDK IHP SG13 {#sec-technology-ihp}
+
+IHP has open-sourced the [process design kit](https://en.wikipedia.org/wiki/Process_design_kit) (PDK) for a 130 nm [BiCMOS](https://en.wikipedia.org/wiki/BiCMOS) technology (the current generation is named SG13G2, referred to here simply as IHP SG13) under the Apache-2.0 license. The relevant files, including documentation, can be found at [github.com/IHP-GmbH/IHP-Open-PDK](https://github.com/IHP-GmbH/IHP-Open-PDK). This technology has a lot of interesting features:
+
+- Support for internal 1.2 V/1.5 V core MOSFETs and 3.3 V I/O MOSFETs
+- An aluminum metal stack with 5 thin and 2 thick levels of metal (see @fig-metal-stack)
+- Silicided, standard, and high-sheet-rho poly resistors
+- A metal-insulator-metal (MIM) capacitor
+- A Schottky diode
+- Optional high-speed SiGe:C heterojunction bipolar transistors (HBTs)
+
+{{< include /content/technology/_fig_metal_stack.qmd >}}
+
+## Technology Qualification {#sec-technology-qualification}
+
+Before a product in a certain semiconductor technology is shipped to customers, a qualification procedure has to be completed. Its purpose is to demonstrate, on a statistically meaningful sample and before the first customer shipment, that the product will meet its datasheet over the intended lifetime and operating conditions. The overall framework is set by [JEDEC](https://www.jedec.org) JESD47 (*Stress-Test-Driven Qualification of Integrated Circuits*), which references the individual test methods; automotive products additionally follow AEC-Q100, which defines temperature grades and larger sample sizes. @tbl-technology-qualification lists typical tests.
+
+| Test (examples) | Standard | Motivation & check |
+|:----------------|:---------|:-------------------|
+| HTOL (high-temperature operating life) | JESD22-A108 | Subject the IC to high temperature under operation over an extended duration. |
+| ESD HBM | JS-001-2023 | ESD test, human-body model. |
+| ESD CDM | JS-002-2022 | ESD test, charged-device model. |
+| Latch-up | JESD78 | Latch-up test. |
+| Electrical test (ED) | JESD86 | Check conformance to the datasheet across conditions and lots. |
+: Typical technology qualification tests {#tbl-technology-qualification}
+
+These tests fall into three groups: **lifetime tests** that accelerate wear-out, **robustness tests** that check survival of a single electrical stress event, and **electrical verification** against the datasheet.
+
+**HTOL** stresses a sample of packaged devices—typically three lots of 77 parts, so that zero failures give a meaningful confidence bound—at an elevated junction temperature, usually 125 °C and often combined with a supply voltage above nominal, while the circuit is electrically exercised, for a duration of typically 1000 h. It accelerates exactly those wear-out mechanisms that limit the life of a MOSFET: [**time-dependent dielectric breakdown (TDDB)**](https://en.wikipedia.org/wiki/Time-dependent_gate_oxide_breakdown) of the gate oxide, [**hot-carrier injection (HCI)**](https://en.wikipedia.org/wiki/Hot-carrier_injection), [**bias temperature instability (BTI)**](https://en.wikipedia.org/wiki/Negative-bias_temperature_instability), and electromigration in the interconnect. Since these mechanisms are thermally activated, an [Arrhenius](https://en.wikipedia.org/wiki/Arrhenius_equation) acceleration factor—commonly in the range of 20 to 100—translates the 1000 h of stress into years of operation at the application temperature. A device fails the test if it stops working, or if any parameter has drifted outside the datasheet limits.
+
+**ESD HBM** models the [electrostatic discharge](https://en.wikipedia.org/wiki/Electrostatic_discharge) of a charged person touching a pin. The **human-body model** discharges a 100 pF capacitor through a 1.5 kΩ resistor, which produces a comparatively slow pulse (rise time of a few nanoseconds, decay time constant of 150 ns) with a peak current of about 0.67 A per kV. Every pin is stressed against every supply, in both polarities; a common target is 2 kV. The protection consists of diodes at each pad plus a clamp across the supply, arranged so that there is a low-impedance path between *any* two pins—which is why ESD protection is a full-chip problem, not a per-pad one.
+
+**ESD CDM** models the opposite situation: the device itself has been charged, for example by sliding through a shipping tube, and discharges when one of its pins touches a grounded surface. The **charged-device model** pulse is far faster than HBM, with a rise time below 500 ps and a total duration of about 1 ns, reaching peak currents of several amperes. Because the pulse is largely over before the protection structures have fully turned on, CDM is usually the harder of the two to pass, and it is the more relevant one in modern automated assembly, where a human rarely touches the parts. The stored charge grows with package size, so large packages are stressed hardest. A typical target is 500 V, and interfaces between separate supply domains are the classic weak spot.
+
+**Latch-up** targets the parasitic thyristor that is inherent to every CMOS well structure: the source of a PMOS, the n-well, the p-substrate, and the source of a neighboring NMOS form a PNPN structure, equivalent to a pair of cross-coupled parasitic bipolar transistors. If enough current is injected into a well—by an I/O pin driven beyond a supply rail, or by a supply overshoot—the structure latches into a low-impedance state that shorts supply to ground and persists until the power is removed, usually destroying the chip. JESD78 therefore injects ±100 mA into the I/O pins and applies an overvoltage to the supplies, at the maximum operating temperature. The countermeasures are all layout measures: a generous number of well and substrate taps, which is why the flow above places one next to each transistor (@fig-process-implants), guard rings around injecting circuits, and minimum-spacing rules between NMOS and PMOS.
+
+**Electrical test (ED)** is not a stress test. It assesses the electrical parameters of devices from the manufacturing and test process being qualified, verifying that they meet every datasheet parameter across the specified supply-voltage and temperature range, and that they do so consistently across several production lots. This is what catches a systematic process shift that leaves the technology inside its own control limits, but the product outside its specification.
+
+A complete qualification also covers the package rather than the silicon, with temperature cycling, highly accelerated stress testing (HAST) for moisture resistance, and solder-reflow sensitivity.
