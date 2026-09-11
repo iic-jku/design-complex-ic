@@ -26,7 +26,7 @@ q = 1.602e-19
 eps_si = 11.9 * 8.854e-12       # F/m
 Na = 3e18 * 1e6                 # 1/m^3
 Cox = 17.3e-3                   # F/m^2 (17.3 fF/um^2)
-phi_b = 0.49                    # V
+phi_b = 0.50                    # V
 phi_fb = -1.05                  # V
 
 # depletion approximation: VG = phi_fb + q Na W^2/(2 eps_si) + q Na W / Cox

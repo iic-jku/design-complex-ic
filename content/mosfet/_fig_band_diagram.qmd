@@ -23,7 +23,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 Ebg = 1.12       # silicon band gap (eV)
-phib = 0.49      # Fermi potential (V)
+phib = 0.50      # Fermi potential (V)
 x_ox0, x_ox1 = 0.0, 0.25   # oxide region
 x_si1 = 2.2                # silicon bulk extent
 x_g0 = -0.8                # gate extent
