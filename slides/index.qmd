@@ -11,3 +11,4 @@ Press `S` for speaker notes, `C` for the chalkboard, and `?` for all shortcuts.
 3. [IC Technology](technology.html)
 4. [The Layout](layout.html)
 5. [IC Packaging](packaging.html)
+6. [Testing](testing.html)

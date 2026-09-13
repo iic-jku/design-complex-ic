@@ -1,6 +1,16 @@
 {
  "book": "../dcic.html",
  "labels": {
+  "eq-cp": {
+   "chapter": 6,
+   "number": "55",
+   "type": "eq"
+  },
+  "eq-cpk": {
+   "chapter": 6,
+   "number": "56",
+   "type": "eq"
+  },
   "eq-dof": {
    "chapter": 3,
    "number": "46",
@@ -271,6 +281,16 @@
    "number": "50",
    "type": "eq"
   },
+  "fig-ac-parametric": {
+   "chapter": 6,
+   "number": "67",
+   "type": "fig"
+  },
+  "fig-ate": {
+   "chapter": 6,
+   "number": "59",
+   "type": "fig"
+  },
   "fig-band-diagram": {
    "chapter": 2,
    "number": "6",
@@ -284,6 +304,16 @@
   "fig-cmos-inverter": {
    "chapter": 2,
    "number": "11",
+   "type": "fig"
+  },
+  "fig-continuity": {
+   "chapter": 6,
+   "number": "62",
+   "type": "fig"
+  },
+  "fig-cpk": {
+   "chapter": 6,
+   "number": "68",
    "type": "fig"
   },
   "fig-cvd-sputter": {
@@ -329,6 +359,11 @@
   "fig-ic-tradeoff": {
    "chapter": 2,
    "number": "23",
+   "type": "fig"
+  },
+  "fig-jtag": {
+   "chapter": 6,
+   "number": "64",
    "type": "fig"
   },
   "fig-layout-antenna": {
@@ -404,6 +439,11 @@
   "fig-litho-scanner": {
    "chapter": 3,
    "number": "30",
+   "type": "fig"
+  },
+  "fig-measurement-errors": {
+   "chapter": 6,
+   "number": "60",
    "type": "fig"
   },
   "fig-metal-stack": {
@@ -526,9 +566,29 @@
    "number": "35",
    "type": "fig"
   },
+  "fig-ram-bist": {
+   "chapter": 6,
+   "number": "63",
+   "type": "fig"
+  },
+  "fig-repeatability": {
+   "chapter": 6,
+   "number": "61",
+   "type": "fig"
+  },
   "fig-resistivity": {
    "chapter": 3,
    "number": "26",
+   "type": "fig"
+  },
+  "fig-scan-path": {
+   "chapter": 6,
+   "number": "66",
+   "type": "fig"
+  },
+  "fig-stuck-at": {
+   "chapter": 6,
+   "number": "65",
    "type": "fig"
   },
   "fig-supply-trend": {
@@ -799,6 +859,41 @@
   "sec-technology-wafer": {
    "chapter": 3,
    "number": "3.1",
+   "type": "sec"
+  },
+  "sec-testing": {
+   "chapter": 6,
+   "number": "6",
+   "type": "sec"
+  },
+  "sec-testing-challenges": {
+   "chapter": 6,
+   "number": "6.3",
+   "type": "sec"
+  },
+  "sec-testing-cpk": {
+   "chapter": 6,
+   "number": "6.6",
+   "type": "sec"
+  },
+  "sec-testing-equipment": {
+   "chapter": 6,
+   "number": "6.2",
+   "type": "sec"
+  },
+  "sec-testing-flow": {
+   "chapter": 6,
+   "number": "6.1",
+   "type": "sec"
+  },
+  "sec-testing-plan": {
+   "chapter": 6,
+   "number": "6.4",
+   "type": "sec"
+  },
+  "sec-testing-types": {
+   "chapter": 6,
+   "number": "6.5",
    "type": "sec"
   },
   "tbl-doping": {
