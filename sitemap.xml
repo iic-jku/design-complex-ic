@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://iic-jku.github.io/design-complex-ic/dcic.html</loc>
-    <lastmod>2026-09-13T17:03:37.399Z</lastmod>
+    <loc>https://iic-jku.github.io/design-complex-ic/slides/packaging.html</loc>
+    <lastmod>2026-09-13T17:39:35.575Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iic-jku.github.io/design-complex-ic/slides/mosfet.html</loc>
+    <lastmod>2026-09-13T17:39:35.575Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iic-jku.github.io/design-complex-ic/slides/testing.html</loc>
+    <lastmod>2026-09-13T17:39:35.575Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iic-jku.github.io/design-complex-ic/slides/index.html</loc>
+    <lastmod>2026-09-13T17:39:35.575Z</lastmod>
   </url>
   <url>
     <loc>https://iic-jku.github.io/design-complex-ic/index.html</loc>
-    <lastmod>2026-09-13T17:03:37.399Z</lastmod>
+    <lastmod>2026-09-13T17:39:35.574Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iic-jku.github.io/design-complex-ic/dcic.html</loc>
+    <lastmod>2026-09-13T17:39:35.574Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iic-jku.github.io/design-complex-ic/slides/intro.html</loc>
+    <lastmod>2026-09-13T17:39:35.575Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iic-jku.github.io/design-complex-ic/slides/technology.html</loc>
+    <lastmod>2026-09-13T17:39:35.575Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iic-jku.github.io/design-complex-ic/slides/layout.html</loc>
+    <lastmod>2026-09-13T17:39:35.575Z</lastmod>
   </url>
 </urlset>

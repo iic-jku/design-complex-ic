@@ -1,5 +1,180 @@
 [
   {
+    "objectID": "slides/packaging.html#sec-packaging-wafer-prep",
+    "href": "slides/packaging.html#sec-packaging-wafer-prep",
+    "title": "IC Packaging",
+    "section": "5.1 From Wafer to Packaged IC",
+    "text": "5.1 From Wafer to Packaged IC\n\nThe finished wafer is not yet a usable product: the individual dice have to be separated, connected, and protected. This chapter covers the path from the processed wafer to the packaged integrated circuit, the most important package families, thermal design, and the electrical parasitics that packages introduce."
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-bonding",
+    "href": "slides/packaging.html#sec-packaging-bonding",
+    "title": "IC Packaging",
+    "section": "5.2 Chip-to-Package Connection",
+    "text": "5.2 Chip-to-Package Connection"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-types",
+    "href": "slides/packaging.html#sec-packaging-types",
+    "title": "IC Packaging",
+    "section": "5.3 Package Types",
+    "text": "5.3 Package Types"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-thermal",
+    "href": "slides/packaging.html#sec-packaging-thermal",
+    "title": "IC Packaging",
+    "section": "5.4 Thermal Design",
+    "text": "5.4 Thermal Design"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-parasitics",
+    "href": "slides/packaging.html#sec-packaging-parasitics",
+    "title": "IC Packaging",
+    "section": "5.5 Package Parasitics",
+    "text": "5.5 Package Parasitics"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-qualification",
+    "href": "slides/packaging.html#sec-packaging-qualification",
+    "title": "IC Packaging",
+    "section": "5.6 Package Qualification",
+    "text": "5.6 Package Qualification"
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-nutshell",
+    "href": "slides/mosfet.html#sec-mosfet-nutshell",
+    "title": "The MOSFET",
+    "section": "2.1 MOSFET Operation in a Nutshell",
+    "text": "2.1 MOSFET Operation in a Nutshell\n\nThis chapter on the metal-oxide-semiconductor field-effect transistor (MOSFET) is largely based on (Hu 2010; Razavi 2014; Tsividis and McAndrew 2011), which are also recommended as further reading. In contrast to our Analog Circuit Design course, where we treated the MOSFET essentially as a numerically-characterized black box, we will derive a simple, first-order model of the MOSFET from the physics of the device, and then discuss the most important second-order effects. The goal is to understand the basic operation of the MOSFET and its \\(I\\)/\\(V\\) characteristic, which will be used in later chapters for circuit design."
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-iv",
+    "href": "slides/mosfet.html#sec-mosfet-iv",
+    "title": "The MOSFET",
+    "section": "2.2 Basic I/V Characteristic of the MOSFET",
+    "text": "2.2 Basic I/V Characteristic of the MOSFET"
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-second-order",
+    "href": "slides/mosfet.html#sec-mosfet-second-order",
+    "title": "The MOSFET",
+    "section": "2.3 Second-Order Effects in the MOSFET",
+    "text": "2.3 Second-Order Effects in the MOSFET\n\nNote that in the CMOS technology shown in Figure 11, the bulk nodes of all the NMOS transistors are tied to the common substrate (\\(V_\\mathrm{SS}\\)), while the bulk nodes of all the PMOS transistors are tied to the \\(n\\)-well (\\(V_\\mathrm{DD}\\)). Since the \\(n\\)-wells are separated from the substrate (and can be separated between different PMOS devices), the bulk nodes of selected PMOS can be tied to different potentials than \\(V_\\mathrm{DD}\\) (e.g., to the source of the PMOS), which is called body biasing. This can be used to adjust the threshold voltage of the PMOS transistors or to avoid the bulk effect (see Section 2.3.1)."
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-ac",
+    "href": "slides/mosfet.html#sec-mosfet-ac",
+    "title": "The MOSFET",
+    "section": "2.4 MOSFET AC Operation",
+    "text": "2.4 MOSFET AC Operation"
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-ssm",
+    "href": "slides/mosfet.html#sec-mosfet-ssm",
+    "title": "The MOSFET",
+    "section": "2.5 MOSFET Small-Signal Model",
+    "text": "2.5 MOSFET Small-Signal Model"
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-scaling",
+    "href": "slides/mosfet.html#sec-mosfet-scaling",
+    "title": "The MOSFET",
+    "section": "2.6 MOSFET Scaling",
+    "text": "2.6 MOSFET Scaling"
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-sce",
+    "href": "slides/mosfet.html#sec-mosfet-sce",
+    "title": "The MOSFET",
+    "section": "2.7 MOSFET Short-Channel Effects",
+    "text": "2.7 MOSFET Short-Channel Effects"
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-ihp",
+    "href": "slides/mosfet.html#sec-mosfet-ihp",
+    "title": "The MOSFET",
+    "section": "2.8 Simulated Characteristics in IHP SG13",
+    "text": "2.8 Simulated Characteristics in IHP SG13\n\nThe evolution of the FinFET is the nanosheet MOSFET, first introduced at the 3 nm node (and used by all foundries at 2 nm) and shown in Figure 18 (c). One advantage is the even better electrostatic control of the gate over the channel, as the stacked channels are completely wrapped by the gate—hence also called gate-all-around (GAA) MOSFET. In addition, the stacked channels can be either \\(n\\)- or \\(p\\)-type (or mixed), and could even use different materials, like SiGe or GaAs, opening the door to 3D integration."
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-sizing",
+    "href": "slides/mosfet.html#sec-mosfet-sizing",
+    "title": "The MOSFET",
+    "section": "2.9 MOSFET Sizing",
+    "text": "2.9 MOSFET Sizing"
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-summary",
+    "href": "slides/mosfet.html#sec-mosfet-summary",
+    "title": "The MOSFET",
+    "section": "2.10 Summary",
+    "text": "2.10 Summary"
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-si-properties",
+    "href": "slides/mosfet.html#sec-mosfet-si-properties",
+    "title": "The MOSFET",
+    "section": "2.11 Appendix: Silicon Material Properties",
+    "text": "2.11 Appendix: Silicon Material Properties"
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-flow",
+    "href": "slides/testing.html#sec-testing-flow",
+    "title": "Testing",
+    "section": "6.1 Post-Silicon Production Flow",
+    "text": "6.1 Post-Silicon Production Flow\n\nIntegrated circuits must be tested for functionality and specification compliance before they are shipped. Defects introduced during manufacturing, as well as parameter variations, are unavoidable—not every IC on a wafer is a good device (the yield is below 100 %). Typical defect causes are doping errors and fluctuations, under- or over-etching, misalignment of layers, and contamination by particles. A comprehensive treatment of IC test is given in (Wang et al. 2006); the related field of hardware security and trust is covered in (Bhunia and Tehranipoor 2018)."
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-equipment",
+    "href": "slides/testing.html#sec-testing-equipment",
+    "title": "Testing",
+    "section": "6.2 Test Equipment",
+    "text": "6.2 Test Equipment"
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-challenges",
+    "href": "slides/testing.html#sec-testing-challenges",
+    "title": "Testing",
+    "section": "6.3 Mixed-Signal Testing Challenges",
+    "text": "6.3 Mixed-Signal Testing Challenges\n\nThe DIB is a custom-designed PCB that hosts the package socket (for testing packaged ICs) or connects to the probe card (for wafer testing). It also contains interface circuits that cannot be handled by the tester hardware resources (e.g., special components required by the DUT). Contact to the packaged DUT is made with spring-loaded “pogo pins” in the socket. For wafer probing, different probe-card types are used: cantilever probe cards (needles coming in at an angle), vertical (“buckling-beam” or “cobra”) probe cards, and membrane probe cards for high pin counts and fine pitches.\nHandlers (robotic pick-and-place or gravity-fed) insert the DUT into the test socket on the DIB. After the test, the ICs are sorted into bins (good = pass, bad = fail, possibly multiple pass grades). The handler can also provide a temperature-controlled environment for hot/cold testing in addition to room-temperature testing (the latter is preferred for cost reasons)."
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-plan",
+    "href": "slides/testing.html#sec-testing-plan",
+    "title": "Testing",
+    "section": "6.4 The Test Plan",
+    "text": "6.4 The Test Plan"
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-types",
+    "href": "slides/testing.html#sec-testing-types",
+    "title": "Testing",
+    "section": "6.5 Types of Tests",
+    "text": "6.5 Types of Tests"
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-cpk",
+    "href": "slides/testing.html#sec-testing-cpk",
+    "title": "Testing",
+    "section": "6.6 Process Capability Index",
+    "text": "6.6 Process Capability Index\n\nFor analog test parameters, the variation over production must stay inside the test limits, which are derived from the datasheet limits minus guard bands: the lower specification limit (LSL) and the upper specification limit (USL)."
+  },
+  {
+    "objectID": "slides/index.html",
+    "href": "slides/index.html",
+    "title": "Lecture Slides",
+    "section": "",
+    "text": "Slide decks generated from the lecture notes, one per chapter. Press S for speaker notes, C for the chalkboard, and ? for all shortcuts.\n\nIntroduction\nThe MOSFET\nIC Technology\nThe Layout\nIC Packaging\nTesting"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "",
+    "text": "Design of Complex Integrated Circuits\n\n\n\nQuarto Publish\n\n\n(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)\nThis is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 (“VL Entwurf komplexer integrierter Schaltungen”). Follow this link to access the material.\nThe course covers how integrated circuits are built (MOSFET operation, CMOS technology, layout, packaging, testing, and the economics of chip making) and how they are designed (design methodology, ESD protection, latch-up, robust design techniques, and circuit simulation).\nAll course material is made publicly available and shared under the Apache-2.0 license.\nWe happily accept pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue!"
+  },
+  {
     "objectID": "dcic.html#sec-intro-scale",
     "href": "dcic.html#sec-intro-scale",
     "title": "Design of Complex Integrated Circuits",
@@ -179,7 +354,7 @@
     "href": "dcic.html#sec-layout-devices",
     "title": "Design of Complex Integrated Circuits",
     "section": "4.3 Devices",
-    "text": "4.3 Devices\n\n4.3.1 NMOS and PMOS Transistors\nFigure 41 shows the layout (mask top view) of an NMOS and a PMOS transistor. The following observations can be made:\n\nThe MOSFET is created by the intersection of RX and PC; this intersection defines \\(W\\) and \\(L\\) of the transistor. The areas of RX not covered by PC become the source and drain regions.\nWhether a device is NMOS or PMOS is decided by whether the RX shape is contained inside a BP region (RX plus BP is \\(p^+\\), RX without BP is \\(n^+\\)).\nA \\(p^+\\) substrate contact is created by drawing RX covered by BP (outside the n-well).\nAn \\(n^+\\) well contact is created by drawing plain RX located inside NW.\nThe NW must surround the PMOS with sufficient margin.\nThe layer BP is a pure marking layer, assisting mask generation and device extraction from the layout.\nCA contacts connect source/drain/gate as well as the \\(p^+\\)/\\(n^+\\) contacts to M1.\n\n\n\n\n\n\n\n\n\nFigure 41: Layout (mask top view) of an NMOS (left) and a PMOS transistor (right). The transistor channel is formed where PC crosses RX; the BP marker turns the diffusion \\(p^+\\), and the NW well surrounds the PMOS. The area where PC overlaps RX is the actual transistor channel, defining its \\(W\\) and \\(L\\). Next to each transistor sits the corresponding substrate or well contact. Note that BP acts as a marking layer, whereas RX, PC, and NW define the actual device regions on the silicon.\n\n\n\n\n\n\n\n4.3.2 Polysilicon Resistor\nThe polysilicon resistor (Figure 42) uses the gate material (PC) as a resistive device. Since the gate poly is normally covered by silicide to lower its resistance, the silicide is suppressed with an OP shape; the intersection of OP with PC precisely defines the \\(L\\) and \\(W\\) of the resistor. Note that the existence of OP is a process option and might not be available in every technology. The gate polysilicon can be either \\(p\\)- or \\(n\\)-type; \\(p\\)-type poly resistors are often preferred, as they offer a lower temperature coefficient (thus the PC is marked with BP).\nThe resistance value of the polysilicon resistor is given by (\\(R_\\square\\) is the sheet resistance in Ω/\\(\\square\\))\n\\[\nR = \\rho \\frac{L}{t \\cdot W} = R_\\square \\frac{L}{W}\n\\tag{48}\\]\n\n\n\n\n\n\n\n\nFigure 42: Layout of a polysilicon resistor: the silicide on the PC strip is blocked by the OP shape, whose intersection with PC defines the resistor body of length \\(L\\) and width \\(W\\); the BP marker selects \\(p\\)-type poly. The silicided ends are contacted with CA and M1.\n\n\n\n\n\nNote that modern FinFET technologies might not support traditional planar polysilicon resistors, as the gate material is used to form the fins rather than a continuous sheet. In this case, often a metal resistor implemented in the back-end layers is used as an alternative.\n\n\n4.3.3 Diffusion Resistor\nDiffusion resistors (Figure 43) use source/drain diffusions or wells (with or without silicide) and are available in basically all silicon technologies, but they are usually inferior to polysilicon resistors: they have larger tolerances and a relatively high voltage coefficient, which can cause nonlinearity, and the nonlinear parasitic junction capacitance to the substrate can be critical as well. In older technology nodes (&gt; 0.25 µm), the matching of diffusion resistors was better than that of poly resistors. One clear advantage of diffusion resistors is reduced self-heating, as the resistor body is embedded in the silicon substrate, whereas poly resistors are isolated from the substrate by SiO2. So resistor with increased power dissipation can benefit from this property.\n\n\n\n\n\n\n\n\nFigure 43: Layout of a diffusion (n-well) resistor: the resistive body is the NW strip, contacted at both ends by \\(n^+\\) diffusions (RX); the OP shape blocks the silicide over the body. The parasitic junction to the substrate makes this resistor nonlinear with the applied voltage.\n\n\n\n\n\nThe resistor types available in IHP SG13 are summarized in Table 9.\n\n\n\nTable 9: Resistor types available in IHP SG13\n\n\n\n\n\n\n\n\n\n\n\n\nType\n\\(R_\\square\\) (Ω/\\(\\square\\))\nProcess tolerance (\\(\\pm 4 \\sigma\\))\nMatching\nTemp. coefficient\n\n\n\n\nSilicided \\(n^{++}\\)-poly (rsil)\n7\n±12 %\n0.6 %µm\n0.3 %/K\n\n\nBlocked \\(p^+\\)-poly (rppd)\n260\n±10 %\n1.5 %µm\n0.017 %/K\n\n\nBlocked compensated poly (rhigh)\n1360\n±15 %\n4.8 %µm\n−0.23 %/K\n\n\n\n\n\n\n\n\n4.3.4 Capacitors\nLinear capacitors can be implemented using the metal stack, either as vertical sandwich capacitors (parallel plates on adjacent metal layers) or as finger capacitors (exploiting the lateral coupling between interdigitated fingers on the same layers); both are shown in Figure 44. Depending on the design rules, the vertical or the lateral coupling capacitance might be more area-effective; such metal-oxide-metal (MOM) capacitors come for free in any technology. Due to the very tight lateral pitch is nm CMOS technologies, finger capacitors are often preferred for capacitor implementation (when a linear capacitor is required).\n\n\n\n\n\n\n\n\nFigure 44: Metal-oxide-metal (MOM) capacitors: (a) vertical sandwich capacitor (cross section) using the plate capacitance between stacked metal layers, with alternating layers connected to the two terminals by via stacks; (b) finger capacitor (top view) using the lateral coupling capacitance between interdigitated fingers drawn in a single metal layer.\n\n\n\n\n\nA few additional considerations for capacitors:\n\nThe density of MOM capacitors scales with smaller design rules and the number of metal layers. The lower metal layers should be skipped if the parasitic capacitance to the substrate is a concern.\nThe process may offer a specialized metal-insulator-metal (MIM) capacitor (density on the order of fF/µm²) using extra masks and processing steps, offering higher specific capacitance and low parasitics at extra cost.\nFor high capacitance density, or where nonlinearity is not critical, the MOSFET gate capacitance can be used, as the gate oxide is tightly controlled in manufacturing.\nIn IHP SG13, a MIM capacitor between Metal5 and TopMetal1 is available (ca. 1.5 fF/µm²); the MOM finger capacitor has ca. 0.3 fF/µm², so when using 4 metal layers the effective capacitance is comparable to the MIM capacitor.\n\n\n\n4.3.5 Diodes\nDiodes are formed by the available pn-junctions (\\(n^+\\) in substrate, \\(p^+\\) in n-well, n-well in substrate). They are intended mainly for reverse-biased operation, as the forward operation is usually not modeled accurately and should be avoided. Note that forward operation might inject charge into parasitic structures and cause latch-up (see ?@sec-latchup)! Applications of reverse-biased diodes include ESD protection structures, antenna diodes, and varactors.\n\n\n4.3.6 Bipolar Junction Transistors\nHigh-performance BJTs are available in bipolar and BiCMOS technologies, but at increased wafer cost compared to pure CMOS. In standard CMOS, a parasitic vertical substrate PNP can be implemented (Figure 45): the \\(p^+\\) diffusion in the n-well forms the emitter, the n-well the base, and the common \\(p\\)-substrate the collector. The performance is limited (\\(\\beta \\approx 1 \\ldots 10\\)), and the collector is tied to the substrate potential. Such a structure is mainly used in bandgap reference circuits where collector and base are shorted to \\(V_\\mathrm{SS}\\) (ground), and the foundry usually supplies a fixed layout template that shall not be modified.\n\n\n\n\n\n\n\n\nFigure 45: Cross section of the vertical substrate PNP available in any CMOS technology: the \\(p^+\\) diffusion in the n-well is the emitter, the n-well is the base, and the common \\(p\\)-substrate is the collector (contacted at the surface and tied to \\(V_\\mathrm{SS}\\))."
+    "text": "4.3 Devices\n\n4.3.1 NMOS and PMOS Transistors\nFigure 41 shows the layout (mask top view) of an NMOS and a PMOS transistor. The following observations can be made:\n\nThe MOSFET is created by the intersection of RX and PC; this intersection defines \\(W\\) and \\(L\\) of the transistor. The areas of RX not covered by PC become the source and drain regions.\nWhether a device is NMOS or PMOS is decided by whether the RX shape is contained inside a BP region (RX plus BP is \\(p^+\\), RX without BP is \\(n^+\\)).\nA \\(p^+\\) substrate contact is created by drawing RX covered by BP (outside the n-well).\nAn \\(n^+\\) well contact is created by drawing plain RX located inside NW.\nThe NW must surround the PMOS with sufficient margin.\nThe layer BP is a pure marking layer, assisting mask generation and device extraction from the layout.\nCA contacts connect source/drain/gate as well as the \\(p^+\\)/\\(n^+\\) contacts to M1.\n\n\n\n\n\n\n\n\n\nFigure 41: Layout (mask top view) of an NMOS (left) and a PMOS transistor (right). The transistor channel is formed where PC crosses RX; the BP marker turns the diffusion \\(p^+\\), and the NW well surrounds the PMOS. The area where PC overlaps RX is the actual transistor channel, defining its \\(W\\) and \\(L\\). Next to each transistor sits the corresponding substrate or well contact. Note that BP acts as a marking layer, whereas RX, PC, and NW define the actual device regions on the silicon.\n\n\n\n\n\n\n\n4.3.2 Polysilicon Resistor\nThe polysilicon resistor (Figure 42) uses the gate material (PC) as a resistive device. Since the gate poly is normally covered by silicide to lower its resistance, the silicide is suppressed with an OP shape; the intersection of OP with PC precisely defines the \\(L\\) and \\(W\\) of the resistor. Note that the existence of OP is a process option and might not be available in every technology. The gate polysilicon can be either \\(p\\)- or \\(n\\)-type; \\(p\\)-type poly resistors are often preferred, as they offer a lower temperature coefficient (thus the PC is marked with BP).\nThe resistance value of the polysilicon resistor is given by (\\(R_\\square\\) is the sheet resistance in Ω/\\(\\square\\))\n\\[\nR = \\rho \\frac{L}{t \\cdot W} = R_\\square \\frac{L}{W}\n\\tag{48}\\]\n\n\n\n\n\n\n\n\nFigure 42: Layout of a polysilicon resistor: the silicide on the PC strip is blocked by the OP shape, whose intersection with PC defines the resistor body of length \\(L\\) and width \\(W\\); the BP marker selects \\(p\\)-type poly. The silicided ends are contacted with CA and M1.\n\n\n\n\n\nNote that modern FinFET technologies might not support traditional planar polysilicon resistors, as the gate material is used to form the fins rather than a continuous sheet. In this case, often a metal resistor implemented in the back-end layers is used as an alternative.\n\n\n4.3.3 Diffusion Resistor\nDiffusion resistors (Figure 43) use source/drain diffusions or wells (with or without silicide) and are available in basically all silicon technologies, but they are usually inferior to polysilicon resistors: they have larger tolerances and a relatively high voltage coefficient, which can cause nonlinearity, and the nonlinear parasitic junction capacitance to the substrate can be critical as well. In older technology nodes (&gt; 0.25 µm), the matching of diffusion resistors was better than that of poly resistors. One clear advantage of diffusion resistors is reduced self-heating, as the resistor body is embedded in the silicon substrate, whereas poly resistors are isolated from the substrate by SiO2. So resistor with increased power dissipation can benefit from this property.\n\n\n\n\n\n\n\n\nFigure 43: Layout of a diffusion (n-well) resistor: the resistive body is the NW strip, contacted at both ends by \\(n^+\\) diffusions (RX); the OP shape blocks the silicide over the body. The parasitic junction to the substrate makes this resistor nonlinear with the applied voltage.\n\n\n\n\n\nThe resistor types available in IHP SG13 are summarized in Table 9.\n\n\n\nTable 9: Resistor types available in IHP SG13\n\n\n\n\n\n\n\n\n\n\n\n\nType\n\\(R_\\square\\) (Ω/\\(\\square\\))\nProcess tolerance (\\(\\pm 4 \\sigma\\))\nMatching\nTemp. coefficient\n\n\n\n\nSilicided \\(n^{++}\\)-poly (rsil)\n7\n±12 %\n0.6 %µm\n0.3 %/K\n\n\nBlocked \\(p^+\\)-poly (rppd)\n260\n±10 %\n1.5 %µm\n0.017 %/K\n\n\nBlocked compensated poly (rhigh)\n1360\n±15 %\n4.8 %µm\n−0.23 %/K\n\n\n\n\n\n\n\n\n4.3.4 Capacitors\nLinear capacitors can be implemented using the metal stack, either as vertical sandwich capacitors (parallel plates on adjacent metal layers) or as finger capacitors (exploiting the lateral coupling between interdigitated fingers on the same layers); both are shown in Figure 44. Depending on the design rules, the vertical or the lateral coupling capacitance might be more area-effective; such metal-oxide-metal (MOM) capacitors come for free in any technology. Due to the very tight lateral pitch is nm CMOS technologies, finger capacitors are often preferred for capacitor implementation (when a linear capacitor is required).\n\n\n\n\n\n\n\n\nFigure 44: Metal-oxide-metal (MOM) capacitors: (a) vertical sandwich capacitor (cross section) using the plate capacitance between stacked metal layers, with alternating layers connected to the two terminals by via stacks; (b) finger capacitor (top view) using the lateral coupling capacitance between interdigitated fingers drawn in a single metal layer.\n\n\n\n\n\nA few additional considerations for capacitors:\n\nThe density of MOM capacitors scales with smaller design rules and the number of metal layers. The lower metal layers should be skipped if the parasitic capacitance to the substrate is a concern.\nThe process may offer a specialized metal-insulator-metal (MIM) capacitor (density on the order of fF/µm²) using extra masks and processing steps, offering higher specific capacitance and low parasitics at extra cost.\nFor high capacitance density, or where nonlinearity is not critical, the MOSFET gate capacitance can be used, as the gate oxide is tightly controlled in manufacturing.\nIn IHP SG13, a MIM capacitor between Metal5 and TopMetal1 is available (ca. 1.5 fF/µm²); the MOM finger capacitor has ca. 0.3 fF/µm², so when using 4 metal layers the effective capacitance is comparable to the MIM capacitor.\n\n\n\n4.3.5 Diodes\nDiodes are formed by the available pn-junctions (\\(n^+\\) in substrate, \\(p^+\\) in n-well, n-well in substrate). They are intended mainly for reverse-biased operation, as the forward operation is usually not modeled accurately and should be avoided. Note that forward operation might inject charge into parasitic structures and cause latch-up (see the latch-up chapter)! Applications of reverse-biased diodes include ESD protection structures, antenna diodes, and varactors.\n\n\n4.3.6 Bipolar Junction Transistors\nHigh-performance BJTs are available in bipolar and BiCMOS technologies, but at increased wafer cost compared to pure CMOS. In standard CMOS, a parasitic vertical substrate PNP can be implemented (Figure 45): the \\(p^+\\) diffusion in the n-well forms the emitter, the n-well the base, and the common \\(p\\)-substrate the collector. The performance is limited (\\(\\beta \\approx 1 \\ldots 10\\)), and the collector is tied to the substrate potential. Such a structure is mainly used in bandgap reference circuits where collector and base are shorted to \\(V_\\mathrm{SS}\\) (ground), and the foundry usually supplies a fixed layout template that shall not be modified.\n\n\n\n\n\n\n\n\nFigure 45: Cross section of the vertical substrate PNP available in any CMOS technology: the \\(p^+\\) diffusion in the n-well is the emitter, the n-well is the base, and the common \\(p\\)-substrate is the collector (contacted at the surface and tied to \\(V_\\mathrm{SS}\\))."
   },
   {
     "objectID": "dcic.html#sec-layout-drc",
@@ -308,10 +483,143 @@
     "text": "Footnotes\n\n\nThe mobility value used here is not fully consistent with the process constant \\(K_\\mathrm{n} = \\mu_\\mathrm{n}C'_\\mathrm{ox}= 280\\,\\mu\\text{A/V}^2\\) in Table 1, which (with \\(C'_\\mathrm{ox}= 17.3\\,\\text{fF/µm}^2\\)) would imply an effective \\(\\mu_\\mathrm{n}\\approx 160\\,\\text{cm}^2/(\\text{V}\\cdot\\text{s})\\). The effective mobility depends strongly on the vertical field and thus on bias; such spread between simple hand-calculation parameters is normal and is one more reason to verify all sizing choices by simulation.↩︎"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Design of Complex Integrated Circuits",
-    "section": "",
-    "text": "Design of Complex Integrated Circuits\n(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)\nThis is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 (“VL Entwurf komplexer integrierter Schaltungen”). Follow this link to access the material.\nThe course covers how integrated circuits are built (MOSFET operation, CMOS technology, layout, packaging, testing, and the economics of chip making) and how they are designed (design methodology, ESD protection, latch-up, robust design techniques, and circuit simulation).\nAll course material is made publicly available and shared under the Apache-2.0 license.\nWe happily accept pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue!"
+    "objectID": "slides/intro.html#sec-intro-scale",
+    "href": "slides/intro.html#sec-intro-scale",
+    "title": "Introduction",
+    "section": "1.1 How Small Is a Nanometer?",
+    "text": "1.1 How Small Is a Nanometer?"
+  },
+  {
+    "objectID": "slides/intro.html#sec-intro-history",
+    "href": "slides/intro.html#sec-intro-history",
+    "title": "Introduction",
+    "section": "1.2 A Brief History of Semiconductors",
+    "text": "1.2 A Brief History of Semiconductors"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-wafer",
+    "href": "slides/technology.html#sec-technology-wafer",
+    "title": "IC Technology",
+    "section": "3.1 The Silicon Wafer",
+    "text": "3.1 The Silicon Wafer\n\nThis chapter walks through the manufacturing technology of integrated circuits: from the raw silicon wafer through the individual processing steps (doping, photolithography, etching, thin-film deposition, and interconnect formation) to a complete CMOS process flow. The treatment largely follows (Hu 2010)."
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-selective-doping",
+    "href": "slides/technology.html#sec-technology-selective-doping",
+    "title": "IC Technology",
+    "section": "3.2 Selective Doping",
+    "text": "3.2 Selective Doping"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-litho",
+    "href": "slides/technology.html#sec-technology-litho",
+    "title": "IC Technology",
+    "section": "3.3 Photolithography",
+    "text": "3.3 Photolithography"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-etching",
+    "href": "slides/technology.html#sec-technology-etching",
+    "title": "IC Technology",
+    "section": "3.4 Etching",
+    "text": "3.4 Etching"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-doping",
+    "href": "slides/technology.html#sec-technology-doping",
+    "title": "IC Technology",
+    "section": "3.5 Doping Techniques",
+    "text": "3.5 Doping Techniques"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-thin-film",
+    "href": "slides/technology.html#sec-technology-thin-film",
+    "title": "IC Technology",
+    "section": "3.6 Thin-Film Deposition",
+    "text": "3.6 Thin-Film Deposition"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-interconnect",
+    "href": "slides/technology.html#sec-technology-interconnect",
+    "title": "IC Technology",
+    "section": "3.7 Interconnects",
+    "text": "3.7 Interconnects"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-cmos-flow",
+    "href": "slides/technology.html#sec-technology-cmos-flow",
+    "title": "IC Technology",
+    "section": "3.8 An Exemplary CMOS Process Flow",
+    "text": "3.8 An Exemplary CMOS Process Flow\n\nThe classic dielectric between the metal layers is SiO2, but in order to reduce capacitive parasitics, low-k dielectrics (e.g., F- or C-doped SiO2) are used in modern processes. Between processing steps, CMP is used to planarize the surfaces."
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-ihp",
+    "href": "slides/technology.html#sec-technology-ihp",
+    "title": "IC Technology",
+    "section": "3.9 The Open-Source PDK IHP SG13",
+    "text": "3.9 The Open-Source PDK IHP SG13"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-qualification",
+    "href": "slides/technology.html#sec-technology-qualification",
+    "title": "IC Technology",
+    "section": "3.10 Technology Qualification",
+    "text": "3.10 Technology Qualification"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-tapeout",
+    "href": "slides/layout.html#sec-layout-tapeout",
+    "title": "The Layout",
+    "section": "4.1 Files and Tapeout",
+    "text": "4.1 Files and Tapeout\n\nThe layout is the 2D representation of the IC manufacturing data. While the schematic captures the electrical intent of a design, the layout captures its physical realization: in the layout tools, the design is drawn on several layers, which are the foundation for the generation of the photomasks used in IC production. Commercial layout tools are, e.g., Cadence Virtuoso, Siemens L-Edit, and open-source tools are Magic and KLayout. The layers are usually manipulated before the geometries are transferred to the masks (shrink, enlarge, invert, combination of several layers into one mask layer, optical proximity correction, etc.)."
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-layers",
+    "href": "slides/layout.html#sec-layout-layers",
+    "title": "The Layout",
+    "section": "4.2 Generic Layer Definition",
+    "text": "4.2 Generic Layer Definition\n\nThe layout is checked for compliance with the wafer-fab design rules in the design rule check (DRC), and for conformance with the intended circuit in the layout-versus-schematic (LVS) check, where a netlist extracted from the layout is compared to the netlist of the original schematic. If all checks pass, the layout data is sent to mask production—this step is called tapeout. The mask house processes the layout data and produces the photomasks used by the wafer fab (depending on technology complexity, between 10 and 80 masks).\nThe standard file format for layout data is GDSII, a hierarchical database in a binary stream format. A newer format with more efficient storage is OASIS, but GDSII is still very common."
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-devices",
+    "href": "slides/layout.html#sec-layout-devices",
+    "title": "The Layout",
+    "section": "4.3 Devices",
+    "text": "4.3 Devices"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-drc",
+    "href": "slides/layout.html#sec-layout-drc",
+    "title": "The Layout",
+    "section": "4.4 Design Rules",
+    "text": "4.4 Design Rules"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-analog",
+    "href": "slides/layout.html#sec-layout-analog",
+    "title": "The Layout",
+    "section": "4.5 Analog Layout Techniques",
+    "text": "4.5 Analog Layout Techniques\n\nThe complete layout rules of the open-source IHP SG13 PDK can be found in the SG13G2 layout rules document and serve as a practical example of a production DRC rule set."
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-additional",
+    "href": "slides/layout.html#sec-layout-additional",
+    "title": "The Layout",
+    "section": "4.6 Additional Layout and Mask Structures",
+    "text": "4.6 Additional Layout and Mask Structures"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-checks",
+    "href": "slides/layout.html#sec-layout-checks",
+    "title": "The Layout",
+    "section": "4.7 Layout Checks",
+    "text": "4.7 Layout Checks"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-extraction",
+    "href": "slides/layout.html#sec-layout-extraction",
+    "title": "The Layout",
+    "section": "4.8 Layout Extraction",
+    "text": "4.8 Layout Extraction"
   }
 ]

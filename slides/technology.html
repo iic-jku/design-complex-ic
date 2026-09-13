@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="../favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <title>Design of Complex Integrated Circuits – IC Technology</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">IC Technology</h1>
+  <p class="subtitle">Design of Complex Integrated Circuits</p>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section>
+<section id="sec-technology" class="title-slide slide level1 center" data-number="3">
+<h1><span class="header-section-number">3</span> IC Technology</h1>
+<div class="hidden">
+
+</div>
+</section>
+<section id="sec-technology-wafer" class="title-slide slide level2 center" data-number="3.1">
+<h2><span class="header-section-number">3.1</span> The Silicon Wafer</h2>
+<aside class="notes">
+<p>This chapter walks through the manufacturing technology of integrated circuits: from the raw silicon wafer through the individual processing steps (doping, photolithography, etching, thin-film deposition, and interconnect formation) to a complete CMOS process flow. The treatment largely follows <span class="citation" data-cites="Hu_ModernDevices">(<a href="#/references" role="doc-biblioref" onclick="">Hu 2010</a>)</span>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>The Silicon Wafer</h3>
+<div id="cell-fig-czochralski" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div id="fig-czochralski" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-czochralski-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-czochralski-output-1.png" width="470" height="450">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-czochralski-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;25: Czochralski crystal growth: a rotating seed crystal is slowly pulled out of the silicon melt, growing a large single-crystal ingot.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>The starting material for integrated-circuit production is, quite literally, sand: quartz sand (SiO<sub>2</sub>) is reduced with coal in an electric arc furnace at about 2000 °C to roughly 98 % purity, following the reaction <span class="math inline">\(\text{SiO}_2 + 2\,\text{C} \rightarrow \text{Si} + 2\,\text{CO}\)</span>. This “metallurgical-grade” silicon is then chemically purified via trichlorosilane (<span class="math inline">\(\text{Si} + 3\,\text{HCl} \rightleftharpoons \text{SiHCl}_3 + \text{H}_2\)</span>), which can be distilled and decomposed back into ultra-pure silicon.</p>
+<p>From the purified silicon, a large single crystal—the <strong>ingot</strong>—is grown by the <a href="https://en.wikipedia.org/wiki/Czochralski_method"><strong>Czochralski method</strong></a>, illustrated in <a href="#/fig-czochralski" class="quarto-xref">Figure&nbsp;25</a>: a seed crystal is dipped into molten silicon and slowly pulled upwards while rotating, so that the melt crystallizes at the interface, continuing the crystal structure of the seed. Further purification can be achieved by zone refining, where a small molten zone is moved along the ingot, dragging impurities along; the final purity reaches 99.9999999 %, which is equivalent to one impurity atom per billion silicon atoms.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="doping" class="slide level3" data-number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Doping</h3>
+<div id="tbl-doping" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-doping-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6: Overview of <span class="math inline">\(n\)</span>-type and <span class="math inline">\(p\)</span>-type doping of silicon
+</figcaption>
+<div aria-describedby="tbl-doping-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 44%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><span class="math inline">\(n\)</span>-type (donor materials)</th>
+<th style="text-align: left;"><span class="math inline">\(p\)</span>-type (acceptor materials)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Effect</td>
+<td style="text-align: left;">Introduces additional free electrons</td>
+<td style="text-align: left;">Introduces a lack of electrons (“holes”)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Elements</td>
+<td style="text-align: left;">Phosphorus (P), Arsenic (As)</td>
+<td style="text-align: left;">Boron (B), Gallium (Ga), Indium (In)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Carrier concentrations</td>
+<td style="text-align: left;"><span class="math inline">\(n_0 \approx N_\mathrm{d}\)</span>, <span class="math inline">\(p_0 \approx n_\mathrm{i}^2 / N_\mathrm{d}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p_0 \approx N_\mathrm{a}\)</span>, <span class="math inline">\(n_0 \approx n_\mathrm{i}^2 / N_\mathrm{a}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<aside class="notes">
+<p>The ingot is then cut into <a href="https://en.wikipedia.org/wiki/Wafer_(electronics)"><strong>wafers</strong></a> using a saw, to a thickness of 0.3 to 0.8 mm, and the wafers are polished. The standard wafer diameters today are 150 mm (6”), 200 mm (8”), and 300 mm (12”). The resistivity of the wafer material, set by doping, is 0.1 to 20 Ω cm, with up to 1000 Ω cm for specialty processes. Wafers can be <span class="math inline">\(n\)</span>- or <span class="math inline">\(p\)</span>-type, and often epitaxial (“epi”) wafers are used.</p>
+<p>The silicon atoms are spaced roughly 0.24 nm apart in the crystal lattice, resulting in about <span class="math inline">\(5 \times 10^{22}\,\text{atoms/cm}^3\)</span>. The intrinsic carrier concentration is <span class="math inline">\(n_\mathrm{i} = p_\mathrm{i} \approx 1.0 \times 10^{10}\,\text{cm}^{-3}\)</span> at 300 K, with an exponential temperature dependence (older textbooks often quote <span class="math inline">\(1.5 \times 10^{10}\,\text{cm}^{-3}\)</span>; the accepted measured value is <span class="math inline">\(9.65 \times 10^{9}\,\text{cm}^{-3}\)</span> <span class="citation" data-cites="Sproul_Green_1991">(<a href="#/references" role="doc-biblioref" onclick="">Sproul and Green 1991</a>)</span>). By introducing doping materials in small quantities, the carrier concentration can be modulated strongly; see <a href="#/tbl-doping" class="quarto-xref">Table&nbsp;6</a> (<span class="math inline">\(N_\mathrm{d}\)</span> and <span class="math inline">\(N_\mathrm{a}\)</span> are given in <span class="math inline">\(\text{cm}^{-3}\)</span>).</p>
+<p>The resulting resistivity of doped silicon is shown in <a href="#/fig-resistivity" class="quarto-xref">Figure&nbsp;26</a> as a function of the doping concentration.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Doping</h3>
+<div id="cell-fig-resistivity" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div id="fig-resistivity" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-resistivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-resistivity-output-1.png" width="565" height="373">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-resistivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;26: Resistivity of silicon at 300 K as a function of the doping concentration, calculated as <span class="math inline">\(\rho = 1/(q \mu N)\)</span> with doping-dependent carrier mobilities (Arora mobility fits).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+Resistivity of silicon at 300 K as a function of the doping concentration, calculated as <span class="math inline">\(\rho = 1/(q \mu N)\)</span> with doping-dependent carrier mobilities (Arora mobility fits). p-type silicon has a higher resistivity for the same doping level because of the lower hole mobility.
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Doping</h3>
+<div id="nte-wafer-resistivity">
+<div id="nte-wafer-resistivity" class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note&nbsp;3: Example: Wafer Doping</strong></p>
+</div>
+<div class="callout-content">
+<p>Let us assume a <span class="math inline">\(p\)</span>-type wafer with 50 Ω cm resistivity (as used in IHP SG13 CMOS). Using <a href="#/fig-resistivity" class="quarto-xref">Figure&nbsp;26</a>, we find <span class="math inline">\(N_\mathrm{a}= p_0 \approx 2.7 \times 10^{14}\,\text{cm}^{-3}\)</span>, which results in <span class="math inline">\(n_0 \approx n_\mathrm{i}^2 / N_\mathrm{a}= 3.7 \times 10^{5}\,\text{cm}^{-3}\)</span>. This doping concentration equates to about one acceptor atom per 180 million silicon atoms!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="sec-technology-selective-doping" class="title-slide slide level2 center" data-number="3.2">
+<h2><span class="header-section-number">3.2</span> Selective Doping</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>Selective Doping</h3>
+<ul>
+<li>The picture from a photomask is optically transferred into a photoresist on the wafer, using a process called <a href="https://en.wikipedia.org/wiki/Photolithography"><strong>photolithography</strong></a>.</li>
+<li>This photoresist is developed and used to selectively etch a masking layer, like SiO<sub>2</sub> (a “hard mask”).</li>
+<li>After this step, the silicon surface is opened at specific locations and covered otherwise, allowing the introduction of dopants into defined areas of the wafer.</li>
+</ul>
+<aside class="notes">
+<p>To introduce dopants into the silicon wafer selectively, a masking process is used:</p>
+<p>The complete sequence—hard-mask formation, lithography, etching, dopant introduction, and annealing (which removes defects from the crystal structure while the dopants diffuse into the silicon)—is shown in <a href="#/fig-doping-process" class="quarto-xref">Figure&nbsp;27</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Selective Doping</h3>
+<div id="cell-fig-doping-process" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div id="fig-doping-process" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-doping-process-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-doping-process-output-1.png" width="390" height="681">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-doping-process-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;27: Selective doping using a hard mask: (a) the wafer is covered by a hard mask (e.g., SiO<span class="math inline">\(_2\)</span>), (b) the hard mask is opened by photolithography and etching, (c) dopants are introduced through the opening (shown here by implantation), and (d) after annealing, the dopants have diffused into the silicon and the crystal damage is repaired.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="oxidation-of-silicon" class="slide level3" data-number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Oxidation of Silicon</h3>
+<aside class="notes">
+<p>Oxidation of silicon is done at elevated temperatures in a furnace, using either “dry” (<span class="math inline">\(\text{Si} + \text{O}_2 \rightarrow \text{SiO}_2\)</span>) or “wet” (<span class="math inline">\(\text{Si} + 2\,\text{H}_2\text{O} \rightarrow \text{SiO}_2 + 2\,\text{H}_2\)</span>) oxidation. The oxide growth follows the <strong>Deal-Grove model</strong> <span class="citation" data-cites="Deal_Grove">(<a href="#/references" role="doc-biblioref" onclick="">Deal and Grove 1965</a>)</span>; the resulting growth curves are shown in <a href="#/fig-oxidation" class="quarto-xref">Figure&nbsp;28</a>. Wet oxidation is much faster, while dry oxidation yields denser, higher-quality oxides (used, e.g., for gate oxides).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Oxidation of Silicon</h3>
+<div id="cell-fig-oxidation" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div id="fig-oxidation" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-oxidation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-oxidation-output-1.png" width="565" height="373">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-oxidation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;28: Thermal oxide growth on silicon calculated with the Deal-Grove model, <span class="math inline">\(x_\mathrm{ox}^2 + A x_\mathrm{ox} = B t\)</span>, for wet and dry oxidation at different temperatures.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+Thermal oxide growth on silicon calculated with the Deal-Grove model, <span class="math inline">\(x_\mathrm{ox}^2 + A x_\mathrm{ox} = B t\)</span>, for wet and dry oxidation at different temperatures. Wet oxidation is much faster and used for thick isolation oxides, dry oxidation for thin, high-quality gate oxides.
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Oxidation of Silicon</h3>
+<ul>
+<li>The gate dielectric of the MOSFET.</li>
+<li>Hard masks for implantation or doping.</li>
+<li>Device isolation and isolation of wiring.</li>
+</ul>
+<aside class="notes">
+<p>The SiO<sub>2</sub> is used for:</p>
+<p>The growth of SiO<sub>2</sub> consumes silicon; the silicon thickness is reduced by 44 % of the grown oxide thickness. Alternatively, <a href="https://en.wikipedia.org/wiki/Chemical_vapor_deposition">chemical vapour deposition</a> (CVD) can be used for depositing SiO<sub>2</sub> without consuming silicon. Local oxidation of silicon (LOCOS) can be used to laterally isolate active regions of an integrated circuit, but in modern CMOS technologies <a href="https://en.wikipedia.org/wiki/Shallow_trench_isolation">shallow trench isolation</a> (STI) is used instead, for higher transistor density.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sec-technology-litho" class="title-slide slide level2 center" data-number="3.3">
+<h2><span class="header-section-number">3.3</span> Photolithography</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>Photolithography</h3>
+<div id="cell-fig-photolithography" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div id="fig-photolithography" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-photolithography-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-photolithography-output-1.png" width="418" height="758">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-photolithography-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;29: Patterning by photolithography: (a) the oxidized wafer is coated with photoresist and exposed through the photomask, (b) with a positive resist, the exposed resist dissolves during development, (c) the hard mask is etched through the resist opening and the resist is removed, and (d) a negative resist creates the inverse image.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>In photolithography, the wafer is first oxidized to create a hard-mask layer and then coated with photoresist. The photomask is imaged onto the photoresist with a projection lens system, the resist is developed and baked, and the hard mask is etched through the resist openings. There are two types of resist: with a <strong>positive</strong> resist, the exposed areas dissolve in the developer, transferring the mask image directly; with a <strong>negative</strong> resist, the exposed areas remain, creating an inverse image. After etching, the remaining photoresist is removed. The process is illustrated in <a href="#/fig-photolithography" class="quarto-xref">Figure&nbsp;29</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="photomasks" class="slide level3" data-number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Photomasks</h3>
+<aside class="notes">
+<p>Instead of a photomask which exposes the whole wafer at once, a <strong>reticle</strong> is mostly used, which is smaller than the wafer, with a field size of ca. 26 mm × 33 mm (limiting the maximum die size to 858 mm²). A <strong>stepper</strong> exposes the complete wafer field by field with the reticle. The photomask/reticle is usually made of a glass carrier with a structured chromium layer.</p>
+<p>The reticle must be protected from contamination, so a thin transparent membrane (called a <strong>pellicle</strong>) keeps particles out of the focal plane, away from the mask structures. The reticle can be the same size (1×) or larger (2× or 4×) than the structures on the wafer, and the photomask can touch the wafer (“contact printing”) or be kept at a distance (“proximity printing”)—modern lithography uses projection printing through a reduction lens.</p>
+<p>The complete exposure system is shown in <a href="#/fig-litho-scanner" class="quarto-xref">Figure&nbsp;30</a>. The light passes from the source through the <strong>illuminator</strong>, which shapes the angular distribution of the illumination (e.g.&nbsp;into a dipole or quasar pattern), onto the reticle; the projection optics then image a demagnified copy of the reticle field into the resist, and the scanner steps this field across the wafer, one exposure at a time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Photomasks</h3>
+<div id="cell-fig-litho-scanner" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div id="fig-litho-scanner" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-litho-scanner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-litho-scanner-output-1.png" width="752" height="428">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-litho-scanner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;30: The optical column of a projection lithography scanner: light from the source passes through the illuminator, which shapes its angular distribution, onto the reticle, and the projection optics image a demagnified copy of the reticle field into the photoresist.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+The optical column of a projection lithography scanner: light from the source passes through the illuminator, which shapes its angular distribution, onto the reticle, and the projection optics image a demagnified copy of the reticle field into the photoresist. The scanner exposes the wafer field by field. Resolution and depth of focus both follow from the wavelength and the numerical aperture of the optics.
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="resolution-limit" class="slide level3" data-number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Resolution Limit</h3>
+<p><span id="eq-rayleigh"><span class="math display">\[
+R = k_1 \frac{\lambda}{n \sin \Theta} = k_1 \frac{\lambda}{\mathrm{NA}}
+\tag{45}\]</span></span></p>
+<p><span id="eq-dof"><span class="math display">\[
+\mathrm{DOF} = k_2 \frac{n \lambda}{\mathrm{NA}^2}
+\tag{46}\]</span></span></p>
+<aside class="notes">
+<p>As in any other optical system, the resolution limit of photolithography is given by the Rayleigh criterion:</p>
+<p>Here, <span class="math inline">\(\lambda\)</span> is the wavelength of the light source, and <span class="math inline">\(k_1\)</span> is a factor that captures various resolution-enhancement measures, like phase-shift masks or off-axis illumination (<span class="math inline">\(0.25 \leq k_1 \leq 1\)</span>). <span class="math inline">\(\mathrm{NA}\)</span> is the numerical aperture of the lens system (in air, <span class="math inline">\(\mathrm{NA} \leq 0.93\)</span>). The resulting half-pitch <span class="math inline">\(R\)</span> is the smallest pattern that can be printed on a wafer: <span class="math inline">\(R = 100\,\text{nm}\)</span> means that lines with a width of 100 nm and a spacing of 100 nm can be printed.</p>
+<p>Resolution is not free. The <strong>depth of focus</strong>, i.e.&nbsp;the range over which the projected image stays sharp, shrinks with the <em>square</em> of the numerical aperture:</p>
+<p>Here, <span class="math inline">\(k_2\)</span> is the depth-of-focus counterpart of <span class="math inline">\(k_1\)</span>: it captures how much image degradation the process still tolerates, set by resist contrast and thickness, feature type and illumination scheme (<span class="math inline">\(0.5 \leq k_2 \leq 1\)</span>). The two factors pull against each other—the same off-axis illumination that buys a small <span class="math inline">\(k_1\)</span> also shrinks <span class="math inline">\(k_2\)</span>, so pushing resolution costs focus budget twice. Note that the refractive index <span class="math inline">\(n\)</span> does not cancel here: raising <span class="math inline">\(n\)</span> recovers depth of focus at a given <span class="math inline">\(\mathrm{NA}\)</span>.</p>
+<p>This is why resists are kept thin and why the wafer surface must be held in focus to within a few tens of nanometers while the field is scanned.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="light-sources" class="slide level3" data-number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Light Sources</h3>
+<aside class="notes">
+<p>In the 1980s, mercury lamps with <span class="math inline">\(\lambda = 436\,\text{nm}\)</span> (g-line) or <span class="math inline">\(\lambda = 365\,\text{nm}\)</span> (i-line) were used. Starting with 0.25 µm CMOS (until 180 nm), excimer lasers with <span class="math inline">\(\lambda = 248\,\text{nm}\)</span> were introduced, called deep-ultraviolet (DUV) light. Since 130 nm CMOS, ArF lasers with <span class="math inline">\(\lambda = 193\,\text{nm}\)</span> are used, which can be combined with multi-patterning to break the half-pitch limit of <span class="math inline">\(R \approx 40\,\text{nm}\)</span>. Finally, <a href="https://en.wikipedia.org/wiki/EUV_lithography">extreme-ultraviolet (EUV) lithography</a> was introduced at the 7 nm CMOS node, offering a huge reduction in wavelength to <span class="math inline">\(\lambda = 13.5\,\text{nm}\)</span>—accompanied by an extreme cost impact due to the need for all-reflective optics.</p>
+<p>Note that there is only one company in the world that currently manufactures EUV lithography machines: ASML from the Netherlands. This gives ASML a unique position in the semiconductor equipment market, as EUV is critical for advanced nodes. Zeiss from Germany produces the high-precision optics required for these machines. Further, there is only one company in the world that makes the multi-beam mask writers needed for creating the EUV masks: IMS Nanofabrication from Austria.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="resolution-enhancements" class="slide level3" data-number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Resolution Enhancements</h3>
+<ul>
+<li><strong>Optical proximity correction (OPC)</strong> enhances the contrast of critical layout features like line ends and corners by pre-distorting the mask shapes.</li>
+<li><strong>Phase-shift masks (PSM)</strong> vary the thickness of the mask, so that phase changes of the light can be used for contrast enhancement.</li>
+<li><strong>Immersion lithography</strong> uses the refractive index of water (<span class="math inline">\(n = 1.44\)</span>) between lens and wafer to achieve <span class="math inline">\(\mathrm{NA} &gt; 1\)</span>; per <a href="#/eq-dof" class="quarto-xref">Equation&nbsp;46</a>, the higher <span class="math inline">\(n\)</span> also restores part of the depth of focus lost to the larger <span class="math inline">\(\mathrm{NA}\)</span>.</li>
+</ul>
+<aside class="notes">
+<p>Various methods are used to reduce the half-pitch in <a href="#/eq-rayleigh" class="quarto-xref">Equation&nbsp;45</a> by compensating distortion due to diffraction and interference, modifying either the amplitude or the phase of the light:</p>
+<p>Ultimately, using these techniques, structures considerably smaller than the wavelength of the used light can be printed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="euv-lithography" class="slide level3" data-number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> EUV Lithography</h3>
+<ul>
+<li>ArF immersion lithography: <span class="math inline">\(\lambda = 193\,\text{nm}\)</span>, <span class="math inline">\(\mathrm{NA} = 1.35\)</span>, <span class="math inline">\(k_1 = 0.27\)</span> (with PSM) <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(R \approx 40\,\text{nm}\)</span>.</li>
+<li>First-generation EUV (NXE): <span class="math inline">\(\lambda = 13.5\,\text{nm}\)</span>, <span class="math inline">\(\mathrm{NA} = 0.33\)</span>, <span class="math inline">\(k_1 = 0.32\)</span> <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(R \approx 13\,\text{nm}\)</span>.</li>
+<li>Current high-NA EUV (EXE): <span class="math inline">\(\lambda = 13.5\,\text{nm}\)</span>, <span class="math inline">\(\mathrm{NA} = 0.55\)</span>, <span class="math inline">\(k_1 = 0.32\)</span> <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(R \approx 8\,\text{nm}\)</span>.</li>
+</ul>
+<aside class="notes">
+<p>EUV light at 13.5 nm is created by firing laser pulses at molten tin droplets. There are no transmissive lens materials for EUV, so the optics are constructed from reflective mirrors with about 30 % loss per mirror. A first-generation EUV scanner is a 180-tonne machine using 0.5 MW of electrical power to create roughly 200 W of optical power at the wafer, processing about 200 wafers per hour. Comparing the achievable resolution:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sec-technology-etching" class="title-slide slide level2 center" data-number="3.4">
+<h2><span class="header-section-number">3.4</span> Etching</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>Etching</h3>
+<ul>
+<li><strong>Wet etching</strong>, using liquid chemicals (typically isotropic).</li>
+<li><strong>Dry etching</strong>, using chemically active ionized gases in a plasma reactor (can be highly anisotropic).</li>
+</ul>
+<aside class="notes">
+<p>Etching is used to transfer the image from the photoresist into the hard mask (or from one layer into another layer) by selectively removing material. Etching can be isotropic or anisotropic, characterized by the anisotropy <span class="math inline">\(A\)</span>; the selectivity <span class="math inline">\(S\)</span> measures the ratio of the etch rate of the film to the etch rate of the mask. An optimal etch has <span class="math inline">\(A=1\)</span> (only vertical etching, no lateral etch) and <span class="math inline">\(S=\infty\)</span> (the mask is not attacked). Two types of etches are used:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sec-technology-doping" class="title-slide slide level2 center" data-number="3.5">
+<h2><span class="header-section-number">3.5</span> Doping Techniques</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>Doping Techniques</h3>
+<ul>
+<li><strong>Diffusion</strong>: dopants move (by diffusion) from the wafer surface into the wafer material; the source of the dopants is a gas (e.g., POCl<sub>3</sub> for phosphorus doping) or a solid film on the wafer surface.</li>
+<li><a href="https://en.wikipedia.org/wiki/Ion_implantation"><strong>Ion implantation</strong></a>: dopants are ionized, accelerated, and shot into the wafer material.</li>
+<li><a href="https://en.wikipedia.org/wiki/Epitaxy"><strong>Epitaxy</strong></a>: additional silicon is grown on the wafer surface and doped in situ while growing the silicon layer.</li>
+</ul>
+<aside class="notes">
+<p>Three methods of introducing dopants into the silicon can be used:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="diffusion" class="slide level3" data-number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Diffusion</h3>
+<ul>
+<li><strong>Infinite source</strong> of impurities at the surface: the resulting doping profile follows a complementary error function (erfc).</li>
+<li><strong>Finite source</strong> of impurities at the surface: the resulting doping profile is a Gaussian, <span class="math inline">\(N(x,t) = N_{0}/\sqrt{\pi D t} \cdot \exp(-x^{2} / (4 D t))\)</span>, with <span class="math inline">\(x\)</span> the distance from the wafer surface, <span class="math inline">\(N_0\)</span> the initial dopant dose per area, <span class="math inline">\(D\)</span> the diffusivity, and <span class="math inline">\(t\)</span> the diffusion time.</li>
+</ul>
+<aside class="notes">
+<p>Diffusion is the movement of impurity atoms from the surface into the bulk of the silicon, performed at high temperatures (900 to 1200 °C). There are two limiting cases:</p>
+<p>The drawback of diffusion is that the doping concentration is always highest at the wafer surface and constrained to these profile shapes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ion-implantation" class="slide level3" data-number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Ion Implantation</h3>
+<p><span id="eq-implant-profile"><span class="math display">\[
+N(x) = \frac{N_\mathrm{i}}{\sqrt{2 \pi} \, {\Delta R}} \, e^{-\frac{(x-R)^2}{2 {\Delta R}^2}}
+\tag{47}\]</span></span></p>
+<aside class="notes">
+<p>Ion implantation lodges impurity ions into the target material at high velocity; implantation can even be done through surface layers (e.g., through the gate oxide for threshold-voltage adjustment). The resulting doping depth profile is</p>
+<p>which peaks at the projected range <span class="math inline">\(R\)</span>; the straggle <span class="math inline">\(\Delta R\)</span> is tied to <span class="math inline">\(R\)</span>, so the achievable profiles are also constrained (<span class="math inline">\(N_\mathrm{i}\)</span> is the implanted dose per area). A subsequent anneal (typically a rapid thermal anneal at 900 to 1100 °C) is required to activate the impurities and to repair the damage to the crystal lattice. <a href="#/fig-doping-profiles" class="quarto-xref">Figure&nbsp;31</a> compares typical diffusion and implantation profiles.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Ion Implantation</h3>
+<div id="cell-fig-doping-profiles" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div id="fig-doping-profiles" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-doping-profiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-doping-profiles-output-1.png" width="565" height="374">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-doping-profiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;31: Doping depth profiles (normalized): diffusion always peaks at the wafer surface, following an erfc profile (infinite source) or a Gaussian profile (finite source), while ion implantation places the doping peak at the projected range <span class="math inline">\(R\)</span> below the surface (shown for <span class="math inline">\(R = 100\,\)</span>nm, <span class="math inline">\(\Delta R = 30\,\)</span>nm).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="epitaxy" class="slide level3" data-number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Epitaxy</h3>
+<aside class="notes">
+<p>Epitaxial growth forms a layer of single-crystal silicon on the surface of the wafer, such that the crystal structure is continuous across the interface. The epi layer can be doped differently from the material where it is grown, with a typical thickness of 1 to 20 µm (patterned epitaxial growth using a mask is also possible).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sec-technology-thin-film" class="title-slide slide level2 center" data-number="3.6">
+<h2><span class="header-section-number">3.6</span> Thin-Film Deposition</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>Thin-Film Deposition</h3>
+<ul>
+<li>The gate dielectric of the MOSFET, like SiO<sub>2</sub> (either thermally grown or deposited via CVD).</li>
+<li>The gate material, polysilicon, which is also used for local interconnects and resistors.</li>
+<li>Metal films for interconnects (metals like Al or Cu, and silicides like TiSi<sub>2</sub>, WSi<sub>2</sub>, TaSi<sub>2</sub>, NiSi<sub>2</sub>).</li>
+<li>Contact and via materials, like W, Al, or Cu.</li>
+<li>Dielectrics between metal layers and spacers, like SiO<sub>2</sub> and Si<sub>3</sub>N<sub>4</sub>.</li>
+</ul>
+<aside class="notes">
+<p>Various thin films are used in IC processing:</p>
+<p>These films are either <strong>sputtered</strong> or deposited from chemical gases in <strong>chemical vapour deposition (CVD)</strong>; both methods are sketched in <a href="#/fig-cvd-sputter" class="quarto-xref">Figure&nbsp;32</a>. Exemplary chemical reactions for CVD are:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Thin-Film Deposition</h3>
+<ul>
+<li>Depositing polysilicon: <span class="math inline">\(\text{SiH}_4 \rightarrow \text{Si} + 2\,\text{H}_2\)</span></li>
+<li>Depositing SiO<sub>2</sub> (as an alternative to thermal oxidation): <span class="math inline">\(\text{SiH}_4 + \text{O}_2 \rightarrow \text{SiO}_2 + 2\,\text{H}_2\)</span> or <span class="math inline">\(\text{SiH}_2\text{Cl}_2 + 2\,\text{N}_2\text{O} \rightarrow \text{SiO}_2 + 2\,\text{HCl} + 2\,\text{N}_2\)</span></li>
+<li>Depositing Si<sub>3</sub>N<sub>4</sub>: <span class="math inline">\(3\,\text{SiH}_2\text{Cl}_2 + 4\,\text{NH}_3 \rightarrow \text{Si}_3\text{N}_4 + 6\,\text{HCl} + 6\,\text{H}_2\)</span></li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Thin-Film Deposition</h3>
+<div id="cell-fig-cvd-sputter" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div id="fig-cvd-sputter" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-cvd-sputter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-cvd-sputter-output-1.png" width="758" height="328">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cvd-sputter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32: Thin-film deposition methods: (a) in chemical vapour deposition (CVD), precursor gases react at the heated wafer surface and deposit a thin film; (b) in sputtering, ions from a plasma knock atoms out of a target, which then condense on the wafer surface.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<section id="sec-technology-interconnect" class="title-slide slide level2 center" data-number="3.7">
+<h2><span class="header-section-number">3.7</span> Interconnects</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>Interconnects</h3>
+<div id="cell-fig-damascene" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div id="fig-damascene" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-damascene-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-damascene-output-1.png" width="323" height="623">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-damascene-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33: The damascene process for copper interconnects: (a) trenches are etched into the dielectric, (b) a conformal diffusion-barrier liner is deposited, (c) copper is (electro-)deposited, overfilling the trenches, and (d) the excess copper and the liner on the field are removed by chemical-mechanical polishing (CMP), leaving metal only in the trenches.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>In the so-called <strong>back-end</strong> of the process, the devices formed in the <strong>front-end</strong> (like MOSFETs and resistors) are connected by a sandwich of metallic and dielectric thin films. The metal layers are connected through the dielectric layers by <strong>vias</strong> (between metals) and <strong>contacts</strong> (from the lowest metal layer to the front-end devices).</p>
+<p>Historically, aluminum has been used as the interconnect metal, as it can be deposited by sputtering and then patterned by etching. However, Al is prone to void formation by <a href="https://en.wikipedia.org/wiki/Electromigration">electromigration</a>. In newer technologies, copper is used: its resistance is 40 % lower, and it has excellent electromigration reliability. However, dry etching of Cu is difficult, so a <a href="https://en.wikipedia.org/wiki/Copper_interconnects"><strong>damascene</strong></a> process is used, shown in <a href="#/fig-damascene" class="quarto-xref">Figure&nbsp;33</a>: the dielectric is structured, a liner and Cu are deposited into the trenches, and the excess metal is removed by <a href="https://en.wikipedia.org/wiki/Chemical-mechanical_polishing"><strong>chemical-mechanical polishing (CMP)</strong></a>. The liner prevents the Cu from diffusing into the dielectric.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sec-technology-cmos-flow" class="title-slide slide level2 center" data-number="3.8">
+<h2><span class="header-section-number">3.8</span> An Exemplary CMOS Process Flow</h2>
+<aside class="notes">
+<p>The classic dielectric between the metal layers is SiO<sub>2</sub>, but in order to reduce capacitive parasitics, low-k dielectrics (e.g., F- or C-doped SiO<sub>2</sub>) are used in modern processes. Between processing steps, CMP is used to planarize the surfaces.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>An Exemplary CMOS Process Flow</h3>
+<div id="cell-fig-process-sti" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div id="fig-process-sti" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-process-sti-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-process-sti-output-1.png" width="400" height="508">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-process-sti-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;34: CMOS process, step 1—shallow trench isolation: (a) a hard mask is grown and patterned by photolithography, (b) the isolation trenches are etched anisotropically into the silicon, and (c) the trenches are filled with oxide and the surface is planarized.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>The following figures illustrate a simplified CMOS process flow, inspired by the openly documented <a href="https://libresilicon.com">LibreSilicon</a> process; the cross sections show an NMOS (in the p-well) and a PMOS (in the n-well), each with its well tap on the outside, evolving through the process steps.</p>
+<p><strong>Step 1—Shallow trench isolation:</strong> After an initial cleaning, a hard mask (SiO<sub>2</sub> or Si<sub>3</sub>N<sub>4</sub>) is grown/deposited and patterned by photolithography. The isolation trenches are etched anisotropically and filled with oxide (<a href="#/fig-process-sti" class="quarto-xref">Figure&nbsp;34</a>).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>An Exemplary CMOS Process Flow</h3>
+<div id="cell-fig-process-wells" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div id="fig-process-wells" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-process-wells-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-process-wells-output-1.png" width="472" height="585">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-process-wells-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;35: CMOS process, steps 2 and 3—well formation: (a) a mask covers the right half of the wafer while boron is implanted to form the p-well, (b) the complementary mask is used for the phosphorus implant of the n-well, and (c) after annealing, both wells are formed.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p><strong>Steps 2 and 3—Well formation:</strong> A hard mask is formed and opened over the p-well region, boron is implanted, and the wafer is annealed. The sequence is repeated with phosphorus for the n-well (<a href="#/fig-process-wells" class="quarto-xref">Figure&nbsp;35</a>).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>An Exemplary CMOS Process Flow</h3>
+<div id="cell-fig-process-gate" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div id="fig-process-gate" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-process-gate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-process-gate-output-1.png" width="427" height="892">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-process-gate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36: CMOS process, steps 4 and 5—gate formation: (a) the field oxide is grown over the whole wafer, merging with the oxide already filling the trenches, (b) it is removed again over the active areas, (c) the thin gate oxide is grown by dry oxidation on the exposed active areas, (d) polysilicon is deposited by CVD over the whole wafer, following the topography of the field oxide, and (e) the gate stack is patterned by photolithography and etching.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p><strong>Steps 4 and 5—Gate formation:</strong> A field oxide is grown and removed over the active areas; then the thin gate oxide is grown by dry oxidation, polysilicon is deposited by CVD, and the gate stack is patterned (<a href="#/fig-process-gate" class="quarto-xref">Figure&nbsp;36</a>).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>An Exemplary CMOS Process Flow</h3>
+<div id="cell-fig-process-implants" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div id="fig-process-implants" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-process-implants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-process-implants-output-1.png" width="384" height="432">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-process-implants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;37: CMOS process, steps 6 and 7—self-aligned source/drain implants: (a) with the PMOS and the p-well tap covered by resist, phosphorus is implanted; the polysilicon gate itself masks the channel, so the n<span class="math inline">\(^+\)</span> regions are self-aligned to the gate, and the same implant forms the n<span class="math inline">\(^+\)</span> tap contacting the n-well; (b) the complementary boron implant forms the p<span class="math inline">\(^+\)</span> source/drain regions of the PMOS and the p<span class="math inline">\(^+\)</span> tap contacting the p-well.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p><strong>Steps 6 and 7—Source/drain implants:</strong> With photoresist masking the PMOS area, phosphorus is implanted to form the NMOS source/drain regions (and the n-well contacts); the implant is <strong>self-aligned</strong> to the gate, which acts as an implantation mask for the channel region. The complementary boron implant forms the PMOS source/drain regions (and the p-well contacts). Each implant is followed by an anneal (<a href="#/fig-process-implants" class="quarto-xref">Figure&nbsp;37</a>).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>An Exemplary CMOS Process Flow</h3>
+<div id="cell-fig-process-silicide" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div id="fig-process-silicide" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-process-silicide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-process-silicide-output-1.png" width="447" height="374">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-process-silicide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38: CMOS process, step 8—spacer and silicide formation: (a) an oxide layer is deposited and anisotropically etched, leaving spacers at the gate edges, and (b) sputtered titanium reacts where it touches silicon, forming a low-resistance silicide (dark) on source/drain and gate; the unreacted metal is then removed.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p><strong>Step 8—Silicide formation:</strong> An oxide/nitride layer is deposited and anisotropically etched, leaving <strong>spacers</strong> at the gate edges. Titanium is sputtered onto the wafer and reacts where it touches silicon, forming low-resistance TiSi<sub>2</sub> on the source/drain areas and the gate; the unreacted metal is removed (<a href="#/fig-process-silicide" class="quarto-xref">Figure&nbsp;38</a>).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>An Exemplary CMOS Process Flow</h3>
+<div id="cell-fig-process-backend" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div id="fig-process-backend" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-process-backend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="technology_files/figure-revealjs/fig-process-backend-output-1.png" width="494" height="662">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-process-backend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;39: CMOS process, steps 9 to 11—back-end: (a) inter-layer dielectric deposition, CMP, and contact formation, (b) first metal layer sputtered and patterned, and (c) inter-metal dielectric, vias, and second metal layer; the finished wafer is then passivated and opened at the pads.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p><strong>Steps 9 to 11—Contacts and metal stack:</strong> An inter-layer dielectric is deposited and planarized by CMP, contact holes are etched and filled, and the first metal layer is deposited and patterned. Further levels of dielectric, vias, and metal follow; finally, the passivation is deposited and opened at the pads (<a href="#/fig-process-backend" class="quarto-xref">Figure&nbsp;39</a>).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sec-technology-ihp" class="title-slide slide level2 center" data-number="3.9">
+<h2><span class="header-section-number">3.9</span> The Open-Source PDK IHP SG13</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>The Open-Source PDK IHP SG13</h3>
+<ul>
+<li>Support for internal 1.2 V/1.5 V core MOSFETs and 3.3 V I/O MOSFETs</li>
+<li>An aluminum metal stack with 5 thin and 2 thick levels of metal (see <a href="#/fig-metal-stack" class="quarto-xref">Figure&nbsp;40</a>)</li>
+<li>Silicided, standard, and high-sheet-rho poly resistors</li>
+<li>A metal-insulator-metal (MIM) capacitor</li>
+<li>A Schottky diode</li>
+<li>Optional high-speed SiGe:C heterojunction bipolar transistors (HBTs)</li>
+</ul>
+<aside class="notes">
+<p>IHP has open-sourced the <a href="https://en.wikipedia.org/wiki/Process_design_kit">process design kit</a> (PDK) for a 130 nm <a href="https://en.wikipedia.org/wiki/BiCMOS">BiCMOS</a> technology (the current generation is named SG13G2, referred to here simply as IHP SG13) under the Apache-2.0 license. The relevant files, including documentation, can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK">github.com/IHP-GmbH/IHP-Open-PDK</a>. This technology has a lot of interesting features:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>The Open-Source PDK IHP SG13</h3>
+
+<img data-src="../content/technology/figures/ihp-sg13g2-cross-section.png" class="r-stretch quarto-figure-center" id="fig-metal-stack"><p class="caption">
+Figure&nbsp;40: Cross-section of the IHP SG13 technology (not to scale): five thin metal layers (Metal1 to Metal5) for dense routing and two thick top metal layers (TopMetal1, TopMetal2) for power routing, inductors, and low-loss RF interconnects, with the MIM capacitor embedded between Metal5 and TopMetal1.
+</p><aside class="notes">
+Cross-section of the IHP SG13 technology (not to scale): five thin metal layers (Metal1 to Metal5) for dense routing and two thick top metal layers (TopMetal1, TopMetal2) for power routing, inductors, and low-loss RF interconnects, with the MIM capacitor embedded between Metal5 and TopMetal1. The FEOL devices are shown at the bottom, and the numbers give the layer and dielectric thicknesses. Source: Fig. 1.1.1 of the <em>SG13G2 Process Specification Rev.&nbsp;1.2</em>, Copyright 2023 IHP PDK Authors, licensed under Apache-2.0, taken from <a href="https://github.com/IHP-GmbH/IHP-Open-PDK">IHP-Open-PDK</a> and cropped out of the original page.
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sec-technology-qualification" class="title-slide slide level2 center" data-number="3.10">
+<h2><span class="header-section-number">3.10</span> Technology Qualification</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>Technology Qualification</h3>
+<div id="tbl-technology-qualification" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-technology-qualification-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;7: Typical technology qualification tests
+</figcaption>
+<div aria-describedby="tbl-technology-qualification-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 21%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Test (examples)</th>
+<th style="text-align: left;">Standard</th>
+<th style="text-align: left;">Motivation &amp; check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">HTOL (high-temperature operating life)</td>
+<td style="text-align: left;">JESD22-A108</td>
+<td style="text-align: left;">Subject the IC to high temperature under operation over an extended duration.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ESD HBM</td>
+<td style="text-align: left;">JS-001-2023</td>
+<td style="text-align: left;">ESD test, human-body model.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ESD CDM</td>
+<td style="text-align: left;">JS-002-2022</td>
+<td style="text-align: left;">ESD test, charged-device model.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Latch-up</td>
+<td style="text-align: left;">JESD78</td>
+<td style="text-align: left;">Latch-up test.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Electrical test (ED)</td>
+<td style="text-align: left;">JESD86</td>
+<td style="text-align: left;">Check conformance to the datasheet across conditions and lots.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<aside class="notes">
+<p>Before a product in a certain semiconductor technology is shipped to customers, a qualification procedure has to be completed. Its purpose is to demonstrate, on a statistically meaningful sample and before the first customer shipment, that the product will meet its datasheet over the intended lifetime and operating conditions. The overall framework is set by <a href="https://www.jedec.org">JEDEC</a> JESD47 (<em>Stress-Test-Driven Qualification of Integrated Circuits</em>), which references the individual test methods; automotive products additionally follow AEC-Q100, which defines temperature grades and larger sample sizes. <a href="#/tbl-technology-qualification" class="quarto-xref">Table&nbsp;7</a> lists typical tests.</p>
+<p>These tests fall into three groups: <strong>lifetime tests</strong> that accelerate wear-out, <strong>robustness tests</strong> that check survival of a single electrical stress event, and <strong>electrical verification</strong> against the datasheet.</p>
+<p><strong>HTOL</strong> stresses a sample of packaged devices—typically three lots of 77 parts, so that zero failures give a meaningful confidence bound—at an elevated junction temperature, usually 125 °C and often combined with a supply voltage above nominal, while the circuit is electrically exercised, for a duration of typically 1000 h. It accelerates exactly those wear-out mechanisms that limit the life of a MOSFET: <a href="https://en.wikipedia.org/wiki/Time-dependent_gate_oxide_breakdown"><strong>time-dependent dielectric breakdown (TDDB)</strong></a> of the gate oxide, <a href="https://en.wikipedia.org/wiki/Hot-carrier_injection"><strong>hot-carrier injection (HCI)</strong></a>, <a href="https://en.wikipedia.org/wiki/Negative-bias_temperature_instability"><strong>bias temperature instability (BTI)</strong></a>, and electromigration in the interconnect. Since these mechanisms are thermally activated, an <a href="https://en.wikipedia.org/wiki/Arrhenius_equation">Arrhenius</a> acceleration factor—commonly in the range of 20 to 100—translates the 1000 h of stress into years of operation at the application temperature. A device fails the test if it stops working, or if any parameter has drifted outside the datasheet limits.</p>
+<p><strong>ESD HBM</strong> models the <a href="https://en.wikipedia.org/wiki/Electrostatic_discharge">electrostatic discharge</a> of a charged person touching a pin. The <strong>human-body model</strong> discharges a 100 pF capacitor through a 1.5 kΩ resistor, which produces a comparatively slow pulse (rise time of a few nanoseconds, decay time constant of 150 ns) with a peak current of about 0.67 A per kV. Every pin is stressed against every supply, in both polarities; a common target is 2 kV. The protection consists of diodes at each pad plus a clamp across the supply, arranged so that there is a low-impedance path between <em>any</em> two pins—which is why ESD protection is a full-chip problem, not a per-pad one.</p>
+<p><strong>ESD CDM</strong> models the opposite situation: the device itself has been charged, for example by sliding through a shipping tube, and discharges when one of its pins touches a grounded surface. The <strong>charged-device model</strong> pulse is far faster than HBM, with a rise time below 500 ps and a total duration of about 1 ns, reaching peak currents of several amperes. Because the pulse is largely over before the protection structures have fully turned on, CDM is usually the harder of the two to pass, and it is the more relevant one in modern automated assembly, where a human rarely touches the parts. The stored charge grows with package size, so large packages are stressed hardest. A typical target is 500 V, and interfaces between separate supply domains are the classic weak spot.</p>
+<p><strong>Latch-up</strong> targets the parasitic thyristor that is inherent to every CMOS well structure: the source of a PMOS, the n-well, the p-substrate, and the source of a neighboring NMOS form a PNPN structure, equivalent to a pair of cross-coupled parasitic bipolar transistors. If enough current is injected into a well—by an I/O pin driven beyond a supply rail, or by a supply overshoot—the structure latches into a low-impedance state that shorts supply to ground and persists until the power is removed, usually destroying the chip. JESD78 therefore injects ±100 mA into the I/O pins and applies an overvoltage to the supplies, at the maximum operating temperature. The countermeasures are all layout measures: a generous number of well and substrate taps, which is why the flow above places one next to each transistor (<a href="#/fig-process-implants" class="quarto-xref">Figure&nbsp;37</a>), guard rings around injecting circuits, and minimum-spacing rules between NMOS and PMOS.</p>
+<p><strong>Electrical test (ED)</strong> is not a stress test. It assesses the electrical parameters of devices from the manufacturing and test process being qualified, verifying that they meet every datasheet parameter across the specified supply-voltage and temperature range, and that they do so consistently across several production lots. This is what catches a systematic process shift that leaves the technology inside its own control limits, but the product outside its specification.</p>
+<p>A complete qualification also covers the package rather than the silicon, with temperature cycling, highly accelerated stress testing (HAST) for moisture resistance, and solder-reflow sensitivity (see <a href="../dcic.html#sec-packaging-qualification">Section&nbsp;5.6</a>).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="references" class="slide level3 unnumbered smaller scrollable">
+<h3>References</h3>
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Deal_Grove" class="csl-entry" role="listitem">
+Deal, Bruce E., and Andrew S. Grove. 1965. <span>“General Relationship for the Thermal Oxidation of Silicon.”</span> <em>Journal of Applied Physics</em> 36 (12): 3770–78.
+</div>
+<div id="ref-Hu_ModernDevices" class="csl-entry" role="listitem">
+Hu, Chenming. 2010. <em>Modern Semiconductor Devices for Integrated Circuits</em>. Pearson.
+</div>
+<div id="ref-Sproul_Green_1991" class="csl-entry" role="listitem">
+Sproul, Alistair B., and Martin A. Green. 1991. <span>“Improved Value for the Silicon Intrinsic Carrier Concentration from 275 to 375 <span>K</span>.”</span> <em>Journal of Applied Physics</em> 70 (2): 846–54. <a href="https://doi.org/10.1063/1.349645">https://doi.org/10.1063/1.349645</a>.
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>References</h3>
+
+</section>
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="../dcic.html#sec-technology">DCIC lecture notes</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"numbers":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/iic-jku\.github\.io\/design-complex-ic\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

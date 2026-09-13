@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="../favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <title>Design of Complex Integrated Circuits – IC Packaging</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">IC Packaging</h1>
+  <p class="subtitle">Design of Complex Integrated Circuits</p>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section>
+<section id="sec-packaging" class="title-slide slide level1 center" data-number="5">
+<h1><span class="header-section-number">5</span> IC Packaging</h1>
+<div class="hidden">
+
+</div>
+</section>
+<section id="sec-packaging-wafer-prep" class="title-slide slide level2 center" data-number="5.1">
+<h2><span class="header-section-number">5.1</span> From Wafer to Packaged IC</h2>
+<aside class="notes">
+<p>The finished wafer is not yet a usable product: the individual dice have to be separated, connected, and protected. This chapter covers the path from the processed wafer to the packaged integrated circuit, the most important package families, thermal design, and the electrical parasitics that packages introduce.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>From Wafer to Packaged IC</h3>
+<ul>
+<li>Electrical connection of signals and power from the IC to the PCB.</li>
+<li>Interconnects adding little delay or distortion (small parasitic <span class="math inline">\(R\)</span>, <span class="math inline">\(L\)</span>, <span class="math inline">\(C\)</span>, and <span class="math inline">\(k\)</span>).</li>
+<li>Mechanical connection of the IC to the PCB.</li>
+<li>Removal of the heat produced in the IC.</li>
+<li>Protection of the IC from mechanical damage and the environment.</li>
+<li>Compatibility with the thermal expansion (CTE) of the PCB.</li>
+<li>Inexpensive manufacturing and testing.</li>
+</ul>
+<aside class="notes">
+<p>After wafer processing (see <a href="../dcic.html#sec-technology">Section&nbsp;3</a>), the wafer is usually first <strong>thinned</strong> by grinding from the backside, depending on the package technology (typical final thickness 100 to 300 µm). After thinning, the wafer is mounted on a carrier tape and split into individual dice—this process is called <a href="https://en.wikipedia.org/wiki/Die_singulation"><strong>dicing</strong></a>. A saw blade is the standard tool; alternatively, a laser can be used to (pre-)cut the wafer. An exception is the wafer-level package (WLP), where the wafer is further processed <em>before</em> sawing.</p>
+<p>The IC package then provides the following important functions:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sec-packaging-bonding" class="title-slide slide level2 center" data-number="5.2">
+<h2><span class="header-section-number">5.2</span> Chip-to-Package Connection</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>Chip-to-Package Connection</h3>
+<div id="cell-fig-wire-bond" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div id="fig-wire-bond" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-wire-bond-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="packaging_files/figure-revealjs/fig-wire-bond-output-1.png" width="758" height="281">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wire-bond-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;54: Cross section of a wire-bonded lead-frame package: the die is glued to the paddle, bond wires connect the die pads to the leads (a down-bond connects directly to the grounded paddle), and the epoxy mold compound protects the assembly.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Traditionally, an IC is surrounded by a <strong>pad frame</strong>: metal pads on a pitch of 80 to 200 µm along the die circumference. <a href="https://en.wikipedia.org/wiki/Wire_bonding"><strong>Bond wires</strong></a> attach the pads to the package, a <a href="https://en.wikipedia.org/wiki/Lead_frame"><strong>lead frame</strong></a> distributes the signals within the package, and a metal heat spreader (paddle) helps with cooling. In <a href="https://en.wikipedia.org/wiki/Flip_chip"><strong>flip-chip</strong></a> packages or WLPs, the pads can instead be distributed arbitrarily across the die area (close to the relevant circuit blocks). <a href="#/fig-wire-bond" class="quarto-xref">Figure&nbsp;54</a> shows the wire-bond arrangement.</p>
+Cross section of a wire-bonded lead-frame package: the die is glued to the paddle, bond wires connect the die pads to the leads (a down-bond connects directly to the grounded paddle), and the epoxy mold compound protects the assembly. The exposed paddle is soldered to the PCB for grounding and heat removal.
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Chip-to-Package Connection</h3>
+<ul>
+<li>A simple pad consisting only of a square of top metal may “<strong>lift off</strong>” during bonding due to insufficient adherence; a mechanically robust pad is formed from the two topmost metal layers, connected by many small vias, at the price of somewhat larger capacitance.</li>
+<li>Pads carrying RF signals can be shaped as octagons to reduce their capacitance (about 20 % reduction).</li>
+<li>In some processes, it is allowed to place circuitry (e.g., ESD protection) below the pads to save chip area—called pad-over-active-area (PoAA).</li>
+</ul>
+<aside class="notes">
+<p>A few notes on the bond pads themselves:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sec-packaging-types" class="title-slide slide level2 center" data-number="5.3">
+<h2><span class="header-section-number">5.3</span> Package Types</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>Package Types</h3>
+<ul>
+<li>Pads can be placed across the whole surface of the die rather than only at the periphery.</li>
+<li>The top-level metal pads are covered with solder balls.</li>
+<li>The IC is mounted upside down and must be carefully aligned to the package (done blind!); then heat is applied to melt the solder balls.</li>
+<li>This process is also called controlled collapse chip connection (C4).</li>
+</ul>
+<aside class="notes">
+<p>Simple lead-frame-based packages using bond wires are cost-effective but have a limited number of I/Os, and the bond wires cause parasitic inductance and mutual (inductive and capacitive) coupling. Laminate-based packages can have several signal and power layers (2–4), like tiny PCBs; they are based either on bond wires or on <strong>flip-chip</strong> assembly:</p>
+<p><a href="#/fig-package-types" class="quarto-xref">Figure&nbsp;55</a> shows cross sections of the most important package families.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Package Types</h3>
+<div id="cell-fig-package-types" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div id="fig-package-types" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-package-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="packaging_files/figure-revealjs/fig-package-types-output-1.png" width="422" height="1334">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-package-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;55: Cross sections of important package families: (a) wire-bonded lead-frame package (e.g., QFN), (b) flip-chip laminate package (BGA) with solder bumps and balls, (c) wafer-level chip-scale package (WLCSP), where the redistribution layer (RDL) and the balls are processed on the wafer, (d) fan-out wafer-level package (FO-WLP), where the fan-out area is created by a mold frame, (e) die stack with bond wires, and (f) system-in-package with a wire-bonded die, a flip-chip die, and a passive component on one laminate substrate, and (g) 2.5D integration, where chiplets (here two logic dice and a high-bandwidth memory stack) sit on Cu pillars on a silicon interposer with fine-pitch wiring and through-silicon vias, which is flip-chip mounted on a laminate substrate and covered by a lid.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+Cross sections of important package families: (a) wire-bonded lead-frame package (e.g., QFN), (b) flip-chip laminate package (BGA) with solder bumps and balls, (c) wafer-level chip-scale package (WLCSP), where the redistribution layer (RDL) and the balls are processed on the wafer, (d) fan-out wafer-level package (FO-WLP), where the fan-out area is created by a mold frame, (e) die stack with bond wires, and (f) system-in-package with a wire-bonded die, a flip-chip die, and a passive component on one laminate substrate, and (g) 2.5D integration, where chiplets (here two logic dice and a high-bandwidth memory stack) sit on Cu pillars on a silicon interposer with fine-pitch wiring and through-silicon vias, which is flip-chip mounted on a laminate substrate and covered by a lid. Exemplary copper routing is shown on two layers with vias in the laminate and on a single layer with vias in the RDL.
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lead-frame-package" class="slide level3" data-number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Lead-Frame Package</h3>
+<aside class="notes">
+<p>A lead-frame package is available with or without leads (e.g., QFP with gull-wing leads versus leadless QFN). The die is glued to the lead-frame paddle and bonded to the leads using Au, Al, Cu, or Ag wires; a “down-bond” to the paddle is usually possible and provides low inductance due to the short wire. The whole assembly is covered and protected by an epoxy mold compound. The lead-frame paddle can be exposed and soldered to the PCB for best grounding and thermal performance.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="laminate-package" class="slide level3" data-number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Laminate Package</h3>
+<aside class="notes">
+<p>A laminate package can be seen as a small PCB with fine design rules; the die is either wire-bonded (cheaper) or soldered face-down using solder bumps (C4) or Cu pillars (better electrical performance). The connection to the main PCB is made with solder balls (<a href="https://en.wikipedia.org/wiki/Ball_grid_array">BGA</a>), pins, or exposed lands. The mold compound protects the assembly; for flip-chip assembly it can be omitted and potentially replaced by a metallic heat spreader.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="chip-scale-and-wafer-level-packages" class="slide level3" data-number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> Chip-Scale and Wafer-Level Packages</h3>
+<aside class="notes">
+<p>The <a href="https://en.wikipedia.org/wiki/Wafer-level_packaging"><strong>wafer-level package (WLP)</strong></a> offers very low cost, excellent electrical properties, and the smallest possible size (package size = die size), but provides little protection of the die. The processing happens on the wafer level: a redistribution layer (RDL) re-routes the pads, solder balls are applied, and only then are the dice singulated. If the I/O count is too large to fit onto the die area, a <strong>fan-out WLP (FO-WLP/eWLB)</strong> can be used, where the die is extended in size by a mold frame: the dice are first singulated, then re-assembled on an artificial wafer where the surrounding area is filled with mold compound, and then processed like a WLP.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="stacked-packages" class="slide level3" data-number="5.3.4">
+<h3><span class="header-section-number">5.3.4</span> Stacked Packages</h3>
+<aside class="notes">
+<p>For dense systems, several dice can be combined in one package: as a <strong>die stack</strong> (dice stacked on top of each other, connected by bond wires or <a href="https://en.wikipedia.org/wiki/Through-silicon_via">through-silicon vias</a>), as <strong>package-on-package (PoP)</strong> (e.g., a memory package soldered on top of a processor package), or as a <a href="https://en.wikipedia.org/wiki/System_in_a_package"><strong>system-in-package (SiP)</strong></a>, where several dice and passives are integrated on a common laminate substrate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="d-integration-with-chiplets-and-silicon-interposer" class="slide level3" data-number="5.3.5">
+<h3><span class="header-section-number">5.3.5</span> 2.5D Integration with Chiplets and Silicon Interposer</h3>
+<ul>
+<li>A single monolithic die is limited by the reticle size of the lithography tool, and the yield drops rapidly with die area; several smaller dice yield better and can exceed the reticle limit in total.</li>
+<li>Each chiplet can be fabricated in the most suitable technology (<strong>heterogeneous integration</strong>), e.g., the compute logic in a leading-edge node, while I/O, analog, or RF functions stay in a mature, cheaper node.</li>
+<li>Memory can be placed very close to the processor; a typical example is high-bandwidth memory (HBM), a stack of DRAM dice connected by through-silicon vias.</li>
+<li>Proven chiplets can be reused across products, reducing design effort.</li>
+</ul>
+<aside class="notes">
+<p>High-end systems like GPUs, AI accelerators, and server processors increasingly split a large SoC into several smaller dice, called <a href="https://en.wikipedia.org/wiki/Chiplet"><strong>chiplets</strong></a>, which are placed side by side on a <strong>silicon interposer</strong> (<a href="#/fig-package-types" class="quarto-xref">Figure&nbsp;55</a> (g)); a well-known example is TSMC’s CoWoS (chip-on-wafer-on-substrate). This approach is motivated by several factors:</p>
+<p>The interposer is a passive silicon die (or a large part of a wafer) that is fabricated with a back-end-of-line process. Its fine-pitch wiring (line width and spacing in the µm range) allows thousands of short, dense connections between the chiplets, which is not possible with laminate substrates. The chiplets are flipped and attached to the interposer with <strong>Cu pillars</strong> with a thin solder cap (sometimes called microbumps, pitch typically 40 to 50 µm). <a href="https://en.wikipedia.org/wiki/Through-silicon_via"><strong>Through-silicon vias (TSVs)</strong></a> lead the supply and external signals through the thinned interposer (thickness ca. 100 µm) to C4 bumps (pitch ca. 150 µm), which connect the interposer to a laminate substrate. The laminate then fans out to the BGA balls, just like a regular flip-chip package. Instead of a mold compound, such packages are typically covered by a metal lid, which is attached to the backside of the chiplets with a thermal interface material (TIM) and acts as a heat spreader.</p>
+<p>As the pitch grows by roughly an order of magnitude at each level (chiplet, interposer, laminate, PCB), this arrangement is a hierarchy of increasingly coarse wiring. Several variants exist to reduce cost: an organic RDL interposer instead of silicon, or small silicon bridges embedded in the laminate only below the chiplet edges (e.g., Intel EMIB). In <strong>3D integration</strong>, chiplets are stacked directly on top of each other using TSVs and hybrid bonding (Cu-to-Cu bonding without solder, pitch below 10 µm).</p>
+<p>Designing chiplet-based systems brings new challenges: the die-to-die interfaces need to be standardized to allow combining chiplets from different sources (e.g., <a href="https://en.wikipedia.org/wiki/UCIe">UCIe</a>, Universal Chiplet Interconnect Express), each chiplet must be tested before assembly (known-good die, as a single faulty chiplet ruins the whole expensive package), power delivery and heat removal must be co-designed with the package, and the mechanical stress and warpage of the large assembly must be controlled.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sec-packaging-thermal" class="title-slide slide level2 center" data-number="5.4">
+<h2><span class="header-section-number">5.4</span> Thermal Design</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>Thermal Design</h3>
+<ul>
+<li>Consumer ambient temperature range: −30 to +85 °C.</li>
+<li>Industrial/automotive ambient temperature range: −40 to +85 °C.</li>
+<li>Usual IC technology junction temperature limits: −40 to +125 °C.</li>
+<li>Automotive IC junction temperature limits: −40 to +150 °C.</li>
+</ul>
+<aside class="notes">
+<p>Managing the die temperature is an important aspect of package selection. Depending on the application, different ambient temperature ranges apply, which result in different on-die temperature ranges (due to the self-heating of the die caused by its power dissipation):</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="thermal-calculations" class="slide level3" data-number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Thermal Calculations</h3>
+<p><span id="eq-thermal-ohm"><span class="math display">\[
+\Delta T = Q \cdot R_\mathrm{th}
+\tag{49}\]</span></span></p>
+<p><span id="eq-thermal-series-parallel"><span class="math display">\[
+R_\mathrm{th,series} = \sum_{i} R_{\mathrm{th},i}
+\qquad
+\frac{1}{R_\mathrm{th,parallel}} = \sum_{i} \frac{1}{R_{\mathrm{th},i}}
+\tag{50}\]</span></span></p>
+<aside class="notes">
+<p>Thermal calculations behave analogously to Ohm’s law, as thermal paths can be modeled as series or parallel connections, using these equivalences: temperature difference <span class="math inline">\(\Delta T \mathrel{\hat{=}}\)</span> voltage <span class="math inline">\(V\)</span>, heat flow <span class="math inline">\(Q \mathrel{\hat{=}}\)</span> current <span class="math inline">\(I\)</span>, thermal resistance <span class="math inline">\(R_\mathrm{th} \mathrel{\hat{=}}\)</span> resistance <span class="math inline">\(R\)</span>:</p>
+<p>An important property of an IC package is its ability to transport the heat generated on the die to the outside, limiting the die’s self-heating. This property is the <strong>thermal resistance</strong>, usually a function of the package, the die, and the PCB design. Using</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Thermal Calculations</h3>
+<p><span id="eq-thermal-rthja"><span class="math display">\[
+\Delta T = R_\mathrm{th,ja} \cdot P_\mathrm{diss}
+\tag{51}\]</span></span></p>
+<aside class="notes">
+<p>with <span class="math inline">\(\Delta T\)</span> the on-chip temperature rise versus the ambient temperature in K, <span class="math inline">\(R_\mathrm{th,ja}\)</span> the junction-to-ambient thermal resistance in K/W, and <span class="math inline">\(P_\mathrm{diss}\)</span> the on-chip power dissipation in W, the die temperature can be estimated. A typical <span class="math inline">\(R_\mathrm{th,ja}\)</span> value is provided by the package manufacturer; for high accuracy, a thermal simulation has to be performed. Strictly speaking, <span class="math inline">\(R_\mathrm{th,ja}\)</span> is defined for a specific PCB design and environment (standardized in, e.g., JEDEC JESD51) and needs re-evaluation for specific cases (PCB size, number of layers, copper and via density, casing, airflow, etc.). <a href="#/fig-thermal-network" class="quarto-xref">Figure&nbsp;56</a> shows how a complete thermal path is modeled as a resistor network.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Thermal Calculations</h3>
+
+<img data-src="packaging_files/figure-revealjs/fig-thermal-network-output-1.svg" class="r-stretch quarto-figure-center" id="fig-thermal-network"><p class="caption">
+Figure&nbsp;56: Thermal equivalent network of a packaged IC: the dissipated power <span class="math inline">\(P_\mathrm{diss}\)</span> acts as a current source injecting heat into the junction node.
+</p><aside class="notes">
+Thermal equivalent network of a packaged IC: the dissipated power <span class="math inline">\(P_\mathrm{diss}\)</span> acts as a current source injecting heat into the junction node. The heat flows through the parallel paths junction→case→heatsink→ambient and junction→board→ambient; every interface is modeled by a thermal resistance, and the node ‘voltages’ are the local temperatures (<span class="math inline">\(T_\mathrm{j}\)</span> junction, <span class="math inline">\(T_\mathrm{c}\)</span> case, <span class="math inline">\(T_\mathrm{s}\)</span> heatsink, <span class="math inline">\(T_\mathrm{b}\)</span> board). The bottom rail is the ambient temperature <span class="math inline">\(T_\mathrm{a}\)</span>.
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sec-packaging-parasitics" class="title-slide slide level2 center" data-number="5.5">
+<h2><span class="header-section-number">5.5</span> Package Parasitics</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>Package Parasitics</h3>
+
+<img data-src="packaging_files/figure-revealjs/fig-package-parasitics-output-1.svg" class="r-stretch quarto-figure-center" id="fig-package-parasitics"><p class="caption">
+Figure&nbsp;57: Equivalent circuit of a single package connection from the PCB to the on-chip pad: the bond wire and package trace contribute a series inductance and resistance, while the package trace and the bond pad add shunt capacitances.
+</p><aside class="notes">
+<p>The parasitics associated with the package and the connections to the chip introduce difficulties in high-speed or high-accuracy designs: trace self-inductance, mutual inductance, and capacitance limit the achievable performance. Packaging continues to limit the performance of high-end designs, which is why advanced packages like WLCSP with minimal <span class="math inline">\(L\)</span> and <span class="math inline">\(C\)</span> are used for high-performance ICs. <a href="#/fig-package-parasitics" class="quarto-xref">Figure&nbsp;57</a> shows the equivalent circuit of a single package connection.</p>
+Equivalent circuit of a single package connection from the PCB to the on-chip pad: the bond wire and package trace contribute a series inductance and resistance, while the package trace and the bond pad add shunt capacitances. These parasitics limit bandwidth and cause supply bounce (<span class="math inline">\(V = L\,di/dt\)</span>).
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Package Parasitics</h3>
+<p><span id="eq-ind-round-wire"><span class="math display">\[
+L' \approx 0.2 \ln \left( \frac{2h}{r} \right) \; \mathrm{nH/mm}
+\tag{52}\]</span></span></p>
+<p><span id="eq-ind-flat-trace"><span class="math display">\[
+L' \approx \frac{1.6}{0.72 + W/d} \; \mathrm{nH/mm}
+\tag{53}\]</span></span></p>
+<aside class="notes">
+<p>Simple approximations for the inductance of common package geometries are given below (higher accuracy requires EM simulation; the underlying transmission-line theory is covered in <span class="citation" data-cites="Pozar_RF">(<a href="#/references" role="doc-biblioref" onclick="">Pozar 2011</a>)</span>). For a <strong>round wire</strong> at height <span class="math inline">\(h\)</span> above a ground plane (wire radius <span class="math inline">\(r\)</span>):</p>
+<p>For a <strong>flat trace</strong> of width <span class="math inline">\(W\)</span> at height <span class="math inline">\(d\)</span> above a ground plane:</p>
+<p>The <strong>mutual inductance of two round wires</strong> at distance <span class="math inline">\(d\)</span> and height <span class="math inline">\(h\)</span> above the ground plane:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Package Parasitics</h3>
+<p><span id="eq-ind-mutual"><span class="math display">\[
+L_\mathrm{m}' \approx 0.1 \ln \left[ 1 + \left( \frac{2h}{d} \right)^2 \right] \; \mathrm{nH/mm}
+\tag{54}\]</span></span></p>
+<aside class="notes">
+<p>A typical bond wire has a radius of 12.5 µm and larger, and an inductance of roughly 1 nH/mm.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Package Parasitics</h3>
+<div id="nte-bond-wire-inductance">
+<div id="nte-bond-wire-inductance" class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note&nbsp;4: Example Calculation of the Bond-Wire Inductance</strong></p>
+</div>
+<div class="callout-content">
+<p>Let us assume a bond wire with a diameter of 25 µm (i.e., <span class="math inline">\(r = 12.5\,\mu\text{m}\)</span>) and a length of <span class="math inline">\(l = 2\,\text{mm}\)</span>, running at a height of <span class="math inline">\(h = 300\,\mu\text{m}\)</span> above the ground plane. With <a href="#/eq-ind-round-wire" class="quarto-xref">Equation&nbsp;52</a>, the inductance per length is</p>
+<p><span class="math display">\[
+L' \approx 0.2 \ln \left( \frac{2 \cdot 300\,\mu\text{m}}{12.5\,\mu\text{m}} \right) \; \text{nH/mm} = 0.2 \ln (48) \; \text{nH/mm} = 0.77\,\text{nH/mm}
+\]</span></p>
+<div class="fragment">
+<p>and the total inductance of the bond wire is</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+L = L' \cdot l = 0.77\,\text{nH/mm} \cdot 2\,\text{mm} = 1.55\,\text{nH}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Note that the height enters only logarithmically: doubling <span class="math inline">\(h\)</span> to <span class="math inline">\(600\,\mu\text{m}\)</span> increases the inductance by just 18 % to <span class="math inline">\(1.83\,\text{nH}\)</span>. At a frequency of <span class="math inline">\(f = 1\,\text{GHz}\)</span>, this bond wire already shows a reactance of</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+X_L = 2 \pi f L = 9.7\,\Omega
+\]</span></p>
+</div>
+<div class="fragment">
+<p>If this bond wire carries the supply current of a digital block, a current step of <span class="math inline">\(\Delta i = 10\,\text{mA}\)</span> within <span class="math inline">\(\Delta t = 100\,\text{ps}\)</span> causes a supply bounce of</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+V = L \frac{\Delta i}{\Delta t} = 1.55\,\text{nH} \cdot \frac{10\,\text{mA}}{100\,\text{ps}} = 155\,\text{mV}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>which is significant for a core supply voltage of about 1.2 V.</p>
+</div>
+<div class="fragment">
+<p>To reduce the supply bounce, a second bond wire of the same dimensions is placed in parallel at a distance of <span class="math inline">\(d = 300\,\mu\text{m}\)</span>. With <a href="#/eq-ind-mutual" class="quarto-xref">Equation&nbsp;54</a>, the mutual inductance per length is</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+L_\mathrm{m}' \approx 0.1 \ln \left[ 1 + \left( \frac{2 \cdot 300\,\mu\text{m}}{300\,\mu\text{m}} \right)^2 \right] \; \text{nH/mm} = 0.1 \ln (5) \; \text{nH/mm} = 0.16\,\text{nH/mm}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>resulting in a mutual inductance of <span class="math inline">\(L_\mathrm{m} = L_\mathrm{m}' \cdot l = 0.32\,\text{nH}\)</span> between the two bond wires. The magnetic coupling factor is</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+k = \frac{L_\mathrm{m}}{\sqrt{L_1 L_2}} = \frac{L_\mathrm{m}}{L} = \frac{0.32\,\text{nH}}{1.55\,\text{nH}} = 0.21
+\]</span></p>
+</div>
+<div class="fragment">
+<p>As both bond wires carry currents in the same direction, the mutual inductance adds to the self-inductance of each wire, and the effective inductance of the parallel connection is</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+L_\mathrm{eff} = \frac{L + L_\mathrm{m}}{2} = \frac{L}{2} (1 + k) = 0.94\,\text{nH}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Instead of halving the inductance to <span class="math inline">\(0.77\,\text{nH}\)</span>, the second bond wire reduces it only by 40 %, and the supply bounce for the same current step drops from <span class="math inline">\(155\,\text{mV}\)</span> to <span class="math inline">\(94\,\text{mV}\)</span>. A larger distance between the bond wires reduces <span class="math inline">\(k\)</span> and brings <span class="math inline">\(L_\mathrm{eff}\)</span> closer to <span class="math inline">\(L/2\)</span>. Conversely, if the two bond wires carry unrelated signals, the same coupling causes crosstalk: the current step of <span class="math inline">\(10\,\text{mA}\)</span> in <span class="math inline">\(100\,\text{ps}\)</span> in one bond wire induces a voltage of <span class="math inline">\(L_\mathrm{m} \, \Delta i / \Delta t = 32\,\text{mV}\)</span> in the other.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-pads-bond-wires-and-pins" class="slide level3" data-number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Multiple Pads, Bond Wires, and Pins</h3>
+<aside class="notes">
+<p>Where a single connection to the chip would sustain a prohibitively large transient voltage drop (<span class="math inline">\(V = L \, di/dt\)</span>), multiple pads, bond wires, and package pins are used in parallel: <span class="math inline">\(N\)</span> parallel connections reduce the effective inductance by roughly <span class="math inline">\(N\)</span> (somewhat less due to the mutual coupling between the parallel wires). This is standard practice for power supplies and high-current outputs.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exposed-paddle-and-down-bonds" class="slide level3" data-number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Exposed Paddle and Down-Bonds</h3>
+<aside class="notes">
+<p>Some packages contain a metal plane (the paddle) to which the die is attached with conductive epoxy. Such packages avoid long, narrow traces in the ground connection: the ground pads are “<strong>down-bonded</strong>” directly to the paddle, minimizing the inductance, and the paddle is soldered to the board ground. Sometimes the paddle has to be plated in the areas where a down-bond lands, adding cost.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="mutual-inductance-and-crosstalk" class="slide level3 scrollable" data-number="5.5.3">
+<h3><span class="header-section-number">5.5.3</span> Mutual Inductance and Crosstalk</h3>
+<ol type="1">
+<li>Arrange critical wires <strong>perpendicular</strong> to each other (mutual inductance requires parallel current paths).</li>
+<li>Interpose <span class="math inline">\(V_\mathrm{SS}\)</span> or <span class="math inline">\(V_\mathrm{DD}\)</span> wires between critical bond wires; the return current in the interposed wire partially cancels the coupled flux.</li>
+</ol>
+<aside class="notes">
+<p>Supply noise and other disturbances can couple through the mutual inductance (and capacitance) of adjacent bond wires and package traces. The design of the pad frame and the position of the bond wires play a critical role in isolating sensitive connections! Two methods reduce the mutual coupling, illustrated in <a href="#/fig-mutual-inductance" class="quarto-xref">Figure&nbsp;58</a>:</p>
+<p>Mutual inductance can even be used to advantage: routing a supply and its return current in adjacent, parallel bond wires carrying <strong>opposite currents</strong> reduces the effective loop inductance.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Mutual Inductance and Crosstalk</h3>
+<div id="cell-fig-mutual-inductance" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div id="fig-mutual-inductance" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-mutual-inductance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="packaging_files/figure-revealjs/fig-mutual-inductance-output-1.png" width="758" height="253">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mutual-inductance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;58: Reducing mutual coupling between bond wires (top view of a chip corner): the noisy output wire couples into the parallel sensitive wire via the mutual inductance <span class="math inline">\(M\)</span> (left); interposing a grounded <span class="math inline">\(V_\mathrm{SS}\)</span> wire (middle) or arranging the wires perpendicular to each other at a corner (right) strongly reduces the coupling.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bond-wires-as-circuit-elements" class="slide level3" data-number="5.5.4">
+<h3><span class="header-section-number">5.5.4</span> Bond Wires as Circuit Elements</h3>
+<aside class="notes">
+<p>Since a bond wire is a relatively high-<span class="math inline">\(Q\)</span> inductor (inductance ca. 1 nH/mm, low resistivity of Au or Al), some designs use it as a circuit element, e.g., in high-frequency <span class="math inline">\(LC\)</span> oscillators <span class="citation" data-cites="Craninckx_1995">(<a href="#/references" role="doc-biblioref" onclick="">Craninckx and Steyaert 1995</a>)</span>. However, the mechanical tolerances of the bond-wire geometry translate into inductance tolerance, which must be taken into account. More generally, any conducting structure in a package can be used to form inductors, capacitors, or even antennas (e.g., in CSP or laminate packages).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sec-packaging-qualification" class="title-slide slide level2 center" data-number="5.6">
+<h2><span class="header-section-number">5.6</span> Package Qualification</h2>
+
+</section>
+<section class="slide level3 unnumbered">
+<h3>Package Qualification</h3>
+<div id="tbl-package-qualification" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-package-qualification-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10: Typical package qualification tests
+</figcaption>
+<div aria-describedby="tbl-package-qualification-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 21%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Test (examples)</th>
+<th style="text-align: left;">Standard</th>
+<th style="text-align: left;">Motivation &amp; check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Pre-conditioning (PC)</td>
+<td style="text-align: left;">JESD22-A113</td>
+<td style="text-align: left;">Moisture soak and reflow simulate storage and board assembly before the other stress tests.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Moisture sensitivity level (MSL)</td>
+<td style="text-align: left;">J-STD-020</td>
+<td style="text-align: left;">Classification of how long a package may be exposed to ambient moisture before soldering.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Temperature cycling (TC)</td>
+<td style="text-align: left;">JESD22-A104</td>
+<td style="text-align: left;">Repeated heating and cooling must not cause failures (thermal expansion mismatch, see CTE).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Temperature humidity bias (THB) / biased HAST</td>
+<td style="text-align: left;">JESD22-A101 / A110</td>
+<td style="text-align: left;">Corrosion and leakage under humidity, temperature, and applied voltage.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Unbiased highly accelerated stress test (UHAST)</td>
+<td style="text-align: left;">JESD22-A118</td>
+<td style="text-align: left;">Exposure of package and die to high temperature and humidity without bias.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">High-temperature storage life (HTSL)</td>
+<td style="text-align: left;">JESD22-A103</td>
+<td style="text-align: left;">Storage at high temperature for thousands of hours (intermetallic growth).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wire bond pull and shear</td>
+<td style="text-align: left;">MIL-STD-883 (2011) / JESD22-B116</td>
+<td style="text-align: left;">Mechanical strength of the bond wires and their connections.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solder ball shear</td>
+<td style="text-align: left;">JESD22-B117</td>
+<td style="text-align: left;">Mechanical strength of the solder balls of BGA and WLCSP packages.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Drop test</td>
+<td style="text-align: left;">JESD22-B111</td>
+<td style="text-align: left;">The assembled PCB is dropped repeatedly under standardized conditions.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Temperature cycling on board (TCoB)</td>
+<td style="text-align: left;">IPC-9701</td>
+<td style="text-align: left;">The assembled PCB is temperature-cycled to check the solder-joint reliability.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<aside class="notes">
+<p>In addition to the qualification of the silicon technology (see <a href="../dcic.html#sec-technology-qualification">Section&nbsp;3.10</a>), the package must be qualified to prove that the assembly of die, bond wires or bumps, substrate, and mold compound survives soldering, handling, and the thermal and environmental stress of its application over the intended lifetime. The framework is again set by JEDEC JESD47, and for automotive products by AEC-Q100, which groups these tests as <em>accelerated environment stress tests</em> and <em>package assembly integrity tests</em>. As for the silicon, a typical sample consists of three assembly lots of 77 parts per test, and zero failures are accepted. <a href="#/tbl-package-qualification" class="quarto-xref">Table&nbsp;10</a> lists typical tests.</p>
+<p>These tests fall into three groups: <strong>component-level stress tests</strong> (PC, TC, THB/HAST, UHAST, HTSL) that accelerate the degradation of the package, <strong>assembly integrity tests</strong> that check the mechanical quality of the interconnects directly, and <strong>board-level tests</strong> (drop, TCoB) that stress the solder joints between package and PCB. After each stress test, the parts are electrically tested against the datasheet at the read points; in addition, non-destructive inspection like <a href="https://en.wikipedia.org/wiki/Scanning_acoustic_microscope">scanning acoustic microscopy</a> (C-SAM) reveals delamination and cracks inside the package, and X-ray imaging shows deformed bond wires. Failing parts are analyzed further, e.g., by cross-sectioning.</p>
+<p><strong>Pre-conditioning (PC)</strong> is not a test on its own but the mandatory first step before TC, THB/HAST, and UHAST. The mold compound and the laminate are polymers that absorb moisture from the ambient air during storage. When the package is then soldered to the PCB, it is heated within seconds to a peak temperature of up to 260 °C for lead-free solder, and the absorbed water evaporates explosively. The vapor pressure can delaminate the mold compound from the die or the lead frame, crack the package, or break bond wires—the so-called <strong>popcorn effect</strong>. Pre-conditioning therefore reproduces the life of a part before it reaches the application: a bake to dry the parts, a moisture soak according to the targeted MSL, and three reflow cycles to simulate board assembly including a rework.</p>
+<p>The <strong>moisture sensitivity level (MSL)</strong> is determined according to J-STD-020 and states how long a package may be exposed to a factory environment (≤30 °C, 60 % RH) after opening its dry pack before it must be soldered. It ranges from MSL 1 (unlimited floor life, soaked at 85 °C and 85 % RH for 168 h) and MSL 3 (floor life of 168 h, a common target for plastic packages) to MSL 6 (parts must be baked right before soldering). Packages with MSL 2 and higher are shipped in sealed moisture-barrier bags with desiccant, and parts that exceeded their floor life have to be baked before use (J-STD-033).</p>
+<p><strong>Temperature cycling (TC)</strong> addresses the thermo-mechanical stress caused by the different coefficients of thermal expansion (CTE) of the package materials: silicon expands by about 2.6 ppm/K, the copper lead frame by about 17 ppm/K, the laminate by about 14 to 17 ppm/K, and the mold compound by roughly 8 to 15 ppm/K (below its glass transition temperature). Every temperature change therefore causes shear stress at the interfaces. The parts are cycled between typically −55 °C and +125 °C (or −40 °C and +150 °C for automotive), with several hundred to 1000 cycles. Typical failure mechanisms are cracked wire-bond heels, lifted ball bonds, delamination, cracked dice or passivation layers, and fatigue of flip-chip bumps (which is why flip-chip dice are usually underfilled). The acceleration factor to the milder temperature swings of the application follows the empirical <a href="https://en.wikipedia.org/wiki/Coffin%E2%80%93Manson_relation">Coffin–Manson relation</a>, where the number of cycles to failure scales with a power of the temperature swing.</p>
+<p><strong>Temperature humidity bias (THB)</strong> and its accelerated variant, <strong>biased HAST</strong>, combine moisture with an electric field. In the classic 85/85 test, the parts are operated for 1000 h at 85 °C and 85 % RH with a static bias applied to the pins; HAST reaches a similar stress in about 96 h at 130 °C and 85 % RH in a pressurized chamber. Moisture diffuses through the mold compound and along interfaces to the die surface, where it dissolves ionic contaminations (e.g., chlorine from the mold compound); together with the applied voltage this causes electrochemical <strong>corrosion</strong> of the Al bond pads and metal lines, or leakage currents between adjacent pins. A dense passivation layer and a well-adhering mold compound are the main countermeasures. <strong>Unbiased HAST (UHAST)</strong> applies the same humidity stress without bias (typically 96 h at 130 °C and 85 % RH), which isolates the purely chemical and mechanical effects of moisture, like galvanic corrosion between dissimilar metals and delamination.</p>
+<p><strong>High-temperature storage life (HTSL)</strong> stores unbiased parts at typically 150 °C for 1000 h. Its main target is the bond interface between the wire and the Al pad: gold and aluminum form <strong>intermetallic compounds</strong> whose growth is thermally activated. Uneven diffusion of the two metals creates voids (Kirkendall voiding), which increase the contact resistance and weaken the bond until it lifts off; the purple color of one of these compounds (AuAl<sub>2</sub>) gave this failure the name “purple plague.” Copper wires, which have widely replaced gold for cost reasons, form Cu–Al intermetallics much more slowly, but they are more sensitive to corrosion in the humidity tests. As for HTOL, an Arrhenius acceleration factor relates the storage test to the application temperature.</p>
+<p><strong>Wire bond pull and shear tests</strong> and <strong>solder ball shear tests</strong> are destructive mechanical tests of the interconnects themselves. In the pull test, a hook is placed below the bond wire and pulled upward until the wire breaks; both the force and the location of the break are recorded—a break in the wire is acceptable, while a lifted bond indicates a weak connection. In the shear test, a tool pushes the ball bond or the solder ball sideways off its pad. These tests are performed on a small sample per assembly lot and are also used for monitoring the ongoing production.</p>
+<p><strong>Board-level reliability tests</strong> assess the solder joints between package and PCB, which usually fail before the package itself. In the <strong>drop test</strong>, a standardized JEDEC test board with the mounted components is subjected to repeated mechanical shocks (e.g., 1500 g for 0.5 ms) while the daisy-chained solder joints are monitored for interruptions; this test is essential for handheld devices. In <strong>temperature cycling on board (TCoB)</strong>, the assembled board is cycled (e.g., between 0 °C and 100 °C) until the solder joints fail by fatigue. The CTE mismatch between silicon and the PCB is particularly critical for WLCSPs, where the silicon die is soldered directly to the board, and for large BGAs, where the distance to the neutral point of expansion is large; the achievable number of cycles therefore limits the maximum die size of a WLCSP.</p>
+<p>A qualified package is not qualified forever. As a package family covers many die sizes and pin counts, qualification is usually performed on worst-case representatives (e.g., the largest die in the thinnest package), and other products are qualified by similarity. Any significant change of the materials (mold compound, wire material, die attach), the assembly site, or the process requires a requalification and a formal notification of the customers (JESD46).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="references" class="slide level3 unnumbered smaller scrollable">
+<h3>References</h3>
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Craninckx_1995" class="csl-entry" role="listitem">
+Craninckx, Jan, and Michiel S. J. Steyaert. 1995. <span>“A 1.8-<span>GHz</span> <span>CMOS</span> Low-Phase-Noise Voltage-Controlled Oscillator with Prescaler.”</span> <em>IEEE Journal of Solid-State Circuits</em> 30 (12): 1474–82.
+</div>
+<div id="ref-Pozar_RF" class="csl-entry" role="listitem">
+Pozar, David M. 2011. <em>Microwave Engineering</em>. 4th ed. Wiley.
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>References</h3>
+
+</section>
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="../dcic.html#sec-packaging">DCIC lecture notes</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"numbers":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/iic-jku\.github\.io\/design-complex-ic\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
