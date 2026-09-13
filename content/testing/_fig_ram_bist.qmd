@@ -1,0 +1,73 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-ram-bist
+#| echo: false
+#| fig-cap: "RAM built-in self-test (BIST): a controller sequences a test-pattern generator and an address generator that exercise the RAM through multiplexers; the read-back data is checked in a comparator, yielding a pass/fail result. In mission mode, the multiplexers connect the RAM to the normal system inputs."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, FancyArrowPatch
+
+
+def box(ax, x, y, w, h, text, fc='#e8eef4'):
+    ax.add_patch(Rectangle((x, y), w, h, fc=fc, ec='k', lw=1.0))
+    ax.text(x + w / 2, y + h / 2, text, ha='center', va='center',
+            fontsize=8.5)
+
+
+def arr(ax, x0, y0, x1, y1):
+    ax.add_patch(FancyArrowPatch((x0, y0), (x1, y1), arrowstyle='->',
+                                 mutation_scale=11, lw=1.0,
+                                 shrinkA=0, shrinkB=0))
+
+
+fig, ax = plt.subplots(figsize=(8, 4.0))
+
+box(ax, 0.2, 2.75, 2.6, 1.0, 'BIST controller', fc='#f4e8d8')
+box(ax, 3.6, 4.2, 2.8, 0.9, 'pattern generator')
+box(ax, 3.6, 2.8, 2.8, 0.9, 'address generator')
+box(ax, 7.4, 2.8, 1.4, 2.3, 'MUX')
+box(ax, 9.6, 2.8, 2.6, 2.3, 'RAM\nunder test')
+box(ax, 9.6, 0.6, 2.6, 1.0, 'comparator')
+box(ax, 3.6, 0.6, 2.8, 1.0, 'expected data')
+
+arr(ax, 2.8, 3.25, 3.6, 3.25)
+ax.plot([3.2, 3.2], [3.25, 4.65], 'k-', lw=1.0,
+        solid_capstyle='projecting')
+arr(ax, 3.2, 4.65, 3.6, 4.65)
+ax.plot(3.2, 3.25, 'ko', ms=4)
+arr(ax, 6.4, 4.65, 7.4, 4.65)
+arr(ax, 6.4, 3.25, 7.4, 3.25)
+arr(ax, 8.8, 3.95, 9.6, 3.95)
+arr(ax, 10.9, 2.8, 10.9, 1.6)
+arr(ax, 6.4, 1.1, 9.6, 1.1)
+ax.plot([1.5, 1.5], [2.75, 1.1], 'k-', lw=1.0, solid_capstyle='projecting')
+arr(ax, 1.5, 1.1, 3.6, 1.1)
+ax.text(11.1, 2.2, 'read data', fontsize=7.5, rotation=90, va='center')
+arr(ax, 12.2, 1.1, 13.1, 1.1)
+ax.text(13.2, 1.1, 'pass/\nfail', fontsize=8.5, va='center')
+ax.text(8.1, 5.6, 'normal system inputs', fontsize=8, ha='center',
+        va='bottom')
+arr(ax, 8.1, 5.6, 8.1, 5.1)
+
+ax.set_xlim(0, 14.2)
+ax.set_ylim(0.2, 6.0)
+ax.set_aspect('equal')
+ax.axis('off')
+plt.tight_layout()
+plt.show()
+```

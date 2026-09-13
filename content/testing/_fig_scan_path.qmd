@@ -1,0 +1,115 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-scan-path
+#| echo: false
+#| fig-cap: "Scan-path test: every flip-flop is replaced by a scan flip-flop with an input multiplexer. In mission mode (scan enable SE = 0), the flip-flops capture the outputs of the combinational logic; in scan mode (SE = 1), all flip-flops form a shift register from scan-in (SI) to scan-out (SO), making every register controllable and observable."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, FancyArrowPatch, Polygon
+
+
+RED = '#b02020'
+
+
+def box(ax, x, y, w, h, text, fc='#e8eef4'):
+    ax.add_patch(Rectangle((x, y), w, h, fc=fc, ec='k', lw=1.0))
+    ax.text(x + w / 2, y + h / 2, text, ha='center', va='center',
+            fontsize=8.5)
+
+
+def mux(ax, x, y):
+    ax.add_patch(Polygon([(x, y), (x, y + 1.2), (x + MW, y + 0.9),
+                          (x + MW, y + 0.3)], closed=True, fc='#f4e8d8',
+                         ec='k', lw=0.9))
+
+
+def arr(ax, x0, y0, x1, y1, color='k'):
+    ax.add_patch(FancyArrowPatch((x0, y0), (x1, y1), arrowstyle='->',
+                                 mutation_scale=10, lw=1.0, color=color,
+                                 shrinkA=0, shrinkB=0))
+
+
+def dashed(ax, xs, ys):
+    ax.plot(xs, ys, color=RED, lw=1.0, ls='--', solid_capstyle='butt')
+
+
+CW, CH = 1.5, 1.6       # combinational logic block
+MW = 0.6                # mux width
+FW, FH = 0.8, 1.0       # flip-flop
+G = 0.7                 # gap between blocks
+Y_D, Y_S, Y_Q = 2.6, 2.0, 2.3   # data-in, scan-in, FF output levels
+Y_R = 0.9               # scan chain routing level
+
+fig, ax = plt.subplots(figsize=(8, 2.8))
+
+x = 0.3
+taps = []
+muxes = []
+for i in range(3):
+    box(ax, x, Y_Q - CH / 2, CW, CH, f'comb.\nlogic {i + 1}')
+    if i > 0:
+        # FF output -> next combinational logic
+        arr(ax, x - G, Y_Q, x, Y_Q)
+    x += CW
+    if i == 2:
+        break
+    # scan FF: mux + flip-flop
+    xm = x + G
+    mux(ax, xm, Y_Q - 0.6)
+    muxes.append(xm)
+    arr(ax, x, Y_D, xm, Y_D)
+    xf = xm + MW + 0.5
+    box(ax, xf, Y_Q - FH / 2, FW, FH, 'FF')
+    arr(ax, xm + MW, Y_Q, xf, Y_Q)
+    x = xf + FW + G
+    taps.append(xf + FW + G / 2)
+x_end = x
+
+# scan chain: SI -> mux 1, FF 1 -> mux 2, FF 2 -> SO
+xs = muxes[0] - G / 2
+dashed(ax, [xs, xs, muxes[0] - 0.25], [Y_R, Y_S, Y_S])
+arr(ax, muxes[0] - 0.25, Y_S, muxes[0], Y_S, color=RED)
+ax.text(xs, Y_R - 0.08, 'SI', color=RED, fontsize=9, ha='center',
+        va='top')
+
+xs = muxes[1] - G / 2
+dashed(ax, [taps[0], taps[0], xs, xs, muxes[1] - 0.25],
+       [Y_Q, Y_R, Y_R, Y_S, Y_S])
+arr(ax, muxes[1] - 0.25, Y_S, muxes[1], Y_S, color=RED)
+
+dashed(ax, [taps[1], taps[1], x_end + 0.3], [Y_Q, Y_R, Y_R])
+arr(ax, x_end + 0.3, Y_R, x_end + 0.7, Y_R, color=RED)
+ax.text(x_end + 0.8, Y_R, 'SO', color=RED, fontsize=9, va='center')
+
+for xt in taps:
+    ax.plot(xt, Y_Q, 'o', color=RED, ms=3.5)
+
+# legend
+xl = (x_end + 0.3) / 2
+ax.text(xl, 3.75, 'mission path', fontsize=9)
+ax.plot([xl - 0.9, xl - 0.2], [3.82, 3.82], 'k-', lw=1.0)
+ax.text(xl, 3.35, 'scan path (SE = 1)', fontsize=9, color=RED)
+ax.plot([xl - 0.9, xl - 0.2], [3.42, 3.42], color=RED, ls='--', lw=1.0)
+
+ax.set_xlim(0, x_end + 1.5)
+ax.set_ylim(0.4, 4.2)
+ax.set_aspect('equal')
+ax.axis('off')
+plt.tight_layout()
+plt.show()
+```

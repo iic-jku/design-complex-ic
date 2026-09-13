@@ -1,0 +1,61 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-measurement-errors
+#| echo: false
+#| fig-cap: "Classification of measurement errors: accuracy is ensured by instrument traceability to standards, while precision splits into repeatability (same person, machine, and setup) and reproducibility (different person, machine, or setup)."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+
+def box(ax, x, y, w, h, text):
+    ax.add_patch(Rectangle((x - w / 2, y - h / 2), w, h, fc='white',
+                           ec='k', lw=1.0))
+    ax.text(x, y, text, ha='center', va='center', fontsize=8.5)
+
+
+def link(ax, x0, y0, x1, y1):
+    ym = (y0 + y1) / 2
+    ax.plot([x0, x0, x1, x1], [y0, ym, ym, y1], 'k-', lw=1.0)
+
+
+fig, ax = plt.subplots(figsize=(8, 3.6))
+
+box(ax, 6.0, 5.4, 3.4, 0.75, 'Measurement errors')
+box(ax, 2.6, 4.0, 2.4, 0.75, 'Accuracy')
+box(ax, 9.4, 4.0, 2.4, 0.75, 'Precision')
+box(ax, 2.6, 2.4, 3.4, 1.0, 'Instrument traceability\nto standards')
+box(ax, 7.2, 2.4, 2.6, 0.75, 'Repeatability')
+box(ax, 11.4, 2.4, 2.7, 0.75, 'Reproducibility')
+box(ax, 7.2, 0.8, 2.8, 1.1, 'Same person\nSame machine\nSame setup')
+box(ax, 11.4, 0.8, 2.9, 1.1, 'Different person\nDifferent machine\nDifferent setup')
+
+link(ax, 6.0, 5.03, 2.6, 4.38)
+link(ax, 6.0, 5.03, 9.4, 4.38)
+ax.plot([2.6, 2.6], [3.62, 2.9], 'k-', lw=1.0)
+link(ax, 9.4, 3.62, 7.2, 2.78)
+link(ax, 9.4, 3.62, 11.4, 2.78)
+ax.plot([7.2, 7.2], [2.02, 1.35], 'k-', lw=1.0)
+ax.plot([11.4, 11.4], [2.02, 1.35], 'k-', lw=1.0)
+
+ax.set_xlim(0.4, 13.3)
+ax.set_ylim(0, 6.0)
+ax.axis('off')
+plt.tight_layout()
+plt.show()
+```

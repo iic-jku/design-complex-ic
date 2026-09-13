@@ -1,0 +1,190 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# Testing {#sec-testing}
+
+Integrated circuits must be tested for functionality and specification compliance before they are shipped. Defects introduced during manufacturing, as well as parameter variations, are unavoidable—not every IC on a wafer is a good device (the yield is below 100 %). Typical defect causes are doping errors and fluctuations, under- or over-etching, misalignment of layers, and contamination by particles. A comprehensive treatment of IC test is given in [@Wang_VLSITest]; the related field of hardware security and trust is covered in [@Bhunia_HWSecurity].
+
+## Post-Silicon Production Flow {#sec-testing-flow}
+
+The production flow after wafer manufacturing consists of the following steps:
+
+1. **Wafer test** (optional): bad dice are inked or recorded in the [automatic test equipment](https://en.wikipedia.org/wiki/Automatic_test_equipment) (ATE) to avoid wasting packages on them. The cost of packaging a bad die has to be weighed against the cost of the wafer test.
+2. **Wafer dicing**: the wafer is cut into separate chips, and bad chips are discarded.
+3. **Packaging**.
+4. **Final test**: ensures that no parts damaged during dicing or packaging are shipped; some parameters might only be testable on the packaged device.
+
+The ATE is typically used in two distinct modes:
+
+- **Prototype/characterization testing** is very extensive: it looks for worst-case behavior across conditions, establishes **guard bands** (margins for temperature and measurement uncertainty), is statistically based across hundreds or thousands of engineering samples, and test time is not the main concern.
+- **Production testing** is very time-critical: the tester is expensive, so minimum test time matters; the tests are based on the worst-case conditions established during characterization, and each IC is tested individually.
+
+## Test Equipment {#sec-testing-equipment}
+
+Mixed-signal IC test equipment (manufacturers include Teradyne, Advantest, Cohu, and National Instruments) consists of the parts shown in @fig-ate:
+
+1. The **workstation**: the user computer of the test engineer, used for debugging and day-to-day operation of the tester.
+2. The **mainframe**: houses the power supplies and measurement instruments and contains the tester computer (including DSP hardware for fast signal analysis).
+3. The **test head**: contains the most sensitive measurement electronics, and carries the **device interface board (DIB)** connecting to the device under test (DUT).
+
+{{< include /content/testing/_fig_ate.qmd >}}
+
+The **DIB** is a custom-designed PCB that hosts the package socket (for testing packaged ICs) or connects to the probe card (for wafer testing). It also contains interface circuits that cannot be handled by the tester hardware resources (e.g., special components required by the DUT). Contact to the packaged DUT is made with spring-loaded "pogo pins" in the socket. For wafer probing, different probe-card types are used: **cantilever** probe cards (needles coming in at an angle), **vertical** ("buckling-beam" or "cobra") probe cards, and **membrane** probe cards for high pin counts and fine pitches.
+
+**Handlers** (robotic pick-and-place or gravity-fed) insert the DUT into the test socket on the DIB. After the test, the ICs are sorted into **bins** (good = pass, bad = fail, possibly multiple pass grades). The handler can also provide a temperature-controlled environment for hot/cold testing in addition to room-temperature testing (the latter is preferred for cost reasons).
+
+## Mixed-Signal Testing Challenges {#sec-testing-challenges}
+
+- **Time is money:** A tester plus handler can cost several million dollars, and one second of test time costs 3 to 5 cents. The test program needs a certain time (up to minutes) to cover all relevant functional blocks and critical parameters. Multi-site testing (testing 2/4/8 devices in parallel) reduces the effective test time per device.
+- **The test socket introduces parasitics** ($R$, $L$, $C$) which impact performance and make precision measurements difficult.
+- **Accuracy** is limited by interference, calibration, and measurement time.
+- **Repeatability & reproducibility (R&R)** are required to obtain the same test results across different testers, DIBs, and test sites.
+
+The classification of measurement errors is summarized in @fig-measurement-errors: accuracy relates the measurement to the true value (via instrument traceability to standards), while precision splits into repeatability and reproducibility, illustrated in @fig-repeatability.
+
+{{< include /content/testing/_fig_measurement_errors.qmd >}}
+
+**Repeatability** is the dispersion of measurements when a quantity is measured several times under the same conditions: same measuring instrument, same parts, same operator, within a short time period. It represents the inherent variation of the measurement system—note that measurements may show good repeatability without being accurate! **Reproducibility** is the variation between the *mean* measurements on the same parts when one condition is changed per trial: a different operator, a different instrument, or a different setup.
+
+{{< include /content/testing/_fig_repeatability.qmd >}}
+
+## The Test Plan {#sec-testing-plan}
+
+The **test plan** is the governing document for generating the test program and contains:
+
+- Device **background information** (in addition to the datasheet).
+- Special **test requirements**.
+- An explanation of the **purpose of each test**.
+- **Assumptions** made for particular tests, and why.
+- A **hardware setup** diagram for each test.
+- Identification of **critical test parameters**: not all parameters from the datasheet need to be (or can be) tested in production, due to test time or measurement error; such parameters are guaranteed by design and marked accordingly in the datasheet.
+- **Binning information**: devices might be binned into pass/fail or different pass grades (e.g., by maximum clock frequency). Continuity fails are binned separately, because they could be caused by contact issues of the handler or socket.
+
+## Types of Tests {#sec-testing-types}
+
+### Continuity Test
+
+The **continuity test** verifies the contact between the DIB and all pins of the DUT. As essentially all pins have some circuitry connected (at least the ESD protection diodes), a small current is forced into or out of each pin (with a voltage limit to protect the device in case of opens), and the resulting voltage is measured, as sketched in @fig-continuity:
+
+- A high voltage (running into the voltage limit) means no contact to the IC pin → **open**.
+- A very small voltage means a short is detected at the IC pin → **short**.
+
+{{< include /content/testing/_fig_continuity.qmd >}}
+
+### Leakage-Current Test
+
+A non-defective device draws only a small **leakage current** at the power-supply and I/O pins when in off-mode, so a leakage test is a **fast method for detecting failing devices** due to shorts and other misprocessing:
+
+- A voltage is applied to all digital and analog inputs, and the current is measured.
+- Digital outputs are set to high-Z (if possible), and the leakage current is measured as for the inputs.
+- A voltage is applied to the $\VDD$ pins and the leakage current is measured; the device must be put into off-mode by applying the proper initialization (reset or power-on sequence).
+
+### Memory Test
+
+Memory cells have to be tested for the following fault types caused by production defects:
+
+- [**Stuck-at faults**](https://en.wikipedia.org/wiki/Stuck-at_fault) (stuck-at-0, stuck-at-1) and **transition faults** ($0 \rightarrow 1$ or $1 \rightarrow 0$ not possible).
+- **Coupling faults** (writing to one cell changes the content of another cell).
+- **Neighborhood pattern-sensitive faults**.
+
+Since on-chip memories can be large, **memory testing can be costly**, requiring a trade-off between fault coverage and test time. Example test methods:
+
+- Zero-one (write all zeros, read all zeros, write all ones, read all ones)—$\mathcal{O}(n)$.
+- Checkerboard (write alternating 0101…, read, write the complement 1010…, read)—$\mathcal{O}(n)$.
+- Walking 1/0 (consecutively fill the memory with ones/zeros and check)—$\mathcal{O}(n^2)$.
+- ROM: read out and compute a checksum/CRC or hash—$\mathcal{O}(n)$.
+
+Applying these RAM tests can be done by external reads/writes (slow), by the internal CPU (faster), or by dedicated [**built-in self-test (BIST)**](https://en.wikipedia.org/wiki/Built-in_self-test) hardware (fastest, at the cost of extra silicon area). @fig-ram-bist shows the structure of a RAM BIST: a controller with pattern and address generators exercises the RAM, and a comparator checks the read-back data.
+
+{{< include /content/testing/_fig_ram_bist.qmd >}}
+
+### JTAG Test and Debug Port
+
+[**JTAG**](https://en.wikipedia.org/wiki/JTAG) (IEEE Standard 1149.1) is a standardized test and debug port using serial communication to access IC-internal functional blocks (like the RAM BIST). JTAG uses four or five additional signals: *TDI* (test data in), *TDO* (test data out), *TCK* (test clock), *TMS* (test mode select), and optionally *TRST* (test reset). A two-pin version (cJTAG, IEEE 1149.7) uses only *TMSC* (test serial data) and *TCKC* (test clock).
+
+JTAG was originally introduced to check **interconnection faults on the PCB level**, as solder joints are the main cause of failing boards: all IC pins can be forced to 0 or 1 (or read) via the boundary-scan chain, so all intended PCB connections between ICs can be tested after board manufacturing (see @fig-jtag). Meanwhile, JTAG is also extensively used to **access internal components of an IC for debugging and test**.
+
+{{< include /content/testing/_fig_jtag.qmd >}}
+
+### Trimming
+
+If a property of the DUT needs to be **trimmed** (e.g., a reference voltage, an $RC$ product, or an SRAM repair map), this property is measured on the tester. This might require a special test mode, where an internal signal is multiplexed to one of the pins, or an internal calibration circuit is triggered and the result is read out digitally. The resulting **trimming information** is **permanently stored** inside the DUT:
+
+- If EEPROM bits are available, these can be used.
+- **Fuses** (e.g., polysilicon or metal wires or minimum-size vias melted open) or **anti-fuses** (e.g., diodes melted into a short) can permanently store a bit by forcing a high current during programming.
+- For analog precision circuits, **laser trimming** on the wafer can be used, e.g., to adjust the value of an integrated resistor.
+
+### Scan-Path Test
+
+Digital circuits consist (besides RAM and ROM) of combinational logic and state machines. For testing, two properties of a circuit node matter:
+
+- **Observability**: the ease of observing a node by watching the external output pins of the IC.
+- **Controllability**: the ease of forcing a node to 0 or 1 by driving the input pins of the IC.
+
+Combinational circuits are controllable and observable, so it is relatively easy to determine test patterns. Sequential circuits, however, have **states**! Finite state machines can be very difficult to test, requiring many cycles to enter a desired state. Beyond a certain size, **exhaustive testing** with all possible input vectors becomes impractical: for a circuit with $N$ inputs and $M$ state bits, $2^{N+M}$ patterns would be needed. For example, $N = 40$ inputs and 32 states ($M = 5$) at 10 ns per pattern results in roughly 100 hours of test time.
+
+Chip failures (opens, weak or strong shorts to other nodes) can cause very complex failure behavior, which is too time-consuming to test exhaustively—so a simplified **stuck-at model** is used: all failures are assumed to make nodes stuck at 0 (shorted to $\VSS$) or stuck at 1 (shorted to $\VDD$). This simple model is not quite true in reality, but works well enough in practice. Its limitation is demonstrated in @fig-stuck-at: an open in one pull-up branch of a CMOS NAND gate causes a *sequential* effect (the output keeps its previous value for one input combination), which needs two test vectors in the right order to be detected.
+
+{{< include /content/testing/_fig_stuck_at.qmd >}}
+
+A manufacturing test would ideally check every node in the circuit, applying the smallest sequence of test vectors necessary to prove that each node is not stuck. To increase observability and controllability, i.e., [**design for test (DFT)**](https://en.wikipedia.org/wiki/Design_for_testing), the **scan-path test** is introduced, shown in @fig-scan-path:
+
+- **Each flip-flop** is converted into a **scan register** (with a small area overhead): in **mission mode**, the flip-flops behave as usual; in **scan mode**, all flip-flops form a shift register, so their contents can be shifted in and out through dedicated pins.
+- If each register can be observed and controlled this way, the test problem reduces to testing the combinational logic between the registers.
+- During the production test, test patterns are shifted into the scan chains, one clock cycle is applied, and the captured result is shifted out and compared to the expected result (→ pass/fail). Digital pattern generators in the ATE hardware accelerate this.
+- The patterns are generated automatically by software ([ATPG](https://en.wikipedia.org/wiki/Automatic_test_pattern_generation)) from the design netlist, achieving high stuck-at fault coverage with a minimum number of patterns.
+- To speed up testing further, multiple chains are operated in parallel (requiring test pins for the parallel chain inputs and outputs).
+- An extension of scan is to use internal pattern generators (e.g., based on a pseudo-random number generator) as logic inputs, and to compress the outputs into a syndrome (e.g., a transition count or hash) that is compared to the expected syndrome → logic **BIST**.
+
+{{< include /content/testing/_fig_scan_path.qmd >}}
+
+### AC Parametric Tests
+
+Analog and mixed-signal parametric tests are highly dependent on the given function; examples are gain, phase, distortion, rejection (CMRR, PSRR), and noise. The DIB must be designed to reflect the conditions of the IC datasheet, e.g., applying the proper output loading ($R$ and $C$); different loads for different tests can be switched in via relays. Noise tests can be very time-consuming due to the long averaging needed to detect small signals; additional circuitry on the DIB can help to increase repeatability and speed.
+
+Modern mixed-signal testers use **arbitrary waveform generators (AWGs)** and **digitizers** to create and capture analog signals, with **DSPs** to speed up signal generation and analysis, as shown in @fig-ac-parametric. Concepts from sampling theory (quantization noise, under/oversampling, aliasing and reconstruction, FFT, windowing, sampling-clock coherence, etc.) apply!
+
+{{< include /content/testing/_fig_ac_parametric.qmd >}}
+
+For analog test parameters, the variation over production must stay inside the **test limits**, which are derived from the **datasheet limits minus guard bands**: the lower specification limit (LSL) and the upper specification limit (USL).
+
+## Process Capability Index {#sec-testing-cpk}
+
+To manufacture within a specification, the difference between the USL and the LSL must be greater than the total process variation, and the distribution should be well centered between the limits. One way to check this is the $C_\mathrm{p}$/$C_\mathrm{pk}$ analysis. Given a parameter distribution $x_i$ from a sample of size $N$, the arithmetic mean and the standard deviation are
+
+$$
+\overline{X} = \frac{1}{N} \sum_{i=1}^{N} x_i
+\qquad
+\sigma = \sqrt{\frac{1}{N} \sum_{i=1}^{N} \left( x_i - \overline{X} \right)^2}
+$$
+
+Then, the [process capability indices](https://en.wikipedia.org/wiki/Process_capability_index) are calculated as
+
+$$
+C_\mathrm{p} = \frac{\mathrm{USL} - \mathrm{LSL}}{6 \sigma}
+$$ {#eq-cp}
+
+$$
+C_\mathrm{pk} = \min \left\lbrace \frac{\mathrm{USL} - \overline{X}}{3 \sigma},  \frac{\overline{X} - \mathrm{LSL}}{3 \sigma} \right\rbrace
+$$ {#eq-cpk}
+
+$C_\mathrm{p}$ measures whether the process spread fits between the limits at all, while $C_\mathrm{pk}$ additionally accounts for the centering of the distribution. Ideally, $C_\mathrm{p} = C_\mathrm{pk}$ (the process is well centered), and $C_\mathrm{pk} > 2$ (which might not be achievable, so lower values like $C_\mathrm{pk} > 1.5$ may have to be accepted). @fig-cpk illustrates well-centered and off-center distributions.
+
+During product qualification, the $C_\mathrm{p}$/$C_\mathrm{pk}$ values are evaluated on a sufficient sample size, and critical tests are improved (change of datasheet limits, better centering of a parameter by redesign, process centering, etc.).
+
+{{< include /content/testing/_fig_cpk.qmd >}}
+
+The advantage of using the $C_\mathrm{p}$/$C_\mathrm{pk}$ analysis is that it provides a *quantitative* measure of both the process spread and the centering of the distribution relative to the specification limits. This helps in automatically identifying whether the process is capable of consistently producing parts within the desired specifications and whether any adjustments are needed to improve yield and quality with just two numbers: $C_\mathrm{p}$ and $C_\mathrm{pk}$. Manual inspection of the distribution alone may not reveal subtle misalignments or variations that could impact production quality and can be extremely time consuming and error prone.

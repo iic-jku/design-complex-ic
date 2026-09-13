@@ -1,0 +1,57 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-repeatability
+#| echo: false
+#| fig-cap: "Repeatability versus reproducibility: (a) repeatability is the spread of a single measurement setup; (b) reproducibility is the difference between the mean values obtained by different operators, machines, or setups."
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(-4, 4, 400)
+
+fig, axs = plt.subplots(1, 2, figsize=(8, 3.2))
+
+# (a) repeatability
+ax = axs[0]
+ax.plot(x, np.exp(-x**2 / 2), 'k-', lw=1.8)
+ax.annotate('', xy=(-2.5, -0.13), xytext=(2.5, -0.13),
+            arrowprops=dict(arrowstyle='<->', lw=1.0))
+ax.text(0, -0.25, 'repeatability', ha='center', fontsize=9)
+ax.set_title('(a)', fontsize=10)
+ax.set_xlim(-4, 4); ax.set_ylim(-0.35, 1.2)
+ax.axis('off')
+
+# (b) reproducibility
+ax = axs[1]
+x2 = np.linspace(-8, 8, 600)
+ax.plot(x2, np.exp(-(x2 + 3)**2 / 2), 'k-', lw=1.8)
+ax.plot(x2, np.exp(-(x2 - 3)**2 / 2) * 1.15, 'k-', lw=1.8)
+ax.text(-3, 1.1, 'operator A', ha='center', fontsize=9)
+ax.text(3, 1.27, 'operator B', ha='center', fontsize=9)
+ax.annotate('', xy=(-3, -0.13), xytext=(3, -0.13),
+            arrowprops=dict(arrowstyle='<->', lw=1.0))
+ax.text(0, -0.25, 'reproducibility', ha='center', fontsize=9)
+ax.plot([-3, -3], [0, 1.0], 'k:', lw=0.8)
+ax.plot([3, 3], [0, 1.15], 'k:', lw=0.8)
+ax.set_title('(b)', fontsize=10)
+ax.set_xlim(-8, 8); ax.set_ylim(-0.35, 1.45)
+ax.axis('off')
+
+plt.tight_layout()
+plt.show()
+```
