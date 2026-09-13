@@ -496,6 +496,24 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-packaging-qualification" id="toc-sec-packaging-qualification" class="nav-link" data-scroll-target="#sec-packaging-qualification"><span class="header-section-number">5.6</span> Package Qualification</a></li>
   </ul></li>
+  <li><a href="#sec-testing" id="toc-sec-testing" class="nav-link" data-scroll-target="#sec-testing"><span class="header-section-number">6</span> Testing</a>
+  <ul class="collapse">
+  <li><a href="#sec-testing-flow" id="toc-sec-testing-flow" class="nav-link" data-scroll-target="#sec-testing-flow"><span class="header-section-number">6.1</span> Post-Silicon Production Flow</a></li>
+  <li><a href="#sec-testing-equipment" id="toc-sec-testing-equipment" class="nav-link" data-scroll-target="#sec-testing-equipment"><span class="header-section-number">6.2</span> Test Equipment</a></li>
+  <li><a href="#sec-testing-challenges" id="toc-sec-testing-challenges" class="nav-link" data-scroll-target="#sec-testing-challenges"><span class="header-section-number">6.3</span> Mixed-Signal Testing Challenges</a></li>
+  <li><a href="#sec-testing-plan" id="toc-sec-testing-plan" class="nav-link" data-scroll-target="#sec-testing-plan"><span class="header-section-number">6.4</span> The Test Plan</a></li>
+  <li><a href="#sec-testing-types" id="toc-sec-testing-types" class="nav-link" data-scroll-target="#sec-testing-types"><span class="header-section-number">6.5</span> Types of Tests</a>
+  <ul class="collapse">
+  <li><a href="#continuity-test" id="toc-continuity-test" class="nav-link" data-scroll-target="#continuity-test"><span class="header-section-number">6.5.1</span> Continuity Test</a></li>
+  <li><a href="#leakage-current-test" id="toc-leakage-current-test" class="nav-link" data-scroll-target="#leakage-current-test"><span class="header-section-number">6.5.2</span> Leakage-Current Test</a></li>
+  <li><a href="#memory-test" id="toc-memory-test" class="nav-link" data-scroll-target="#memory-test"><span class="header-section-number">6.5.3</span> Memory Test</a></li>
+  <li><a href="#jtag-test-and-debug-port" id="toc-jtag-test-and-debug-port" class="nav-link" data-scroll-target="#jtag-test-and-debug-port"><span class="header-section-number">6.5.4</span> JTAG Test and Debug Port</a></li>
+  <li><a href="#trimming" id="toc-trimming" class="nav-link" data-scroll-target="#trimming"><span class="header-section-number">6.5.5</span> Trimming</a></li>
+  <li><a href="#scan-path-test" id="toc-scan-path-test" class="nav-link" data-scroll-target="#scan-path-test"><span class="header-section-number">6.5.6</span> Scan-Path Test</a></li>
+  <li><a href="#ac-parametric-tests" id="toc-ac-parametric-tests" class="nav-link" data-scroll-target="#ac-parametric-tests"><span class="header-section-number">6.5.7</span> AC Parametric Tests</a></li>
+  </ul></li>
+  <li><a href="#sec-testing-cpk" id="toc-sec-testing-cpk" class="nav-link" data-scroll-target="#sec-testing-cpk"><span class="header-section-number">6.6</span> Process Capability Index</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dcic.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -3119,6 +3137,295 @@ Table&nbsp;10: Typical package qualification tests
 <p><strong>Wire bond pull and shear tests</strong> and <strong>solder ball shear tests</strong> are destructive mechanical tests of the interconnects themselves. In the pull test, a hook is placed below the bond wire and pulled upward until the wire breaks; both the force and the location of the break are recorded—a break in the wire is acceptable, while a lifted bond indicates a weak connection. In the shear test, a tool pushes the ball bond or the solder ball sideways off its pad. These tests are performed on a small sample per assembly lot and are also used for monitoring the ongoing production.</p>
 <p><strong>Board-level reliability tests</strong> assess the solder joints between package and PCB, which usually fail before the package itself. In the <strong>drop test</strong>, a standardized JEDEC test board with the mounted components is subjected to repeated mechanical shocks (e.g., 1500 g for 0.5 ms) while the daisy-chained solder joints are monitored for interruptions; this test is essential for handheld devices. In <strong>temperature cycling on board (TCoB)</strong>, the assembled board is cycled (e.g., between 0 °C and 100 °C) until the solder joints fail by fatigue. The CTE mismatch between silicon and the PCB is particularly critical for WLCSPs, where the silicon die is soldered directly to the board, and for large BGAs, where the distance to the neutral point of expansion is large; the achievable number of cycles therefore limits the maximum die size of a WLCSP.</p>
 <p>A qualified package is not qualified forever. As a package family covers many die sizes and pin counts, qualification is usually performed on worst-case representatives (e.g., the largest die in the thinnest package), and other products are qualified by similarity. Any significant change of the materials (mold compound, wire material, die attach), the assembly site, or the process requires a requalification and a formal notification of the customers (JESD46).</p>
+</section>
+</section>
+<section id="sec-testing" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Testing</h1>
+<p>Integrated circuits must be tested for functionality and specification compliance before they are shipped. Defects introduced during manufacturing, as well as parameter variations, are unavoidable—not every IC on a wafer is a good device (the yield is below 100 %). Typical defect causes are doping errors and fluctuations, under- or over-etching, misalignment of layers, and contamination by particles. A comprehensive treatment of IC test is given in <span class="citation" data-cites="Wang_VLSITest">(<a href="#ref-Wang_VLSITest" role="doc-biblioref">Wang et al. 2006</a>)</span>; the related field of hardware security and trust is covered in <span class="citation" data-cites="Bhunia_HWSecurity">(<a href="#ref-Bhunia_HWSecurity" role="doc-biblioref">Bhunia and Tehranipoor 2018</a>)</span>.</p>
+<section id="sec-testing-flow" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-testing-flow"><span class="header-section-number">6.1</span> Post-Silicon Production Flow</h2>
+<p>The production flow after wafer manufacturing consists of the following steps:</p>
+<ol type="1">
+<li><strong>Wafer test</strong> (optional): bad dice are inked or recorded in the <a href="https://en.wikipedia.org/wiki/Automatic_test_equipment">automatic test equipment</a> (ATE) to avoid wasting packages on them. The cost of packaging a bad die has to be weighed against the cost of the wafer test.</li>
+<li><strong>Wafer dicing</strong>: the wafer is cut into separate chips, and bad chips are discarded.</li>
+<li><strong>Packaging</strong>.</li>
+<li><strong>Final test</strong>: ensures that no parts damaged during dicing or packaging are shipped; some parameters might only be testable on the packaged device.</li>
+</ol>
+<p>The ATE is typically used in two distinct modes:</p>
+<ul>
+<li><strong>Prototype/characterization testing</strong> is very extensive: it looks for worst-case behavior across conditions, establishes <strong>guard bands</strong> (margins for temperature and measurement uncertainty), is statistically based across hundreds or thousands of engineering samples, and test time is not the main concern.</li>
+<li><strong>Production testing</strong> is very time-critical: the tester is expensive, so minimum test time matters; the tests are based on the worst-case conditions established during characterization, and each IC is tested individually.</li>
+</ul>
+</section>
+<section id="sec-testing-equipment" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sec-testing-equipment"><span class="header-section-number">6.2</span> Test Equipment</h2>
+<p>Mixed-signal IC test equipment (manufacturers include Teradyne, Advantest, Cohu, and National Instruments) consists of the parts shown in <a href="#fig-ate" class="quarto-xref">Figure&nbsp;59</a>:</p>
+<ol type="1">
+<li>The <strong>workstation</strong>: the user computer of the test engineer, used for debugging and day-to-day operation of the tester.</li>
+<li>The <strong>mainframe</strong>: houses the power supplies and measurement instruments and contains the tester computer (including DSP hardware for fast signal analysis).</li>
+<li>The <strong>test head</strong>: contains the most sensitive measurement electronics, and carries the <strong>device interface board (DIB)</strong> connecting to the device under test (DUT).</li>
+</ol>
+<div id="cell-fig-ate" class="cell" data-execution_count="58">
+<div class="cell-output cell-output-display">
+<div id="fig-ate" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-ate-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-59" title="Figure&nbsp;59: Structure of a mixed-signal automatic test equipment (ATE): the workstation controls the mainframe (power supplies, instruments, tester computer with DSP), which connects to the test head carrying the sensitive measurement frontends and the device interface board (DIB) with the DUT socket; a handler feeds the devices."><img src="dcic_files/figure-html/fig-ate-output-1.png" width="758" height="266" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;59: Structure of a mixed-signal automatic test equipment (ATE): the workstation controls the mainframe (power supplies, instruments, tester computer with DSP), which connects to the test head carrying the sensitive measurement frontends and the device interface board (DIB) with the DUT socket; a handler feeds the devices.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The <strong>DIB</strong> is a custom-designed PCB that hosts the package socket (for testing packaged ICs) or connects to the probe card (for wafer testing). It also contains interface circuits that cannot be handled by the tester hardware resources (e.g., special components required by the DUT). Contact to the packaged DUT is made with spring-loaded “pogo pins” in the socket. For wafer probing, different probe-card types are used: <strong>cantilever</strong> probe cards (needles coming in at an angle), <strong>vertical</strong> (“buckling-beam” or “cobra”) probe cards, and <strong>membrane</strong> probe cards for high pin counts and fine pitches.</p>
+<p><strong>Handlers</strong> (robotic pick-and-place or gravity-fed) insert the DUT into the test socket on the DIB. After the test, the ICs are sorted into <strong>bins</strong> (good = pass, bad = fail, possibly multiple pass grades). The handler can also provide a temperature-controlled environment for hot/cold testing in addition to room-temperature testing (the latter is preferred for cost reasons).</p>
+</section>
+<section id="sec-testing-challenges" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-testing-challenges"><span class="header-section-number">6.3</span> Mixed-Signal Testing Challenges</h2>
+<ul>
+<li><strong>Time is money:</strong> A tester plus handler can cost several million dollars, and one second of test time costs 3 to 5 cents. The test program needs a certain time (up to minutes) to cover all relevant functional blocks and critical parameters. Multi-site testing (testing 2/4/8 devices in parallel) reduces the effective test time per device.</li>
+<li><strong>The test socket introduces parasitics</strong> (<span class="math inline">\(R\)</span>, <span class="math inline">\(L\)</span>, <span class="math inline">\(C\)</span>) which impact performance and make precision measurements difficult.</li>
+<li><strong>Accuracy</strong> is limited by interference, calibration, and measurement time.</li>
+<li><strong>Repeatability &amp; reproducibility (R&amp;R)</strong> are required to obtain the same test results across different testers, DIBs, and test sites.</li>
+</ul>
+<p>The classification of measurement errors is summarized in <a href="#fig-measurement-errors" class="quarto-xref">Figure&nbsp;60</a>: accuracy relates the measurement to the true value (via instrument traceability to standards), while precision splits into repeatability and reproducibility, illustrated in <a href="#fig-repeatability" class="quarto-xref">Figure&nbsp;61</a>.</p>
+<div id="cell-fig-measurement-errors" class="cell" data-execution_count="59">
+<div class="cell-output cell-output-display">
+<div id="fig-measurement-errors" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-measurement-errors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-measurement-errors-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-60" title="Figure&nbsp;60: Classification of measurement errors: accuracy is ensured by instrument traceability to standards, while precision splits into repeatability (same person, machine, and setup) and reproducibility (different person, machine, or setup)."><img src="dcic_files/figure-html/fig-measurement-errors-output-1.png" width="758" height="336" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-measurement-errors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;60: Classification of measurement errors: accuracy is ensured by instrument traceability to standards, while precision splits into repeatability (same person, machine, and setup) and reproducibility (different person, machine, or setup).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Repeatability</strong> is the dispersion of measurements when a quantity is measured several times under the same conditions: same measuring instrument, same parts, same operator, within a short time period. It represents the inherent variation of the measurement system—note that measurements may show good repeatability without being accurate! <strong>Reproducibility</strong> is the variation between the <em>mean</em> measurements on the same parts when one condition is changed per trial: a different operator, a different instrument, or a different setup.</p>
+<div id="cell-fig-repeatability" class="cell" data-execution_count="60">
+<div class="cell-output cell-output-display">
+<div id="fig-repeatability" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-repeatability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-repeatability-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-61" title="Figure&nbsp;61: Repeatability versus reproducibility: (a) repeatability is the spread of a single measurement setup; (b) reproducibility is the difference between the mean values obtained by different operators, machines, or setups."><img src="dcic_files/figure-html/fig-repeatability-output-1.png" width="758" height="297" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-repeatability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;61: Repeatability versus reproducibility: (a) repeatability is the spread of a single measurement setup; (b) reproducibility is the difference between the mean values obtained by different operators, machines, or setups.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-testing-plan" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-testing-plan"><span class="header-section-number">6.4</span> The Test Plan</h2>
+<p>The <strong>test plan</strong> is the governing document for generating the test program and contains:</p>
+<ul>
+<li>Device <strong>background information</strong> (in addition to the datasheet).</li>
+<li>Special <strong>test requirements</strong>.</li>
+<li>An explanation of the <strong>purpose of each test</strong>.</li>
+<li><strong>Assumptions</strong> made for particular tests, and why.</li>
+<li>A <strong>hardware setup</strong> diagram for each test.</li>
+<li>Identification of <strong>critical test parameters</strong>: not all parameters from the datasheet need to be (or can be) tested in production, due to test time or measurement error; such parameters are guaranteed by design and marked accordingly in the datasheet.</li>
+<li><strong>Binning information</strong>: devices might be binned into pass/fail or different pass grades (e.g., by maximum clock frequency). Continuity fails are binned separately, because they could be caused by contact issues of the handler or socket.</li>
+</ul>
+</section>
+<section id="sec-testing-types" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="sec-testing-types"><span class="header-section-number">6.5</span> Types of Tests</h2>
+<section id="continuity-test" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="continuity-test"><span class="header-section-number">6.5.1</span> Continuity Test</h3>
+<p>The <strong>continuity test</strong> verifies the contact between the DIB and all pins of the DUT. As essentially all pins have some circuitry connected (at least the ESD protection diodes), a small current is forced into or out of each pin (with a voltage limit to protect the device in case of opens), and the resulting voltage is measured, as sketched in <a href="#fig-continuity" class="quarto-xref">Figure&nbsp;62</a>:</p>
+<ul>
+<li>A high voltage (running into the voltage limit) means no contact to the IC pin → <strong>open</strong>.</li>
+<li>A very small voltage means a short is detected at the IC pin → <strong>short</strong>.</li>
+</ul>
+<div id="cell-fig-continuity" class="cell" data-execution_count="61">
+<div class="cell-output cell-output-display">
+<div id="fig-continuity" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-continuity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-continuity-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-62" title="Figure&nbsp;62: Continuity test: the tester forces a small current into the pin and measures the resulting voltage across the ESD protection diodes of the DUT. A voltage near one diode drop confirms contact; a voltage running into the limit indicates an open, a near-zero voltage a short."><img src="dcic_files/figure-html/fig-continuity-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-continuity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;62: Continuity test: the tester forces a small current into the pin and measures the resulting voltage across the ESD protection diodes of the DUT. A voltage near one diode drop confirms contact; a voltage running into the limit indicates an open, a near-zero voltage a short.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="leakage-current-test" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="leakage-current-test"><span class="header-section-number">6.5.2</span> Leakage-Current Test</h3>
+<p>A non-defective device draws only a small <strong>leakage current</strong> at the power-supply and I/O pins when in off-mode, so a leakage test is a <strong>fast method for detecting failing devices</strong> due to shorts and other misprocessing:</p>
+<ul>
+<li>A voltage is applied to all digital and analog inputs, and the current is measured.</li>
+<li>Digital outputs are set to high-Z (if possible), and the leakage current is measured as for the inputs.</li>
+<li>A voltage is applied to the <span class="math inline">\(V_\mathrm{DD}\)</span> pins and the leakage current is measured; the device must be put into off-mode by applying the proper initialization (reset or power-on sequence).</li>
+</ul>
+</section>
+<section id="memory-test" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="memory-test"><span class="header-section-number">6.5.3</span> Memory Test</h3>
+<p>Memory cells have to be tested for the following fault types caused by production defects:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Stuck-at_fault"><strong>Stuck-at faults</strong></a> (stuck-at-0, stuck-at-1) and <strong>transition faults</strong> (<span class="math inline">\(0 \rightarrow 1\)</span> or <span class="math inline">\(1 \rightarrow 0\)</span> not possible).</li>
+<li><strong>Coupling faults</strong> (writing to one cell changes the content of another cell).</li>
+<li><strong>Neighborhood pattern-sensitive faults</strong>.</li>
+</ul>
+<p>Since on-chip memories can be large, <strong>memory testing can be costly</strong>, requiring a trade-off between fault coverage and test time. Example test methods:</p>
+<ul>
+<li>Zero-one (write all zeros, read all zeros, write all ones, read all ones)—<span class="math inline">\(\mathcal{O}(n)\)</span>.</li>
+<li>Checkerboard (write alternating 0101…, read, write the complement 1010…, read)—<span class="math inline">\(\mathcal{O}(n)\)</span>.</li>
+<li>Walking 1/0 (consecutively fill the memory with ones/zeros and check)—<span class="math inline">\(\mathcal{O}(n^2)\)</span>.</li>
+<li>ROM: read out and compute a checksum/CRC or hash—<span class="math inline">\(\mathcal{O}(n)\)</span>.</li>
+</ul>
+<p>Applying these RAM tests can be done by external reads/writes (slow), by the internal CPU (faster), or by dedicated <a href="https://en.wikipedia.org/wiki/Built-in_self-test"><strong>built-in self-test (BIST)</strong></a> hardware (fastest, at the cost of extra silicon area). <a href="#fig-ram-bist" class="quarto-xref">Figure&nbsp;63</a> shows the structure of a RAM BIST: a controller with pattern and address generators exercises the RAM, and a comparator checks the read-back data.</p>
+<div id="cell-fig-ram-bist" class="cell" data-execution_count="62">
+<div class="cell-output cell-output-display">
+<div id="fig-ram-bist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ram-bist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-ram-bist-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-63" title="Figure&nbsp;63: RAM built-in self-test (BIST): a controller sequences a test-pattern generator and an address generator that exercise the RAM through multiplexers; the read-back data is checked in a comparator, yielding a pass/fail result. In mission mode, the multiplexers connect the RAM to the normal system inputs."><img src="dcic_files/figure-html/fig-ram-bist-output-1.png" width="758" height="321" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ram-bist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;63: RAM built-in self-test (BIST): a controller sequences a test-pattern generator and an address generator that exercise the RAM through multiplexers; the read-back data is checked in a comparator, yielding a pass/fail result. In mission mode, the multiplexers connect the RAM to the normal system inputs.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="jtag-test-and-debug-port" class="level3" data-number="6.5.4">
+<h3 data-number="6.5.4" class="anchored" data-anchor-id="jtag-test-and-debug-port"><span class="header-section-number">6.5.4</span> JTAG Test and Debug Port</h3>
+<p><a href="https://en.wikipedia.org/wiki/JTAG"><strong>JTAG</strong></a> (IEEE Standard 1149.1) is a standardized test and debug port using serial communication to access IC-internal functional blocks (like the RAM BIST). JTAG uses four or five additional signals: <em>TDI</em> (test data in), <em>TDO</em> (test data out), <em>TCK</em> (test clock), <em>TMS</em> (test mode select), and optionally <em>TRST</em> (test reset). A two-pin version (cJTAG, IEEE 1149.7) uses only <em>TMSC</em> (test serial data) and <em>TCKC</em> (test clock).</p>
+<p>JTAG was originally introduced to check <strong>interconnection faults on the PCB level</strong>, as solder joints are the main cause of failing boards: all IC pins can be forced to 0 or 1 (or read) via the boundary-scan chain, so all intended PCB connections between ICs can be tested after board manufacturing (see <a href="#fig-jtag" class="quarto-xref">Figure&nbsp;64</a>). Meanwhile, JTAG is also extensively used to <strong>access internal components of an IC for debugging and test</strong>.</p>
+<div id="cell-fig-jtag" class="cell" data-execution_count="63">
+<div class="cell-output cell-output-display">
+<div id="fig-jtag" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-jtag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-jtag-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-64" title="Figure&nbsp;64: JTAG boundary scan on a PCB: the boundary-scan cells (small squares) at every pin of each IC form a serial shift register; the chain runs from TDI through all devices to TDO, controlled by TCK and TMS. This allows forcing and observing all pins, and thus testing the PCB interconnects between the ICs."><img src="dcic_files/figure-html/fig-jtag-output-1.png" width="758" height="290" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-jtag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;64: JTAG boundary scan on a PCB: the boundary-scan cells (small squares) at every pin of each IC form a serial shift register; the chain runs from TDI through all devices to TDO, controlled by TCK and TMS. This allows forcing and observing all pins, and thus testing the PCB interconnects between the ICs.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="trimming" class="level3" data-number="6.5.5">
+<h3 data-number="6.5.5" class="anchored" data-anchor-id="trimming"><span class="header-section-number">6.5.5</span> Trimming</h3>
+<p>If a property of the DUT needs to be <strong>trimmed</strong> (e.g., a reference voltage, an <span class="math inline">\(RC\)</span> product, or an SRAM repair map), this property is measured on the tester. This might require a special test mode, where an internal signal is multiplexed to one of the pins, or an internal calibration circuit is triggered and the result is read out digitally. The resulting <strong>trimming information</strong> is <strong>permanently stored</strong> inside the DUT:</p>
+<ul>
+<li>If EEPROM bits are available, these can be used.</li>
+<li><strong>Fuses</strong> (e.g., polysilicon or metal wires or minimum-size vias melted open) or <strong>anti-fuses</strong> (e.g., diodes melted into a short) can permanently store a bit by forcing a high current during programming.</li>
+<li>For analog precision circuits, <strong>laser trimming</strong> on the wafer can be used, e.g., to adjust the value of an integrated resistor.</li>
+</ul>
+</section>
+<section id="scan-path-test" class="level3" data-number="6.5.6">
+<h3 data-number="6.5.6" class="anchored" data-anchor-id="scan-path-test"><span class="header-section-number">6.5.6</span> Scan-Path Test</h3>
+<p>Digital circuits consist (besides RAM and ROM) of combinational logic and state machines. For testing, two properties of a circuit node matter:</p>
+<ul>
+<li><strong>Observability</strong>: the ease of observing a node by watching the external output pins of the IC.</li>
+<li><strong>Controllability</strong>: the ease of forcing a node to 0 or 1 by driving the input pins of the IC.</li>
+</ul>
+<p>Combinational circuits are controllable and observable, so it is relatively easy to determine test patterns. Sequential circuits, however, have <strong>states</strong>! Finite state machines can be very difficult to test, requiring many cycles to enter a desired state. Beyond a certain size, <strong>exhaustive testing</strong> with all possible input vectors becomes impractical: for a circuit with <span class="math inline">\(N\)</span> inputs and <span class="math inline">\(M\)</span> state bits, <span class="math inline">\(2^{N+M}\)</span> patterns would be needed. For example, <span class="math inline">\(N = 40\)</span> inputs and 32 states (<span class="math inline">\(M = 5\)</span>) at 10 ns per pattern results in roughly 100 hours of test time.</p>
+<p>Chip failures (opens, weak or strong shorts to other nodes) can cause very complex failure behavior, which is too time-consuming to test exhaustively—so a simplified <strong>stuck-at model</strong> is used: all failures are assumed to make nodes stuck at 0 (shorted to <span class="math inline">\(V_\mathrm{SS}\)</span>) or stuck at 1 (shorted to <span class="math inline">\(V_\mathrm{DD}\)</span>). This simple model is not quite true in reality, but works well enough in practice. Its limitation is demonstrated in <a href="#fig-stuck-at" class="quarto-xref">Figure&nbsp;65</a>: an open in one pull-up branch of a CMOS NAND gate causes a <em>sequential</em> effect (the output keeps its previous value for one input combination), which needs two test vectors in the right order to be detected.</p>
+<div id="cell-fig-stuck-at" class="cell" data-execution_count="64">
+<div class="cell-output cell-output-display">
+<div id="fig-stuck-at" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stuck-at-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-stuck-at-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-65" title="Figure&nbsp;65: Limitation of the stuck-at fault model: a CMOS NAND gate with an open defect in the pull-up path of B. For A = 1, B = 0, neither the pull-up nor the pull-down network conducts, so the output floats and keeps its previous value Y_{n-1}—a sequential effect that requires two test vectors in the correct order to detect."><img src="dcic_files/figure-html/fig-stuck-at-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stuck-at-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;65: Limitation of the stuck-at fault model: a CMOS NAND gate with an open defect in the pull-up path of <span class="math inline">\(B\)</span>. For <span class="math inline">\(A = 1\)</span>, <span class="math inline">\(B = 0\)</span>, neither the pull-up nor the pull-down network conducts, so the output floats and keeps its previous value <span class="math inline">\(Y_{n-1}\)</span>—a sequential effect that requires two test vectors in the correct order to detect.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A manufacturing test would ideally check every node in the circuit, applying the smallest sequence of test vectors necessary to prove that each node is not stuck. To increase observability and controllability, i.e., <a href="https://en.wikipedia.org/wiki/Design_for_testing"><strong>design for test (DFT)</strong></a>, the <strong>scan-path test</strong> is introduced, shown in <a href="#fig-scan-path" class="quarto-xref">Figure&nbsp;66</a>:</p>
+<ul>
+<li><strong>Each flip-flop</strong> is converted into a <strong>scan register</strong> (with a small area overhead): in <strong>mission mode</strong>, the flip-flops behave as usual; in <strong>scan mode</strong>, all flip-flops form a shift register, so their contents can be shifted in and out through dedicated pins.</li>
+<li>If each register can be observed and controlled this way, the test problem reduces to testing the combinational logic between the registers.</li>
+<li>During the production test, test patterns are shifted into the scan chains, one clock cycle is applied, and the captured result is shifted out and compared to the expected result (→ pass/fail). Digital pattern generators in the ATE hardware accelerate this.</li>
+<li>The patterns are generated automatically by software (<a href="https://en.wikipedia.org/wiki/Automatic_test_pattern_generation">ATPG</a>) from the design netlist, achieving high stuck-at fault coverage with a minimum number of patterns.</li>
+<li>To speed up testing further, multiple chains are operated in parallel (requiring test pins for the parallel chain inputs and outputs).</li>
+<li>An extension of scan is to use internal pattern generators (e.g., based on a pseudo-random number generator) as logic inputs, and to compress the outputs into a syndrome (e.g., a transition count or hash) that is compared to the expected syndrome → logic <strong>BIST</strong>.</li>
+</ul>
+<div id="cell-fig-scan-path" class="cell" data-execution_count="65">
+<div class="cell-output cell-output-display">
+<div id="fig-scan-path" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scan-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-scan-path-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-66" title="Figure&nbsp;66: Scan-path test: every flip-flop is replaced by a scan flip-flop with an input multiplexer. In mission mode (scan enable SE = 0), the flip-flops capture the outputs of the combinational logic; in scan mode (SE = 1), all flip-flops form a shift register from scan-in (SI) to scan-out (SO), making every register controllable and observable."><img src="dcic_files/figure-html/fig-scan-path-output-1.png" width="758" height="237" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scan-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;66: Scan-path test: every flip-flop is replaced by a scan flip-flop with an input multiplexer. In mission mode (scan enable SE = 0), the flip-flops capture the outputs of the combinational logic; in scan mode (SE = 1), all flip-flops form a shift register from scan-in (SI) to scan-out (SO), making every register controllable and observable.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ac-parametric-tests" class="level3" data-number="6.5.7">
+<h3 data-number="6.5.7" class="anchored" data-anchor-id="ac-parametric-tests"><span class="header-section-number">6.5.7</span> AC Parametric Tests</h3>
+<p>Analog and mixed-signal parametric tests are highly dependent on the given function; examples are gain, phase, distortion, rejection (CMRR, PSRR), and noise. The DIB must be designed to reflect the conditions of the IC datasheet, e.g., applying the proper output loading (<span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>); different loads for different tests can be switched in via relays. Noise tests can be very time-consuming due to the long averaging needed to detect small signals; additional circuitry on the DIB can help to increase repeatability and speed.</p>
+<p>Modern mixed-signal testers use <strong>arbitrary waveform generators (AWGs)</strong> and <strong>digitizers</strong> to create and capture analog signals, with <strong>DSPs</strong> to speed up signal generation and analysis, as shown in <a href="#fig-ac-parametric" class="quarto-xref">Figure&nbsp;67</a>. Concepts from sampling theory (quantization noise, under/oversampling, aliasing and reconstruction, FFT, windowing, sampling-clock coherence, etc.) apply!</p>
+<div id="cell-fig-ac-parametric" class="cell" data-execution_count="66">
+<div class="cell-output cell-output-display">
+<div id="fig-ac-parametric" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ac-parametric-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-ac-parametric-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-67" title="Figure&nbsp;67: Mixed-signal AC parametric test setup: an arbitrary waveform generator (AWG) synthesizes the stimulus from a pattern memory, the DUT response is captured by a digitizer, and a DSP evaluates the records (FFT, filtering, averaging). A common, coherent clock for AWG and digitizer avoids spectral leakage."><img src="dcic_files/figure-html/fig-ac-parametric-output-1.png" width="758" height="212" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ac-parametric-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;67: Mixed-signal AC parametric test setup: an arbitrary waveform generator (AWG) synthesizes the stimulus from a pattern memory, the DUT response is captured by a digitizer, and a DSP evaluates the records (FFT, filtering, averaging). A common, coherent clock for AWG and digitizer avoids spectral leakage.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For analog test parameters, the variation over production must stay inside the <strong>test limits</strong>, which are derived from the <strong>datasheet limits minus guard bands</strong>: the lower specification limit (LSL) and the upper specification limit (USL).</p>
+</section>
+</section>
+<section id="sec-testing-cpk" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="sec-testing-cpk"><span class="header-section-number">6.6</span> Process Capability Index</h2>
+<p>To manufacture within a specification, the difference between the USL and the LSL must be greater than the total process variation, and the distribution should be well centered between the limits. One way to check this is the <span class="math inline">\(C_\mathrm{p}\)</span>/<span class="math inline">\(C_\mathrm{pk}\)</span> analysis. Given a parameter distribution <span class="math inline">\(x_i\)</span> from a sample of size <span class="math inline">\(N\)</span>, the arithmetic mean and the standard deviation are</p>
+<p><span class="math display">\[
+\overline{X} = \frac{1}{N} \sum_{i=1}^{N} x_i
+\qquad
+\sigma = \sqrt{\frac{1}{N} \sum_{i=1}^{N} \left( x_i - \overline{X} \right)^2}
+\]</span></p>
+<p>Then, the <a href="https://en.wikipedia.org/wiki/Process_capability_index">process capability indices</a> are calculated as</p>
+<p><span id="eq-cp"><span class="math display">\[
+C_\mathrm{p} = \frac{\mathrm{USL} - \mathrm{LSL}}{6 \sigma}
+\tag{55}\]</span></span></p>
+<p><span id="eq-cpk"><span class="math display">\[
+C_\mathrm{pk} = \min \left\lbrace \frac{\mathrm{USL} - \overline{X}}{3 \sigma},  \frac{\overline{X} - \mathrm{LSL}}{3 \sigma} \right\rbrace
+\tag{56}\]</span></span></p>
+<p><span class="math inline">\(C_\mathrm{p}\)</span> measures whether the process spread fits between the limits at all, while <span class="math inline">\(C_\mathrm{pk}\)</span> additionally accounts for the centering of the distribution. Ideally, <span class="math inline">\(C_\mathrm{p} = C_\mathrm{pk}\)</span> (the process is well centered), and <span class="math inline">\(C_\mathrm{pk} &gt; 2\)</span> (which might not be achievable, so lower values like <span class="math inline">\(C_\mathrm{pk} &gt; 1.5\)</span> may have to be accepted). <a href="#fig-cpk" class="quarto-xref">Figure&nbsp;68</a> illustrates well-centered and off-center distributions.</p>
+<p>During product qualification, the <span class="math inline">\(C_\mathrm{p}\)</span>/<span class="math inline">\(C_\mathrm{pk}\)</span> values are evaluated on a sufficient sample size, and critical tests are improved (change of datasheet limits, better centering of a parameter by redesign, process centering, etc.).</p>
+<div id="cell-fig-cpk" class="cell" data-execution_count="67">
+<div class="cell-output cell-output-display">
+<div id="fig-cpk" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cpk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-cpk-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-68" title="Figure&nbsp;68: Process capability: (a) a well-centered distribution with small spread (C_\mathrm{p} = C_\mathrm{pk} = 2); (b) the same spread but off-center—C_\mathrm{p} is unchanged, but C_\mathrm{pk} drops to 1, indicating parts close to the upper specification limit; (c) a centered but wide distribution, where both indices are poor and yield is lost at both limits."><img src="dcic_files/figure-html/fig-cpk-output-1.png" width="758" height="259" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cpk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;68: Process capability: (a) a well-centered distribution with small spread (<span class="math inline">\(C_\mathrm{p} = C_\mathrm{pk} = 2\)</span>); (b) the same spread but off-center—<span class="math inline">\(C_\mathrm{p}\)</span> is unchanged, but <span class="math inline">\(C_\mathrm{pk}\)</span> drops to 1, indicating parts close to the upper specification limit; (c) a centered but wide distribution, where both indices are poor and yield is lost at both limits.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The advantage of using the <span class="math inline">\(C_\mathrm{p}\)</span>/<span class="math inline">\(C_\mathrm{pk}\)</span> analysis is that it provides a <em>quantitative</em> measure of both the process spread and the centering of the distribution relative to the specification limits. This helps in automatically identifying whether the process is capable of consistently producing parts within the desired specifications and whether any adjustments are needed to improve yield and quality with just two numbers: <span class="math inline">\(C_\mathrm{p}\)</span> and <span class="math inline">\(C_\mathrm{pk}\)</span>. Manual inspection of the distribution alone may not reveal subtle misalignments or variations that could impact production quality and can be extremely time consuming and error prone.</p>
 
 
 
@@ -3129,6 +3436,9 @@ Table&nbsp;10: Typical package qualification tests
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Allen_Holberg" class="csl-entry" role="listitem">
 Allen, Phillip E., and Douglas R. Holberg. 2012. <em>CMOS Analog Circuit Design</em>. 3rd ed. Oxford University Press.
+</div>
+<div id="ref-Bhunia_HWSecurity" class="csl-entry" role="listitem">
+Bhunia, Swarup, and Mark Tehranipoor. 2018. <em>Hardware Security: A Hands-on Learning Approach</em>. Morgan Kaufmann.
 </div>
 <div id="ref-Craninckx_1995" class="csl-entry" role="listitem">
 Craninckx, Jan, and Michiel S. J. Steyaert. 1995. <span>“A 1.8-<span>GHz</span> <span>CMOS</span> Low-Phase-Noise Voltage-Controlled Oscillator with Prescaler.”</span> <em>IEEE Journal of Solid-State Circuits</em> 30 (12): 1474–82.
@@ -3180,6 +3490,9 @@ Sugibayashi, T., I. Naritake, S. Utsugi, et al. 1995. <span>“A 1-<span>Gb</spa
 </div>
 <div id="ref-Tsividis_MOS" class="csl-entry" role="listitem">
 Tsividis, Yannis, and Colin McAndrew. 2011. <em>Operation and Modeling of the MOS Transistor</em>. 3rd ed. Oxford University Press.
+</div>
+<div id="ref-Wang_VLSITest" class="csl-entry" role="listitem">
+Wang, Laung-Terng, Cheng-Wen Wu, and Xiaoqing Wen. 2006. <em>VLSI Test Principles and Architectures: Design for Testability</em>. Morgan Kaufmann.
 </div>
 <div id="ref-Wanlass_Sah_1963" class="csl-entry" role="listitem">
 Wanlass, Frank M., and Chih-Tang Sah. 1963. <span>“Nanowatt Logic Using Field-Effect Metal-Oxide Semiconductor Triodes.”</span> <em>IEEE International Solid-State Circuits Conference (ISSCC), Digest of Technical Papers</em>, 32–33.
