@@ -1,0 +1,142 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-jtag
+#| echo: false
+#| fig-cap: "JTAG boundary scan on a PCB: the boundary-scan cells (small squares) at every pin of each IC form a serial shift register; the chain runs from TDI through all devices to TDO, controlled by TCK and TMS. This allows forcing and observing all pins, and thus testing the PCB interconnects between the ICs."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, FancyArrowPatch
+
+RED = '#b02020'
+BLUE = '#1f4fb0'
+GREY = '#555555'
+
+
+def line(ax, xs, ys, color='k', lw=1.1):
+    ax.plot(xs, ys, '-', color=color, lw=lw, solid_capstyle='projecting',
+            solid_joinstyle='miter')
+
+
+def arr(ax, x0, y0, x1, y1, color='k', lw=1.1):
+    ax.add_patch(FancyArrowPatch((x0, y0), (x1, y1), arrowstyle='->',
+                                 mutation_scale=9, lw=lw, color=color,
+                                 shrinkA=0, shrinkB=0))
+
+
+def wire(ax, pts, color='k', lw=1.1):
+    """Polyline with an arrowhead on the last segment."""
+    xs, ys = zip(*pts)
+    if len(pts) > 2:
+        line(ax, xs[:-1], ys[:-1], color, lw)
+    arr(ax, *pts[-2], *pts[-1], color=color, lw=lw)
+
+
+def dot(ax, x, y, color='k'):
+    ax.plot(x, y, 'o', color=color, ms=3.5)
+
+
+W, H = 3.4, 3.2     # chip size
+Y = 2.3             # chip bottom edge
+CS = 0.4            # boundary-scan cell size
+ROWS = (1.2, 1.9, 2.6)  # cell centres relative to chip bottom
+
+
+def chip(ax, x, name):
+    ax.add_patch(Rectangle((x, Y), W, H, fc='#e8eef4', ec='k', lw=1.2,
+                           zorder=1))
+    # core logic and TAP controller
+    ax.add_patch(Rectangle((x + 0.95, Y + 1.0), W - 1.9, 1.8, fc='white',
+                           ec=GREY, lw=0.8))
+    ax.text(x + W / 2, Y + 1.9, name + '\ncore', ha='center', va='center',
+            fontsize=8.5)
+    ax.add_patch(Rectangle((x + W / 2 - 0.5, Y + 0.2), 1.0, 0.55,
+                           fc='white', ec=GREY, lw=0.8))
+    ax.text(x + W / 2, Y + 0.475, 'TAP', ha='center', va='center',
+            fontsize=7)
+
+    xl, xr = x + 0.4, x + W - 0.4        # cell column centres
+    for cx in (xl, xr):
+        for r in ROWS:
+            ax.add_patch(Rectangle((cx - CS / 2, Y + r - CS / 2), CS, CS,
+                                   fc='#f4c542', ec='k', lw=0.7, zorder=3))
+            # cell to core
+            cxi = cx + CS / 2 if cx == xl else cx - CS / 2
+            core = x + 0.95 if cx == xl else x + W - 0.95
+            line(ax, [cxi, core], [Y + r] * 2, GREY, 0.7)
+
+    # scan chain inside the chip: TDI -> left cells -> right cells -> TDO
+    yb, yt = Y + ROWS[0], Y + ROWS[-1]
+    wire(ax, [(xl, Y), (xl, yb - CS / 2)], RED)
+    for r0, r1 in zip(ROWS[:-1], ROWS[1:]):
+        arr(ax, xl, Y + r0 + CS / 2, xl, Y + r1 - CS / 2, RED)
+    ytop = Y + H - 0.25
+    wire(ax, [(xl, yt + CS / 2), (xl, ytop), (xr, ytop),
+              (xr, yt + CS / 2)], RED)
+    for r0, r1 in zip(ROWS[:0:-1], ROWS[-2::-1]):
+        arr(ax, xr, Y + r0 - CS / 2, xr, Y + r1 + CS / 2, RED)
+    line(ax, [xr, xr], [yb - CS / 2, Y], RED)
+    return xl, xr, x + W / 2
+
+
+fig, ax = plt.subplots(figsize=(8, 3.5))
+
+# PCB
+ax.add_patch(Rectangle((0.2, 0.2), 16.2, 5.8, fc='#e9f4e6', ec='k', lw=1.0,
+                       zorder=0))
+ax.text(0.4, 5.65, 'PCB', fontsize=9)
+
+# JTAG header
+Y_TDI, Y_TCK, Y_TMS, Y_TDO = 1.75, 1.3, 0.95, 0.6
+ax.add_patch(Rectangle((0.5, 0.35), 0.9, 1.7, fc='#d8d8d8', ec='k', lw=1.0))
+ax.text(0.95, 2.2, 'JTAG', ha='center', va='bottom', fontsize=8)
+for yy, name, col in ((Y_TDI, 'TDI', RED), (Y_TCK, 'TCK', GREY),
+                      (Y_TMS, 'TMS', GREY), (Y_TDO, 'TDO', RED)):
+    ax.text(1.5, yy + 0.05, name, fontsize=6.5, color=col, va='bottom')
+
+chips = [chip(ax, x, n) for x, n in ((2.6, 'IC 1'), (7.4, 'IC 2'),
+                                      (12.2, 'IC 3'))]
+
+# interconnect nets under test between neighbouring chips
+for (_, xr, _), (xl, _, _) in zip(chips[:-1], chips[1:]):
+    for r in ROWS:
+        line(ax, [xr + CS / 2, xl - CS / 2], [Y + r] * 2, BLUE, 1.4)
+ax.text(2.6 + W + 0.7, Y + ROWS[0] - 0.25, 'nets\nunder test',
+        ha='center', va='top', fontsize=7, color=BLUE)
+
+# board-level scan chain: header TDI -> IC1 -> IC2 -> IC3 -> header TDO
+wire(ax, [(1.4, Y_TDI), (chips[0][0], Y_TDI), (chips[0][0], Y)], RED)
+for (_, xr, _), (xl, _, _) in zip(chips[:-1], chips[1:]):
+    wire(ax, [(xr, Y), (xr, Y_TDI), (xl, Y_TDI), (xl, Y)], RED)
+wire(ax, [(chips[-1][1], Y), (chips[-1][1], Y_TDO), (1.4, Y_TDO)], RED)
+
+# TCK / TMS bus to the TAP controller of every chip
+for yy, dx in ((Y_TCK, -0.25), (Y_TMS, 0.25)):
+    xend = chips[-1][2] + dx
+    line(ax, [1.4, xend], [yy, yy], GREY)
+    for i, (_, _, xc) in enumerate(chips):
+        arr(ax, xc + dx, yy, xc + dx, Y + 0.2, GREY)
+        if i < len(chips) - 1:
+            dot(ax, xc + dx, yy, GREY)
+
+ax.set_xlim(0.1, 16.5)
+ax.set_ylim(0.1, 6.1)
+ax.set_aspect('equal')
+ax.axis('off')
+plt.tight_layout()
+plt.show()
+```

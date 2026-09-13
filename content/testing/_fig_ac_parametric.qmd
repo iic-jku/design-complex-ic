@@ -1,0 +1,59 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-ac-parametric
+#| echo: false
+#| fig-cap: "Mixed-signal AC parametric test setup: an arbitrary waveform generator (AWG) synthesizes the stimulus from a pattern memory, the DUT response is captured by a digitizer, and a DSP evaluates the records (FFT, filtering, averaging). A common, coherent clock for AWG and digitizer avoids spectral leakage."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, FancyArrowPatch
+
+
+def box(ax, x, y, w, h, text, fc='#e8eef4'):
+    ax.add_patch(Rectangle((x, y), w, h, fc=fc, ec='k', lw=1.0))
+    ax.text(x + w / 2, y + h / 2, text, ha='center', va='center',
+            fontsize=8.5)
+
+
+def arr(ax, x0, y0, x1, y1):
+    ax.add_patch(FancyArrowPatch((x0, y0), (x1, y1), arrowstyle='->',
+                                 mutation_scale=11, lw=1.0))
+
+
+fig, ax = plt.subplots(figsize=(8, 3.0))
+
+box(ax, 0.2, 1.6, 2.2, 1.2, 'waveform\nmemory')
+box(ax, 3.2, 1.6, 2.4, 1.2, 'AWG\n(DAC + filter)')
+box(ax, 6.4, 1.6, 1.8, 1.2, 'DUT', fc='#f4e8d8')
+box(ax, 9.0, 1.6, 2.4, 1.2, 'digitizer\n(filter + ADC)')
+box(ax, 12.2, 1.6, 1.8, 1.2, 'DSP')
+box(ax, 5.6, 0.0, 3.4, 0.9, 'coherent clock')
+
+arr(ax, 2.4, 2.2, 3.2, 2.2)
+arr(ax, 5.6, 2.2, 6.4, 2.2)
+arr(ax, 8.2, 2.2, 9.0, 2.2)
+arr(ax, 11.4, 2.2, 12.2, 2.2)
+arr(ax, 5.9, 0.9, 4.4, 1.6)
+arr(ax, 8.7, 0.9, 10.2, 1.6)
+
+ax.set_xlim(0, 14.2)
+ax.set_ylim(-0.3, 3.4)
+ax.set_aspect('equal')
+ax.axis('off')
+plt.tight_layout()
+plt.show()
+```

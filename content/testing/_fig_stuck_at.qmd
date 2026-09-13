@@ -1,0 +1,87 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-stuck-at
+#| echo: false
+#| fig-cap: "Limitation of the stuck-at fault model: a CMOS NAND gate with an open defect in the pull-up path of $B$. For $A = 1$, $B = 0$, neither the pull-up nor the pull-down network conducts, so the output floats and keeps its previous value $Y_{n-1}$—a sequential effect that requires two test vectors in the correct order to detect."
+
+import schemdraw as sd
+import schemdraw.elements as elm
+
+sd.svgconfig.svg2 = False
+
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2, fontsize=10)
+
+    # supply rail
+    d += elm.Vdd().at((2, 8.2)).label('$V_\\mathrm{DD}$')
+    d += elm.Line().endpoints((2, 8.2), (2, 7.6))
+    d += elm.Line().endpoints((0.5, 7.6), (4.5, 7.6))
+    d += elm.Dot().at((2, 7.6))
+
+    # PMOS 1 (A), mirrored so the gate faces input A
+    p1 = elm.PFet(bulk=False).at((0.5, 7.6)).anchor('source').theta(180).flip()
+    d += p1
+    d += elm.Label().at((0.9, p1.gate[1])).label('$M_{P1}$', halign='left')
+    # PMOS 2 (B) with open defect at its drain
+    p2 = elm.PFet(bulk=False).at((4.5, 7.6)).anchor('source').theta(0)
+    d += p2
+    d += elm.Label().at((4.1, p2.gate[1])).label('$M_{P2}$', halign='right')
+
+    # output node
+    d += elm.Line().at(p1.drain).to((0.5, 4.5))
+    d += elm.Line().endpoints((0.5, 4.5), (4.5, 4.5))
+    d += elm.Dot().at((2, 4.5))
+    # open defect in the branch of MP2
+    d += elm.Line().at(p2.drain).to((4.5, 5.6))
+    d += elm.Line().endpoints((4.5, 5.0), (4.5, 4.5))
+    d += elm.Line().endpoints((4.35, 5.45), (4.65, 5.15)).color('red')
+    d += elm.Label().at((4.1, 5.3)).label('open', color='red',
+                                           halign='right')
+
+    # NMOS stack, MN1 mirrored so the gate faces input A
+    n1 = elm.NFet(bulk=False).at((2, 4.5)).anchor('drain').theta(180).flip()
+    d += n1
+    d += elm.Label().at((2.4, n1.gate[1])).label('$M_{N1}$', halign='left')
+    n2 = elm.NFet(bulk=False).at(n1.source).anchor('drain').theta(0)
+    d += n2
+    d += elm.Label().at((1.6, n2.gate[1])).label('$M_{N2}$', halign='right')
+    d += elm.Ground().at(n2.source)
+
+    # input A
+    xa, ya = -1.6, (p1.gate[1] + n1.gate[1]) / 2
+    d += elm.Line().at(p1.gate).to((xa, p1.gate[1]))
+    d += elm.Line().at(n1.gate).to((xa, n1.gate[1]))
+    d += elm.Line().endpoints((xa, p1.gate[1]), (xa, n1.gate[1]))
+    d += elm.Line().endpoints((xa, ya), (xa - 0.8, ya))
+    d += elm.Dot().at((xa, ya))
+    d += elm.Dot(open=True).at((xa - 0.8, ya)).label('$A$', 'left')
+
+    # input B
+    xb, yb = 7.4, n2.gate[1] + 1.0
+    d += elm.Line().at(p2.gate).to((xb, p2.gate[1]))
+    d += elm.Line().at(n2.gate).to((xb, n2.gate[1]))
+    d += elm.Line().endpoints((xb, p2.gate[1]), (xb, n2.gate[1]))
+    d += elm.Line().endpoints((xb, yb), (xb + 0.8, yb))
+    d += elm.Dot().at((xb, yb))
+    d += elm.Dot(open=True).at((xb + 0.8, yb)).label('$B$', 'right')
+
+    # output Y
+    d += elm.Line().endpoints((4.5, 4.5), (6.2, 4.5))
+    d += elm.Dot().at((4.5, 4.5))
+    d += elm.Dot(open=True).at((6.2, 4.5)).label('$Y$', 'top')
+```
