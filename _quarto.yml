@@ -1,5 +1,8 @@
 project:
    type: website
+   # run code cells from the project root, so that decks in slides/ can
+   # import pyutil like the notes in the root
+   execute-dir: project
 
 var:
   url-repo: https://github.com/iic-jku/design-complex-ic   # to call this value : {{< meta var.url-repo >}}
@@ -16,6 +19,9 @@ website:
         text: "About"
       - href: dcic.qmd
         text: "Course Material"
+      - icon: easel
+        href: slides/index.qmd
+        text: "Slides"
       - icon: bi-filetype-pdf
         text: PDF
         href: dcic.pdf

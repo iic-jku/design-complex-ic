@@ -1,0 +1,862 @@
+{
+ "book": "../dcic.html",
+ "labels": {
+  "eq-dof": {
+   "chapter": 3,
+   "number": "46",
+   "type": "eq"
+  },
+  "eq-implant-profile": {
+   "chapter": 3,
+   "number": "47",
+   "type": "eq"
+  },
+  "eq-ind-flat-trace": {
+   "chapter": 5,
+   "number": "53",
+   "type": "eq"
+  },
+  "eq-ind-mutual": {
+   "chapter": 5,
+   "number": "54",
+   "type": "eq"
+  },
+  "eq-ind-round-wire": {
+   "chapter": 5,
+   "number": "52",
+   "type": "eq"
+  },
+  "eq-layout-resistor": {
+   "chapter": 4,
+   "number": "48",
+   "type": "eq"
+  },
+  "eq-mosfet-body-effect": {
+   "chapter": 2,
+   "number": "15",
+   "type": "eq"
+  },
+  "eq-mosfet-clm": {
+   "chapter": 2,
+   "number": "17",
+   "type": "eq"
+  },
+  "eq-mosfet-depletion-cap": {
+   "chapter": 2,
+   "number": "3",
+   "type": "eq"
+  },
+  "eq-mosfet-depletion-width": {
+   "chapter": 2,
+   "number": "2",
+   "type": "eq"
+  },
+  "eq-mosfet-dibl": {
+   "chapter": 2,
+   "number": "39",
+   "type": "eq"
+  },
+  "eq-mosfet-drift": {
+   "chapter": 2,
+   "number": "9",
+   "type": "eq"
+  },
+  "eq-mosfet-fmax": {
+   "chapter": 2,
+   "number": "34",
+   "type": "eq"
+  },
+  "eq-mosfet-ft": {
+   "chapter": 2,
+   "number": "33",
+   "type": "eq"
+  },
+  "eq-mosfet-gamma": {
+   "chapter": 2,
+   "number": "16",
+   "type": "eq"
+  },
+  "eq-mosfet-gate-res": {
+   "chapter": 2,
+   "number": "30",
+   "type": "eq"
+  },
+  "eq-mosfet-gate-res-double": {
+   "chapter": 2,
+   "number": "31",
+   "type": "eq"
+  },
+  "eq-mosfet-gate-res-fingers": {
+   "chapter": 2,
+   "number": "32",
+   "type": "eq"
+  },
+  "eq-mosfet-gate-voltage": {
+   "chapter": 2,
+   "number": "5",
+   "type": "eq"
+  },
+  "eq-mosfet-gds": {
+   "chapter": 2,
+   "number": "18",
+   "type": "eq"
+  },
+  "eq-mosfet-gm": {
+   "chapter": 2,
+   "number": "14",
+   "type": "eq"
+  },
+  "eq-mosfet-gm-correct": {
+   "chapter": 2,
+   "number": "29",
+   "type": "eq"
+  },
+  "eq-mosfet-gm-weak": {
+   "chapter": 2,
+   "number": "26",
+   "type": "eq"
+  },
+  "eq-mosfet-gmsat": {
+   "chapter": 2,
+   "number": "21",
+   "type": "eq"
+  },
+  "eq-mosfet-ic": {
+   "chapter": 2,
+   "number": "41",
+   "type": "eq"
+  },
+  "eq-mosfet-ic-ft": {
+   "chapter": 2,
+   "number": "44",
+   "type": "eq"
+  },
+  "eq-mosfet-ic-gm": {
+   "chapter": 2,
+   "number": "43",
+   "type": "eq"
+  },
+  "eq-mosfet-ic-id": {
+   "chapter": 2,
+   "number": "42",
+   "type": "eq"
+  },
+  "eq-mosfet-is": {
+   "chapter": 2,
+   "number": "40",
+   "type": "eq"
+  },
+  "eq-mosfet-leakage": {
+   "chapter": 2,
+   "number": "37",
+   "type": "eq"
+  },
+  "eq-mosfet-mobility-cubic": {
+   "chapter": 2,
+   "number": "23",
+   "type": "eq"
+  },
+  "eq-mosfet-mobility-degradation": {
+   "chapter": 2,
+   "number": "22",
+   "type": "eq"
+  },
+  "eq-mosfet-n": {
+   "chapter": 2,
+   "number": "25",
+   "type": "eq"
+  },
+  "eq-mosfet-n-tox": {
+   "chapter": 2,
+   "number": "36",
+   "type": "eq"
+  },
+  "eq-mosfet-overdrive": {
+   "chapter": 2,
+   "number": "11",
+   "type": "eq"
+  },
+  "eq-mosfet-phib": {
+   "chapter": 2,
+   "number": "8",
+   "type": "eq"
+  },
+  "eq-mosfet-poisson": {
+   "chapter": 2,
+   "number": "1",
+   "type": "eq"
+  },
+  "eq-mosfet-qdep": {
+   "chapter": 2,
+   "number": "4",
+   "type": "eq"
+  },
+  "eq-mosfet-sat": {
+   "chapter": 2,
+   "number": "13",
+   "type": "eq"
+  },
+  "eq-mosfet-sat-correct": {
+   "chapter": 2,
+   "number": "28",
+   "type": "eq"
+  },
+  "eq-mosfet-slope": {
+   "chapter": 2,
+   "number": "38",
+   "type": "eq"
+  },
+  "eq-mosfet-square-law": {
+   "chapter": 2,
+   "number": "10",
+   "type": "eq"
+  },
+  "eq-mosfet-square-law-correct": {
+   "chapter": 2,
+   "number": "27",
+   "type": "eq"
+  },
+  "eq-mosfet-subthreshold": {
+   "chapter": 2,
+   "number": "24",
+   "type": "eq"
+  },
+  "eq-mosfet-subthreshold-simple": {
+   "chapter": 2,
+   "number": "35",
+   "type": "eq"
+  },
+  "eq-mosfet-surface-potential": {
+   "chapter": 2,
+   "number": "6",
+   "type": "eq"
+  },
+  "eq-mosfet-triode": {
+   "chapter": 2,
+   "number": "12",
+   "type": "eq"
+  },
+  "eq-mosfet-vsat": {
+   "chapter": 2,
+   "number": "20",
+   "type": "eq"
+  },
+  "eq-mosfet-vsat-model": {
+   "chapter": 2,
+   "number": "19",
+   "type": "eq"
+  },
+  "eq-mosfet-vth": {
+   "chapter": 2,
+   "number": "7",
+   "type": "eq"
+  },
+  "eq-rayleigh": {
+   "chapter": 3,
+   "number": "45",
+   "type": "eq"
+  },
+  "eq-thermal-ohm": {
+   "chapter": 5,
+   "number": "49",
+   "type": "eq"
+  },
+  "eq-thermal-rthja": {
+   "chapter": 5,
+   "number": "51",
+   "type": "eq"
+  },
+  "eq-thermal-series-parallel": {
+   "chapter": 5,
+   "number": "50",
+   "type": "eq"
+  },
+  "fig-band-diagram": {
+   "chapter": 2,
+   "number": "6",
+   "type": "fig"
+  },
+  "fig-cmos-cross-section": {
+   "chapter": 2,
+   "number": "10",
+   "type": "fig"
+  },
+  "fig-cmos-inverter": {
+   "chapter": 2,
+   "number": "11",
+   "type": "fig"
+  },
+  "fig-cvd-sputter": {
+   "chapter": 3,
+   "number": "32",
+   "type": "fig"
+  },
+  "fig-czochralski": {
+   "chapter": 3,
+   "number": "25",
+   "type": "fig"
+  },
+  "fig-damascene": {
+   "chapter": 3,
+   "number": "33",
+   "type": "fig"
+  },
+  "fig-dibl": {
+   "chapter": 2,
+   "number": "17",
+   "type": "fig"
+  },
+  "fig-doping-process": {
+   "chapter": 3,
+   "number": "27",
+   "type": "fig"
+  },
+  "fig-doping-profiles": {
+   "chapter": 3,
+   "number": "31",
+   "type": "fig"
+  },
+  "fig-history-timeline": {
+   "chapter": 1,
+   "number": "2",
+   "type": "fig"
+  },
+  "fig-ic-ihp": {
+   "chapter": 2,
+   "number": "24",
+   "type": "fig"
+  },
+  "fig-ic-tradeoff": {
+   "chapter": 2,
+   "number": "23",
+   "type": "fig"
+  },
+  "fig-layout-antenna": {
+   "chapter": 4,
+   "number": "47",
+   "type": "fig"
+  },
+  "fig-layout-cap-matching": {
+   "chapter": 4,
+   "number": "53",
+   "type": "fig"
+  },
+  "fig-layout-common-centroid": {
+   "chapter": 4,
+   "number": "52",
+   "type": "fig"
+  },
+  "fig-layout-diff-resistor": {
+   "chapter": 4,
+   "number": "43",
+   "type": "fig"
+  },
+  "fig-layout-drc": {
+   "chapter": 4,
+   "number": "46",
+   "type": "fig"
+  },
+  "fig-layout-dummies": {
+   "chapter": 4,
+   "number": "50",
+   "type": "fig"
+  },
+  "fig-layout-matched-resistors": {
+   "chapter": 4,
+   "number": "51",
+   "type": "fig"
+  },
+  "fig-layout-merged-diffusion": {
+   "chapter": 4,
+   "number": "49",
+   "type": "fig"
+  },
+  "fig-layout-mom-cap": {
+   "chapter": 4,
+   "number": "44",
+   "type": "fig"
+  },
+  "fig-layout-mosfets": {
+   "chapter": 4,
+   "number": "41",
+   "type": "fig"
+  },
+  "fig-layout-multifinger": {
+   "chapter": 4,
+   "number": "48",
+   "type": "fig"
+  },
+  "fig-layout-poly-resistor": {
+   "chapter": 4,
+   "number": "42",
+   "type": "fig"
+  },
+  "fig-layout-vpnp": {
+   "chapter": 4,
+   "number": "45",
+   "type": "fig"
+  },
+  "fig-length-scales": {
+   "chapter": 1,
+   "number": "1",
+   "type": "fig"
+  },
+  "fig-litho-scanner": {
+   "chapter": 3,
+   "number": "30",
+   "type": "fig"
+  },
+  "fig-metal-stack": {
+   "chapter": 3,
+   "number": "40",
+   "type": "fig"
+  },
+  "fig-moores-law": {
+   "chapter": 1,
+   "number": "3",
+   "type": "fig"
+  },
+  "fig-mosfet-ssm": {
+   "chapter": 2,
+   "number": "13",
+   "type": "fig"
+  },
+  "fig-mosfet-ssm-simple": {
+   "chapter": 2,
+   "number": "14",
+   "type": "fig"
+  },
+  "fig-mutual-inductance": {
+   "chapter": 5,
+   "number": "58",
+   "type": "fig"
+  },
+  "fig-nmos-clm": {
+   "chapter": 2,
+   "number": "12",
+   "type": "fig"
+  },
+  "fig-nmos-drain-sweep": {
+   "chapter": 2,
+   "number": "5",
+   "type": "fig"
+  },
+  "fig-nmos-full": {
+   "chapter": 2,
+   "number": "9",
+   "type": "fig"
+  },
+  "fig-nmos-gate-sweep": {
+   "chapter": 2,
+   "number": "4",
+   "type": "fig"
+  },
+  "fig-nmos-id-log": {
+   "chapter": 2,
+   "number": "20",
+   "type": "fig"
+  },
+  "fig-nmos-iv-lin": {
+   "chapter": 2,
+   "number": "19",
+   "type": "fig"
+  },
+  "fig-nmos-triode": {
+   "chapter": 2,
+   "number": "8",
+   "type": "fig"
+  },
+  "fig-oxidation": {
+   "chapter": 3,
+   "number": "28",
+   "type": "fig"
+  },
+  "fig-package-parasitics": {
+   "chapter": 5,
+   "number": "57",
+   "type": "fig"
+  },
+  "fig-package-types": {
+   "chapter": 5,
+   "number": "55",
+   "type": "fig"
+  },
+  "fig-photolithography": {
+   "chapter": 3,
+   "number": "29",
+   "type": "fig"
+  },
+  "fig-pmos-id-log": {
+   "chapter": 2,
+   "number": "22",
+   "type": "fig"
+  },
+  "fig-pmos-iv-lin": {
+   "chapter": 2,
+   "number": "21",
+   "type": "fig"
+  },
+  "fig-process-backend": {
+   "chapter": 3,
+   "number": "39",
+   "type": "fig"
+  },
+  "fig-process-gate": {
+   "chapter": 3,
+   "number": "36",
+   "type": "fig"
+  },
+  "fig-process-implants": {
+   "chapter": 3,
+   "number": "37",
+   "type": "fig"
+  },
+  "fig-process-silicide": {
+   "chapter": 3,
+   "number": "38",
+   "type": "fig"
+  },
+  "fig-process-sti": {
+   "chapter": 3,
+   "number": "34",
+   "type": "fig"
+  },
+  "fig-process-wells": {
+   "chapter": 3,
+   "number": "35",
+   "type": "fig"
+  },
+  "fig-resistivity": {
+   "chapter": 3,
+   "number": "26",
+   "type": "fig"
+  },
+  "fig-supply-trend": {
+   "chapter": 2,
+   "number": "16",
+   "type": "fig"
+  },
+  "fig-technology-trend": {
+   "chapter": 2,
+   "number": "15",
+   "type": "fig"
+  },
+  "fig-thermal-network": {
+   "chapter": 5,
+   "number": "56",
+   "type": "fig"
+  },
+  "fig-utb-finfet": {
+   "chapter": 2,
+   "number": "18",
+   "type": "fig"
+  },
+  "fig-wdep-phis": {
+   "chapter": 2,
+   "number": "7",
+   "type": "fig"
+  },
+  "fig-wire-bond": {
+   "chapter": 5,
+   "number": "54",
+   "type": "fig"
+  },
+  "nte-body-effect": {
+   "chapter": 2,
+   "number": "2",
+   "type": "nte"
+  },
+  "nte-bond-wire-inductance": {
+   "chapter": 5,
+   "number": "4",
+   "type": "nte"
+  },
+  "nte-vth-calculation": {
+   "chapter": 2,
+   "number": "1",
+   "type": "nte"
+  },
+  "nte-wafer-resistivity": {
+   "chapter": 3,
+   "number": "3",
+   "type": "nte"
+  },
+  "sec-intro": {
+   "chapter": 1,
+   "number": "1",
+   "type": "sec"
+  },
+  "sec-intro-history": {
+   "chapter": 1,
+   "number": "1.2",
+   "type": "sec"
+  },
+  "sec-intro-scale": {
+   "chapter": 1,
+   "number": "1.1",
+   "type": "sec"
+  },
+  "sec-layout": {
+   "chapter": 4,
+   "number": "4",
+   "type": "sec"
+  },
+  "sec-layout-additional": {
+   "chapter": 4,
+   "number": "4.6",
+   "type": "sec"
+  },
+  "sec-layout-analog": {
+   "chapter": 4,
+   "number": "4.5",
+   "type": "sec"
+  },
+  "sec-layout-checks": {
+   "chapter": 4,
+   "number": "4.7",
+   "type": "sec"
+  },
+  "sec-layout-devices": {
+   "chapter": 4,
+   "number": "4.3",
+   "type": "sec"
+  },
+  "sec-layout-drc": {
+   "chapter": 4,
+   "number": "4.4",
+   "type": "sec"
+  },
+  "sec-layout-extraction": {
+   "chapter": 4,
+   "number": "4.8",
+   "type": "sec"
+  },
+  "sec-layout-layers": {
+   "chapter": 4,
+   "number": "4.2",
+   "type": "sec"
+  },
+  "sec-layout-tapeout": {
+   "chapter": 4,
+   "number": "4.1",
+   "type": "sec"
+  },
+  "sec-mosfet": {
+   "chapter": 2,
+   "number": "2",
+   "type": "sec"
+  },
+  "sec-mosfet-ac": {
+   "chapter": 2,
+   "number": "2.4",
+   "type": "sec"
+  },
+  "sec-mosfet-body-effect": {
+   "chapter": 2,
+   "number": "2.3.1",
+   "type": "sec"
+  },
+  "sec-mosfet-ihp": {
+   "chapter": 2,
+   "number": "2.8",
+   "type": "sec"
+  },
+  "sec-mosfet-iv": {
+   "chapter": 2,
+   "number": "2.2",
+   "type": "sec"
+  },
+  "sec-mosfet-nutshell": {
+   "chapter": 2,
+   "number": "2.1",
+   "type": "sec"
+  },
+  "sec-mosfet-scaling": {
+   "chapter": 2,
+   "number": "2.6",
+   "type": "sec"
+  },
+  "sec-mosfet-sce": {
+   "chapter": 2,
+   "number": "2.7",
+   "type": "sec"
+  },
+  "sec-mosfet-second-order": {
+   "chapter": 2,
+   "number": "2.3",
+   "type": "sec"
+  },
+  "sec-mosfet-si-properties": {
+   "chapter": 2,
+   "number": "2.11",
+   "type": "sec"
+  },
+  "sec-mosfet-sizing": {
+   "chapter": 2,
+   "number": "2.9",
+   "type": "sec"
+  },
+  "sec-mosfet-ssm": {
+   "chapter": 2,
+   "number": "2.5",
+   "type": "sec"
+  },
+  "sec-mosfet-subthreshold": {
+   "chapter": 2,
+   "number": "2.3.5",
+   "type": "sec"
+  },
+  "sec-mosfet-summary": {
+   "chapter": 2,
+   "number": "2.10",
+   "type": "sec"
+  },
+  "sec-packaging": {
+   "chapter": 5,
+   "number": "5",
+   "type": "sec"
+  },
+  "sec-packaging-bonding": {
+   "chapter": 5,
+   "number": "5.2",
+   "type": "sec"
+  },
+  "sec-packaging-parasitics": {
+   "chapter": 5,
+   "number": "5.5",
+   "type": "sec"
+  },
+  "sec-packaging-qualification": {
+   "chapter": 5,
+   "number": "5.6",
+   "type": "sec"
+  },
+  "sec-packaging-thermal": {
+   "chapter": 5,
+   "number": "5.4",
+   "type": "sec"
+  },
+  "sec-packaging-types": {
+   "chapter": 5,
+   "number": "5.3",
+   "type": "sec"
+  },
+  "sec-packaging-wafer-prep": {
+   "chapter": 5,
+   "number": "5.1",
+   "type": "sec"
+  },
+  "sec-technology": {
+   "chapter": 3,
+   "number": "3",
+   "type": "sec"
+  },
+  "sec-technology-cmos-flow": {
+   "chapter": 3,
+   "number": "3.8",
+   "type": "sec"
+  },
+  "sec-technology-doping": {
+   "chapter": 3,
+   "number": "3.5",
+   "type": "sec"
+  },
+  "sec-technology-etching": {
+   "chapter": 3,
+   "number": "3.4",
+   "type": "sec"
+  },
+  "sec-technology-ihp": {
+   "chapter": 3,
+   "number": "3.9",
+   "type": "sec"
+  },
+  "sec-technology-interconnect": {
+   "chapter": 3,
+   "number": "3.7",
+   "type": "sec"
+  },
+  "sec-technology-litho": {
+   "chapter": 3,
+   "number": "3.3",
+   "type": "sec"
+  },
+  "sec-technology-qualification": {
+   "chapter": 3,
+   "number": "3.10",
+   "type": "sec"
+  },
+  "sec-technology-selective-doping": {
+   "chapter": 3,
+   "number": "3.2",
+   "type": "sec"
+  },
+  "sec-technology-thin-film": {
+   "chapter": 3,
+   "number": "3.6",
+   "type": "sec"
+  },
+  "sec-technology-wafer": {
+   "chapter": 3,
+   "number": "3.1",
+   "type": "sec"
+  },
+  "tbl-doping": {
+   "chapter": 3,
+   "number": "6",
+   "type": "tbl"
+  },
+  "tbl-ihp-resistors": {
+   "chapter": 4,
+   "number": "9",
+   "type": "tbl"
+  },
+  "tbl-ihp130-parameters": {
+   "chapter": 2,
+   "number": "1",
+   "type": "tbl"
+  },
+  "tbl-layers": {
+   "chapter": 4,
+   "number": "8",
+   "type": "tbl"
+  },
+  "tbl-mosfet-caps": {
+   "chapter": 2,
+   "number": "2",
+   "type": "tbl"
+  },
+  "tbl-mosfet-ic-asymptotic": {
+   "chapter": 2,
+   "number": "4",
+   "type": "tbl"
+  },
+  "tbl-mosfet-scaling": {
+   "chapter": 2,
+   "number": "3",
+   "type": "tbl"
+  },
+  "tbl-package-qualification": {
+   "chapter": 5,
+   "number": "10",
+   "type": "tbl"
+  },
+  "tbl-si-properties": {
+   "chapter": 2,
+   "number": "5",
+   "type": "tbl"
+  },
+  "tbl-technology-qualification": {
+   "chapter": 3,
+   "number": "7",
+   "type": "tbl"
+  }
+ },
+ "prefix": {
+  "eq": "Equation",
+  "fig": "Figure",
+  "nte": "Note",
+  "sec": "Section",
+  "tbl": "Table"
+ }
+}

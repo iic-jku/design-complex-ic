@@ -6,3 +6,4 @@
 /.quarto/
 **/*.quarto_ipynb
 /dcic_files
+/slides/*_files
