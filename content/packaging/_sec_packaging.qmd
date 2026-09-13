@@ -1,0 +1,257 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# IC Packaging {#sec-packaging}
+
+The finished wafer is not yet a usable product: the individual dice have to be separated, connected, and protected. This chapter covers the path from the processed wafer to the packaged integrated circuit, the most important package families, thermal design, and the electrical parasitics that packages introduce.
+
+## From Wafer to Packaged IC {#sec-packaging-wafer-prep}
+
+After wafer processing (see @sec-technology), the wafer is usually first **thinned** by grinding from the backside, depending on the package technology (typical final thickness 100 to 300 µm). After thinning, the wafer is mounted on a carrier tape and split into individual dice—this process is called [**dicing**](https://en.wikipedia.org/wiki/Die_singulation). A saw blade is the standard tool; alternatively, a laser can be used to (pre-)cut the wafer. An exception is the wafer-level package (WLP), where the wafer is further processed *before* sawing.
+
+The IC package then provides the following important functions:
+
+- Electrical connection of signals and power from the IC to the PCB.
+- Interconnects adding little delay or distortion (small parasitic $R$, $L$, $C$, and $k$).
+- Mechanical connection of the IC to the PCB.
+- Removal of the heat produced in the IC.
+- Protection of the IC from mechanical damage and the environment.
+- Compatibility with the thermal expansion (CTE) of the PCB.
+- Inexpensive manufacturing and testing.
+
+## Chip-to-Package Connection {#sec-packaging-bonding}
+
+Traditionally, an IC is surrounded by a **pad frame**: metal pads on a pitch of 80 to 200 µm along the die circumference. [**Bond wires**](https://en.wikipedia.org/wiki/Wire_bonding) attach the pads to the package, a [**lead frame**](https://en.wikipedia.org/wiki/Lead_frame) distributes the signals within the package, and a metal heat spreader (paddle) helps with cooling. In [**flip-chip**](https://en.wikipedia.org/wiki/Flip_chip) packages or WLPs, the pads can instead be distributed arbitrarily across the die area (close to the relevant circuit blocks). @fig-wire-bond shows the wire-bond arrangement.
+
+{{< include /content/packaging/_fig_wire_bond.qmd >}}
+
+A few notes on the bond pads themselves:
+
+- A simple pad consisting only of a square of top metal may "**lift off**" during bonding due to insufficient adherence; a mechanically robust pad is formed from the two topmost metal layers, connected by many small vias, at the price of somewhat larger capacitance.
+- Pads carrying RF signals can be shaped as octagons to reduce their capacitance (about 20 % reduction).
+- In some processes, it is allowed to place circuitry (e.g., ESD protection) below the pads to save chip area—called pad-over-active-area (PoAA).
+
+## Package Types {#sec-packaging-types}
+
+Simple lead-frame-based packages using bond wires are cost-effective but have a limited number of I/Os, and the bond wires cause parasitic inductance and mutual (inductive and capacitive) coupling. Laminate-based packages can have several signal and power layers (2--4), like tiny PCBs; they are based either on bond wires or on **flip-chip** assembly:
+
+- Pads can be placed across the whole surface of the die rather than only at the periphery.
+- The top-level metal pads are covered with solder balls.
+- The IC is mounted upside down and must be carefully aligned to the package (done blind!); then heat is applied to melt the solder balls.
+- This process is also called controlled collapse chip connection (C4).
+
+@fig-package-types shows cross sections of the most important package families.
+
+{{< include /content/packaging/_fig_package_types.qmd >}}
+
+### Lead-Frame Package
+
+A lead-frame package is available with or without leads (e.g., QFP with gull-wing leads versus leadless QFN). The die is glued to the lead-frame paddle and bonded to the leads using Au, Al, Cu, or Ag wires; a "down-bond" to the paddle is usually possible and provides low inductance due to the short wire. The whole assembly is covered and protected by an epoxy mold compound. The lead-frame paddle can be exposed and soldered to the PCB for best grounding and thermal performance.
+
+### Laminate Package
+
+A laminate package can be seen as a small PCB with fine design rules; the die is either wire-bonded (cheaper) or soldered face-down using solder bumps (C4) or Cu pillars (better electrical performance). The connection to the main PCB is made with solder balls ([BGA](https://en.wikipedia.org/wiki/Ball_grid_array)), pins, or exposed lands. The mold compound protects the assembly; for flip-chip assembly it can be omitted and potentially replaced by a metallic heat spreader.
+
+### Chip-Scale and Wafer-Level Packages
+
+The [**wafer-level package (WLP)**](https://en.wikipedia.org/wiki/Wafer-level_packaging) offers very low cost, excellent electrical properties, and the smallest possible size (package size = die size), but provides little protection of the die. The processing happens on the wafer level: a redistribution layer (RDL) re-routes the pads, solder balls are applied, and only then are the dice singulated. If the I/O count is too large to fit onto the die area, a **fan-out WLP (FO-WLP/eWLB)** can be used, where the die is extended in size by a mold frame: the dice are first singulated, then re-assembled on an artificial wafer where the surrounding area is filled with mold compound, and then processed like a WLP.
+
+### Stacked Packages
+
+For dense systems, several dice can be combined in one package: as a **die stack** (dice stacked on top of each other, connected by bond wires or [through-silicon vias](https://en.wikipedia.org/wiki/Through-silicon_via)), as **package-on-package (PoP)** (e.g., a memory package soldered on top of a processor package), or as a [**system-in-package (SiP)**](https://en.wikipedia.org/wiki/System_in_a_package), where several dice and passives are integrated on a common laminate substrate.
+
+### 2.5D Integration with Chiplets and Silicon Interposer
+
+High-end systems like GPUs, AI accelerators, and server processors increasingly split a large SoC into several smaller dice, called [**chiplets**](https://en.wikipedia.org/wiki/Chiplet), which are placed side by side on a **silicon interposer** (@fig-package-types (g)); a well-known example is TSMC's CoWoS (chip-on-wafer-on-substrate). This approach is motivated by several factors:
+
+- A single monolithic die is limited by the reticle size of the lithography tool, and the yield drops rapidly with die area; several smaller dice yield better and can exceed the reticle limit in total.
+- Each chiplet can be fabricated in the most suitable technology (**heterogeneous integration**), e.g., the compute logic in a leading-edge node, while I/O, analog, or RF functions stay in a mature, cheaper node.
+- Memory can be placed very close to the processor; a typical example is high-bandwidth memory (HBM), a stack of DRAM dice connected by through-silicon vias.
+- Proven chiplets can be reused across products, reducing design effort.
+
+The interposer is a passive silicon die (or a large part of a wafer) that is fabricated with a back-end-of-line process. Its fine-pitch wiring (line width and spacing in the µm range) allows thousands of short, dense connections between the chiplets, which is not possible with laminate substrates. The chiplets are flipped and attached to the interposer with **Cu pillars** with a thin solder cap (sometimes called microbumps, pitch typically 40 to 50 µm). [**Through-silicon vias (TSVs)**](https://en.wikipedia.org/wiki/Through-silicon_via) lead the supply and external signals through the thinned interposer (thickness ca. 100 µm) to C4 bumps (pitch ca. 150 µm), which connect the interposer to a laminate substrate. The laminate then fans out to the BGA balls, just like a regular flip-chip package. Instead of a mold compound, such packages are typically covered by a metal lid, which is attached to the backside of the chiplets with a thermal interface material (TIM) and acts as a heat spreader.
+
+As the pitch grows by roughly an order of magnitude at each level (chiplet, interposer, laminate, PCB), this arrangement is a hierarchy of increasingly coarse wiring. Several variants exist to reduce cost: an organic RDL interposer instead of silicon, or small silicon bridges embedded in the laminate only below the chiplet edges (e.g., Intel EMIB). In **3D integration**, chiplets are stacked directly on top of each other using TSVs and hybrid bonding (Cu-to-Cu bonding without solder, pitch below 10 µm).
+
+Designing chiplet-based systems brings new challenges: the die-to-die interfaces need to be standardized to allow combining chiplets from different sources (e.g., [UCIe](https://en.wikipedia.org/wiki/UCIe), Universal Chiplet Interconnect Express), each chiplet must be tested before assembly (known-good die, as a single faulty chiplet ruins the whole expensive package), power delivery and heat removal must be co-designed with the package, and the mechanical stress and warpage of the large assembly must be controlled.
+
+## Thermal Design {#sec-packaging-thermal}
+
+Managing the die temperature is an important aspect of package selection. Depending on the application, different ambient temperature ranges apply, which result in different on-die temperature ranges (due to the self-heating of the die caused by its power dissipation):
+
+- Consumer ambient temperature range: −30 to +85 °C.
+- Industrial/automotive ambient temperature range: −40 to +85 °C.
+- Usual IC technology junction temperature limits: −40 to +125 °C.
+- Automotive IC junction temperature limits: −40 to +150 °C.
+
+### Thermal Calculations
+
+Thermal calculations behave analogously to Ohm's law, as thermal paths can be modeled as series or parallel connections, using these equivalences: temperature difference $\Delta T \mathrel{\hat{=}}$ voltage $V$, heat flow $Q \mathrel{\hat{=}}$ current $I$, thermal resistance $R_\mathrm{th} \mathrel{\hat{=}}$ resistance $R$:
+
+$$
+\Delta T = Q \cdot R_\mathrm{th}
+$$ {#eq-thermal-ohm}
+
+$$
+R_\mathrm{th,series} = \sum_{i} R_{\mathrm{th},i}
+\qquad
+\frac{1}{R_\mathrm{th,parallel}} = \sum_{i} \frac{1}{R_{\mathrm{th},i}}
+$$ {#eq-thermal-series-parallel}
+
+An important property of an IC package is its ability to transport the heat generated on the die to the outside, limiting the die's self-heating. This property is the **thermal resistance**, usually a function of the package, the die, and the PCB design. Using
+
+$$
+\Delta T = R_\mathrm{th,ja} \cdot P_\mathrm{diss}
+$$ {#eq-thermal-rthja}
+
+with $\Delta T$ the on-chip temperature rise versus the ambient temperature in K, $R_\mathrm{th,ja}$ the junction-to-ambient thermal resistance in K/W, and $P_\mathrm{diss}$ the on-chip power dissipation in W, the die temperature can be estimated. A typical $R_\mathrm{th,ja}$ value is provided by the package manufacturer; for high accuracy, a thermal simulation has to be performed. Strictly speaking, $R_\mathrm{th,ja}$ is defined for a specific PCB design and environment (standardized in, e.g., JEDEC JESD51) and needs re-evaluation for specific cases (PCB size, number of layers, copper and via density, casing, airflow, etc.). @fig-thermal-network shows how a complete thermal path is modeled as a resistor network.
+
+{{< include /content/packaging/_fig_thermal_network.qmd >}}
+
+## Package Parasitics {#sec-packaging-parasitics}
+
+The parasitics associated with the package and the connections to the chip introduce difficulties in high-speed or high-accuracy designs: trace self-inductance, mutual inductance, and capacitance limit the achievable performance. Packaging continues to limit the performance of high-end designs, which is why advanced packages like WLCSP with minimal $L$ and $C$ are used for high-performance ICs. @fig-package-parasitics shows the equivalent circuit of a single package connection.
+
+{{< include /content/packaging/_fig_package_parasitics.qmd >}}
+
+Simple approximations for the inductance of common package geometries are given below (higher accuracy requires EM simulation; the underlying transmission-line theory is covered in [@Pozar_RF]). For a **round wire** at height $h$ above a ground plane (wire radius $r$):
+
+$$
+L' \approx 0.2 \ln \left( \frac{2h}{r} \right) \; \mathrm{nH/mm}
+$$ {#eq-ind-round-wire}
+
+For a **flat trace** of width $W$ at height $d$ above a ground plane:
+
+$$
+L' \approx \frac{1.6}{0.72 + W/d} \; \mathrm{nH/mm}
+$$ {#eq-ind-flat-trace}
+
+The **mutual inductance of two round wires** at distance $d$ and height $h$ above the ground plane:
+
+$$
+L_\mathrm{m}' \approx 0.1 \ln \left[ 1 + \left( \frac{2h}{d} \right)^2 \right] \; \mathrm{nH/mm}
+$$ {#eq-ind-mutual}
+
+A typical bond wire has a radius of 12.5 µm and larger, and an inductance of roughly 1 nH/mm.
+
+::: {#nte-bond-wire-inductance .callout-note}
+## Example Calculation of the Bond-Wire Inductance
+
+Let us assume a bond wire with a diameter of 25 µm (i.e., $r = 12.5\,\mu\text{m}$) and a length of $l = 2\,\text{mm}$, running at a height of $h = 300\,\mu\text{m}$ above the ground plane. With @eq-ind-round-wire, the inductance per length is
+
+$$
+L' \approx 0.2 \ln \left( \frac{2 \cdot 300\,\mu\text{m}}{12.5\,\mu\text{m}} \right) \; \text{nH/mm} = 0.2 \ln (48) \; \text{nH/mm} = 0.77\,\text{nH/mm}
+$$
+
+and the total inductance of the bond wire is
+
+$$
+L = L' \cdot l = 0.77\,\text{nH/mm} \cdot 2\,\text{mm} = 1.55\,\text{nH}
+$$
+
+Note that the height enters only logarithmically: doubling $h$ to $600\,\mu\text{m}$ increases the inductance by just 18 % to $1.83\,\text{nH}$. At a frequency of $f = 1\,\text{GHz}$, this bond wire already shows a reactance of
+
+$$
+X_L = 2 \pi f L = 9.7\,\Omega
+$$
+
+If this bond wire carries the supply current of a digital block, a current step of $\Delta i = 10\,\text{mA}$ within $\Delta t = 100\,\text{ps}$ causes a supply bounce of
+
+$$
+V = L \frac{\Delta i}{\Delta t} = 1.55\,\text{nH} \cdot \frac{10\,\text{mA}}{100\,\text{ps}} = 155\,\text{mV}
+$$
+
+which is significant for a core supply voltage of about 1.2 V.
+
+To reduce the supply bounce, a second bond wire of the same dimensions is placed in parallel at a distance of $d = 300\,\mu\text{m}$. With @eq-ind-mutual, the mutual inductance per length is
+
+$$
+L_\mathrm{m}' \approx 0.1 \ln \left[ 1 + \left( \frac{2 \cdot 300\,\mu\text{m}}{300\,\mu\text{m}} \right)^2 \right] \; \text{nH/mm} = 0.1 \ln (5) \; \text{nH/mm} = 0.16\,\text{nH/mm}
+$$
+
+resulting in a mutual inductance of $L_\mathrm{m} = L_\mathrm{m}' \cdot l = 0.32\,\text{nH}$ between the two bond wires. The magnetic coupling factor is
+
+$$
+k = \frac{L_\mathrm{m}}{\sqrt{L_1 L_2}} = \frac{L_\mathrm{m}}{L} = \frac{0.32\,\text{nH}}{1.55\,\text{nH}} = 0.21
+$$
+
+As both bond wires carry currents in the same direction, the mutual inductance adds to the self-inductance of each wire, and the effective inductance of the parallel connection is
+
+$$
+L_\mathrm{eff} = \frac{L + L_\mathrm{m}}{2} = \frac{L}{2} (1 + k) = 0.94\,\text{nH}
+$$
+
+Instead of halving the inductance to $0.77\,\text{nH}$, the second bond wire reduces it only by 40 %, and the supply bounce for the same current step drops from $155\,\text{mV}$ to $94\,\text{mV}$. A larger distance between the bond wires reduces $k$ and brings $L_\mathrm{eff}$ closer to $L/2$. Conversely, if the two bond wires carry unrelated signals, the same coupling causes crosstalk: the current step of $10\,\text{mA}$ in $100\,\text{ps}$ in one bond wire induces a voltage of $L_\mathrm{m} \, \Delta i / \Delta t = 32\,\text{mV}$ in the other.
+:::
+
+### Multiple Pads, Bond Wires, and Pins
+
+Where a single connection to the chip would sustain a prohibitively large transient voltage drop ($V = L \, di/dt$), multiple pads, bond wires, and package pins are used in parallel: $N$ parallel connections reduce the effective inductance by roughly $N$ (somewhat less due to the mutual coupling between the parallel wires). This is standard practice for power supplies and high-current outputs.
+
+### Exposed Paddle and Down-Bonds
+
+Some packages contain a metal plane (the paddle) to which the die is attached with conductive epoxy. Such packages avoid long, narrow traces in the ground connection: the ground pads are "**down-bonded**" directly to the paddle, minimizing the inductance, and the paddle is soldered to the board ground. Sometimes the paddle has to be plated in the areas where a down-bond lands, adding cost.
+
+### Mutual Inductance and Crosstalk
+
+Supply noise and other disturbances can couple through the mutual inductance (and capacitance) of adjacent bond wires and package traces. The design of the pad frame and the position of the bond wires play a critical role in isolating sensitive connections! Two methods reduce the mutual coupling, illustrated in @fig-mutual-inductance:
+
+1. Arrange critical wires **perpendicular** to each other (mutual inductance requires parallel current paths).
+2. Interpose $\VSS$ or $\VDD$ wires between critical bond wires; the return current in the interposed wire partially cancels the coupled flux.
+
+Mutual inductance can even be used to advantage: routing a supply and its return current in adjacent, parallel bond wires carrying **opposite currents** reduces the effective loop inductance.
+
+{{< include /content/packaging/_fig_mutual_inductance.qmd >}}
+
+### Bond Wires as Circuit Elements
+
+Since a bond wire is a relatively high-$Q$ inductor (inductance ca. 1 nH/mm, low resistivity of Au or Al), some designs use it as a circuit element, e.g., in high-frequency $LC$ oscillators [@Craninckx_1995]. However, the mechanical tolerances of the bond-wire geometry translate into inductance tolerance, which must be taken into account. More generally, any conducting structure in a package can be used to form inductors, capacitors, or even antennas (e.g., in CSP or laminate packages).
+
+## Package Qualification {#sec-packaging-qualification}
+
+In addition to the qualification of the silicon technology (see @sec-technology-qualification), the package must be qualified to prove that the assembly of die, bond wires or bumps, substrate, and mold compound survives soldering, handling, and the thermal and environmental stress of its application over the intended lifetime. The framework is again set by JEDEC JESD47, and for automotive products by AEC-Q100, which groups these tests as *accelerated environment stress tests* and *package assembly integrity tests*. As for the silicon, a typical sample consists of three assembly lots of 77 parts per test, and zero failures are accepted. @tbl-package-qualification lists typical tests.
+
+| Test (examples) | Standard | Motivation & check |
+|:----------------|:---------|:-------------------|
+| Pre-conditioning (PC) | JESD22-A113 | Moisture soak and reflow simulate storage and board assembly before the other stress tests. |
+| Moisture sensitivity level (MSL) | J-STD-020 | Classification of how long a package may be exposed to ambient moisture before soldering. |
+| Temperature cycling (TC) | JESD22-A104 | Repeated heating and cooling must not cause failures (thermal expansion mismatch, see CTE). |
+| Temperature humidity bias (THB) / biased HAST | JESD22-A101 / A110 | Corrosion and leakage under humidity, temperature, and applied voltage. |
+| Unbiased highly accelerated stress test (UHAST) | JESD22-A118 | Exposure of package and die to high temperature and humidity without bias. |
+| High-temperature storage life (HTSL) | JESD22-A103 | Storage at high temperature for thousands of hours (intermetallic growth). |
+| Wire bond pull and shear | MIL-STD-883 (2011) / JESD22-B116 | Mechanical strength of the bond wires and their connections. |
+| Solder ball shear | JESD22-B117 | Mechanical strength of the solder balls of BGA and WLCSP packages. |
+| Drop test | JESD22-B111 | The assembled PCB is dropped repeatedly under standardized conditions. |
+| Temperature cycling on board (TCoB) | IPC-9701 | The assembled PCB is temperature-cycled to check the solder-joint reliability. |
+: Typical package qualification tests {#tbl-package-qualification}
+
+These tests fall into three groups: **component-level stress tests** (PC, TC, THB/HAST, UHAST, HTSL) that accelerate the degradation of the package, **assembly integrity tests** that check the mechanical quality of the interconnects directly, and **board-level tests** (drop, TCoB) that stress the solder joints between package and PCB. After each stress test, the parts are electrically tested against the datasheet at the read points; in addition, non-destructive inspection like [scanning acoustic microscopy](https://en.wikipedia.org/wiki/Scanning_acoustic_microscope) (C-SAM) reveals delamination and cracks inside the package, and X-ray imaging shows deformed bond wires. Failing parts are analyzed further, e.g., by cross-sectioning.
+
+**Pre-conditioning (PC)** is not a test on its own but the mandatory first step before TC, THB/HAST, and UHAST. The mold compound and the laminate are polymers that absorb moisture from the ambient air during storage. When the package is then soldered to the PCB, it is heated within seconds to a peak temperature of up to 260 °C for lead-free solder, and the absorbed water evaporates explosively. The vapor pressure can delaminate the mold compound from the die or the lead frame, crack the package, or break bond wires—the so-called **popcorn effect**. Pre-conditioning therefore reproduces the life of a part before it reaches the application: a bake to dry the parts, a moisture soak according to the targeted MSL, and three reflow cycles to simulate board assembly including a rework.
+
+The **moisture sensitivity level (MSL)** is determined according to J-STD-020 and states how long a package may be exposed to a factory environment (≤30 °C, 60 % RH) after opening its dry pack before it must be soldered. It ranges from MSL 1 (unlimited floor life, soaked at 85 °C and 85 % RH for 168 h) and MSL 3 (floor life of 168 h, a common target for plastic packages) to MSL 6 (parts must be baked right before soldering). Packages with MSL 2 and higher are shipped in sealed moisture-barrier bags with desiccant, and parts that exceeded their floor life have to be baked before use (J-STD-033).
+
+**Temperature cycling (TC)** addresses the thermo-mechanical stress caused by the different coefficients of thermal expansion (CTE) of the package materials: silicon expands by about 2.6 ppm/K, the copper lead frame by about 17 ppm/K, the laminate by about 14 to 17 ppm/K, and the mold compound by roughly 8 to 15 ppm/K (below its glass transition temperature). Every temperature change therefore causes shear stress at the interfaces. The parts are cycled between typically −55 °C and +125 °C (or −40 °C and +150 °C for automotive), with several hundred to 1000 cycles. Typical failure mechanisms are cracked wire-bond heels, lifted ball bonds, delamination, cracked dice or passivation layers, and fatigue of flip-chip bumps (which is why flip-chip dice are usually underfilled). The acceleration factor to the milder temperature swings of the application follows the empirical [Coffin–Manson relation](https://en.wikipedia.org/wiki/Coffin%E2%80%93Manson_relation), where the number of cycles to failure scales with a power of the temperature swing.
+
+**Temperature humidity bias (THB)** and its accelerated variant, **biased HAST**, combine moisture with an electric field. In the classic 85/85 test, the parts are operated for 1000 h at 85 °C and 85 % RH with a static bias applied to the pins; HAST reaches a similar stress in about 96 h at 130 °C and 85 % RH in a pressurized chamber. Moisture diffuses through the mold compound and along interfaces to the die surface, where it dissolves ionic contaminations (e.g., chlorine from the mold compound); together with the applied voltage this causes electrochemical **corrosion** of the Al bond pads and metal lines, or leakage currents between adjacent pins. A dense passivation layer and a well-adhering mold compound are the main countermeasures. **Unbiased HAST (UHAST)** applies the same humidity stress without bias (typically 96 h at 130 °C and 85 % RH), which isolates the purely chemical and mechanical effects of moisture, like galvanic corrosion between dissimilar metals and delamination.
+
+**High-temperature storage life (HTSL)** stores unbiased parts at typically 150 °C for 1000 h. Its main target is the bond interface between the wire and the Al pad: gold and aluminum form **intermetallic compounds** whose growth is thermally activated. Uneven diffusion of the two metals creates voids (Kirkendall voiding), which increase the contact resistance and weaken the bond until it lifts off; the purple color of one of these compounds (AuAl~2~) gave this failure the name "purple plague." Copper wires, which have widely replaced gold for cost reasons, form Cu–Al intermetallics much more slowly, but they are more sensitive to corrosion in the humidity tests. As for HTOL, an Arrhenius acceleration factor relates the storage test to the application temperature.
+
+**Wire bond pull and shear tests** and **solder ball shear tests** are destructive mechanical tests of the interconnects themselves. In the pull test, a hook is placed below the bond wire and pulled upward until the wire breaks; both the force and the location of the break are recorded—a break in the wire is acceptable, while a lifted bond indicates a weak connection. In the shear test, a tool pushes the ball bond or the solder ball sideways off its pad. These tests are performed on a small sample per assembly lot and are also used for monitoring the ongoing production.
+
+**Board-level reliability tests** assess the solder joints between package and PCB, which usually fail before the package itself. In the **drop test**, a standardized JEDEC test board with the mounted components is subjected to repeated mechanical shocks (e.g., 1500 g for 0.5 ms) while the daisy-chained solder joints are monitored for interruptions; this test is essential for handheld devices. In **temperature cycling on board (TCoB)**, the assembled board is cycled (e.g., between 0 °C and 100 °C) until the solder joints fail by fatigue. The CTE mismatch between silicon and the PCB is particularly critical for WLCSPs, where the silicon die is soldered directly to the board, and for large BGAs, where the distance to the neutral point of expansion is large; the achievable number of cycles therefore limits the maximum die size of a WLCSP.
+
+A qualified package is not qualified forever. As a package family covers many die sizes and pin counts, qualification is usually performed on worst-case representatives (e.g., the largest die in the thinnest package), and other products are qualified by similarity. Any significant change of the materials (mold compound, wire material, die attach), the assembly site, or the process requires a requalification and a formal notification of the customers (JESD46).

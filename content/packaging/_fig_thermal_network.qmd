@@ -1,0 +1,61 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-thermal-network
+#| echo: false
+#| fig-cap: "Thermal equivalent network of a packaged IC: the dissipated power $P_\\mathrm{diss}$ acts as a current source injecting heat into the junction node. The heat flows through the parallel paths junction→case→heatsink→ambient and junction→board→ambient; every interface is modeled by a thermal resistance, and the node 'voltages' are the local temperatures ($T_\\mathrm{j}$ junction, $T_\\mathrm{c}$ case, $T_\\mathrm{s}$ heatsink, $T_\\mathrm{b}$ board). The bottom rail is the ambient temperature $T_\\mathrm{a}$."
+
+import schemdraw as sd
+import schemdraw.elements as elm
+
+sd.svgconfig.svg2 = False
+
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2, fontsize=10)
+
+    # heat source from ambient rail into the junction node
+    d += elm.SourceI().endpoints((0, 0), (0, 3)).label(
+        '$P_\\mathrm{diss}$', loc='top')
+    d += elm.Line().endpoints((0, 3), (2, 3))
+    d += elm.Dot().at((2, 3)).label('$T_\\mathrm{j}$', 'top')
+
+    # path 1: junction -> case -> heatsink -> ambient
+    d += elm.Resistor().endpoints((2, 3), (4.75, 3)).label(
+        '$R_\\mathrm{th,jc}$')
+    d += elm.Label().at((4.75, 3)).label('$T_\\mathrm{c}$', 'top')
+    d += elm.Resistor().endpoints((4.75, 3), (7.5, 3)).label(
+        '$R_\\mathrm{th,cs}$')
+    d += elm.Label().at((7.5, 3)).label('$T_\\mathrm{s}$', 'top')
+    d += elm.Resistor().endpoints((7.5, 3), (10.25, 3)).label(
+        '$R_\\mathrm{th,sa}$')
+    d += elm.Line().endpoints((10.25, 3), (10.25, 0))
+
+    # path 2: junction -> board -> ambient
+    d += elm.Resistor().endpoints((2, 3), (2, 1.2)).label(
+        '$R_\\mathrm{th,jb}$', loc='bottom')
+    d += elm.Line().endpoints((2, 1.2), (3, 1.2))
+    d += elm.Label().at((3, 1.2)).label('$T_\\mathrm{b}$', 'top')
+    d += elm.Resistor().endpoints((3, 1.2), (5.75, 1.2)).label(
+        '$R_\\mathrm{th,ba}$', loc='bottom')
+    d += elm.Line().endpoints((5.75, 1.2), (5.75, 0))
+    d += elm.Dot().at((5.75, 0))
+
+    # ambient rail
+    d += elm.Line().endpoints((0, 0), (10.25, 0))
+    d += elm.Dot().at((8, 0))
+    d += elm.Ground().at((8, 0)).label('$T_\\mathrm{a}$', 'right')
+```

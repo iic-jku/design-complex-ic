@@ -1,0 +1,70 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-wire-bond
+#| echo: false
+#| fig-cap: "Cross section of a wire-bonded lead-frame package: the die is glued to the paddle, bond wires connect the die pads to the leads (a down-bond connects directly to the grounded paddle), and the epoxy mold compound protects the assembly. The exposed paddle is soldered to the PCB for grounding and heat removal."
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, FancyBboxPatch
+
+fig, ax = plt.subplots(figsize=(8, 3.2))
+
+# mold compound
+ax.add_patch(Rectangle((1.0, 0.6), 10.0, 3.2, fc='#2f2f2f', ec='k',
+                       lw=0.8, alpha=0.15))
+# leads
+ax.add_patch(Rectangle((0.2, 0.6), 2.2, 0.45, fc='#b0b0b0', ec='k', lw=0.8))
+ax.add_patch(Rectangle((9.6, 0.6), 2.2, 0.45, fc='#b0b0b0', ec='k', lw=0.8))
+# paddle
+ax.add_patch(Rectangle((3.4, 0.6), 5.2, 0.45, fc='#b0b0b0', ec='k', lw=0.8))
+# die attach + die
+ax.add_patch(Rectangle((4.4, 1.05), 3.2, 0.18, fc='#c8a165', ec='k',
+                       lw=0.5))
+ax.add_patch(Rectangle((4.4, 1.23), 3.2, 0.6, fc='#6b7f95', ec='k', lw=0.8))
+ax.text(6.0, 1.53, 'die', ha='center', fontsize=9, color='white')
+
+# bond wires (arcs)
+t = np.linspace(0, np.pi, 50)
+
+
+def bond(x0, y0, x1, y1, h):
+    xm = np.linspace(x0, x1, 50)
+    ym = y0 + (y1 - y0) * (xm - x0) / (x1 - x0) + h * np.sin(
+        np.pi * (xm - x0) / (x1 - x0))
+    ax.plot(xm, ym, 'k-', lw=1.2)
+
+
+bond(4.6, 1.83, 1.6, 1.05, 0.8)     # left lead
+bond(7.4, 1.83, 10.4, 1.05, 0.8)    # right lead
+bond(5.2, 1.83, 4.0, 1.05, 0.5)     # down-bond to paddle
+ax.annotate('down-bond', xy=(4.3, 1.7), xytext=(2.6, 2.9), fontsize=8,
+            arrowprops=dict(arrowstyle='->', lw=0.7))
+ax.annotate('bond wire', xy=(8.9, 1.9), xytext=(8.9, 3.0), fontsize=8,
+            arrowprops=dict(arrowstyle='->', lw=0.7))
+ax.text(6.0, 3.4, 'mold compound', ha='center', fontsize=8)
+ax.text(1.2, 0.25, 'lead', fontsize=8)
+ax.text(6.0, 0.25, 'paddle (exposed)', fontsize=8, ha='center')
+
+ax.set_xlim(-0.2, 12.2)
+ax.set_ylim(-0.2, 4.2)
+ax.set_aspect('equal')
+ax.axis('off')
+plt.tight_layout()
+plt.show()
+```

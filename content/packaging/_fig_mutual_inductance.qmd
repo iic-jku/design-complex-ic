@@ -1,0 +1,72 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-mutual-inductance
+#| echo: false
+#| fig-cap: "Reducing mutual coupling between bond wires (top view of a chip corner): the noisy output wire couples into the parallel sensitive wire via the mutual inductance $M$ (left); interposing a grounded $V_\\mathrm{SS}$ wire (middle) or arranging the wires perpendicular to each other at a corner (right) strongly reduces the coupling."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+fig, axs = plt.subplots(1, 3, figsize=(8, 3.2))
+
+
+def chip(ax):
+    ax.add_patch(Rectangle((2.2, 0.2), 4.0, 4.0, fc='#6b7f95', ec='k',
+                           lw=0.8))
+    ax.text(4.2, 2.2, 'die', ha='center', fontsize=9, color='white')
+
+
+# (a) coupled parallel wires
+ax = axs[0]
+chip(ax)
+ax.plot([2.2, 0.4], [3.4, 3.9], 'r-', lw=1.6)
+ax.plot([2.2, 0.4], [2.4, 2.6], 'b-', lw=1.6)
+ax.text(0.3, 4.15, 'noisy', color='r', fontsize=8)
+ax.text(0.3, 2.1, 'sensitive', color='b', fontsize=8)
+ax.annotate('$M$', xy=(1.3, 3.15), fontsize=9)
+ax.set_title('(a) parallel wires couple', fontsize=9)
+
+# (b) interposed ground wire
+ax = axs[1]
+chip(ax)
+ax.plot([2.2, 0.4], [3.6, 4.1], 'r-', lw=1.6)
+ax.plot([2.2, 0.4], [2.9, 3.1], 'k-', lw=1.6)
+ax.plot([2.2, 0.4], [2.1, 2.1], 'b-', lw=1.6)
+ax.text(0.3, 4.35, 'noisy', color='r', fontsize=8)
+ax.text(0.3, 3.3, '$V_\\mathrm{SS}$', fontsize=8)
+ax.text(0.3, 1.6, 'sensitive', color='b', fontsize=8)
+ax.set_title('(b) interposed ground wire', fontsize=9)
+
+# (c) perpendicular wires
+ax = axs[2]
+chip(ax)
+ax.plot([2.2, 0.4], [3.2, 3.2], 'r-', lw=1.6)
+ax.plot([4.4, 4.4], [4.2, 6.0], 'b-', lw=1.6)
+ax.text(0.3, 3.45, 'noisy', color='r', fontsize=8)
+ax.text(4.6, 5.5, 'sensitive', color='b', fontsize=8)
+ax.set_title('(c) perpendicular wires', fontsize=9)
+
+for ax in axs:
+    ax.set_xlim(0, 7)
+    ax.set_ylim(0, 6.4)
+    ax.set_aspect('equal')
+    ax.axis('off')
+
+plt.tight_layout()
+plt.show()
+```

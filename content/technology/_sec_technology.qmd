@@ -269,4 +269,4 @@ These tests fall into three groups: **lifetime tests** that accelerate wear-out,
 
 **Electrical test (ED)** is not a stress test. It assesses the electrical parameters of devices from the manufacturing and test process being qualified, verifying that they meet every datasheet parameter across the specified supply-voltage and temperature range, and that they do so consistently across several production lots. This is what catches a systematic process shift that leaves the technology inside its own control limits, but the product outside its specification.
 
-A complete qualification also covers the package rather than the silicon, with temperature cycling, highly accelerated stress testing (HAST) for moisture resistance, and solder-reflow sensitivity.
+A complete qualification also covers the package rather than the silicon, with temperature cycling, highly accelerated stress testing (HAST) for moisture resistance, and solder-reflow sensitivity (see @sec-packaging-qualification).
