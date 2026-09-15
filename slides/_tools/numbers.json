@@ -11,6 +11,16 @@
    "number": "56",
    "type": "eq"
   },
+  "eq-dice-per-wafer": {
+   "chapter": 7,
+   "number": "62",
+   "type": "eq"
+  },
+  "eq-die-cost": {
+   "chapter": 7,
+   "number": "61",
+   "type": "eq"
+  },
   "eq-dof": {
    "chapter": 3,
    "number": "46",
@@ -261,9 +271,29 @@
    "number": "7",
    "type": "eq"
   },
+  "eq-murphy-yield": {
+   "chapter": 7,
+   "number": "63",
+   "type": "eq"
+  },
+  "eq-nre": {
+   "chapter": 7,
+   "number": "59",
+   "type": "eq"
+  },
   "eq-rayleigh": {
    "chapter": 3,
    "number": "45",
+   "type": "eq"
+  },
+  "eq-recurring-cost": {
+   "chapter": 7,
+   "number": "60",
+   "type": "eq"
+  },
+  "eq-selling-price": {
+   "chapter": 7,
+   "number": "57",
    "type": "eq"
   },
   "eq-thermal-ohm": {
@@ -279,6 +309,11 @@
   "eq-thermal-series-parallel": {
    "chapter": 5,
    "number": "50",
+   "type": "eq"
+  },
+  "eq-total-cost": {
+   "chapter": 7,
+   "number": "58",
    "type": "eq"
   },
   "fig-ac-parametric": {
@@ -311,9 +346,19 @@
    "number": "62",
    "type": "fig"
   },
+  "fig-cost-example": {
+   "chapter": 7,
+   "number": "71",
+   "type": "fig"
+  },
   "fig-cpk": {
    "chapter": 6,
    "number": "68",
+   "type": "fig"
+  },
+  "fig-custom-flow": {
+   "chapter": 8,
+   "number": "79",
    "type": "fig"
   },
   "fig-cvd-sputter": {
@@ -336,6 +381,11 @@
    "number": "17",
    "type": "fig"
   },
+  "fig-die-per-wafer": {
+   "chapter": 7,
+   "number": "69",
+   "type": "fig"
+  },
   "fig-doping-process": {
    "chapter": 3,
    "number": "27",
@@ -344,6 +394,11 @@
   "fig-doping-profiles": {
    "chapter": 3,
    "number": "31",
+   "type": "fig"
+  },
+  "fig-good-die-per-wafer": {
+   "chapter": 7,
+   "number": "70",
    "type": "fig"
   },
   "fig-history-timeline": {
@@ -359,6 +414,11 @@
   "fig-ic-tradeoff": {
    "chapter": 2,
    "number": "23",
+   "type": "fig"
+  },
+  "fig-impl-choices": {
+   "chapter": 8,
+   "number": "73",
    "type": "fig"
   },
   "fig-jtag": {
@@ -471,6 +531,11 @@
    "number": "58",
    "type": "fig"
   },
+  "fig-nand2-schematic": {
+   "chapter": 8,
+   "number": "74",
+   "type": "fig"
+  },
   "fig-nmos-clm": {
    "chapter": 2,
    "number": "12",
@@ -536,6 +601,11 @@
    "number": "21",
    "type": "fig"
   },
+  "fig-pnr-flow": {
+   "chapter": 8,
+   "number": "78",
+   "type": "fig"
+  },
   "fig-process-backend": {
    "chapter": 3,
    "number": "39",
@@ -581,9 +651,24 @@
    "number": "26",
    "type": "fig"
   },
+  "fig-rtl-flow": {
+   "chapter": 8,
+   "number": "77",
+   "type": "fig"
+  },
   "fig-scan-path": {
    "chapter": 6,
    "number": "66",
+   "type": "fig"
+  },
+  "fig-semicustom-flow": {
+   "chapter": 8,
+   "number": "76",
+   "type": "fig"
+  },
+  "fig-stdcell-layout": {
+   "chapter": 8,
+   "number": "75",
    "type": "fig"
   },
   "fig-stuck-at": {
@@ -621,6 +706,11 @@
    "number": "54",
    "type": "fig"
   },
+  "fig-y-diagram": {
+   "chapter": 8,
+   "number": "72",
+   "type": "fig"
+  },
   "nte-body-effect": {
    "chapter": 2,
    "number": "2",
@@ -629,6 +719,11 @@
   "nte-bond-wire-inductance": {
    "chapter": 5,
    "number": "4",
+   "type": "nte"
+  },
+  "nte-ic-cost": {
+   "chapter": 7,
+   "number": "5",
    "type": "nte"
   },
   "nte-vth-calculation": {
@@ -640,6 +735,31 @@
    "chapter": 3,
    "number": "3",
    "type": "nte"
+  },
+  "sec-economy": {
+   "chapter": 7,
+   "number": "7",
+   "type": "sec"
+  },
+  "sec-economy-example": {
+   "chapter": 7,
+   "number": "7.4",
+   "type": "sec"
+  },
+  "sec-economy-nre": {
+   "chapter": 7,
+   "number": "7.2",
+   "type": "sec"
+  },
+  "sec-economy-price": {
+   "chapter": 7,
+   "number": "7.1",
+   "type": "sec"
+  },
+  "sec-economy-recurring": {
+   "chapter": 7,
+   "number": "7.3",
+   "type": "sec"
   },
   "sec-intro": {
    "chapter": 1,
@@ -699,6 +819,41 @@
   "sec-layout-tapeout": {
    "chapter": 4,
    "number": "4.1",
+   "type": "sec"
+  },
+  "sec-methodology": {
+   "chapter": 8,
+   "number": "8",
+   "type": "sec"
+  },
+  "sec-methodology-cells": {
+   "chapter": 8,
+   "number": "8.3",
+   "type": "sec"
+  },
+  "sec-methodology-choices": {
+   "chapter": 8,
+   "number": "8.2",
+   "type": "sec"
+  },
+  "sec-methodology-custom": {
+   "chapter": 8,
+   "number": "8.5",
+   "type": "sec"
+  },
+  "sec-methodology-flow": {
+   "chapter": 8,
+   "number": "8.4",
+   "type": "sec"
+  },
+  "sec-methodology-fpga": {
+   "chapter": 8,
+   "number": "8.6",
+   "type": "sec"
+  },
+  "sec-methodology-y": {
+   "chapter": 8,
+   "number": "8.1",
    "type": "sec"
   },
   "sec-mosfet": {
@@ -896,6 +1051,11 @@
    "number": "6.5",
    "type": "sec"
   },
+  "tbl-design-styles": {
+   "chapter": 8,
+   "number": "13",
+   "type": "tbl"
+  },
   "tbl-doping": {
    "chapter": 3,
    "number": "6",
@@ -914,6 +1074,16 @@
   "tbl-layers": {
    "chapter": 4,
    "number": "8",
+   "type": "tbl"
+  },
+  "tbl-margin": {
+   "chapter": 7,
+   "number": "11",
+   "type": "tbl"
+  },
+  "tbl-mask-cost": {
+   "chapter": 7,
+   "number": "12",
    "type": "tbl"
   },
   "tbl-mosfet-caps": {
