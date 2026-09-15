@@ -104,7 +104,7 @@ A few additional considerations for capacitors:
 
 ### Diodes
 
-Diodes are formed by the available pn-junctions ($n^+$ in substrate, $p^+$ in n-well, n-well in substrate). They are intended mainly for reverse-biased operation, as the forward operation is usually not modeled accurately and should be avoided. Note that forward operation might inject charge into parasitic structures and cause latch-up (see the latch-up chapter)! Applications of reverse-biased diodes include ESD protection structures, antenna diodes, and varactors.
+Diodes are formed by the available pn-junctions ($n^+$ in substrate, $p^+$ in n-well, n-well in substrate). They are intended mainly for reverse-biased operation, as the forward operation is usually not modeled accurately and should be avoided. Note that forward operation might inject charge into parasitic structures and cause latch-up (see @sec-latchup)! Applications of reverse-biased diodes include ESD protection structures, antenna diodes, and varactors.
 
 ### Bipolar Junction Transistors
 
