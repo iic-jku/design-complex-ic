@@ -1,0 +1,120 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# Design Methodology {#sec-methodology}
+
+In this chapter, basic knowledge of digital and analog circuit design is assumed; we discuss IC-specific design methodology topics which are usually not covered in entry-level courses. A comprehensive treatment of digital VLSI design and its methodology is given in [@Weste_CMOS]. We first introduce a mental model of the design space (the Y-diagram), then survey the available implementation styles and their trade-offs, and finally walk through the concrete design flows—the digital semicustom flow and the analog/mixed-signal custom flow—illustrated throughout with open-source EDA tools.
+
+## The Y-Diagram {#sec-methodology-y}
+
+A useful mental model for IC design is the [**Y-diagram**](https://en.wikipedia.org/wiki/Gajski%E2%80%93Kuhn_chart) [@Gajski_Kuhn_1983], shown in @fig-y-diagram. A design can be described in three domains—**behavioral** (what the circuit does), **structural** (which components it is composed of), and **physical** (how it is arranged geometrically)—each represented by one axis of the "Y". Orthogonal to the domains are several **levels of abstraction**, drawn as concentric rings: from the system level on the outer rings, through the register-transfer and logic levels, down to the transistor (circuit) level in the center. Any design representation is thus a point on one of the three axes at a given abstraction ring. A **design step** is a transformation between these representations, typically moving from one domain to another and towards lower abstraction (inner rings): for example, [logic synthesis](https://en.wikipedia.org/wiki/Logic_synthesis) transforms a behavioral description (RTL) into a structural one (gate-level netlist), and [place-and-route](https://en.wikipedia.org/wiki/Place_and_route) transforms the structural netlist into physical layout. Synthesis steps move inward (refining detail), while abstraction or extraction steps move outward.
+
+{{< include /content/methodology/_fig_y_diagram.qmd >}}
+
+## Digital Implementation Choices {#sec-methodology-choices}
+
+@fig-impl-choices shows the taxonomy of digital circuit implementation approaches, from fully custom design to semicustom cell-based and array-based styles.
+
+{{< include /content/methodology/_fig_impl_choices.qmd >}}
+
+In a **fully custom** design, every transistor and wire is crafted by hand to maximize performance, density, or both; this is worthwhile for analog blocks, high-speed interfaces, or memory bit-cells that are replicated millions of times, but it is slow and labor-intensive. **Semicustom** design instead assembles the circuit from pre-designed and pre-characterized building blocks, trading some area and speed for much shorter design time and lower risk. Semicustom styles fall into two groups: **cell-based** approaches build the design from standard cells and macro cells that are placed and routed (mostly automatically), whereas **array-based** approaches start from a pre-fabricated array of devices (gate arrays) or programmable logic (FPGAs) and customize only the interconnect.
+
+There usually exists a trade-off between energy efficiency and flexibility:
+
+- Hard-wired logic offers the lowest power consumption, but very little flexibility.
+- Software running on a general-purpose CPU is fully flexible, but not power-efficient.
+- Software running on a domain-specific processor like a DSP or GPU sits in between.
+
+| Design style | Energy efficiency | Flexibility |
+|:-------------|:---:|:---:|
+| Hardwired custom logic | high | low |
+| FPGA | low | high |
+| Domain-specific processor (e.g., DSP, GPU) | low/mid | mid |
+| General-purpose processor (CPU) | low | high |
+: Energy efficiency versus flexibility of digital design styles {#tbl-design-styles}
+
+Given the trade-offs in @tbl-design-styles, the architecture of SoCs often involves a careful balance between energy efficiency and flexibility, selecting appropriate implementation approaches for different parts of the system. Often an optimized mix is chosen: fixed-function blocks can be implemented using hard-wired logic for maximum energy efficiency, while programmable blocks can leverage CPUs, DSPs, or domain-specific processors to maintain flexibility with FW updates.
+
+## Cell-Based Design {#sec-methodology-cells}
+
+Different types of cells can be used when designing ICs:
+
+- A high-level description (e.g., in [VHDL](https://en.wikipedia.org/wiki/VHDL) or [SystemVerilog](https://en.wikipedia.org/wiki/SystemVerilog)) can be synthesized and automatically placed and routed using [**standard logic cells**](https://en.wikipedia.org/wiki/Standard_cell).
+- **Hard macro modules** (like SRAM or IO cells) can be used to construct larger designs.
+- **Soft macro modules** (provided as a synthesizable high-level description or RTL) can be integrated as well.
+
+### Standard Cell Library
+
+**Standard-cell libraries (SCLs)** are offered by IP vendors or foundries; a detailed treatment of standard cells and semicustom design is given in [@Smith_ASIC]. The following cell types are usually available:
+
+- Logic functions (AND, OR, NAND, NOR, INV, XOR, XNOR) with 2 and more inputs (usually up to 4).
+- Complex gates (like combined AND-OR gates, half-adders, bit-shifter cells).
+- Auxiliary cells (buffers to balance delays, tie cells to bias n-wells and substrate, decoupling cells, spacers, tri-state buffers, antenna diodes).
+- Storage elements (latches, flip-flops).
+
+The logic cells are available in different **drive strengths** to balance chip area versus propagation delay versus power consumption (active as well as leakage). The cells are thoroughly characterized for timing, power consumption, capacitive load, and leakage versus PVTL (process, voltage, temperature, load), and the results are stored in look-up tables used by the EDA tools.
+
+As an example, @fig-nand2-schematic shows the transistor-level schematic of a NAND2 standard cell; in the IHP SG13 open PDK, this cell is available in two drive strengths ([`nand2_1` and `nand2_2`](https://github.com/IHP-GmbH/IHP-Open-PDK/tree/main/ihp-sg13g2/libs.ref/sg13g2_stdcell)). Also, various latches and flip-flops are provided, with and without scan-chain support, with optional set and reset, and in different drive strengths (e.g., the scan flip-flop `sdfbbp_1` with inverted asynchronous set and reset).
+
+{{< include /content/methodology/_fig_nand2_schematic.qmd >}}
+
+@fig-stdcell-layout shows the typical layout organization of a standard cell: all the cells have a common height, power is distributed on horizontal $\VDD$/$\VSS$ rails at the top and bottom (abutting with the neighbors), the n-well spans the upper half (PMOS devices), and the signal terminals are placed on a routing grid. The height of the cells is fixed to ensure uniformity and ease of placement in rows and is usually given in terms of track height (i.e., the number of routing tracks that fit within the cell height). The width of the cells can vary depending on the complexity and drive strength of the cell, but is based on a grid structure to facilitate routing and alignment with neighboring cells.
+
+{{< include /content/methodology/_fig_stdcell_layout.qmd >}}
+
+### Hard Macros
+
+Usually read-only memories (ROM), random-access memories (RAM), and one-time programmable (OTP) memories like e-fuses are available as hard macros, created by **module generators** ("memory compilers"). SRAM generators often provide plenty of options, like the number of rows and columns, with or without repair, built-in self-test (BIST), single- or dual-port, and high-performance or low-leakage variants.
+
+IO cells (input/output cells for interfacing with the external pins of the chip, providing the necessary voltage level shifting, drive strength, and protection circuitry) are often provided as hard macros as well, for example the [`sg13g2_io`](https://github.com/IHP-GmbH/IHP-Open-PDK/tree/main/ihp-sg13g2/libs.ref/sg13g2_io) library in the IHP SG13G2 open PDK. From these IO cells the padring is constructed, which surrounds the core logic and provides the interface to the external pins.
+
+## The Semicustom Design Flow {#sec-methodology-flow}
+
+@fig-semicustom-flow shows the semicustom design flow at a high level: the design is captured in an HDL, synthesized to a gate-level netlist, and physically implemented by floorplanning, placement, and routing (RTL2GDS). Simulation accompanies every step (pre-layout simulation of the HDL and the netlist, post-layout simulation with extracted parasitics), and design iterations loop back to earlier stages when timing, power, or functionality goals are not met. The flow is conventionally divided into a **front-end** part, which turns the behavioral description into a verified gate-level netlist, and a **back-end** part, which turns that netlist into manufacturable layout; both are detailed in the following subsections. Because a decision made late in the flow—such as a routing detour that adds delay—can invalidate an assumption made earlier, reaching **design closure**, where timing, power, area, and signal-integrity constraints are met simultaneously, usually takes several of these iterations.
+
+{{< include /content/methodology/_fig_semicustom_flow.qmd >}}
+
+### RTL Synthesis
+
+The front-end part of the flow transforms the behavioral description into a verified gate-level netlist, as shown in @fig-rtl-flow. The behavioral description (VHDL, SystemVerilog) is first verified by simulation; after RTL synthesis and library mapping, the resulting netlist is verified again (by simulation or formal equivalence checking), followed by [static timing analysis](https://en.wikipedia.org/wiki/Static_timing_analysis). Test logic (scan chains, see @sec-testing-types) is inserted, and the netlist is checked once more, together with a power analysis, before it is handed to physical synthesis. The algorithms behind logic synthesis and optimization are covered in depth in [@DeMicheli_Synthesis]. In the open-source flow, the corresponding tools are `iverilog` or `verilator` (simulation), `yosys` (synthesis), `abc` (logic optimization and mapping), `opensta` (timing and power analysis), `fault` (test insertion), and `gtkwave` (waveform viewing).
+
+{{< include /content/methodology/_fig_rtl_flow.qmd >}}
+
+### Standard-Cell Place and Route
+
+The back-end part of the flow, shown in @fig-pnr-flow, turns the netlist into manufacturable layout: placement and routing (`openroad`) use the library and technology descriptions (LEF), producing the design in DEF format; parasitic extraction (`openrcx`) generates a SPEF file used for accurate post-layout timing analysis (`opensta`); after noise and reliability checks pass, the final layout database is streamed out as GDSII (`klayout`, `magic`) and sent to the manufacturer. The algorithms of physical design—partitioning, floorplanning, placement, routing, and timing closure—are treated comprehensively in [@Kahng_PhysicalDesign].
+
+{{< include /content/methodology/_fig_pnr_flow.qmd >}}
+
+### The Open-Source RTL-to-GDS Flow
+
+In recent years, open-source tools have made a huge step forward, so that a complete behavioral (SystemVerilog) to GDSII flow is freely available with [OpenROAD](https://github.com/The-OpenROAD-Project/OpenROAD) and the integrated [LibreLane](https://github.com/librelane/librelane) flow. Together with the IHP SG13 open-source PDK—including its open standard-cell library ([sg13g2_stdcell](https://github.com/IHP-GmbH/IHP-Open-PDK/tree/main/ihp-sg13g2/libs.ref/sg13g2_stdcell))—everything needed for a digital tapeout is now openly available. This has dramatically lowered the barrier to entry for chip design: students, researchers, and hobbyists can take a design all the way from RTL to a manufacturable layout without any commercial tool licenses, and low-cost [multi-project wafer](https://en.wikipedia.org/wiki/Multi-project_wafer_service) shuttle runs make it feasible to obtain real silicon.
+
+## The Mixed-Signal/Custom Flow {#sec-methodology-custom}
+
+For analog and mixed-signal designs, the flow is usually schematic-driven, as shown in @fig-custom-flow: the design is captured as a schematic (`xschem`) or netlist, checked by electrical rule checks, and simulated (`ngspice`, `vacask`). The layout is constructed manually (`klayout`, `magic`), verified by DRC (`klayout` or `magic`), and compared against the schematic (LVS with `klayout` or `netgen`). After LVS passes, parasitic extraction (`magic` or `klayout-pex`) delivers a netlist with layout parasitics, which is back-annotated into the schematic and re-simulated; after reliability checks, the block or IC is ready.
+
+{{< include /content/methodology/_fig_custom_flow.qmd >}}
+
+## FPGAs {#sec-methodology-fpga}
+
+[Field-programmable gate arrays](https://en.wikipedia.org/wiki/Field-programmable_gate_array) (FPGAs) are a good alternative to a custom digital IC, because the initial cost is very low, and the same HDL description can be used to program an FPGA or to create a semicustom digital design:
+
+- An FPGA consists of programmable logic blocks (typically look-up tables (LUTs) paired with flip-flops), hard macros (like CPUs, DSP slices, memory blocks, or high-speed interfaces), and a programmable interconnect fabric.
+- The flexibility is very high (the FPGA can be loaded with a new bit-stream at any time), and the performance can be high as well; however, power consumption and unit cost can be substantial.
+- FPGAs can also be used as (more or less) real-time test vehicles for HDL code (for prototyping and software development) before committing to a costly mask set.
+
+The choice between an FPGA and a custom IC is largely a question of volume: FPGAs win at low to medium volumes, where their high per-unit cost is outweighed by the avoided [NRE](https://en.wikipedia.org/wiki/Non-recurring_engineering) (mask set and design effort) of a custom IC, while an ASIC becomes cheaper per piece once the volume is large enough to amortize its NRE. Many products therefore start on an FPGA and are migrated to an ASIC only once the volume and specification have stabilized.

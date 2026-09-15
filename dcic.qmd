@@ -41,3 +41,4 @@ format:
 {{< include /content/packaging/_sec_packaging.qmd >}}
 {{< include /content/testing/_sec_testing.qmd >}}
 {{< include /content/economy/_sec_economy.qmd >}}
+{{< include /content/methodology/_sec_methodology.qmd >}}

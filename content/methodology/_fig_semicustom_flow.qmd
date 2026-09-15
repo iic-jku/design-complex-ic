@@ -1,0 +1,80 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-semicustom-flow
+#| echo: false
+#| fig-cap: "High-level semicustom design flow: from design capture in an HDL through logic synthesis, floorplanning, placement, and routing to tapeout. Pre- and post-layout simulations verify the design; failed checks lead to design iterations back to earlier steps."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, FancyArrowPatch, FancyBboxPatch
+
+
+def box(ax, x, y, text, w=3.0, h=0.8, rounded=False, fc='#e8eef4'):
+    if rounded:
+        # shrink by the pad so the padded outer edge matches w x h exactly
+        p = 0.08
+        ax.add_patch(FancyBboxPatch((x - w / 2 + p, y - h / 2 + p),
+                                    w - 2 * p, h - 2 * p,
+                                    boxstyle=f'round,pad={p}',
+                                    fc='#f4e8d8', ec='k', lw=1.0))
+    else:
+        ax.add_patch(Rectangle((x - w / 2, y - h / 2), w, h, fc=fc,
+                               ec='k', lw=1.0))
+    ax.text(x, y, text, ha='center', va='center', fontsize=9)
+
+
+def arr(ax, x0, y0, x1, y1):
+    ax.add_patch(FancyArrowPatch((x0, y0), (x1, y1), arrowstyle='->',
+                                 mutation_scale=12, lw=1.0,
+                                 shrinkA=0, shrinkB=0))
+
+
+fig, ax = plt.subplots(figsize=(7.5, 6.8))
+
+main = [('Design capture', True), ('HDL', False),
+        ('Logic synthesis', False), ('Floorplanning', False),
+        ('Placement', False), ('Routing', False), ('Tapeout', True)]
+ys = [9.6, 8.4, 7.2, 6.0, 4.8, 3.6, 2.4]
+for (text, rounded), y in zip(main, ys):
+    box(ax, 5.0, y, text, rounded=rounded)
+for y0, y1 in zip(ys[:-1], ys[1:]):
+    arr(ax, 5.0, y0 - 0.4, 5.0, y1 + 0.4)
+
+# side boxes
+box(ax, 0.9, 7.8, 'Pre-layout\nsimulation', w=2.4, h=1.0)
+box(ax, 0.9, 5.4, 'Post-layout\nsimulation', w=2.4, h=1.0)
+box(ax, 0.9, 3.6, 'Circuit\nextraction', w=2.4, h=1.0)
+
+arr(ax, 3.5, 7.2, 2.1, 7.6)      # synthesis -> pre-layout sim
+arr(ax, 2.1, 8.0, 3.5, 8.4)      # pre-layout sim -> HDL
+arr(ax, 3.5, 3.6, 2.1, 3.6)      # routing -> extraction
+arr(ax, 0.9, 4.1, 0.9, 4.9)      # extraction -> post-layout sim
+arr(ax, 2.1, 5.6, 3.5, 6.0)      # post-layout sim -> floorplanning
+arr(ax, 2.1, 5.2, 3.5, 4.8)      # post-layout sim -> placement
+
+# iteration loop: post-layout simulation back to the top (dashed)
+ax.plot([-0.3, -0.6, -0.6], [5.4, 5.4, 9.6], 'k--', lw=1.0)
+ax.add_patch(FancyArrowPatch((-0.6, 9.6), (3.5, 9.6), arrowstyle='->',
+                             mutation_scale=12, lw=1.0, linestyle='--'))
+ax.text(1.4, 9.75, 'design iteration', fontsize=8, ha='center')
+
+ax.set_xlim(-0.9, 9.2)
+ax.set_ylim(1.8, 10.2)
+ax.axis('off')
+plt.tight_layout()
+plt.show()
+```

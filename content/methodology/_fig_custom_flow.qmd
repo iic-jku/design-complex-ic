@@ -1,0 +1,87 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-custom-flow
+#| echo: false
+#| fig-cap: "Mixed-signal/custom design flow with open-source tools: the schematic (xschem) is simulated (ngspice), the layout is drawn (klayout, magic) and verified by DRC, extraction, and LVS (netgen); parasitic extraction (magic) feeds a back-annotated re-simulation, and after reliability checks the block is done. Failing checks loop back to the layout or the schematic."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, FancyArrowPatch, FancyBboxPatch
+
+
+def box(ax, x, y, text, w=3.4, h=1.0, kind='proc'):
+    if kind == 'term':
+        # shrink by the pad so the padded outer edge matches w x h exactly
+        p = 0.08
+        ax.add_patch(FancyBboxPatch((x - w / 2 + p, y - h / 2 + p),
+                                    w - 2 * p, h - 2 * p,
+                                    boxstyle=f'round,pad={p}',
+                                    fc='#f4e8d8', ec='k', lw=1.0))
+    else:
+        ax.add_patch(Rectangle((x - w / 2, y - h / 2), w, h, fc='#e8eef4',
+                               ec='k', lw=1.0))
+    ax.text(x, y, text, ha='center', va='center', fontsize=8)
+
+
+def arr(ax, x0, y0, x1, y1):
+    ax.add_patch(FancyArrowPatch((x0, y0), (x1, y1), arrowstyle='->',
+                                 mutation_scale=11, lw=1.0,
+                                 shrinkA=0, shrinkB=0))
+
+
+fig, ax = plt.subplots(figsize=(8.5, 6.4))
+
+# left column: schematic side
+box(ax, 2.5, 10.4, 'Schematic (xschem)\nor netlist', kind='term')
+box(ax, 2.5, 8.9, 'Electrical rule check')
+box(ax, 2.5, 7.4, 'Circuit simulation\n(ngspice or vacask)')
+box(ax, 2.5, 5.9, 'Layout construction\n(klayout or magic)')
+box(ax, 2.5, 4.4, 'Design rule check\n(klayout or magic)')
+box(ax, 2.5, 2.9, 'Circuit extraction\n(magic or klayout)')
+box(ax, 2.5, 1.4, 'Layout vs. schematic\n(klayout or netgen)')
+for y0 in [9.9, 8.4, 6.9, 5.4, 3.9, 2.4]:
+    arr(ax, 2.5, y0, 2.5, y0 - 0.5)
+
+# right column: post-layout
+box(ax, 8.0, 10.4, 'Parasitic extraction\n(magic or klayout-pex)')
+box(ax, 8.0, 8.9, 'Schematic back-annotation\n(xschem)', w=4.2)
+box(ax, 8.0, 7.4, 'Re-simulation\n(ngspice or vacask)')
+box(ax, 8.0, 5.9, 'Reliability check')
+box(ax, 8.0, 4.4, 'IC or module OK', kind='term')
+for y0 in [9.9, 8.4, 6.9, 5.4]:
+    arr(ax, 8.0, y0, 8.0, y0 - 0.5)
+
+# LVS pass -> parasitic extraction
+ax.plot([4.2, 5.4, 5.4], [1.4, 1.4, 10.4], 'k-', lw=1.0)
+arr(ax, 5.4, 10.4, 6.3, 10.4)
+ax.text(4.5, 1.6, 'pass', fontsize=8)
+
+# loop backs
+ax.plot([0.8, 0.1, 0.1], [4.4, 4.4, 5.9], 'k-', lw=1.0)
+arr(ax, 0.1, 5.9, 0.8, 5.9)
+ax.text(0.15, 4.6, 'fail', fontsize=8)
+ax.plot([9.7, 11.2, 11.2], [7.4, 7.4, 11.6], 'k-', lw=1.0)
+ax.plot([11.2, 2.5], [11.6, 11.6], 'k-', lw=1.0)
+arr(ax, 2.5, 11.6, 2.5, 10.9)
+ax.text(10.3, 7.6, 'fail', fontsize=8)
+
+ax.set_xlim(-0.4, 12.4)
+ax.set_ylim(0.6, 12.2)
+ax.axis('off')
+plt.tight_layout()
+plt.show()
+```

@@ -1,0 +1,62 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-stdcell-layout
+#| echo: false
+#| fig-cap: "Typical layout organization of a standard cell (shown: an inverter): fixed cell height with horizontal $V_\\mathrm{DD}$/$V_\\mathrm{SS}$ rails in `M1` at top and bottom, the n-well with the PMOS in the upper half, the NMOS in the lower half, a shared vertical poly gate as input, and the output on `M1`."
+
+import matplotlib.pyplot as plt
+from pyutil import laygen as lg
+
+fig, ax = plt.subplots(figsize=(5, 4.6))
+
+# n-well upper half
+lg.rect(ax, 'NW', -0.6, 3.4, 6.8, 3.4)
+# power rails merged with the source stubs (one polygon per supply net)
+lg.poly(ax, 'M1', [(-0.6, 7.0), (6.2, 7.0), (6.2, 6.2), (2.15, 6.2),
+                   (2.15, 4.55), (1.45, 4.55), (1.45, 6.2), (-0.6, 6.2)])
+lg.poly(ax, 'M1', [(-0.6, -0.8), (6.2, -0.8), (6.2, 0.0), (2.15, 0.0),
+                   (2.15, 1.45), (1.45, 1.45), (1.45, 0.0), (-0.6, 0.0)])
+# PMOS active + BP
+lg.rect(ax, 'BP', 1.0, 3.9, 3.6, 2.0)
+lg.rect(ax, 'RX', 1.4, 4.2, 2.8, 1.4)
+# NMOS active
+lg.rect(ax, 'RX', 1.4, 0.6, 2.8, 1.1)
+# shared poly gate
+lg.rect(ax, 'PC', 2.55, 0.0, 0.5, 6.1)
+# contacts
+lg.contacts(ax, 1.6, 4.7, 1, 1, size=0.4)
+lg.contacts(ax, 3.7, 4.7, 1, 1, size=0.4)
+lg.contacts(ax, 1.6, 0.9, 1, 1, size=0.4)
+lg.contacts(ax, 3.7, 0.9, 1, 1, size=0.4)
+# output connection (single strip: PMOS drain to NMOS drain)
+lg.rect(ax, 'M1', 3.55, 0.75, 0.7, 4.5)
+# input pin marker
+lg.contacts(ax, 2.6, 2.6, 1, 1, size=0.4)
+lg.rect(ax, 'M1', 2.45, 2.45, 0.7, 0.7)
+
+ax.text(6.5, 6.6, '$V_\\mathrm{DD}$ rail', fontsize=8, va='center')
+ax.text(6.5, -0.4, '$V_\\mathrm{SS}$ rail', fontsize=8, va='center')
+ax.text(6.5, 4.9, 'PMOS', fontsize=8, va='center')
+ax.text(6.5, 1.1, 'NMOS', fontsize=8, va='center')
+ax.text(2.8, -1.4, 'input (poly)', fontsize=8, ha='center')
+ax.text(4.6, 3.0, 'output', fontsize=8)
+
+lg.finish(ax, (-1.0, 9.4), (-1.8, 7.6))
+plt.tight_layout()
+plt.show()
+```
