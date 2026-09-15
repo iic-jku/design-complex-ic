@@ -163,7 +163,7 @@ For analog test parameters, the variation over production must stay inside the *
 
 ## Process Capability Index {#sec-testing-cpk}
 
-To manufacture within a specification, the difference between the USL and the LSL must be greater than the total process variation, and the distribution should be well centered between the limits. One way to check this is the $C_\mathrm{p}$/$C_\mathrm{pk}$ analysis. Given a parameter distribution $x_i$ from a sample of size $N$, the arithmetic mean and the standard deviation are
+To manufacture within a specification, the difference between the USL and the LSL must be greater than the total process variation, and the distribution should be well centered between the limits. One way to check this is the $C_\mathrm{p}$/$C_\mathrm{pk}$ analysis [@Montgomery_SQC]. Given a parameter distribution $x_i$ from a sample of size $N$, the arithmetic mean and the standard deviation are
 
 $$
 \overline{X} = \frac{1}{N} \sum_{i=1}^{N} x_i
