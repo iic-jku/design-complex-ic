@@ -40,3 +40,4 @@ format:
 {{< include /content/layout/_sec_layout.qmd >}}
 {{< include /content/packaging/_sec_packaging.qmd >}}
 {{< include /content/testing/_sec_testing.qmd >}}
+{{< include /content/economy/_sec_economy.qmd >}}

@@ -1,0 +1,150 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# Economy of Integrated Circuits {#sec-economy}
+
+The manufacturing of ICs is a large-scale business, requiring significant investment in research and development, and usually large volumes are built and sold. It is therefore rewarding to take a look at the economics of integrated circuits.
+
+## Selling Price and Total Cost {#sec-economy-price}
+
+The selling price $S_\mathrm{tot}$ of a good depends on the achievable profit margin $m$ and the total cost of the product $C_\mathrm{tot}$:
+
+$$
+S_\mathrm{tot} = \frac{C_\mathrm{tot}}{1 - m}
+$$ {#eq-selling-price}
+
+| Profit margin | Selling price |
+|:---:|:---:|
+| 30 % | $S_\mathrm{tot} \approx 1.4 \cdot C_\mathrm{tot}$ |
+| 50 % | $S_\mathrm{tot} = 2 \cdot C_\mathrm{tot}$ |
+| 70 % | $S_\mathrm{tot} \approx 3.3 \cdot C_\mathrm{tot}$ |
+: Impact of the profit margin on the required selling price {#tbl-margin}
+
+The total cost $C_\mathrm{tot}$ of a product consists of the [**non-recurring engineering cost (NRE)**](https://en.wikipedia.org/wiki/Non-recurring_engineering) $F'_\mathrm{tot}$ plus other fixed costs $F''_\mathrm{tot}$ (together $F_\mathrm{tot} = F'_\mathrm{tot} + F''_\mathrm{tot}$), and the **recurring cost** $R_\mathrm{tot}$. The recurring cost is incurred per IC, whereas NRE and fixed costs relate to the whole project; their impact on the cost per piece thus depends on the number of pieces sold, $N_\mathrm{sold}$:
+
+$$
+C_\mathrm{tot} = R_\mathrm{tot} + \frac{F_\mathrm{tot}}{N_\mathrm{sold}}
+$$ {#eq-total-cost}
+
+## Non-Recurring Engineering Cost {#sec-economy-nre}
+
+The NRE consists of the engineering cost $E_\mathrm{tot}$, the prototype cost $P_\mathrm{tot}$, and the cost of licensed IP blocks $I_\mathrm{tot}$:
+
+$$
+F'_\mathrm{tot} = E_\mathrm{tot} + P_\mathrm{tot} + I_\mathrm{tot}
+$$ {#eq-nre}
+
+**Engineering cost:** $E_\mathrm{tot}$ depends on the size of the design team (architecture, design, simulation, layout, timing, DRC & tapeout, test). It includes salaries, benefits, training, computers, and CAD tool licenses. License costs can be substantial in IC design; approximate yearly costs per seat are \$10k/yr for a digital front-end seat, \$1M/yr for a digital back-end seat, and \$100k/yr for an analog front-/back-end seat.
+
+**Prototype cost:** The mask cost depends heavily on the process technology and the used technology options (e.g., additional $\Vth$ flavors, analog options like precision resistors or MIM capacitors), which drive up the number of masking steps; see @tbl-mask-cost. A [**multi-project wafer (MPW)**](https://en.wikipedia.org/wiki/Multi-project_wafer_service), where multiple designs share a single reticle and thus the share also the mask cost, is a good alternative for prototypes. Also test fixtures (sockets, PCBs) and package tooling belong to $P_\mathrm{tot}$.
+
+| Technology | Estimated mask-set cost |
+|:-----------|:---:|
+| CMOS 180 nm | \$80k |
+| CMOS 28 nm | \$1.5M |
+| CMOS 5 nm | > \$10M |
+: Approximate mask-set costs for different technology nodes {#tbl-mask-cost}
+
+**IP cost:** Large [SoCs](https://en.wikipedia.org/wiki/System_on_a_chip) might require licensing of certain [IP blocks](https://en.wikipedia.org/wiki/Semiconductor_intellectual_property_core) (interfaces, processor cores, memory, etc.); patent licensing might be required as well. Types of licensed IP are:
+
+- **Hard IP:** circuit blocks defined at the mask (layout) and transistor (netlist) level.
+- **Firm IP:** logic-level/register netlist.
+- **Soft IP:** described at the [register-transfer level](https://en.wikipedia.org/wiki/Register-transfer_level) (RTL) in an [HDL](https://en.wikipedia.org/wiki/Hardware_description_language).
+
+Licensed cores must come with documentation, BIST, a test-pattern delivery method, or external test patterns.
+
+**Other fixed costs** $F''_\mathrm{tot}$ include datasheets and application notes, marketing and advertising, and yield analysis and production support.
+
+## Recurring Cost {#sec-economy-recurring}
+
+The recurring cost consists of the fabrication cost per IC, considering the wafer manufacturing, packaging, and test:
+
+$$
+R_\mathrm{tot} = R_\mathrm{die} + R_\mathrm{pack} + R_\mathrm{test}
+$$ {#eq-recurring-cost}
+
+The packaging cost $R_\mathrm{pack}$ depends mainly on the type of package and the packaging yield. The test cost $R_\mathrm{test}$ depends strongly on the type of tester (digital, mixed-signal, RF) and the test time (the duration of the test program including robotic handling); an effective way to reduce test cost is to test several devices in parallel.
+
+### Dice per Wafer
+
+The cost per die depends strongly on the cost per wafer $W$ (on the order of \$500 to \$30,000), the die area $A$, the usable wafer diameter $d$ (nominal wafer diameter minus twice the edge exclusion), and the yield $Y$:
+
+$$
+R_\mathrm{die} = \frac{W}{N \cdot Y}
+$$ {#eq-die-cost}
+
+The edge exclusion (EE) is the ring around the circumference where no functional IC can be placed, typically 2 to 3 mm (we use 2 mm here). The number of dice per wafer can be approximated by ($A$ in mm², $d$ in mm) [@deVries_2005]
+
+$$
+N \approx d \pi \left( \frac{d}{4 A} - \frac{1}{\sqrt{2 A}} \right)
+$$ {#eq-dice-per-wafer}
+
+which is plotted in @fig-die-per-wafer for the standard wafer sizes.
+
+{{< include /content/economy/_fig_die_per_wafer.qmd >}}
+
+### Yield
+
+The [yield](https://en.wikipedia.org/wiki/Semiconductor_device_fabrication#Device_yield) $Y$ is the number of functional dice divided by the total number of dice per wafer ($Y = 50\,\%$ means that half of the produced ICs are defective). Wafer processing incurs a defect density per unit area ($D_0 \approx 0.01$ to $1\,\text{cm}^{-2}$) in the silicon structures—this is why [clean rooms](https://en.wikipedia.org/wiki/Cleanroom) and careful processing are essential. The defect density and the die area are related to the yield by Murphy's model [@Murphy_1964]:
+
+$$
+Y = \left( \frac{1 - e^{- A D_0}}{A D_0} \right)^2 \approx e^{-A D_0}
+$$ {#eq-murphy-yield}
+
+@eq-murphy-yield shows that the die size is also a critical factor for yield! Combining @eq-dice-per-wafer and @eq-murphy-yield yields the number of *good dice per wafer*, depicted in @fig-good-die-per-wafer.
+
+{{< include /content/economy/_fig_good_die_per_wafer.qmd >}}
+
+## An Exemplary Calculation {#sec-economy-example}
+
+::: {#nte-ic-cost .callout-note}
+## IC Cost and Selling Price
+
+Let us calculate the required selling price for an IC using the following assumptions:
+
+| Parameter | Value |
+|:----------|:---:|
+| Wafer cost $W$ for a $d = 200\,\text{mm}$ wafer | \$1500 |
+| Die size $A$ | 15 mm² |
+| Yield $Y$ | 95 % |
+| Targeted gross margin $m$ | 50 % |
+| NRE plus fixed cost $F_\mathrm{tot}$ | \$5M |
+| Package and test cost | \$0.75 |
+
+Using @eq-dice-per-wafer with $d = 196\,\text{mm}$ (2 mm edge exclusion), we get $N \approx 1900$ dice per wafer, and with @eq-die-cost, the cost per die is
+
+$$
+R_\mathrm{die} = \frac{\$1500}{1900 \cdot 0.95} = \$0.83
+$$
+
+The total recurring cost per die is (using @eq-recurring-cost)
+
+$$
+R_\mathrm{tot} = \$0.83 + \$0.75 = \$1.58
+$$
+
+The required selling price is strongly dependent on the number of ICs sold (using @eq-selling-price and @eq-total-cost):
+
+$$
+S_\mathrm{tot} = \frac{1}{1 - m} \left( R_\mathrm{tot} + \frac{F_\mathrm{tot}}{N_\mathrm{sold}} \right) = 2 \left( \$1.58 + \frac{\$5\,\text{M}}{N_\mathrm{sold}} \right)
+$$
+
+The resulting selling price versus sales volume is plotted in @fig-cost-example: in the left region (low volume), the fixed cost $F_\mathrm{tot}$ dominates the selling price, whereas for larger volumes the recurring cost $R_\mathrm{tot}$ becomes crucial.
+
+{{< include /content/economy/_fig_cost_example.qmd >}}
+:::
+
+In the example of @nte-ic-cost, we can clearly see that at low sales volumes, the fixed costs dominate the selling price, whereas at high sales volumes, the selling price approaches twice the recurring cost. Since a fixed-cost dominated IC product is often simply too expensive, it is crucial to achieve sufficient sales volume to make the product economically viable.

@@ -1,0 +1,41 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-die-per-wafer
+#| echo: false
+#| fig-cap: "Number of dice per wafer as a function of the die size, for the standard wafer diameters (2 mm edge exclusion assumed)."
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+A = np.linspace(5, 100, 200)   # die size in mm^2
+
+fig, ax = plt.subplots(figsize=(6, 4))
+for d, style, label in [(146, ':', '150 mm wafer'),
+                        (196, '--', '200 mm wafer'),
+                        (296, '-', '300 mm wafer')]:
+    N = d * np.pi * (d / (4 * A) - 1 / np.sqrt(2 * A))
+    ax.semilogy(A, N, style, color='tab:blue', lw=2, label=label)
+
+ax.set_xlabel('Die size $A$ (mm²)')
+ax.set_ylabel('Dice per wafer $N$')
+ax.set_ylim(100, 100000)
+ax.grid(True, which='both', alpha=0.3)
+ax.legend(fontsize=9)
+plt.tight_layout()
+plt.show()
+```
