@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
-<meta name="dcterms.date" content="2026-09-13">
+<meta name="dcterms.date" content="2026-09-15">
 
 <title>Design of Complex Integrated Circuits</title>
 <style>
@@ -519,6 +519,35 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-testing-cpk" id="toc-sec-testing-cpk" class="nav-link" data-scroll-target="#sec-testing-cpk"><span class="header-section-number">6.6</span> Process Capability Index</a></li>
   </ul></li>
+  <li><a href="#sec-economy" id="toc-sec-economy" class="nav-link" data-scroll-target="#sec-economy"><span class="header-section-number">7</span> Economy of Integrated Circuits</a>
+  <ul class="collapse">
+  <li><a href="#sec-economy-price" id="toc-sec-economy-price" class="nav-link" data-scroll-target="#sec-economy-price"><span class="header-section-number">7.1</span> Selling Price and Total Cost</a></li>
+  <li><a href="#sec-economy-nre" id="toc-sec-economy-nre" class="nav-link" data-scroll-target="#sec-economy-nre"><span class="header-section-number">7.2</span> Non-Recurring Engineering Cost</a></li>
+  <li><a href="#sec-economy-recurring" id="toc-sec-economy-recurring" class="nav-link" data-scroll-target="#sec-economy-recurring"><span class="header-section-number">7.3</span> Recurring Cost</a>
+  <ul class="collapse">
+  <li><a href="#dice-per-wafer" id="toc-dice-per-wafer" class="nav-link" data-scroll-target="#dice-per-wafer"><span class="header-section-number">7.3.1</span> Dice per Wafer</a></li>
+  <li><a href="#yield" id="toc-yield" class="nav-link" data-scroll-target="#yield"><span class="header-section-number">7.3.2</span> Yield</a></li>
+  </ul></li>
+  <li><a href="#sec-economy-example" id="toc-sec-economy-example" class="nav-link" data-scroll-target="#sec-economy-example"><span class="header-section-number">7.4</span> An Exemplary Calculation</a></li>
+  </ul></li>
+  <li><a href="#sec-methodology" id="toc-sec-methodology" class="nav-link" data-scroll-target="#sec-methodology"><span class="header-section-number">8</span> Design Methodology</a>
+  <ul class="collapse">
+  <li><a href="#sec-methodology-y" id="toc-sec-methodology-y" class="nav-link" data-scroll-target="#sec-methodology-y"><span class="header-section-number">8.1</span> The Y-Diagram</a></li>
+  <li><a href="#sec-methodology-choices" id="toc-sec-methodology-choices" class="nav-link" data-scroll-target="#sec-methodology-choices"><span class="header-section-number">8.2</span> Digital Implementation Choices</a></li>
+  <li><a href="#sec-methodology-cells" id="toc-sec-methodology-cells" class="nav-link" data-scroll-target="#sec-methodology-cells"><span class="header-section-number">8.3</span> Cell-Based Design</a>
+  <ul class="collapse">
+  <li><a href="#standard-cell-library" id="toc-standard-cell-library" class="nav-link" data-scroll-target="#standard-cell-library"><span class="header-section-number">8.3.1</span> Standard Cell Library</a></li>
+  <li><a href="#hard-macros" id="toc-hard-macros" class="nav-link" data-scroll-target="#hard-macros"><span class="header-section-number">8.3.2</span> Hard Macros</a></li>
+  </ul></li>
+  <li><a href="#sec-methodology-flow" id="toc-sec-methodology-flow" class="nav-link" data-scroll-target="#sec-methodology-flow"><span class="header-section-number">8.4</span> The Semicustom Design Flow</a>
+  <ul class="collapse">
+  <li><a href="#rtl-synthesis" id="toc-rtl-synthesis" class="nav-link" data-scroll-target="#rtl-synthesis"><span class="header-section-number">8.4.1</span> RTL Synthesis</a></li>
+  <li><a href="#standard-cell-place-and-route" id="toc-standard-cell-place-and-route" class="nav-link" data-scroll-target="#standard-cell-place-and-route"><span class="header-section-number">8.4.2</span> Standard-Cell Place and Route</a></li>
+  <li><a href="#the-open-source-rtl-to-gds-flow" id="toc-the-open-source-rtl-to-gds-flow" class="nav-link" data-scroll-target="#the-open-source-rtl-to-gds-flow"><span class="header-section-number">8.4.3</span> The Open-Source RTL-to-GDS Flow</a></li>
+  </ul></li>
+  <li><a href="#sec-methodology-custom" id="toc-sec-methodology-custom" class="nav-link" data-scroll-target="#sec-methodology-custom"><span class="header-section-number">8.5</span> The Mixed-Signal/Custom Flow</a></li>
+  <li><a href="#sec-methodology-fpga" id="toc-sec-methodology-fpga" class="nav-link" data-scroll-target="#sec-methodology-fpga"><span class="header-section-number">8.6</span> FPGAs</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dcic.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -554,7 +583,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 13, 2026</p>
+      <p class="date">September 15, 2026</p>
     </div>
   </div>
   
@@ -2569,7 +2598,7 @@ Figure&nbsp;44: Metal-oxide-metal (MOM) capacitors: (a) vertical sandwich capaci
 </section>
 <section id="diodes" class="level3" data-number="4.3.5">
 <h3 data-number="4.3.5" class="anchored" data-anchor-id="diodes"><span class="header-section-number">4.3.5</span> Diodes</h3>
-<p>Diodes are formed by the available pn-junctions (<span class="math inline">\(n^+\)</span> in substrate, <span class="math inline">\(p^+\)</span> in n-well, n-well in substrate). They are intended mainly for reverse-biased operation, as the forward operation is usually not modeled accurately and should be avoided. Note that forward operation might inject charge into parasitic structures and cause latch-up (see the latch-up chapter)! Applications of reverse-biased diodes include ESD protection structures, antenna diodes, and varactors.</p>
+<p>Diodes are formed by the available pn-junctions (<span class="math inline">\(n^+\)</span> in substrate, <span class="math inline">\(p^+\)</span> in n-well, n-well in substrate). They are intended mainly for reverse-biased operation, as the forward operation is usually not modeled accurately and should be avoided. Note that forward operation might inject charge into parasitic structures and cause latch-up (see <strong>?@sec-latchup</strong>)! Applications of reverse-biased diodes include ESD protection structures, antenna diodes, and varactors.</p>
 </section>
 <section id="bipolar-junction-transistors" class="level3" data-number="4.3.6">
 <h3 data-number="4.3.6" class="anchored" data-anchor-id="bipolar-junction-transistors"><span class="header-section-number">4.3.6</span> Bipolar Junction Transistors</h3>
@@ -3401,7 +3430,7 @@ Figure&nbsp;67: Mixed-signal AC parametric test setup: an arbitrary waveform gen
 </section>
 <section id="sec-testing-cpk" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="sec-testing-cpk"><span class="header-section-number">6.6</span> Process Capability Index</h2>
-<p>To manufacture within a specification, the difference between the USL and the LSL must be greater than the total process variation, and the distribution should be well centered between the limits. One way to check this is the <span class="math inline">\(C_\mathrm{p}\)</span>/<span class="math inline">\(C_\mathrm{pk}\)</span> analysis. Given a parameter distribution <span class="math inline">\(x_i\)</span> from a sample of size <span class="math inline">\(N\)</span>, the arithmetic mean and the standard deviation are</p>
+<p>To manufacture within a specification, the difference between the USL and the LSL must be greater than the total process variation, and the distribution should be well centered between the limits. One way to check this is the <span class="math inline">\(C_\mathrm{p}\)</span>/<span class="math inline">\(C_\mathrm{pk}\)</span> analysis <span class="citation" data-cites="Montgomery_SQC">(<a href="#ref-Montgomery_SQC" role="doc-biblioref">Montgomery 2012</a>)</span>. Given a parameter distribution <span class="math inline">\(x_i\)</span> from a sample of size <span class="math inline">\(N\)</span>, the arithmetic mean and the standard deviation are</p>
 <p><span class="math display">\[
 \overline{X} = \frac{1}{N} \sum_{i=1}^{N} x_i
 \qquad
@@ -3431,6 +3460,463 @@ Figure&nbsp;68: Process capability: (a) a well-centered distribution with small 
 </div>
 </div>
 <p>The advantage of using the <span class="math inline">\(C_\mathrm{p}\)</span>/<span class="math inline">\(C_\mathrm{pk}\)</span> analysis is that it provides a <em>quantitative</em> measure of both the process spread and the centering of the distribution relative to the specification limits. This helps in automatically identifying whether the process is capable of consistently producing parts within the desired specifications and whether any adjustments are needed to improve yield and quality with just two numbers: <span class="math inline">\(C_\mathrm{p}\)</span> and <span class="math inline">\(C_\mathrm{pk}\)</span>. Manual inspection of the distribution alone may not reveal subtle misalignments or variations that could impact production quality and can be extremely time consuming and error prone.</p>
+</section>
+</section>
+<section id="sec-economy" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Economy of Integrated Circuits</h1>
+<p>The manufacturing of ICs is a large-scale business, requiring significant investment in research and development, and usually large volumes are built and sold. It is therefore rewarding to take a look at the economics of integrated circuits.</p>
+<section id="sec-economy-price" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="sec-economy-price"><span class="header-section-number">7.1</span> Selling Price and Total Cost</h2>
+<p>The selling price <span class="math inline">\(S_\mathrm{tot}\)</span> of a good depends on the achievable profit margin <span class="math inline">\(m\)</span> and the total cost of the product <span class="math inline">\(C_\mathrm{tot}\)</span>:</p>
+<p><span id="eq-selling-price"><span class="math display">\[
+S_\mathrm{tot} = \frac{C_\mathrm{tot}}{1 - m}
+\tag{57}\]</span></span></p>
+<div id="tbl-margin" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-margin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11: Impact of the profit margin on the required selling price
+</figcaption>
+<div aria-describedby="tbl-margin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Profit margin</th>
+<th style="text-align: center;">Selling price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">30 %</td>
+<td style="text-align: center;"><span class="math inline">\(S_\mathrm{tot} \approx 1.4 \cdot C_\mathrm{tot}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">50 %</td>
+<td style="text-align: center;"><span class="math inline">\(S_\mathrm{tot} = 2 \cdot C_\mathrm{tot}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">70 %</td>
+<td style="text-align: center;"><span class="math inline">\(S_\mathrm{tot} \approx 3.3 \cdot C_\mathrm{tot}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The total cost <span class="math inline">\(C_\mathrm{tot}\)</span> of a product consists of the <a href="https://en.wikipedia.org/wiki/Non-recurring_engineering"><strong>non-recurring engineering cost (NRE)</strong></a> <span class="math inline">\(F'_\mathrm{tot}\)</span> plus other fixed costs <span class="math inline">\(F''_\mathrm{tot}\)</span> (together <span class="math inline">\(F_\mathrm{tot} = F'_\mathrm{tot} + F''_\mathrm{tot}\)</span>), and the <strong>recurring cost</strong> <span class="math inline">\(R_\mathrm{tot}\)</span>. The recurring cost is incurred per IC, whereas NRE and fixed costs relate to the whole project; their impact on the cost per piece thus depends on the number of pieces sold, <span class="math inline">\(N_\mathrm{sold}\)</span>:</p>
+<p><span id="eq-total-cost"><span class="math display">\[
+C_\mathrm{tot} = R_\mathrm{tot} + \frac{F_\mathrm{tot}}{N_\mathrm{sold}}
+\tag{58}\]</span></span></p>
+</section>
+<section id="sec-economy-nre" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="sec-economy-nre"><span class="header-section-number">7.2</span> Non-Recurring Engineering Cost</h2>
+<p>The NRE consists of the engineering cost <span class="math inline">\(E_\mathrm{tot}\)</span>, the prototype cost <span class="math inline">\(P_\mathrm{tot}\)</span>, and the cost of licensed IP blocks <span class="math inline">\(I_\mathrm{tot}\)</span>:</p>
+<p><span id="eq-nre"><span class="math display">\[
+F'_\mathrm{tot} = E_\mathrm{tot} + P_\mathrm{tot} + I_\mathrm{tot}
+\tag{59}\]</span></span></p>
+<p><strong>Engineering cost:</strong> <span class="math inline">\(E_\mathrm{tot}\)</span> depends on the size of the design team (architecture, design, simulation, layout, timing, DRC &amp; tapeout, test). It includes salaries, benefits, training, computers, and CAD tool licenses. License costs can be substantial in IC design; approximate yearly costs per seat are $10k/yr for a digital front-end seat, $1M/yr for a digital back-end seat, and $100k/yr for an analog front-/back-end seat.</p>
+<p><strong>Prototype cost:</strong> The mask cost depends heavily on the process technology and the used technology options (e.g., additional <span class="math inline">\(V_\mathrm{th}\)</span> flavors, analog options like precision resistors or MIM capacitors), which drive up the number of masking steps; see <a href="#tbl-mask-cost" class="quarto-xref">Table&nbsp;12</a>. A <a href="https://en.wikipedia.org/wiki/Multi-project_wafer_service"><strong>multi-project wafer (MPW)</strong></a>, where multiple designs share a single reticle and thus the share also the mask cost, is a good alternative for prototypes. Also test fixtures (sockets, PCBs) and package tooling belong to <span class="math inline">\(P_\mathrm{tot}\)</span>.</p>
+<div id="tbl-mask-cost" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mask-cost-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;12: Approximate mask-set costs for different technology nodes
+</figcaption>
+<div aria-describedby="tbl-mask-cost-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Technology</th>
+<th style="text-align: center;">Estimated mask-set cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CMOS 180 nm</td>
+<td style="text-align: center;">$80k</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CMOS 28 nm</td>
+<td style="text-align: center;">$1.5M</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CMOS 5 nm</td>
+<td style="text-align: center;">&gt; $10M</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><strong>IP cost:</strong> Large <a href="https://en.wikipedia.org/wiki/System_on_a_chip">SoCs</a> might require licensing of certain <a href="https://en.wikipedia.org/wiki/Semiconductor_intellectual_property_core">IP blocks</a> (interfaces, processor cores, memory, etc.); patent licensing might be required as well. Types of licensed IP are:</p>
+<ul>
+<li><strong>Hard IP:</strong> circuit blocks defined at the mask (layout) and transistor (netlist) level.</li>
+<li><strong>Firm IP:</strong> logic-level/register netlist.</li>
+<li><strong>Soft IP:</strong> described at the <a href="https://en.wikipedia.org/wiki/Register-transfer_level">register-transfer level</a> (RTL) in an <a href="https://en.wikipedia.org/wiki/Hardware_description_language">HDL</a>.</li>
+</ul>
+<p>Licensed cores must come with documentation, BIST, a test-pattern delivery method, or external test patterns.</p>
+<p><strong>Other fixed costs</strong> <span class="math inline">\(F''_\mathrm{tot}\)</span> include datasheets and application notes, marketing and advertising, and yield analysis and production support.</p>
+</section>
+<section id="sec-economy-recurring" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="sec-economy-recurring"><span class="header-section-number">7.3</span> Recurring Cost</h2>
+<p>The recurring cost consists of the fabrication cost per IC, considering the wafer manufacturing, packaging, and test:</p>
+<p><span id="eq-recurring-cost"><span class="math display">\[
+R_\mathrm{tot} = R_\mathrm{die} + R_\mathrm{pack} + R_\mathrm{test}
+\tag{60}\]</span></span></p>
+<p>The packaging cost <span class="math inline">\(R_\mathrm{pack}\)</span> depends mainly on the type of package and the packaging yield. The test cost <span class="math inline">\(R_\mathrm{test}\)</span> depends strongly on the type of tester (digital, mixed-signal, RF) and the test time (the duration of the test program including robotic handling); an effective way to reduce test cost is to test several devices in parallel.</p>
+<section id="dice-per-wafer" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="dice-per-wafer"><span class="header-section-number">7.3.1</span> Dice per Wafer</h3>
+<p>The cost per die depends strongly on the cost per wafer <span class="math inline">\(W\)</span> (on the order of $500 to $30,000), the die area <span class="math inline">\(A\)</span>, the usable wafer diameter <span class="math inline">\(d\)</span> (nominal wafer diameter minus twice the edge exclusion), and the yield <span class="math inline">\(Y\)</span>:</p>
+<p><span id="eq-die-cost"><span class="math display">\[
+R_\mathrm{die} = \frac{W}{N \cdot Y}
+\tag{61}\]</span></span></p>
+<p>The edge exclusion (EE) is the ring around the circumference where no functional IC can be placed, typically 2 to 3 mm (we use 2 mm here). The number of dice per wafer can be approximated by (<span class="math inline">\(A\)</span> in mm², <span class="math inline">\(d\)</span> in mm) <span class="citation" data-cites="deVries_2005">(<a href="#ref-deVries_2005" role="doc-biblioref">Vries 2005</a>)</span></p>
+<p><span id="eq-dice-per-wafer"><span class="math display">\[
+N \approx d \pi \left( \frac{d}{4 A} - \frac{1}{\sqrt{2 A}} \right)
+\tag{62}\]</span></span></p>
+<p>which is plotted in <a href="#fig-die-per-wafer" class="quarto-xref">Figure&nbsp;69</a> for the standard wafer sizes.</p>
+<div id="cell-fig-die-per-wafer" class="cell" data-execution_count="68">
+<div class="cell-output cell-output-display">
+<div id="fig-die-per-wafer" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-die-per-wafer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-die-per-wafer-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-69" title="Figure&nbsp;69: Number of dice per wafer as a function of the die size, for the standard wafer diameters (2 mm edge exclusion assumed)."><img src="dcic_files/figure-html/fig-die-per-wafer-output-1.png" width="565" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-die-per-wafer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;69: Number of dice per wafer as a function of the die size, for the standard wafer diameters (2 mm edge exclusion assumed).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="yield" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="yield"><span class="header-section-number">7.3.2</span> Yield</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/Semiconductor_device_fabrication#Device_yield">yield</a> <span class="math inline">\(Y\)</span> is the number of functional dice divided by the total number of dice per wafer (<span class="math inline">\(Y = 50\,\%\)</span> means that half of the produced ICs are defective). Wafer processing incurs a defect density per unit area (<span class="math inline">\(D_0 \approx 0.01\)</span> to <span class="math inline">\(1\,\text{cm}^{-2}\)</span>) in the silicon structures—this is why <a href="https://en.wikipedia.org/wiki/Cleanroom">clean rooms</a> and careful processing are essential. The defect density and the die area are related to the yield by Murphy’s model <span class="citation" data-cites="Murphy_1964">(<a href="#ref-Murphy_1964" role="doc-biblioref">Murphy 1964</a>)</span>:</p>
+<p><span id="eq-murphy-yield"><span class="math display">\[
+Y = \left( \frac{1 - e^{- A D_0}}{A D_0} \right)^2 \approx e^{-A D_0}
+\tag{63}\]</span></span></p>
+<p><a href="#eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a> shows that the die size is also a critical factor for yield! Combining <a href="#eq-dice-per-wafer" class="quarto-xref">Equation&nbsp;62</a> and <a href="#eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a> yields the number of <em>good dice per wafer</em>, depicted in <a href="#fig-good-die-per-wafer" class="quarto-xref">Figure&nbsp;70</a>.</p>
+<div id="cell-fig-good-die-per-wafer" class="cell" data-execution_count="69">
+<div class="cell-output cell-output-display">
+<div id="fig-good-die-per-wafer" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-good-die-per-wafer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-good-die-per-wafer-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-70" title="Figure&nbsp;70: Good dice per wafer versus die size for a 300 mm wafer (2 mm edge exclusion) and two defect densities, using the simplified Murphy yield model of Equation&nbsp;63."><img src="dcic_files/figure-html/fig-good-die-per-wafer-output-1.png" width="565" height="374" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-good-die-per-wafer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;70: Good dice per wafer versus die size for a 300 mm wafer (2 mm edge exclusion) and two defect densities, using the simplified Murphy yield model of <a href="#eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-economy-example" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="sec-economy-example"><span class="header-section-number">7.4</span> An Exemplary Calculation</h2>
+<div id="nte-ic-cost" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note&nbsp;5: IC Cost and Selling Price
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let us calculate the required selling price for an IC using the following assumptions:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: center;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Wafer cost <span class="math inline">\(W\)</span> for a <span class="math inline">\(d = 200\,\text{mm}\)</span> wafer</td>
+<td style="text-align: center;">$1500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Die size <span class="math inline">\(A\)</span></td>
+<td style="text-align: center;">15 mm²</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Yield <span class="math inline">\(Y\)</span></td>
+<td style="text-align: center;">95 %</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Targeted gross margin <span class="math inline">\(m\)</span></td>
+<td style="text-align: center;">50 %</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NRE plus fixed cost <span class="math inline">\(F_\mathrm{tot}\)</span></td>
+<td style="text-align: center;">$5M</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Package and test cost</td>
+<td style="text-align: center;">$0.75</td>
+</tr>
+</tbody>
+</table>
+<p>Using <a href="#eq-dice-per-wafer" class="quarto-xref">Equation&nbsp;62</a> with <span class="math inline">\(d = 196\,\text{mm}\)</span> (2 mm edge exclusion), we get <span class="math inline">\(N \approx 1900\)</span> dice per wafer, and with <a href="#eq-die-cost" class="quarto-xref">Equation&nbsp;61</a>, the cost per die is</p>
+<p><span class="math display">\[
+R_\mathrm{die} = \frac{\$1500}{1900 \cdot 0.95} = \$0.83
+\]</span></p>
+<p>The total recurring cost per die is (using <a href="#eq-recurring-cost" class="quarto-xref">Equation&nbsp;60</a>)</p>
+<p><span class="math display">\[
+R_\mathrm{tot} = \$0.83 + \$0.75 = \$1.58
+\]</span></p>
+<p>The required selling price is strongly dependent on the number of ICs sold (using <a href="#eq-selling-price" class="quarto-xref">Equation&nbsp;57</a> and <a href="#eq-total-cost" class="quarto-xref">Equation&nbsp;58</a>):</p>
+<p><span class="math display">\[
+S_\mathrm{tot} = \frac{1}{1 - m} \left( R_\mathrm{tot} + \frac{F_\mathrm{tot}}{N_\mathrm{sold}} \right) = 2 \left( \$1.58 + \frac{\$5\,\text{M}}{N_\mathrm{sold}} \right)
+\]</span></p>
+<p>The resulting selling price versus sales volume is plotted in <a href="#fig-cost-example" class="quarto-xref">Figure&nbsp;71</a>: in the left region (low volume), the fixed cost <span class="math inline">\(F_\mathrm{tot}\)</span> dominates the selling price, whereas for larger volumes the recurring cost <span class="math inline">\(R_\mathrm{tot}\)</span> becomes crucial.</p>
+<div id="cell-fig-cost-example" class="cell" data-execution_count="70">
+<div class="cell-output cell-output-display">
+<div id="fig-cost-example" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cost-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-cost-example-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-71" title="Figure&nbsp;71: Required selling price versus sales volume for this exemplary IC: at low volumes, the fixed costs dominate; at high volumes, the price approaches twice the recurring cost."><img src="dcic_files/figure-html/fig-cost-example-output-1.png" width="567" height="373" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cost-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;71: Required selling price versus sales volume for this exemplary IC: at low volumes, the fixed costs dominate; at high volumes, the price approaches twice the recurring cost.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>In the example of <a href="#nte-ic-cost" class="quarto-xref">Note&nbsp;5</a>, we can clearly see that at low sales volumes, the fixed costs dominate the selling price, whereas at high sales volumes, the selling price approaches twice the recurring cost. Since a fixed-cost dominated IC product is often simply too expensive, it is crucial to achieve sufficient sales volume to make the product economically viable.</p>
+</section>
+</section>
+<section id="sec-methodology" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Design Methodology</h1>
+<p>In this chapter, basic knowledge of digital and analog circuit design is assumed; we discuss IC-specific design methodology topics which are usually not covered in entry-level courses. A comprehensive treatment of digital VLSI design and its methodology is given in <span class="citation" data-cites="Weste_CMOS">(<a href="#ref-Weste_CMOS" role="doc-biblioref">Weste and Harris 2011</a>)</span>. We first introduce a mental model of the design space (the Y-diagram), then survey the available implementation styles and their trade-offs, and finally walk through the concrete design flows—the digital semicustom flow and the analog/mixed-signal custom flow—illustrated throughout with open-source EDA tools.</p>
+<section id="sec-methodology-y" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="sec-methodology-y"><span class="header-section-number">8.1</span> The Y-Diagram</h2>
+<p>A useful mental model for IC design is the <a href="https://en.wikipedia.org/wiki/Gajski%E2%80%93Kuhn_chart"><strong>Y-diagram</strong></a> <span class="citation" data-cites="Gajski_Kuhn_1983">(<a href="#ref-Gajski_Kuhn_1983" role="doc-biblioref">Gajski and Kuhn 1983</a>)</span>, shown in <a href="#fig-y-diagram" class="quarto-xref">Figure&nbsp;72</a>. A design can be described in three domains—<strong>behavioral</strong> (what the circuit does), <strong>structural</strong> (which components it is composed of), and <strong>physical</strong> (how it is arranged geometrically)—each represented by one axis of the “Y”. Orthogonal to the domains are several <strong>levels of abstraction</strong>, drawn as concentric rings: from the system level on the outer rings, through the register-transfer and logic levels, down to the transistor (circuit) level in the center. Any design representation is thus a point on one of the three axes at a given abstraction ring. A <strong>design step</strong> is a transformation between these representations, typically moving from one domain to another and towards lower abstraction (inner rings): for example, <a href="https://en.wikipedia.org/wiki/Logic_synthesis">logic synthesis</a> transforms a behavioral description (RTL) into a structural one (gate-level netlist), and <a href="https://en.wikipedia.org/wiki/Place_and_route">place-and-route</a> transforms the structural netlist into physical layout. Synthesis steps move inward (refining detail), while abstraction or extraction steps move outward.</p>
+<div id="cell-fig-y-diagram" class="cell" data-execution_count="71">
+<div class="cell-output cell-output-display">
+<div id="fig-y-diagram" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-y-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-y-diagram-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-72" title="Figure&nbsp;72: The Y-diagram (after Gajski-Kuhn): a design can be described in the behavioral, structural, and physical domain, on abstraction levels ranging from the system level (outer ring) to the transistor level (center)."><img src="dcic_files/figure-html/fig-y-diagram-output-1.png" width="662" height="502" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-y-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;72: The Y-diagram (after Gajski-Kuhn): a design can be described in the behavioral, structural, and physical domain, on abstraction levels ranging from the system level (outer ring) to the transistor level (center).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-methodology-choices" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="sec-methodology-choices"><span class="header-section-number">8.2</span> Digital Implementation Choices</h2>
+<p><a href="#fig-impl-choices" class="quarto-xref">Figure&nbsp;73</a> shows the taxonomy of digital circuit implementation approaches, from fully custom design to semicustom cell-based and array-based styles.</p>
+<div id="cell-fig-impl-choices" class="cell" data-execution_count="72">
+<div class="cell-output cell-output-display">
+<div id="fig-impl-choices" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-impl-choices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-impl-choices-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-73" title="Figure&nbsp;73: Taxonomy of digital circuit implementation approaches: custom design versus semicustom design, the latter split into cell-based (standard cells, macro cells) and array-based (pre-diffused gate arrays, pre-wired FPGAs) styles."><img src="dcic_files/figure-html/fig-impl-choices-output-1.png" width="758" height="336" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-impl-choices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;73: Taxonomy of digital circuit implementation approaches: custom design versus semicustom design, the latter split into cell-based (standard cells, macro cells) and array-based (pre-diffused gate arrays, pre-wired FPGAs) styles.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In a <strong>fully custom</strong> design, every transistor and wire is crafted by hand to maximize performance, density, or both; this is worthwhile for analog blocks, high-speed interfaces, or memory bit-cells that are replicated millions of times, but it is slow and labor-intensive. <strong>Semicustom</strong> design instead assembles the circuit from pre-designed and pre-characterized building blocks, trading some area and speed for much shorter design time and lower risk. Semicustom styles fall into two groups: <strong>cell-based</strong> approaches build the design from standard cells and macro cells that are placed and routed (mostly automatically), whereas <strong>array-based</strong> approaches start from a pre-fabricated array of devices (gate arrays) or programmable logic (FPGAs) and customize only the interconnect.</p>
+<p>There usually exists a trade-off between energy efficiency and flexibility:</p>
+<ul>
+<li>Hard-wired logic offers the lowest power consumption, but very little flexibility.</li>
+<li>Software running on a general-purpose CPU is fully flexible, but not power-efficient.</li>
+<li>Software running on a domain-specific processor like a DSP or GPU sits in between.</li>
+</ul>
+<div id="tbl-design-styles" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-design-styles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;13: Energy efficiency versus flexibility of digital design styles
+</figcaption>
+<div aria-describedby="tbl-design-styles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Design style</th>
+<th style="text-align: center;">Energy efficiency</th>
+<th style="text-align: center;">Flexibility</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Hardwired custom logic</td>
+<td style="text-align: center;">high</td>
+<td style="text-align: center;">low</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FPGA</td>
+<td style="text-align: center;">low</td>
+<td style="text-align: center;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Domain-specific processor (e.g., DSP, GPU)</td>
+<td style="text-align: center;">low/mid</td>
+<td style="text-align: center;">mid</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">General-purpose processor (CPU)</td>
+<td style="text-align: center;">low</td>
+<td style="text-align: center;">high</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Given the trade-offs in <a href="#tbl-design-styles" class="quarto-xref">Table&nbsp;13</a>, the architecture of SoCs often involves a careful balance between energy efficiency and flexibility, selecting appropriate implementation approaches for different parts of the system. Often an optimized mix is chosen: fixed-function blocks can be implemented using hard-wired logic for maximum energy efficiency, while programmable blocks can leverage CPUs, DSPs, or domain-specific processors to maintain flexibility with FW updates.</p>
+</section>
+<section id="sec-methodology-cells" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="sec-methodology-cells"><span class="header-section-number">8.3</span> Cell-Based Design</h2>
+<p>Different types of cells can be used when designing ICs:</p>
+<ul>
+<li>A high-level description (e.g., in <a href="https://en.wikipedia.org/wiki/VHDL">VHDL</a> or <a href="https://en.wikipedia.org/wiki/SystemVerilog">SystemVerilog</a>) can be synthesized and automatically placed and routed using <a href="https://en.wikipedia.org/wiki/Standard_cell"><strong>standard logic cells</strong></a>.</li>
+<li><strong>Hard macro modules</strong> (like SRAM or IO cells) can be used to construct larger designs.</li>
+<li><strong>Soft macro modules</strong> (provided as a synthesizable high-level description or RTL) can be integrated as well.</li>
+</ul>
+<section id="standard-cell-library" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="standard-cell-library"><span class="header-section-number">8.3.1</span> Standard Cell Library</h3>
+<p><strong>Standard-cell libraries (SCLs)</strong> are offered by IP vendors or foundries; a detailed treatment of standard cells and semicustom design is given in <span class="citation" data-cites="Smith_ASIC">(<a href="#ref-Smith_ASIC" role="doc-biblioref">Smith 1997</a>)</span>. The following cell types are usually available:</p>
+<ul>
+<li>Logic functions (AND, OR, NAND, NOR, INV, XOR, XNOR) with 2 and more inputs (usually up to 4).</li>
+<li>Complex gates (like combined AND-OR gates, half-adders, bit-shifter cells).</li>
+<li>Auxiliary cells (buffers to balance delays, tie cells to bias n-wells and substrate, decoupling cells, spacers, tri-state buffers, antenna diodes).</li>
+<li>Storage elements (latches, flip-flops).</li>
+</ul>
+<p>The logic cells are available in different <strong>drive strengths</strong> to balance chip area versus propagation delay versus power consumption (active as well as leakage). The cells are thoroughly characterized for timing, power consumption, capacitive load, and leakage versus PVTL (process, voltage, temperature, load), and the results are stored in look-up tables used by the EDA tools.</p>
+<p>As an example, <a href="#fig-nand2-schematic" class="quarto-xref">Figure&nbsp;74</a> shows the transistor-level schematic of a NAND2 standard cell; in the IHP SG13 open PDK, this cell is available in two drive strengths (<a href="https://github.com/IHP-GmbH/IHP-Open-PDK/tree/main/ihp-sg13g2/libs.ref/sg13g2_stdcell"><code>nand2_1</code> and <code>nand2_2</code></a>). Also, various latches and flip-flops are provided, with and without scan-chain support, with optional set and reset, and in different drive strengths (e.g., the scan flip-flop <code>sdfbbp_1</code> with inverted asynchronous set and reset).</p>
+<div id="cell-fig-nand2-schematic" class="cell" data-execution_count="73">
+<div class="cell-output cell-output-display">
+<div id="fig-nand2-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nand2-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-nand2-schematic-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-74" title="Figure&nbsp;74: Transistor-level schematic of a NAND2 standard cell: two parallel PMOS pull-up transistors and two stacked NMOS pull-down transistors. Different drive strengths of the cell simply scale the transistor widths."><img src="dcic_files/figure-html/fig-nand2-schematic-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nand2-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;74: Transistor-level schematic of a NAND2 standard cell: two parallel PMOS pull-up transistors and two stacked NMOS pull-down transistors. Different drive strengths of the cell simply scale the transistor widths.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-stdcell-layout" class="quarto-xref">Figure&nbsp;75</a> shows the typical layout organization of a standard cell: all the cells have a common height, power is distributed on horizontal <span class="math inline">\(V_\mathrm{DD}\)</span>/<span class="math inline">\(V_\mathrm{SS}\)</span> rails at the top and bottom (abutting with the neighbors), the n-well spans the upper half (PMOS devices), and the signal terminals are placed on a routing grid. The height of the cells is fixed to ensure uniformity and ease of placement in rows and is usually given in terms of track height (i.e., the number of routing tracks that fit within the cell height). The width of the cells can vary depending on the complexity and drive strength of the cell, but is based on a grid structure to facilitate routing and alignment with neighboring cells.</p>
+<div id="cell-fig-stdcell-layout" class="cell" data-execution_count="74">
+<div class="cell-output cell-output-display">
+<div id="fig-stdcell-layout" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stdcell-layout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-stdcell-layout-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-75" title="Figure&nbsp;75: Typical layout organization of a standard cell (shown: an inverter): fixed cell height with horizontal V_\mathrm{DD}/V_\mathrm{SS} rails in M1 at top and bottom, the n-well with the PMOS in the upper half, the NMOS in the lower half, a shared vertical poly gate as input, and the output on M1."><img src="dcic_files/figure-html/fig-stdcell-layout-output-1.png" width="470" height="427" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stdcell-layout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;75: Typical layout organization of a standard cell (shown: an inverter): fixed cell height with horizontal <span class="math inline">\(V_\mathrm{DD}\)</span>/<span class="math inline">\(V_\mathrm{SS}\)</span> rails in <code>M1</code> at top and bottom, the n-well with the PMOS in the upper half, the NMOS in the lower half, a shared vertical poly gate as input, and the output on <code>M1</code>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="hard-macros" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="hard-macros"><span class="header-section-number">8.3.2</span> Hard Macros</h3>
+<p>Usually read-only memories (ROM), random-access memories (RAM), and one-time programmable (OTP) memories like e-fuses are available as hard macros, created by <strong>module generators</strong> (“memory compilers”). SRAM generators often provide plenty of options, like the number of rows and columns, with or without repair, built-in self-test (BIST), single- or dual-port, and high-performance or low-leakage variants.</p>
+<p>IO cells (input/output cells for interfacing with the external pins of the chip, providing the necessary voltage level shifting, drive strength, and protection circuitry) are often provided as hard macros as well, for example the <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/tree/main/ihp-sg13g2/libs.ref/sg13g2_io"><code>sg13g2_io</code></a> library in the IHP SG13G2 open PDK. From these IO cells the padring is constructed, which surrounds the core logic and provides the interface to the external pins.</p>
+</section>
+</section>
+<section id="sec-methodology-flow" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="sec-methodology-flow"><span class="header-section-number">8.4</span> The Semicustom Design Flow</h2>
+<p><a href="#fig-semicustom-flow" class="quarto-xref">Figure&nbsp;76</a> shows the semicustom design flow at a high level: the design is captured in an HDL, synthesized to a gate-level netlist, and physically implemented by floorplanning, placement, and routing (RTL2GDS). Simulation accompanies every step (pre-layout simulation of the HDL and the netlist, post-layout simulation with extracted parasitics), and design iterations loop back to earlier stages when timing, power, or functionality goals are not met. The flow is conventionally divided into a <strong>front-end</strong> part, which turns the behavioral description into a verified gate-level netlist, and a <strong>back-end</strong> part, which turns that netlist into manufacturable layout; both are detailed in the following subsections. Because a decision made late in the flow—such as a routing detour that adds delay—can invalidate an assumption made earlier, reaching <strong>design closure</strong>, where timing, power, area, and signal-integrity constraints are met simultaneously, usually takes several of these iterations.</p>
+<div id="cell-fig-semicustom-flow" class="cell" data-execution_count="75">
+<div class="cell-output cell-output-display">
+<div id="fig-semicustom-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-semicustom-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-semicustom-flow-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-76" title="Figure&nbsp;76: High-level semicustom design flow: from design capture in an HDL through logic synthesis, floorplanning, placement, and routing to tapeout. Pre- and post-layout simulations verify the design; failed checks lead to design iterations back to earlier steps."><img src="dcic_files/figure-html/fig-semicustom-flow-output-1.png" width="710" height="643" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-semicustom-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;76: High-level semicustom design flow: from design capture in an HDL through logic synthesis, floorplanning, placement, and routing to tapeout. Pre- and post-layout simulations verify the design; failed checks lead to design iterations back to earlier steps.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="rtl-synthesis" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="rtl-synthesis"><span class="header-section-number">8.4.1</span> RTL Synthesis</h3>
+<p>The front-end part of the flow transforms the behavioral description into a verified gate-level netlist, as shown in <a href="#fig-rtl-flow" class="quarto-xref">Figure&nbsp;77</a>. The behavioral description (VHDL, SystemVerilog) is first verified by simulation; after RTL synthesis and library mapping, the resulting netlist is verified again (by simulation or formal equivalence checking), followed by <a href="https://en.wikipedia.org/wiki/Static_timing_analysis">static timing analysis</a>. Test logic (scan chains, see <a href="#sec-testing-types" class="quarto-xref">Section&nbsp;6.5</a>) is inserted, and the netlist is checked once more, together with a power analysis, before it is handed to physical synthesis. The algorithms behind logic synthesis and optimization are covered in depth in <span class="citation" data-cites="DeMicheli_Synthesis">(<a href="#ref-DeMicheli_Synthesis" role="doc-biblioref">Micheli 1994</a>)</span>. In the open-source flow, the corresponding tools are <code>iverilog</code> or <code>verilator</code> (simulation), <code>yosys</code> (synthesis), <code>abc</code> (logic optimization and mapping), <code>opensta</code> (timing and power analysis), <code>fault</code> (test insertion), and <code>gtkwave</code> (waveform viewing).</p>
+<div id="cell-fig-rtl-flow" class="cell" data-execution_count="76">
+<div class="cell-output cell-output-display">
+<div id="fig-rtl-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rtl-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-rtl-flow-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-77" title="Figure&nbsp;77: RTL synthesis flow with open-source tools: the behavioral description is verified by simulation, synthesized and mapped to the standard-cell library, and re-verified; static timing analysis, test-logic insertion, and power analysis complete the front-end before physical synthesis. Failed checks loop back to the behavioral description."><img src="dcic_files/figure-html/fig-rtl-flow-output-1.png" width="754" height="778" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rtl-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;77: RTL synthesis flow with open-source tools: the behavioral description is verified by simulation, synthesized and mapped to the standard-cell library, and re-verified; static timing analysis, test-logic insertion, and power analysis complete the front-end before physical synthesis. Failed checks loop back to the behavioral description.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="standard-cell-place-and-route" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="standard-cell-place-and-route"><span class="header-section-number">8.4.2</span> Standard-Cell Place and Route</h3>
+<p>The back-end part of the flow, shown in <a href="#fig-pnr-flow" class="quarto-xref">Figure&nbsp;78</a>, turns the netlist into manufacturable layout: placement and routing (<code>openroad</code>) use the library and technology descriptions (LEF), producing the design in DEF format; parasitic extraction (<code>openrcx</code>) generates a SPEF file used for accurate post-layout timing analysis (<code>opensta</code>); after noise and reliability checks pass, the final layout database is streamed out as GDSII (<code>klayout</code>, <code>magic</code>) and sent to the manufacturer. The algorithms of physical design—partitioning, floorplanning, placement, routing, and timing closure—are treated comprehensively in <span class="citation" data-cites="Kahng_PhysicalDesign">(<a href="#ref-Kahng_PhysicalDesign" role="doc-biblioref">Kahng et al. 2022</a>)</span>.</p>
+<div id="cell-fig-pnr-flow" class="cell" data-execution_count="77">
+<div class="cell-output cell-output-display">
+<div id="fig-pnr-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pnr-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-pnr-flow-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-78" title="Figure&nbsp;78: Standard-cell place-and-route flow with open-source tools: placement and routing (openroad) use the library and technology data (LEF); parasitic extraction (openrcx) delivers a SPEF file for post-layout timing analysis (opensta); after timing, noise, and reliability checks pass, the layout is streamed out as GDSII (klayout, magic) and sent to the manufacturer. Timing failures loop back to placement."><img src="dcic_files/figure-html/fig-pnr-flow-output-1.png" width="758" height="643" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pnr-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;78: Standard-cell place-and-route flow with open-source tools: placement and routing (openroad) use the library and technology data (LEF); parasitic extraction (openrcx) delivers a SPEF file for post-layout timing analysis (opensta); after timing, noise, and reliability checks pass, the layout is streamed out as GDSII (klayout, magic) and sent to the manufacturer. Timing failures loop back to placement.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-open-source-rtl-to-gds-flow" class="level3" data-number="8.4.3">
+<h3 data-number="8.4.3" class="anchored" data-anchor-id="the-open-source-rtl-to-gds-flow"><span class="header-section-number">8.4.3</span> The Open-Source RTL-to-GDS Flow</h3>
+<p>In recent years, open-source tools have made a huge step forward, so that a complete behavioral (SystemVerilog) to GDSII flow is freely available with <a href="https://github.com/The-OpenROAD-Project/OpenROAD">OpenROAD</a> and the integrated <a href="https://github.com/librelane/librelane">LibreLane</a> flow. Together with the IHP SG13 open-source PDK—including its open standard-cell library (<a href="https://github.com/IHP-GmbH/IHP-Open-PDK/tree/main/ihp-sg13g2/libs.ref/sg13g2_stdcell">sg13g2_stdcell</a>)—everything needed for a digital tapeout is now openly available. This has dramatically lowered the barrier to entry for chip design: students, researchers, and hobbyists can take a design all the way from RTL to a manufacturable layout without any commercial tool licenses, and low-cost <a href="https://en.wikipedia.org/wiki/Multi-project_wafer_service">multi-project wafer</a> shuttle runs make it feasible to obtain real silicon.</p>
+</section>
+</section>
+<section id="sec-methodology-custom" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="sec-methodology-custom"><span class="header-section-number">8.5</span> The Mixed-Signal/Custom Flow</h2>
+<p>For analog and mixed-signal designs, the flow is usually schematic-driven, as shown in <a href="#fig-custom-flow" class="quarto-xref">Figure&nbsp;79</a>: the design is captured as a schematic (<code>xschem</code>) or netlist, checked by electrical rule checks, and simulated (<code>ngspice</code>, <code>vacask</code>). The layout is constructed manually (<code>klayout</code>, <code>magic</code>), verified by DRC (<code>klayout</code> or <code>magic</code>), and compared against the schematic (LVS with <code>klayout</code> or <code>netgen</code>). After LVS passes, parasitic extraction (<code>magic</code> or <code>klayout-pex</code>) delivers a netlist with layout parasitics, which is back-annotated into the schematic and re-simulated; after reliability checks, the block or IC is ready.</p>
+<div id="cell-fig-custom-flow" class="cell" data-execution_count="78">
+<div class="cell-output cell-output-display">
+<div id="fig-custom-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-custom-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-custom-flow-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-79" title="Figure&nbsp;79: Mixed-signal/custom design flow with open-source tools: the schematic (xschem) is simulated (ngspice), the layout is drawn (klayout, magic) and verified by DRC, extraction, and LVS (netgen); parasitic extraction (magic) feeds a back-annotated re-simulation, and after reliability checks the block is done. Failing checks loop back to the layout or the schematic."><img src="dcic_files/figure-html/fig-custom-flow-output-1.png" width="806" height="605" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-custom-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;79: Mixed-signal/custom design flow with open-source tools: the schematic (xschem) is simulated (ngspice), the layout is drawn (klayout, magic) and verified by DRC, extraction, and LVS (netgen); parasitic extraction (magic) feeds a back-annotated re-simulation, and after reliability checks the block is done. Failing checks loop back to the layout or the schematic.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-methodology-fpga" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="sec-methodology-fpga"><span class="header-section-number">8.6</span> FPGAs</h2>
+<p><a href="https://en.wikipedia.org/wiki/Field-programmable_gate_array">Field-programmable gate arrays</a> (FPGAs) are a good alternative to a custom digital IC, because the initial cost is very low, and the same HDL description can be used to program an FPGA or to create a semicustom digital design:</p>
+<ul>
+<li>An FPGA consists of programmable logic blocks (typically look-up tables (LUTs) paired with flip-flops), hard macros (like CPUs, DSP slices, memory blocks, or high-speed interfaces), and a programmable interconnect fabric.</li>
+<li>The flexibility is very high (the FPGA can be loaded with a new bit-stream at any time), and the performance can be high as well; however, power consumption and unit cost can be substantial.</li>
+<li>FPGAs can also be used as (more or less) real-time test vehicles for HDL code (for prototyping and software development) before committing to a costly mask set.</li>
+</ul>
+<p>The choice between an FPGA and a custom IC is largely a question of volume: FPGAs win at low to medium volumes, where their high per-unit cost is outweighed by the avoided <a href="https://en.wikipedia.org/wiki/Non-recurring_engineering">NRE</a> (mask set and design effort) of a custom IC, while an ASIC becomes cheaper per piece once the volume is large enough to amortize its NRE. Many products therefore start on an FPGA and are migrated to an ASIC only once the volume and specification have stabilized.</p>
 
 
 
@@ -3454,14 +3940,29 @@ Deal, Bruce E., and Andrew S. Grove. 1965. <span>“General Relationship for the
 <div id="ref-Dennard_1974" class="csl-entry" role="listitem">
 Dennard, Robert H., Fritz H. Gaensslen, Hwa-Nien Yu, V. Leo Rideout, Ernest Bassous, and Andre R. LeBlanc. 1974. <span>“Design of Ion-Implanted <span>MOSFET</span>’s with Very Small Physical Dimensions.”</span> <em>IEEE Journal of Solid-State Circuits</em> 9 (5): 256–68.
 </div>
+<div id="ref-Gajski_Kuhn_1983" class="csl-entry" role="listitem">
+Gajski, Daniel D., and Robert H. Kuhn. 1983. <span>“Guest Editors’ Introduction: New <span>VLSI</span> Tools.”</span> <em>Computer</em> 16 (12): 11–14. <a href="https://doi.org/10.1109/MC.1983.1654264">https://doi.org/10.1109/MC.1983.1654264</a>.
+</div>
 <div id="ref-Goto_2003" class="csl-entry" role="listitem">
 <span class="nocase">Goto, Ken-ichi et al.</span> 2003. <span>“High Performance 25 <span class="nocase">nm</span> Gate <span>CMOSFETs</span> for 65 <span class="nocase">nm</span> Node High Speed <span>MPUs</span>.”</span> <em>IEEE International Electron Devices Meeting (IEDM)</em>.
 </div>
 <div id="ref-Hu_ModernDevices" class="csl-entry" role="listitem">
 Hu, Chenming. 2010. <em>Modern Semiconductor Devices for Integrated Circuits</em>. Pearson.
 </div>
+<div id="ref-Kahng_PhysicalDesign" class="csl-entry" role="listitem">
+Kahng, Andrew B., Jens Lienig, Igor L. Markov, and Jin Hu. 2022. <em>VLSI Physical Design: From Graph Partitioning to Timing Closure</em>. 2nd ed. Springer.
+</div>
+<div id="ref-DeMicheli_Synthesis" class="csl-entry" role="listitem">
+Micheli, Giovanni De. 1994. <em>Synthesis and Optimization of Digital Circuits</em>. McGraw-Hill.
+</div>
+<div id="ref-Montgomery_SQC" class="csl-entry" role="listitem">
+Montgomery, Douglas C. 2012. <em>Introduction to Statistical Quality Control</em>. 7th ed. Wiley.
+</div>
 <div id="ref-Moore_1965" class="csl-entry" role="listitem">
 Moore, Gordon E. 1965. <span>“Cramming More Components onto Integrated Circuits.”</span> <em>Electronics</em> 38 (8): 114–17.
+</div>
+<div id="ref-Murphy_1964" class="csl-entry" role="listitem">
+Murphy, Bernard T. 1964. <span>“Cost-Size Optima of Monolithic Integrated Circuits.”</span> <em>Proceedings of the IEEE</em> 52 (12): 1537–45. <a href="https://doi.org/10.1109/PROC.1964.3442">https://doi.org/10.1109/PROC.1964.3442</a>.
 </div>
 <div id="ref-Pozar_RF" class="csl-entry" role="listitem">
 Pozar, David M. 2011. <em>Microwave Engineering</em>. 4th ed. Wiley.
@@ -3484,6 +3985,9 @@ Sansen, Willy M. C. 2006. <em>Analog Design Essentials</em>. Springer.
 <div id="ref-Schmickl_2020" class="csl-entry" role="listitem">
 Schmickl, Stefan, Thomas Faseth, and Harald Pretl. 2020. <span>“A 350-<span class="nocase">nW</span> Low-Noise Amplifier with Reduced Flicker-Noise for Bio-Signal Acquisition.”</span> <em>Austrochip Workshop on Microelectronics</em>.
 </div>
+<div id="ref-Smith_ASIC" class="csl-entry" role="listitem">
+Smith, Michael John Sebastian. 1997. <em>Application-Specific Integrated Circuits</em>. Addison-Wesley.
+</div>
 <div id="ref-Sproul_Green_1991" class="csl-entry" role="listitem">
 Sproul, Alistair B., and Martin A. Green. 1991. <span>“Improved Value for the Silicon Intrinsic Carrier Concentration from 275 to 375 <span>K</span>.”</span> <em>Journal of Applied Physics</em> 70 (2): 846–54. <a href="https://doi.org/10.1063/1.349645">https://doi.org/10.1063/1.349645</a>.
 </div>
@@ -3496,11 +4000,17 @@ Sugibayashi, T., I. Naritake, S. Utsugi, et al. 1995. <span>“A 1-<span>Gb</spa
 <div id="ref-Tsividis_MOS" class="csl-entry" role="listitem">
 Tsividis, Yannis, and Colin McAndrew. 2011. <em>Operation and Modeling of the MOS Transistor</em>. 3rd ed. Oxford University Press.
 </div>
+<div id="ref-deVries_2005" class="csl-entry" role="listitem">
+Vries, Dirk K. de. 2005. <span>“Investigation of Gross Die Per Wafer Formulas.”</span> <em>IEEE Transactions on Semiconductor Manufacturing</em> 18 (1): 136–39. <a href="https://doi.org/10.1109/TSM.2004.836656">https://doi.org/10.1109/TSM.2004.836656</a>.
+</div>
 <div id="ref-Wang_VLSITest" class="csl-entry" role="listitem">
 Wang, Laung-Terng, Cheng-Wen Wu, and Xiaoqing Wen. 2006. <em>VLSI Test Principles and Architectures: Design for Testability</em>. Morgan Kaufmann.
 </div>
 <div id="ref-Wanlass_Sah_1963" class="csl-entry" role="listitem">
 Wanlass, Frank M., and Chih-Tang Sah. 1963. <span>“Nanowatt Logic Using Field-Effect Metal-Oxide Semiconductor Triodes.”</span> <em>IEEE International Solid-State Circuits Conference (ISSCC), Digest of Technical Papers</em>, 32–33.
+</div>
+<div id="ref-Weste_CMOS" class="csl-entry" role="listitem">
+Weste, Neil H. E., and David Money Harris. 2011. <em>CMOS VLSI Design: A Circuits and Systems Perspective</em>. 4th ed. Addison-Wesley.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
