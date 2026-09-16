@@ -201,7 +201,8 @@ function Pandoc(doc)
       if b.content[1] and b.content[1].t == "Header" then
         local h = table.remove(b.content, 1)
         open_slide(h)
-      else
+      elseif not (slide and slide.own_header and #slide.blocks == 0) then
+        -- without a heading, fill a still-empty section slide
         open_slide()
       end
       add(b)

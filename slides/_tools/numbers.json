@@ -291,6 +291,11 @@
    "number": "60",
    "type": "eq"
   },
+  "eq-robust-pelgrom": {
+   "chapter": 10,
+   "number": "65",
+   "type": "eq"
+  },
   "eq-scr-condition": {
    "chapter": 9,
    "number": "64",
@@ -419,6 +424,11 @@
   "fig-esd-symbols": {
    "chapter": 9,
    "number": "86",
+   "type": "fig"
+  },
+  "fig-fishbone": {
+   "chapter": 10,
+   "number": "89",
    "type": "fig"
   },
   "fig-ggnmos": {
@@ -1029,6 +1039,36 @@
   "sec-packaging-wafer-prep": {
    "chapter": 5,
    "number": "5.1",
+   "type": "sec"
+  },
+  "sec-robust": {
+   "chapter": 10,
+   "number": "10",
+   "type": "sec"
+  },
+  "sec-robust-circuits": {
+   "chapter": 10,
+   "number": "10.1",
+   "type": "sec"
+  },
+  "sec-robust-corners": {
+   "chapter": 10,
+   "number": "10.2",
+   "type": "sec"
+  },
+  "sec-robust-debug": {
+   "chapter": 10,
+   "number": "10.5",
+   "type": "sec"
+  },
+  "sec-robust-failure-mode": {
+   "chapter": 10,
+   "number": "10.4",
+   "type": "sec"
+  },
+  "sec-robust-parasitics": {
+   "chapter": 10,
+   "number": "10.3",
    "type": "sec"
   },
   "sec-technology": {

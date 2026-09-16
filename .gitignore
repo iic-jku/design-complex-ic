@@ -7,3 +7,4 @@
 **/*.quarto_ipynb
 /dcic_files
 /slides/*_files
+/site_libs/revealjs

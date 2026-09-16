@@ -1,0 +1,214 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# Robust Design {#sec-robust}
+
+Better than debugging a failing IC is avoiding design issues up front! A good overall strategy for IC design is:
+
+1. Go for robust circuits and layouts that are insensitive to **PVT** (process, voltage, temperature) influences.
+2. Keep in mind that fabrication variations are normal; use the foundry-supplied **corner models** to check the design against parameter excursions and component mismatch.
+3. PCB, IC package, and on-chip **wiring** all add $R$, $L$, $C$, $k$ **parasitics**—model them properly and include them in the circuit simulation.
+4. During all phases of design and layout, think about what could go wrong, and **build in remedies for debug and fix** (layout locations where a cut or short can easily be made by FIB or a metal redesign, spare elements, programmability).
+
+This chapter follows these four points, and closes with structured methods and tools for the case where, despite all precautions, first silicon does not behave as expected.
+
+## Robust Circuits and Layouts {#sec-robust-circuits}
+
+Absolute parameters of IC components (MOSFETs, $R$, $C$) vary a lot in production ($\Vth$ by $\pm 100\,\text{mV}$, other parameters by ±10 to ±30 %), but **ratios** can be produced very accurately. Therefore:
+
+- Define gains by resistor ratios or capacitor ratios.
+- Set currents by the ratio of a current mirror.
+- Time as a parameter can be handled efficiently and accurately (crystal-referenced); if possible, base the circuit principle on timing.
+
+A few further circuit-level habits make a design tolerant against the remaining variations:
+
+- Use **negative feedback**: the closed-loop gain of an amplifier is set by the feedback network (a ratio again), and is largely independent of the poorly controlled open-loop gain.
+- Derive bias currents from a well-defined reference (e.g., a bandgap voltage across a resistor, or a constant-$\gm$ bias) instead of a plain supply-referenced resistor, so the circuit performance tracks with process and temperature in a controlled way.
+- Prefer **differential** signal paths: supply noise, substrate coupling, and even-order distortion appear as common-mode disturbances and are rejected to first order.
+- Where the achievable accuracy is not sufficient, plan for **calibration** or **trimming** (see @sec-testing-types) instead of over-designing the circuit.
+
+Mismatch of IC components is inherent to wafer production, but can be made worse by bad layout or non-matched sizing: matching is best when devices are constructed from **unit elements**, with matched size, orientation, wiring, and current-flow direction (see @sec-layout-analog). The random part of the mismatch between two identical, closely spaced devices scales with their area, as described by the **Pelgrom model** [@Pelgrom_1989]:
+
+$$
+\sigma(\Delta \Vth) = \frac{A_{\Vth}}{\sqrt{W L}}
+$$ {#eq-robust-pelgrom}
+
+The matching coefficient $A_{\Vth}$ is supplied by the foundry and is in the range of a few $\text{mV}\cdot\mu\text{m}$ for current CMOS technologies. With $A_{\Vth} = 5\,\text{mV}\cdot\mu\text{m}$, a transistor pair with $W L = 1\,\mu\text{m}^2$ has $\sigma(\Delta \Vth) = 5\,\text{mV}$; halving the mismatch costs four times the area (and capacitance). @eq-robust-pelgrom is thus a fundamental trade-off between accuracy, area, and speed, which is analyzed in detail in [@Kinget_2005]; practical layout measures for matching and robustness are collected in [@Hastings_AnalogLayout].
+
+::: {.content-visible when-format="revealjs"}
+### Mismatch versus Area
+
+- Matching is best with **unit elements**: same size, orientation, wiring, and current-flow direction
+- $A_{\Vth}$ is supplied by the foundry (a few $\text{mV}\cdot\mu\text{m}$)
+- Example: $A_{\Vth} = 5\,\text{mV}\cdot\mu\text{m}$, $W L = 1\,\mu\text{m}^2$ $\rightarrow$ $\sigma(\Delta \Vth) = 5\,\text{mV}$
+- Halving the mismatch costs **4× area** (and capacitance)
+- Fundamental trade-off between accuracy, area, and speed
+:::
+
+Keep the production flow in mind to anticipate good layout practices: masks can be offset relative to each other, gradients across the wafer will happen, single defects should not cause circuit failure (use multiple vias!), and the layout will be post-processed for manufacturability (filling, cheesing, dummy structures).
+
+Robustness also has a **lifetime** dimension: a circuit that works at time zero has to keep working over years of operation (see @sec-technology-qualification). Relevant wear-out mechanisms are [**electromigration**](https://en.wikipedia.org/wiki/Electromigration) in wires and vias (respect the current-density limits of the PDK, especially for supply lines and output drivers), gate-oxide breakdown (TDDB), and $\Vth$ drift by hot-carrier injection (HCI) and bias-temperature instability (NBTI/PBTI). Hence, keep all device terminal voltages within the rated limits of the respective device type in *all* operating states—including power-up, power-down, and when a block is disabled.
+
+::: {.content-visible when-format="revealjs"}
+### Production and Lifetime
+
+- Anticipate the production flow:
+  - masks can be offset relative to each other, gradients across the wafer happen
+  - single defects must not cause failure (use multiple vias!)
+  - layout is post-processed (filling, cheesing, dummy structures)
+- A working circuit has to keep working for years—wear-out mechanisms:
+  - **electromigration** in wires and vias (respect the PDK current-density limits)
+  - gate-oxide breakdown (TDDB)
+  - $\Vth$ drift by HCI and NBTI/PBTI
+- Keep all terminal voltages within the rated limits in *all* operating states (power-up, power-down, block disabled)
+:::
+
+## Corner Models {#sec-robust-corners}
+
+To check the influence of production parameter variations, the foundries supply **corner models**. Model files are provided for the nominal corner (TT), reflecting the target values of production, and for the expected parameter extremes (usually $3\sigma$ to $5\sigma$):
+
+- Smallest/largest $R$, smallest/largest $C$, etc.
+- Slow/fast PMOS and slow/fast NMOS, usually grouped into the corner sets SS, SF, TT, FS, FF (first letter NMOS, second letter PMOS).
+
+All available corner files should be simulated to check the circuit performance against production spread; in addition, temperature and supply voltage (defined early in the IC specification) have to be varied. This results in many simulation runs, requiring automated simulation control and data post-processing. Which combination is the worst case depends on the circuit and on the parameter under test:
+
+- For digital timing, the **slow** corner (SS, lowest supply, highest temperature) usually limits the maximum clock frequency (setup time), whereas the **fast** corner (FF, highest supply, lowest temperature) is critical for hold-time violations and leakage. In advanced low-voltage nodes, *temperature inversion* can make low temperature the slowest condition.
+- The **skewed** corners SF and FS are critical for circuits relying on a balance between NMOS and PMOS, such as the switching threshold of an inverter, ratioed logic, or SRAM cells.
+- Analog circuits can have their worst case in any corner, so no corner should be skipped.
+
+Component *mismatch* (as opposed to global process shift) is covered by [Monte-Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method) models, in which device parameters are randomly varied for each simulation run according to their statistical distribution. The result is a distribution of the circuit performance (e.g., the input offset of a comparator), from which mean and standard deviation are estimated. Since a specification is usually required to be met with a margin of several $\sigma$ (see @sec-testing-cpk), and the estimate of $\sigma$ itself is uncertain for few samples, a meaningful Monte-Carlo analysis needs at least a few hundred runs. Corner models describe the (fully correlated) global process shift, while Monte-Carlo mismatch describes random local variations; for critical blocks, both have to be combined, i.e., Monte-Carlo mismatch runs are performed on top of the process corners.
+
+Note that stacking all worst cases at their extremes (slowest process, lowest supply, highest temperature, $3\sigma$ mismatch, maximum parasitics) quickly leads to an over-designed circuit wasting power and area. A good specification states which conditions have to be met simultaneously.
+
+::: {.content-visible when-format="revealjs"}
+### Monte-Carlo Mismatch
+
+- **Corners:** fully correlated *global* process shift
+- **Monte-Carlo:** random *local* mismatch, device parameters varied in every run
+- Result is a distribution of the circuit performance (e.g., comparator offset) $\rightarrow$ mean and $\sigma$
+- Specs need a margin of several $\sigma$ $\rightarrow$ at least a few hundred runs
+- Critical blocks: Monte-Carlo mismatch runs on top of the process corners
+- Do not stack all worst cases at their extremes $\rightarrow$ over-design; the spec states which conditions apply simultaneously
+:::
+
+## Include the Parasitics {#sec-robust-parasitics}
+
+All circuit wiring adds $R$, $L$, $C$, $k$ parasitics: PCB traces and cables, package parasitics like bond wires, and on-chip interconnect. Having a unified simulation setup capturing all these impairments is a must, as unwanted effects like crosstalk or degraded performance can often be root-caused to them:
+
+- For first investigations, hand-calculated values are a good starting point (see @sec-packaging-parasitics).
+- For on-chip circuits, **parasitic extraction (PEX)** of the layout blocks is mandatory (see @sec-layout-extraction).
+- For IC packages, first-order lumped models can be refined by calculated **EM models** (e.g., $S$-parameters).
+- The same holds for PCB effects; if no simulation model is available, approximate the important effects by calculating $R$, $L$, $C$, $k$ from the geometry.
+
+Parasitics that are easily overlooked, because they are not part of the signal path, are those of the **supply and ground network**: a current step through the bond-wire inductance causes supply and ground bounce ($L\,di/dt$), and resistive on-chip supply lines cause static and dynamic **IR drop**. These disturbances couple into every block sharing the same supply, and also into the **substrate**, which connects all devices on the die through a resistive network [@AfzaliKusha_2006]. Common remedies are on-chip decoupling capacitors, separate supply and ground pins for noisy (digital, output drivers) and sensitive (analog, RF) blocks, multiple parallel bond wires, and guard rings around sensitive circuits. When no model of such an effect exists, add a pessimistic estimate to the testbench—an ideal supply and a perfect ground hide exactly the problems that show up in the lab.
+
+::: {.content-visible when-format="revealjs"}
+### Supply, Ground, and Substrate
+
+- Easily overlooked: parasitics *outside* the signal path
+- Bond-wire inductance $\rightarrow$ supply and ground bounce ($L\,di/dt$)
+- Resistive on-chip supply lines $\rightarrow$ static and dynamic **IR drop**
+- Disturbances couple into every block on the same supply, and via the resistive **substrate**
+- Remedies: on-chip decoupling, separate supplies for noisy and sensitive blocks, parallel bond wires, guard rings
+- No model available? Add a pessimistic estimate—an ideal supply and a perfect ground hide the problems seen in the lab
+:::
+
+## Failure-Mode Thinking {#sec-robust-failure-mode}
+
+During the complete design phase, an important habit is "failure-mode thinking," i.e., asking "**what could go wrong?**" (paranoia is a good trait in IC design). By anticipating potential issues, remedies and debug hooks can be built into the design. Some examples:
+
+- If feedback-loop stability is a concern, make the compensation components (feedback $R$ and $C$) **programmable** (using register bits and transmission gates to switch components in and out).
+- If there is a critical bias point in the circuit, make it **observable** (connect it to a test pad via a T-gate) or **programmable** (adapt voltages or currents by programming, metal redesign, or FIB).
+- For complex logic functions, add **spare logic gates** nearby (a few NAND gates, inverters, latches, and delay elements) to allow fixing overlooked logic bugs in a metal-only redesign.
+- If circuit sizing is uncertain, place **spare elements** ($R$, $C$, MOSFETs, logic gates) that can be connected in a metal redesign, or by FIB for a handful of repaired samples; often, dummy elements can double in this role.
+- If the risk is very high, implement multiple **design variants** of a circuit on one tape-out, so the best variant (based on measurements) can be selected and refined for the next tape-out.
+- Route internal nodes that are hard to measure (bias voltages, reference clocks, the output of a sub-block) to an **analog test bus** or a test multiplexer, and provide **bypass** and **loop-back** modes, so each block of a signal chain can be characterized in isolation.
+- Make sure the circuit always reaches its intended operating point: self-biased circuits like bandgap references and current references can have a second, degenerate stable state (all currents zero) and need a **start-up circuit**. Power-up and power-down sequences, undefined reset states, and floating inputs of disabled blocks deserve dedicated simulations.
+
+For larger projects, this informal habit can be formalized as a [**failure mode and effects analysis (FMEA)**](https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis), in which potential failure modes are systematically listed and ranked by severity, likelihood, and detectability; FMEA is mandatory, e.g., for automotive ICs.
+
+::: {.content-visible when-format="revealjs"}
+### Failure Mode and Effects Analysis
+
+- Formalized failure-mode thinking for larger projects
+- Systematically list potential failure modes
+- Rank them by **severity**, **likelihood**, and **detectability**
+- Mandatory, e.g., for automotive ICs
+:::
+
+## Debugging of ICs {#sec-robust-debug}
+
+If first silicon fails, the pressure to find a quick fix is high, and the temptation is to change several things at once based on a first guess. A disciplined procedure is usually faster:
+
+1. **Reproduce** the failure reliably and document the conditions (sample, supply, temperature, input signals); check whether all samples fail or only some (a design issue versus a production defect).
+2. **Isolate** the failing block, e.g., using the test modes, bypass paths, and observable nodes built in during the design phase.
+3. Collect potential causes and form a **hypothesis** (the methods below help here).
+4. **Confirm** the hypothesis by reproducing the failure in simulation, and by predicting a further observation that is then checked in the lab.
+5. Only then implement and verify the **fix**—first in simulation, then on silicon (e.g., by a FIB repair of a few samples) before the redesign is taped out.
+
+### The Fishbone Diagram
+
+During the root-cause analysis of a failure, a structured method of investigation helps; the [**fishbone (Ishikawa) diagram**](https://en.wikipedia.org/wiki/Ishikawa_diagram) shown in @fig-fishbone visualizes the cause-and-effect investigation [@Ishikawa_QC]. In a tree-like structure, the potential causes leading to an effect are organized, and details (branches) are added as debugging or brainstorming progresses. Causes are usually grouped into categories:
+
+- **People**: anyone involved in the process.
+- **Methods**: policies, procedures, rules, and regulations.
+- **Machines**: computers, tools, and equipment required to accomplish the job.
+- **Materials**: raw materials, parts, and consumables used to produce the final product.
+- **Measurements**: data generated from the process, used to evaluate its quality.
+- **Environment**: the conditions—location, time, temperature, culture—in which the process operates.
+
+{{< include /content/robust/_fig_fishbone.qmd >}}
+
+### The "5-Why" Method
+
+A helpful strategy to identify causes is the [**"5-why" method**](https://en.wikipedia.org/wiki/Five_whys): ask "Why…?" five times in succession (five is just a rough number—more or less, depending on complexity); the method originates from the Toyota production system [@Ohno_TPS]. An example:
+
+1. "**Why** did the robot stop?" → The circuit overloaded, causing a fuse to blow.
+2. "**Why** did the circuit overload?" → There was insufficient lubrication on the bearings, so they locked up.
+3. "**Why** was there insufficient lubrication?" → The oil pump is not circulating enough oil.
+4. "**Why** is the pump not circulating enough oil?" → The pump intake is clogged with metal shavings.
+5. "**Why** is the intake clogged?" → Because there is no filter on the pump.
+
+This may sound simple, but in a complex setting (time pressure, pressure from management or customers), analyzing an issue with simple, structured methods is an effective way to make progress.
+
+### Focused Ion Beam (FIB)
+
+The [**focused ion beam (FIB)**](https://en.wikipedia.org/wiki/Focused_ion_beam) is an extremely helpful technique to modify on-chip circuitry, by **cutting connections** and/or **creating new on-chip connections** (it can also create probe **pads** for micro-probing) [@Giannuzzi_FIB]:
+
+- A FIB machine uses ions (e.g., Ga) to **remove material** from a sample by sputtering/milling, with a resolution down to about 10 nm.
+- Using a reactive gas inside the vacuum chamber, FIB-assisted CVD can **deposit structured layers** of, e.g., tungsten, forming new electrical connections.
+- Since the deposited layers are very thin, creating low-ohmic connections is difficult—so a cut is preferable to a new connection where possible.
+
+FIB access is easiest on the top metal layers; nets that are candidates for a FIB modification should therefore be routed (at least for a short section) on top metal, away from dense wiring, and not be covered by metal fill. For flip-chip packages or dense metal stacks, FIB modifications from the backside of the thinned die are possible, but considerably more difficult.
+
+::: {.content-visible when-format="revealjs"}
+### Preparing for FIB
+
+- FIB access is easiest on the **top metal** layers
+- Route candidate nets (at least a short section) on top metal
+  - away from dense wiring
+  - not covered by metal fill
+- Flip-chip or dense metal stacks: backside FIB of the thinned die possible, but considerably more difficult
+:::
+
+### Failure Analysis
+
+Beyond electrical measurements at the pins, several physical failure-analysis techniques help to locate a fault on the die (a comprehensive overview is given in [@Gandhi_FADeskRef]):
+
+- **Micro-probing**: fine needles (or FIB-created probe pads) contact internal nodes to measure voltages and waveforms directly.
+- **Hot-spot detection**: shorts, leaky junctions, and latched structures dissipate power locally, which can be localized by thermal imaging (e.g., lock-in thermography) or by [liquid-crystal](https://en.wikipedia.org/wiki/Liquid_crystal) coatings changing their appearance with temperature.
+- **Photon emission microscopy**: forward-biased junctions, MOSFETs in saturation, and oxide breakdown emit weak light (mostly in the infrared), which can be detected, also through the backside of the die.
+- **X-ray** inspection and **acoustic microscopy** reveal package defects like broken bond wires, voids, or delamination non-destructively; afterwards, the die can be exposed by **decapsulation** and inspected optically or in a scanning electron microscope (SEM).

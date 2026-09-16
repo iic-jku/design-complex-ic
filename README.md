@@ -22,7 +22,7 @@ python3 -m unittest slides/_tools/test_gen_decks.py
 
 Optional markup in the chapter files to improve slides (ignored by the HTML and PDF notes):
 
-- `::: {.content-visible when-format="revealjs"}` — slide-only content (e.g. key bullet points); a leading `###` heading becomes the slide title.
+- `::: {.content-visible when-format="revealjs"}` — slide-only content (e.g. key bullet points); a leading `###` heading becomes the slide title; without a heading, it fills a section slide that would otherwise be empty.
 - `::: {.content-hidden when-format="revealjs"}` — keep content in the notes only.
 - `{.no-slide}` on a div (callout, figure cell) or in an equation label (`{#eq-foo .no-slide}`) — skip it on slides.
 
