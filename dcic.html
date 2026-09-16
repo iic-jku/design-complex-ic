@@ -566,6 +566,20 @@ window.Quarto = {
   <li><a href="#latch-up-prevention" id="toc-latch-up-prevention" class="nav-link" data-scroll-target="#latch-up-prevention"><span class="header-section-number">9.2.2</span> Latch-Up Prevention</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#sec-robust" id="toc-sec-robust" class="nav-link" data-scroll-target="#sec-robust"><span class="header-section-number">10</span> Robust Design</a>
+  <ul class="collapse">
+  <li><a href="#sec-robust-circuits" id="toc-sec-robust-circuits" class="nav-link" data-scroll-target="#sec-robust-circuits"><span class="header-section-number">10.1</span> Robust Circuits and Layouts</a></li>
+  <li><a href="#sec-robust-corners" id="toc-sec-robust-corners" class="nav-link" data-scroll-target="#sec-robust-corners"><span class="header-section-number">10.2</span> Corner Models</a></li>
+  <li><a href="#sec-robust-parasitics" id="toc-sec-robust-parasitics" class="nav-link" data-scroll-target="#sec-robust-parasitics"><span class="header-section-number">10.3</span> Include the Parasitics</a></li>
+  <li><a href="#sec-robust-failure-mode" id="toc-sec-robust-failure-mode" class="nav-link" data-scroll-target="#sec-robust-failure-mode"><span class="header-section-number">10.4</span> Failure-Mode Thinking</a></li>
+  <li><a href="#sec-robust-debug" id="toc-sec-robust-debug" class="nav-link" data-scroll-target="#sec-robust-debug"><span class="header-section-number">10.5</span> Debugging of ICs</a>
+  <ul class="collapse">
+  <li><a href="#the-fishbone-diagram" id="toc-the-fishbone-diagram" class="nav-link" data-scroll-target="#the-fishbone-diagram"><span class="header-section-number">10.5.1</span> The Fishbone Diagram</a></li>
+  <li><a href="#the-5-why-method" id="toc-the-5-why-method" class="nav-link" data-scroll-target="#the-5-why-method"><span class="header-section-number">10.5.2</span> The “5-Why” Method</a></li>
+  <li><a href="#focused-ion-beam-fib" id="toc-focused-ion-beam-fib" class="nav-link" data-scroll-target="#focused-ion-beam-fib"><span class="header-section-number">10.5.3</span> Focused Ion Beam (FIB)</a></li>
+  <li><a href="#failure-analysis" id="toc-failure-analysis" class="nav-link" data-scroll-target="#failure-analysis"><span class="header-section-number">10.5.4</span> Failure Analysis</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dcic.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -4164,6 +4178,150 @@ Figure&nbsp;88: Guard rings for latch-up prevention (layout top view): the NMOS 
 <li>Rules <code>LU.c</code> to <code>LU.d1</code> limit how far a tie may extend beyond its contact (6 µm), which keeps the resistance of the tie itself low.</li>
 </ul>
 <p>Beware: these latch-up rules are <em>not</em> checked by default in the SG13G2 DRC deck—the check has to be enabled explicitly.</p>
+</section>
+</section>
+</section>
+<section id="sec-robust" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Robust Design</h1>
+<p>Better than debugging a failing IC is avoiding design issues up front! A good overall strategy for IC design is:</p>
+<ol type="1">
+<li>Go for robust circuits and layouts that are insensitive to <strong>PVT</strong> (process, voltage, temperature) influences.</li>
+<li>Keep in mind that fabrication variations are normal; use the foundry-supplied <strong>corner models</strong> to check the design against parameter excursions and component mismatch.</li>
+<li>PCB, IC package, and on-chip <strong>wiring</strong> all add <span class="math inline">\(R\)</span>, <span class="math inline">\(L\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(k\)</span> <strong>parasitics</strong>—model them properly and include them in the circuit simulation.</li>
+<li>During all phases of design and layout, think about what could go wrong, and <strong>build in remedies for debug and fix</strong> (layout locations where a cut or short can easily be made by FIB or a metal redesign, spare elements, programmability).</li>
+</ol>
+<p>This chapter follows these four points, and closes with structured methods and tools for the case where, despite all precautions, first silicon does not behave as expected.</p>
+<section id="sec-robust-circuits" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="sec-robust-circuits"><span class="header-section-number">10.1</span> Robust Circuits and Layouts</h2>
+<p>Absolute parameters of IC components (MOSFETs, <span class="math inline">\(R\)</span>, <span class="math inline">\(C\)</span>) vary a lot in production (<span class="math inline">\(V_\mathrm{th}\)</span> by <span class="math inline">\(\pm 100\,\text{mV}\)</span>, other parameters by ±10 to ±30 %), but <strong>ratios</strong> can be produced very accurately. Therefore:</p>
+<ul>
+<li>Define gains by resistor ratios or capacitor ratios.</li>
+<li>Set currents by the ratio of a current mirror.</li>
+<li>Time as a parameter can be handled efficiently and accurately (crystal-referenced); if possible, base the circuit principle on timing.</li>
+</ul>
+<p>A few further circuit-level habits make a design tolerant against the remaining variations:</p>
+<ul>
+<li>Use <strong>negative feedback</strong>: the closed-loop gain of an amplifier is set by the feedback network (a ratio again), and is largely independent of the poorly controlled open-loop gain.</li>
+<li>Derive bias currents from a well-defined reference (e.g., a bandgap voltage across a resistor, or a constant-<span class="math inline">\(g_\mathrm{m}\)</span> bias) instead of a plain supply-referenced resistor, so the circuit performance tracks with process and temperature in a controlled way.</li>
+<li>Prefer <strong>differential</strong> signal paths: supply noise, substrate coupling, and even-order distortion appear as common-mode disturbances and are rejected to first order.</li>
+<li>Where the achievable accuracy is not sufficient, plan for <strong>calibration</strong> or <strong>trimming</strong> (see <a href="#sec-testing-types" class="quarto-xref">Section&nbsp;6.5</a>) instead of over-designing the circuit.</li>
+</ul>
+<p>Mismatch of IC components is inherent to wafer production, but can be made worse by bad layout or non-matched sizing: matching is best when devices are constructed from <strong>unit elements</strong>, with matched size, orientation, wiring, and current-flow direction (see <a href="#sec-layout-analog" class="quarto-xref">Section&nbsp;4.5</a>). The random part of the mismatch between two identical, closely spaced devices scales with their area, as described by the <strong>Pelgrom model</strong> <span class="citation" data-cites="Pelgrom_1989">(<a href="#ref-Pelgrom_1989" role="doc-biblioref">Pelgrom et al. 1989</a>)</span>:</p>
+<p><span id="eq-robust-pelgrom"><span class="math display">\[
+\sigma(\Delta V_\mathrm{th}) = \frac{A_{V_\mathrm{th}}}{\sqrt{W L}}
+\tag{65}\]</span></span></p>
+<p>The matching coefficient <span class="math inline">\(A_{V_\mathrm{th}}\)</span> is supplied by the foundry and is in the range of a few <span class="math inline">\(\text{mV}\cdot\mu\text{m}\)</span> for current CMOS technologies. With <span class="math inline">\(A_{V_\mathrm{th}} = 5\,\text{mV}\cdot\mu\text{m}\)</span>, a transistor pair with <span class="math inline">\(W L = 1\,\mu\text{m}^2\)</span> has <span class="math inline">\(\sigma(\Delta V_\mathrm{th}) = 5\,\text{mV}\)</span>; halving the mismatch costs four times the area (and capacitance). <a href="#eq-robust-pelgrom" class="quarto-xref">Equation&nbsp;65</a> is thus a fundamental trade-off between accuracy, area, and speed, which is analyzed in detail in <span class="citation" data-cites="Kinget_2005">(<a href="#ref-Kinget_2005" role="doc-biblioref">Kinget 2005</a>)</span>; practical layout measures for matching and robustness are collected in <span class="citation" data-cites="Hastings_AnalogLayout">(<a href="#ref-Hastings_AnalogLayout" role="doc-biblioref">Hastings 2006</a>)</span>.</p>
+<p>Keep the production flow in mind to anticipate good layout practices: masks can be offset relative to each other, gradients across the wafer will happen, single defects should not cause circuit failure (use multiple vias!), and the layout will be post-processed for manufacturability (filling, cheesing, dummy structures).</p>
+<p>Robustness also has a <strong>lifetime</strong> dimension: a circuit that works at time zero has to keep working over years of operation (see <a href="#sec-technology-qualification" class="quarto-xref">Section&nbsp;3.10</a>). Relevant wear-out mechanisms are <a href="https://en.wikipedia.org/wiki/Electromigration"><strong>electromigration</strong></a> in wires and vias (respect the current-density limits of the PDK, especially for supply lines and output drivers), gate-oxide breakdown (TDDB), and <span class="math inline">\(V_\mathrm{th}\)</span> drift by hot-carrier injection (HCI) and bias-temperature instability (NBTI/PBTI). Hence, keep all device terminal voltages within the rated limits of the respective device type in <em>all</em> operating states—including power-up, power-down, and when a block is disabled.</p>
+</section>
+<section id="sec-robust-corners" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-robust-corners"><span class="header-section-number">10.2</span> Corner Models</h2>
+<p>To check the influence of production parameter variations, the foundries supply <strong>corner models</strong>. Model files are provided for the nominal corner (TT), reflecting the target values of production, and for the expected parameter extremes (usually <span class="math inline">\(3\sigma\)</span> to <span class="math inline">\(5\sigma\)</span>):</p>
+<ul>
+<li>Smallest/largest <span class="math inline">\(R\)</span>, smallest/largest <span class="math inline">\(C\)</span>, etc.</li>
+<li>Slow/fast PMOS and slow/fast NMOS, usually grouped into the corner sets SS, SF, TT, FS, FF (first letter NMOS, second letter PMOS).</li>
+</ul>
+<p>All available corner files should be simulated to check the circuit performance against production spread; in addition, temperature and supply voltage (defined early in the IC specification) have to be varied. This results in many simulation runs, requiring automated simulation control and data post-processing. Which combination is the worst case depends on the circuit and on the parameter under test:</p>
+<ul>
+<li>For digital timing, the <strong>slow</strong> corner (SS, lowest supply, highest temperature) usually limits the maximum clock frequency (setup time), whereas the <strong>fast</strong> corner (FF, highest supply, lowest temperature) is critical for hold-time violations and leakage. In advanced low-voltage nodes, <em>temperature inversion</em> can make low temperature the slowest condition.</li>
+<li>The <strong>skewed</strong> corners SF and FS are critical for circuits relying on a balance between NMOS and PMOS, such as the switching threshold of an inverter, ratioed logic, or SRAM cells.</li>
+<li>Analog circuits can have their worst case in any corner, so no corner should be skipped.</li>
+</ul>
+<p>Component <em>mismatch</em> (as opposed to global process shift) is covered by <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte-Carlo</a> models, in which device parameters are randomly varied for each simulation run according to their statistical distribution. The result is a distribution of the circuit performance (e.g., the input offset of a comparator), from which mean and standard deviation are estimated. Since a specification is usually required to be met with a margin of several <span class="math inline">\(\sigma\)</span> (see <a href="#sec-testing-cpk" class="quarto-xref">Section&nbsp;6.6</a>), and the estimate of <span class="math inline">\(\sigma\)</span> itself is uncertain for few samples, a meaningful Monte-Carlo analysis needs at least a few hundred runs. Corner models describe the (fully correlated) global process shift, while Monte-Carlo mismatch describes random local variations; for critical blocks, both have to be combined, i.e., Monte-Carlo mismatch runs are performed on top of the process corners.</p>
+<p>Note that stacking all worst cases at their extremes (slowest process, lowest supply, highest temperature, <span class="math inline">\(3\sigma\)</span> mismatch, maximum parasitics) quickly leads to an over-designed circuit wasting power and area. A good specification states which conditions have to be met simultaneously.</p>
+</section>
+<section id="sec-robust-parasitics" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="sec-robust-parasitics"><span class="header-section-number">10.3</span> Include the Parasitics</h2>
+<p>All circuit wiring adds <span class="math inline">\(R\)</span>, <span class="math inline">\(L\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(k\)</span> parasitics: PCB traces and cables, package parasitics like bond wires, and on-chip interconnect. Having a unified simulation setup capturing all these impairments is a must, as unwanted effects like crosstalk or degraded performance can often be root-caused to them:</p>
+<ul>
+<li>For first investigations, hand-calculated values are a good starting point (see <a href="#sec-packaging-parasitics" class="quarto-xref">Section&nbsp;5.5</a>).</li>
+<li>For on-chip circuits, <strong>parasitic extraction (PEX)</strong> of the layout blocks is mandatory (see <a href="#sec-layout-extraction" class="quarto-xref">Section&nbsp;4.8</a>).</li>
+<li>For IC packages, first-order lumped models can be refined by calculated <strong>EM models</strong> (e.g., <span class="math inline">\(S\)</span>-parameters).</li>
+<li>The same holds for PCB effects; if no simulation model is available, approximate the important effects by calculating <span class="math inline">\(R\)</span>, <span class="math inline">\(L\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(k\)</span> from the geometry.</li>
+</ul>
+<p>Parasitics that are easily overlooked, because they are not part of the signal path, are those of the <strong>supply and ground network</strong>: a current step through the bond-wire inductance causes supply and ground bounce (<span class="math inline">\(L\,di/dt\)</span>), and resistive on-chip supply lines cause static and dynamic <strong>IR drop</strong>. These disturbances couple into every block sharing the same supply, and also into the <strong>substrate</strong>, which connects all devices on the die through a resistive network <span class="citation" data-cites="AfzaliKusha_2006">(<a href="#ref-AfzaliKusha_2006" role="doc-biblioref">Afzali-Kusha et al. 2006</a>)</span>. Common remedies are on-chip decoupling capacitors, separate supply and ground pins for noisy (digital, output drivers) and sensitive (analog, RF) blocks, multiple parallel bond wires, and guard rings around sensitive circuits. When no model of such an effect exists, add a pessimistic estimate to the testbench—an ideal supply and a perfect ground hide exactly the problems that show up in the lab.</p>
+</section>
+<section id="sec-robust-failure-mode" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="sec-robust-failure-mode"><span class="header-section-number">10.4</span> Failure-Mode Thinking</h2>
+<p>During the complete design phase, an important habit is “failure-mode thinking,” i.e., asking “<strong>what could go wrong?</strong>” (paranoia is a good trait in IC design). By anticipating potential issues, remedies and debug hooks can be built into the design. Some examples:</p>
+<ul>
+<li>If feedback-loop stability is a concern, make the compensation components (feedback <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) <strong>programmable</strong> (using register bits and transmission gates to switch components in and out).</li>
+<li>If there is a critical bias point in the circuit, make it <strong>observable</strong> (connect it to a test pad via a T-gate) or <strong>programmable</strong> (adapt voltages or currents by programming, metal redesign, or FIB).</li>
+<li>For complex logic functions, add <strong>spare logic gates</strong> nearby (a few NAND gates, inverters, latches, and delay elements) to allow fixing overlooked logic bugs in a metal-only redesign.</li>
+<li>If circuit sizing is uncertain, place <strong>spare elements</strong> (<span class="math inline">\(R\)</span>, <span class="math inline">\(C\)</span>, MOSFETs, logic gates) that can be connected in a metal redesign, or by FIB for a handful of repaired samples; often, dummy elements can double in this role.</li>
+<li>If the risk is very high, implement multiple <strong>design variants</strong> of a circuit on one tape-out, so the best variant (based on measurements) can be selected and refined for the next tape-out.</li>
+<li>Route internal nodes that are hard to measure (bias voltages, reference clocks, the output of a sub-block) to an <strong>analog test bus</strong> or a test multiplexer, and provide <strong>bypass</strong> and <strong>loop-back</strong> modes, so each block of a signal chain can be characterized in isolation.</li>
+<li>Make sure the circuit always reaches its intended operating point: self-biased circuits like bandgap references and current references can have a second, degenerate stable state (all currents zero) and need a <strong>start-up circuit</strong>. Power-up and power-down sequences, undefined reset states, and floating inputs of disabled blocks deserve dedicated simulations.</li>
+</ul>
+<p>For larger projects, this informal habit can be formalized as a <a href="https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis"><strong>failure mode and effects analysis (FMEA)</strong></a>, in which potential failure modes are systematically listed and ranked by severity, likelihood, and detectability; FMEA is mandatory, e.g., for automotive ICs.</p>
+</section>
+<section id="sec-robust-debug" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="sec-robust-debug"><span class="header-section-number">10.5</span> Debugging of ICs</h2>
+<p>If first silicon fails, the pressure to find a quick fix is high, and the temptation is to change several things at once based on a first guess. A disciplined procedure is usually faster:</p>
+<ol type="1">
+<li><strong>Reproduce</strong> the failure reliably and document the conditions (sample, supply, temperature, input signals); check whether all samples fail or only some (a design issue versus a production defect).</li>
+<li><strong>Isolate</strong> the failing block, e.g., using the test modes, bypass paths, and observable nodes built in during the design phase.</li>
+<li>Collect potential causes and form a <strong>hypothesis</strong> (the methods below help here).</li>
+<li><strong>Confirm</strong> the hypothesis by reproducing the failure in simulation, and by predicting a further observation that is then checked in the lab.</li>
+<li>Only then implement and verify the <strong>fix</strong>—first in simulation, then on silicon (e.g., by a FIB repair of a few samples) before the redesign is taped out.</li>
+</ol>
+<section id="the-fishbone-diagram" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="the-fishbone-diagram"><span class="header-section-number">10.5.1</span> The Fishbone Diagram</h3>
+<p>During the root-cause analysis of a failure, a structured method of investigation helps; the <a href="https://en.wikipedia.org/wiki/Ishikawa_diagram"><strong>fishbone (Ishikawa) diagram</strong></a> shown in <a href="#fig-fishbone" class="quarto-xref">Figure&nbsp;89</a> visualizes the cause-and-effect investigation <span class="citation" data-cites="Ishikawa_QC">(<a href="#ref-Ishikawa_QC" role="doc-biblioref">Ishikawa 1976</a>)</span>. In a tree-like structure, the potential causes leading to an effect are organized, and details (branches) are added as debugging or brainstorming progresses. Causes are usually grouped into categories:</p>
+<ul>
+<li><strong>People</strong>: anyone involved in the process.</li>
+<li><strong>Methods</strong>: policies, procedures, rules, and regulations.</li>
+<li><strong>Machines</strong>: computers, tools, and equipment required to accomplish the job.</li>
+<li><strong>Materials</strong>: raw materials, parts, and consumables used to produce the final product.</li>
+<li><strong>Measurements</strong>: data generated from the process, used to evaluate its quality.</li>
+<li><strong>Environment</strong>: the conditions—location, time, temperature, culture—in which the process operates.</li>
+</ul>
+<div id="cell-fig-fishbone" class="cell" data-execution_count="88">
+<div class="cell-output cell-output-display">
+<div id="fig-fishbone" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fishbone-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-fishbone-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-89" title="Figure&nbsp;89: Fishbone (Ishikawa) diagram for structured root-cause analysis: the effect (the observed problem) forms the head, the main bones are the cause categories, and detailed causes are added as smaller branches during the investigation."><img src="dcic_files/figure-html/fig-fishbone-output-1.png" width="758" height="394" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fishbone-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;89: Fishbone (Ishikawa) diagram for structured root-cause analysis: the effect (the observed problem) forms the head, the main bones are the cause categories, and detailed causes are added as smaller branches during the investigation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-5-why-method" class="level3" data-number="10.5.2">
+<h3 data-number="10.5.2" class="anchored" data-anchor-id="the-5-why-method"><span class="header-section-number">10.5.2</span> The “5-Why” Method</h3>
+<p>A helpful strategy to identify causes is the <a href="https://en.wikipedia.org/wiki/Five_whys"><strong>“5-why” method</strong></a>: ask “Why…?” five times in succession (five is just a rough number—more or less, depending on complexity); the method originates from the Toyota production system <span class="citation" data-cites="Ohno_TPS">(<a href="#ref-Ohno_TPS" role="doc-biblioref">Ohno 1988</a>)</span>. An example:</p>
+<ol type="1">
+<li>“<strong>Why</strong> did the robot stop?” → The circuit overloaded, causing a fuse to blow.</li>
+<li>“<strong>Why</strong> did the circuit overload?” → There was insufficient lubrication on the bearings, so they locked up.</li>
+<li>“<strong>Why</strong> was there insufficient lubrication?” → The oil pump is not circulating enough oil.</li>
+<li>“<strong>Why</strong> is the pump not circulating enough oil?” → The pump intake is clogged with metal shavings.</li>
+<li>“<strong>Why</strong> is the intake clogged?” → Because there is no filter on the pump.</li>
+</ol>
+<p>This may sound simple, but in a complex setting (time pressure, pressure from management or customers), analyzing an issue with simple, structured methods is an effective way to make progress.</p>
+</section>
+<section id="focused-ion-beam-fib" class="level3" data-number="10.5.3">
+<h3 data-number="10.5.3" class="anchored" data-anchor-id="focused-ion-beam-fib"><span class="header-section-number">10.5.3</span> Focused Ion Beam (FIB)</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/Focused_ion_beam"><strong>focused ion beam (FIB)</strong></a> is an extremely helpful technique to modify on-chip circuitry, by <strong>cutting connections</strong> and/or <strong>creating new on-chip connections</strong> (it can also create probe <strong>pads</strong> for micro-probing) <span class="citation" data-cites="Giannuzzi_FIB">(<a href="#ref-Giannuzzi_FIB" role="doc-biblioref">Giannuzzi and Stevie 2005</a>)</span>:</p>
+<ul>
+<li>A FIB machine uses ions (e.g., Ga) to <strong>remove material</strong> from a sample by sputtering/milling, with a resolution down to about 10 nm.</li>
+<li>Using a reactive gas inside the vacuum chamber, FIB-assisted CVD can <strong>deposit structured layers</strong> of, e.g., tungsten, forming new electrical connections.</li>
+<li>Since the deposited layers are very thin, creating low-ohmic connections is difficult—so a cut is preferable to a new connection where possible.</li>
+</ul>
+<p>FIB access is easiest on the top metal layers; nets that are candidates for a FIB modification should therefore be routed (at least for a short section) on top metal, away from dense wiring, and not be covered by metal fill. For flip-chip packages or dense metal stacks, FIB modifications from the backside of the thinned die are possible, but considerably more difficult.</p>
+</section>
+<section id="failure-analysis" class="level3" data-number="10.5.4">
+<h3 data-number="10.5.4" class="anchored" data-anchor-id="failure-analysis"><span class="header-section-number">10.5.4</span> Failure Analysis</h3>
+<p>Beyond electrical measurements at the pins, several physical failure-analysis techniques help to locate a fault on the die (a comprehensive overview is given in <span class="citation" data-cites="Gandhi_FADeskRef">(<a href="#ref-Gandhi_FADeskRef" role="doc-biblioref">Gandhi 2019</a>)</span>):</p>
+<ul>
+<li><strong>Micro-probing</strong>: fine needles (or FIB-created probe pads) contact internal nodes to measure voltages and waveforms directly.</li>
+<li><strong>Hot-spot detection</strong>: shorts, leaky junctions, and latched structures dissipate power locally, which can be localized by thermal imaging (e.g., lock-in thermography) or by <a href="https://en.wikipedia.org/wiki/Liquid_crystal">liquid-crystal</a> coatings changing their appearance with temperature.</li>
+<li><strong>Photon emission microscopy</strong>: forward-biased junctions, MOSFETs in saturation, and oxide breakdown emit weak light (mostly in the infrared), which can be detected, also through the backside of the die.</li>
+<li><strong>X-ray</strong> inspection and <strong>acoustic microscopy</strong> reveal package defects like broken bond wires, voids, or delamination non-destructively; afterwards, the die can be exposed by <strong>decapsulation</strong> and inspected optically or in a scanning electron microscope (SEM).</li>
+</ul>
 
 
 
@@ -4173,6 +4331,9 @@ Figure&nbsp;88: Guard rings for latch-up prevention (layout top view): the NMOS 
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-AfzaliKusha_2006" class="csl-entry" role="listitem">
+Afzali-Kusha, Ali, Makoto Nagata, Nishath K. Verghese, and David J. Allstot. 2006. <span>“Substrate Noise Coupling in <span>SoC</span> Design: Modeling, Avoidance, and Validation.”</span> <em>Proceedings of the IEEE</em> 94 (12): 2109–38. <a href="https://doi.org/10.1109/JPROC.2006.886029">https://doi.org/10.1109/JPROC.2006.886029</a>.
+</div>
 <div id="ref-Allen_Holberg" class="csl-entry" role="listitem">
 Allen, Phillip E., and Douglas R. Holberg. 2012. <em>CMOS Analog Circuit Design</em>. 3rd ed. Oxford University Press.
 </div>
@@ -4194,11 +4355,23 @@ Dennard, Robert H., Fritz H. Gaensslen, Hwa-Nien Yu, V. Leo Rideout, Ernest Bass
 <div id="ref-Gajski_Kuhn_1983" class="csl-entry" role="listitem">
 Gajski, Daniel D., and Robert H. Kuhn. 1983. <span>“Guest Editors’ Introduction: New <span>VLSI</span> Tools.”</span> <em>Computer</em> 16 (12): 11–14. <a href="https://doi.org/10.1109/MC.1983.1654264">https://doi.org/10.1109/MC.1983.1654264</a>.
 </div>
+<div id="ref-Gandhi_FADeskRef" class="csl-entry" role="listitem">
+Gandhi, Tejinder, ed. 2019. <em>Microelectronics Failure Analysis Desk Reference</em>. ASM International.
+</div>
+<div id="ref-Giannuzzi_FIB" class="csl-entry" role="listitem">
+Giannuzzi, Lucille A., and Fred A. Stevie, eds. 2005. <em>Introduction to Focused Ion Beams: Instrumentation, Theory, Techniques and Practice</em>. Springer. <a href="https://doi.org/10.1007/b101190">https://doi.org/10.1007/b101190</a>.
+</div>
 <div id="ref-Goto_2003" class="csl-entry" role="listitem">
 <span class="nocase">Goto, Ken-ichi et al.</span> 2003. <span>“High Performance 25 <span class="nocase">nm</span> Gate <span>CMOSFETs</span> for 65 <span class="nocase">nm</span> Node High Speed <span>MPUs</span>.”</span> <em>IEEE International Electron Devices Meeting (IEDM)</em>.
 </div>
+<div id="ref-Hastings_AnalogLayout" class="csl-entry" role="listitem">
+Hastings, Alan. 2006. <em>The Art of Analog Layout</em>. 2nd ed. Prentice Hall.
+</div>
 <div id="ref-Hu_ModernDevices" class="csl-entry" role="listitem">
 Hu, Chenming. 2010. <em>Modern Semiconductor Devices for Integrated Circuits</em>. Pearson.
+</div>
+<div id="ref-Ishikawa_QC" class="csl-entry" role="listitem">
+Ishikawa, Kaoru. 1976. <em>Guide to Quality Control</em>. Asian Productivity Organization.
 </div>
 <div id="ref-Kahng_PhysicalDesign" class="csl-entry" role="listitem">
 Kahng, Andrew B., Jens Lienig, Igor L. Markov, and Jin Hu. 2022. <em>VLSI Physical Design: From Graph Partitioning to Timing Closure</em>. 2nd ed. Springer.
@@ -4212,6 +4385,9 @@ Kahng, Andrew B., Jens Lienig, Igor L. Markov, and Jin Hu. 2022. <em>VLSI Physic
 <div id="ref-Ker_2002" class="csl-entry" role="listitem">
 Ker, Ming-Dou, and Chien-Hui Chuang. 2002. <span>“<span>ESD</span> Protection Circuits with Novel <span>MOS</span>-Bounded Diode Structures.”</span> <em>IEEE International Symposium on Circuits and Systems (ISCAS)</em>.
 </div>
+<div id="ref-Kinget_2005" class="csl-entry" role="listitem">
+Kinget, Peter R. 2005. <span>“Device Mismatch and Tradeoffs in the Design of Analog Circuits.”</span> <em>IEEE Journal of Solid-State Circuits</em> 40 (6): 1212–24. <a href="https://doi.org/10.1109/JSSC.2005.848021">https://doi.org/10.1109/JSSC.2005.848021</a>.
+</div>
 <div id="ref-DeMicheli_Synthesis" class="csl-entry" role="listitem">
 Micheli, Giovanni De. 1994. <em>Synthesis and Optimization of Digital Circuits</em>. McGraw-Hill.
 </div>
@@ -4223,6 +4399,12 @@ Moore, Gordon E. 1965. <span>“Cramming More Components onto Integrated Circuit
 </div>
 <div id="ref-Murphy_1964" class="csl-entry" role="listitem">
 Murphy, Bernard T. 1964. <span>“Cost-Size Optima of Monolithic Integrated Circuits.”</span> <em>Proceedings of the IEEE</em> 52 (12): 1537–45. <a href="https://doi.org/10.1109/PROC.1964.3442">https://doi.org/10.1109/PROC.1964.3442</a>.
+</div>
+<div id="ref-Ohno_TPS" class="csl-entry" role="listitem">
+Ohno, Taiichi. 1988. <em>Toyota Production System: Beyond Large-Scale Production</em>. Productivity Press.
+</div>
+<div id="ref-Pelgrom_1989" class="csl-entry" role="listitem">
+Pelgrom, Marcel J. M., Aad C. J. Duinmaijer, and Anton P. G. Welbers. 1989. <span>“Matching Properties of <span>MOS</span> Transistors.”</span> <em>IEEE Journal of Solid-State Circuits</em> 24 (5): 1433–39. <a href="https://doi.org/10.1109/JSSC.1989.572629">https://doi.org/10.1109/JSSC.1989.572629</a>.
 </div>
 <div id="ref-Pozar_RF" class="csl-entry" role="listitem">
 Pozar, David M. 2011. <em>Microwave Engineering</em>. 4th ed. Wiley.

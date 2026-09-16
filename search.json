@@ -84,130 +84,144 @@
     "text": "8.6 FPGAs"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-nutshell",
-    "href": "slides/mosfet.html#sec-mosfet-nutshell",
-    "title": "The MOSFET",
-    "section": "2.1 MOSFET Operation in a Nutshell",
-    "text": "2.1 MOSFET Operation in a Nutshell\n\nThis chapter on the metal-oxide-semiconductor field-effect transistor (MOSFET) is largely based on (Hu 2010; Razavi 2014; Tsividis and McAndrew 2011), which are also recommended as further reading. In contrast to our Analog Circuit Design course, where we treated the MOSFET essentially as a numerically-characterized black box, we will derive a simple, first-order model of the MOSFET from the physics of the device, and then discuss the most important second-order effects. The goal is to understand the basic operation of the MOSFET and its \\(I\\)/\\(V\\) characteristic, which will be used in later chapters for circuit design."
+    "objectID": "slides/robust.html#sec-robust-circuits",
+    "href": "slides/robust.html#sec-robust-circuits",
+    "title": "Robust Design",
+    "section": "10.1 Robust Circuits and Layouts",
+    "text": "10.1 Robust Circuits and Layouts"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-iv",
-    "href": "slides/mosfet.html#sec-mosfet-iv",
-    "title": "The MOSFET",
-    "section": "2.2 Basic I/V Characteristic of the MOSFET",
-    "text": "2.2 Basic I/V Characteristic of the MOSFET"
+    "objectID": "slides/robust.html#sec-robust-corners",
+    "href": "slides/robust.html#sec-robust-corners",
+    "title": "Robust Design",
+    "section": "10.2 Corner Models",
+    "text": "10.2 Corner Models"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-second-order",
-    "href": "slides/mosfet.html#sec-mosfet-second-order",
-    "title": "The MOSFET",
-    "section": "2.3 Second-Order Effects in the MOSFET",
-    "text": "2.3 Second-Order Effects in the MOSFET\n\nNote that in the CMOS technology shown in Figure 11, the bulk nodes of all the NMOS transistors are tied to the common substrate (\\(V_\\mathrm{SS}\\)), while the bulk nodes of all the PMOS transistors are tied to the \\(n\\)-well (\\(V_\\mathrm{DD}\\)). Since the \\(n\\)-wells are separated from the substrate (and can be separated between different PMOS devices), the bulk nodes of selected PMOS can be tied to different potentials than \\(V_\\mathrm{DD}\\) (e.g., to the source of the PMOS), which is called body biasing. This can be used to adjust the threshold voltage of the PMOS transistors or to avoid the bulk effect (see Section 2.3.1)."
+    "objectID": "slides/robust.html#sec-robust-parasitics",
+    "href": "slides/robust.html#sec-robust-parasitics",
+    "title": "Robust Design",
+    "section": "10.3 Include the Parasitics",
+    "text": "10.3 Include the Parasitics"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-ac",
-    "href": "slides/mosfet.html#sec-mosfet-ac",
-    "title": "The MOSFET",
-    "section": "2.4 MOSFET AC Operation",
-    "text": "2.4 MOSFET AC Operation"
+    "objectID": "slides/robust.html#sec-robust-failure-mode",
+    "href": "slides/robust.html#sec-robust-failure-mode",
+    "title": "Robust Design",
+    "section": "10.4 Failure-Mode Thinking",
+    "text": "10.4 Failure-Mode Thinking"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-ssm",
-    "href": "slides/mosfet.html#sec-mosfet-ssm",
-    "title": "The MOSFET",
-    "section": "2.5 MOSFET Small-Signal Model",
-    "text": "2.5 MOSFET Small-Signal Model"
+    "objectID": "slides/robust.html#sec-robust-debug",
+    "href": "slides/robust.html#sec-robust-debug",
+    "title": "Robust Design",
+    "section": "10.5 Debugging of ICs",
+    "text": "10.5 Debugging of ICs"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-scaling",
-    "href": "slides/mosfet.html#sec-mosfet-scaling",
-    "title": "The MOSFET",
-    "section": "2.6 MOSFET Scaling",
-    "text": "2.6 MOSFET Scaling"
+    "objectID": "slides/technology.html#sec-technology-wafer",
+    "href": "slides/technology.html#sec-technology-wafer",
+    "title": "IC Technology",
+    "section": "3.1 The Silicon Wafer",
+    "text": "3.1 The Silicon Wafer\n\nThis chapter walks through the manufacturing technology of integrated circuits: from the raw silicon wafer through the individual processing steps (doping, photolithography, etching, thin-film deposition, and interconnect formation) to a complete CMOS process flow. The treatment largely follows (Hu 2010)."
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-sce",
-    "href": "slides/mosfet.html#sec-mosfet-sce",
-    "title": "The MOSFET",
-    "section": "2.7 MOSFET Short-Channel Effects",
-    "text": "2.7 MOSFET Short-Channel Effects"
+    "objectID": "slides/technology.html#sec-technology-selective-doping",
+    "href": "slides/technology.html#sec-technology-selective-doping",
+    "title": "IC Technology",
+    "section": "3.2 Selective Doping",
+    "text": "3.2 Selective Doping"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-ihp",
-    "href": "slides/mosfet.html#sec-mosfet-ihp",
-    "title": "The MOSFET",
-    "section": "2.8 Simulated Characteristics in IHP SG13",
-    "text": "2.8 Simulated Characteristics in IHP SG13\n\nThe evolution of the FinFET is the nanosheet MOSFET, first introduced at the 3 nm node (and used by all foundries at 2 nm) and shown in Figure 18 (c). One advantage is the even better electrostatic control of the gate over the channel, as the stacked channels are completely wrapped by the gate—hence also called gate-all-around (GAA) MOSFET. In addition, the stacked channels can be either \\(n\\)- or \\(p\\)-type (or mixed), and could even use different materials, like SiGe or GaAs, opening the door to 3D integration."
+    "objectID": "slides/technology.html#sec-technology-litho",
+    "href": "slides/technology.html#sec-technology-litho",
+    "title": "IC Technology",
+    "section": "3.3 Photolithography",
+    "text": "3.3 Photolithography"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-sizing",
-    "href": "slides/mosfet.html#sec-mosfet-sizing",
-    "title": "The MOSFET",
-    "section": "2.9 MOSFET Sizing",
-    "text": "2.9 MOSFET Sizing"
+    "objectID": "slides/technology.html#sec-technology-etching",
+    "href": "slides/technology.html#sec-technology-etching",
+    "title": "IC Technology",
+    "section": "3.4 Etching",
+    "text": "3.4 Etching"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-summary",
-    "href": "slides/mosfet.html#sec-mosfet-summary",
-    "title": "The MOSFET",
-    "section": "2.10 Summary",
-    "text": "2.10 Summary"
+    "objectID": "slides/technology.html#sec-technology-doping",
+    "href": "slides/technology.html#sec-technology-doping",
+    "title": "IC Technology",
+    "section": "3.5 Doping Techniques",
+    "text": "3.5 Doping Techniques"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-si-properties",
-    "href": "slides/mosfet.html#sec-mosfet-si-properties",
-    "title": "The MOSFET",
-    "section": "2.11 Appendix: Silicon Material Properties",
-    "text": "2.11 Appendix: Silicon Material Properties"
+    "objectID": "slides/technology.html#sec-technology-thin-film",
+    "href": "slides/technology.html#sec-technology-thin-film",
+    "title": "IC Technology",
+    "section": "3.6 Thin-Film Deposition",
+    "text": "3.6 Thin-Film Deposition"
   },
   {
-    "objectID": "slides/testing.html#sec-testing-flow",
-    "href": "slides/testing.html#sec-testing-flow",
-    "title": "Testing",
-    "section": "6.1 Post-Silicon Production Flow",
-    "text": "6.1 Post-Silicon Production Flow\n\nIntegrated circuits must be tested for functionality and specification compliance before they are shipped. Defects introduced during manufacturing, as well as parameter variations, are unavoidable—not every IC on a wafer is a good device (the yield is below 100 %). Typical defect causes are doping errors and fluctuations, under- or over-etching, misalignment of layers, and contamination by particles. A comprehensive treatment of IC test is given in (Wang et al. 2006); the related field of hardware security and trust is covered in (Bhunia and Tehranipoor 2018)."
+    "objectID": "slides/technology.html#sec-technology-interconnect",
+    "href": "slides/technology.html#sec-technology-interconnect",
+    "title": "IC Technology",
+    "section": "3.7 Interconnects",
+    "text": "3.7 Interconnects"
   },
   {
-    "objectID": "slides/testing.html#sec-testing-equipment",
-    "href": "slides/testing.html#sec-testing-equipment",
-    "title": "Testing",
-    "section": "6.2 Test Equipment",
-    "text": "6.2 Test Equipment"
+    "objectID": "slides/technology.html#sec-technology-cmos-flow",
+    "href": "slides/technology.html#sec-technology-cmos-flow",
+    "title": "IC Technology",
+    "section": "3.8 An Exemplary CMOS Process Flow",
+    "text": "3.8 An Exemplary CMOS Process Flow\n\nThe classic dielectric between the metal layers is SiO2, but in order to reduce capacitive parasitics, low-k dielectrics (e.g., F- or C-doped SiO2) are used in modern processes. Between processing steps, CMP is used to planarize the surfaces."
   },
   {
-    "objectID": "slides/testing.html#sec-testing-challenges",
-    "href": "slides/testing.html#sec-testing-challenges",
-    "title": "Testing",
-    "section": "6.3 Mixed-Signal Testing Challenges",
-    "text": "6.3 Mixed-Signal Testing Challenges\n\nThe DIB is a custom-designed PCB that hosts the package socket (for testing packaged ICs) or connects to the probe card (for wafer testing). It also contains interface circuits that cannot be handled by the tester hardware resources (e.g., special components required by the DUT). Contact to the packaged DUT is made with spring-loaded “pogo pins” in the socket. For wafer probing, different probe-card types are used: cantilever probe cards (needles coming in at an angle), vertical (“buckling-beam” or “cobra”) probe cards, and membrane probe cards for high pin counts and fine pitches.\nHandlers (robotic pick-and-place or gravity-fed) insert the DUT into the test socket on the DIB. After the test, the ICs are sorted into bins (good = pass, bad = fail, possibly multiple pass grades). The handler can also provide a temperature-controlled environment for hot/cold testing in addition to room-temperature testing (the latter is preferred for cost reasons)."
+    "objectID": "slides/technology.html#sec-technology-ihp",
+    "href": "slides/technology.html#sec-technology-ihp",
+    "title": "IC Technology",
+    "section": "3.9 The Open-Source PDK IHP SG13",
+    "text": "3.9 The Open-Source PDK IHP SG13"
   },
   {
-    "objectID": "slides/testing.html#sec-testing-plan",
-    "href": "slides/testing.html#sec-testing-plan",
-    "title": "Testing",
-    "section": "6.4 The Test Plan",
-    "text": "6.4 The Test Plan"
+    "objectID": "slides/technology.html#sec-technology-qualification",
+    "href": "slides/technology.html#sec-technology-qualification",
+    "title": "IC Technology",
+    "section": "3.10 Technology Qualification",
+    "text": "3.10 Technology Qualification"
   },
   {
-    "objectID": "slides/testing.html#sec-testing-types",
-    "href": "slides/testing.html#sec-testing-types",
-    "title": "Testing",
-    "section": "6.5 Types of Tests",
-    "text": "6.5 Types of Tests"
+    "objectID": "slides/intro.html#sec-intro-scale",
+    "href": "slides/intro.html#sec-intro-scale",
+    "title": "Introduction",
+    "section": "1.1 How Small Is a Nanometer?",
+    "text": "1.1 How Small Is a Nanometer?"
   },
   {
-    "objectID": "slides/testing.html#sec-testing-cpk",
-    "href": "slides/testing.html#sec-testing-cpk",
-    "title": "Testing",
-    "section": "6.6 Process Capability Index",
-    "text": "6.6 Process Capability Index\n\nFor analog test parameters, the variation over production must stay inside the test limits, which are derived from the datasheet limits minus guard bands: the lower specification limit (LSL) and the upper specification limit (USL)."
+    "objectID": "slides/intro.html#sec-intro-history",
+    "href": "slides/intro.html#sec-intro-history",
+    "title": "Introduction",
+    "section": "1.2 A Brief History of Semiconductors",
+    "text": "1.2 A Brief History of Semiconductors"
   },
   {
-    "objectID": "slides/index.html",
-    "href": "slides/index.html",
-    "title": "Lecture Slides",
+    "objectID": "slides/esd.html#sec-esd-basics",
+    "href": "slides/esd.html#sec-esd-basics",
+    "title": "Electrostatic Discharge and Latch-Up",
+    "section": "9.1 Electrostatic Discharge",
+    "text": "9.1 Electrostatic Discharge\n\nThis chapter covers two reliability hazards that every IC design must handle: electrostatic discharge (ESD), the sudden discharge of statically charged objects into the chip, and latch-up, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows (Amerasekera and Duvvury 2002); overviews of ESD test methods and of protection structures can be found in (Ker et al. 2001; Ker and Chuang 2002)."
+  },
+  {
+    "objectID": "slides/esd.html#sec-latchup",
+    "href": "slides/esd.html#sec-latchup",
+    "title": "Electrostatic Discharge and Latch-Up",
+    "section": "9.2 Latch-Up",
+    "text": "9.2 Latch-Up"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Design of Complex Integrated Circuits",
     "section": "",
-    "text": "Slide decks generated from the lecture notes, one per chapter. Press S for speaker notes, C for the chalkboard, and ? for all shortcuts.\n\nIntroduction\nThe MOSFET\nIC Technology\nThe Layout\nIC Packaging\nTesting\nEconomy of Integrated Circuits\nDesign Methodology\nElectrostatic Discharge and Latch-Up"
+    "text": "Design of Complex Integrated Circuits\n\n\n\nQuarto Publish\n\n\n(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)\nThis is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 (“VL Entwurf komplexer integrierter Schaltungen”). Follow this link to access the material.\nThe course covers how integrated circuits are built (MOSFET operation, CMOS technology, layout, packaging, testing, and the economics of chip making) and how they are designed (design methodology, ESD protection, latch-up, robust design techniques, and circuit simulation).\nAll course material is made publicly available and shared under the Apache-2.0 license.\nWe happily accept pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue!"
   },
   {
     "objectID": "dcic.html#sec-intro-scale",
@@ -595,6 +609,41 @@
     "text": "9.2 Latch-Up\nLatch-up is the creation of a low-impedance path between the power-supply rails (\\(V_\\mathrm{DD}\\) to \\(V_\\mathrm{SS}\\)) by triggering the parasitic SCR formed by the complementary devices in CMOS, shown in Figure 87 and already discussed in Section 9.1.6. The vertical PNP (emitter = PMOS source in the n-well, base = n-well, collector = substrate) and the lateral NPN (emitter = NMOS source, base = substrate, collector = n-well) form a PNPN structure between the rails, with the well and substrate resistances \\(R_\\mathrm{well}\\) and \\(R_\\mathrm{sub}\\) completing the classic thyristor equivalent circuit.\n\n\n\n\n\n\n\n\nFigure 87: Parasitic thyristor in a CMOS inverter, causing latch-up: the vertical PNP (PMOS source = emitter, n-well = base, substrate = collector) and the lateral NPN (NMOS source = emitter, substrate = base, n-well = collector) are cross-coupled through the well resistance \\(R_\\mathrm{well}\\) and the substrate resistance \\(R_\\mathrm{sub}\\). Injected charge that develops \\(\\approx 0.7\\,\\)V across either resistance triggers the loop.\n\n\n\n\n\nLatch-up is triggered by a current or voltage stimulus on an input, output, or I/O pin (injecting carriers into wells or substrate), or by an over-voltage on the supply pin. Two cases are distinguished:\n\nTransient latch-up: the low-impedance state persists only while the stimulus is applied.\nTrue latch-up: the state remains after the stimulus is removed and can only be ended by a power-supply shutdown—use a current limit on the power supply when testing ICs in the lab! The large current can destroy the chip by overheating and electromigration.\n\n\n9.2.1 Latch-Up Testing\nLatch-up testing is a standard procedure during IC qualification (JEDEC JESD78): a current-limited (typically 100 mA), 10 ms pulse is applied to all pads, with the voltage compliance constrained to 1.5× the maximum supply voltage above ground and to a defined negative value below ground; additionally, a supply over-voltage test is applied. After each stimulus, the supply current is monitored to detect a latched state.\n\n\n9.2.2 Latch-Up Prevention\nLatch-up is prevented by weakening the parasitic bipolar transistors and their coupling:\n\nPhysical separation of the diffusions/wells forming the parasitic BJTs lowers their current gain (shallow-trench isolation helps to increase the electrical distance without a large spacing penalty).\nReduce the parasitic resistances \\(R_\\mathrm{well}\\) and \\(R_\\mathrm{sub}\\) that develop the triggering base-emitter voltages: place many well and substrate ties, and/or use an epi-process with a highly doped substrate.\nUse guard rings around critical components (e.g., I/O drivers and any junction that may inject carriers) to collect stray charges before they can reach a parasitic base, as shown in Figure 88.\n\n\n\n\n\n\n\n\n\nFigure 88: Guard rings for latch-up prevention (layout top view): the NMOS is surrounded by a grounded \\(p^+\\) guard ring, the PMOS by an \\(n^+\\) guard ring tied to \\(V_\\mathrm{DD}\\) inside the n-well. The rings collect injected minority and majority carriers before they can act as base current for the parasitic bipolar transistors.\n\n\n\n\n\nAdopting these design practices helps to significantly reduce the risk of latch-up in CMOS circuits.\nFoundries cast these practices into their design rule manuals. IHP SG13G2, for example, dedicates Sec. 7.2 Latch-up Guidelines of the SG13G2 layout rules to the topic:\n\nFor output buffers, the sources of the NMOS and PMOS have to be tied to \\(V_\\mathrm{SS}\\) and \\(V_\\mathrm{DD}\\) and their drains connected directly to the pad; guard rings (well and substrate ties) are required around every device directly tied to a pad, and double guard rings (an n-well isolator plus a \\(p^+\\) isolator) have to be placed between the n-channel and p-channel buffers, as well as between the buffers and the internal circuitry.\nRules LU.a and LU.b limit the maximum distance from any \\(p^+\\) active area inside the n-well to an n-well tie, and from any \\(n^+\\) active area inside the p-well to a substrate tie, to 20 µm—this is the rule-deck version of “place many well and substrate ties”.\nRules LU.c to LU.d1 limit how far a tie may extend beyond its contact (6 µm), which keeps the resistance of the tie itself low.\n\nBeware: these latch-up rules are not checked by default in the SG13G2 DRC deck—the check has to be enabled explicitly."
   },
   {
+    "objectID": "dcic.html#sec-robust-circuits",
+    "href": "dcic.html#sec-robust-circuits",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "10.1 Robust Circuits and Layouts",
+    "text": "10.1 Robust Circuits and Layouts\nAbsolute parameters of IC components (MOSFETs, \\(R\\), \\(C\\)) vary a lot in production (\\(V_\\mathrm{th}\\) by \\(\\pm 100\\,\\text{mV}\\), other parameters by ±10 to ±30 %), but ratios can be produced very accurately. Therefore:\n\nDefine gains by resistor ratios or capacitor ratios.\nSet currents by the ratio of a current mirror.\nTime as a parameter can be handled efficiently and accurately (crystal-referenced); if possible, base the circuit principle on timing.\n\nA few further circuit-level habits make a design tolerant against the remaining variations:\n\nUse negative feedback: the closed-loop gain of an amplifier is set by the feedback network (a ratio again), and is largely independent of the poorly controlled open-loop gain.\nDerive bias currents from a well-defined reference (e.g., a bandgap voltage across a resistor, or a constant-\\(g_\\mathrm{m}\\) bias) instead of a plain supply-referenced resistor, so the circuit performance tracks with process and temperature in a controlled way.\nPrefer differential signal paths: supply noise, substrate coupling, and even-order distortion appear as common-mode disturbances and are rejected to first order.\nWhere the achievable accuracy is not sufficient, plan for calibration or trimming (see Section 6.5) instead of over-designing the circuit.\n\nMismatch of IC components is inherent to wafer production, but can be made worse by bad layout or non-matched sizing: matching is best when devices are constructed from unit elements, with matched size, orientation, wiring, and current-flow direction (see Section 4.5). The random part of the mismatch between two identical, closely spaced devices scales with their area, as described by the Pelgrom model (Pelgrom et al. 1989):\n\\[\n\\sigma(\\Delta V_\\mathrm{th}) = \\frac{A_{V_\\mathrm{th}}}{\\sqrt{W L}}\n\\tag{65}\\]\nThe matching coefficient \\(A_{V_\\mathrm{th}}\\) is supplied by the foundry and is in the range of a few \\(\\text{mV}\\cdot\\mu\\text{m}\\) for current CMOS technologies. With \\(A_{V_\\mathrm{th}} = 5\\,\\text{mV}\\cdot\\mu\\text{m}\\), a transistor pair with \\(W L = 1\\,\\mu\\text{m}^2\\) has \\(\\sigma(\\Delta V_\\mathrm{th}) = 5\\,\\text{mV}\\); halving the mismatch costs four times the area (and capacitance). Equation 65 is thus a fundamental trade-off between accuracy, area, and speed, which is analyzed in detail in (Kinget 2005); practical layout measures for matching and robustness are collected in (Hastings 2006).\nKeep the production flow in mind to anticipate good layout practices: masks can be offset relative to each other, gradients across the wafer will happen, single defects should not cause circuit failure (use multiple vias!), and the layout will be post-processed for manufacturability (filling, cheesing, dummy structures).\nRobustness also has a lifetime dimension: a circuit that works at time zero has to keep working over years of operation (see Section 3.10). Relevant wear-out mechanisms are electromigration in wires and vias (respect the current-density limits of the PDK, especially for supply lines and output drivers), gate-oxide breakdown (TDDB), and \\(V_\\mathrm{th}\\) drift by hot-carrier injection (HCI) and bias-temperature instability (NBTI/PBTI). Hence, keep all device terminal voltages within the rated limits of the respective device type in all operating states—including power-up, power-down, and when a block is disabled."
+  },
+  {
+    "objectID": "dcic.html#sec-robust-corners",
+    "href": "dcic.html#sec-robust-corners",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "10.2 Corner Models",
+    "text": "10.2 Corner Models\nTo check the influence of production parameter variations, the foundries supply corner models. Model files are provided for the nominal corner (TT), reflecting the target values of production, and for the expected parameter extremes (usually \\(3\\sigma\\) to \\(5\\sigma\\)):\n\nSmallest/largest \\(R\\), smallest/largest \\(C\\), etc.\nSlow/fast PMOS and slow/fast NMOS, usually grouped into the corner sets SS, SF, TT, FS, FF (first letter NMOS, second letter PMOS).\n\nAll available corner files should be simulated to check the circuit performance against production spread; in addition, temperature and supply voltage (defined early in the IC specification) have to be varied. This results in many simulation runs, requiring automated simulation control and data post-processing. Which combination is the worst case depends on the circuit and on the parameter under test:\n\nFor digital timing, the slow corner (SS, lowest supply, highest temperature) usually limits the maximum clock frequency (setup time), whereas the fast corner (FF, highest supply, lowest temperature) is critical for hold-time violations and leakage. In advanced low-voltage nodes, temperature inversion can make low temperature the slowest condition.\nThe skewed corners SF and FS are critical for circuits relying on a balance between NMOS and PMOS, such as the switching threshold of an inverter, ratioed logic, or SRAM cells.\nAnalog circuits can have their worst case in any corner, so no corner should be skipped.\n\nComponent mismatch (as opposed to global process shift) is covered by Monte-Carlo models, in which device parameters are randomly varied for each simulation run according to their statistical distribution. The result is a distribution of the circuit performance (e.g., the input offset of a comparator), from which mean and standard deviation are estimated. Since a specification is usually required to be met with a margin of several \\(\\sigma\\) (see Section 6.6), and the estimate of \\(\\sigma\\) itself is uncertain for few samples, a meaningful Monte-Carlo analysis needs at least a few hundred runs. Corner models describe the (fully correlated) global process shift, while Monte-Carlo mismatch describes random local variations; for critical blocks, both have to be combined, i.e., Monte-Carlo mismatch runs are performed on top of the process corners.\nNote that stacking all worst cases at their extremes (slowest process, lowest supply, highest temperature, \\(3\\sigma\\) mismatch, maximum parasitics) quickly leads to an over-designed circuit wasting power and area. A good specification states which conditions have to be met simultaneously."
+  },
+  {
+    "objectID": "dcic.html#sec-robust-parasitics",
+    "href": "dcic.html#sec-robust-parasitics",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "10.3 Include the Parasitics",
+    "text": "10.3 Include the Parasitics\nAll circuit wiring adds \\(R\\), \\(L\\), \\(C\\), \\(k\\) parasitics: PCB traces and cables, package parasitics like bond wires, and on-chip interconnect. Having a unified simulation setup capturing all these impairments is a must, as unwanted effects like crosstalk or degraded performance can often be root-caused to them:\n\nFor first investigations, hand-calculated values are a good starting point (see Section 5.5).\nFor on-chip circuits, parasitic extraction (PEX) of the layout blocks is mandatory (see Section 4.8).\nFor IC packages, first-order lumped models can be refined by calculated EM models (e.g., \\(S\\)-parameters).\nThe same holds for PCB effects; if no simulation model is available, approximate the important effects by calculating \\(R\\), \\(L\\), \\(C\\), \\(k\\) from the geometry.\n\nParasitics that are easily overlooked, because they are not part of the signal path, are those of the supply and ground network: a current step through the bond-wire inductance causes supply and ground bounce (\\(L\\,di/dt\\)), and resistive on-chip supply lines cause static and dynamic IR drop. These disturbances couple into every block sharing the same supply, and also into the substrate, which connects all devices on the die through a resistive network (Afzali-Kusha et al. 2006). Common remedies are on-chip decoupling capacitors, separate supply and ground pins for noisy (digital, output drivers) and sensitive (analog, RF) blocks, multiple parallel bond wires, and guard rings around sensitive circuits. When no model of such an effect exists, add a pessimistic estimate to the testbench—an ideal supply and a perfect ground hide exactly the problems that show up in the lab."
+  },
+  {
+    "objectID": "dcic.html#sec-robust-failure-mode",
+    "href": "dcic.html#sec-robust-failure-mode",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "10.4 Failure-Mode Thinking",
+    "text": "10.4 Failure-Mode Thinking\nDuring the complete design phase, an important habit is “failure-mode thinking,” i.e., asking “what could go wrong?” (paranoia is a good trait in IC design). By anticipating potential issues, remedies and debug hooks can be built into the design. Some examples:\n\nIf feedback-loop stability is a concern, make the compensation components (feedback \\(R\\) and \\(C\\)) programmable (using register bits and transmission gates to switch components in and out).\nIf there is a critical bias point in the circuit, make it observable (connect it to a test pad via a T-gate) or programmable (adapt voltages or currents by programming, metal redesign, or FIB).\nFor complex logic functions, add spare logic gates nearby (a few NAND gates, inverters, latches, and delay elements) to allow fixing overlooked logic bugs in a metal-only redesign.\nIf circuit sizing is uncertain, place spare elements (\\(R\\), \\(C\\), MOSFETs, logic gates) that can be connected in a metal redesign, or by FIB for a handful of repaired samples; often, dummy elements can double in this role.\nIf the risk is very high, implement multiple design variants of a circuit on one tape-out, so the best variant (based on measurements) can be selected and refined for the next tape-out.\nRoute internal nodes that are hard to measure (bias voltages, reference clocks, the output of a sub-block) to an analog test bus or a test multiplexer, and provide bypass and loop-back modes, so each block of a signal chain can be characterized in isolation.\nMake sure the circuit always reaches its intended operating point: self-biased circuits like bandgap references and current references can have a second, degenerate stable state (all currents zero) and need a start-up circuit. Power-up and power-down sequences, undefined reset states, and floating inputs of disabled blocks deserve dedicated simulations.\n\nFor larger projects, this informal habit can be formalized as a failure mode and effects analysis (FMEA), in which potential failure modes are systematically listed and ranked by severity, likelihood, and detectability; FMEA is mandatory, e.g., for automotive ICs."
+  },
+  {
+    "objectID": "dcic.html#sec-robust-debug",
+    "href": "dcic.html#sec-robust-debug",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "10.5 Debugging of ICs",
+    "text": "10.5 Debugging of ICs\nIf first silicon fails, the pressure to find a quick fix is high, and the temptation is to change several things at once based on a first guess. A disciplined procedure is usually faster:\n\nReproduce the failure reliably and document the conditions (sample, supply, temperature, input signals); check whether all samples fail or only some (a design issue versus a production defect).\nIsolate the failing block, e.g., using the test modes, bypass paths, and observable nodes built in during the design phase.\nCollect potential causes and form a hypothesis (the methods below help here).\nConfirm the hypothesis by reproducing the failure in simulation, and by predicting a further observation that is then checked in the lab.\nOnly then implement and verify the fix—first in simulation, then on silicon (e.g., by a FIB repair of a few samples) before the redesign is taped out.\n\n\n10.5.1 The Fishbone Diagram\nDuring the root-cause analysis of a failure, a structured method of investigation helps; the fishbone (Ishikawa) diagram shown in Figure 89 visualizes the cause-and-effect investigation (Ishikawa 1976). In a tree-like structure, the potential causes leading to an effect are organized, and details (branches) are added as debugging or brainstorming progresses. Causes are usually grouped into categories:\n\nPeople: anyone involved in the process.\nMethods: policies, procedures, rules, and regulations.\nMachines: computers, tools, and equipment required to accomplish the job.\nMaterials: raw materials, parts, and consumables used to produce the final product.\nMeasurements: data generated from the process, used to evaluate its quality.\nEnvironment: the conditions—location, time, temperature, culture—in which the process operates.\n\n\n\n\n\n\n\n\n\nFigure 89: Fishbone (Ishikawa) diagram for structured root-cause analysis: the effect (the observed problem) forms the head, the main bones are the cause categories, and detailed causes are added as smaller branches during the investigation.\n\n\n\n\n\n\n\n10.5.2 The “5-Why” Method\nA helpful strategy to identify causes is the “5-why” method: ask “Why…?” five times in succession (five is just a rough number—more or less, depending on complexity); the method originates from the Toyota production system (Ohno 1988). An example:\n\n“Why did the robot stop?” → The circuit overloaded, causing a fuse to blow.\n“Why did the circuit overload?” → There was insufficient lubrication on the bearings, so they locked up.\n“Why was there insufficient lubrication?” → The oil pump is not circulating enough oil.\n“Why is the pump not circulating enough oil?” → The pump intake is clogged with metal shavings.\n“Why is the intake clogged?” → Because there is no filter on the pump.\n\nThis may sound simple, but in a complex setting (time pressure, pressure from management or customers), analyzing an issue with simple, structured methods is an effective way to make progress.\n\n\n10.5.3 Focused Ion Beam (FIB)\nThe focused ion beam (FIB) is an extremely helpful technique to modify on-chip circuitry, by cutting connections and/or creating new on-chip connections (it can also create probe pads for micro-probing) (Giannuzzi and Stevie 2005):\n\nA FIB machine uses ions (e.g., Ga) to remove material from a sample by sputtering/milling, with a resolution down to about 10 nm.\nUsing a reactive gas inside the vacuum chamber, FIB-assisted CVD can deposit structured layers of, e.g., tungsten, forming new electrical connections.\nSince the deposited layers are very thin, creating low-ohmic connections is difficult—so a cut is preferable to a new connection where possible.\n\nFIB access is easiest on the top metal layers; nets that are candidates for a FIB modification should therefore be routed (at least for a short section) on top metal, away from dense wiring, and not be covered by metal fill. For flip-chip packages or dense metal stacks, FIB modifications from the backside of the thinned die are possible, but considerably more difficult.\n\n\n10.5.4 Failure Analysis\nBeyond electrical measurements at the pins, several physical failure-analysis techniques help to locate a fault on the die (a comprehensive overview is given in (Gandhi 2019)):\n\nMicro-probing: fine needles (or FIB-created probe pads) contact internal nodes to measure voltages and waveforms directly.\nHot-spot detection: shorts, leaky junctions, and latched structures dissipate power locally, which can be localized by thermal imaging (e.g., lock-in thermography) or by liquid-crystal coatings changing their appearance with temperature.\nPhoton emission microscopy: forward-biased junctions, MOSFETs in saturation, and oxide breakdown emit weak light (mostly in the infrared), which can be detected, also through the backside of the die.\nX-ray inspection and acoustic microscopy reveal package defects like broken bond wires, voids, or delamination non-destructively; afterwards, the die can be exposed by decapsulation and inspected optically or in a scanning electron microscope (SEM)."
+  },
+  {
     "objectID": "dcic.html#footnotes",
     "href": "dcic.html#footnotes",
     "title": "Design of Complex Integrated Circuits",
@@ -602,109 +651,130 @@
     "text": "Footnotes\n\n\nThe mobility value used here is not fully consistent with the process constant \\(K_\\mathrm{n} = \\mu_\\mathrm{n}C'_\\mathrm{ox}= 280\\,\\mu\\text{A/V}^2\\) in Table 1, which (with \\(C'_\\mathrm{ox}= 17.3\\,\\text{fF/µm}^2\\)) would imply an effective \\(\\mu_\\mathrm{n}\\approx 160\\,\\text{cm}^2/(\\text{V}\\cdot\\text{s})\\). The effective mobility depends strongly on the vertical field and thus on bias; such spread between simple hand-calculation parameters is normal and is one more reason to verify all sizing choices by simulation.↩︎"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Design of Complex Integrated Circuits",
+    "objectID": "slides/index.html",
+    "href": "slides/index.html",
+    "title": "Lecture Slides",
     "section": "",
-    "text": "Design of Complex Integrated Circuits\n\n\n\nQuarto Publish\n\n\n(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)\nThis is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 (“VL Entwurf komplexer integrierter Schaltungen”). Follow this link to access the material.\nThe course covers how integrated circuits are built (MOSFET operation, CMOS technology, layout, packaging, testing, and the economics of chip making) and how they are designed (design methodology, ESD protection, latch-up, robust design techniques, and circuit simulation).\nAll course material is made publicly available and shared under the Apache-2.0 license.\nWe happily accept pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue!"
+    "text": "Slide decks generated from the lecture notes, one per chapter. Press S for speaker notes, C for the chalkboard, and ? for all shortcuts.\n\nIntroduction\nThe MOSFET\nIC Technology\nThe Layout\nIC Packaging\nTesting\nEconomy of Integrated Circuits\nDesign Methodology\nElectrostatic Discharge and Latch-Up\nRobust Design"
   },
   {
-    "objectID": "slides/esd.html#sec-esd-basics",
-    "href": "slides/esd.html#sec-esd-basics",
-    "title": "Electrostatic Discharge and Latch-Up",
-    "section": "9.1 Electrostatic Discharge",
-    "text": "9.1 Electrostatic Discharge\n\nThis chapter covers two reliability hazards that every IC design must handle: electrostatic discharge (ESD), the sudden discharge of statically charged objects into the chip, and latch-up, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows (Amerasekera and Duvvury 2002); overviews of ESD test methods and of protection structures can be found in (Ker et al. 2001; Ker and Chuang 2002)."
+    "objectID": "slides/testing.html#sec-testing-flow",
+    "href": "slides/testing.html#sec-testing-flow",
+    "title": "Testing",
+    "section": "6.1 Post-Silicon Production Flow",
+    "text": "6.1 Post-Silicon Production Flow\n\nIntegrated circuits must be tested for functionality and specification compliance before they are shipped. Defects introduced during manufacturing, as well as parameter variations, are unavoidable—not every IC on a wafer is a good device (the yield is below 100 %). Typical defect causes are doping errors and fluctuations, under- or over-etching, misalignment of layers, and contamination by particles. A comprehensive treatment of IC test is given in (Wang et al. 2006); the related field of hardware security and trust is covered in (Bhunia and Tehranipoor 2018)."
   },
   {
-    "objectID": "slides/esd.html#sec-latchup",
-    "href": "slides/esd.html#sec-latchup",
-    "title": "Electrostatic Discharge and Latch-Up",
-    "section": "9.2 Latch-Up",
-    "text": "9.2 Latch-Up"
+    "objectID": "slides/testing.html#sec-testing-equipment",
+    "href": "slides/testing.html#sec-testing-equipment",
+    "title": "Testing",
+    "section": "6.2 Test Equipment",
+    "text": "6.2 Test Equipment"
   },
   {
-    "objectID": "slides/intro.html#sec-intro-scale",
-    "href": "slides/intro.html#sec-intro-scale",
-    "title": "Introduction",
-    "section": "1.1 How Small Is a Nanometer?",
-    "text": "1.1 How Small Is a Nanometer?"
+    "objectID": "slides/testing.html#sec-testing-challenges",
+    "href": "slides/testing.html#sec-testing-challenges",
+    "title": "Testing",
+    "section": "6.3 Mixed-Signal Testing Challenges",
+    "text": "6.3 Mixed-Signal Testing Challenges\n\nThe DIB is a custom-designed PCB that hosts the package socket (for testing packaged ICs) or connects to the probe card (for wafer testing). It also contains interface circuits that cannot be handled by the tester hardware resources (e.g., special components required by the DUT). Contact to the packaged DUT is made with spring-loaded “pogo pins” in the socket. For wafer probing, different probe-card types are used: cantilever probe cards (needles coming in at an angle), vertical (“buckling-beam” or “cobra”) probe cards, and membrane probe cards for high pin counts and fine pitches.\nHandlers (robotic pick-and-place or gravity-fed) insert the DUT into the test socket on the DIB. After the test, the ICs are sorted into bins (good = pass, bad = fail, possibly multiple pass grades). The handler can also provide a temperature-controlled environment for hot/cold testing in addition to room-temperature testing (the latter is preferred for cost reasons)."
   },
   {
-    "objectID": "slides/intro.html#sec-intro-history",
-    "href": "slides/intro.html#sec-intro-history",
-    "title": "Introduction",
-    "section": "1.2 A Brief History of Semiconductors",
-    "text": "1.2 A Brief History of Semiconductors"
+    "objectID": "slides/testing.html#sec-testing-plan",
+    "href": "slides/testing.html#sec-testing-plan",
+    "title": "Testing",
+    "section": "6.4 The Test Plan",
+    "text": "6.4 The Test Plan"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-wafer",
-    "href": "slides/technology.html#sec-technology-wafer",
-    "title": "IC Technology",
-    "section": "3.1 The Silicon Wafer",
-    "text": "3.1 The Silicon Wafer\n\nThis chapter walks through the manufacturing technology of integrated circuits: from the raw silicon wafer through the individual processing steps (doping, photolithography, etching, thin-film deposition, and interconnect formation) to a complete CMOS process flow. The treatment largely follows (Hu 2010)."
+    "objectID": "slides/testing.html#sec-testing-types",
+    "href": "slides/testing.html#sec-testing-types",
+    "title": "Testing",
+    "section": "6.5 Types of Tests",
+    "text": "6.5 Types of Tests"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-selective-doping",
-    "href": "slides/technology.html#sec-technology-selective-doping",
-    "title": "IC Technology",
-    "section": "3.2 Selective Doping",
-    "text": "3.2 Selective Doping"
+    "objectID": "slides/testing.html#sec-testing-cpk",
+    "href": "slides/testing.html#sec-testing-cpk",
+    "title": "Testing",
+    "section": "6.6 Process Capability Index",
+    "text": "6.6 Process Capability Index\n\nFor analog test parameters, the variation over production must stay inside the test limits, which are derived from the datasheet limits minus guard bands: the lower specification limit (LSL) and the upper specification limit (USL)."
   },
   {
-    "objectID": "slides/technology.html#sec-technology-litho",
-    "href": "slides/technology.html#sec-technology-litho",
-    "title": "IC Technology",
-    "section": "3.3 Photolithography",
-    "text": "3.3 Photolithography"
+    "objectID": "slides/mosfet.html#sec-mosfet-nutshell",
+    "href": "slides/mosfet.html#sec-mosfet-nutshell",
+    "title": "The MOSFET",
+    "section": "2.1 MOSFET Operation in a Nutshell",
+    "text": "2.1 MOSFET Operation in a Nutshell\n\nThis chapter on the metal-oxide-semiconductor field-effect transistor (MOSFET) is largely based on (Hu 2010; Razavi 2014; Tsividis and McAndrew 2011), which are also recommended as further reading. In contrast to our Analog Circuit Design course, where we treated the MOSFET essentially as a numerically-characterized black box, we will derive a simple, first-order model of the MOSFET from the physics of the device, and then discuss the most important second-order effects. The goal is to understand the basic operation of the MOSFET and its \\(I\\)/\\(V\\) characteristic, which will be used in later chapters for circuit design."
   },
   {
-    "objectID": "slides/technology.html#sec-technology-etching",
-    "href": "slides/technology.html#sec-technology-etching",
-    "title": "IC Technology",
-    "section": "3.4 Etching",
-    "text": "3.4 Etching"
+    "objectID": "slides/mosfet.html#sec-mosfet-iv",
+    "href": "slides/mosfet.html#sec-mosfet-iv",
+    "title": "The MOSFET",
+    "section": "2.2 Basic I/V Characteristic of the MOSFET",
+    "text": "2.2 Basic I/V Characteristic of the MOSFET"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-doping",
-    "href": "slides/technology.html#sec-technology-doping",
-    "title": "IC Technology",
-    "section": "3.5 Doping Techniques",
-    "text": "3.5 Doping Techniques"
+    "objectID": "slides/mosfet.html#sec-mosfet-second-order",
+    "href": "slides/mosfet.html#sec-mosfet-second-order",
+    "title": "The MOSFET",
+    "section": "2.3 Second-Order Effects in the MOSFET",
+    "text": "2.3 Second-Order Effects in the MOSFET\n\nNote that in the CMOS technology shown in Figure 11, the bulk nodes of all the NMOS transistors are tied to the common substrate (\\(V_\\mathrm{SS}\\)), while the bulk nodes of all the PMOS transistors are tied to the \\(n\\)-well (\\(V_\\mathrm{DD}\\)). Since the \\(n\\)-wells are separated from the substrate (and can be separated between different PMOS devices), the bulk nodes of selected PMOS can be tied to different potentials than \\(V_\\mathrm{DD}\\) (e.g., to the source of the PMOS), which is called body biasing. This can be used to adjust the threshold voltage of the PMOS transistors or to avoid the bulk effect (see Section 2.3.1)."
   },
   {
-    "objectID": "slides/technology.html#sec-technology-thin-film",
-    "href": "slides/technology.html#sec-technology-thin-film",
-    "title": "IC Technology",
-    "section": "3.6 Thin-Film Deposition",
-    "text": "3.6 Thin-Film Deposition"
+    "objectID": "slides/mosfet.html#sec-mosfet-ac",
+    "href": "slides/mosfet.html#sec-mosfet-ac",
+    "title": "The MOSFET",
+    "section": "2.4 MOSFET AC Operation",
+    "text": "2.4 MOSFET AC Operation"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-interconnect",
-    "href": "slides/technology.html#sec-technology-interconnect",
-    "title": "IC Technology",
-    "section": "3.7 Interconnects",
-    "text": "3.7 Interconnects"
+    "objectID": "slides/mosfet.html#sec-mosfet-ssm",
+    "href": "slides/mosfet.html#sec-mosfet-ssm",
+    "title": "The MOSFET",
+    "section": "2.5 MOSFET Small-Signal Model",
+    "text": "2.5 MOSFET Small-Signal Model"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-cmos-flow",
-    "href": "slides/technology.html#sec-technology-cmos-flow",
-    "title": "IC Technology",
-    "section": "3.8 An Exemplary CMOS Process Flow",
-    "text": "3.8 An Exemplary CMOS Process Flow\n\nThe classic dielectric between the metal layers is SiO2, but in order to reduce capacitive parasitics, low-k dielectrics (e.g., F- or C-doped SiO2) are used in modern processes. Between processing steps, CMP is used to planarize the surfaces."
+    "objectID": "slides/mosfet.html#sec-mosfet-scaling",
+    "href": "slides/mosfet.html#sec-mosfet-scaling",
+    "title": "The MOSFET",
+    "section": "2.6 MOSFET Scaling",
+    "text": "2.6 MOSFET Scaling"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-ihp",
-    "href": "slides/technology.html#sec-technology-ihp",
-    "title": "IC Technology",
-    "section": "3.9 The Open-Source PDK IHP SG13",
-    "text": "3.9 The Open-Source PDK IHP SG13"
+    "objectID": "slides/mosfet.html#sec-mosfet-sce",
+    "href": "slides/mosfet.html#sec-mosfet-sce",
+    "title": "The MOSFET",
+    "section": "2.7 MOSFET Short-Channel Effects",
+    "text": "2.7 MOSFET Short-Channel Effects"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-qualification",
-    "href": "slides/technology.html#sec-technology-qualification",
-    "title": "IC Technology",
-    "section": "3.10 Technology Qualification",
-    "text": "3.10 Technology Qualification"
+    "objectID": "slides/mosfet.html#sec-mosfet-ihp",
+    "href": "slides/mosfet.html#sec-mosfet-ihp",
+    "title": "The MOSFET",
+    "section": "2.8 Simulated Characteristics in IHP SG13",
+    "text": "2.8 Simulated Characteristics in IHP SG13\n\nThe evolution of the FinFET is the nanosheet MOSFET, first introduced at the 3 nm node (and used by all foundries at 2 nm) and shown in Figure 18 (c). One advantage is the even better electrostatic control of the gate over the channel, as the stacked channels are completely wrapped by the gate—hence also called gate-all-around (GAA) MOSFET. In addition, the stacked channels can be either \\(n\\)- or \\(p\\)-type (or mixed), and could even use different materials, like SiGe or GaAs, opening the door to 3D integration."
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-sizing",
+    "href": "slides/mosfet.html#sec-mosfet-sizing",
+    "title": "The MOSFET",
+    "section": "2.9 MOSFET Sizing",
+    "text": "2.9 MOSFET Sizing"
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-summary",
+    "href": "slides/mosfet.html#sec-mosfet-summary",
+    "title": "The MOSFET",
+    "section": "2.10 Summary",
+    "text": "2.10 Summary"
+  },
+  {
+    "objectID": "slides/mosfet.html#sec-mosfet-si-properties",
+    "href": "slides/mosfet.html#sec-mosfet-si-properties",
+    "title": "The MOSFET",
+    "section": "2.11 Appendix: Silicon Material Properties",
+    "text": "2.11 Appendix: Silicon Material Properties"
   },
   {
     "objectID": "slides/layout.html#sec-layout-tapeout",

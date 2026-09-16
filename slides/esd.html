@@ -325,6 +325,16 @@ ESD protection of a bidirectional digital I/O pad: the primary diodes <span clas
 </section>
 <section id="analog-and-rf-pads" class="slide level3" data-number="9.1.3">
 <h3><span class="header-section-number">9.1.3</span> Analog and RF Pads</h3>
+<ul>
+<li><span class="math inline">\(V_\mathrm{DD}\)</span> and digital input-only/output-only pads: derived from the general I/O pad</li>
+<li><strong>Analog pads:</strong> series resistances <span class="math inline">\(R_\mathrm{s}\)</span>, <span class="math inline">\(R_\mathrm{in}\)</span> often prohibitive <span class="math inline">\(\rightarrow\)</span> function-specific ESD protection</li>
+<li><strong>RF pads:</strong> ESD protection is highly critical
+<ul>
+<li>often no series resistance acceptable</li>
+<li>parasitic capacitance of the protection limits the bandwidth</li>
+<li>RF I/Os often limit the ESD rating of an RFIC <span class="math inline">\(\rightarrow\)</span> always custom-designed</li>
+</ul></li>
+</ul>
 <aside class="notes">
 <p><span class="math inline">\(V_\mathrm{DD}\)</span> pads and digital input-only or output-only pads are easily derived from the general I/O pad shown in <a href="#/fig-esd-io-protection" class="quarto-xref">Figure&nbsp;82</a>. <strong>Analog input and output pads</strong> are more critical, since the series resistances (<span class="math inline">\(R_\mathrm{s}\)</span>, <span class="math inline">\(R_\mathrm{in}\)</span>) might be prohibitive for the intended circuit function; usually, special ESD protection tailored to the specific function is designed for analog pins. For <strong>high-frequency pads</strong>, ESD protection is <strong>highly critical</strong>: often no series resistance is acceptable at all, and the protection elements add parasitic capacitance that limits the bandwidth of the I/O. Since the size of an ESD element is determined by the required low resistance and thermal dissipation, RF I/Os often limit the ESD rating of an RFIC, and RF ESD protection is always custom-designed <span class="citation" data-cites="Ker_2000">(see, e.g., <a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Ker et al.</span> 2000</a>)</span>.</p>
 <style type="text/css">
@@ -341,6 +351,13 @@ ESD protection of a bidirectional digital I/O pad: the primary diodes <span clas
 </section>
 <section id="snapback-devices-the-ggnmos" class="slide level3" data-number="9.1.4">
 <h3><span class="header-section-number">9.1.4</span> Snapback Devices: The ggNMOS</h3>
+<ul>
+<li>Gate tied to <span class="math inline">\(V_\mathrm{SS}\)</span> <span class="math inline">\(\rightarrow\)</span> NMOS off in normal operation</li>
+<li>Positive ESD event: drain-bulk junction breaks down (avalanche) and injects current into the substrate</li>
+<li>Drop across <span class="math inline">\(R_\mathrm{sub}\)</span> forward-biases the source-bulk junction <span class="math inline">\(\rightarrow\)</span> parasitic lateral NPN turns on</li>
+<li>Device <strong>snaps back</strong> to a low holding voltage and conducts the ESD current</li>
+<li>Silicide-blocked extended drain ballasts the current across the device width</li>
+</ul>
 <aside class="notes">
 <p>A popular primary protection element is the <strong>grounded-gate NMOS (ggNMOS)</strong>, shown in <a href="#/fig-ggnmos" class="quarto-xref">Figure&nbsp;83</a>. In normal operation, the NMOS is off, since its gate is tied to <span class="math inline">\(V_\mathrm{SS}\)</span>. During a positive ESD event, the drain-bulk diode breaks down (reversibly) by <a href="https://en.wikipedia.org/wiki/Avalanche_breakdown">avalanche multiplication</a> and injects current into the substrate; this current, together with the substrate resistance <span class="math inline">\(R_\mathrm{sub}\)</span>, forward-biases the source-bulk junction, turning on the parasitic lateral NPN transistor (drain = collector, bulk = base, source = emitter). The device “snaps back” to a low holding voltage and conducts the ESD current between drain and source. A silicide-blocked extended drain improves the robustness by ballasting the current across the device width.</p>
 <style type="text/css">
@@ -374,6 +391,12 @@ Figure&nbsp;83: The grounded-gate NMOS (ggNMOS) ESD protection device: (a) cross
 </section>
 <section id="rc-triggered-power-clamp" class="slide level3" data-number="9.1.5">
 <h3><span class="header-section-number">9.1.5</span> RC-Triggered Power Clamp</h3>
+<ul>
+<li><strong>Normal operation:</strong> capacitor charged to <span class="math inline">\(V_\mathrm{DD}\)</span>, inverter output low, <span class="math inline">\(M_\mathrm{ESD}\)</span> off</li>
+<li><strong>ESD event:</strong> rail rises faster than the RC time constant <span class="math inline">\(\rightarrow\)</span> inverter input stays low <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(M_\mathrm{ESD}\)</span> on, shorting the rails</li>
+<li><strong>Beware:</strong> a fast <span class="math inline">\(V_\mathrm{DD}\)</span> ramp at power-up can falsely trigger the clamp</li>
+<li>Inrush current <span class="math inline">\(I_\mathrm{rush} = C_\mathrm{decoup} \cdot dV_\mathrm{DD}/dt\)</span> <span class="math inline">\(\rightarrow\)</span> controlled supply ramp is essential</li>
+</ul>
 <aside class="notes">
 <p><a href="#/fig-rc-clamp" class="quarto-xref">Figure&nbsp;84</a> shows an <strong>RC-triggered supply clamp</strong>: during normal operation, the capacitor is charged to <span class="math inline">\(V_\mathrm{DD}\)</span>, the inverter output is low, and the large clamping NMOS <span class="math inline">\(M_\mathrm{ESD}\)</span> is off. During a (positive) ESD event, the supply rail rises much faster than the RC time constant, the capacitor voltage cannot follow, the inverter input stays low, and its output turns <span class="math inline">\(M_\mathrm{ESD}\)</span> on—providing a conducting path for the ESD current between the rails.</p>
 <p>Beware that a fast <span class="math inline">\(V_\mathrm{DD}\)</span> ramp during power-up can falsely trigger such a clamp! For this reason, when building the power supplies of electronic systems, designers often include additional circuitry to control the ramp rate or to temporarily disable the RC-triggered clamp during power-up. Considering also the potentially large inrush current <span class="math inline">\(I_\mathrm{rush} = C_\mathrm{decoup} \cdot dV_\mathrm{DD}/dt\)</span>, a controlled supply ramp during supply turn on is essential.</p>
@@ -560,6 +583,13 @@ Parasitic thyristor in a CMOS inverter, causing latch-up: the vertical PNP (PMOS
 </section>
 <section id="latch-up-testing" class="slide level3" data-number="9.2.1">
 <h3><span class="header-section-number">9.2.1</span> Latch-Up Testing</h3>
+<ul>
+<li>Standard qualification test: JEDEC JESD78</li>
+<li>Current-limited pulse (typically 100 mA, 10 ms) applied to all pads</li>
+<li>Voltage compliance: 1.5× max. supply voltage above ground, defined negative value below ground</li>
+<li>Additional supply over-voltage test</li>
+<li>Supply current monitored after each stimulus <span class="math inline">\(\rightarrow\)</span> latched state detected</li>
+</ul>
 <aside class="notes">
 <p>Latch-up testing is a standard procedure during IC qualification (JEDEC JESD78): a current-limited (typically 100 mA), 10 ms pulse is applied to all pads, with the voltage compliance constrained to 1.5× the maximum supply voltage above ground and to a defined negative value below ground; additionally, a supply over-voltage test is applied. After each stimulus, the supply current is monitored to detect a latched state.</p>
 <style type="text/css">
