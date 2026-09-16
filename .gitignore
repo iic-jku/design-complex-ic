@@ -8,3 +8,4 @@
 /dcic_files
 /slides/*_files
 /site_libs/revealjs
+/slides/_tools/__pycache__

@@ -1,6 +1,11 @@
 {
  "book": "../dcic.html",
  "labels": {
+  "eq-ac-matrix": {
+   "chapter": 11,
+   "number": "69",
+   "type": "eq"
+  },
   "eq-cp": {
    "chapter": 6,
    "number": "55",
@@ -9,6 +14,11 @@
   "eq-cpk": {
    "chapter": 6,
    "number": "56",
+   "type": "eq"
+  },
+  "eq-dc-nonlinear": {
+   "chapter": 11,
+   "number": "67",
    "type": "eq"
   },
   "eq-dice-per-wafer": {
@@ -49,6 +59,11 @@
   "eq-layout-resistor": {
    "chapter": 4,
    "number": "48",
+   "type": "eq"
+  },
+  "eq-mna-result": {
+   "chapter": 11,
+   "number": "66",
    "type": "eq"
   },
   "eq-mosfet-body-effect": {
@@ -276,6 +291,16 @@
    "number": "63",
    "type": "eq"
   },
+  "eq-newton-raphson": {
+   "chapter": 11,
+   "number": "68",
+   "type": "eq"
+  },
+  "eq-nqs-resistance": {
+   "chapter": 11,
+   "number": "71",
+   "type": "eq"
+  },
   "eq-nre": {
    "chapter": 7,
    "number": "59",
@@ -324,6 +349,11 @@
   "eq-total-cost": {
    "chapter": 7,
    "number": "58",
+   "type": "eq"
+  },
+  "eq-tran-dae": {
+   "chapter": 11,
+   "number": "70",
    "type": "eq"
   },
   "fig-ac-parametric": {
@@ -561,6 +591,11 @@
    "number": "40",
    "type": "fig"
   },
+  "fig-mna-circuit": {
+   "chapter": 11,
+   "number": "90",
+   "type": "fig"
+  },
   "fig-moores-law": {
    "chapter": 1,
    "number": "3",
@@ -784,6 +819,11 @@
   "nte-ic-cost": {
    "chapter": 7,
    "number": "5",
+   "type": "nte"
+  },
+  "nte-mna-example": {
+   "chapter": 11,
+   "number": "6",
    "type": "nte"
   },
   "nte-vth-calculation": {
@@ -1071,6 +1111,51 @@
    "number": "10.3",
    "type": "sec"
   },
+  "sec-simulation": {
+   "chapter": 11,
+   "number": "11",
+   "type": "sec"
+  },
+  "sec-simulation-ac": {
+   "chapter": 11,
+   "number": "11.3",
+   "type": "sec"
+  },
+  "sec-simulation-advanced": {
+   "chapter": 11,
+   "number": "11.5",
+   "type": "sec"
+  },
+  "sec-simulation-dc": {
+   "chapter": 11,
+   "number": "11.2",
+   "type": "sec"
+  },
+  "sec-simulation-digital": {
+   "chapter": 11,
+   "number": "11.7",
+   "type": "sec"
+  },
+  "sec-simulation-mixed": {
+   "chapter": 11,
+   "number": "11.8",
+   "type": "sec"
+  },
+  "sec-simulation-mna": {
+   "chapter": 11,
+   "number": "11.1",
+   "type": "sec"
+  },
+  "sec-simulation-models": {
+   "chapter": 11,
+   "number": "11.6",
+   "type": "sec"
+  },
+  "sec-simulation-tran": {
+   "chapter": 11,
+   "number": "11.4",
+   "type": "sec"
+  },
   "sec-technology": {
    "chapter": 3,
    "number": "3",
@@ -1179,6 +1264,11 @@
   "tbl-ihp130-parameters": {
    "chapter": 2,
    "number": "1",
+   "type": "tbl"
+  },
+  "tbl-integration": {
+   "chapter": 11,
+   "number": "14",
    "type": "tbl"
   },
   "tbl-layers": {

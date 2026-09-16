@@ -1,0 +1,53 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-mna-circuit
+#| echo: false
+#| fig-cap: "Example circuit for the modified nodal analysis: a voltage source $V_\\mathrm{g}$, two resistors, and a current source $I_\\mathrm{g}$. The node voltages $v_1$, $v_2$ (with node 0 as reference) and the branch currents $i_\\mathrm{a}$ to $i_\\mathrm{d}$ are annotated."
+
+import schemdraw as sd
+import schemdraw.elements as elm
+
+sd.svgconfig.svg2 = False
+
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2, fontsize=10)
+
+    d += elm.SourceV().endpoints((0, 0), (0, 4)).label('$V_\\mathrm{g}$')
+    d += elm.Line().endpoints((0, 4), (2, 4))
+    d += elm.Dot().at((1.2, 4)).label('$v_1$', 'top', color='blue')
+    d += elm.Resistor().endpoints((2, 4), (5, 4)).label('$R_1$')
+    d += elm.Line().endpoints((5, 4), (8.5, 4))
+    d += elm.Dot().at((5.5, 4)).label('$v_2$', 'top', color='blue')
+    d += elm.Resistor().endpoints((5.5, 4), (5.5, 0)).label('$R_2$',
+                                                           loc='bottom')
+    d += elm.SourceI().endpoints((8.5, 0), (8.5, 4)).label(
+        '$I_\\mathrm{g}$')
+    d += elm.Line().endpoints((0, 0), (8.5, 0))
+    d += elm.Dot().at((5.5, 0))
+    d += elm.Dot().at((1.2, 0)).label('0', 'bottom', color='blue')
+
+    # branch current arrows
+    d += elm.Arrow(headwidth=0.2, headlength=0.25).endpoints(
+        (0.5, 3.2), (0.5, 2.2)).label('$i_\\mathrm{a}$', loc='right')
+    d += elm.Arrow(headwidth=0.2, headlength=0.25).endpoints(
+        (2.7, 3.3), (3.7, 3.3)).label('$i_\\mathrm{b}$', loc='bottom')
+    d += elm.Arrow(headwidth=0.2, headlength=0.25).endpoints(
+        (6.2, 3.0), (6.2, 2.0)).label('$i_\\mathrm{c}$', loc='right')
+    d += elm.Arrow(headwidth=0.2, headlength=0.25).endpoints(
+        (9.2, 2.0), (9.2, 3.0)).label('$i_\\mathrm{d}$', loc='right')
+```
