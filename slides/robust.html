@@ -245,6 +245,16 @@
 <p><span id="eq-robust-pelgrom"><span class="math display">\[
 \sigma(\Delta V_\mathrm{th}) = \frac{A_{V_\mathrm{th}}}{\sqrt{W L}}
 \tag{65}\]</span></span></p>
+</section>
+<section id="mismatch-versus-area" class="slide level3 unnumbered">
+<h3>Mismatch versus Area</h3>
+<ul>
+<li>Matching is best with <strong>unit elements</strong>: same size, orientation, wiring, and current-flow direction</li>
+<li><span class="math inline">\(A_{V_\mathrm{th}}\)</span> is supplied by the foundry (a few <span class="math inline">\(\text{mV}\cdot\mu\text{m}\)</span>)</li>
+<li>Example: <span class="math inline">\(A_{V_\mathrm{th}} = 5\,\text{mV}\cdot\mu\text{m}\)</span>, <span class="math inline">\(W L = 1\,\mu\text{m}^2\)</span> <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(\sigma(\Delta V_\mathrm{th}) = 5\,\text{mV}\)</span></li>
+<li>Halving the mismatch costs <strong>4× area</strong> (and capacitance)</li>
+<li>Fundamental trade-off between accuracy, area, and speed</li>
+</ul>
 <aside class="notes">
 <p>The matching coefficient <span class="math inline">\(A_{V_\mathrm{th}}\)</span> is supplied by the foundry and is in the range of a few <span class="math inline">\(\text{mV}\cdot\mu\text{m}\)</span> for current CMOS technologies. With <span class="math inline">\(A_{V_\mathrm{th}} = 5\,\text{mV}\cdot\mu\text{m}\)</span>, a transistor pair with <span class="math inline">\(W L = 1\,\mu\text{m}^2\)</span> has <span class="math inline">\(\sigma(\Delta V_\mathrm{th}) = 5\,\text{mV}\)</span>; halving the mismatch costs four times the area (and capacitance). <a href="#/eq-robust-pelgrom" class="quarto-xref">Equation&nbsp;65</a> is thus a fundamental trade-off between accuracy, area, and speed, which is analyzed in detail in <span class="citation" data-cites="Kinget_2005">(<a href="#/references" role="doc-biblioref" onclick="">Kinget 2005</a>)</span>; practical layout measures for matching and robustness are collected in <span class="citation" data-cites="Hastings_AnalogLayout">(<a href="#/references" role="doc-biblioref" onclick="">Hastings 2006</a>)</span>.</p>
 <style type="text/css">
@@ -258,16 +268,6 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="mismatch-versus-area" class="slide level3 unnumbered">
-<h3>Mismatch versus Area</h3>
-<ul>
-<li>Matching is best with <strong>unit elements</strong>: same size, orientation, wiring, and current-flow direction</li>
-<li><span class="math inline">\(A_{V_\mathrm{th}}\)</span> is supplied by the foundry (a few <span class="math inline">\(\text{mV}\cdot\mu\text{m}\)</span>)</li>
-<li>Example: <span class="math inline">\(A_{V_\mathrm{th}} = 5\,\text{mV}\cdot\mu\text{m}\)</span>, <span class="math inline">\(W L = 1\,\mu\text{m}^2\)</span> <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(\sigma(\Delta V_\mathrm{th}) = 5\,\text{mV}\)</span></li>
-<li>Halving the mismatch costs <strong>4× area</strong> (and capacitance)</li>
-<li>Fundamental trade-off between accuracy, area, and speed</li>
-</ul>
 </section>
 <section id="production-and-lifetime" class="slide level3 unnumbered">
 <h3>Production and Lifetime</h3>
@@ -334,6 +334,17 @@
 <li>The <strong>skewed</strong> corners SF and FS are critical for circuits relying on a balance between NMOS and PMOS, such as the switching threshold of an inverter, ratioed logic, or SRAM cells.</li>
 <li>Analog circuits can have their worst case in any corner, so no corner should be skipped.</li>
 </ul>
+</section>
+<section id="monte-carlo-mismatch" class="slide level3 unnumbered">
+<h3>Monte-Carlo Mismatch</h3>
+<ul>
+<li><strong>Corners:</strong> fully correlated <em>global</em> process shift</li>
+<li><strong>Monte-Carlo:</strong> random <em>local</em> mismatch, device parameters varied in every run</li>
+<li>Result is a distribution of the circuit performance (e.g., comparator offset) <span class="math inline">\(\rightarrow\)</span> mean and <span class="math inline">\(\sigma\)</span></li>
+<li>Specs need a margin of several <span class="math inline">\(\sigma\)</span> <span class="math inline">\(\rightarrow\)</span> at least a few hundred runs</li>
+<li>Critical blocks: Monte-Carlo mismatch runs on top of the process corners</li>
+<li>Do not stack all worst cases at their extremes <span class="math inline">\(\rightarrow\)</span> over-design; the spec states which conditions apply simultaneously</li>
+</ul>
 <aside class="notes">
 <p>Component <em>mismatch</em> (as opposed to global process shift) is covered by <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte-Carlo</a> models, in which device parameters are randomly varied for each simulation run according to their statistical distribution. The result is a distribution of the circuit performance (e.g., the input offset of a comparator), from which mean and standard deviation are estimated. Since a specification is usually required to be met with a margin of several <span class="math inline">\(\sigma\)</span> (see <a href="../dcic.html#sec-testing-cpk">Section&nbsp;6.6</a>), and the estimate of <span class="math inline">\(\sigma\)</span> itself is uncertain for few samples, a meaningful Monte-Carlo analysis needs at least a few hundred runs. Corner models describe the (fully correlated) global process shift, while Monte-Carlo mismatch describes random local variations; for critical blocks, both have to be combined, i.e., Monte-Carlo mismatch runs are performed on top of the process corners.</p>
 <p>Note that stacking all worst cases at their extremes (slowest process, lowest supply, highest temperature, <span class="math inline">\(3\sigma\)</span> mismatch, maximum parasitics) quickly leads to an over-designed circuit wasting power and area. A good specification states which conditions have to be met simultaneously.</p>
@@ -349,17 +360,6 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="monte-carlo-mismatch" class="slide level3 unnumbered">
-<h3>Monte-Carlo Mismatch</h3>
-<ul>
-<li><strong>Corners:</strong> fully correlated <em>global</em> process shift</li>
-<li><strong>Monte-Carlo:</strong> random <em>local</em> mismatch, device parameters varied in every run</li>
-<li>Result is a distribution of the circuit performance (e.g., comparator offset) <span class="math inline">\(\rightarrow\)</span> mean and <span class="math inline">\(\sigma\)</span></li>
-<li>Specs need a margin of several <span class="math inline">\(\sigma\)</span> <span class="math inline">\(\rightarrow\)</span> at least a few hundred runs</li>
-<li>Critical blocks: Monte-Carlo mismatch runs on top of the process corners</li>
-<li>Do not stack all worst cases at their extremes <span class="math inline">\(\rightarrow\)</span> over-design; the spec states which conditions apply simultaneously</li>
-</ul>
-</section>
 
 <section id="sec-robust-parasitics" class="title-slide slide level2 center" data-number="10.3">
 <h2><span class="header-section-number">10.3</span> Include the Parasitics</h2>
@@ -372,6 +372,17 @@
 <li>For on-chip circuits, <strong>parasitic extraction (PEX)</strong> of the layout blocks is mandatory (see <a href="../dcic.html#sec-layout-extraction">Section&nbsp;4.8</a>).</li>
 <li>For IC packages, first-order lumped models can be refined by calculated <strong>EM models</strong> (e.g., <span class="math inline">\(S\)</span>-parameters).</li>
 <li>The same holds for PCB effects; if no simulation model is available, approximate the important effects by calculating <span class="math inline">\(R\)</span>, <span class="math inline">\(L\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(k\)</span> from the geometry.</li>
+</ul>
+</section>
+<section id="supply-ground-and-substrate" class="slide level3 unnumbered">
+<h3>Supply, Ground, and Substrate</h3>
+<ul>
+<li>Easily overlooked: parasitics <em>outside</em> the signal path</li>
+<li>Bond-wire inductance <span class="math inline">\(\rightarrow\)</span> supply and ground bounce (<span class="math inline">\(L\,di/dt\)</span>)</li>
+<li>Resistive on-chip supply lines <span class="math inline">\(\rightarrow\)</span> static and dynamic <strong>IR drop</strong></li>
+<li>Disturbances couple into every block on the same supply, and via the resistive <strong>substrate</strong></li>
+<li>Remedies: on-chip decoupling, separate supplies for noisy and sensitive blocks, parallel bond wires, guard rings</li>
+<li>No model available? Add a pessimistic estimate—an ideal supply and a perfect ground hide the problems seen in the lab</li>
 </ul>
 <aside class="notes">
 <p>All circuit wiring adds <span class="math inline">\(R\)</span>, <span class="math inline">\(L\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(k\)</span> parasitics: PCB traces and cables, package parasitics like bond wires, and on-chip interconnect. Having a unified simulation setup capturing all these impairments is a must, as unwanted effects like crosstalk or degraded performance can often be root-caused to them:</p>
@@ -387,17 +398,6 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="supply-ground-and-substrate" class="slide level3 unnumbered">
-<h3>Supply, Ground, and Substrate</h3>
-<ul>
-<li>Easily overlooked: parasitics <em>outside</em> the signal path</li>
-<li>Bond-wire inductance <span class="math inline">\(\rightarrow\)</span> supply and ground bounce (<span class="math inline">\(L\,di/dt\)</span>)</li>
-<li>Resistive on-chip supply lines <span class="math inline">\(\rightarrow\)</span> static and dynamic <strong>IR drop</strong></li>
-<li>Disturbances couple into every block on the same supply, and via the resistive <strong>substrate</strong></li>
-<li>Remedies: on-chip decoupling, separate supplies for noisy and sensitive blocks, parallel bond wires, guard rings</li>
-<li>No model available? Add a pessimistic estimate—an ideal supply and a perfect ground hide the problems seen in the lab</li>
-</ul>
 </section>
 
 <section id="sec-robust-failure-mode" class="title-slide slide level2 center" data-number="10.4">
@@ -415,6 +415,15 @@
 <li>Route internal nodes that are hard to measure (bias voltages, reference clocks, the output of a sub-block) to an <strong>analog test bus</strong> or a test multiplexer, and provide <strong>bypass</strong> and <strong>loop-back</strong> modes, so each block of a signal chain can be characterized in isolation.</li>
 <li>Make sure the circuit always reaches its intended operating point: self-biased circuits like bandgap references and current references can have a second, degenerate stable state (all currents zero) and need a <strong>start-up circuit</strong>. Power-up and power-down sequences, undefined reset states, and floating inputs of disabled blocks deserve dedicated simulations.</li>
 </ul>
+</section>
+<section id="failure-mode-and-effects-analysis" class="slide level3 unnumbered">
+<h3>Failure Mode and Effects Analysis</h3>
+<ul>
+<li>Formalized failure-mode thinking for larger projects</li>
+<li>Systematically list potential failure modes</li>
+<li>Rank them by <strong>severity</strong>, <strong>likelihood</strong>, and <strong>detectability</strong></li>
+<li>Mandatory, e.g., for automotive ICs</li>
+</ul>
 <aside class="notes">
 <p>During the complete design phase, an important habit is “failure-mode thinking,” i.e., asking “<strong>what could go wrong?</strong>” (paranoia is a good trait in IC design). By anticipating potential issues, remedies and debug hooks can be built into the design. Some examples:</p>
 <p>For larger projects, this informal habit can be formalized as a <a href="https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis"><strong>failure mode and effects analysis (FMEA)</strong></a>, in which potential failure modes are systematically listed and ranked by severity, likelihood, and detectability; FMEA is mandatory, e.g., for automotive ICs.</p>
@@ -429,15 +438,6 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="failure-mode-and-effects-analysis" class="slide level3 unnumbered">
-<h3>Failure Mode and Effects Analysis</h3>
-<ul>
-<li>Formalized failure-mode thinking for larger projects</li>
-<li>Systematically list potential failure modes</li>
-<li>Rank them by <strong>severity</strong>, <strong>likelihood</strong>, and <strong>detectability</strong></li>
-<li>Mandatory, e.g., for automotive ICs</li>
-</ul>
 </section>
 
 <section id="sec-robust-debug" class="title-slide slide level2 center" data-number="10.5">
@@ -539,6 +539,18 @@ Figure&nbsp;89: Fishbone (Ishikawa) diagram for structured root-cause analysis: 
 <li>Using a reactive gas inside the vacuum chamber, FIB-assisted CVD can <strong>deposit structured layers</strong> of, e.g., tungsten, forming new electrical connections.</li>
 <li>Since the deposited layers are very thin, creating low-ohmic connections is difficult—so a cut is preferable to a new connection where possible.</li>
 </ul>
+</section>
+<section id="preparing-for-fib" class="slide level3 unnumbered">
+<h3>Preparing for FIB</h3>
+<ul>
+<li>FIB access is easiest on the <strong>top metal</strong> layers</li>
+<li>Route candidate nets (at least a short section) on top metal
+<ul>
+<li>away from dense wiring</li>
+<li>not covered by metal fill</li>
+</ul></li>
+<li>Flip-chip or dense metal stacks: backside FIB of the thinned die possible, but considerably more difficult</li>
+</ul>
 <aside class="notes">
 <p>The <a href="https://en.wikipedia.org/wiki/Focused_ion_beam"><strong>focused ion beam (FIB)</strong></a> is an extremely helpful technique to modify on-chip circuitry, by <strong>cutting connections</strong> and/or <strong>creating new on-chip connections</strong> (it can also create probe <strong>pads</strong> for micro-probing) <span class="citation" data-cites="Giannuzzi_FIB">(<a href="#/references" role="doc-biblioref" onclick="">Giannuzzi and Stevie 2005</a>)</span>:</p>
 <p>FIB access is easiest on the top metal layers; nets that are candidates for a FIB modification should therefore be routed (at least for a short section) on top metal, away from dense wiring, and not be covered by metal fill. For flip-chip packages or dense metal stacks, FIB modifications from the backside of the thinned die are possible, but considerably more difficult.</p>
@@ -553,18 +565,6 @@ Figure&nbsp;89: Fishbone (Ishikawa) diagram for structured root-cause analysis: 
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="preparing-for-fib" class="slide level3 unnumbered">
-<h3>Preparing for FIB</h3>
-<ul>
-<li>FIB access is easiest on the <strong>top metal</strong> layers</li>
-<li>Route candidate nets (at least a short section) on top metal
-<ul>
-<li>away from dense wiring</li>
-<li>not covered by metal fill</li>
-</ul></li>
-<li>Flip-chip or dense metal stacks: backside FIB of the thinned die possible, but considerably more difficult</li>
-</ul>
 </section>
 <section id="failure-analysis" class="slide level3" data-number="10.5.4">
 <h3><span class="header-section-number">10.5.4</span> Failure Analysis</h3>

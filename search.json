@@ -1,227 +1,269 @@
 [
   {
-    "objectID": "slides/packaging.html#sec-packaging-wafer-prep",
-    "href": "slides/packaging.html#sec-packaging-wafer-prep",
-    "title": "IC Packaging",
-    "section": "5.1 From Wafer to Packaged IC",
-    "text": "5.1 From Wafer to Packaged IC\n\nThe finished wafer is not yet a usable product: the individual dice have to be separated, connected, and protected. This chapter covers the path from the processed wafer to the packaged integrated circuit, the most important package families, thermal design, and the electrical parasitics that packages introduce."
+    "objectID": "slides/simulation.html#sec-simulation-mna",
+    "href": "slides/simulation.html#sec-simulation-mna",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.1 Formulating the Circuit Equations",
+    "text": "11.1 Formulating the Circuit Equations"
   },
   {
-    "objectID": "slides/packaging.html#sec-packaging-bonding",
-    "href": "slides/packaging.html#sec-packaging-bonding",
-    "title": "IC Packaging",
-    "section": "5.2 Chip-to-Package Connection",
-    "text": "5.2 Chip-to-Package Connection"
+    "objectID": "slides/simulation.html#sec-simulation-dc",
+    "href": "slides/simulation.html#sec-simulation-dc",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.2 DC Simulation",
+    "text": "11.2 DC Simulation"
   },
   {
-    "objectID": "slides/packaging.html#sec-packaging-types",
-    "href": "slides/packaging.html#sec-packaging-types",
-    "title": "IC Packaging",
-    "section": "5.3 Package Types",
-    "text": "5.3 Package Types"
+    "objectID": "slides/simulation.html#sec-simulation-ac",
+    "href": "slides/simulation.html#sec-simulation-ac",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.3 AC Simulation",
+    "text": "11.3 AC Simulation"
   },
   {
-    "objectID": "slides/packaging.html#sec-packaging-thermal",
-    "href": "slides/packaging.html#sec-packaging-thermal",
-    "title": "IC Packaging",
-    "section": "5.4 Thermal Design",
-    "text": "5.4 Thermal Design"
+    "objectID": "slides/simulation.html#sec-simulation-tran",
+    "href": "slides/simulation.html#sec-simulation-tran",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.4 Transient Simulation",
+    "text": "11.4 Transient Simulation"
   },
   {
-    "objectID": "slides/packaging.html#sec-packaging-parasitics",
-    "href": "slides/packaging.html#sec-packaging-parasitics",
-    "title": "IC Packaging",
-    "section": "5.5 Package Parasitics",
-    "text": "5.5 Package Parasitics"
+    "objectID": "slides/simulation.html#sec-simulation-advanced",
+    "href": "slides/simulation.html#sec-simulation-advanced",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.5 Advanced Simulation Modes",
+    "text": "11.5 Advanced Simulation Modes"
   },
   {
-    "objectID": "slides/packaging.html#sec-packaging-qualification",
-    "href": "slides/packaging.html#sec-packaging-qualification",
-    "title": "IC Packaging",
-    "section": "5.6 Package Qualification",
-    "text": "5.6 Package Qualification"
+    "objectID": "slides/simulation.html#sec-simulation-models",
+    "href": "slides/simulation.html#sec-simulation-models",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.6 Device Models",
+    "text": "11.6 Device Models"
   },
   {
-    "objectID": "slides/methodology.html#sec-methodology-y",
-    "href": "slides/methodology.html#sec-methodology-y",
-    "title": "Design Methodology",
-    "section": "8.1 The Y-Diagram",
-    "text": "8.1 The Y-Diagram\n\nIn this chapter, basic knowledge of digital and analog circuit design is assumed; we discuss IC-specific design methodology topics which are usually not covered in entry-level courses. A comprehensive treatment of digital VLSI design and its methodology is given in (Weste and Harris 2011). We first introduce a mental model of the design space (the Y-diagram), then survey the available implementation styles and their trade-offs, and finally walk through the concrete design flows—the digital semicustom flow and the analog/mixed-signal custom flow—illustrated throughout with open-source EDA tools."
+    "objectID": "slides/simulation.html#sec-simulation-digital",
+    "href": "slides/simulation.html#sec-simulation-digital",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.7 Digital Simulation",
+    "text": "11.7 Digital Simulation"
   },
   {
-    "objectID": "slides/methodology.html#sec-methodology-choices",
-    "href": "slides/methodology.html#sec-methodology-choices",
-    "title": "Design Methodology",
-    "section": "8.2 Digital Implementation Choices",
-    "text": "8.2 Digital Implementation Choices"
+    "objectID": "slides/simulation.html#sec-simulation-mixed",
+    "href": "slides/simulation.html#sec-simulation-mixed",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.8 Mixed-Signal Simulation",
+    "text": "11.8 Mixed-Signal Simulation"
   },
   {
-    "objectID": "slides/methodology.html#sec-methodology-cells",
-    "href": "slides/methodology.html#sec-methodology-cells",
-    "title": "Design Methodology",
-    "section": "8.3 Cell-Based Design",
-    "text": "8.3 Cell-Based Design"
+    "objectID": "slides/economy.html#sec-economy-price",
+    "href": "slides/economy.html#sec-economy-price",
+    "title": "Economy of Integrated Circuits",
+    "section": "7.1 Selling Price and Total Cost",
+    "text": "7.1 Selling Price and Total Cost\n\nThe manufacturing of ICs is a large-scale business, requiring significant investment in research and development, and usually large volumes are built and sold. It is therefore rewarding to take a look at the economics of integrated circuits."
   },
   {
-    "objectID": "slides/methodology.html#sec-methodology-flow",
-    "href": "slides/methodology.html#sec-methodology-flow",
-    "title": "Design Methodology",
-    "section": "8.4 The Semicustom Design Flow",
-    "text": "8.4 The Semicustom Design Flow"
+    "objectID": "slides/economy.html#sec-economy-nre",
+    "href": "slides/economy.html#sec-economy-nre",
+    "title": "Economy of Integrated Circuits",
+    "section": "7.2 Non-Recurring Engineering Cost",
+    "text": "7.2 Non-Recurring Engineering Cost"
   },
   {
-    "objectID": "slides/methodology.html#sec-methodology-custom",
-    "href": "slides/methodology.html#sec-methodology-custom",
-    "title": "Design Methodology",
-    "section": "8.5 The Mixed-Signal/Custom Flow",
-    "text": "8.5 The Mixed-Signal/Custom Flow"
+    "objectID": "slides/economy.html#sec-economy-recurring",
+    "href": "slides/economy.html#sec-economy-recurring",
+    "title": "Economy of Integrated Circuits",
+    "section": "7.3 Recurring Cost",
+    "text": "7.3 Recurring Cost"
   },
   {
-    "objectID": "slides/methodology.html#sec-methodology-fpga",
-    "href": "slides/methodology.html#sec-methodology-fpga",
-    "title": "Design Methodology",
-    "section": "8.6 FPGAs",
-    "text": "8.6 FPGAs"
+    "objectID": "slides/economy.html#sec-economy-example",
+    "href": "slides/economy.html#sec-economy-example",
+    "title": "Economy of Integrated Circuits",
+    "section": "7.4 An Exemplary Calculation",
+    "text": "7.4 An Exemplary Calculation"
   },
   {
-    "objectID": "slides/robust.html#sec-robust-circuits",
-    "href": "slides/robust.html#sec-robust-circuits",
-    "title": "Robust Design",
-    "section": "10.1 Robust Circuits and Layouts",
-    "text": "10.1 Robust Circuits and Layouts"
+    "objectID": "slides/layout.html#sec-layout-tapeout",
+    "href": "slides/layout.html#sec-layout-tapeout",
+    "title": "The Layout",
+    "section": "4.1 Files and Tapeout",
+    "text": "4.1 Files and Tapeout\n\nThe layout is the 2D representation of the IC manufacturing data. While the schematic captures the electrical intent of a design, the layout captures its physical realization: in the layout tools, the design is drawn on several layers, which are the foundation for the generation of the photomasks used in IC production. Commercial layout tools are, e.g., Cadence Virtuoso, Siemens L-Edit, and open-source tools are Magic and KLayout. The layers are usually manipulated before the geometries are transferred to the masks (shrink, enlarge, invert, combination of several layers into one mask layer, optical proximity correction, etc.)."
   },
   {
-    "objectID": "slides/robust.html#sec-robust-corners",
-    "href": "slides/robust.html#sec-robust-corners",
-    "title": "Robust Design",
-    "section": "10.2 Corner Models",
-    "text": "10.2 Corner Models"
+    "objectID": "slides/layout.html#sec-layout-layers",
+    "href": "slides/layout.html#sec-layout-layers",
+    "title": "The Layout",
+    "section": "4.2 Generic Layer Definition",
+    "text": "4.2 Generic Layer Definition\n\nThe layout is checked for compliance with the wafer-fab design rules in the design rule check (DRC), and for conformance with the intended circuit in the layout-versus-schematic (LVS) check, where a netlist extracted from the layout is compared to the netlist of the original schematic. If all checks pass, the layout data is sent to mask production—this step is called tapeout. The mask house processes the layout data and produces the photomasks used by the wafer fab (depending on technology complexity, between 10 and 80 masks).\nThe standard file format for layout data is GDSII, a hierarchical database in a binary stream format. A newer format with more efficient storage is OASIS, but GDSII is still very common."
   },
   {
-    "objectID": "slides/robust.html#sec-robust-parasitics",
-    "href": "slides/robust.html#sec-robust-parasitics",
-    "title": "Robust Design",
-    "section": "10.3 Include the Parasitics",
-    "text": "10.3 Include the Parasitics"
+    "objectID": "slides/layout.html#sec-layout-devices",
+    "href": "slides/layout.html#sec-layout-devices",
+    "title": "The Layout",
+    "section": "4.3 Devices",
+    "text": "4.3 Devices"
   },
   {
-    "objectID": "slides/robust.html#sec-robust-failure-mode",
-    "href": "slides/robust.html#sec-robust-failure-mode",
-    "title": "Robust Design",
-    "section": "10.4 Failure-Mode Thinking",
-    "text": "10.4 Failure-Mode Thinking"
+    "objectID": "slides/layout.html#sec-layout-drc",
+    "href": "slides/layout.html#sec-layout-drc",
+    "title": "The Layout",
+    "section": "4.4 Design Rules",
+    "text": "4.4 Design Rules"
   },
   {
-    "objectID": "slides/robust.html#sec-robust-debug",
-    "href": "slides/robust.html#sec-robust-debug",
-    "title": "Robust Design",
-    "section": "10.5 Debugging of ICs",
-    "text": "10.5 Debugging of ICs"
+    "objectID": "slides/layout.html#sec-layout-analog",
+    "href": "slides/layout.html#sec-layout-analog",
+    "title": "The Layout",
+    "section": "4.5 Analog Layout Techniques",
+    "text": "4.5 Analog Layout Techniques\n\nThe complete layout rules of the open-source IHP SG13 PDK can be found in the SG13G2 layout rules document and serve as a practical example of a production DRC rule set."
   },
   {
-    "objectID": "slides/technology.html#sec-technology-wafer",
-    "href": "slides/technology.html#sec-technology-wafer",
-    "title": "IC Technology",
-    "section": "3.1 The Silicon Wafer",
-    "text": "3.1 The Silicon Wafer\n\nThis chapter walks through the manufacturing technology of integrated circuits: from the raw silicon wafer through the individual processing steps (doping, photolithography, etching, thin-film deposition, and interconnect formation) to a complete CMOS process flow. The treatment largely follows (Hu 2010)."
+    "objectID": "slides/layout.html#sec-layout-additional",
+    "href": "slides/layout.html#sec-layout-additional",
+    "title": "The Layout",
+    "section": "4.6 Additional Layout and Mask Structures",
+    "text": "4.6 Additional Layout and Mask Structures"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-selective-doping",
-    "href": "slides/technology.html#sec-technology-selective-doping",
-    "title": "IC Technology",
-    "section": "3.2 Selective Doping",
-    "text": "3.2 Selective Doping"
+    "objectID": "slides/layout.html#sec-layout-checks",
+    "href": "slides/layout.html#sec-layout-checks",
+    "title": "The Layout",
+    "section": "4.7 Layout Checks",
+    "text": "4.7 Layout Checks"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-litho",
-    "href": "slides/technology.html#sec-technology-litho",
-    "title": "IC Technology",
-    "section": "3.3 Photolithography",
-    "text": "3.3 Photolithography"
+    "objectID": "slides/layout.html#sec-layout-extraction",
+    "href": "slides/layout.html#sec-layout-extraction",
+    "title": "The Layout",
+    "section": "4.8 Layout Extraction",
+    "text": "4.8 Layout Extraction"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-etching",
-    "href": "slides/technology.html#sec-technology-etching",
-    "title": "IC Technology",
-    "section": "3.4 Etching",
-    "text": "3.4 Etching"
+    "objectID": "slides/mosfet.html#sec-mosfet-nutshell",
+    "href": "slides/mosfet.html#sec-mosfet-nutshell",
+    "title": "The MOSFET",
+    "section": "2.1 MOSFET Operation in a Nutshell",
+    "text": "2.1 MOSFET Operation in a Nutshell\n\nThis chapter on the metal-oxide-semiconductor field-effect transistor (MOSFET) is largely based on (Hu 2010; Razavi 2014; Tsividis and McAndrew 2011), which are also recommended as further reading. In contrast to our Analog Circuit Design course, where we treated the MOSFET essentially as a numerically-characterized black box, we will derive a simple, first-order model of the MOSFET from the physics of the device, and then discuss the most important second-order effects. The goal is to understand the basic operation of the MOSFET and its \\(I\\)/\\(V\\) characteristic, which will be used in later chapters for circuit design."
   },
   {
-    "objectID": "slides/technology.html#sec-technology-doping",
-    "href": "slides/technology.html#sec-technology-doping",
-    "title": "IC Technology",
-    "section": "3.5 Doping Techniques",
-    "text": "3.5 Doping Techniques"
+    "objectID": "slides/mosfet.html#sec-mosfet-iv",
+    "href": "slides/mosfet.html#sec-mosfet-iv",
+    "title": "The MOSFET",
+    "section": "2.2 Basic I/V Characteristic of the MOSFET",
+    "text": "2.2 Basic I/V Characteristic of the MOSFET"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-thin-film",
-    "href": "slides/technology.html#sec-technology-thin-film",
-    "title": "IC Technology",
-    "section": "3.6 Thin-Film Deposition",
-    "text": "3.6 Thin-Film Deposition"
+    "objectID": "slides/mosfet.html#sec-mosfet-second-order",
+    "href": "slides/mosfet.html#sec-mosfet-second-order",
+    "title": "The MOSFET",
+    "section": "2.3 Second-Order Effects in the MOSFET",
+    "text": "2.3 Second-Order Effects in the MOSFET\n\nNote that in the CMOS technology shown in Figure 11, the bulk nodes of all the NMOS transistors are tied to the common substrate (\\(V_\\mathrm{SS}\\)), while the bulk nodes of all the PMOS transistors are tied to the \\(n\\)-well (\\(V_\\mathrm{DD}\\)). Since the \\(n\\)-wells are separated from the substrate (and can be separated between different PMOS devices), the bulk nodes of selected PMOS can be tied to different potentials than \\(V_\\mathrm{DD}\\) (e.g., to the source of the PMOS), which is called body biasing. This can be used to adjust the threshold voltage of the PMOS transistors or to avoid the bulk effect (see Section 2.3.1)."
   },
   {
-    "objectID": "slides/technology.html#sec-technology-interconnect",
-    "href": "slides/technology.html#sec-technology-interconnect",
-    "title": "IC Technology",
-    "section": "3.7 Interconnects",
-    "text": "3.7 Interconnects"
+    "objectID": "slides/mosfet.html#sec-mosfet-ac",
+    "href": "slides/mosfet.html#sec-mosfet-ac",
+    "title": "The MOSFET",
+    "section": "2.4 MOSFET AC Operation",
+    "text": "2.4 MOSFET AC Operation"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-cmos-flow",
-    "href": "slides/technology.html#sec-technology-cmos-flow",
-    "title": "IC Technology",
-    "section": "3.8 An Exemplary CMOS Process Flow",
-    "text": "3.8 An Exemplary CMOS Process Flow\n\nThe classic dielectric between the metal layers is SiO2, but in order to reduce capacitive parasitics, low-k dielectrics (e.g., F- or C-doped SiO2) are used in modern processes. Between processing steps, CMP is used to planarize the surfaces."
+    "objectID": "slides/mosfet.html#sec-mosfet-ssm",
+    "href": "slides/mosfet.html#sec-mosfet-ssm",
+    "title": "The MOSFET",
+    "section": "2.5 MOSFET Small-Signal Model",
+    "text": "2.5 MOSFET Small-Signal Model"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-ihp",
-    "href": "slides/technology.html#sec-technology-ihp",
-    "title": "IC Technology",
-    "section": "3.9 The Open-Source PDK IHP SG13",
-    "text": "3.9 The Open-Source PDK IHP SG13"
+    "objectID": "slides/mosfet.html#sec-mosfet-scaling",
+    "href": "slides/mosfet.html#sec-mosfet-scaling",
+    "title": "The MOSFET",
+    "section": "2.6 MOSFET Scaling",
+    "text": "2.6 MOSFET Scaling"
   },
   {
-    "objectID": "slides/technology.html#sec-technology-qualification",
-    "href": "slides/technology.html#sec-technology-qualification",
-    "title": "IC Technology",
-    "section": "3.10 Technology Qualification",
-    "text": "3.10 Technology Qualification"
+    "objectID": "slides/mosfet.html#sec-mosfet-sce",
+    "href": "slides/mosfet.html#sec-mosfet-sce",
+    "title": "The MOSFET",
+    "section": "2.7 MOSFET Short-Channel Effects",
+    "text": "2.7 MOSFET Short-Channel Effects"
   },
   {
-    "objectID": "slides/intro.html#sec-intro-scale",
-    "href": "slides/intro.html#sec-intro-scale",
-    "title": "Introduction",
-    "section": "1.1 How Small Is a Nanometer?",
-    "text": "1.1 How Small Is a Nanometer?"
+    "objectID": "slides/mosfet.html#sec-mosfet-ihp",
+    "href": "slides/mosfet.html#sec-mosfet-ihp",
+    "title": "The MOSFET",
+    "section": "2.8 Simulated Characteristics in IHP SG13",
+    "text": "2.8 Simulated Characteristics in IHP SG13\n\nThe evolution of the FinFET is the nanosheet MOSFET, first introduced at the 3 nm node (and used by all foundries at 2 nm) and shown in Figure 18 (c). One advantage is the even better electrostatic control of the gate over the channel, as the stacked channels are completely wrapped by the gate—hence also called gate-all-around (GAA) MOSFET. In addition, the stacked channels can be either \\(n\\)- or \\(p\\)-type (or mixed), and could even use different materials, like SiGe or GaAs, opening the door to 3D integration."
   },
   {
-    "objectID": "slides/intro.html#sec-intro-history",
-    "href": "slides/intro.html#sec-intro-history",
-    "title": "Introduction",
-    "section": "1.2 A Brief History of Semiconductors",
-    "text": "1.2 A Brief History of Semiconductors"
+    "objectID": "slides/mosfet.html#sec-mosfet-sizing",
+    "href": "slides/mosfet.html#sec-mosfet-sizing",
+    "title": "The MOSFET",
+    "section": "2.9 MOSFET Sizing",
+    "text": "2.9 MOSFET Sizing"
   },
   {
-    "objectID": "slides/esd.html#sec-esd-basics",
-    "href": "slides/esd.html#sec-esd-basics",
-    "title": "Electrostatic Discharge and Latch-Up",
-    "section": "9.1 Electrostatic Discharge",
-    "text": "9.1 Electrostatic Discharge\n\nThis chapter covers two reliability hazards that every IC design must handle: electrostatic discharge (ESD), the sudden discharge of statically charged objects into the chip, and latch-up, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows (Amerasekera and Duvvury 2002); overviews of ESD test methods and of protection structures can be found in (Ker et al. 2001; Ker and Chuang 2002)."
+    "objectID": "slides/mosfet.html#sec-mosfet-summary",
+    "href": "slides/mosfet.html#sec-mosfet-summary",
+    "title": "The MOSFET",
+    "section": "2.10 Summary",
+    "text": "2.10 Summary"
   },
   {
-    "objectID": "slides/esd.html#sec-latchup",
-    "href": "slides/esd.html#sec-latchup",
-    "title": "Electrostatic Discharge and Latch-Up",
-    "section": "9.2 Latch-Up",
-    "text": "9.2 Latch-Up"
+    "objectID": "slides/mosfet.html#sec-mosfet-si-properties",
+    "href": "slides/mosfet.html#sec-mosfet-si-properties",
+    "title": "The MOSFET",
+    "section": "2.11 Appendix: Silicon Material Properties",
+    "text": "2.11 Appendix: Silicon Material Properties"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Design of Complex Integrated Circuits",
+    "objectID": "slides/testing.html#sec-testing-flow",
+    "href": "slides/testing.html#sec-testing-flow",
+    "title": "Testing",
+    "section": "6.1 Post-Silicon Production Flow",
+    "text": "6.1 Post-Silicon Production Flow\n\nIntegrated circuits must be tested for functionality and specification compliance before they are shipped. Defects introduced during manufacturing, as well as parameter variations, are unavoidable—not every IC on a wafer is a good device (the yield is below 100 %). Typical defect causes are doping errors and fluctuations, under- or over-etching, misalignment of layers, and contamination by particles. A comprehensive treatment of IC test is given in (Wang et al. 2006); the related field of hardware security and trust is covered in (Bhunia and Tehranipoor 2018)."
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-equipment",
+    "href": "slides/testing.html#sec-testing-equipment",
+    "title": "Testing",
+    "section": "6.2 Test Equipment",
+    "text": "6.2 Test Equipment"
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-challenges",
+    "href": "slides/testing.html#sec-testing-challenges",
+    "title": "Testing",
+    "section": "6.3 Mixed-Signal Testing Challenges",
+    "text": "6.3 Mixed-Signal Testing Challenges\n\nThe DIB is a custom-designed PCB that hosts the package socket (for testing packaged ICs) or connects to the probe card (for wafer testing). It also contains interface circuits that cannot be handled by the tester hardware resources (e.g., special components required by the DUT). Contact to the packaged DUT is made with spring-loaded “pogo pins” in the socket. For wafer probing, different probe-card types are used: cantilever probe cards (needles coming in at an angle), vertical (“buckling-beam” or “cobra”) probe cards, and membrane probe cards for high pin counts and fine pitches.\nHandlers (robotic pick-and-place or gravity-fed) insert the DUT into the test socket on the DIB. After the test, the ICs are sorted into bins (good = pass, bad = fail, possibly multiple pass grades). The handler can also provide a temperature-controlled environment for hot/cold testing in addition to room-temperature testing (the latter is preferred for cost reasons)."
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-plan",
+    "href": "slides/testing.html#sec-testing-plan",
+    "title": "Testing",
+    "section": "6.4 The Test Plan",
+    "text": "6.4 The Test Plan"
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-types",
+    "href": "slides/testing.html#sec-testing-types",
+    "title": "Testing",
+    "section": "6.5 Types of Tests",
+    "text": "6.5 Types of Tests"
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-cpk",
+    "href": "slides/testing.html#sec-testing-cpk",
+    "title": "Testing",
+    "section": "6.6 Process Capability Index",
+    "text": "6.6 Process Capability Index\n\nFor analog test parameters, the variation over production must stay inside the test limits, which are derived from the datasheet limits minus guard bands: the lower specification limit (LSL) and the upper specification limit (USL)."
+  },
+  {
+    "objectID": "slides/index.html",
+    "href": "slides/index.html",
+    "title": "Lecture Slides",
     "section": "",
-    "text": "Design of Complex Integrated Circuits\n\n\n\nQuarto Publish\n\n\n(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)\nThis is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 (“VL Entwurf komplexer integrierter Schaltungen”). Follow this link to access the material.\nThe course covers how integrated circuits are built (MOSFET operation, CMOS technology, layout, packaging, testing, and the economics of chip making) and how they are designed (design methodology, ESD protection, latch-up, robust design techniques, and circuit simulation).\nAll course material is made publicly available and shared under the Apache-2.0 license.\nWe happily accept pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue!"
+    "text": "Slide decks generated from the lecture notes, one per chapter. Press S for speaker notes, C for the chalkboard, and ? for all shortcuts.\n\nIntroduction\nThe MOSFET\nIC Technology\nThe Layout\nIC Packaging\nTesting\nEconomy of Integrated Circuits\nDesign Methodology\nElectrostatic Discharge and Latch-Up\nRobust Design\nSimulation of Integrated Circuits"
   },
   {
     "objectID": "dcic.html#sec-intro-scale",
@@ -644,6 +686,62 @@
     "text": "10.5 Debugging of ICs\nIf first silicon fails, the pressure to find a quick fix is high, and the temptation is to change several things at once based on a first guess. A disciplined procedure is usually faster:\n\nReproduce the failure reliably and document the conditions (sample, supply, temperature, input signals); check whether all samples fail or only some (a design issue versus a production defect).\nIsolate the failing block, e.g., using the test modes, bypass paths, and observable nodes built in during the design phase.\nCollect potential causes and form a hypothesis (the methods below help here).\nConfirm the hypothesis by reproducing the failure in simulation, and by predicting a further observation that is then checked in the lab.\nOnly then implement and verify the fix—first in simulation, then on silicon (e.g., by a FIB repair of a few samples) before the redesign is taped out.\n\n\n10.5.1 The Fishbone Diagram\nDuring the root-cause analysis of a failure, a structured method of investigation helps; the fishbone (Ishikawa) diagram shown in Figure 89 visualizes the cause-and-effect investigation (Ishikawa 1976). In a tree-like structure, the potential causes leading to an effect are organized, and details (branches) are added as debugging or brainstorming progresses. Causes are usually grouped into categories:\n\nPeople: anyone involved in the process.\nMethods: policies, procedures, rules, and regulations.\nMachines: computers, tools, and equipment required to accomplish the job.\nMaterials: raw materials, parts, and consumables used to produce the final product.\nMeasurements: data generated from the process, used to evaluate its quality.\nEnvironment: the conditions—location, time, temperature, culture—in which the process operates.\n\n\n\n\n\n\n\n\n\nFigure 89: Fishbone (Ishikawa) diagram for structured root-cause analysis: the effect (the observed problem) forms the head, the main bones are the cause categories, and detailed causes are added as smaller branches during the investigation.\n\n\n\n\n\n\n\n10.5.2 The “5-Why” Method\nA helpful strategy to identify causes is the “5-why” method: ask “Why…?” five times in succession (five is just a rough number—more or less, depending on complexity); the method originates from the Toyota production system (Ohno 1988). An example:\n\n“Why did the robot stop?” → The circuit overloaded, causing a fuse to blow.\n“Why did the circuit overload?” → There was insufficient lubrication on the bearings, so they locked up.\n“Why was there insufficient lubrication?” → The oil pump is not circulating enough oil.\n“Why is the pump not circulating enough oil?” → The pump intake is clogged with metal shavings.\n“Why is the intake clogged?” → Because there is no filter on the pump.\n\nThis may sound simple, but in a complex setting (time pressure, pressure from management or customers), analyzing an issue with simple, structured methods is an effective way to make progress.\n\n\n10.5.3 Focused Ion Beam (FIB)\nThe focused ion beam (FIB) is an extremely helpful technique to modify on-chip circuitry, by cutting connections and/or creating new on-chip connections (it can also create probe pads for micro-probing) (Giannuzzi and Stevie 2005):\n\nA FIB machine uses ions (e.g., Ga) to remove material from a sample by sputtering/milling, with a resolution down to about 10 nm.\nUsing a reactive gas inside the vacuum chamber, FIB-assisted CVD can deposit structured layers of, e.g., tungsten, forming new electrical connections.\nSince the deposited layers are very thin, creating low-ohmic connections is difficult—so a cut is preferable to a new connection where possible.\n\nFIB access is easiest on the top metal layers; nets that are candidates for a FIB modification should therefore be routed (at least for a short section) on top metal, away from dense wiring, and not be covered by metal fill. For flip-chip packages or dense metal stacks, FIB modifications from the backside of the thinned die are possible, but considerably more difficult.\n\n\n10.5.4 Failure Analysis\nBeyond electrical measurements at the pins, several physical failure-analysis techniques help to locate a fault on the die (a comprehensive overview is given in (Gandhi 2019)):\n\nMicro-probing: fine needles (or FIB-created probe pads) contact internal nodes to measure voltages and waveforms directly.\nHot-spot detection: shorts, leaky junctions, and latched structures dissipate power locally, which can be localized by thermal imaging (e.g., lock-in thermography) or by liquid-crystal coatings changing their appearance with temperature.\nPhoton emission microscopy: forward-biased junctions, MOSFETs in saturation, and oxide breakdown emit weak light (mostly in the infrared), which can be detected, also through the backside of the die.\nX-ray inspection and acoustic microscopy reveal package defects like broken bond wires, voids, or delamination non-destructively; afterwards, the die can be exposed by decapsulation and inspected optically or in a scanning electron microscope (SEM)."
   },
   {
+    "objectID": "dcic.html#sec-simulation-mna",
+    "href": "dcic.html#sec-simulation-mna",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "11.1 Formulating the Circuit Equations",
+    "text": "11.1 Formulating the Circuit Equations\nFor analog circuit simulation, the electrical network has to be formulated as a system of equations that the computer can solve. Most simulators use the modified nodal analysis (MNA) (Ho et al. 1975):Kirchhoff’s current law (KCL) is formulated for \\(N-1\\) nodes, using the node voltages as unknowns (one node serves as the reference or ground node, called node 0). For \\(R\\), \\(L\\), and \\(C\\), their characteristic equations are used:\n\\[\ni_\\mathrm{R} = \\frac{1}{R} ( v_1 - v_2 ), \\qquad\ni_\\mathrm{C} = C \\frac{ d( v_1 - v_2 )}{dt}, \\qquad\n\\frac{di_\\mathrm{L}}{dt} = \\frac{1}{L} (v_1 - v_2)\n\\]\nVoltage sources force a node voltage but contribute an unknown branch current; current sources force a branch current. The same holds for inductors, whose branch current is kept as an unknown so that their differential equation can be expressed.\nEach element contributes only to the few matrix entries belonging to its terminals, so a simulator builds the matrix by adding a fixed pattern (the element stamp) for every element in the netlist. As a node typically connects to only a few elements, the resulting matrices are very sparse.\n\n\n\n\n\n\nNote 6: MNA Example\n\n\n\nLet us perform the modified nodal analysis for the simple circuit in Figure 90. As a first step, the voltage nodes are numbered, and the directions of the branch currents are fixed. The KCL equations are formulated for each node except the reference node (current flowing out counts positive):\nNode \\(v_1\\): \\(i_\\mathrm{a} + i_\\mathrm{b} = 0\\), and node \\(v_2\\): \\(-i_\\mathrm{b} + i_\\mathrm{c} - i_\\mathrm{d} = 0\\).\nNext, the currents are expressed through the element equations. For node \\(v_1\\):\n\\[\ni_\\mathrm{a} + \\frac{v_1 - v_2}{R_1} = 0\n\\]\nand for node \\(v_2\\), using \\(i_\\mathrm{d} = I_\\mathrm{g}\\):\n\\[\n-\\frac{v_1 - v_2}{R_1} + \\frac{v_2}{R_2} - I_\\mathrm{g} = 0\n\\]\nThe current through the voltage source cannot be expressed by node voltages, so we keep it as an additional unknown and add the compensating equation \\(v_1 - V_\\mathrm{g} = 0\\). Finally, everything is put into matrix form:\n\\[\n\\begin{bmatrix}\n\\frac{1}{R_1} & -\\frac{1}{R_1} & 1 \\\\\n-\\frac{1}{R_1} & \\frac{1}{R_1} + \\frac{1}{R_2} & 0 \\\\\n1 & 0 & 0\n\\end{bmatrix}\n\\begin{bmatrix}\nv_1 \\\\ v_2 \\\\ i_\\mathrm{a}\n\\end{bmatrix}\n-\n\\begin{bmatrix}\n0 \\\\ I_\\mathrm{g} \\\\ V_\\mathrm{g}\n\\end{bmatrix}\n= 0\n\\tag{66}\\]\nEquation 66 has the form \\(\\mathbf{G} \\mathbf{x} - \\mathbf{w} = 0\\). Since the entries of \\(\\mathbf{G}\\) are constant in this example, the solution is simply \\(\\mathbf{x} = \\mathbf{G}^{-1} \\mathbf{w}\\). Note that \\(\\mathbf{G}\\) must be invertible (\\(\\det \\mathbf{G} \\neq 0\\)), otherwise no solution can be found—and this is also true inside circuit simulators (a typical cause is a floating node without a DC path to ground, or a loop of ideal voltage sources)! Simulators never compute \\(\\mathbf{G}^{-1}\\) explicitly but solve the system by sparse LU factorization.\n\n\n\n\n\n\n\n\nFigure 90: Example circuit for the modified nodal analysis: a voltage source \\(V_\\mathrm{g}\\), two resistors, and a current source \\(I_\\mathrm{g}\\). The node voltages \\(v_1\\), \\(v_2\\) (with node 0 as reference) and the branch currents \\(i_\\mathrm{a}\\) to \\(i_\\mathrm{d}\\) are annotated.\n\n\n\n\n\n\n\n\n11.1.1 Controlled Sources\nVoltage and current sources can also be controlled elements, like a voltage-controlled current source—such elements are needed, e.g., to model active devices like MOSFETs and BJTs:\n\nThe addition of voltage-controlled elements (VCVS, VCCS) is a straightforward extension of the MNA, as the node voltages are already part of the equation system.\nThe addition of current-controlled elements (CCVS, CCCS) requires sensing a branch current; conceptually, this is achieved by inserting a 0 V voltage source, which introduces an additional unknown branch current into the equation system that can then control the dependent source."
+  },
+  {
+    "objectID": "dcic.html#sec-simulation-dc",
+    "href": "dcic.html#sec-simulation-dc",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "11.2 DC Simulation",
+    "text": "11.2 DC Simulation\nThe simulation of the dc operating point (.op in SPICE) is usually the first step in any circuit simulation; the dc sweep (.dc) repeats it while stepping a source value (or temperature), e.g., to obtain transfer characteristics. Before the circuit equations are derived, all capacitors are replaced by open circuits, and all inductors by short circuits. Some elements are nonlinear functions of voltage or current, leading to a nonlinear system of equations,\n\\[\n\\mathbf{G} \\mathbf{x} + \\mathbf{p}(\\mathbf{x}) - \\mathbf{w} = 0\n\\tag{67}\\]\nwhere \\(\\mathbf{p}(\\mathbf{x})\\) collects all nonlinear current and voltage relationships.\n\n11.2.1 Solving Nonlinear Equations\nThe nonlinear circuit equations of the dc analysis are solved with the Newton-Raphson algorithm. Newton’s iterative method for solving a nonlinear equation \\(f(x) = 0\\) in a single variable starts with an initial guess \\(x_0\\) and repeatedly evaluates\n\\[\nx_{n+1} = x_n - \\left[ \\frac{d}{dx} f(x_n) \\right]^{-1} f(x_n)\n\\]\nThe generalization to multiple variables involves the Jacobian matrix:\n\\[\n\\mathbf{x}_{n+1} = \\mathbf{x}_n - \\left[ \\mathbf{J}(\\mathbf{x}_n) \\right]^{-1} \\mathbf{F}(\\mathbf{x}_n)\n\\tag{68}\\]\nIn circuit terms, each Newton-Raphson iteration replaces every nonlinear element by its linearization at the present solution estimate—a companion model consisting of a conductance (the derivative) and a current source—and then solves the resulting linear MNA system. Close to the solution, the method converges quadratically; far from it, the iteration can overshoot or diverge, so simulators limit the voltage change per iteration (e.g., across \\(pn\\) junctions).\n\n\n11.2.2 Convergence\nNote that circuits sometimes have more than one dc solution (consider a flip-flop!), and the dc solution computed by the simulator may even be an unstable one. The iterative algorithm needs a convergence criterion, i.e., when to stop the iteration; SPICE uses three parameters (for higher accuracy, tighten these values at the cost of simulation speed):\n\nRELTOL: relative tolerance of voltages and currents from one iteration to the next; default 0.001 (0.1 %).\nVNTOL: absolute node-voltage tolerance; default 1 µV.\nABSTOL: absolute branch-current tolerance; default 1 pA.\n\nA non-converging dc simulation can be a serious issue, which tends to get worse with increasing circuit size. Things to try:\n\nThe starting point of the Newton-Raphson iteration matters, so provide initial guesses for critical nodes using the .nodeset statement (in contrast to .ic, which forces an initial condition for the transient simulation).\nFloating small resistances are critical for convergence and should be avoided; for probing currents, a 0 V voltage source is a better choice than a small resistor.\nVery-high-impedance nodes and strong nonlinearities (e.g., in diodes) may cause convergence issues. The simulator automatically places a conductance in parallel with such structures, controlled by the parameter GMIN (default \\(10^{-12}\\), i.e., 1 TΩ)—which itself can cause accuracy issues, e.g., in sample-and-hold circuits.\nAnother method to achieve convergence is source stepping: slowly ramp the voltage and current sources from zero to their final values, using the result of each step as the starting point for the next (alternatively, GMIN stepping can be used)."
+  },
+  {
+    "objectID": "dcic.html#sec-simulation-ac",
+    "href": "dcic.html#sec-simulation-ac",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "11.3 AC Simulation",
+    "text": "11.3 AC Simulation\nFor the small-signal ac simulation (.ac in SPICE), the large-signal operating point is first calculated using the dc simulation. The circuit is then linearized around this operating point (the nonlinear elements are replaced by their small-signal conductances, which are the entries of the Jacobian from Equation 68), and the complex impedances of \\(L\\) and \\(C\\) are incorporated in a phasor analysis. The frequency is swept from \\(f_\\mathrm{min}\\) to \\(f_\\mathrm{max}\\), and for each frequency the complex linear matrix equations of the form\n\\[\n\\left[ \\mathbf{G} + j \\omega \\mathbf{C} \\right]\\mathbf{x} - \\mathbf{w} = 0\n\\tag{69}\\]\nare solved, where \\(\\mathbf{C}\\) holds the capacitances and inductances (the latter in the rows of the inductor branch currents). Due to the linearization, the ac simulation can not show effects like distortion, clipping, or frequency translation! Also, use the ac simulation with care when evaluating the stability of circuits: stability is only shown for the selected operating point—in another operating point, the circuit may behave differently. For assessing the stability of feedback loops, breaking the loop by hand is error-prone (it disturbs the loading and the operating point); dedicated loop-gain methods like the one in (Tian et al. 2001) (available as stb analysis in Spectre) measure the loop gain without opening the loop.\n\n11.3.1 Noise Simulation\nThe ac framework also provides the noise analysis (.noise in SPICE): small-signal noise sources are added to the circuit automatically (thermal noise for resistors; additionally shot noise and flicker noise for active devices). By computing the transfer function of each noise source to an output port (efficiently done for all sources at once using the adjoint network), the noise contributions are summed in power at the output, and dividing by the gain yields the input-referred noise. The contribution list per device is a valuable design aid to identify the dominant noise sources. Since .noise is based on .ac, nonlinear noise effects (as in mixers, oscillators, or sampled circuits) can not be simulated this way. For modeling purposes, a noiseless resistor is sometimes needed: it can be built from a VCCS, or by setting the resistor’s local temperature to 0 K if the simulator supports it."
+  },
+  {
+    "objectID": "dcic.html#sec-simulation-tran",
+    "href": "dcic.html#sec-simulation-tran",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "11.4 Transient Simulation",
+    "text": "11.4 Transient Simulation\nIn the transient analysis (.tran in SPICE), inductors and capacitors must be considered with their differential equations, so the circuit is described by a system of differential-algebraic equations (DAEs) of the general form\n\\[\n\\mathbf{C} \\frac{d}{dt} \\mathbf{x} + \\mathbf{G} \\mathbf{x} + \\mathbf{p}(\\mathbf{x}) - \\mathbf{w}(t) = 0\n\\tag{70}\\]\nFor solving the DAEs, the time-derivative operator is replaced by a discrete-time approximation, and the resulting finite-difference equations are solved one time point at a time. At each time point, this results in a nonlinear algebraic system just like in the dc analysis, which is solved by Newton-Raphson iteration (with the solution of the previous time point as a good starting guess).\n\n11.4.1 Discrete-Time Integration Methods\nThe discrete-time approximations mostly used in circuit simulators are listed in Table 14 (with the time step \\(\\Delta T = t_{k+1} - t_k\\)).\n\n\n\nTable 14: Discrete-time integration methods used in circuit simulation\n\n\n\n\n\n\n\n\n\nMethod\nApproximation\n\n\n\n\nForward Euler (FE)\n\\(\\frac{d}{dt}v(t_k) \\approx \\frac{1}{\\Delta T} [ v(t_{k+1}) - v(t_k) ]\\)\n\n\nBackward Euler (BE)\n\\(\\frac{d}{dt}v(t_{k+1}) \\approx \\frac{1}{\\Delta T} [ v(t_{k+1}) - v(t_k) ]\\)\n\n\nTrapezoidal rule (TR)\n\\(\\frac{d}{dt}v(t_{k+1}) \\approx \\frac{2}{\\Delta T} [ v(t_{k+1}) - v(t_k) ] - \\frac{d}{dt}v(t_{k})\\)\n\n\n2nd-order backward difference (Gear2)\n\\(\\frac{d}{dt}v(t_{k+1}) \\approx \\frac{3}{2\\Delta T} v(t_{k+1}) - \\frac{2}{\\Delta T} v(t_k) + \\frac{1}{2\\Delta T} v(t_{k-1})\\)\n\n\n\n\n\n\nIf the time steps are small enough, the approximation of the differential operator is adequate; circuit simulators change the time step dynamically during the simulation to trade off accuracy against simulation time. The step size is controlled by estimating the local truncation error of the integration method: the step is reduced when signals change quickly (and a time point is rejected if the error is too large), and enlarged when signals are smooth. If Newton-Raphson fails to converge at a time point, the step is reduced as well—repeated failure ends in the infamous “timestep too small” error. Regarding the choice of method:\n\nFE is an explicit method and is numerically unstable for stiff circuits (with widely separated time constants, which is the normal case), unless the time step is tiny; therefore, it is not used in general-purpose circuit simulators.\nTR and Gear2 are the most heavily used integration methods in circuit simulation.\nFor a fixed time step, the most accurate method is TR, followed by Gear2.\nTR is overly sensitive to errors of previous time steps, so do not use it with a loose RELTOL!\nFor abrupt signal changes, BE and TR adapt quickly, but beware of the artificial ringing introduced by TR.\nGear2 is efficient when simulating with tight tolerances or smooth waveforms.\nBE, TR, and Gear2 are stable on stiff circuits, but BE shows strong artificial numerical damping (TR shows none, Gear2 weak damping).\n\nOverall, Gear2 is a robust choice for most circuits. Note that simulator defaults differ: ngspice, for example, uses TR by default, and switches to Gear integration with .options method=gear (the order is set by maxord).\n\n\n11.4.2 Using the Transient Simulation\nDepending on the simulation task, the proper integration method should be selected, keeping potential numerical ringing and damping in mind when evaluating results. Some practical notes:\n\nSince no noise is modeled in the plain transient simulation, the startup of oscillators or bi-stable circuits can be inhibited—if so, a start-up pulse or an initial condition is required!\nThe transient simulation can be an effective fallback to find a dc operating point if .op does not converge, by slowly ramping all dc sources from zero to their final values.\nIf high accuracy is needed, tighten the tolerance parameters (RELTOL, VNTOL, ABSTOL) and limit the maximum time step (TMAX).\nNonlinearity is inherently captured in .tran—but noise is not!\nWhen applying an FFT to transient results, make sure that all transients have settled (use TSTART to delay the recording of the output). As the time points are not equidistant, the waveform is interpolated before the FFT; limit TMAX accordingly, and use coherent sampling or a window function to avoid spectral leakage."
+  },
+  {
+    "objectID": "dcic.html#sec-simulation-advanced",
+    "href": "dcic.html#sec-simulation-advanced",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "11.5 Advanced Simulation Modes",
+    "text": "11.5 Advanced Simulation Modes\nBeyond the basic analyses (.dc, .ac, .noise, .tran), advanced circuit simulators offer analyses that capture large-signal noise effects, including frequency conversion and time-varying bias points:\n\nIn the transient noise simulation, the noise sources are modeled as random signals in the time domain and added to the circuit (in ngspice, e.g., by using trnoise sources, or in VACASK by using the transient noise analysis). As the noise bandwidth is linked to the time step, such simulations are slow and require many runs or long simulation times for statistically meaningful results.\nFor RF simulation, there is a large discrepancy between the baseband (low) frequencies and the high carrier frequency, which makes the standard transient simulation extremely time-consuming (a small time step is dictated by the carrier, but a long simulation time by the modulation). For these cases, special methods like harmonic balance or shooting-Newton have been developed; see (Kundert 1999) for an introduction. In the open-source domain, Xyce and VACASK offer a harmonic-balance analysis.\n\nCommercial RF simulators (e.g., Cadence SpectreRF) offer a whole family of such analyses: periodic steady-state in the time domain (pss, with pac, pstb, pnoise, pxf, psp) for circuits with one periodic excitation; quasi-periodic steady-state (qpss, …) for circuits operating on multiple fundamental frequencies; and harmonic balance in the frequency domain (hb, hbac, hbnoise, …) for the natural inclusion of \\(S\\)-parameters and frequency conversion. Additional analyses cover device matching (dcmatch, acmatch), stability (stb), pole-zero (pz), \\(S\\)-parameters (sp), and envelope following (envlp)."
+  },
+  {
+    "objectID": "dcic.html#sec-simulation-models",
+    "href": "dcic.html#sec-simulation-models",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "11.6 Device Models",
+    "text": "11.6 Device Models\nTo include active devices (diodes, BJTs, MOSFETs) in the circuit simulation, numerically efficient compact models have been developed and implemented in the simulators. Exemplary MOSFET model families (dozens have been developed over time):\n\nThe SPICE level-1 model (the most basic model with a minimum number of parameters).\nThe BSIM family (mainly BSIM3 and BSIM4 for planar bulk CMOS, BSIM-CMG for FinFETs), the widespread industry standard.\nThe PSP model, well suited for analog/mixed-signal/RF design.\n\nThe standard models are maintained under the umbrella of the Compact Model Coalition (CMC) and are distributed as Verilog-A code. Open-source simulators use them via a Verilog-A compiler like OpenVAF, whose compiled models are loaded by ngspice (through the OSDI interface) and VACASK.\nFor modeling production variations, corner and Monte-Carlo model sets are provided by the foundry (see Section 10.2).\n\n11.6.1 SPICE Level-1\nThe original MOSFET model implemented in SPICE, also known as the Shichman-Hodges model, is based on the following equations (with \\(K_\\mathrm{p} = \\mu C'_\\mathrm{ox}\\) and \\(V_\\mathrm{th}= V_\\mathrm{th0} + \\gamma ( \\sqrt{2 \\Phi_\\mathrm{B}- V_\\mathrm{BS} } - \\sqrt{2 \\Phi_\\mathrm{B}} )\\)):\n\\[\nI_\\mathrm{D}= \\frac{1}{2} K_\\mathrm{p} \\frac{W}{L - 2 L_\\mathrm{D}} \\left[ 2 (V_\\mathrm{GS}- V_\\mathrm{th}) V_\\mathrm{DS}- V_\\mathrm{DS}^2 \\right] ( 1 + \\lambda V_\\mathrm{DS}) \\quad \\text{(triode)}\n\\]\n\\[\nI_\\mathrm{D}= \\frac{1}{2} K_\\mathrm{p} \\frac{W}{L - 2 L_\\mathrm{D}} (V_\\mathrm{GS}- V_\\mathrm{th})^2 ( 1 + \\lambda V_\\mathrm{DS}) \\quad \\text{(saturation)}\n\\]\nThis model includes neither subthreshold conduction nor any short-channel effects, so it should not be used below roughly 4 µm gate length! In addition, since its \\(C_\\mathrm{GS}\\) changes abruptly between the saturation and triode regions, computation algorithms often experience convergence difficulties with it.\n\n\n11.6.2 BSIM3 and BSIM4\nThe Berkeley BSIM models are the industry standard since version 3 (especially BSIM3v3) (Cheng and Hu 1999). They are source-referenced, threshold-voltage-based models and properly capture effects like mobility reduction, velocity saturation, DIBL, non-uniform doping, poly depletion, geometric scaling, and extrinsic parasitics (often modeled by embedding the intrinsic device in a subcircuit). BSIM4 adds gate current, gate-induced drain/source leakage, and improved flicker-noise modeling. The main disadvantage of the BSIM models is a lack of symmetry around \\(V_\\mathrm{DS}= 0\\), which can be critical when a MOSFET operates as an analog switch with small \\(V_\\mathrm{DS}\\). This is fixed in the charge-based successor model BSIM-BULK (formerly BSIM6).\n\n\n11.6.3 PSP\nThe PSP model (Gildenblat et al. 2006) is a symmetric, surface-potential-based model, created by merging the SP model (Pennsylvania State University) and MOS Model 11 (Philips), and selected by the CMC as an industry standard. It accurately models \\(g_\\mathrm{m}/I_\\mathrm{D}\\) in all operating regions as well as distortion—especially at small \\(V_\\mathrm{DS}\\), where BSIM has issues. In addition, PSP provides detailed and accurate noise models (including induced gate noise and the correlation between gate and drain noise) and takes non-quasi-static (NQS) effects into account. IHP SG13 uses PSP models for the core and I/O MOSFETs.\n\n\n11.6.4 NQS Effects\nThe quasi-static assumption underlying most compact models is that the terminal voltages change slowly enough for the channel charge to follow instantaneously. If this assumption is violated (e.g., in RF operation), NQS effects must be considered. Following (Bagheri and Tsividis 1985), a simple first-order model of the NQS effect is an additional gate resistance of\n\\[\nR_\\mathrm{G,nqs} = \\frac{1}{5 g_\\mathrm{m}}\n\\tag{71}\\]"
+  },
+  {
+    "objectID": "dcic.html#sec-simulation-digital",
+    "href": "dcic.html#sec-simulation-digital",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "11.7 Digital Simulation",
+    "text": "11.7 Digital Simulation\nDigital simulation is much less numerically intensive than analog simulation, as the signal values are discrete and the timing is event-driven. The signal values used in digital simulation are 0 (logic zero), 1 (logic one), X (unknown/undefined), and Z (high-impedance/tri-state). Transitions occur only at discrete points in time (driven by input events and the clock), considering the delays of the logic elements and the wiring.\nTwo main simulator types are in use:\n\nEvent-driven simulators (like GHDL and iVerilog) evaluate a logic element only when one of its inputs changes, and support the full language semantics including delays and X/Z states. After synthesis and place-and-route, a gate-level simulation with delays back-annotated from an SDF file is possible, although timing is primarily verified by static timing analysis.\nCycle-based simulators (like Verilator) compile the design into a C++ model that is evaluated once per clock cycle, typically with two-state (0/1) logic and without delays; this is dramatically faster and well suited for large synchronous designs and long test runs (e.g., booting software on a CPU core).\n\nAn intermediate method between analog and digital simulation is timing simulation: strongly simplified MOSFET models avoid the solution of nonlinear systems, matrix operations are minimized, and forward-Euler integration is used—trading accuracy for speed."
+  },
+  {
+    "objectID": "dcic.html#sec-simulation-mixed",
+    "href": "dcic.html#sec-simulation-mixed",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "11.8 Mixed-Signal Simulation",
+    "text": "11.8 Mixed-Signal Simulation\nSimulating a large mixed-signal circuit (e.g., a complex SoC combining analog circuits and digital blocks) may require a coupled mixed-signal simulation, where parts of the design run in an analog circuit simulator and other parts in a digital simulator (ngspice offers an integrated event-driven digital simulation with XSPICE, and can co-simulate Verilog code compiled by Verilator or iVerilog through its d_cosim element):\n\nAn all-analog (transistor-level) simulation of the digital part is possible but usually too time-consuming.\nFor further speed-up, some analog circuits can be replaced by behavioral descriptions (e.g., in Verilog-AMS or VHDL-AMS).\n\nAt the interfaces between the analog and digital partitions, interface elements (IEs) are inserted (manually or automatically), converting between the signal representations:\n\nDigital → analog (D2A): the IE is a voltage source with optional output resistance and finite transition times; the logic 0/1 levels are mapped to voltage levels.\nAnalog → digital (A2D): the IE is a comparator with adjustable thresholds for 0 and 1 (and X in between)."
+  },
+  {
     "objectID": "dcic.html#footnotes",
     "href": "dcic.html#footnotes",
     "title": "Design of Complex Integrated Circuits",
@@ -651,213 +749,227 @@
     "text": "Footnotes\n\n\nThe mobility value used here is not fully consistent with the process constant \\(K_\\mathrm{n} = \\mu_\\mathrm{n}C'_\\mathrm{ox}= 280\\,\\mu\\text{A/V}^2\\) in Table 1, which (with \\(C'_\\mathrm{ox}= 17.3\\,\\text{fF/µm}^2\\)) would imply an effective \\(\\mu_\\mathrm{n}\\approx 160\\,\\text{cm}^2/(\\text{V}\\cdot\\text{s})\\). The effective mobility depends strongly on the vertical field and thus on bias; such spread between simple hand-calculation parameters is normal and is one more reason to verify all sizing choices by simulation.↩︎"
   },
   {
-    "objectID": "slides/index.html",
-    "href": "slides/index.html",
-    "title": "Lecture Slides",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Design of Complex Integrated Circuits",
     "section": "",
-    "text": "Slide decks generated from the lecture notes, one per chapter. Press S for speaker notes, C for the chalkboard, and ? for all shortcuts.\n\nIntroduction\nThe MOSFET\nIC Technology\nThe Layout\nIC Packaging\nTesting\nEconomy of Integrated Circuits\nDesign Methodology\nElectrostatic Discharge and Latch-Up\nRobust Design"
+    "text": "Design of Complex Integrated Circuits\n\n\n\nQuarto Publish\n\n\n(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)\nThis is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 (“VL Entwurf komplexer integrierter Schaltungen”). Follow this link to access the material.\nThe course covers how integrated circuits are built (MOSFET operation, CMOS technology, layout, packaging, testing, and the economics of chip making) and how they are designed (design methodology, ESD protection, latch-up, robust design techniques, and circuit simulation).\nAll course material is made publicly available and shared under the Apache-2.0 license.\nWe happily accept pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue!"
   },
   {
-    "objectID": "slides/testing.html#sec-testing-flow",
-    "href": "slides/testing.html#sec-testing-flow",
-    "title": "Testing",
-    "section": "6.1 Post-Silicon Production Flow",
-    "text": "6.1 Post-Silicon Production Flow\n\nIntegrated circuits must be tested for functionality and specification compliance before they are shipped. Defects introduced during manufacturing, as well as parameter variations, are unavoidable—not every IC on a wafer is a good device (the yield is below 100 %). Typical defect causes are doping errors and fluctuations, under- or over-etching, misalignment of layers, and contamination by particles. A comprehensive treatment of IC test is given in (Wang et al. 2006); the related field of hardware security and trust is covered in (Bhunia and Tehranipoor 2018)."
+    "objectID": "slides/esd.html#sec-esd-basics",
+    "href": "slides/esd.html#sec-esd-basics",
+    "title": "Electrostatic Discharge and Latch-Up",
+    "section": "9.1 Electrostatic Discharge",
+    "text": "9.1 Electrostatic Discharge\n\nThis chapter covers two reliability hazards that every IC design must handle: electrostatic discharge (ESD), the sudden discharge of statically charged objects into the chip, and latch-up, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows (Amerasekera and Duvvury 2002); overviews of ESD test methods and of protection structures can be found in (Ker et al. 2001; Ker and Chuang 2002)."
   },
   {
-    "objectID": "slides/testing.html#sec-testing-equipment",
-    "href": "slides/testing.html#sec-testing-equipment",
-    "title": "Testing",
-    "section": "6.2 Test Equipment",
-    "text": "6.2 Test Equipment"
+    "objectID": "slides/esd.html#sec-latchup",
+    "href": "slides/esd.html#sec-latchup",
+    "title": "Electrostatic Discharge and Latch-Up",
+    "section": "9.2 Latch-Up",
+    "text": "9.2 Latch-Up"
   },
   {
-    "objectID": "slides/testing.html#sec-testing-challenges",
-    "href": "slides/testing.html#sec-testing-challenges",
-    "title": "Testing",
-    "section": "6.3 Mixed-Signal Testing Challenges",
-    "text": "6.3 Mixed-Signal Testing Challenges\n\nThe DIB is a custom-designed PCB that hosts the package socket (for testing packaged ICs) or connects to the probe card (for wafer testing). It also contains interface circuits that cannot be handled by the tester hardware resources (e.g., special components required by the DUT). Contact to the packaged DUT is made with spring-loaded “pogo pins” in the socket. For wafer probing, different probe-card types are used: cantilever probe cards (needles coming in at an angle), vertical (“buckling-beam” or “cobra”) probe cards, and membrane probe cards for high pin counts and fine pitches.\nHandlers (robotic pick-and-place or gravity-fed) insert the DUT into the test socket on the DIB. After the test, the ICs are sorted into bins (good = pass, bad = fail, possibly multiple pass grades). The handler can also provide a temperature-controlled environment for hot/cold testing in addition to room-temperature testing (the latter is preferred for cost reasons)."
+    "objectID": "slides/intro.html#sec-intro-scale",
+    "href": "slides/intro.html#sec-intro-scale",
+    "title": "Introduction",
+    "section": "1.1 How Small Is a Nanometer?",
+    "text": "1.1 How Small Is a Nanometer?"
   },
   {
-    "objectID": "slides/testing.html#sec-testing-plan",
-    "href": "slides/testing.html#sec-testing-plan",
-    "title": "Testing",
-    "section": "6.4 The Test Plan",
-    "text": "6.4 The Test Plan"
+    "objectID": "slides/intro.html#sec-intro-history",
+    "href": "slides/intro.html#sec-intro-history",
+    "title": "Introduction",
+    "section": "1.2 A Brief History of Semiconductors",
+    "text": "1.2 A Brief History of Semiconductors"
   },
   {
-    "objectID": "slides/testing.html#sec-testing-types",
-    "href": "slides/testing.html#sec-testing-types",
-    "title": "Testing",
-    "section": "6.5 Types of Tests",
-    "text": "6.5 Types of Tests"
+    "objectID": "slides/technology.html#sec-technology-wafer",
+    "href": "slides/technology.html#sec-technology-wafer",
+    "title": "IC Technology",
+    "section": "3.1 The Silicon Wafer",
+    "text": "3.1 The Silicon Wafer\n\nThis chapter walks through the manufacturing technology of integrated circuits: from the raw silicon wafer through the individual processing steps (doping, photolithography, etching, thin-film deposition, and interconnect formation) to a complete CMOS process flow. The treatment largely follows (Hu 2010)."
   },
   {
-    "objectID": "slides/testing.html#sec-testing-cpk",
-    "href": "slides/testing.html#sec-testing-cpk",
-    "title": "Testing",
-    "section": "6.6 Process Capability Index",
-    "text": "6.6 Process Capability Index\n\nFor analog test parameters, the variation over production must stay inside the test limits, which are derived from the datasheet limits minus guard bands: the lower specification limit (LSL) and the upper specification limit (USL)."
+    "objectID": "slides/technology.html#sec-technology-selective-doping",
+    "href": "slides/technology.html#sec-technology-selective-doping",
+    "title": "IC Technology",
+    "section": "3.2 Selective Doping",
+    "text": "3.2 Selective Doping"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-nutshell",
-    "href": "slides/mosfet.html#sec-mosfet-nutshell",
-    "title": "The MOSFET",
-    "section": "2.1 MOSFET Operation in a Nutshell",
-    "text": "2.1 MOSFET Operation in a Nutshell\n\nThis chapter on the metal-oxide-semiconductor field-effect transistor (MOSFET) is largely based on (Hu 2010; Razavi 2014; Tsividis and McAndrew 2011), which are also recommended as further reading. In contrast to our Analog Circuit Design course, where we treated the MOSFET essentially as a numerically-characterized black box, we will derive a simple, first-order model of the MOSFET from the physics of the device, and then discuss the most important second-order effects. The goal is to understand the basic operation of the MOSFET and its \\(I\\)/\\(V\\) characteristic, which will be used in later chapters for circuit design."
+    "objectID": "slides/technology.html#sec-technology-litho",
+    "href": "slides/technology.html#sec-technology-litho",
+    "title": "IC Technology",
+    "section": "3.3 Photolithography",
+    "text": "3.3 Photolithography"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-iv",
-    "href": "slides/mosfet.html#sec-mosfet-iv",
-    "title": "The MOSFET",
-    "section": "2.2 Basic I/V Characteristic of the MOSFET",
-    "text": "2.2 Basic I/V Characteristic of the MOSFET"
+    "objectID": "slides/technology.html#sec-technology-etching",
+    "href": "slides/technology.html#sec-technology-etching",
+    "title": "IC Technology",
+    "section": "3.4 Etching",
+    "text": "3.4 Etching"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-second-order",
-    "href": "slides/mosfet.html#sec-mosfet-second-order",
-    "title": "The MOSFET",
-    "section": "2.3 Second-Order Effects in the MOSFET",
-    "text": "2.3 Second-Order Effects in the MOSFET\n\nNote that in the CMOS technology shown in Figure 11, the bulk nodes of all the NMOS transistors are tied to the common substrate (\\(V_\\mathrm{SS}\\)), while the bulk nodes of all the PMOS transistors are tied to the \\(n\\)-well (\\(V_\\mathrm{DD}\\)). Since the \\(n\\)-wells are separated from the substrate (and can be separated between different PMOS devices), the bulk nodes of selected PMOS can be tied to different potentials than \\(V_\\mathrm{DD}\\) (e.g., to the source of the PMOS), which is called body biasing. This can be used to adjust the threshold voltage of the PMOS transistors or to avoid the bulk effect (see Section 2.3.1)."
+    "objectID": "slides/technology.html#sec-technology-doping",
+    "href": "slides/technology.html#sec-technology-doping",
+    "title": "IC Technology",
+    "section": "3.5 Doping Techniques",
+    "text": "3.5 Doping Techniques"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-ac",
-    "href": "slides/mosfet.html#sec-mosfet-ac",
-    "title": "The MOSFET",
-    "section": "2.4 MOSFET AC Operation",
-    "text": "2.4 MOSFET AC Operation"
+    "objectID": "slides/technology.html#sec-technology-thin-film",
+    "href": "slides/technology.html#sec-technology-thin-film",
+    "title": "IC Technology",
+    "section": "3.6 Thin-Film Deposition",
+    "text": "3.6 Thin-Film Deposition"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-ssm",
-    "href": "slides/mosfet.html#sec-mosfet-ssm",
-    "title": "The MOSFET",
-    "section": "2.5 MOSFET Small-Signal Model",
-    "text": "2.5 MOSFET Small-Signal Model"
+    "objectID": "slides/technology.html#sec-technology-interconnect",
+    "href": "slides/technology.html#sec-technology-interconnect",
+    "title": "IC Technology",
+    "section": "3.7 Interconnects",
+    "text": "3.7 Interconnects"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-scaling",
-    "href": "slides/mosfet.html#sec-mosfet-scaling",
-    "title": "The MOSFET",
-    "section": "2.6 MOSFET Scaling",
-    "text": "2.6 MOSFET Scaling"
+    "objectID": "slides/technology.html#sec-technology-cmos-flow",
+    "href": "slides/technology.html#sec-technology-cmos-flow",
+    "title": "IC Technology",
+    "section": "3.8 An Exemplary CMOS Process Flow",
+    "text": "3.8 An Exemplary CMOS Process Flow\n\nThe classic dielectric between the metal layers is SiO2, but in order to reduce capacitive parasitics, low-k dielectrics (e.g., F- or C-doped SiO2) are used in modern processes. Between processing steps, CMP is used to planarize the surfaces."
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-sce",
-    "href": "slides/mosfet.html#sec-mosfet-sce",
-    "title": "The MOSFET",
-    "section": "2.7 MOSFET Short-Channel Effects",
-    "text": "2.7 MOSFET Short-Channel Effects"
+    "objectID": "slides/technology.html#sec-technology-ihp",
+    "href": "slides/technology.html#sec-technology-ihp",
+    "title": "IC Technology",
+    "section": "3.9 The Open-Source PDK IHP SG13",
+    "text": "3.9 The Open-Source PDK IHP SG13"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-ihp",
-    "href": "slides/mosfet.html#sec-mosfet-ihp",
-    "title": "The MOSFET",
-    "section": "2.8 Simulated Characteristics in IHP SG13",
-    "text": "2.8 Simulated Characteristics in IHP SG13\n\nThe evolution of the FinFET is the nanosheet MOSFET, first introduced at the 3 nm node (and used by all foundries at 2 nm) and shown in Figure 18 (c). One advantage is the even better electrostatic control of the gate over the channel, as the stacked channels are completely wrapped by the gate—hence also called gate-all-around (GAA) MOSFET. In addition, the stacked channels can be either \\(n\\)- or \\(p\\)-type (or mixed), and could even use different materials, like SiGe or GaAs, opening the door to 3D integration."
+    "objectID": "slides/technology.html#sec-technology-qualification",
+    "href": "slides/technology.html#sec-technology-qualification",
+    "title": "IC Technology",
+    "section": "3.10 Technology Qualification",
+    "text": "3.10 Technology Qualification"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-sizing",
-    "href": "slides/mosfet.html#sec-mosfet-sizing",
-    "title": "The MOSFET",
-    "section": "2.9 MOSFET Sizing",
-    "text": "2.9 MOSFET Sizing"
+    "objectID": "slides/robust.html#sec-robust-circuits",
+    "href": "slides/robust.html#sec-robust-circuits",
+    "title": "Robust Design",
+    "section": "10.1 Robust Circuits and Layouts",
+    "text": "10.1 Robust Circuits and Layouts"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-summary",
-    "href": "slides/mosfet.html#sec-mosfet-summary",
-    "title": "The MOSFET",
-    "section": "2.10 Summary",
-    "text": "2.10 Summary"
+    "objectID": "slides/robust.html#sec-robust-corners",
+    "href": "slides/robust.html#sec-robust-corners",
+    "title": "Robust Design",
+    "section": "10.2 Corner Models",
+    "text": "10.2 Corner Models"
   },
   {
-    "objectID": "slides/mosfet.html#sec-mosfet-si-properties",
-    "href": "slides/mosfet.html#sec-mosfet-si-properties",
-    "title": "The MOSFET",
-    "section": "2.11 Appendix: Silicon Material Properties",
-    "text": "2.11 Appendix: Silicon Material Properties"
+    "objectID": "slides/robust.html#sec-robust-parasitics",
+    "href": "slides/robust.html#sec-robust-parasitics",
+    "title": "Robust Design",
+    "section": "10.3 Include the Parasitics",
+    "text": "10.3 Include the Parasitics"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-tapeout",
-    "href": "slides/layout.html#sec-layout-tapeout",
-    "title": "The Layout",
-    "section": "4.1 Files and Tapeout",
-    "text": "4.1 Files and Tapeout\n\nThe layout is the 2D representation of the IC manufacturing data. While the schematic captures the electrical intent of a design, the layout captures its physical realization: in the layout tools, the design is drawn on several layers, which are the foundation for the generation of the photomasks used in IC production. Commercial layout tools are, e.g., Cadence Virtuoso, Siemens L-Edit, and open-source tools are Magic and KLayout. The layers are usually manipulated before the geometries are transferred to the masks (shrink, enlarge, invert, combination of several layers into one mask layer, optical proximity correction, etc.)."
+    "objectID": "slides/robust.html#sec-robust-failure-mode",
+    "href": "slides/robust.html#sec-robust-failure-mode",
+    "title": "Robust Design",
+    "section": "10.4 Failure-Mode Thinking",
+    "text": "10.4 Failure-Mode Thinking"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-layers",
-    "href": "slides/layout.html#sec-layout-layers",
-    "title": "The Layout",
-    "section": "4.2 Generic Layer Definition",
-    "text": "4.2 Generic Layer Definition\n\nThe layout is checked for compliance with the wafer-fab design rules in the design rule check (DRC), and for conformance with the intended circuit in the layout-versus-schematic (LVS) check, where a netlist extracted from the layout is compared to the netlist of the original schematic. If all checks pass, the layout data is sent to mask production—this step is called tapeout. The mask house processes the layout data and produces the photomasks used by the wafer fab (depending on technology complexity, between 10 and 80 masks).\nThe standard file format for layout data is GDSII, a hierarchical database in a binary stream format. A newer format with more efficient storage is OASIS, but GDSII is still very common."
+    "objectID": "slides/robust.html#sec-robust-debug",
+    "href": "slides/robust.html#sec-robust-debug",
+    "title": "Robust Design",
+    "section": "10.5 Debugging of ICs",
+    "text": "10.5 Debugging of ICs"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-devices",
-    "href": "slides/layout.html#sec-layout-devices",
-    "title": "The Layout",
-    "section": "4.3 Devices",
-    "text": "4.3 Devices"
+    "objectID": "slides/methodology.html#sec-methodology-y",
+    "href": "slides/methodology.html#sec-methodology-y",
+    "title": "Design Methodology",
+    "section": "8.1 The Y-Diagram",
+    "text": "8.1 The Y-Diagram\n\nIn this chapter, basic knowledge of digital and analog circuit design is assumed; we discuss IC-specific design methodology topics which are usually not covered in entry-level courses. A comprehensive treatment of digital VLSI design and its methodology is given in (Weste and Harris 2011). We first introduce a mental model of the design space (the Y-diagram), then survey the available implementation styles and their trade-offs, and finally walk through the concrete design flows—the digital semicustom flow and the analog/mixed-signal custom flow—illustrated throughout with open-source EDA tools."
   },
   {
-    "objectID": "slides/layout.html#sec-layout-drc",
-    "href": "slides/layout.html#sec-layout-drc",
-    "title": "The Layout",
-    "section": "4.4 Design Rules",
-    "text": "4.4 Design Rules"
+    "objectID": "slides/methodology.html#sec-methodology-choices",
+    "href": "slides/methodology.html#sec-methodology-choices",
+    "title": "Design Methodology",
+    "section": "8.2 Digital Implementation Choices",
+    "text": "8.2 Digital Implementation Choices"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-analog",
-    "href": "slides/layout.html#sec-layout-analog",
-    "title": "The Layout",
-    "section": "4.5 Analog Layout Techniques",
-    "text": "4.5 Analog Layout Techniques\n\nThe complete layout rules of the open-source IHP SG13 PDK can be found in the SG13G2 layout rules document and serve as a practical example of a production DRC rule set."
+    "objectID": "slides/methodology.html#sec-methodology-cells",
+    "href": "slides/methodology.html#sec-methodology-cells",
+    "title": "Design Methodology",
+    "section": "8.3 Cell-Based Design",
+    "text": "8.3 Cell-Based Design"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-additional",
-    "href": "slides/layout.html#sec-layout-additional",
-    "title": "The Layout",
-    "section": "4.6 Additional Layout and Mask Structures",
-    "text": "4.6 Additional Layout and Mask Structures"
+    "objectID": "slides/methodology.html#sec-methodology-flow",
+    "href": "slides/methodology.html#sec-methodology-flow",
+    "title": "Design Methodology",
+    "section": "8.4 The Semicustom Design Flow",
+    "text": "8.4 The Semicustom Design Flow"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-checks",
-    "href": "slides/layout.html#sec-layout-checks",
-    "title": "The Layout",
-    "section": "4.7 Layout Checks",
-    "text": "4.7 Layout Checks"
+    "objectID": "slides/methodology.html#sec-methodology-custom",
+    "href": "slides/methodology.html#sec-methodology-custom",
+    "title": "Design Methodology",
+    "section": "8.5 The Mixed-Signal/Custom Flow",
+    "text": "8.5 The Mixed-Signal/Custom Flow"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-extraction",
-    "href": "slides/layout.html#sec-layout-extraction",
-    "title": "The Layout",
-    "section": "4.8 Layout Extraction",
-    "text": "4.8 Layout Extraction"
+    "objectID": "slides/methodology.html#sec-methodology-fpga",
+    "href": "slides/methodology.html#sec-methodology-fpga",
+    "title": "Design Methodology",
+    "section": "8.6 FPGAs",
+    "text": "8.6 FPGAs"
   },
   {
-    "objectID": "slides/economy.html#sec-economy-price",
-    "href": "slides/economy.html#sec-economy-price",
-    "title": "Economy of Integrated Circuits",
-    "section": "7.1 Selling Price and Total Cost",
-    "text": "7.1 Selling Price and Total Cost\n\nThe manufacturing of ICs is a large-scale business, requiring significant investment in research and development, and usually large volumes are built and sold. It is therefore rewarding to take a look at the economics of integrated circuits."
+    "objectID": "slides/packaging.html#sec-packaging-wafer-prep",
+    "href": "slides/packaging.html#sec-packaging-wafer-prep",
+    "title": "IC Packaging",
+    "section": "5.1 From Wafer to Packaged IC",
+    "text": "5.1 From Wafer to Packaged IC\n\nThe finished wafer is not yet a usable product: the individual dice have to be separated, connected, and protected. This chapter covers the path from the processed wafer to the packaged integrated circuit, the most important package families, thermal design, and the electrical parasitics that packages introduce."
   },
   {
-    "objectID": "slides/economy.html#sec-economy-nre",
-    "href": "slides/economy.html#sec-economy-nre",
-    "title": "Economy of Integrated Circuits",
-    "section": "7.2 Non-Recurring Engineering Cost",
-    "text": "7.2 Non-Recurring Engineering Cost"
+    "objectID": "slides/packaging.html#sec-packaging-bonding",
+    "href": "slides/packaging.html#sec-packaging-bonding",
+    "title": "IC Packaging",
+    "section": "5.2 Chip-to-Package Connection",
+    "text": "5.2 Chip-to-Package Connection"
   },
   {
-    "objectID": "slides/economy.html#sec-economy-recurring",
-    "href": "slides/economy.html#sec-economy-recurring",
-    "title": "Economy of Integrated Circuits",
-    "section": "7.3 Recurring Cost",
-    "text": "7.3 Recurring Cost"
+    "objectID": "slides/packaging.html#sec-packaging-types",
+    "href": "slides/packaging.html#sec-packaging-types",
+    "title": "IC Packaging",
+    "section": "5.3 Package Types",
+    "text": "5.3 Package Types"
   },
   {
-    "objectID": "slides/economy.html#sec-economy-example",
-    "href": "slides/economy.html#sec-economy-example",
-    "title": "Economy of Integrated Circuits",
-    "section": "7.4 An Exemplary Calculation",
-    "text": "7.4 An Exemplary Calculation"
+    "objectID": "slides/packaging.html#sec-packaging-thermal",
+    "href": "slides/packaging.html#sec-packaging-thermal",
+    "title": "IC Packaging",
+    "section": "5.4 Thermal Design",
+    "text": "5.4 Thermal Design"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-parasitics",
+    "href": "slides/packaging.html#sec-packaging-parasitics",
+    "title": "IC Packaging",
+    "section": "5.5 Package Parasitics",
+    "text": "5.5 Package Parasitics"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-qualification",
+    "href": "slides/packaging.html#sec-packaging-qualification",
+    "title": "IC Packaging",
+    "section": "5.6 Package Qualification",
+    "text": "5.6 Package Qualification"
   }
 ]

@@ -580,6 +580,37 @@ window.Quarto = {
   <li><a href="#failure-analysis" id="toc-failure-analysis" class="nav-link" data-scroll-target="#failure-analysis"><span class="header-section-number">10.5.4</span> Failure Analysis</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#sec-simulation" id="toc-sec-simulation" class="nav-link" data-scroll-target="#sec-simulation"><span class="header-section-number">11</span> Simulation of Integrated Circuits</a>
+  <ul class="collapse">
+  <li><a href="#sec-simulation-mna" id="toc-sec-simulation-mna" class="nav-link" data-scroll-target="#sec-simulation-mna"><span class="header-section-number">11.1</span> Formulating the Circuit Equations</a>
+  <ul class="collapse">
+  <li><a href="#controlled-sources" id="toc-controlled-sources" class="nav-link" data-scroll-target="#controlled-sources"><span class="header-section-number">11.1.1</span> Controlled Sources</a></li>
+  </ul></li>
+  <li><a href="#sec-simulation-dc" id="toc-sec-simulation-dc" class="nav-link" data-scroll-target="#sec-simulation-dc"><span class="header-section-number">11.2</span> DC Simulation</a>
+  <ul class="collapse">
+  <li><a href="#solving-nonlinear-equations" id="toc-solving-nonlinear-equations" class="nav-link" data-scroll-target="#solving-nonlinear-equations"><span class="header-section-number">11.2.1</span> Solving Nonlinear Equations</a></li>
+  <li><a href="#convergence" id="toc-convergence" class="nav-link" data-scroll-target="#convergence"><span class="header-section-number">11.2.2</span> Convergence</a></li>
+  </ul></li>
+  <li><a href="#sec-simulation-ac" id="toc-sec-simulation-ac" class="nav-link" data-scroll-target="#sec-simulation-ac"><span class="header-section-number">11.3</span> AC Simulation</a>
+  <ul class="collapse">
+  <li><a href="#noise-simulation" id="toc-noise-simulation" class="nav-link" data-scroll-target="#noise-simulation"><span class="header-section-number">11.3.1</span> Noise Simulation</a></li>
+  </ul></li>
+  <li><a href="#sec-simulation-tran" id="toc-sec-simulation-tran" class="nav-link" data-scroll-target="#sec-simulation-tran"><span class="header-section-number">11.4</span> Transient Simulation</a>
+  <ul class="collapse">
+  <li><a href="#discrete-time-integration-methods" id="toc-discrete-time-integration-methods" class="nav-link" data-scroll-target="#discrete-time-integration-methods"><span class="header-section-number">11.4.1</span> Discrete-Time Integration Methods</a></li>
+  <li><a href="#using-the-transient-simulation" id="toc-using-the-transient-simulation" class="nav-link" data-scroll-target="#using-the-transient-simulation"><span class="header-section-number">11.4.2</span> Using the Transient Simulation</a></li>
+  </ul></li>
+  <li><a href="#sec-simulation-advanced" id="toc-sec-simulation-advanced" class="nav-link" data-scroll-target="#sec-simulation-advanced"><span class="header-section-number">11.5</span> Advanced Simulation Modes</a></li>
+  <li><a href="#sec-simulation-models" id="toc-sec-simulation-models" class="nav-link" data-scroll-target="#sec-simulation-models"><span class="header-section-number">11.6</span> Device Models</a>
+  <ul class="collapse">
+  <li><a href="#spice-level-1" id="toc-spice-level-1" class="nav-link" data-scroll-target="#spice-level-1"><span class="header-section-number">11.6.1</span> SPICE Level-1</a></li>
+  <li><a href="#bsim3-and-bsim4" id="toc-bsim3-and-bsim4" class="nav-link" data-scroll-target="#bsim3-and-bsim4"><span class="header-section-number">11.6.2</span> BSIM3 and BSIM4</a></li>
+  <li><a href="#psp" id="toc-psp" class="nav-link" data-scroll-target="#psp"><span class="header-section-number">11.6.3</span> PSP</a></li>
+  <li><a href="#nqs-effects" id="toc-nqs-effects" class="nav-link" data-scroll-target="#nqs-effects"><span class="header-section-number">11.6.4</span> NQS Effects</a></li>
+  </ul></li>
+  <li><a href="#sec-simulation-digital" id="toc-sec-simulation-digital" class="nav-link" data-scroll-target="#sec-simulation-digital"><span class="header-section-number">11.7</span> Digital Simulation</a></li>
+  <li><a href="#sec-simulation-mixed" id="toc-sec-simulation-mixed" class="nav-link" data-scroll-target="#sec-simulation-mixed"><span class="header-section-number">11.8</span> Mixed-Signal Simulation</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dcic.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -4322,10 +4353,278 @@ Figure&nbsp;89: Fishbone (Ishikawa) diagram for structured root-cause analysis: 
 <li><strong>Photon emission microscopy</strong>: forward-biased junctions, MOSFETs in saturation, and oxide breakdown emit weak light (mostly in the infrared), which can be detected, also through the backside of the die.</li>
 <li><strong>X-ray</strong> inspection and <strong>acoustic microscopy</strong> reveal package defects like broken bond wires, voids, or delamination non-destructively; afterwards, the die can be exposed by <strong>decapsulation</strong> and inspected optically or in a scanning electron microscope (SEM).</li>
 </ul>
-
-
-
 </section>
+</section>
+</section>
+<section id="sec-simulation" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Simulation of Integrated Circuits</h1>
+<p>Circuit simulators are critically important for IC design, as the functionality and performance of an IC must be ensured <em>before</em> submitting the design to production—an expensive and lengthy process. Most circuit simulators today can be traced back to the <a href="https://en.wikipedia.org/wiki/SPICE"><strong>SPICE</strong></a> software released in 1972 by UC Berkeley (whose source code was made public soon after), with SPICE2 <span class="citation" data-cites="Nagel_1975">(<a href="#ref-Nagel_1975" role="doc-biblioref">Nagel 1975</a>)</span> establishing the algorithms still in use today. This chapter is largely based on <span class="citation" data-cites="Kundert_SPICE">(<a href="#ref-Kundert_SPICE" role="doc-biblioref">Kundert 1995</a>)</span>.</p>
+<p>Excellent open-source simulators are available: <a href="https://github.com/ghdl/ghdl"><strong>GHDL</strong></a> for VHDL and <a href="https://github.com/steveicarus/iverilog"><strong>iVerilog</strong></a>/<a href="https://www.veripool.org/verilator/"><strong>Verilator</strong></a> for Verilog/SystemVerilog digital simulation, and <a href="http://ngspice.sourceforge.net"><strong>ngspice</strong></a> <a href="https://codeberg.org/arpadbuermen/VACASK"><strong>VACASK</strong></a>, and <a href="https://xyce.sandia.gov"><strong>Xyce</strong></a> for SPICE analog/mixed-signal simulation.</p>
+<p>The <a href="https://codeberg.org/arpadbuermen/VACASK/src/branch/main/docs/index.md">documentation of VACASK</a> is a good reading resource for learning how to set up and run simulations.</p>
+<section id="sec-simulation-mna" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="sec-simulation-mna"><span class="header-section-number">11.1</span> Formulating the Circuit Equations</h2>
+<p>For analog circuit simulation, the electrical network has to be formulated as a system of equations that the computer can solve. Most simulators use the <a href="https://en.wikipedia.org/wiki/Modified_nodal_analysis"><strong>modified nodal analysis (MNA)</strong></a> <span class="citation" data-cites="Ho_1975">(<a href="#ref-Ho_1975" role="doc-biblioref">Ho et al. 1975</a>)</span>:<a href="https://en.wikipedia.org/wiki/Kirchhoff%27s_circuit_laws">Kirchhoff’s current law</a> (KCL) is formulated for <span class="math inline">\(N-1\)</span> nodes, using the node voltages as unknowns (one node serves as the reference or ground node, called node 0). For <span class="math inline">\(R\)</span>, <span class="math inline">\(L\)</span>, and <span class="math inline">\(C\)</span>, their characteristic equations are used:</p>
+<p><span class="math display">\[
+i_\mathrm{R} = \frac{1}{R} ( v_1 - v_2 ), \qquad
+i_\mathrm{C} = C \frac{ d( v_1 - v_2 )}{dt}, \qquad
+\frac{di_\mathrm{L}}{dt} = \frac{1}{L} (v_1 - v_2)
+\]</span></p>
+<p>Voltage sources force a node voltage but contribute an unknown branch current; current sources force a branch current. The same holds for inductors, whose branch current is kept as an unknown so that their differential equation can be expressed.</p>
+<p>Each element contributes only to the few matrix entries belonging to its terminals, so a simulator builds the matrix by adding a fixed pattern (the element <strong>stamp</strong>) for every element in the netlist. As a node typically connects to only a few elements, the resulting matrices are very <strong>sparse</strong>.</p>
+<div id="nte-mna-example" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note&nbsp;6: MNA Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let us perform the modified nodal analysis for the simple circuit in <a href="#fig-mna-circuit" class="quarto-xref">Figure&nbsp;90</a>. As a first step, the voltage nodes are numbered, and the directions of the branch currents are fixed. The KCL equations are formulated for each node except the reference node (current flowing out counts positive):</p>
+<p>Node <span class="math inline">\(v_1\)</span>: <span class="math inline">\(i_\mathrm{a} + i_\mathrm{b} = 0\)</span>, and node <span class="math inline">\(v_2\)</span>: <span class="math inline">\(-i_\mathrm{b} + i_\mathrm{c} - i_\mathrm{d} = 0\)</span>.</p>
+<p>Next, the currents are expressed through the element equations. For node <span class="math inline">\(v_1\)</span>:</p>
+<p><span class="math display">\[
+i_\mathrm{a} + \frac{v_1 - v_2}{R_1} = 0
+\]</span></p>
+<p>and for node <span class="math inline">\(v_2\)</span>, using <span class="math inline">\(i_\mathrm{d} = I_\mathrm{g}\)</span>:</p>
+<p><span class="math display">\[
+-\frac{v_1 - v_2}{R_1} + \frac{v_2}{R_2} - I_\mathrm{g} = 0
+\]</span></p>
+<p>The current through the voltage source cannot be expressed by node voltages, so we keep it as an additional unknown and add the compensating equation <span class="math inline">\(v_1 - V_\mathrm{g} = 0\)</span>. Finally, everything is put into matrix form:</p>
+<p><span id="eq-mna-result"><span class="math display">\[
+\begin{bmatrix}
+\frac{1}{R_1} &amp; -\frac{1}{R_1} &amp; 1 \\
+-\frac{1}{R_1} &amp; \frac{1}{R_1} + \frac{1}{R_2} &amp; 0 \\
+1 &amp; 0 &amp; 0
+\end{bmatrix}
+\begin{bmatrix}
+v_1 \\ v_2 \\ i_\mathrm{a}
+\end{bmatrix}
+-
+\begin{bmatrix}
+0 \\ I_\mathrm{g} \\ V_\mathrm{g}
+\end{bmatrix}
+= 0
+\tag{66}\]</span></span></p>
+<p><a href="#eq-mna-result" class="quarto-xref">Equation&nbsp;66</a> has the form <span class="math inline">\(\mathbf{G} \mathbf{x} - \mathbf{w} = 0\)</span>. Since the entries of <span class="math inline">\(\mathbf{G}\)</span> are constant in this example, the solution is simply <span class="math inline">\(\mathbf{x} = \mathbf{G}^{-1} \mathbf{w}\)</span>. Note that <span class="math inline">\(\mathbf{G}\)</span> must be invertible (<span class="math inline">\(\det \mathbf{G} \neq 0\)</span>), otherwise no solution can be found—and this is also true inside circuit simulators (a typical cause is a floating node without a DC path to ground, or a loop of ideal voltage sources)! Simulators never compute <span class="math inline">\(\mathbf{G}^{-1}\)</span> explicitly but solve the system by sparse LU factorization.</p>
+<div id="cell-fig-mna-circuit" class="cell" data-execution_count="89">
+<div class="cell-output cell-output-display">
+<div id="fig-mna-circuit" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mna-circuit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-mna-circuit-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-90" title="Figure&nbsp;90: Example circuit for the modified nodal analysis: a voltage source V_\mathrm{g}, two resistors, and a current source I_\mathrm{g}. The node voltages v_1, v_2 (with node 0 as reference) and the branch currents i_\mathrm{a} to i_\mathrm{d} are annotated."><img src="dcic_files/figure-html/fig-mna-circuit-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mna-circuit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;90: Example circuit for the modified nodal analysis: a voltage source <span class="math inline">\(V_\mathrm{g}\)</span>, two resistors, and a current source <span class="math inline">\(I_\mathrm{g}\)</span>. The node voltages <span class="math inline">\(v_1\)</span>, <span class="math inline">\(v_2\)</span> (with node 0 as reference) and the branch currents <span class="math inline">\(i_\mathrm{a}\)</span> to <span class="math inline">\(i_\mathrm{d}\)</span> are annotated.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="controlled-sources" class="level3" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="controlled-sources"><span class="header-section-number">11.1.1</span> Controlled Sources</h3>
+<p>Voltage and current sources can also be controlled elements, like a voltage-controlled current source—such elements are needed, e.g., to model active devices like MOSFETs and BJTs:</p>
+<ol type="1">
+<li>The addition of voltage-controlled elements (VCVS, VCCS) is a straightforward extension of the MNA, as the node voltages are already part of the equation system.</li>
+<li>The addition of current-controlled elements (CCVS, CCCS) requires sensing a branch current; conceptually, this is achieved by inserting a 0 V voltage source, which introduces an additional unknown branch current into the equation system that can then control the dependent source.</li>
+</ol>
+</section>
+</section>
+<section id="sec-simulation-dc" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="sec-simulation-dc"><span class="header-section-number">11.2</span> DC Simulation</h2>
+<p>The simulation of the dc operating point (<code>.op</code> in SPICE) is usually the first step in any circuit simulation; the dc sweep (<code>.dc</code>) repeats it while stepping a source value (or temperature), e.g., to obtain transfer characteristics. Before the circuit equations are derived, all capacitors are replaced by open circuits, and all inductors by short circuits. Some elements are nonlinear functions of voltage or current, leading to a nonlinear system of equations,</p>
+<p><span id="eq-dc-nonlinear"><span class="math display">\[
+\mathbf{G} \mathbf{x} + \mathbf{p}(\mathbf{x}) - \mathbf{w} = 0
+\tag{67}\]</span></span></p>
+<p>where <span class="math inline">\(\mathbf{p}(\mathbf{x})\)</span> collects all nonlinear current and voltage relationships.</p>
+<section id="solving-nonlinear-equations" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="solving-nonlinear-equations"><span class="header-section-number">11.2.1</span> Solving Nonlinear Equations</h3>
+<p>The nonlinear circuit equations of the dc analysis are solved with the <a href="https://en.wikipedia.org/wiki/Newton%27s_method"><strong>Newton-Raphson</strong></a> algorithm. Newton’s iterative method for solving a nonlinear equation <span class="math inline">\(f(x) = 0\)</span> in a single variable starts with an initial guess <span class="math inline">\(x_0\)</span> and repeatedly evaluates</p>
+<p><span class="math display">\[
+x_{n+1} = x_n - \left[ \frac{d}{dx} f(x_n) \right]^{-1} f(x_n)
+\]</span></p>
+<p>The generalization to multiple variables involves the Jacobian matrix:</p>
+<p><span id="eq-newton-raphson"><span class="math display">\[
+\mathbf{x}_{n+1} = \mathbf{x}_n - \left[ \mathbf{J}(\mathbf{x}_n) \right]^{-1} \mathbf{F}(\mathbf{x}_n)
+\tag{68}\]</span></span></p>
+<p>In circuit terms, each Newton-Raphson iteration replaces every nonlinear element by its linearization at the present solution estimate—a <strong>companion model</strong> consisting of a conductance (the derivative) and a current source—and then solves the resulting linear MNA system. Close to the solution, the method converges quadratically; far from it, the iteration can overshoot or diverge, so simulators limit the voltage change per iteration (e.g., across <span class="math inline">\(pn\)</span> junctions).</p>
+</section>
+<section id="convergence" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="convergence"><span class="header-section-number">11.2.2</span> Convergence</h3>
+<p>Note that circuits sometimes have more than one dc solution (consider a flip-flop!), and the dc solution computed by the simulator may even be an unstable one. The iterative algorithm needs a convergence criterion, i.e., when to stop the iteration; SPICE uses three parameters (for higher accuracy, tighten these values at the cost of simulation speed):</p>
+<ul>
+<li><code>RELTOL</code>: relative tolerance of voltages and currents from one iteration to the next; default 0.001 (0.1 %).</li>
+<li><code>VNTOL</code>: absolute node-voltage tolerance; default 1 µV.</li>
+<li><code>ABSTOL</code>: absolute branch-current tolerance; default 1 pA.</li>
+</ul>
+<p>A non-converging dc simulation can be a serious issue, which tends to get worse with increasing circuit size. Things to try:</p>
+<ul>
+<li>The starting point of the Newton-Raphson iteration matters, so provide <strong>initial guesses</strong> for critical nodes using the <code>.nodeset</code> statement (in contrast to <code>.ic</code>, which forces an initial condition for the transient simulation).</li>
+<li>Floating small resistances are critical for convergence and should be avoided; for probing currents, a 0 V voltage source is a better choice than a small resistor.</li>
+<li>Very-high-impedance nodes and strong nonlinearities (e.g., in diodes) may cause convergence issues. The simulator automatically places a conductance in parallel with such structures, controlled by the parameter <code>GMIN</code> (default <span class="math inline">\(10^{-12}\)</span>, i.e., 1 TΩ)—which itself can cause accuracy issues, e.g., in sample-and-hold circuits.</li>
+<li>Another method to achieve convergence is <strong>source stepping</strong>: slowly ramp the voltage and current sources from zero to their final values, using the result of each step as the starting point for the next (alternatively, <code>GMIN</code> stepping can be used).</li>
+</ul>
+</section>
+</section>
+<section id="sec-simulation-ac" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="sec-simulation-ac"><span class="header-section-number">11.3</span> AC Simulation</h2>
+<p>For the small-signal ac simulation (<code>.ac</code> in SPICE), the large-signal operating point is first calculated using the dc simulation. The circuit is then <strong>linearized</strong> around this operating point (the nonlinear elements are replaced by their small-signal conductances, which are the entries of the Jacobian from <a href="#eq-newton-raphson" class="quarto-xref">Equation&nbsp;68</a>), and the complex impedances of <span class="math inline">\(L\)</span> and <span class="math inline">\(C\)</span> are incorporated in a phasor analysis. The frequency is swept from <span class="math inline">\(f_\mathrm{min}\)</span> to <span class="math inline">\(f_\mathrm{max}\)</span>, and for each frequency the complex linear matrix equations of the form</p>
+<p><span id="eq-ac-matrix"><span class="math display">\[
+\left[ \mathbf{G} + j \omega \mathbf{C} \right]\mathbf{x} - \mathbf{w} = 0
+\tag{69}\]</span></span></p>
+<p>are solved, where <span class="math inline">\(\mathbf{C}\)</span> holds the capacitances and inductances (the latter in the rows of the inductor branch currents). Due to the linearization, the ac simulation can <strong>not</strong> show effects like distortion, clipping, or frequency translation! Also, use the ac simulation with care when evaluating the stability of circuits: stability is only shown for the selected operating point—in another operating point, the circuit may behave differently. For assessing the stability of feedback loops, breaking the loop by hand is error-prone (it disturbs the loading and the operating point); dedicated loop-gain methods like the one in <span class="citation" data-cites="Tian_2001">(<a href="#ref-Tian_2001" role="doc-biblioref">Tian et al. 2001</a>)</span> (available as <code>stb</code> analysis in Spectre) measure the loop gain without opening the loop.</p>
+<section id="noise-simulation" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="noise-simulation"><span class="header-section-number">11.3.1</span> Noise Simulation</h3>
+<p>The ac framework also provides the noise analysis (<code>.noise</code> in SPICE): small-signal noise sources are added to the circuit automatically (thermal noise for resistors; additionally shot noise and flicker noise for active devices). By computing the transfer function of each noise source to an output port (efficiently done for all sources at once using the adjoint network), the noise contributions are summed in power at the output, and dividing by the gain yields the input-referred noise. The contribution list per device is a valuable design aid to identify the dominant noise sources. Since <code>.noise</code> is based on <code>.ac</code>, <strong>nonlinear</strong> noise effects (as in mixers, oscillators, or sampled circuits) can <strong>not</strong> be simulated this way. For modeling purposes, a <strong>noiseless resistor</strong> is sometimes needed: it can be built from a VCCS, or by setting the resistor’s local temperature to 0 K if the simulator supports it.</p>
+</section>
+</section>
+<section id="sec-simulation-tran" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="sec-simulation-tran"><span class="header-section-number">11.4</span> Transient Simulation</h2>
+<p>In the transient analysis (<code>.tran</code> in SPICE), inductors and capacitors must be considered with their differential equations, so the circuit is described by a system of <a href="https://en.wikipedia.org/wiki/Differential-algebraic_system_of_equations">differential-algebraic equations</a> (DAEs) of the general form</p>
+<p><span id="eq-tran-dae"><span class="math display">\[
+\mathbf{C} \frac{d}{dt} \mathbf{x} + \mathbf{G} \mathbf{x} + \mathbf{p}(\mathbf{x}) - \mathbf{w}(t) = 0
+\tag{70}\]</span></span></p>
+<p>For solving the DAEs, the time-derivative operator is replaced by a discrete-time approximation, and the resulting finite-difference equations are solved one time point at a time. At each time point, this results in a nonlinear algebraic system just like in the dc analysis, which is solved by Newton-Raphson iteration (with the solution of the previous time point as a good starting guess).</p>
+<section id="discrete-time-integration-methods" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="discrete-time-integration-methods"><span class="header-section-number">11.4.1</span> Discrete-Time Integration Methods</h3>
+<p>The discrete-time approximations mostly used in circuit simulators are listed in <a href="#tbl-integration" class="quarto-xref">Table&nbsp;14</a> (with the time step <span class="math inline">\(\Delta T = t_{k+1} - t_k\)</span>).</p>
+<div id="tbl-integration" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-integration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;14: Discrete-time integration methods used in circuit simulation
+</figcaption>
+<div aria-describedby="tbl-integration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Approximation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Forward Euler (<code>FE</code>)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dt}v(t_k) \approx \frac{1}{\Delta T} [ v(t_{k+1}) - v(t_k) ]\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Backward Euler (<code>BE</code>)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dt}v(t_{k+1}) \approx \frac{1}{\Delta T} [ v(t_{k+1}) - v(t_k) ]\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Trapezoidal rule (<code>TR</code>)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dt}v(t_{k+1}) \approx \frac{2}{\Delta T} [ v(t_{k+1}) - v(t_k) ] - \frac{d}{dt}v(t_{k})\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2nd-order backward difference (<code>Gear2</code>)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dt}v(t_{k+1}) \approx \frac{3}{2\Delta T} v(t_{k+1}) - \frac{2}{\Delta T} v(t_k) + \frac{1}{2\Delta T} v(t_{k-1})\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>If the time steps are small enough, the approximation of the differential operator is adequate; circuit simulators change the time step dynamically during the simulation to trade off accuracy against simulation time. The step size is controlled by estimating the <strong>local truncation error</strong> of the integration method: the step is reduced when signals change quickly (and a time point is rejected if the error is too large), and enlarged when signals are smooth. If Newton-Raphson fails to converge at a time point, the step is reduced as well—repeated failure ends in the infamous “timestep too small” error. Regarding the choice of method:</p>
+<ul>
+<li><code>FE</code> is an explicit method and is numerically unstable for stiff circuits (with widely separated time constants, which is the normal case), unless the time step is tiny; therefore, it is not used in general-purpose circuit simulators.</li>
+<li><code>TR</code> and <code>Gear2</code> are the most heavily used integration methods in circuit simulation.</li>
+<li>For a fixed time step, the most accurate method is <code>TR</code>, followed by <code>Gear2</code>.</li>
+<li><code>TR</code> is overly sensitive to errors of previous time steps, so do not use it with a loose <code>RELTOL</code>!</li>
+<li>For abrupt signal changes, <code>BE</code> and <code>TR</code> adapt quickly, but beware of the artificial ringing introduced by <code>TR</code>.</li>
+<li><code>Gear2</code> is efficient when simulating with tight tolerances or smooth waveforms.</li>
+<li><code>BE</code>, <code>TR</code>, and <code>Gear2</code> are stable on stiff circuits, but <code>BE</code> shows strong artificial numerical damping (<code>TR</code> shows none, <code>Gear2</code> weak damping).</li>
+</ul>
+<p>Overall, <code>Gear2</code> is a robust choice for most circuits. Note that simulator defaults differ: <code>ngspice</code>, for example, uses <code>TR</code> by default, and switches to Gear integration with <code>.options method=gear</code> (the order is set by <code>maxord</code>).</p>
+</section>
+<section id="using-the-transient-simulation" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="using-the-transient-simulation"><span class="header-section-number">11.4.2</span> Using the Transient Simulation</h3>
+<p>Depending on the simulation task, the proper integration method should be selected, keeping potential numerical ringing and damping in mind when evaluating results. Some practical notes:</p>
+<ul>
+<li>Since no noise is modeled in the plain transient simulation, the startup of oscillators or bi-stable circuits can be inhibited—if so, a start-up pulse or an initial condition is required!</li>
+<li>The transient simulation can be an effective fallback to find a dc operating point if <code>.op</code> does not converge, by slowly ramping all dc sources from zero to their final values.</li>
+<li>If high accuracy is needed, tighten the tolerance parameters (<code>RELTOL</code>, <code>VNTOL</code>, <code>ABSTOL</code>) and limit the maximum time step (<code>TMAX</code>).</li>
+<li>Nonlinearity is inherently captured in <code>.tran</code>—but noise is not!</li>
+<li>When applying an FFT to transient results, make sure that all transients have settled (use <code>TSTART</code> to delay the recording of the output). As the time points are not equidistant, the waveform is interpolated before the FFT; limit <code>TMAX</code> accordingly, and use coherent sampling or a window function to avoid spectral leakage.</li>
+</ul>
+</section>
+</section>
+<section id="sec-simulation-advanced" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="sec-simulation-advanced"><span class="header-section-number">11.5</span> Advanced Simulation Modes</h2>
+<p>Beyond the basic analyses (<code>.dc</code>, <code>.ac</code>, <code>.noise</code>, <code>.tran</code>), advanced circuit simulators offer analyses that capture large-signal noise effects, including frequency conversion and time-varying bias points:</p>
+<ul>
+<li>In the <strong>transient noise</strong> simulation, the noise sources are modeled as random signals in the time domain and added to the circuit (in <code>ngspice</code>, e.g., by using <code>trnoise</code> sources, or in <code>VACASK</code> by using the transient noise analysis). As the noise bandwidth is linked to the time step, such simulations are slow and require many runs or long simulation times for statistically meaningful results.</li>
+<li>For <strong>RF simulation</strong>, there is a large discrepancy between the baseband (low) frequencies and the high carrier frequency, which makes the standard transient simulation extremely time-consuming (a small time step is dictated by the carrier, but a long simulation time by the modulation). For these cases, special methods like <a href="https://en.wikipedia.org/wiki/Harmonic_balance"><strong>harmonic balance</strong></a> or <strong>shooting-Newton</strong> have been developed; see <span class="citation" data-cites="Kundert_RFSim">(<a href="#ref-Kundert_RFSim" role="doc-biblioref">Kundert 1999</a>)</span> for an introduction. In the open-source domain, <code>Xyce</code> and <code>VACASK</code> offer a harmonic-balance analysis.</li>
+</ul>
+<p>Commercial RF simulators (e.g., Cadence SpectreRF) offer a whole family of such analyses: periodic steady-state in the time domain (<code>pss</code>, with <code>pac</code>, <code>pstb</code>, <code>pnoise</code>, <code>pxf</code>, <code>psp</code>) for circuits with one periodic excitation; quasi-periodic steady-state (<code>qpss</code>, …) for circuits operating on multiple fundamental frequencies; and harmonic balance in the frequency domain (<code>hb</code>, <code>hbac</code>, <code>hbnoise</code>, …) for the natural inclusion of <span class="math inline">\(S\)</span>-parameters and frequency conversion. Additional analyses cover device matching (<code>dcmatch</code>, <code>acmatch</code>), stability (<code>stb</code>), pole-zero (<code>pz</code>), <span class="math inline">\(S\)</span>-parameters (<code>sp</code>), and envelope following (<code>envlp</code>).</p>
+</section>
+<section id="sec-simulation-models" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="sec-simulation-models"><span class="header-section-number">11.6</span> Device Models</h2>
+<p>To include active devices (diodes, BJTs, MOSFETs) in the circuit simulation, numerically efficient <strong>compact models</strong> have been developed and implemented in the simulators. Exemplary MOSFET model families (dozens have been developed over time):</p>
+<ul>
+<li>The <strong>SPICE level-1</strong> model (the most basic model with a minimum number of parameters).</li>
+<li>The <a href="https://en.wikipedia.org/wiki/BSIM"><strong>BSIM</strong></a> family (mainly BSIM3 and BSIM4 for planar bulk CMOS, BSIM-CMG for FinFETs), the widespread industry standard.</li>
+<li>The <strong>PSP</strong> model, well suited for analog/mixed-signal/RF design.</li>
+</ul>
+<p>The standard models are maintained under the umbrella of the <a href="https://si2.org/cmc/"><strong>Compact Model Coalition (CMC)</strong></a> and are distributed as Verilog-A code. Open-source simulators use them via a Verilog-A compiler like <a href="https://openvaf.semimod.de"><strong>OpenVAF</strong></a>, whose compiled models are loaded by <code>ngspice</code> (through the OSDI interface) and <code>VACASK</code>.</p>
+<p>For modeling production variations, corner and Monte-Carlo model sets are provided by the foundry (see <a href="#sec-robust-corners" class="quarto-xref">Section&nbsp;10.2</a>).</p>
+<section id="spice-level-1" class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="spice-level-1"><span class="header-section-number">11.6.1</span> SPICE Level-1</h3>
+<p>The original MOSFET model implemented in SPICE, also known as the Shichman-Hodges model, is based on the following equations (with <span class="math inline">\(K_\mathrm{p} = \mu C'_\mathrm{ox}\)</span> and <span class="math inline">\(V_\mathrm{th}= V_\mathrm{th0} + \gamma ( \sqrt{2 \Phi_\mathrm{B}- V_\mathrm{BS} } - \sqrt{2 \Phi_\mathrm{B}} )\)</span>):</p>
+<p><span class="math display">\[
+I_\mathrm{D}= \frac{1}{2} K_\mathrm{p} \frac{W}{L - 2 L_\mathrm{D}} \left[ 2 (V_\mathrm{GS}- V_\mathrm{th}) V_\mathrm{DS}- V_\mathrm{DS}^2 \right] ( 1 + \lambda V_\mathrm{DS}) \quad \text{(triode)}
+\]</span></p>
+<p><span class="math display">\[
+I_\mathrm{D}= \frac{1}{2} K_\mathrm{p} \frac{W}{L - 2 L_\mathrm{D}} (V_\mathrm{GS}- V_\mathrm{th})^2 ( 1 + \lambda V_\mathrm{DS}) \quad \text{(saturation)}
+\]</span></p>
+<p>This model includes neither subthreshold conduction nor any short-channel effects, so it should not be used below roughly 4 µm gate length! In addition, since its <span class="math inline">\(C_\mathrm{GS}\)</span> changes abruptly between the saturation and triode regions, computation algorithms often experience convergence difficulties with it.</p>
+</section>
+<section id="bsim3-and-bsim4" class="level3" data-number="11.6.2">
+<h3 data-number="11.6.2" class="anchored" data-anchor-id="bsim3-and-bsim4"><span class="header-section-number">11.6.2</span> BSIM3 and BSIM4</h3>
+<p>The Berkeley BSIM models are the industry standard since version 3 (especially BSIM3v3) <span class="citation" data-cites="Cheng_Hu_BSIM">(<a href="#ref-Cheng_Hu_BSIM" role="doc-biblioref">Cheng and Hu 1999</a>)</span>. They are source-referenced, threshold-voltage-based models and properly capture effects like mobility reduction, velocity saturation, DIBL, non-uniform doping, poly depletion, geometric scaling, and extrinsic parasitics (often modeled by embedding the intrinsic device in a subcircuit). BSIM4 adds gate current, gate-induced drain/source leakage, and improved flicker-noise modeling. The main disadvantage of the BSIM models is a lack of symmetry around <span class="math inline">\(V_\mathrm{DS}= 0\)</span>, which can be critical when a MOSFET operates as an analog switch with small <span class="math inline">\(V_\mathrm{DS}\)</span>. This is fixed in the charge-based successor model BSIM-BULK (formerly BSIM6).</p>
+</section>
+<section id="psp" class="level3" data-number="11.6.3">
+<h3 data-number="11.6.3" class="anchored" data-anchor-id="psp"><span class="header-section-number">11.6.3</span> PSP</h3>
+<p>The <strong>PSP</strong> model <span class="citation" data-cites="Gildenblat_2006">(<a href="#ref-Gildenblat_2006" role="doc-biblioref"><span class="nocase">Gildenblat et al.</span> 2006</a>)</span> is a symmetric, surface-potential-based model, created by merging the SP model (Pennsylvania State University) and MOS Model 11 (Philips), and selected by the CMC as an industry standard. It accurately models <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> in all operating regions as well as distortion—especially at small <span class="math inline">\(V_\mathrm{DS}\)</span>, where BSIM has issues. In addition, PSP provides detailed and accurate noise models (including induced gate noise and the correlation between gate and drain noise) and takes <strong>non-quasi-static (NQS)</strong> effects into account. IHP SG13 uses PSP models for the core and I/O MOSFETs.</p>
+</section>
+<section id="nqs-effects" class="level3" data-number="11.6.4">
+<h3 data-number="11.6.4" class="anchored" data-anchor-id="nqs-effects"><span class="header-section-number">11.6.4</span> NQS Effects</h3>
+<p>The quasi-static assumption underlying most compact models is that the terminal voltages change slowly enough for the channel charge to follow instantaneously. If this assumption is violated (e.g., in RF operation), NQS effects must be considered. Following <span class="citation" data-cites="Bagheri_1985">(<a href="#ref-Bagheri_1985" role="doc-biblioref">Bagheri and Tsividis 1985</a>)</span>, a simple first-order model of the NQS effect is an additional gate resistance of</p>
+<p><span id="eq-nqs-resistance"><span class="math display">\[
+R_\mathrm{G,nqs} = \frac{1}{5 g_\mathrm{m}}
+\tag{71}\]</span></span></p>
+</section>
+</section>
+<section id="sec-simulation-digital" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="sec-simulation-digital"><span class="header-section-number">11.7</span> Digital Simulation</h2>
+<p>Digital simulation is much less numerically intensive than analog simulation, as the signal values are discrete and the timing is event-driven. The signal values used in digital simulation are <code>0</code> (logic zero), <code>1</code> (logic one), <code>X</code> (unknown/undefined), and <code>Z</code> (high-impedance/tri-state). Transitions occur only at discrete points in time (driven by input events and the clock), considering the delays of the logic elements and the wiring.</p>
+<p>Two main simulator types are in use:</p>
+<ul>
+<li><strong>Event-driven</strong> simulators (like <code>GHDL</code> and <code>iVerilog</code>) evaluate a logic element only when one of its inputs changes, and support the full language semantics including delays and <code>X</code>/<code>Z</code> states. After synthesis and place-and-route, a <strong>gate-level simulation</strong> with delays back-annotated from an SDF file is possible, although timing is primarily verified by static timing analysis.</li>
+<li><strong>Cycle-based</strong> simulators (like <code>Verilator</code>) compile the design into a C++ model that is evaluated once per clock cycle, typically with two-state (<code>0</code>/<code>1</code>) logic and without delays; this is dramatically faster and well suited for large synchronous designs and long test runs (e.g., booting software on a CPU core).</li>
+</ul>
+<p>An intermediate method between analog and digital simulation is <strong>timing simulation</strong>: strongly simplified MOSFET models avoid the solution of nonlinear systems, matrix operations are minimized, and forward-Euler integration is used—trading accuracy for speed.</p>
+</section>
+<section id="sec-simulation-mixed" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="sec-simulation-mixed"><span class="header-section-number">11.8</span> Mixed-Signal Simulation</h2>
+<p>Simulating a large mixed-signal circuit (e.g., a complex SoC combining analog circuits and digital blocks) may require a coupled <strong>mixed-signal simulation</strong>, where parts of the design run in an analog circuit simulator and other parts in a digital simulator (<code>ngspice</code> offers an integrated event-driven digital simulation with <code>XSPICE</code>, and can co-simulate Verilog code compiled by <code>Verilator</code> or <code>iVerilog</code> through its <code>d_cosim</code> element):</p>
+<ul>
+<li>An all-analog (transistor-level) simulation of the digital part is possible but usually too time-consuming.</li>
+<li>For further speed-up, some analog circuits can be replaced by behavioral descriptions (e.g., in Verilog-AMS or VHDL-AMS).</li>
+</ul>
+<p>At the interfaces between the analog and digital partitions, <strong>interface elements (IEs)</strong> are inserted (manually or automatically), converting between the signal representations:</p>
+<ul>
+<li><strong>Digital → analog (D2A):</strong> the IE is a voltage source with optional output resistance and finite transition times; the logic <code>0</code>/<code>1</code> levels are mapped to voltage levels.</li>
+<li><strong>Analog → digital (A2D):</strong> the IE is a comparator with adjustable thresholds for <code>0</code> and <code>1</code> (and <code>X</code> in between).</li>
+</ul>
+
+
+
 </section>
 </section>
 
@@ -4340,8 +4639,14 @@ Allen, Phillip E., and Douglas R. Holberg. 2012. <em>CMOS Analog Circuit Design<
 <div id="ref-Amerasekera_ESD" class="csl-entry" role="listitem">
 Amerasekera, Ajith, and Charvaka Duvvury. 2002. <em>ESD in Silicon Integrated Circuits</em>. 2nd ed. Wiley.
 </div>
+<div id="ref-Bagheri_1985" class="csl-entry" role="listitem">
+Bagheri, Mehran, and Yannis Tsividis. 1985. <span>“A Small Signal Dc-to-High-Frequency Nonquasistatic Model for the Four-Terminal <span>MOSFET</span> Valid in All Regions of Operation.”</span> <em>IEEE Transactions on Electron Devices</em> 32 (11): 2383–91.
+</div>
 <div id="ref-Bhunia_HWSecurity" class="csl-entry" role="listitem">
 Bhunia, Swarup, and Mark Tehranipoor. 2018. <em>Hardware Security: A Hands-on Learning Approach</em>. Morgan Kaufmann.
+</div>
+<div id="ref-Cheng_Hu_BSIM" class="csl-entry" role="listitem">
+Cheng, Yuhua, and Chenming Hu. 1999. <em><span>MOSFET</span> Modeling &amp; <span>BSIM3</span> User’s Guide</em>. Kluwer Academic Publishers.
 </div>
 <div id="ref-Craninckx_1995" class="csl-entry" role="listitem">
 Craninckx, Jan, and Michiel S. J. Steyaert. 1995. <span>“A 1.8-<span>GHz</span> <span>CMOS</span> Low-Phase-Noise Voltage-Controlled Oscillator with Prescaler.”</span> <em>IEEE Journal of Solid-State Circuits</em> 30 (12): 1474–82.
@@ -4361,11 +4666,17 @@ Gandhi, Tejinder, ed. 2019. <em>Microelectronics Failure Analysis Desk Reference
 <div id="ref-Giannuzzi_FIB" class="csl-entry" role="listitem">
 Giannuzzi, Lucille A., and Fred A. Stevie, eds. 2005. <em>Introduction to Focused Ion Beams: Instrumentation, Theory, Techniques and Practice</em>. Springer. <a href="https://doi.org/10.1007/b101190">https://doi.org/10.1007/b101190</a>.
 </div>
+<div id="ref-Gildenblat_2006" class="csl-entry" role="listitem">
+<span class="nocase">Gildenblat, Gennady, Xin Li, Weimin Wu, et al.</span> 2006. <span>“<span>PSP</span>: An Advanced Surface-Potential-Based <span>MOSFET</span> Model for Circuit Simulation.”</span> <em>IEEE Transactions on Electron Devices</em> 53 (9): 1979–93.
+</div>
 <div id="ref-Goto_2003" class="csl-entry" role="listitem">
 <span class="nocase">Goto, Ken-ichi et al.</span> 2003. <span>“High Performance 25 <span class="nocase">nm</span> Gate <span>CMOSFETs</span> for 65 <span class="nocase">nm</span> Node High Speed <span>MPUs</span>.”</span> <em>IEEE International Electron Devices Meeting (IEDM)</em>.
 </div>
 <div id="ref-Hastings_AnalogLayout" class="csl-entry" role="listitem">
 Hastings, Alan. 2006. <em>The Art of Analog Layout</em>. 2nd ed. Prentice Hall.
+</div>
+<div id="ref-Ho_1975" class="csl-entry" role="listitem">
+Ho, Chung-Wen, Albert E. Ruehli, and Pierce A. Brennan. 1975. <span>“The Modified Nodal Approach to Network Analysis.”</span> <em>IEEE Transactions on Circuits and Systems</em> 22 (6): 504–9. <a href="https://doi.org/10.1109/TCS.1975.1084079">https://doi.org/10.1109/TCS.1975.1084079</a>.
 </div>
 <div id="ref-Hu_ModernDevices" class="csl-entry" role="listitem">
 Hu, Chenming. 2010. <em>Modern Semiconductor Devices for Integrated Circuits</em>. Pearson.
@@ -4388,6 +4699,12 @@ Ker, Ming-Dou, and Chien-Hui Chuang. 2002. <span>“<span>ESD</span> Protection 
 <div id="ref-Kinget_2005" class="csl-entry" role="listitem">
 Kinget, Peter R. 2005. <span>“Device Mismatch and Tradeoffs in the Design of Analog Circuits.”</span> <em>IEEE Journal of Solid-State Circuits</em> 40 (6): 1212–24. <a href="https://doi.org/10.1109/JSSC.2005.848021">https://doi.org/10.1109/JSSC.2005.848021</a>.
 </div>
+<div id="ref-Kundert_SPICE" class="csl-entry" role="listitem">
+Kundert, Kenneth S. 1995. <em>The Designer’s Guide to SPICE and Spectre</em>. Kluwer Academic Publishers.
+</div>
+<div id="ref-Kundert_RFSim" class="csl-entry" role="listitem">
+Kundert, Kenneth S. 1999. <span>“Introduction to <span>RF</span> Simulation and Its Application.”</span> <em>IEEE Journal of Solid-State Circuits</em> 34 (9): 1298–319.
+</div>
 <div id="ref-DeMicheli_Synthesis" class="csl-entry" role="listitem">
 Micheli, Giovanni De. 1994. <em>Synthesis and Optimization of Digital Circuits</em>. McGraw-Hill.
 </div>
@@ -4399,6 +4716,9 @@ Moore, Gordon E. 1965. <span>“Cramming More Components onto Integrated Circuit
 </div>
 <div id="ref-Murphy_1964" class="csl-entry" role="listitem">
 Murphy, Bernard T. 1964. <span>“Cost-Size Optima of Monolithic Integrated Circuits.”</span> <em>Proceedings of the IEEE</em> 52 (12): 1537–45. <a href="https://doi.org/10.1109/PROC.1964.3442">https://doi.org/10.1109/PROC.1964.3442</a>.
+</div>
+<div id="ref-Nagel_1975" class="csl-entry" role="listitem">
+Nagel, Laurence W. 1975. <em><span>SPICE2</span>: A Computer Program to Simulate Semiconductor Circuits</em>. UCB/ERL M520. EECS Department, University of California, Berkeley.
 </div>
 <div id="ref-Ohno_TPS" class="csl-entry" role="listitem">
 Ohno, Taiichi. 1988. <em>Toyota Production System: Beyond Large-Scale Production</em>. Productivity Press.
@@ -4438,6 +4758,9 @@ Stillmaker, Aaron, and Bevan Baas. 2017. <span>“Scaling Equations for the Accu
 </div>
 <div id="ref-NEC_1Gbit_DRAM_1995" class="csl-entry" role="listitem">
 Sugibayashi, T., I. Naritake, S. Utsugi, et al. 1995. <span>“A 1-<span>Gb</span> <span>DRAM</span> for File Applications.”</span> <em>IEEE Journal of Solid-State Circuits</em> 30 (11): 1277–80. <a href="https://doi.org/10.1109/4.475716">https://doi.org/10.1109/4.475716</a>.
+</div>
+<div id="ref-Tian_2001" class="csl-entry" role="listitem">
+Tian, Michael, V. Visvanathan, Jeffrey Hantgan, and Kenneth Kundert. 2001. <span>“Striving for Small-Signal Stability.”</span> <em>IEEE Circuits and Devices Magazine</em> 17 (1): 31–41.
 </div>
 <div id="ref-Tsividis_MOS" class="csl-entry" role="listitem">
 Tsividis, Yannis, and Colin McAndrew. 2011. <em>Operation and Modeling of the MOS Transistor</em>. 3rd ed. Oxford University Press.
