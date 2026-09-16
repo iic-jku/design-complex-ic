@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
-<meta name="dcterms.date" content="2026-09-15">
+<meta name="dcterms.date" content="2026-09-16">
 
 <title>Design of Complex Integrated Circuits</title>
 <style>
@@ -548,6 +548,24 @@ window.Quarto = {
   <li><a href="#sec-methodology-custom" id="toc-sec-methodology-custom" class="nav-link" data-scroll-target="#sec-methodology-custom"><span class="header-section-number">8.5</span> The Mixed-Signal/Custom Flow</a></li>
   <li><a href="#sec-methodology-fpga" id="toc-sec-methodology-fpga" class="nav-link" data-scroll-target="#sec-methodology-fpga"><span class="header-section-number">8.6</span> FPGAs</a></li>
   </ul></li>
+  <li><a href="#sec-esd" id="toc-sec-esd" class="nav-link" data-scroll-target="#sec-esd"><span class="header-section-number">9</span> Electrostatic Discharge and Latch-Up</a>
+  <ul class="collapse">
+  <li><a href="#sec-esd-basics" id="toc-sec-esd-basics" class="nav-link" data-scroll-target="#sec-esd-basics"><span class="header-section-number">9.1</span> Electrostatic Discharge</a>
+  <ul class="collapse">
+  <li><a href="#esd-models-for-testing" id="toc-esd-models-for-testing" class="nav-link" data-scroll-target="#esd-models-for-testing"><span class="header-section-number">9.1.1</span> ESD Models for Testing</a></li>
+  <li><a href="#esd-protection-concept" id="toc-esd-protection-concept" class="nav-link" data-scroll-target="#esd-protection-concept"><span class="header-section-number">9.1.2</span> ESD Protection Concept</a></li>
+  <li><a href="#analog-and-rf-pads" id="toc-analog-and-rf-pads" class="nav-link" data-scroll-target="#analog-and-rf-pads"><span class="header-section-number">9.1.3</span> Analog and RF Pads</a></li>
+  <li><a href="#snapback-devices-the-ggnmos" id="toc-snapback-devices-the-ggnmos" class="nav-link" data-scroll-target="#snapback-devices-the-ggnmos"><span class="header-section-number">9.1.4</span> Snapback Devices: The ggNMOS</a></li>
+  <li><a href="#rc-triggered-power-clamp" id="toc-rc-triggered-power-clamp" class="nav-link" data-scroll-target="#rc-triggered-power-clamp"><span class="header-section-number">9.1.5</span> RC-Triggered Power Clamp</a></li>
+  <li><a href="#sec-esd-scr" id="toc-sec-esd-scr" class="nav-link" data-scroll-target="#sec-esd-scr"><span class="header-section-number">9.1.6</span> The Silicon-Controlled Rectifier</a></li>
+  <li><a href="#esd-protected-areas" id="toc-esd-protected-areas" class="nav-link" data-scroll-target="#esd-protected-areas"><span class="header-section-number">9.1.7</span> ESD-Protected Areas</a></li>
+  </ul></li>
+  <li><a href="#sec-latchup" id="toc-sec-latchup" class="nav-link" data-scroll-target="#sec-latchup"><span class="header-section-number">9.2</span> Latch-Up</a>
+  <ul class="collapse">
+  <li><a href="#latch-up-testing" id="toc-latch-up-testing" class="nav-link" data-scroll-target="#latch-up-testing"><span class="header-section-number">9.2.1</span> Latch-Up Testing</a></li>
+  <li><a href="#latch-up-prevention" id="toc-latch-up-prevention" class="nav-link" data-scroll-target="#latch-up-prevention"><span class="header-section-number">9.2.2</span> Latch-Up Prevention</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dcic.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -583,7 +601,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 15, 2026</p>
+      <p class="date">September 16, 2026</p>
     </div>
   </div>
   
@@ -2598,7 +2616,7 @@ Figure&nbsp;44: Metal-oxide-metal (MOM) capacitors: (a) vertical sandwich capaci
 </section>
 <section id="diodes" class="level3" data-number="4.3.5">
 <h3 data-number="4.3.5" class="anchored" data-anchor-id="diodes"><span class="header-section-number">4.3.5</span> Diodes</h3>
-<p>Diodes are formed by the available pn-junctions (<span class="math inline">\(n^+\)</span> in substrate, <span class="math inline">\(p^+\)</span> in n-well, n-well in substrate). They are intended mainly for reverse-biased operation, as the forward operation is usually not modeled accurately and should be avoided. Note that forward operation might inject charge into parasitic structures and cause latch-up (see <strong>?@sec-latchup</strong>)! Applications of reverse-biased diodes include ESD protection structures, antenna diodes, and varactors.</p>
+<p>Diodes are formed by the available pn-junctions (<span class="math inline">\(n^+\)</span> in substrate, <span class="math inline">\(p^+\)</span> in n-well, n-well in substrate). They are intended mainly for reverse-biased operation, as the forward operation is usually not modeled accurately and should be avoided. Note that forward operation might inject charge into parasitic structures and cause latch-up (see <a href="#sec-latchup" class="quarto-xref">Section&nbsp;9.2</a>)! Applications of reverse-biased diodes include ESD protection structures, antenna diodes, and varactors.</p>
 </section>
 <section id="bipolar-junction-transistors" class="level3" data-number="4.3.6">
 <h3 data-number="4.3.6" class="anchored" data-anchor-id="bipolar-junction-transistors"><span class="header-section-number">4.3.6</span> Bipolar Junction Transistors</h3>
@@ -3917,9 +3935,239 @@ Figure&nbsp;79: Mixed-signal/custom design flow with open-source tools: the sche
 <li>FPGAs can also be used as (more or less) real-time test vehicles for HDL code (for prototyping and software development) before committing to a costly mask set.</li>
 </ul>
 <p>The choice between an FPGA and a custom IC is largely a question of volume: FPGAs win at low to medium volumes, where their high per-unit cost is outweighed by the avoided <a href="https://en.wikipedia.org/wiki/Non-recurring_engineering">NRE</a> (mask set and design effort) of a custom IC, while an ASIC becomes cheaper per piece once the volume is large enough to amortize its NRE. Many products therefore start on an FPGA and are migrated to an ASIC only once the volume and specification have stabilized.</p>
+</section>
+</section>
+<section id="sec-esd" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Electrostatic Discharge and Latch-Up</h1>
+<p>This chapter covers two reliability hazards that every IC design must handle: <a href="https://en.wikipedia.org/wiki/Electrostatic_discharge"><strong>electrostatic discharge (ESD)</strong></a>, the sudden discharge of statically charged objects into the chip, and <a href="https://en.wikipedia.org/wiki/Latch-up"><strong>latch-up</strong></a>, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows <span class="citation" data-cites="Amerasekera_ESD">(<a href="#ref-Amerasekera_ESD" role="doc-biblioref">Amerasekera and Duvvury 2002</a>)</span>; overviews of ESD test methods and of protection structures can be found in <span class="citation" data-cites="Ker_2001 Ker_2002">(<a href="#ref-Ker_2001" role="doc-biblioref"><span class="nocase">Ker et al.</span> 2001</a>; <a href="#ref-Ker_2002" role="doc-biblioref">Ker and Chuang 2002</a>)</span>.</p>
+<section id="sec-esd-basics" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="sec-esd-basics"><span class="header-section-number">9.1</span> Electrostatic Discharge</h2>
+<p>When an external object at a high potential (e.g., charged by the <a href="https://en.wikipedia.org/wiki/Triboelectric_effect">triboelectric effect</a> or by induction from an electric field) touches one of the connections of a circuit, the resulting <strong>electrostatic discharge</strong> produces a large transient voltage or current—for example, when ICs are handled by humans or by machines with faulty grounding. ESD can even occur without actual contact, as an arc across an air gap. Devices sustain two types of <em>permanent damage</em> as a result of ESD:</p>
+<ul>
+<li>A thin isolation layer (like the gate oxide) may break down, leading to a low-resistance path between structures that should be isolated.</li>
+<li>Diodes, resistors, or wiring may melt while carrying the large discharge current, creating a short or an open.</li>
+</ul>
+<section id="esd-models-for-testing" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="esd-models-for-testing"><span class="header-section-number">9.1.1</span> ESD Models for Testing</h3>
+<p>Three standardized models are used for ESD testing of ICs, differing in the equivalent charge storage and discharge path:</p>
+<ul>
+<li>The <a href="https://en.wikipedia.org/wiki/Human-body_model"><strong>human-body model (HBM)</strong></a>: a 100 pF capacitor discharged through 1.5 kΩ, modeling the touch of a charged person.</li>
+<li>The <strong>charged-device model (CDM)</strong>: the IC itself is charged and discharges abruptly through a single pin, modeling machine handling.</li>
+<li>The <strong>machine model (MM)</strong>: a 200 pF capacitor discharged with negligible series resistance, modeling charged (metallic) machinery (largely superseded by HBM/CDM testing today).</li>
+</ul>
+<p>Each model defines the charging voltage of an equivalent capacitance and the discharge network—this defines the ESD pulse shape and the peak discharge voltage and current. An “HBM level of 1 kV” means the model capacitance is charged to 1 kV before the discharge. The equivalent circuit and the resulting pulse shapes are shown in <a href="#fig-esd-models" class="quarto-xref">Figure&nbsp;80</a> and <a href="#fig-esd-pulse" class="quarto-xref">Figure&nbsp;81</a>: the HBM produces a comparatively long pulse (~150 ns decay) causing mostly thermal stress, while the CDM produces a very short (~1 ns) pulse with high current, leading to large on-chip voltage drops.</p>
+<div id="cell-fig-esd-models" class="cell" data-execution_count="79">
+<div class="cell-output cell-output-display">
+<div id="fig-esd-models" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-esd-models-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-esd-models-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-80" title="Figure&nbsp;80: Equivalent circuit of the standardized ESD test models: the model capacitance C is charged to the test voltage via a high-ohmic resistor; closing the switch discharges it into the DUT through the model resistance R. HBM: C = 100\,pF, R = 1.5\,kΩ; MM: C = 200\,pF, R \approx 0; CDM: the capacitance is the device itself against ground."><img src="dcic_files/figure-html/fig-esd-models-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-esd-models-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;80: Equivalent circuit of the standardized ESD test models: the model capacitance <span class="math inline">\(C\)</span> is charged to the test voltage via a high-ohmic resistor; closing the switch discharges it into the DUT through the model resistance <span class="math inline">\(R\)</span>. HBM: <span class="math inline">\(C = 100\,\)</span>pF, <span class="math inline">\(R = 1.5\,\)</span>kΩ; MM: <span class="math inline">\(C = 200\,\)</span>pF, <span class="math inline">\(R \approx 0\)</span>; CDM: the capacitance is the device itself against ground.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-fig-esd-pulse" class="cell" data-execution_count="80">
+<div class="cell-output cell-output-display">
+<div id="fig-esd-pulse" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-esd-pulse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-esd-pulse-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-81" title="Figure&nbsp;81: Typical discharge current waveforms of the ESD models (schematic representation): the 1 kV HBM pulse peaks at about 0.67 A (V/1.5\,kΩ) with a slow decay (\tau \approx 150\,ns), while the 500 V CDM pulse reaches several amperes within a fraction of a nanosecond and rings out within a few nanoseconds. Note the logarithmic time axis."><img src="dcic_files/figure-html/fig-esd-pulse-output-1.png" width="615" height="373" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-esd-pulse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;81: Typical discharge current waveforms of the ESD models (schematic representation): the 1 kV HBM pulse peaks at about 0.67 A (<span class="math inline">\(V/1.5\,\)</span>kΩ) with a slow decay (<span class="math inline">\(\tau \approx 150\,\)</span>ns), while the 500 V CDM pulse reaches several amperes within a fraction of a nanosecond and rings out within a few nanoseconds. Note the logarithmic time axis.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In a CDM event, the <em>charge stored in the body of the IC</em> is discharged when some pin touches external ground; discharge currents of several amperes with rise times below a nanosecond are typical. HBM testing is standardized in ANSI/ESDA/JEDEC JS-001, CDM testing in JS-002.</p>
+</section>
+<section id="esd-protection-concept" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="esd-protection-concept"><span class="header-section-number">9.1.2</span> ESD Protection Concept</h3>
+<p>All inputs and outputs of an IC (including <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span>) have to be protected against ESD. The protection circuits are usually bundled in a <strong>pad library</strong> providing optimized I/O cells (digital input/output, analog input/output, RF input/output, supply pads). The protection elements are made from the devices available in the technology, optimized for high-current/high-voltage operation—usually they are provided and qualified by the wafer foundry.</p>
+<p><a href="#fig-esd-io-protection" class="quarto-xref">Figure&nbsp;82</a> shows the general protection scheme of a (bidirectional) digital I/O:</p>
+<ul>
+<li>The <strong>primary ESD element</strong> (typically a pair of large diodes to the rails, like <span class="math inline">\(D_{1,2}\)</span>, or a snapback device) provides the main low-ohmic path for a positive or negative ESD pulse.</li>
+<li>The <strong>series resistor</strong> <span class="math inline">\(R_\mathrm{in}\)</span> (typically around 500 Ω) limits the current into the <strong>secondary protection</strong>, which clamps the voltage at the gate oxide of the input receiver.</li>
+<li>The <strong>secondary protection</strong> (typically a gate-protected NMOS or a diode to the rails, like the shown <span class="math inline">\(D_{3,4}\)</span>) clamps the voltage at the input of the receiver, protecting the gate oxide from ESD stress.</li>
+<li>The <strong>power clamp</strong> between <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span> provides a discharge path between the rails, preventing an ESD-induced rise of the supply voltage from damaging core circuits.</li>
+<li>All diodes and clamps are reverse-biased (off) during normal operation. A positive ESD pulse at the pad is discharged via the upper diode and the power clamp to ground; a negative pulse is discharged via the lower diode.</li>
+<li>The <strong>receiver</strong> might implement additional functionality for the digital input, like Schmitt-trigger action or input filtering.</li>
+<li>The <strong>driver</strong> consists of large output devices (NMOS and PMOS) that provide the necessary drive strength for the digital output, while the series resistance and protection elements safeguard the driver during ESD events. Additional features might be a tri-state capability or slew-rate control. A (small) series resistance <span class="math inline">\(R_\mathrm{s}\)</span> in the drain path helps divert the ESD current into the protection devices, at the cost of degrading the driver in normal operation. Often, this series resistance is implemented by extending the drain region of the MOSFETs and blocking the silicide (recall the <code>OP</code> layer from <a href="#sec-layout-layers" class="quarto-xref">Section&nbsp;4.2</a>), similar to the technique used for the RC-triggered power clamp.</li>
+<li>The <strong>layout of the protection elements</strong> is critical: they should be placed close to the pad to minimize parasitic inductance and resistance, ensuring a fast response to ESD events.</li>
+</ul>
+<div id="cell-fig-esd-io-protection" class="cell" data-execution_count="81">
+<div class="cell-output cell-output-display">
+<div id="fig-esd-io-protection" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-esd-io-protection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-esd-io-protection-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-82" title="Figure&nbsp;82: ESD protection of a bidirectional digital I/O pad: the primary diodes D_1/D_2 carry the main discharge current to the rails, the series resistor R_\mathrm{in} limits the current into the secondary diodes D_3/D_4, which protect the gate oxide of the input receiver; the output driver M_\mathrm{P}/M_\mathrm{N} is decoupled from the pad by the small drain series resistance R_\mathrm{s}; the power clamp closes the discharge loop between V_\mathrm{DD} and V_\mathrm{SS}. All protection elements are off in normal operation."><img src="dcic_files/figure-html/fig-esd-io-protection-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-esd-io-protection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;82: ESD protection of a bidirectional digital I/O pad: the primary diodes <span class="math inline">\(D_1\)</span>/<span class="math inline">\(D_2\)</span> carry the main discharge current to the rails, the series resistor <span class="math inline">\(R_\mathrm{in}\)</span> limits the current into the secondary diodes <span class="math inline">\(D_3\)</span>/<span class="math inline">\(D_4\)</span>, which protect the gate oxide of the input receiver; the output driver <span class="math inline">\(M_\mathrm{P}\)</span>/<span class="math inline">\(M_\mathrm{N}\)</span> is decoupled from the pad by the small drain series resistance <span class="math inline">\(R_\mathrm{s}\)</span>; the power clamp closes the discharge loop between <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span>. All protection elements are off in normal operation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="analog-and-rf-pads" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="analog-and-rf-pads"><span class="header-section-number">9.1.3</span> Analog and RF Pads</h3>
+<p><span class="math inline">\(V_\mathrm{DD}\)</span> pads and digital input-only or output-only pads are easily derived from the general I/O pad shown in <a href="#fig-esd-io-protection" class="quarto-xref">Figure&nbsp;82</a>. <strong>Analog input and output pads</strong> are more critical, since the series resistances (<span class="math inline">\(R_\mathrm{s}\)</span>, <span class="math inline">\(R_\mathrm{in}\)</span>) might be prohibitive for the intended circuit function; usually, special ESD protection tailored to the specific function is designed for analog pins. For <strong>high-frequency pads</strong>, ESD protection is <strong>highly critical</strong>: often no series resistance is acceptable at all, and the protection elements add parasitic capacitance that limits the bandwidth of the I/O. Since the size of an ESD element is determined by the required low resistance and thermal dissipation, RF I/Os often limit the ESD rating of an RFIC, and RF ESD protection is always custom-designed <span class="citation" data-cites="Ker_2000">(see, e.g., <a href="#ref-Ker_2000" role="doc-biblioref"><span class="nocase">Ker et al.</span> 2000</a>)</span>.</p>
+</section>
+<section id="snapback-devices-the-ggnmos" class="level3" data-number="9.1.4">
+<h3 data-number="9.1.4" class="anchored" data-anchor-id="snapback-devices-the-ggnmos"><span class="header-section-number">9.1.4</span> Snapback Devices: The ggNMOS</h3>
+<p>A popular primary protection element is the <strong>grounded-gate NMOS (ggNMOS)</strong>, shown in <a href="#fig-ggnmos" class="quarto-xref">Figure&nbsp;83</a>. In normal operation, the NMOS is off, since its gate is tied to <span class="math inline">\(V_\mathrm{SS}\)</span>. During a positive ESD event, the drain-bulk diode breaks down (reversibly) by <a href="https://en.wikipedia.org/wiki/Avalanche_breakdown">avalanche multiplication</a> and injects current into the substrate; this current, together with the substrate resistance <span class="math inline">\(R_\mathrm{sub}\)</span>, forward-biases the source-bulk junction, turning on the parasitic lateral NPN transistor (drain = collector, bulk = base, source = emitter). The device “snaps back” to a low holding voltage and conducts the ESD current between drain and source. A silicide-blocked extended drain improves the robustness by ballasting the current across the device width.</p>
+<div id="cell-fig-ggnmos" class="cell" data-execution_count="82">
+<div class="cell-output cell-output-display">
+<div id="fig-ggnmos" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ggnmos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-ggnmos-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-83" title="Figure&nbsp;83: The grounded-gate NMOS (ggNMOS) ESD protection device: (a) cross section with the parasitic lateral NPN (drain = collector, substrate = base, source = emitter) and the substrate resistance R_\mathrm{sub}; the drain contact is set back from the gate with blocked silicide, forming a ballast resistance; (b) snapback I/V characteristic—after avalanche breakdown at V_\mathrm{t1}, the parasitic NPN turns on and the device conducts the ESD current at a low holding voltage V_\mathrm{h}."><img src="dcic_files/figure-html/fig-ggnmos-output-1.png" width="758" height="335" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggnmos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;83: The grounded-gate NMOS (ggNMOS) ESD protection device: (a) cross section with the parasitic lateral NPN (drain = collector, substrate = base, source = emitter) and the substrate resistance <span class="math inline">\(R_\mathrm{sub}\)</span>; the drain contact is set back from the gate with blocked silicide, forming a ballast resistance; (b) snapback I/V characteristic—after avalanche breakdown at <span class="math inline">\(V_\mathrm{t1}\)</span>, the parasitic NPN turns on and the device conducts the ESD current at a low holding voltage <span class="math inline">\(V_\mathrm{h}\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="rc-triggered-power-clamp" class="level3" data-number="9.1.5">
+<h3 data-number="9.1.5" class="anchored" data-anchor-id="rc-triggered-power-clamp"><span class="header-section-number">9.1.5</span> RC-Triggered Power Clamp</h3>
+<p><a href="#fig-rc-clamp" class="quarto-xref">Figure&nbsp;84</a> shows an <strong>RC-triggered supply clamp</strong>: during normal operation, the capacitor is charged to <span class="math inline">\(V_\mathrm{DD}\)</span>, the inverter output is low, and the large clamping NMOS <span class="math inline">\(M_\mathrm{ESD}\)</span> is off. During a (positive) ESD event, the supply rail rises much faster than the RC time constant, the capacitor voltage cannot follow, the inverter input stays low, and its output turns <span class="math inline">\(M_\mathrm{ESD}\)</span> on—providing a conducting path for the ESD current between the rails.</p>
+<p>Beware that a fast <span class="math inline">\(V_\mathrm{DD}\)</span> ramp during power-up can falsely trigger such a clamp! For this reason, when building the power supplies of electronic systems, designers often include additional circuitry to control the ramp rate or to temporarily disable the RC-triggered clamp during power-up. Considering also the potentially large inrush current <span class="math inline">\(I_\mathrm{rush} = C_\mathrm{decoup} \cdot dV_\mathrm{DD}/dt\)</span>, a controlled supply ramp during supply turn on is essential.</p>
+<div id="cell-fig-rc-clamp" class="cell" data-execution_count="83">
+<div class="cell-output cell-output-display">
+<div id="fig-rc-clamp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rc-clamp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-rc-clamp-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-84" title="Figure&nbsp;84: RC-triggered power-supply clamp: in normal operation, the capacitor is charged to V_\mathrm{DD}, the inverter output is low, and the large clamp transistor M_\mathrm{ESD} is off. During a fast ESD-induced rise of V_\mathrm{DD}, the RC node lags behind, the inverter output goes high, and M_\mathrm{ESD} shorts the rails for the duration of the event."><img src="dcic_files/figure-html/fig-rc-clamp-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rc-clamp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;84: RC-triggered power-supply clamp: in normal operation, the capacitor is charged to <span class="math inline">\(V_\mathrm{DD}\)</span>, the inverter output is low, and the large clamp transistor <span class="math inline">\(M_\mathrm{ESD}\)</span> is off. During a fast ESD-induced rise of <span class="math inline">\(V_\mathrm{DD}\)</span>, the RC node lags behind, the inverter output goes high, and <span class="math inline">\(M_\mathrm{ESD}\)</span> shorts the rails for the duration of the event.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-esd-scr" class="level3" data-number="9.1.6">
+<h3 data-number="9.1.6" class="anchored" data-anchor-id="sec-esd-scr"><span class="header-section-number">9.1.6</span> The Silicon-Controlled Rectifier</h3>
+<p>A <a href="https://en.wikipedia.org/wiki/Silicon_controlled_rectifier"><strong>silicon-controlled rectifier (SCR, thyristor)</strong></a> can be formed in standard CMOS by utilizing the available diffusions (<span class="math inline">\(n^+\)</span> and <span class="math inline">\(p^+\)</span>) and wells (n-well and p-substrate/p-well), forming a PNPN structure, shown in <a href="#fig-scr" class="quarto-xref">Figure&nbsp;85</a>. The structure contains <em>two cross-coupled parasitic bipolar transistors</em> (a vertical PNP and a lateral NPN); if the loop gain of the two transistors satisfies</p>
+<p><span id="eq-scr-condition"><span class="math display">\[
+\beta_\mathrm{NPN} \cdot \beta_\mathrm{PNP} \geq 1
+\tag{64}\]</span></span></p>
+<p>then the SCR triggers and provides a very low-ohmic path (<strong>snapback</strong>). Deliberately built SCRs are excellent ESD protection devices, but the same structure exists <em>parasitically</em> in every CMOS inverter—which brings us to latch-up.</p>
+<div id="cell-fig-scr" class="cell" data-execution_count="84">
+<div class="cell-output cell-output-display">
+<div id="fig-scr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-scr-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-85" title="Figure&nbsp;85: The silicon-controlled rectifier (SCR) in CMOS: (a) the PNPN structure formed by the p^+ anode diffusion, the n-well, the p-substrate, and the n^+ cathode diffusion; (b) equivalent circuit of the two cross-coupled parasitic bipolar transistors—if their loop gain exceeds unity, the structure latches into a low-ohmic state."><img src="dcic_files/figure-html/fig-scr-output-1.png" width="736" height="337" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;85: The silicon-controlled rectifier (SCR) in CMOS: (a) the PNPN structure formed by the <span class="math inline">\(p^+\)</span> anode diffusion, the n-well, the <span class="math inline">\(p\)</span>-substrate, and the <span class="math inline">\(n^+\)</span> cathode diffusion; (b) equivalent circuit of the two cross-coupled parasitic bipolar transistors—if their loop gain exceeds unity, the structure latches into a low-ohmic state.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="esd-protected-areas" class="level3" data-number="9.1.7">
+<h3 data-number="9.1.7" class="anchored" data-anchor-id="esd-protected-areas"><span class="header-section-number">9.1.7</span> ESD-Protected Areas</h3>
+<p>On-chip protection is dimensioned for the standardized qualification levels (a few kV HBM, several hundred volts CDM); it does not make a chip immune to the tens of kilovolts that a person or a machine accumulates during handling. Everything <em>outside</em> the chip therefore has to be controlled as well: wafer test, assembly, board manufacturing, and laboratory work are carried out inside an <strong>ESD-protected area (EPA)</strong>, as specified in IEC/EN 61340-5-1 and ANSI/ESD S20.20.</p>
+<p>The principle of an EPA is simple: no ungrounded conductor and no charged insulator is allowed near an unprotected device, and all conductive objects—the operator included—are kept at the <em>same potential</em>, so that no discharge can occur in the first place:</p>
+<ul>
+<li><strong>Grounding of all conductors:</strong> benches, tools, equipment, chairs, and carts are bonded to a common ground point. The connections are deliberately <em>dissipative</em> rather than metallic (typically <span class="math inline">\(10^6 \ldots 10^9\,\Omega\)</span>), so that charge bleeds off slowly instead of flowing as a fast, damaging current pulse.</li>
+<li><strong>Personnel grounding:</strong> wrist straps (with an integrated 1 MΩ resistor for operator safety) at the bench, plus dissipative shoes and flooring while walking—walking across an insulating floor charges a person to several kV within a few steps.</li>
+<li><strong>Dissipative work surfaces and floors</strong>, avoiding both metal (discharge too fast) and plastic (charges up and cannot be discharged).</li>
+<li><strong>Ionizers</strong> neutralize the insulators that cannot be grounded at all—plastic housings, PCB base material, documents, clothing—by blowing ionized air across the workplace.</li>
+<li><strong>Humidity control</strong> (typically 40 … 60 % relative humidity) raises the surface conductivity of insulators and strongly reduces triboelectric charging; dry air in winter is a classic cause of field failures.</li>
+<li><strong>ESD-safe packaging:</strong> devices leave the EPA only inside shielding (Faraday) bags, conductive trays and tubes, or dissipative foam, and are unpacked only inside another EPA.</li>
+<li><strong>Marking, training, and auditing:</strong> the EPA boundary is marked, wrist straps and mats are verified regularly (typically per shift), and personnel is trained—an EPA is a <em>process</em>, not just a set of equipment.</li>
+</ul>
+<p>ESD-sensitive devices and their packaging carry the <strong>ESD susceptibility symbol</strong>, whereas the EPA boundary and the protective equipment itself carry the <strong>ESD protective symbol</strong>, shown in <a href="#fig-esd-symbols" class="quarto-xref">Figure&nbsp;86</a>.</p>
+<div id="cell-fig-esd-symbols" class="cell" data-execution_count="85">
+<div class="cell-output cell-output-display">
+<div id="fig-esd-symbols" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-esd-symbols-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-esd-symbols-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-86" title="Figure&nbsp;86: The two standardized ESD symbols: (a) the susceptibility symbol (a crossed-out hand in a triangle) marks ESD-sensitive devices, assemblies, and their packaging; (b) the protective symbol (a hand in a triangle under a protecting arc) marks EPA entrances and ESD-protective equipment such as wrist straps, mats, bags, and trays. A device carrying the symbol in (a) must only be unpacked inside an area marked with the symbol in (b)."><img src="dcic_files/figure-html/fig-esd-symbols-output-1.png" width="605" height="247" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-esd-symbols-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;86: The two standardized ESD symbols: (a) the susceptibility symbol (a crossed-out hand in a triangle) marks ESD-sensitive devices, assemblies, and their packaging; (b) the protective symbol (a hand in a triangle under a protecting arc) marks EPA entrances and ESD-protective equipment such as wrist straps, mats, bags, and trays. A device carrying the symbol in (a) must only be unpacked inside an area marked with the symbol in (b).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-latchup" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="sec-latchup"><span class="header-section-number">9.2</span> Latch-Up</h2>
+<p><strong>Latch-up</strong> is the creation of a low-impedance path between the power-supply rails (<span class="math inline">\(V_\mathrm{DD}\)</span> to <span class="math inline">\(V_\mathrm{SS}\)</span>) by triggering the <strong>parasitic SCR</strong> formed by the complementary devices in CMOS, shown in <a href="#fig-latchup" class="quarto-xref">Figure&nbsp;87</a> and already discussed in <a href="#sec-esd-scr" class="quarto-xref">Section&nbsp;9.1.6</a>. The vertical PNP (emitter = PMOS source in the n-well, base = n-well, collector = substrate) and the lateral NPN (emitter = NMOS source, base = substrate, collector = n-well) form a PNPN structure between the rails, with the well and substrate resistances <span class="math inline">\(R_\mathrm{well}\)</span> and <span class="math inline">\(R_\mathrm{sub}\)</span> completing the classic thyristor equivalent circuit.</p>
+<div id="cell-fig-latchup" class="cell" data-execution_count="86">
+<div class="cell-output cell-output-display">
+<div id="fig-latchup" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-latchup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-latchup-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-87" title="Figure&nbsp;87: Parasitic thyristor in a CMOS inverter, causing latch-up: the vertical PNP (PMOS source = emitter, n-well = base, substrate = collector) and the lateral NPN (NMOS source = emitter, substrate = base, n-well = collector) are cross-coupled through the well resistance R_\mathrm{well} and the substrate resistance R_\mathrm{sub}. Injected charge that develops \approx 0.7\,V across either resistance triggers the loop."><img src="dcic_files/figure-html/fig-latchup-output-1.png" width="758" height="302" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-latchup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;87: Parasitic thyristor in a CMOS inverter, causing latch-up: the vertical PNP (PMOS source = emitter, n-well = base, substrate = collector) and the lateral NPN (NMOS source = emitter, substrate = base, n-well = collector) are cross-coupled through the well resistance <span class="math inline">\(R_\mathrm{well}\)</span> and the substrate resistance <span class="math inline">\(R_\mathrm{sub}\)</span>. Injected charge that develops <span class="math inline">\(\approx 0.7\,\)</span>V across either resistance triggers the loop.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Latch-up is triggered by a current or voltage stimulus on an input, output, or I/O pin (injecting carriers into wells or substrate), or by an over-voltage on the supply pin. Two cases are distinguished:</p>
+<ul>
+<li><strong>Transient latch-up:</strong> the low-impedance state persists only while the stimulus is applied.</li>
+<li><strong>True latch-up:</strong> the state remains after the stimulus is removed and can only be ended by a power-supply shutdown—use a <strong>current limit</strong> on the power supply when testing ICs in the lab! The large current can destroy the chip by overheating and electromigration.</li>
+</ul>
+<section id="latch-up-testing" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="latch-up-testing"><span class="header-section-number">9.2.1</span> Latch-Up Testing</h3>
+<p>Latch-up testing is a standard procedure during IC qualification (JEDEC JESD78): a current-limited (typically 100 mA), 10 ms pulse is applied to all pads, with the voltage compliance constrained to 1.5× the maximum supply voltage above ground and to a defined negative value below ground; additionally, a supply over-voltage test is applied. After each stimulus, the supply current is monitored to detect a latched state.</p>
+</section>
+<section id="latch-up-prevention" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="latch-up-prevention"><span class="header-section-number">9.2.2</span> Latch-Up Prevention</h3>
+<p>Latch-up is prevented by weakening the parasitic bipolar transistors and their coupling:</p>
+<ul>
+<li>Physical <strong>separation</strong> of the diffusions/wells forming the parasitic BJTs lowers their current gain (shallow-trench isolation helps to increase the electrical distance without a large spacing penalty).</li>
+<li><strong>Reduce the parasitic resistances</strong> <span class="math inline">\(R_\mathrm{well}\)</span> and <span class="math inline">\(R_\mathrm{sub}\)</span> that develop the triggering base-emitter voltages: place many well and substrate ties, and/or use an <strong>epi-process</strong> with a highly doped substrate.</li>
+<li>Use <strong>guard rings</strong> around critical components (e.g., I/O drivers and any junction that may inject carriers) to collect stray charges before they can reach a parasitic base, as shown in <a href="#fig-guard-rings" class="quarto-xref">Figure&nbsp;88</a>.</li>
+</ul>
+<div id="cell-fig-guard-rings" class="cell" data-execution_count="87">
+<div class="cell-output cell-output-display">
+<div id="fig-guard-rings" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-guard-rings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-guard-rings-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-88" title="Figure&nbsp;88: Guard rings for latch-up prevention (layout top view): the NMOS is surrounded by a grounded p^+ guard ring, the PMOS by an n^+ guard ring tied to V_\mathrm{DD} inside the n-well. The rings collect injected minority and majority carriers before they can act as base current for the parasitic bipolar transistors."><img src="dcic_files/figure-html/fig-guard-rings-output-1.png" width="758" height="363" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-guard-rings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;88: Guard rings for latch-up prevention (layout top view): the NMOS is surrounded by a grounded <span class="math inline">\(p^+\)</span> guard ring, the PMOS by an <span class="math inline">\(n^+\)</span> guard ring tied to <span class="math inline">\(V_\mathrm{DD}\)</span> inside the n-well. The rings collect injected minority and majority carriers before they can act as base current for the parasitic bipolar transistors.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Adopting these design practices helps to significantly reduce the risk of latch-up in CMOS circuits.</p>
+<p>Foundries cast these practices into their design rule manuals. IHP SG13G2, for example, dedicates Sec. 7.2 <em>Latch-up Guidelines</em> of the <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a> to the topic:</p>
+<ul>
+<li>For <strong>output buffers</strong>, the sources of the NMOS and PMOS have to be tied to <span class="math inline">\(V_\mathrm{SS}\)</span> and <span class="math inline">\(V_\mathrm{DD}\)</span> and their drains connected directly to the pad; guard rings (well and substrate ties) are required around every device directly tied to a pad, and <em>double</em> guard rings (an n-well isolator plus a <span class="math inline">\(p^+\)</span> isolator) have to be placed between the n-channel and p-channel buffers, as well as between the buffers and the internal circuitry.</li>
+<li>Rules <code>LU.a</code> and <code>LU.b</code> limit the maximum distance from any <span class="math inline">\(p^+\)</span> active area inside the n-well to an n-well tie, and from any <span class="math inline">\(n^+\)</span> active area inside the p-well to a substrate tie, to 20 µm—this is the rule-deck version of “place many well and substrate ties”.</li>
+<li>Rules <code>LU.c</code> to <code>LU.d1</code> limit how far a tie may extend beyond its contact (6 µm), which keeps the resistance of the tie itself low.</li>
+</ul>
+<p>Beware: these latch-up rules are <em>not</em> checked by default in the SG13G2 DRC deck—the check has to be enabled explicitly.</p>
 
 
 
+</section>
 </section>
 </section>
 
@@ -3927,6 +4175,9 @@ Figure&nbsp;79: Mixed-signal/custom design flow with open-source tools: the sche
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Allen_Holberg" class="csl-entry" role="listitem">
 Allen, Phillip E., and Douglas R. Holberg. 2012. <em>CMOS Analog Circuit Design</em>. 3rd ed. Oxford University Press.
+</div>
+<div id="ref-Amerasekera_ESD" class="csl-entry" role="listitem">
+Amerasekera, Ajith, and Charvaka Duvvury. 2002. <em>ESD in Silicon Integrated Circuits</em>. 2nd ed. Wiley.
 </div>
 <div id="ref-Bhunia_HWSecurity" class="csl-entry" role="listitem">
 Bhunia, Swarup, and Mark Tehranipoor. 2018. <em>Hardware Security: A Hands-on Learning Approach</em>. Morgan Kaufmann.
@@ -3951,6 +4202,15 @@ Hu, Chenming. 2010. <em>Modern Semiconductor Devices for Integrated Circuits</em
 </div>
 <div id="ref-Kahng_PhysicalDesign" class="csl-entry" role="listitem">
 Kahng, Andrew B., Jens Lienig, Igor L. Markov, and Jin Hu. 2022. <em>VLSI Physical Design: From Graph Partitioning to Timing Closure</em>. 2nd ed. Springer.
+</div>
+<div id="ref-Ker_2000" class="csl-entry" role="listitem">
+<span class="nocase">Ker, Ming-Dou et al.</span> 2000. <span>“<span>ESD</span> Protection Design on Analog Pin with Very Low Input Capacitance for High-Frequency or Current-Mode Applications.”</span> <em>IEEE Journal of Solid-State Circuits</em> 35 (8): 1194–99.
+</div>
+<div id="ref-Ker_2001" class="csl-entry" role="listitem">
+<span class="nocase">Ker, Ming-Dou et al.</span> 2001. <span>“<span>ESD</span> Test Methods on Integrated Circuits: An Overview.”</span> <em>IEEE International Conference on Electronics, Circuits and Systems (ICECS)</em>.
+</div>
+<div id="ref-Ker_2002" class="csl-entry" role="listitem">
+Ker, Ming-Dou, and Chien-Hui Chuang. 2002. <span>“<span>ESD</span> Protection Circuits with Novel <span>MOS</span>-Bounded Diode Structures.”</span> <em>IEEE International Symposium on Circuits and Systems (ISCAS)</em>.
 </div>
 <div id="ref-DeMicheli_Synthesis" class="csl-entry" role="listitem">
 Micheli, Giovanni De. 1994. <em>Synthesis and Optimization of Digital Circuits</em>. McGraw-Hill.
