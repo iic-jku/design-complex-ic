@@ -1,0 +1,142 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# Electrostatic Discharge and Latch-Up {#sec-esd}
+
+This chapter covers two reliability hazards that every IC design must handle: [**electrostatic discharge (ESD)**](https://en.wikipedia.org/wiki/Electrostatic_discharge), the sudden discharge of statically charged objects into the chip, and [**latch-up**](https://en.wikipedia.org/wiki/Latch-up), the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows [@Amerasekera_ESD]; overviews of ESD test methods and of protection structures can be found in [@Ker_2001; @Ker_2002].
+
+## Electrostatic Discharge {#sec-esd-basics}
+
+When an external object at a high potential (e.g., charged by the [triboelectric effect](https://en.wikipedia.org/wiki/Triboelectric_effect) or by induction from an electric field) touches one of the connections of a circuit, the resulting **electrostatic discharge** produces a large transient voltage or current—for example, when ICs are handled by humans or by machines with faulty grounding. ESD can even occur without actual contact, as an arc across an air gap. Devices sustain two types of *permanent damage* as a result of ESD:
+
+- A thin isolation layer (like the gate oxide) may break down, leading to a low-resistance path between structures that should be isolated.
+- Diodes, resistors, or wiring may melt while carrying the large discharge current, creating a short or an open.
+
+### ESD Models for Testing
+
+Three standardized models are used for ESD testing of ICs, differing in the equivalent charge storage and discharge path:
+
+- The [**human-body model (HBM)**](https://en.wikipedia.org/wiki/Human-body_model): a 100 pF capacitor discharged through 1.5 kΩ, modeling the touch of a charged person.
+- The **charged-device model (CDM)**: the IC itself is charged and discharges abruptly through a single pin, modeling machine handling.
+- The **machine model (MM)**: a 200 pF capacitor discharged with negligible series resistance, modeling charged (metallic) machinery (largely superseded by HBM/CDM testing today).
+
+Each model defines the charging voltage of an equivalent capacitance and the discharge network—this defines the ESD pulse shape and the peak discharge voltage and current. An "HBM level of 1 kV" means the model capacitance is charged to 1 kV before the discharge. The equivalent circuit and the resulting pulse shapes are shown in @fig-esd-models and @fig-esd-pulse: the HBM produces a comparatively long pulse (~150 ns decay) causing mostly thermal stress, while the CDM produces a very short (~1 ns) pulse with high current, leading to large on-chip voltage drops.
+
+{{< include /content/esd/_fig_esd_models.qmd >}}
+
+{{< include /content/esd/_fig_esd_pulse.qmd >}}
+
+In a CDM event, the *charge stored in the body of the IC* is discharged when some pin touches external ground; discharge currents of several amperes with rise times below a nanosecond are typical. HBM testing is standardized in ANSI/ESDA/JEDEC JS-001, CDM testing in JS-002.
+
+### ESD Protection Concept
+
+All inputs and outputs of an IC (including $\VDD$ and $\VSS$) have to be protected against ESD. The protection circuits are usually bundled in a **pad library** providing optimized I/O cells (digital input/output, analog input/output, RF input/output, supply pads). The protection elements are made from the devices available in the technology, optimized for high-current/high-voltage operation—usually they are provided and qualified by the wafer foundry.
+
+@fig-esd-io-protection shows the general protection scheme of a (bidirectional) digital I/O:
+
+- The **primary ESD element** (typically a pair of large diodes to the rails, like $D_{1,2}$, or a snapback device) provides the main low-ohmic path for a positive or negative ESD pulse.
+- The **series resistor** $R_\mathrm{in}$ (typically around 500 Ω) limits the current into the **secondary protection**, which clamps the voltage at the gate oxide of the input receiver.
+- The **secondary protection** (typically a gate-protected NMOS or a diode to the rails, like the shown $D_{3,4}$) clamps the voltage at the input of the receiver, protecting the gate oxide from ESD stress.
+- The **power clamp** between $\VDD$ and $\VSS$ provides a discharge path between the rails, preventing an ESD-induced rise of the supply voltage from damaging core circuits.
+- All diodes and clamps are reverse-biased (off) during normal operation. A positive ESD pulse at the pad is discharged via the upper diode and the power clamp to ground; a negative pulse is discharged via the lower diode.
+- The **receiver** might implement additional functionality for the digital input, like Schmitt-trigger action or input filtering.
+- The **driver** consists of large output devices (NMOS and PMOS) that provide the necessary drive strength for the digital output, while the series resistance and protection elements safeguard the driver during ESD events. Additional features might be a tri-state capability or slew-rate control.  A (small) series resistance $R_\mathrm{s}$ in the drain path helps divert the ESD current into the protection devices, at the cost of degrading the driver in normal operation. Often, this series resistance is implemented by extending the drain region of the MOSFETs and blocking the silicide (recall the `OP` layer from @sec-layout-layers), similar to the technique used for the RC-triggered power clamp.
+- The **layout of the protection elements** is critical: they should be placed close to the pad to minimize parasitic inductance and resistance, ensuring a fast response to ESD events.
+
+{{< include /content/esd/_fig_esd_io_protection.qmd >}}
+
+### Analog and RF Pads
+
+$\VDD$ pads and digital input-only or output-only pads are easily derived from the general I/O pad shown in @fig-esd-io-protection. **Analog input and output pads** are more critical, since the series resistances ($R_\mathrm{s}$, $R_\mathrm{in}$) might be prohibitive for the intended circuit function; usually, special ESD protection tailored to the specific function is designed for analog pins. For **high-frequency pads**, ESD protection is **highly critical**: often no series resistance is acceptable at all, and the protection elements add parasitic capacitance that limits the bandwidth of the I/O. Since the size of an ESD element is determined by the required low resistance and thermal dissipation, RF I/Os often limit the ESD rating of an RFIC, and RF ESD protection is always custom-designed [see, e.g., @Ker_2000].
+
+### Snapback Devices: The ggNMOS
+
+A popular primary protection element is the **grounded-gate NMOS (ggNMOS)**, shown in @fig-ggnmos. In normal operation, the NMOS is off, since its gate is tied to $\VSS$. During a positive ESD event, the drain-bulk diode breaks down (reversibly) by [avalanche multiplication](https://en.wikipedia.org/wiki/Avalanche_breakdown) and injects current into the substrate; this current, together with the substrate resistance $R_\mathrm{sub}$, forward-biases the source-bulk junction, turning on the parasitic lateral NPN transistor (drain = collector, bulk = base, source = emitter). The device "snaps back" to a low holding voltage and conducts the ESD current between drain and source. A silicide-blocked extended drain improves the robustness by ballasting the current across the device width.
+
+{{< include /content/esd/_fig_ggnmos.qmd >}}
+
+### RC-Triggered Power Clamp
+
+@fig-rc-clamp shows an **RC-triggered supply clamp**: during normal operation, the capacitor is charged to $\VDD$, the inverter output is low, and the large clamping NMOS $M_\mathrm{ESD}$ is off. During a (positive) ESD event, the supply rail rises much faster than the RC time constant, the capacitor voltage cannot follow, the inverter input stays low, and its output turns $M_\mathrm{ESD}$ on—providing a conducting path for the ESD current between the rails. 
+
+Beware that a fast $\VDD$ ramp during power-up can falsely trigger such a clamp! For this reason, when building the power supplies of electronic systems, designers often include additional circuitry to control the ramp rate or to temporarily disable the RC-triggered clamp during power-up. Considering also the potentially large inrush current $I_\mathrm{rush} = C_\mathrm{decoup} \cdot d\VDD/dt$, a controlled supply ramp during supply turn on is essential.
+
+{{< include /content/esd/_fig_rc_clamp.qmd >}}
+
+### The Silicon-Controlled Rectifier {#sec-esd-scr}
+
+A [**silicon-controlled rectifier (SCR, thyristor)**](https://en.wikipedia.org/wiki/Silicon_controlled_rectifier) can be formed in standard CMOS by utilizing the available diffusions ($n^+$ and $p^+$) and wells (n-well and p-substrate/p-well), forming a PNPN structure, shown in @fig-scr. The structure contains *two cross-coupled parasitic bipolar transistors* (a vertical PNP and a lateral NPN); if the loop gain of the two transistors satisfies
+
+$$
+\beta_\mathrm{NPN} \cdot \beta_\mathrm{PNP} \geq 1
+$$ {#eq-scr-condition}
+
+then the SCR triggers and provides a very low-ohmic path (**snapback**). Deliberately built SCRs are excellent ESD protection devices, but the same structure exists *parasitically* in every CMOS inverter—which brings us to latch-up.
+
+{{< include /content/esd/_fig_scr.qmd >}}
+
+### ESD-Protected Areas
+
+On-chip protection is dimensioned for the standardized qualification levels (a few kV HBM, several hundred volts CDM); it does not make a chip immune to the tens of kilovolts that a person or a machine accumulates during handling. Everything *outside* the chip therefore has to be controlled as well: wafer test, assembly, board manufacturing, and laboratory work are carried out inside an **ESD-protected area (EPA)**, as specified in IEC/EN 61340-5-1 and ANSI/ESD S20.20.
+
+The principle of an EPA is simple: no ungrounded conductor and no charged insulator is allowed near an unprotected device, and all conductive objects—the operator included—are kept at the *same potential*, so that no discharge can occur in the first place:
+
+- **Grounding of all conductors:** benches, tools, equipment, chairs, and carts are bonded to a common ground point. The connections are deliberately *dissipative* rather than metallic (typically $10^6 \ldots 10^9\,\Omega$), so that charge bleeds off slowly instead of flowing as a fast, damaging current pulse.
+- **Personnel grounding:** wrist straps (with an integrated 1 MΩ resistor for operator safety) at the bench, plus dissipative shoes and flooring while walking—walking across an insulating floor charges a person to several kV within a few steps.
+- **Dissipative work surfaces and floors**, avoiding both metal (discharge too fast) and plastic (charges up and cannot be discharged).
+- **Ionizers** neutralize the insulators that cannot be grounded at all—plastic housings, PCB base material, documents, clothing—by blowing ionized air across the workplace.
+- **Humidity control** (typically 40 ... 60 % relative humidity) raises the surface conductivity of insulators and strongly reduces triboelectric charging; dry air in winter is a classic cause of field failures.
+- **ESD-safe packaging:** devices leave the EPA only inside shielding (Faraday) bags, conductive trays and tubes, or dissipative foam, and are unpacked only inside another EPA.
+- **Marking, training, and auditing:** the EPA boundary is marked, wrist straps and mats are verified regularly (typically per shift), and personnel is trained—an EPA is a *process*, not just a set of equipment.
+
+ESD-sensitive devices and their packaging carry the **ESD susceptibility symbol**, whereas the EPA boundary and the protective equipment itself carry the **ESD protective symbol**, shown in @fig-esd-symbols.
+
+{{< include /content/esd/_fig_esd_symbols.qmd >}}
+
+## Latch-Up {#sec-latchup}
+
+**Latch-up** is the creation of a low-impedance path between the power-supply rails ($\VDD$ to $\VSS$) by triggering the **parasitic SCR** formed by the complementary devices in CMOS, shown in @fig-latchup and already discussed in @sec-esd-scr. The vertical PNP (emitter = PMOS source in the n-well, base = n-well, collector = substrate) and the lateral NPN (emitter = NMOS source, base = substrate, collector = n-well) form a PNPN structure between the rails, with the well and substrate resistances $R_\mathrm{well}$ and $R_\mathrm{sub}$ completing the classic thyristor equivalent circuit.
+
+{{< include /content/esd/_fig_latchup.qmd >}}
+
+Latch-up is triggered by a current or voltage stimulus on an input, output, or I/O pin (injecting carriers into wells or substrate), or by an over-voltage on the supply pin. Two cases are distinguished:
+
+- **Transient latch-up:** the low-impedance state persists only while the stimulus is applied.
+- **True latch-up:** the state remains after the stimulus is removed and can only be ended by a power-supply shutdown—use a **current limit** on the power supply when testing ICs in the lab! The large current can destroy the chip by overheating and electromigration.
+
+### Latch-Up Testing
+
+Latch-up testing is a standard procedure during IC qualification (JEDEC JESD78): a current-limited (typically 100 mA), 10 ms pulse is applied to all pads, with the voltage compliance constrained to 1.5× the maximum supply voltage above ground and to a defined negative value below ground; additionally, a supply over-voltage test is applied. After each stimulus, the supply current is monitored to detect a latched state.
+
+### Latch-Up Prevention
+
+Latch-up is prevented by weakening the parasitic bipolar transistors and their coupling:
+
+- Physical **separation** of the diffusions/wells forming the parasitic BJTs lowers their current gain (shallow-trench isolation helps to increase the electrical distance without a large spacing penalty).
+- **Reduce the parasitic resistances** $R_\mathrm{well}$ and $R_\mathrm{sub}$ that develop the triggering base-emitter voltages: place many well and substrate ties, and/or use an **epi-process** with a highly doped substrate.
+- Use **guard rings** around critical components (e.g., I/O drivers and any junction that may inject carriers) to collect stray charges before they can reach a parasitic base, as shown in @fig-guard-rings.
+
+{{< include /content/esd/_fig_guard_rings.qmd >}}
+
+Adopting these design practices helps to significantly reduce the risk of latch-up in CMOS circuits.
+
+Foundries cast these practices into their design rule manuals. IHP SG13G2, for example, dedicates Sec. 7.2 *Latch-up Guidelines* of the [SG13G2 layout rules](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf) to the topic:
+
+- For **output buffers**, the sources of the NMOS and PMOS have to be tied to $\VSS$ and $\VDD$ and their drains connected directly to the pad; guard rings (well and substrate ties) are required around every device directly tied to a pad, and *double* guard rings (an n-well isolator plus a $p^+$ isolator) have to be placed between the n-channel and p-channel buffers, as well as between the buffers and the internal circuitry.
+- Rules `LU.a` and `LU.b` limit the maximum distance from any $p^+$ active area inside the n-well to an n-well tie, and from any $n^+$ active area inside the p-well to a substrate tie, to 20 µm—this is the rule-deck version of "place many well and substrate ties".
+- Rules `LU.c` to `LU.d1` limit how far a tie may extend beyond its contact (6 µm), which keeps the resistance of the tie itself low.
+
+Beware: these latch-up rules are *not* checked by default in the SG13G2 DRC deck—the check has to be enabled explicitly.

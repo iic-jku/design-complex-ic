@@ -291,6 +291,11 @@
    "number": "60",
    "type": "eq"
   },
+  "eq-scr-condition": {
+   "chapter": 9,
+   "number": "64",
+   "type": "eq"
+  },
   "eq-selling-price": {
    "chapter": 7,
    "number": "57",
@@ -396,9 +401,39 @@
    "number": "31",
    "type": "fig"
   },
+  "fig-esd-io-protection": {
+   "chapter": 9,
+   "number": "82",
+   "type": "fig"
+  },
+  "fig-esd-models": {
+   "chapter": 9,
+   "number": "80",
+   "type": "fig"
+  },
+  "fig-esd-pulse": {
+   "chapter": 9,
+   "number": "81",
+   "type": "fig"
+  },
+  "fig-esd-symbols": {
+   "chapter": 9,
+   "number": "86",
+   "type": "fig"
+  },
+  "fig-ggnmos": {
+   "chapter": 9,
+   "number": "83",
+   "type": "fig"
+  },
   "fig-good-die-per-wafer": {
    "chapter": 7,
    "number": "70",
+   "type": "fig"
+  },
+  "fig-guard-rings": {
+   "chapter": 9,
+   "number": "88",
    "type": "fig"
   },
   "fig-history-timeline": {
@@ -424,6 +459,11 @@
   "fig-jtag": {
    "chapter": 6,
    "number": "64",
+   "type": "fig"
+  },
+  "fig-latchup": {
+   "chapter": 9,
+   "number": "87",
    "type": "fig"
   },
   "fig-layout-antenna": {
@@ -641,6 +681,11 @@
    "number": "63",
    "type": "fig"
   },
+  "fig-rc-clamp": {
+   "chapter": 9,
+   "number": "84",
+   "type": "fig"
+  },
   "fig-repeatability": {
    "chapter": 6,
    "number": "61",
@@ -659,6 +704,11 @@
   "fig-scan-path": {
    "chapter": 6,
    "number": "66",
+   "type": "fig"
+  },
+  "fig-scr": {
+   "chapter": 9,
+   "number": "85",
    "type": "fig"
   },
   "fig-semicustom-flow": {
@@ -761,6 +811,21 @@
    "number": "7.3",
    "type": "sec"
   },
+  "sec-esd": {
+   "chapter": 9,
+   "number": "9",
+   "type": "sec"
+  },
+  "sec-esd-basics": {
+   "chapter": 9,
+   "number": "9.1",
+   "type": "sec"
+  },
+  "sec-esd-scr": {
+   "chapter": 9,
+   "number": "9.1.6",
+   "type": "sec"
+  },
   "sec-intro": {
    "chapter": 1,
    "number": "1",
@@ -774,6 +839,11 @@
   "sec-intro-scale": {
    "chapter": 1,
    "number": "1.1",
+   "type": "sec"
+  },
+  "sec-latchup": {
+   "chapter": 9,
+   "number": "9.2",
    "type": "sec"
   },
   "sec-layout": {

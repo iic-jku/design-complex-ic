@@ -1,0 +1,57 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-guard-rings
+#| echo: false
+#| fig-cap: "Guard rings for latch-up prevention (layout top view): the NMOS is surrounded by a grounded $p^+$ guard ring, the PMOS by an $n^+$ guard ring tied to $V_\\mathrm{DD}$ inside the n-well. The rings collect injected minority and majority carriers before they can act as base current for the parasitic bipolar transistors."
+
+import matplotlib.pyplot as plt
+from pyutil import laygen as lg
+from matplotlib.patches import Rectangle
+
+
+def ring(ax, x, y, w, h, t, layer):
+    lg.rect(ax, layer, x, y, w, t)             # bottom
+    lg.rect(ax, layer, x, y + h - t, w, t)     # top
+    lg.rect(ax, layer, x, y, t, h)             # left
+    lg.rect(ax, layer, x + w - t, y, t, h)     # right
+
+
+fig, ax = plt.subplots(figsize=(8, 4.4))
+
+# NMOS side: p+ guard ring (RX + BP)
+ring(ax, 0.0, 0.0, 6.0, 6.0, 0.55, 'BP')
+ring(ax, 0.1, 0.1, 5.8, 5.8, 0.35, 'RX')
+lg.rect(ax, 'RX', 1.5, 1.8, 3.0, 2.2)
+lg.rect(ax, 'PC', 2.75, 1.2, 0.5, 3.4)
+ax.text(3.0, 6.4, 'NMOS with $p^+$ guard ring ($V_\\mathrm{SS}$)',
+        fontsize=9, ha='center')
+
+# PMOS side: n-well with n+ guard ring
+lg.rect(ax, 'NW', 7.6, -0.5, 7.0, 7.0)
+ring(ax, 8.2, 0.0, 6.0, 6.0, 0.55, 'RX')
+lg.rect(ax, 'BP', 9.4, 1.5, 3.6, 2.8)
+lg.rect(ax, 'RX', 9.7, 1.8, 3.0, 2.2)
+lg.rect(ax, 'PC', 10.95, 1.2, 0.5, 3.4)
+ax.text(11.2, 6.7, 'PMOS with $n^+$ guard ring ($V_\\mathrm{DD}$)\nin the n-well',
+        fontsize=9, ha='center')
+
+lg.legend(ax, ['NW', 'RX', 'PC', 'BP'], loc='center right')
+lg.finish(ax, (-0.5, 18.0), (-1.0, 7.6))
+plt.tight_layout()
+plt.show()
+```

@@ -1,0 +1,134 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-scr
+#| echo: false
+#| fig-cap: "The silicon-controlled rectifier (SCR) in CMOS: (a) the PNPN structure formed by the $p^+$ anode diffusion, the n-well, the $p$-substrate, and the $n^+$ cathode diffusion; (b) equivalent circuit of the two cross-coupled parasitic bipolar transistors—if their loop gain exceeds unity, the structure latches into a low-ohmic state."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, FancyArrowPatch
+
+fig, axs = plt.subplots(1, 2, figsize=(8, 3.6),
+                        gridspec_kw={'width_ratios': [1.4, 1]})
+
+C = dict(sub='#f5e9d0', nwell='#aacdea', nplus='#4a7fb5', pplus='#d1862c')
+
+# (a) cross section
+ax = axs[0]
+SURF = 3.0
+ax.add_patch(Rectangle((0, 0), 12, SURF, fc=C['sub'], ec='k', lw=0.8))
+ax.text(2.6, 0.5, 'p-substrate', fontsize=8)
+ax.add_patch(Rectangle((5.6, 1.1), 6.0, SURF - 1.1, fc=C['nwell'],
+                       ec='k', lw=0.8))
+ax.text(9.8, 1.4, 'n-well', fontsize=8)
+
+
+def diff(x0, w, typ, lbl):
+    fc = C['nplus'] if typ == 'n' else C['pplus']
+    ax.add_patch(Rectangle((x0, SURF - 0.5), w, 0.5, fc=fc, ec='k',
+                           lw=0.6))
+    ax.text(x0 + w / 2, SURF - 0.25, lbl, ha='center', va='center',
+            fontsize=7, color='white')
+
+
+diff(1.2, 1.4, 'n', '$n^+$')   # cathode
+diff(3.4, 1.4, 'p', '$p^+$')   # substrate tie
+diff(6.4, 1.4, 'p', '$p^+$')   # anode
+diff(9.0, 1.4, 'n', '$n^+$')   # well tie
+
+for x, t in [(1.9, 'cathode\n($V_\\mathrm{SS}$)'),
+             (4.1, 'sub. tie\n($V_\\mathrm{SS}$)'),
+             (7.1, 'anode\n($V_\\mathrm{DD}$)'),
+             (9.7, 'well tie\n($V_\\mathrm{DD}$)')]:
+    ax.annotate(t, xy=(x, SURF), xytext=(x, SURF + 1.0), fontsize=7,
+                ha='center', arrowprops=dict(arrowstyle='-', lw=0.7))
+
+ax.text(6.1, 0.55, 'PNPN path', fontsize=8, color='#b02020')
+ax.add_patch(FancyArrowPatch((7.1, 2.3), (1.9, 2.2), arrowstyle='->',
+                             mutation_scale=10, lw=1.2, color='#b02020',
+                             connectionstyle='arc3,rad=0.25'))
+ax.set_xlim(-0.2, 12.2)
+ax.set_ylim(-0.3, 5.2)
+ax.set_aspect('equal')
+ax.axis('off')
+ax.set_title('(a)', fontsize=10)
+
+# (b) equivalent circuit (drawn schematically with matplotlib)
+ax = axs[1]
+ax.axis('off')
+ax.set_xlim(0, 6)
+ax.set_ylim(0, 7)
+ax.set_aspect('equal')
+ax.set_title('(b)', fontsize=10)
+
+# classic thyristor equivalent: PNP (top) and NPN (bottom) cross-coupled
+# PNP: emitter to VDD, base = NPN collector; NPN: emitter to VSS,
+# base = PNP collector
+
+# supply rails
+ax.plot([2.0, 4.0], [6.3, 6.3], 'k-', lw=1.2)
+ax.text(3.0, 6.55, '$V_\\mathrm{DD}$ (anode)', ha='center', fontsize=9)
+ax.plot([2.0, 4.0], [1.3, 1.3], 'k-', lw=1.2)
+ax.text(3.0, 0.85, '$V_\\mathrm{SS}$ (cathode)', ha='center', fontsize=9)
+
+# PNP symbol (circle, base on the right)
+ax.add_patch(plt.Circle((2.3, 5.0), 0.6, fc='none', ec='k', lw=1.2))
+ax.plot([2.4, 2.4], [4.65, 5.35], 'k-', lw=2.0)          # base bar
+ax.plot([2.4, 2.9], [5.0, 5.0], 'k-', lw=1.0)            # base lead
+ax.annotate('', xy=(2.4, 5.22), xytext=(2.0, 5.45),      # emitter (arrow
+            arrowprops=dict(arrowstyle='-|>', lw=1.0,    # into base: PNP)
+                            color='k', shrinkA=0, shrinkB=0))
+ax.plot([2.0, 2.0], [5.45, 6.3], 'k-', lw=1.0)           # emitter to VDD
+ax.plot([2.4, 2.0], [4.8, 4.55], 'k-', lw=1.0)           # collector
+ax.text(1.55, 5.35, 'PNP', ha='right', va='center', fontsize=8)
+
+# NPN symbol (circle, base on the left)
+ax.add_patch(plt.Circle((3.7, 2.6), 0.6, fc='none', ec='k', lw=1.2))
+ax.plot([3.6, 3.6], [2.25, 2.95], 'k-', lw=2.0)          # base bar
+ax.plot([3.1, 3.6], [2.6, 2.6], 'k-', lw=1.0)            # base lead
+ax.plot([3.6, 4.0], [2.8, 3.05], 'k-', lw=1.0)           # collector
+ax.annotate('', xy=(4.0, 2.17), xytext=(3.6, 2.4),       # emitter (arrow
+            arrowprops=dict(arrowstyle='-|>', lw=1.0,    # away: NPN)
+                            color='k', shrinkA=0, shrinkB=0))
+ax.plot([4.0, 4.0], [2.17, 1.3], 'k-', lw=1.0)           # emitter to VSS
+ax.text(4.45, 2.25, 'NPN', ha='left', va='center', fontsize=8)
+
+# node A: PNP base = NPN collector, tied to VDD via R_well
+ax.plot([2.9, 4.0], [5.0, 5.0], 'k-', lw=1.0)
+ax.plot([4.0, 4.0], [3.05, 5.0], 'k-', lw=1.0)
+ax.plot([4.0], [5.0], 'ko', ms=3.5)
+ax.add_patch(Rectangle((3.85, 5.45), 0.3, 0.7, fc='white', ec='k', lw=1.0))
+ax.plot([4.0, 4.0], [5.0, 5.45], 'k-', lw=1.0)
+ax.plot([4.0, 4.0], [6.15, 6.3], 'k-', lw=1.0)
+ax.text(4.3, 5.8, '$R_\\mathrm{well}$', va='center', fontsize=8)
+
+# node B: NPN base = PNP collector, tied to VSS via R_sub
+ax.plot([2.0, 3.1], [2.6, 2.6], 'k-', lw=1.0)
+ax.plot([2.0, 2.0], [2.6, 4.55], 'k-', lw=1.0)
+ax.plot([2.0], [2.6], 'ko', ms=3.5)
+ax.add_patch(Rectangle((1.85, 1.45), 0.3, 0.7, fc='white', ec='k', lw=1.0))
+ax.plot([2.0, 2.0], [2.15, 2.6], 'k-', lw=1.0)
+ax.plot([2.0, 2.0], [1.3, 1.45], 'k-', lw=1.0)
+ax.text(1.7, 1.8, '$R_\\mathrm{sub}$', ha='right', va='center',
+        fontsize=8)
+
+ax.text(3.0, 0.2, '$\\beta_\\mathrm{NPN} \\cdot \\beta_\\mathrm{PNP} \\geq 1$'
+        ' $\\Rightarrow$ latched', ha='center', fontsize=9)
+
+plt.tight_layout()
+plt.show()
+```

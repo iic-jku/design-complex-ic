@@ -14,3 +14,4 @@ Press `S` for speaker notes, `C` for the chalkboard, and `?` for all shortcuts.
 6. [Testing](testing.html)
 7. [Economy of Integrated Circuits](economy.html)
 8. [Design Methodology](methodology.html)
+9. [Electrostatic Discharge and Latch-Up](esd.html)

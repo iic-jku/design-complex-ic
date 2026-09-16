@@ -1,0 +1,100 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-esd-io-protection
+#| echo: false
+#| fig-cap: "ESD protection of a bidirectional digital I/O pad: the primary diodes $D_1$/$D_2$ carry the main discharge current to the rails, the series resistor $R_\\mathrm{in}$ limits the current into the secondary diodes $D_3$/$D_4$, which protect the gate oxide of the input receiver; the output driver $M_\\mathrm{P}$/$M_\\mathrm{N}$ is decoupled from the pad by the small drain series resistance $R_\\mathrm{s}$; the power clamp closes the discharge loop between $V_\\mathrm{DD}$ and $V_\\mathrm{SS}$. All protection elements are off in normal operation."
+
+import schemdraw as sd
+import schemdraw.elements as elm
+
+sd.svgconfig.svg2 = False
+
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2, fontsize=10)
+
+    # rails
+    d += elm.Line().endpoints((0, 6), (13.4, 6)).label(
+        '$V_\\mathrm{DD}$', loc='left')
+    d += elm.Line().endpoints((0, 0), (13.4, 0)).label(
+        '$V_\\mathrm{SS}$', loc='left')
+
+    # power clamp
+    d += elm.Zener().endpoints((1, 0), (1, 6)).label('power\nclamp',
+                                                     loc='top')
+    d += elm.Dot().at((1, 6))
+    d += elm.Dot().at((1, 0))
+
+    # output driver
+    mp = elm.PFet(bulk=False).at((3, 4.5)).anchor('gate').theta(0).reverse()
+    d += mp.label('$M_\\mathrm{P}$', loc='right', ofst=(-0.3, 0))
+    mn = elm.NFet(bulk=False).at((3, 1.5)).anchor('gate').theta(0).reverse()
+    d += mn.label('$M_\\mathrm{N}$', loc='right', ofst=(-0.3, 0))
+
+    x_drv = mp.absanchors['drain'][0]
+    d += elm.Line().at(mp.absanchors['source']).to((x_drv, 6))
+    d += elm.Dot().at((x_drv, 6))
+    d += elm.Line().at(mn.absanchors['source']).to((x_drv, 0))
+    d += elm.Dot().at((x_drv, 0))
+    d += elm.Line().at(mp.absanchors['drain']).to((x_drv, 3))
+    d += elm.Line().at(mn.absanchors['drain']).to((x_drv, 3))
+    d += elm.Dot().at((x_drv, 3))
+
+    # driver gates from the core
+    d += elm.Line().endpoints((3, 4.5), (3, 1.5))
+    d += elm.Line().endpoints((2.4, 3), (3, 3))
+    d += elm.Dot().at((3, 3))
+    d += elm.Label().at((2.0, 3)).label('from\ncore')
+
+    # drain series resistance and pad
+    d += elm.Resistor().endpoints((x_drv, 3), (6.15, 3)).label(
+        '$R_\\mathrm{s}$')
+    d += elm.Rect(corner1=(6.15, 2.75), corner2=(6.65, 3.25)).at((0, 0))
+    d += elm.Label().at((6.4, 3.65)).label('PAD')
+    d += elm.Line().endpoints((6.65, 3), (7.4, 3))
+
+    # primary diodes
+    d += elm.Diode().endpoints((7.4, 3), (7.4, 6)).label('$D_1$',
+                                                         loc='bottom')
+    d += elm.Diode().endpoints((7.4, 0), (7.4, 3)).label('$D_2$',
+                                                         loc='bottom')
+    d += elm.Dot().at((7.4, 3))
+    d += elm.Dot().at((7.4, 6))
+    d += elm.Dot().at((7.4, 0))
+
+    # series resistor
+    d += elm.Resistor().endpoints((7.4, 3), (9.9, 3)).label(
+        '$R_\\mathrm{in}$')
+    d += elm.Dot().at((9.9, 3))
+
+    # secondary diodes
+    d += elm.Diode().endpoints((9.9, 3), (9.9, 6)).label('$D_3$',
+                                                         loc='bottom')
+    d += elm.Diode().endpoints((9.9, 0), (9.9, 3)).label('$D_4$',
+                                                         loc='bottom')
+    d += elm.Dot().at((9.9, 6))
+    d += elm.Dot().at((9.9, 0))
+
+    # receiver (triangle symbol)
+    d += elm.Line().endpoints((9.9, 3), (11, 3))
+    d += elm.Line().endpoints((11, 3.8), (11, 2.2))
+    d += elm.Line().endpoints((11, 3.8), (12.4, 3))
+    d += elm.Line().endpoints((11, 2.2), (12.4, 3))
+    d += elm.Line().endpoints((12.4, 3), (13.2, 3))
+    d += elm.Label().at((11.6, 4.1)).label('receiver')
+    d += elm.Label().at((13.6, 3)).label('to\ncore')
+```

@@ -1,0 +1,106 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-ggnmos
+#| echo: false
+#| fig-cap: "The grounded-gate NMOS (ggNMOS) ESD protection device: (a) cross section with the parasitic lateral NPN (drain = collector, substrate = base, source = emitter) and the substrate resistance $R_\\mathrm{sub}$; the drain contact is set back from the gate with blocked silicide, forming a ballast resistance; (b) snapback I/V characteristic—after avalanche breakdown at $V_\\mathrm{t1}$, the parasitic NPN turns on and the device conducts the ESD current at a low holding voltage $V_\\mathrm{h}$."
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, FancyArrowPatch
+
+fig, axs = plt.subplots(1, 2, figsize=(8, 3.6),
+                        gridspec_kw={'width_ratios': [1.4, 1]})
+
+C = dict(sub='#f5e9d0', ox='#c7dff2', poly='#3e9c5c', nplus='#4a7fb5',
+         metal='#8f8f8f')
+
+# (a) cross section
+ax = axs[0]
+SURF = 3.0
+ax.add_patch(Rectangle((0, 0), 15, SURF, fc=C['sub'], ec='k', lw=0.8))
+ax.text(2.0, 0.5, 'p-substrate', fontsize=8)
+# source n+
+ax.add_patch(Rectangle((1.5, SURF - 0.5), 2.0, 0.5, fc=C['nplus'],
+                       ec='k', lw=0.6))
+ax.text(2.5, SURF - 0.25, '$n^+$ S', ha='center', va='center',
+        fontsize=7, color='white')
+# drain n+ (extended)
+ax.add_patch(Rectangle((4.7, SURF - 0.5), 6.9, 0.5, fc=C['nplus'],
+                       ec='k', lw=0.6))
+ax.text(8.15, SURF - 0.25, '$n^+$ D (extended, silicide blocked)',
+        ha='center', va='center', fontsize=7, color='white')
+# gate
+ax.add_patch(Rectangle((3.5, SURF), 1.2, 0.12, fc=C['ox'], ec='k', lw=0.4))
+ax.add_patch(Rectangle((3.5, SURF + 0.12), 1.2, 0.4, fc=C['poly'],
+                       ec='k', lw=0.5))
+# terminals
+ax.plot([2.5, 2.5], [SURF, SURF + 1.3], 'k-', lw=1.0)
+ax.text(2.5, SURF + 1.5, 'S + G + B\n($V_\\mathrm{SS}$)', ha='center',
+        fontsize=8)
+ax.plot([4.1, 2.5], [SURF + 0.52, SURF + 1.3], 'k-', lw=1.0)
+ax.plot([8.15, 8.15], [SURF, SURF + 1.3], 'k-', lw=1.0)
+ax.text(8.15, SURF + 1.5, 'D (pad)', ha='center', fontsize=8)
+# substrate contact
+ax.add_patch(Rectangle((12.6, SURF - 0.5), 1.2, 0.5, fc='#d1862c',
+                       ec='k', lw=0.6))
+ax.text(13.2, SURF - 0.25, '$p^+$', ha='center', va='center', fontsize=7,
+        color='white')
+ax.plot([13.2, 13.2], [SURF, SURF + 1.3], 'k-', lw=1.0)
+ax.text(13.2, SURF + 1.5, 'B ($V_\\mathrm{SS}$)', ha='center', fontsize=8)
+# parasitic NPN sketch
+ax.annotate('NPN', xy=(4.0, 1.6), fontsize=9, color='#b02020',
+            ha='center')
+ax.add_patch(FancyArrowPatch((5.2, 2.3), (3.2, 2.3), arrowstyle='->',
+                             mutation_scale=10, lw=1.2, color='#b02020'))
+ax.text(10.3, 1.2, '$R_\\mathrm{sub}$', fontsize=9, color='#b02020')
+ax.plot([8.15, 12.6], [1.9, 1.9], color='#b02020', lw=1.2, ls=':')
+ax.set_xlim(-0.2, 15.2)
+ax.set_ylim(-0.3, 5.4)
+ax.set_aspect('equal')
+ax.axis('off')
+ax.set_title('(a)', fontsize=10)
+
+# (b) snapback IV
+ax = axs[1]
+# branch 1: off-state leakage up to Vt1
+v1 = np.linspace(0, 8, 50)
+i1 = 0.15 * (v1 / 8)**14
+ax.plot(v1, i1, 'b-', lw=2)
+# snapback jump
+ax.annotate('', xy=(4.5, 0.35), xytext=(8, 0.15),
+            arrowprops=dict(arrowstyle='->', lw=1.2, ls='--',
+                            color='gray'))
+# branch 2: on-state
+i2 = np.linspace(0.35, 2.6, 50)
+v2 = 4.5 + (i2 - 0.35) * 1.1
+ax.plot(v2, i2, 'b-', lw=2)
+ax.plot([8], [0.15], 'bo', ms=4)
+ax.plot([4.5], [0.35], 'bo', ms=4)
+ax.text(7.6, 0.45, '$V_\\mathrm{t1}$ (trigger)', fontsize=8, ha='center')
+ax.text(3.6, 0.6, '$V_\\mathrm{h}$', fontsize=8)
+ax.text(2.4, 2.0, 'snapback\nregion', fontsize=8)
+ax.set_xlabel('$V_\\mathrm{DS}$ (V)')
+ax.set_ylabel('$I_\\mathrm{D}$ (A)')
+ax.set_xlim(0, 9)
+ax.set_ylim(0, 2.8)
+ax.grid(alpha=0.3)
+ax.set_title('(b)', fontsize=10)
+
+plt.tight_layout()
+plt.show()
+```

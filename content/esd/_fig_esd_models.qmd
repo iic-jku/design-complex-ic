@@ -1,0 +1,57 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-esd-models
+#| echo: false
+#| fig-cap: "Equivalent circuit of the standardized ESD test models: the model capacitance $C$ is charged to the test voltage via a high-ohmic resistor; closing the switch discharges it into the DUT through the model resistance $R$. HBM: $C = 100\\,$pF, $R = 1.5\\,$kΩ; MM: $C = 200\\,$pF, $R \\approx 0$; CDM: the capacitance is the device itself against ground."
+
+import schemdraw as sd
+import schemdraw.elements as elm
+
+sd.svgconfig.svg2 = False
+
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2, fontsize=10)
+
+    # DUT box first, so its fill stays behind the wiring
+    d += elm.Rect(corner1=(8.5, 0.3), corner2=(10.5, 3)).fill('#f4e8d8')
+    d += elm.Label().at((9.5, 1.65)).label('DUT')
+
+    # HV source and charging resistor
+    d += elm.SourceV().endpoints((0, 0), (0, 3.7)).label(
+        '$V_\\mathrm{ESD}$', loc='top')
+    d += elm.Resistor().endpoints((0, 3.7), (3, 3.7)).label(
+        '$R_\\mathrm{charge}$ (1 MΩ)')
+
+    # model C
+    d += elm.Capacitor().endpoints((3, 3.7), (3, 0)).label('$C$',
+                                                           loc='bottom')
+    d += elm.Dot().at((3, 3.7))
+    d += elm.Dot().at((3, 0))
+
+    # discharge switch and model R, dropping into the DUT from the top
+    d += elm.Switch().endpoints((3, 3.7), (5.5, 3.7))
+    d += elm.Resistor().endpoints((5.5, 3.7), (8.5, 3.7)).label('$R$')
+    d += elm.Line().endpoints((8.5, 3.7), (9.5, 3.7))
+    d += elm.Line().endpoints((9.5, 3.7), (9.5, 3))
+    d += elm.Line().endpoints((9.5, 0.3), (9.5, 0))
+
+    # ground rail
+    d += elm.Line().endpoints((0, 0), (9.5, 0))
+    d += elm.Ground().at((6, 0))
+    d += elm.Dot().at((6, 0))
+```
