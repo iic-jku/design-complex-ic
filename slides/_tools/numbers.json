@@ -306,6 +306,21 @@
    "number": "59",
    "type": "eq"
   },
+  "eq-project-evm": {
+   "chapter": 12,
+   "number": "74",
+   "type": "eq"
+  },
+  "eq-project-float": {
+   "chapter": 12,
+   "number": "73",
+   "type": "eq"
+  },
+  "eq-project-pert": {
+   "chapter": 12,
+   "number": "72",
+   "type": "eq"
+  },
   "eq-rayleigh": {
    "chapter": 3,
    "number": "45",
@@ -459,6 +474,11 @@
   "fig-fishbone": {
    "chapter": 10,
    "number": "89",
+   "type": "fig"
+  },
+  "fig-gantt": {
+   "chapter": 12,
+   "number": "92",
    "type": "fig"
   },
   "fig-ggnmos": {
@@ -791,6 +811,11 @@
    "number": "18",
    "type": "fig"
   },
+  "fig-wbs": {
+   "chapter": 12,
+   "number": "91",
+   "type": "fig"
+  },
   "fig-wdep-phis": {
    "chapter": 2,
    "number": "7",
@@ -1081,6 +1106,66 @@
    "number": "5.1",
    "type": "sec"
   },
+  "sec-project": {
+   "chapter": 12,
+   "number": "12",
+   "type": "sec"
+  },
+  "sec-project-estimation": {
+   "chapter": 12,
+   "number": "12.5",
+   "type": "sec"
+  },
+  "sec-project-gantt": {
+   "chapter": 12,
+   "number": "12.6",
+   "type": "sec"
+  },
+  "sec-project-goals": {
+   "chapter": 12,
+   "number": "12.1",
+   "type": "sec"
+  },
+  "sec-project-phases": {
+   "chapter": 12,
+   "number": "12.2",
+   "type": "sec"
+  },
+  "sec-project-raci": {
+   "chapter": 12,
+   "number": "12.7",
+   "type": "sec"
+  },
+  "sec-project-reviews": {
+   "chapter": 12,
+   "number": "12.9",
+   "type": "sec"
+  },
+  "sec-project-risk": {
+   "chapter": 12,
+   "number": "12.8",
+   "type": "sec"
+  },
+  "sec-project-sow": {
+   "chapter": 12,
+   "number": "12.3",
+   "type": "sec"
+  },
+  "sec-project-team": {
+   "chapter": 12,
+   "number": "12.11",
+   "type": "sec"
+  },
+  "sec-project-tracking": {
+   "chapter": 12,
+   "number": "12.10",
+   "type": "sec"
+  },
+  "sec-project-wbs": {
+   "chapter": 12,
+   "number": "12.4",
+   "type": "sec"
+  },
   "sec-robust": {
    "chapter": 10,
    "number": "10",
@@ -1304,6 +1389,26 @@
   "tbl-package-qualification": {
    "chapter": 5,
    "number": "10",
+   "type": "tbl"
+  },
+  "tbl-project-cpm": {
+   "chapter": 12,
+   "number": "16",
+   "type": "tbl"
+  },
+  "tbl-project-phases": {
+   "chapter": 12,
+   "number": "15",
+   "type": "tbl"
+  },
+  "tbl-project-raci": {
+   "chapter": 12,
+   "number": "17",
+   "type": "tbl"
+  },
+  "tbl-project-risk": {
+   "chapter": 12,
+   "number": "18",
    "type": "tbl"
   },
   "tbl-si-properties": {

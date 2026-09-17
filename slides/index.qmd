@@ -17,3 +17,4 @@ Press `S` for speaker notes, `C` for the chalkboard, and `?` for all shortcuts.
 9. [Electrostatic Discharge and Latch-Up](esd.html)
 10. [Robust Design](robust.html)
 11. [Simulation of Integrated Circuits](simulation.html)
+12. [Project Management](project.html)

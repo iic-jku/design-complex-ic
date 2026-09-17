@@ -45,3 +45,4 @@ format:
 {{< include /content/esd/_sec_esd.qmd >}}
 {{< include /content/robust/_sec_robust.qmd >}}
 {{< include /content/simulation/_sec_simulation.qmd >}}
+{{< include /content/project/_sec_project.qmd >}}

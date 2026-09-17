@@ -1,0 +1,77 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-gantt
+#| echo: false
+#| fig-cap: "Exemplary Gantt chart of a 16-week project: bars show the task durations, dark fill the completed fraction, the diamond a milestone, and the arrows finish-to-start dependencies."
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, FancyArrowPatch
+
+# (name, start, duration, progress, group)
+tasks = [
+    ('Group 1', 0, 7, None, True),
+    ('Task 1', 0, 2, 1.0, False),
+    ('Task 2', 2, 5, 1.0, False),
+    ('Milestone', 7, 0, None, 'ms'),
+    ('Group 2', 7, 9, None, True),
+    ('Task 3', 7, 4, 0.75, False),
+    ('Final task', 11, 5, 0.0, False),
+]
+
+fig, ax = plt.subplots(figsize=(8, 3.6))
+
+yticklabels = []
+for i, (name, start, dur, prog, kind) in enumerate(tasks):
+    y = len(tasks) - i
+    yticklabels.append((y, name))
+    if kind is True:      # group bar
+        ax.add_patch(Rectangle((start, y - 0.15), dur, 0.3, fc='#555555',
+                               ec='k', lw=0.5))
+        ax.plot([start, start], [y - 0.35, y + 0.1], 'k-', lw=1.5)
+        ax.plot([start + dur, start + dur], [y - 0.35, y + 0.1], 'k-',
+                lw=1.5)
+    elif kind == 'ms':    # milestone diamond
+        ax.plot(start, y, 'D', color='#b02020', ms=9)
+    else:                 # task bar with progress
+        ax.add_patch(Rectangle((start, y - 0.25), dur, 0.5, fc='#cfe0f0',
+                               ec='k', lw=0.7))
+        if prog:
+            ax.add_patch(Rectangle((start, y - 0.25), dur * prog, 0.5,
+                                   fc='#4a7fb5', ec='none'))
+
+# dependencies: task2 -> milestone -> task3
+def dep(x0, y0, x1, y1):
+    ax.add_patch(FancyArrowPatch((x0, y0), (x1, y1), arrowstyle='->',
+                                 mutation_scale=10, lw=1.0,
+                                 connectionstyle='arc3,rad=-0.3',
+                                 color='#b02020'))
+
+dep(7, len(tasks) - 2, 7, len(tasks) - 3 + 0.15)
+dep(7, len(tasks) - 3 - 0.15, 7, len(tasks) - 5 + 0.3)
+
+ax.set_yticks([y for y, _ in yticklabels])
+ax.set_yticklabels([n for _, n in yticklabels], fontsize=9)
+ax.set_xlim(-0.2, 16.2)
+ax.set_ylim(0.3, len(tasks) + 0.7)
+ax.set_xticks(range(0, 17, 2))
+ax.set_xlabel('Week')
+ax.grid(axis='x', alpha=0.3)
+ax.spines[['right', 'top', 'left']].set_visible(False)
+plt.tight_layout()
+plt.show()
+```

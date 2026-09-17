@@ -1,0 +1,327 @@
+::: {.content-hidden}
+Copyright (C) 2017-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# Project Management {#sec-project}
+
+Designing an integrated circuit is a complex process with many dependencies and interrelated tasks. Therefore, careful project planning is essential to ensure that all activities are coordinated and completed successfully.
+
+A project plan, in its simplest form, is an attempt at a timetable for all the activities which make up a project; as a minimum, it sets out **"how,"** **"who does what,"** and **"when."** A more sophisticated plan also states **"at which quality level,"** **"at what cost,"** and **"with which resources."** Planning is an iterative process, and the amount of detail included varies over time. The project plan is prepared and tracked by the project management, with the advice and assistance of the project sponsor, customer, project team, and other stakeholders. General introductions to the field are [@PMI_PMBOK] and [@Kerzner_PM].
+
+IC projects have a few properties that make planning both harder and more important than in many other engineering disciplines:
+
+- **Tapeout is irreversible.** Once the layout database is sent to the foundry, no change is possible until silicon returns, typically after two to four months of fabrication, packaging, and shipping. A bug found afterward costs a **re-spin**, i.e., new masks (see @sec-economy-nre) and another full fabrication cycle.
+- **Deadlines are fixed from the outside.** Prototypes are often fabricated on a [**multi-project wafer (MPW)**](https://en.wikipedia.org/wiki/Multi-project_wafer_service) shuttle with a small number of fixed tapeout dates per year; missing a shuttle delays the project by months, not by days.
+- **Verification dominates.** A large and growing fraction of the effort is not spent on designing but on verifying the design. Nevertheless, industry surveys show that only a minority of IC/ASIC projects achieve first-silicon success, and that most projects are behind schedule [@Foster_2024].
+
+Good project management cannot remove technical risk, but it makes the risk visible early and leaves enough time and budget to deal with it.
+
+::: {.content-visible when-format="revealjs"}
+### Why IC Projects Are Special
+
+- A project plan sets out **how**, **who does what**, and **when**
+  - better: also **quality level**, **cost**, and **resources**
+- **Tapeout is irreversible:** a bug in silicon costs a re-spin (masks + months)
+- **Fixed deadlines:** MPW shuttles have only a few tapeout dates per year
+- **Verification dominates** the effort, still most projects are late and first-silicon success is rare
+- Planning makes risk visible early and leaves time and budget to handle it
+:::
+
+## Goals and Constraints {#sec-project-goals}
+
+Every project is bounded by the **triple constraint** of *scope* (what is delivered, including its quality), *time*, and *cost*. These three are coupled: adding functionality to an IC under a fixed tapeout date increases cost (more engineers, more licenses) or lowers quality (less verification); a fixed team and scope define the earliest realistic tapeout date. The project management has to make these trade-offs explicit and agree on them with the sponsor—a plan that silently assumes all three can be held at once is not a plan.
+
+Project goals should be formulated so that everybody can decide whether they are met. A widely used checklist is **SMART**: goals are *specific*, *measurable*, *achievable*, *relevant*, and *time-bound* (in the original proposal [@Doran_1981], the letters stood for *specific*, *measurable*, *assignable*, *realistic*, and *time-related*). "Design a low-power ADC" is not a goal; "tape out a 10 bit SAR ADC with $\geq 9.5$ bit ENOB at 1 MS/s and $\leq 100\,\mu\text{W}$ on the IHP SG13G2 shuttle of March" is.
+
+For an IC, the goals are condensed into the **specification**. The most expensive changes are those made late, as each change ripples through design, layout, verification, test program, and documentation. Therefore, the specification is reviewed and **frozen** at an early milestone; later changes are still possible, but go through a formal **change request** that assesses the impact on schedule and cost before the change is accepted.
+
+::: {.content-visible when-format="revealjs"}
+### Goals and Constraints
+
+- **Triple constraint:** scope (incl. quality), time, cost—coupled, trade-offs must be explicit
+- **SMART** goals: specific, measurable, achievable, relevant, time-bound
+  - bad: "design a low-power ADC"
+  - good: "10 bit SAR ADC, ENOB ≥ 9.5 bit at 1 MS/s, ≤ 100 µW, on the March SG13G2 shuttle"
+- The **specification** is reviewed and **frozen** early
+- Later changes via a formal **change request** (impact on schedule and cost)
+:::
+
+## Project Phases {#sec-project-phases}
+
+The technical work of an IC project follows the **V-model** [@Forsberg_Mooz_1991]: on the descending branch, the system is decomposed from the specification over the architecture into blocks, which are designed and laid out; on the ascending branch, the blocks are verified and integrated, and the complete chip is verified against the specification. Each level of the descending branch defines the test criteria for the same level on the ascending branch—the block specification is the reference for block verification, and the chip specification the reference for silicon characterization. In contrast to software, the tip of the V contains the tapeout and fabrication, which cannot be iterated quickly.
+
+@tbl-project-phases lists typical phases, each concluded by a milestone that marks a decision point (a **gate**) at which the results are reviewed before the next phase is started.
+
+| Phase | Main activities | Milestone (gate) |
+|:------|:----------------|:-----------------|
+| Definition | Requirements, feasibility, technology choice, budget | Specification and project plan frozen |
+| Architecture | System modeling, block partitioning, block specifications, test and debug concept | Architecture review |
+| Design | Schematic/RTL design, block simulation and verification | Design review |
+| Layout | Floor plan, block layout, P&R, top-level assembly, PEX simulation | Layout review |
+| Tapeout | DRC/LVS/ERC sign-off, final verification, database release | Tapeout |
+| Fabrication | Test PCB, test program, lab setup (in parallel to the fab run) | Silicon arrival |
+| Evaluation | Functional test, characterization, debug | Evaluation report |
+| Qualification | Reliability tests, production test release (products only) | Release to production |
+: Typical phases and milestones of an IC project {#tbl-project-phases}
+
+For the design phase itself, iterative ("agile") ways of working have proven useful, especially for RTL and software, where regression tests can be run automatically. The hard gate at tapeout, however, remains; iterations have to converge before it.
+
+::: {.content-visible when-format="revealjs"}
+### The V-Model
+
+- **Descending branch:** decomposition (spec $\rightarrow$ architecture $\rightarrow$ blocks $\rightarrow$ design and layout)
+- **Ascending branch:** verification and integration (blocks $\rightarrow$ chip $\rightarrow$ silicon)
+- Each level on the left defines the test criteria for the same level on the right
+- The tip of the V (tapeout, fabrication) cannot be iterated quickly
+- Every phase ends with a milestone = **gate** (review before the next phase)
+- Agile iterations work well for RTL and software—but must converge before tapeout
+:::
+
+## Statement of Work {#sec-project-sow}
+
+Project goals are often collected in a [**statement of work (SOW)**](https://en.wikipedia.org/wiki/Statement_of_work): specifications, cost, quality, deadlines, and project deliverables, plus a detailed description of the work (possibly in the form of a legal contract), containing:
+
+1. Introduction/background
+2. Technical description
+3. Timeline and milestones
+4. Payment details
+5. Client expectations
+
+For the individual tasks within the project, the SOW defines the estimated duration, resources, and cost; measures of performance (what are suitable indicators?); risks and uncertainties; and the reporting procedure. The **deliverables (milestones)** are captured as a list of items or activities needed to meet the defined goals, together with when and how each item must be delivered. Equally important is what is *not* part of the work (e.g., "package qualification is not included"), as unclear boundaries are a frequent source of conflict with customers and partners.
+
+## Work Breakdown Structure {#sec-project-wbs}
+
+To arrive at the individual work packages for the SOW, it is useful to employ a [**work breakdown structure (WBS)**](https://en.wikipedia.org/wiki/Work_breakdown_structure) to derive the tasks iteratively: the WBS breaks the project down into several deliverables; each deliverable consists of **work packages (WPs)**, and each work package can consist of several work units, as shown in @fig-wbs.
+
+{{< include /content/project/_fig_wbs.qmd >}}
+
+A few rules help to create a useful WBS [@PMI_WBS]:
+
+- **100 % rule:** the WBS contains the *complete* work of the project—no more and no less—and the children of each element add up to 100 % of the parent's work. Work that does not appear in the WBS will not be planned, staffed, or budgeted.
+- **Deliverable-oriented:** the elements are outcomes (e.g., "bandgap reference, verified layout"), not activities or departments. This makes progress measurable.
+- **Mutually exclusive:** no work is contained in two elements, otherwise it is counted twice.
+- **Adequate granularity:** a work package is small enough to be estimated and assigned to one responsible person, and large enough to be worth tracking; a common heuristic is a size between one day and a few weeks of effort.
+
+Each work package is described in a short **WBS dictionary** entry: responsible person, content, inputs, deliverables, effort estimate, and completion criterion. The completion criterion ("done" means, e.g., "schematic reviewed, all corners and Monte-Carlo simulations pass, results documented") prevents the familiar situation where a task stays "90 % complete" for weeks.
+
+In IC projects, a WBS built only from the circuit blocks misses a large part of the work. Typically forgotten are top-level verification and mixed-signal simulations, the pad ring and ESD concept (see @sec-esd), package selection and bonding diagram (see @sec-packaging), test PCB and test program (see @sec-testing-plan), tapeout checks, documentation, and project management itself.
+
+::: {.content-visible when-format="revealjs"}
+### Rules for a Good WBS
+
+- **100 % rule:** complete work of the project, children add up to the parent
+- **Deliverable-oriented:** outcomes, not activities or departments
+- **Mutually exclusive:** no work counted twice
+- **Granularity:** estimable, one responsible person (≈ one day to a few weeks)
+- **WBS dictionary:** owner, content, inputs, deliverables, effort, completion criterion
+- Often forgotten in IC projects: top-level and mixed-signal verification, pad ring and ESD, package, test PCB and program, tapeout checks, documentation
+:::
+
+## Effort Estimation {#sec-project-estimation}
+
+Estimates are needed for every work package. It is important to distinguish **effort** (person-days of work) from **duration** (calendar time): a work package with 10 person-days of effort does not finish in two weeks if the responsible designer also supports the lab and attends meetings. Plan with a realistic availability of 60 % to 80 % of the working time for project work.
+
+Single-value estimates hide the uncertainty. The **three-point estimate** of the [PERT](https://en.wikipedia.org/wiki/Program_evaluation_and_review_technique) method [@Malcolm_1959] asks for an optimistic ($t_o$), a most likely ($t_m$), and a pessimistic ($t_p$) duration, and approximates the expected duration and its standard deviation by
+
+$$
+t_e = \frac{t_o + 4 t_m + t_p}{6}, \qquad \sigma_t = \frac{t_p - t_o}{6}.
+$$ {#eq-project-pert}
+
+For a bandgap reference with $t_o = 5$ days, $t_m = 8$ days, and $t_p = 17$ days, the expected duration is $t_e = 9$ days with $\sigma_t = 2$ days. Note that $t_e > t_m$: the duration distribution of engineering tasks is skewed, since there are many more ways for a task to take longer than planned than to finish early. For a sequence of independent tasks, the expected durations add up, and so do the variances $\sigma_t^2$.
+
+Estimates improve with **historical data** (how long did the last PLL take?), with **bottom-up** estimation by the people doing the work, and when the pessimistic value explicitly includes the rework after a failed review. Three well-known observations should be kept in mind:
+
+- **Brooks's law** [@Brooks_MMM]: "Adding manpower to a late software project makes it later." New team members need training by the experienced ones, and the communication overhead grows with the number of pairs, $n(n-1)/2$, in a team of $n$ persons. The same holds for IC projects.
+- **Parkinson's law:** work expands to fill the time available. Generous buffers hidden in every task are consumed; it is better to estimate tasks realistically and to hold an explicit **project buffer** before the tapeout.
+- **Verification effort** is regularly underestimated. It is not a phase at the end, but runs in parallel to the design from the first block on (see @sec-simulation and @sec-robust-corners).
+
+::: {.content-visible when-format="revealjs"}
+### Effort Estimation
+
+- **Effort** (person-days) $\neq$ **duration** (calendar time); plan with 60–80 % availability
+- **Three-point estimate** (PERT): optimistic, most likely, pessimistic
+- Example: $t_o = 5$, $t_m = 8$, $t_p = 17$ days $\rightarrow$ $t_e = 9$ days, $\sigma_t = 2$ days
+- Use historical data and bottom-up estimates by the people doing the work
+- **Brooks's law:** adding people to a late project makes it later ($n(n-1)/2$ communication paths)
+- **Parkinson's law:** hidden buffers get consumed $\rightarrow$ explicit project buffer
+- Verification effort is regularly underestimated
+:::
+
+## Scheduling {#sec-project-gantt}
+
+A [**Gantt chart**](https://en.wikipedia.org/wiki/Gantt_chart) is one way to visualize and maintain a project schedule; it is usually updated regularly during the project. The elements of a Gantt chart are:
+
+1. Task names
+2. Start/finish dates or durations of the tasks
+3. Dependency relationships between the tasks
+4. Lag relationships (start-to-start, finish-to-start, etc.)
+5. Task responsibilities (who does it)
+6. Required resources
+
+@fig-gantt shows an exemplary Gantt chart with task groups, task progress, a milestone, and dependencies.
+
+{{< include /content/project/_fig_gantt.qmd >}}
+
+The Gantt chart shows *when* tasks happen, but not directly *which* tasks determine the end date. This is answered by the [**critical path method (CPM)**](https://en.wikipedia.org/wiki/Critical_path_method) [@Kelley_Walker_1959]. In a **forward pass** through the dependency network, the earliest start (ES) and earliest finish (EF $=$ ES $+$ duration) of each task are calculated, where ES is the maximum EF of all predecessors. In a **backward pass** from the project end, the latest finish (LF) and latest start (LS $=$ LF $-$ duration) are calculated, where LF is the minimum LS of all successors. The difference
+
+$$
+\text{Float} = \text{LS} - \text{ES} = \text{LF} - \text{EF}
+$$ {#eq-project-float}
+
+is the time by which a task can slip without delaying the project. Tasks with zero float form the **critical path**; any delay on it delays the tapeout.
+
+@tbl-project-cpm shows a simplified mixed-signal chip project (durations in weeks). The critical path is A–B–D–F–G with a total duration of 16 weeks, i.e., the analog design and layout set the tapeout date. The digital branch C–E has a float of 4 weeks; accelerating the digital work does not help the schedule at all, whereas every week gained in the analog design is a week gained for the project.
+
+| Task | Description | Duration | Predecessors | ES | EF | LS | LF | Float |
+|:----:|:------------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| A | Specification and architecture | 2 | – | 0 | 2 | 0 | 2 | **0** |
+| B | Analog design | 6 | A | 2 | 8 | 2 | 8 | **0** |
+| C | Digital RTL design and verification | 4 | A | 2 | 6 | 6 | 10 | 4 |
+| D | Analog layout | 4 | B | 8 | 12 | 8 | 12 | **0** |
+| E | Digital synthesis and P&R | 2 | C | 6 | 8 | 10 | 12 | 4 |
+| F | Top-level integration and verification | 3 | D, E | 12 | 15 | 12 | 15 | **0** |
+| G | Sign-off and tapeout | 1 | F | 15 | 16 | 15 | 16 | **0** |
+: Critical path analysis of a simplified mixed-signal chip project (durations in weeks) {#tbl-project-cpm}
+
+When the tapeout date is fixed by a shuttle, the schedule is best built **backward** from this date: the latest finish of the last task is the shuttle deadline, and a negative float in the backward pass immediately shows that the plan is not feasible and scope or resources have to be adjusted—*before* the project starts, not two weeks before the tapeout. Keep in mind that the critical path can move during the project, e.g., when the digital branch runs into problems and consumes its float, and that the CPM assumes unlimited resources: if B and C are done by the same designer, they cannot run in parallel.
+
+::: {.content-visible when-format="revealjs"}
+### Critical Path Method
+
+- **Forward pass:** earliest start/finish (ES, EF = ES + duration)
+- **Backward pass:** latest finish/start (LF, LS = LF − duration)
+- Tasks with zero float form the **critical path**; delay there = delay of the tapeout
+- Example: analog design and layout are critical, digital branch has 4 weeks float
+- **Backward scheduling** from the shuttle date: negative float $\rightarrow$ plan infeasible
+- The critical path can move; CPM assumes unlimited resources
+:::
+
+## Roles and Responsibilities {#sec-project-raci}
+
+Each work package needs exactly *one* person who is accountable for its completion. A **responsibility assignment matrix**, also called [**RACI matrix**](https://en.wikipedia.org/wiki/Responsibility_assignment_matrix), maps the work packages to the team members, stating who is *responsible* (does the work), *accountable* (owns the result and approves it; exactly one per task), *consulted* (gives input before), and *informed* (is notified after). @tbl-project-raci shows an example.
+
+| Work package | Project lead | Analog designer | Digital designer | Layout | Test engineer |
+|:-------------|:---:|:---:|:---:|:---:|:---:|
+| Chip specification | A | R | R | C | C |
+| Bandgap reference | I | A/R | – | C | C |
+| Digital control (RTL) | I | C | A/R | – | C |
+| Top-level layout | I | C | C | A/R | I |
+| Tapeout sign-off | A | R | R | R | I |
+| Test program | I | C | C | – | A/R |
+: Example RACI matrix of a small IC project (R: responsible, A: accountable, C: consulted, I: informed) {#tbl-project-raci}
+
+The matrix makes gaps (a task without an owner) and overloads (one person responsible for everything critical) visible. The latter is a common risk in small IC teams, where a single expert is often the only one who knows a block well enough to debug it.
+
+## Risk Management {#sec-project-risk}
+
+A **risk** is an uncertain event that, if it occurs, affects the project goals. Risk management is a continuous loop of *identifying* risks, *assessing* them, planning *responses*, and *monitoring* them throughout the project [@PMI_PMBOK]. Risks are collected in a **risk register**; each risk is rated by its probability of occurrence $P$ and its impact $I$ (e.g., both on a scale from 1 to 5), and the product $P \cdot I$ is used to prioritize. The possible responses are to *avoid* the risk (change the plan so that it cannot occur), *mitigate* it (reduce $P$ or $I$), *transfer* it (e.g., buy a silicon-proven IP block with a warranty), or *accept* it (with a contingency plan and budget reserve).
+
+Typical risks in IC projects and possible responses are listed in @tbl-project-risk.
+
+| Risk | $P$ | $I$ | $P \cdot I$ | Response |
+|:-----|:---:|:---:|:---:|:---------|
+| Functional bug found after tapeout | 3 | 5 | 15 | Mitigate: verification plan with coverage metrics, reviews, spare cells and metal-fix options (see @sec-robust-debug) |
+| Late or immature PDK or IP | 3 | 4 | 12 | Mitigate: early test chip, qualified IP only, freeze PDK version |
+| Key designer leaves or is unavailable | 2 | 5 | 10 | Mitigate: reviews, documentation, second person per critical block |
+| Performance missed due to layout parasitics | 3 | 3 | 9 | Mitigate: parasitic estimates in early simulations, PEX simulations (see @sec-robust-parasitics) |
+| Shuttle date missed | 2 | 4 | 8 | Avoid: backward scheduling with buffer; accept: identify alternative shuttle |
+| Specification change by customer | 2 | 3 | 6 | Mitigate: specification freeze and change-request process |
+: Example risk register of an IC project ($P$: probability, $I$: impact, both rated 1 to 5) {#tbl-project-risk}
+
+The largest risk of an IC project, a non-functional first silicon, is best addressed with a combination of measures: thorough verification, design reviews by colleagues who did not design the block, a **tapeout checklist**, test chips for new circuit concepts, built-in observability and programmability (see @sec-robust), and a schedule and budget that already contain a realistic probability of a metal re-spin.
+
+::: {.content-visible when-format="revealjs"}
+### Risk Management
+
+- Loop: **identify**, **assess**, plan **response**, **monitor**
+- **Risk register:** probability $P$ × impact $I$ $\rightarrow$ priority
+- Responses: **avoid**, **mitigate**, **transfer**, **accept** (with contingency)
+- Biggest IC risk: non-functional first silicon
+  - verification plan with coverage, independent reviews, tapeout checklist
+  - test chips for new concepts, observability and programmability
+  - schedule and budget contain a realistic metal re-spin
+:::
+
+## Reviews and Tapeout Checklist {#sec-project-reviews}
+
+**Design reviews** are the most effective and cheapest method to find errors before they reach silicon. A review is scheduled at each gate (@tbl-project-phases), prepared with documents distributed in advance, attended by experienced engineers who are not the authors of the design, and concluded with a written list of **action items**, each with an owner and a due date. The author presents the design intent, the specification versus simulation results over all corners, and the open issues; the reviewers ask the "what if" questions—What happens at power-up? What if the reference is not yet settled? What if the digital control sends an illegal state?
+
+Right before the tapeout, a **tapeout checklist** ensures that nothing is forgotten under time pressure. The items are collected over many projects and grow with every lesson learned; typical entries are:
+
+- DRC, LVS, ERC, antenna, and density checks clean on the final database, all waivers documented and approved by the foundry (see @sec-layout-checks)
+- Post-layout (PEX) simulations of all critical blocks over corners and temperature (see @sec-robust-corners)
+- ESD and latch-up checks, pad ring and bonding diagram matched to the package (see @sec-esd and @sec-packaging)
+- Seal ring, chip ID/revision marking, alignment and test structures present
+- Top-level netlist and layout versions tagged in the version control system; the final GDSII checksum recorded
+- Test concept and test PCB ready to start in parallel to the fabrication (see @sec-testing-plan)
+
+::: {.content-visible when-format="revealjs"}
+### Design Reviews and Tapeout Checklist
+
+- **Design reviews** at every gate: cheapest way to find errors
+  - documents in advance, independent reviewers, written **action items** (owner, due date)
+  - "what if" questions: power-up, unsettled references, illegal states
+- **Tapeout checklist** (grows with every project):
+  - DRC/LVS/ERC/antenna/density clean, waivers approved
+  - PEX simulations over corners and temperature
+  - ESD/latch-up, pad ring, bonding diagram
+  - seal ring, chip ID, test structures
+  - versions tagged, GDSII checksum recorded
+  - test PCB and program started
+:::
+
+## Tracking and Control {#sec-project-tracking}
+
+A plan is only useful if the actual progress is regularly compared against it. Short, regular status meetings (weekly in most IC teams) track the progress of the work packages, the open action items, and the top risks. Progress should be measured by completed deliverables with a clear completion criterion (@sec-project-wbs), not by the fraction of time spent.
+
+A quantitative method that combines schedule and cost is **earned value management (EVM)** [@PMI_PMBOK]. At a status date, the *planned value* (PV) is the budget of the work scheduled until this date, the *earned value* (EV) is the budget of the work actually completed, and the *actual cost* (AC) is what has actually been spent. The schedule and cost performance indices
+
+$$
+\text{SPI} = \frac{\text{EV}}{\text{PV}}, \qquad \text{CPI} = \frac{\text{EV}}{\text{AC}}
+$$ {#eq-project-evm}
+
+show a delay for SPI $< 1$ and a cost overrun for CPI $< 1$. For example, if 40 person-weeks of work were planned until today, work worth 32 person-weeks has been completed, and 45 person-weeks have been spent, then SPI $= 0.8$ and CPI $\approx 0.71$: the project is late *and* each completed work package costs more than estimated—a trend that rarely corrects itself without action.
+
+A simple and popular visualization in European companies is the [**milestone trend analysis (MTA)**](https://de.wikipedia.org/wiki/Meilensteintrendanalyse): at every reporting date, the currently forecast date of each milestone is plotted. A horizontal line indicates a stable forecast, a rising line a milestone that keeps slipping—usually an early warning long before the milestone is officially missed.
+
+The technical data of the project need the same discipline: all design data (schematics, RTL, layouts, testbenches, scripts) are kept under **version control**, open issues are tracked in an **issue tracker**, and automated **regression** simulations show whether a change has broken something that worked before. Changes after the specification freeze go through the change-request process (@sec-project-goals). After the project, a short **lessons-learned** session collects what went well and what should be done differently; its results update the estimation data and the tapeout checklist for the next project.
+
+::: {.content-visible when-format="revealjs"}
+### Tracking and Control
+
+- Weekly status: work packages, action items, top risks
+- Measure progress by **completed deliverables**, not by time spent
+- **Earned value:** SPI = EV/PV (schedule), CPI = EV/AC (cost)
+  - example: PV = 40, EV = 32, AC = 45 person-weeks $\rightarrow$ SPI = 0.8, CPI ≈ 0.71
+- **Milestone trend analysis:** rising line = slipping milestone (early warning)
+- Version control, issue tracker, automated regressions
+- **Lessons learned** update estimates and the tapeout checklist
+:::
+
+## Team and Communication {#sec-project-team}
+
+In the end, projects are carried out by people. **Conway's law** [@Conway_1968] states that organizations design systems whose structure mirrors their own communication structure. For ICs, this is visible at the interfaces between analog, digital, layout, and test teams: an interface between blocks that is not also an interface between people who talk regularly is a likely place for a bug. Interface specifications (pin lists, signal levels, timing, power-up sequence) should therefore be written down, owned, and reviewed by both sides.
+
+Productive design work requires long, uninterrupted periods of concentration; frequent context switches between projects and meetings reduce the effective capacity much more than the time spent in them suggests [@DeMarco_Peopleware]. A good project manager protects the team from unnecessary interruptions, resolves blocking issues quickly, and communicates bad news early—a delay announced three months before the tapeout leaves options, one announced three days before does not.
+
+::: {.content-visible when-format="revealjs"}
+### Team and Communication
+
+- **Conway's law:** system structure mirrors the communication structure
+  - block interfaces = team interfaces (analog, digital, layout, test) $\rightarrow$ likely bugs
+  - write down, own, and review interface specifications
+- Design work needs uninterrupted concentration; context switches are expensive
+- Protect the team, resolve blockers quickly, communicate bad news **early**
+:::
