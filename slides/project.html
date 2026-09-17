@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -173,6 +173,26 @@
 <h3>Project Management</h3>
 <ul>
 <li><strong>Tapeout is irreversible.</strong> Once the layout database is sent to the foundry, no change is possible until silicon returns, typically after two to four months of fabrication, packaging, and shipping. A bug found afterward costs a <strong>re-spin</strong>, i.e., new masks (see <a href="../dcic.html#sec-economy-nre">Section&nbsp;7.2</a>) and another full fabrication cycle.</li>
+</ul>
+<aside class="notes">
+<p>Designing an integrated circuit is a complex process with many dependencies and interrelated tasks. Therefore, careful project planning is essential to ensure that all activities are coordinated and completed successfully.</p>
+<p>A project plan, in its simplest form, is an attempt at a timetable for all the activities which make up a project; as a minimum, it sets out <strong>“how,”</strong> <strong>“who does what,”</strong> and <strong>“when.”</strong> A more sophisticated plan also states <strong>“at which quality level,”</strong> <strong>“at what cost,”</strong> and <strong>“with which resources.”</strong> Planning is an iterative process, and the amount of detail included varies over time. The project plan is prepared and tracked by the project management, with the advice and assistance of the project sponsor, customer, project team, and other stakeholders. General introductions to the field are <span class="citation" data-cites="PMI_PMBOK">(<a href="#/references" role="doc-biblioref" onclick="">Project Management Institute 2021</a>)</span> and <span class="citation" data-cites="Kerzner_PM">(<a href="#/references" role="doc-biblioref" onclick="">Kerzner 2022</a>)</span>.</p>
+<p>IC projects have a few properties that make planning both harder and more important than in many other engineering disciplines:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Project Management</h3>
+<ul>
 <li><strong>Deadlines are fixed from the outside.</strong> Prototypes are often fabricated on a <a href="https://en.wikipedia.org/wiki/Multi-project_wafer_service"><strong>multi-project wafer (MPW)</strong></a> shuttle with a small number of fixed tapeout dates per year; missing a shuttle delays the project by months, not by days.</li>
 <li><strong>Verification dominates.</strong> A large and growing fraction of the effort is not spent on designing but on verifying the design. Nevertheless, industry surveys show that only a minority of IC/ASIC projects achieve first-silicon success, and that most projects are behind schedule <span class="citation" data-cites="Foster_2024">(<a href="#/references" role="doc-biblioref" onclick="">Foster 2024</a>)</span>.</li>
 </ul>
@@ -190,9 +210,6 @@
 <li>Planning makes risk visible early and leaves time and budget to handle it</li>
 </ul>
 <aside class="notes">
-<p>Designing an integrated circuit is a complex process with many dependencies and interrelated tasks. Therefore, careful project planning is essential to ensure that all activities are coordinated and completed successfully.</p>
-<p>A project plan, in its simplest form, is an attempt at a timetable for all the activities which make up a project; as a minimum, it sets out <strong>“how,”</strong> <strong>“who does what,”</strong> and <strong>“when.”</strong> A more sophisticated plan also states <strong>“at which quality level,”</strong> <strong>“at what cost,”</strong> and <strong>“with which resources.”</strong> Planning is an iterative process, and the amount of detail included varies over time. The project plan is prepared and tracked by the project management, with the advice and assistance of the project sponsor, customer, project team, and other stakeholders. General introductions to the field are <span class="citation" data-cites="PMI_PMBOK">(<a href="#/references" role="doc-biblioref" onclick="">Project Management Institute 2021</a>)</span> and <span class="citation" data-cites="Kerzner_PM">(<a href="#/references" role="doc-biblioref" onclick="">Kerzner 2022</a>)</span>.</p>
-<p>IC projects have a few properties that make planning both harder and more important than in many other engineering disciplines:</p>
 <p>Good project management cannot remove technical risk, but it makes the risk visible early and leaves enough time and budget to deal with it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -407,6 +424,24 @@ Figure&nbsp;91: Work breakdown structure (WBS): the project is broken down into 
 <li><strong>100 % rule:</strong> the WBS contains the <em>complete</em> work of the project—no more and no less—and the children of each element add up to 100 % of the parent’s work. Work that does not appear in the WBS will not be planned, staffed, or budgeted.</li>
 <li><strong>Deliverable-oriented:</strong> the elements are outcomes (e.g., “bandgap reference, verified layout”), not activities or departments. This makes progress measurable.</li>
 <li><strong>Mutually exclusive:</strong> no work is contained in two elements, otherwise it is counted twice.</li>
+</ul>
+<aside class="notes">
+<p>A few rules help to create a useful WBS <span class="citation" data-cites="PMI_WBS">(<a href="#/references" role="doc-biblioref" onclick="">Project Management Institute 2019</a>)</span>:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Work Breakdown Structure</h3>
+<ul>
 <li><strong>Adequate granularity:</strong> a work package is small enough to be estimated and assigned to one responsible person, and large enough to be worth tracking; a common heuristic is a size between one day and a few weeks of effort.</li>
 </ul>
 </section>
@@ -421,7 +456,6 @@ Figure&nbsp;91: Work breakdown structure (WBS): the project is broken down into 
 <li>Often forgotten in IC projects: top-level and mixed-signal verification, pad ring and ESD, package, test PCB and program, tapeout checks, documentation</li>
 </ul>
 <aside class="notes">
-<p>A few rules help to create a useful WBS <span class="citation" data-cites="PMI_WBS">(<a href="#/references" role="doc-biblioref" onclick="">Project Management Institute 2019</a>)</span>:</p>
 <p>Each work package is described in a short <strong>WBS dictionary</strong> entry: responsible person, content, inputs, deliverables, effort estimate, and completion criterion. The completion criterion (“done” means, e.g., “schematic reviewed, all corners and Monte-Carlo simulations pass, results documented”) prevents the familiar situation where a task stays “90 % complete” for weeks.</p>
 <p>In IC projects, a WBS built only from the circuit blocks misses a large part of the work. Typically forgotten are top-level verification and mixed-signal simulations, the pad ring and ESD concept (see <a href="../dcic.html#sec-esd">Section&nbsp;9</a>), package selection and bonding diagram (see <a href="../dcic.html#sec-packaging">Section&nbsp;5</a>), test PCB and test program (see <a href="../dcic.html#sec-testing-plan">Section&nbsp;6.4</a>), tapeout checks, documentation, and project management itself.</p>
 <style type="text/css">
@@ -468,6 +502,11 @@ t_e = \frac{t_o + 4 t_m + t_p}{6}, \qquad \sigma_t = \frac{t_p - t_o}{6}.
 <ul>
 <li><strong>Brooks’s law</strong> <span class="citation" data-cites="Brooks_MMM">(<a href="#/references" role="doc-biblioref" onclick="">Brooks, Jr. 1995</a>)</span>: “Adding manpower to a late software project makes it later.” New team members need training by the experienced ones, and the communication overhead grows with the number of pairs, <span class="math inline">\(n(n-1)/2\)</span>, in a team of <span class="math inline">\(n\)</span> persons. The same holds for IC projects.</li>
 <li><strong>Parkinson’s law:</strong> work expands to fill the time available. Generous buffers hidden in every task are consumed; it is better to estimate tasks realistically and to hold an explicit <strong>project buffer</strong> before the tapeout.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Effort Estimation</h3>
+<ul>
 <li><strong>Verification effort</strong> is regularly underestimated. It is not a phase at the end, but runs in parallel to the design from the first block on (see <a href="../dcic.html#sec-simulation">Section&nbsp;11</a> and <a href="../dcic.html#sec-robust-corners">Section&nbsp;10.2</a>).</li>
 </ul>
 </section>
@@ -838,21 +877,54 @@ Table&nbsp;18: Example risk register of an IC project (<span class="math inline"
 <td style="text-align: center;">10</td>
 <td style="text-align: left;">Mitigate: reviews, documentation, second person per critical block</td>
 </tr>
-<tr class="even">
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<aside class="notes">
+<p>A <strong>risk</strong> is an uncertain event that, if it occurs, affects the project goals. Risk management is a continuous loop of <em>identifying</em> risks, <em>assessing</em> them, planning <em>responses</em>, and <em>monitoring</em> them throughout the project <span class="citation" data-cites="PMI_PMBOK">(<a href="#/references" role="doc-biblioref" onclick="">Project Management Institute 2021</a>)</span>. Risks are collected in a <strong>risk register</strong>; each risk is rated by its probability of occurrence <span class="math inline">\(P\)</span> and its impact <span class="math inline">\(I\)</span> (e.g., both on a scale from 1 to 5), and the product <span class="math inline">\(P \cdot I\)</span> is used to prioritize. The possible responses are to <em>avoid</em> the risk (change the plan so that it cannot occur), <em>mitigate</em> it (reduce <span class="math inline">\(P\)</span> or <span class="math inline">\(I\)</span>), <em>transfer</em> it (e.g., buy a silicon-proven IP block with a warranty), or <em>accept</em> it (with a contingency plan and budget reserve).</p>
+<p>Typical risks in IC projects and possible responses are listed in <a href="#/tbl-project-risk" class="quarto-xref">Table&nbsp;18</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Risk Management</h3>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Risk</th>
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(I\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \cdot I\)</span></th>
+<th style="text-align: left;">Response</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: left;">Performance missed due to layout parasitics</td>
 <td style="text-align: center;">3</td>
 <td style="text-align: center;">3</td>
 <td style="text-align: center;">9</td>
 <td style="text-align: left;">Mitigate: parasitic estimates in early simulations, PEX simulations (see <a href="../dcic.html#sec-robust-parasitics">Section&nbsp;10.3</a>)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Shuttle date missed</td>
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">4</td>
 <td style="text-align: center;">8</td>
 <td style="text-align: left;">Avoid: backward scheduling with buffer; accept: identify alternative shuttle</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Specification change by customer</td>
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">3</td>
@@ -861,9 +933,6 @@ Table&nbsp;18: Example risk register of an IC project (<span class="math inline"
 </tr>
 </tbody>
 </table>
-</div>
-</figure>
-</div>
 </section>
 <section id="risk-management" class="slide level3 unnumbered">
 <h3>Risk Management</h3>
@@ -879,8 +948,6 @@ Table&nbsp;18: Example risk register of an IC project (<span class="math inline"
 </ul></li>
 </ul>
 <aside class="notes">
-<p>A <strong>risk</strong> is an uncertain event that, if it occurs, affects the project goals. Risk management is a continuous loop of <em>identifying</em> risks, <em>assessing</em> them, planning <em>responses</em>, and <em>monitoring</em> them throughout the project <span class="citation" data-cites="PMI_PMBOK">(<a href="#/references" role="doc-biblioref" onclick="">Project Management Institute 2021</a>)</span>. Risks are collected in a <strong>risk register</strong>; each risk is rated by its probability of occurrence <span class="math inline">\(P\)</span> and its impact <span class="math inline">\(I\)</span> (e.g., both on a scale from 1 to 5), and the product <span class="math inline">\(P \cdot I\)</span> is used to prioritize. The possible responses are to <em>avoid</em> the risk (change the plan so that it cannot occur), <em>mitigate</em> it (reduce <span class="math inline">\(P\)</span> or <span class="math inline">\(I\)</span>), <em>transfer</em> it (e.g., buy a silicon-proven IP block with a warranty), or <em>accept</em> it (with a contingency plan and budget reserve).</p>
-<p>Typical risks in IC projects and possible responses are listed in <a href="#/tbl-project-risk" class="quarto-xref">Table&nbsp;18</a>.</p>
 <p>The largest risk of an IC project, a non-functional first silicon, is best addressed with a combination of measures: thorough verification, design reviews by colleagues who did not design the block, a <strong>tapeout checklist</strong>, test chips for new circuit concepts, built-in observability and programmability (see <a href="../dcic.html#sec-robust">Section&nbsp;10</a>), and a schedule and budget that already contain a realistic probability of a metal re-spin.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -906,6 +973,25 @@ Table&nbsp;18: Example risk register of an IC project (<span class="math inline"
 <li>Post-layout (PEX) simulations of all critical blocks over corners and temperature (see <a href="../dcic.html#sec-robust-corners">Section&nbsp;10.2</a>)</li>
 <li>ESD and latch-up checks, pad ring and bonding diagram matched to the package (see <a href="../dcic.html#sec-esd">Section&nbsp;9</a> and <a href="../dcic.html#sec-packaging">Section&nbsp;5</a>)</li>
 <li>Seal ring, chip ID/revision marking, alignment and test structures present</li>
+</ul>
+<aside class="notes">
+<p><strong>Design reviews</strong> are the most effective and cheapest method to find errors before they reach silicon. A review is scheduled at each gate (<a href="#/tbl-project-phases" class="quarto-xref">Table&nbsp;15</a>), prepared with documents distributed in advance, attended by experienced engineers who are not the authors of the design, and concluded with a written list of <strong>action items</strong>, each with an owner and a due date. The author presents the design intent, the specification versus simulation results over all corners, and the open issues; the reviewers ask the “what if” questions—What happens at power-up? What if the reference is not yet settled? What if the digital control sends an illegal state?</p>
+<p>Right before the tapeout, a <strong>tapeout checklist</strong> ensures that nothing is forgotten under time pressure. The items are collected over many projects and grow with every lesson learned; typical entries are:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Reviews and Tapeout Checklist</h3>
+<ul>
 <li>Top-level netlist and layout versions tagged in the version control system; the final GDSII checksum recorded</li>
 <li>Test concept and test PCB ready to start in parallel to the fabrication (see <a href="../dcic.html#sec-testing-plan">Section&nbsp;6.4</a>)</li>
 </ul>
@@ -928,20 +1014,6 @@ Table&nbsp;18: Example risk register of an IC project (<span class="math inline"
 <li>test PCB and program started</li>
 </ul></li>
 </ul>
-<aside class="notes">
-<p><strong>Design reviews</strong> are the most effective and cheapest method to find errors before they reach silicon. A review is scheduled at each gate (<a href="#/tbl-project-phases" class="quarto-xref">Table&nbsp;15</a>), prepared with documents distributed in advance, attended by experienced engineers who are not the authors of the design, and concluded with a written list of <strong>action items</strong>, each with an owner and a due date. The author presents the design intent, the specification versus simulation results over all corners, and the open issues; the reviewers ask the “what if” questions—What happens at power-up? What if the reference is not yet settled? What if the digital control sends an illegal state?</p>
-<p>Right before the tapeout, a <strong>tapeout checklist</strong> ensures that nothing is forgotten under time pressure. The items are collected over many projects and grow with every lesson learned; typical entries are:</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 
 <section id="sec-project-tracking" class="title-slide slide level2 center" data-number="12.10">

@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -259,10 +259,30 @@ i_\mathrm{C} = C \frac{ d( v_1 - v_2 )}{dt}, \qquad
 <p><span class="math display">\[
 i_\mathrm{a} + \frac{v_1 - v_2}{R_1} = 0
 \]</span></p>
+<div class="fragment">
 <p>and for node <span class="math inline">\(v_2\)</span>, using <span class="math inline">\(i_\mathrm{d} = I_\mathrm{g}\)</span>:</p>
+</div>
+<div class="fragment">
 <p><span class="math display">\[
 -\frac{v_1 - v_2}{R_1} + \frac{v_2}{R_2} - I_\mathrm{g} = 0
 \]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Formulating the Circuit Equations</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MNA Example</strong></p>
+</div>
+<div class="callout-content">
 <p>The current through the voltage source cannot be expressed by node voltages, so we keep it as an additional unknown and add the compensating equation <span class="math inline">\(v_1 - V_\mathrm{g} = 0\)</span>. Finally, everything is put into matrix form:</p>
 <p><span id="eq-mna-result"><span class="math display">\[
 \begin{bmatrix}
@@ -279,7 +299,37 @@ v_1 \\ v_2 \\ i_\mathrm{a}
 \end{bmatrix}
 = 0
 \tag{66}\]</span></span></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Formulating the Circuit Equations</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MNA Example</strong></p>
+</div>
+<div class="callout-content">
 <p><a href="#/eq-mna-result" class="quarto-xref">Equation&nbsp;66</a> has the form <span class="math inline">\(\mathbf{G} \mathbf{x} - \mathbf{w} = 0\)</span>. Since the entries of <span class="math inline">\(\mathbf{G}\)</span> are constant in this example, the solution is simply <span class="math inline">\(\mathbf{x} = \mathbf{G}^{-1} \mathbf{w}\)</span>. Note that <span class="math inline">\(\mathbf{G}\)</span> must be invertible (<span class="math inline">\(\det \mathbf{G} \neq 0\)</span>), otherwise no solution can be found—and this is also true inside circuit simulators (a typical cause is a floating node without a DC path to ground, or a loop of ideal voltage sources)! Simulators never compute <span class="math inline">\(\mathbf{G}^{-1}\)</span> explicitly but solve the system by sparse LU factorization.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Formulating the Circuit Equations</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MNA Example</strong></p>
+</div>
+<div class="callout-content">
 <div id="cell-fig-mna-circuit" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div id="fig-mna-circuit" class="quarto-float quarto-figure quarto-figure-center">
@@ -291,7 +341,6 @@ v_1 \\ v_2 \\ i_\mathrm{a}
 Figure&nbsp;90: Example circuit for the modified nodal analysis: a voltage source <span class="math inline">\(V_\mathrm{g}\)</span>, two resistors, and a current source <span class="math inline">\(I_\mathrm{g}\)</span>.
 </figcaption>
 </figure>
-</div>
 </div>
 </div>
 </div>
@@ -418,7 +467,17 @@ x_{n+1} = x_n - \left[ \frac{d}{dx} f(x_n) \right]^{-1} f(x_n)
 <ul>
 <li>The starting point of the Newton-Raphson iteration matters, so provide <strong>initial guesses</strong> for critical nodes using the <code>.nodeset</code> statement (in contrast to <code>.ic</code>, which forces an initial condition for the transient simulation).</li>
 <li>Floating small resistances are critical for convergence and should be avoided; for probing currents, a 0 V voltage source is a better choice than a small resistor.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Convergence</h3>
+<ul>
 <li>Very-high-impedance nodes and strong nonlinearities (e.g., in diodes) may cause convergence issues. The simulator automatically places a conductance in parallel with such structures, controlled by the parameter <code>GMIN</code> (default <span class="math inline">\(10^{-12}\)</span>, i.e., 1 TΩ)—which itself can cause accuracy issues, e.g., in sample-and-hold circuits.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Convergence</h3>
+<ul>
 <li>Another method to achieve convergence is <strong>source stepping</strong>: slowly ramp the voltage and current sources from zero to their final values, using the result of each step as the starting point for the next (alternatively, <code>GMIN</code> stepping can be used).</li>
 </ul>
 </section>
@@ -583,6 +642,11 @@ Table&nbsp;14: Discrete-time integration methods used in circuit simulation
 <li><code>TR</code> and <code>Gear2</code> are the most heavily used integration methods in circuit simulation.</li>
 <li>For a fixed time step, the most accurate method is <code>TR</code>, followed by <code>Gear2</code>.</li>
 <li><code>TR</code> is overly sensitive to errors of previous time steps, so do not use it with a loose <code>RELTOL</code>!</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Discrete-Time Integration Methods</h3>
+<ul>
 <li>For abrupt signal changes, <code>BE</code> and <code>TR</code> adapt quickly, but beware of the artificial ringing introduced by <code>TR</code>.</li>
 <li><code>Gear2</code> is efficient when simulating with tight tolerances or smooth waveforms.</li>
 <li><code>BE</code>, <code>TR</code>, and <code>Gear2</code> are stable on stiff circuits, but <code>BE</code> shows strong artificial numerical damping (<code>TR</code> shows none, <code>Gear2</code> weak damping).</li>
@@ -606,9 +670,6 @@ Table&nbsp;14: Discrete-time integration methods used in circuit simulation
 <ul>
 <li>Since no noise is modeled in the plain transient simulation, the startup of oscillators or bi-stable circuits can be inhibited—if so, a start-up pulse or an initial condition is required!</li>
 <li>The transient simulation can be an effective fallback to find a dc operating point if <code>.op</code> does not converge, by slowly ramping all dc sources from zero to their final values.</li>
-<li>If high accuracy is needed, tighten the tolerance parameters (<code>RELTOL</code>, <code>VNTOL</code>, <code>ABSTOL</code>) and limit the maximum time step (<code>TMAX</code>).</li>
-<li>Nonlinearity is inherently captured in <code>.tran</code>—but noise is not!</li>
-<li>When applying an FFT to transient results, make sure that all transients have settled (use <code>TSTART</code> to delay the recording of the output). As the time points are not equidistant, the waveform is interpolated before the FFT; limit <code>TMAX</code> accordingly, and use coherent sampling or a window function to avoid spectral leakage.</li>
 </ul>
 <aside class="notes">
 <p>Depending on the simulation task, the proper integration method should be selected, keeping potential numerical ringing and damping in mind when evaluating results. Some practical notes:</p>
@@ -624,6 +685,14 @@ Table&nbsp;14: Discrete-time integration methods used in circuit simulation
           display:block!important;
       }</style></aside>
 </section>
+<section class="slide level3 unnumbered">
+<h3>Using the Transient Simulation</h3>
+<ul>
+<li>If high accuracy is needed, tighten the tolerance parameters (<code>RELTOL</code>, <code>VNTOL</code>, <code>ABSTOL</code>) and limit the maximum time step (<code>TMAX</code>).</li>
+<li>Nonlinearity is inherently captured in <code>.tran</code>—but noise is not!</li>
+<li>When applying an FFT to transient results, make sure that all transients have settled (use <code>TSTART</code> to delay the recording of the output). As the time points are not equidistant, the waveform is interpolated before the FFT; limit <code>TMAX</code> accordingly, and use coherent sampling or a window function to avoid spectral leakage.</li>
+</ul>
+</section>
 
 <section id="sec-simulation-advanced" class="title-slide slide level2 center" data-number="11.5">
 <h2><span class="header-section-number">11.5</span> Advanced Simulation Modes</h2>
@@ -633,6 +702,24 @@ Table&nbsp;14: Discrete-time integration methods used in circuit simulation
 <h3>Advanced Simulation Modes</h3>
 <ul>
 <li>In the <strong>transient noise</strong> simulation, the noise sources are modeled as random signals in the time domain and added to the circuit (in <code>ngspice</code>, e.g., by using <code>trnoise</code> sources, or in <code>VACASK</code> by using the transient noise analysis). As the noise bandwidth is linked to the time step, such simulations are slow and require many runs or long simulation times for statistically meaningful results.</li>
+</ul>
+<aside class="notes">
+<p>Beyond the basic analyses (<code>.dc</code>, <code>.ac</code>, <code>.noise</code>, <code>.tran</code>), advanced circuit simulators offer analyses that capture large-signal noise effects, including frequency conversion and time-varying bias points:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Advanced Simulation Modes</h3>
+<ul>
 <li>For <strong>RF simulation</strong>, there is a large discrepancy between the baseband (low) frequencies and the high carrier frequency, which makes the standard transient simulation extremely time-consuming (a small time step is dictated by the carrier, but a long simulation time by the modulation). For these cases, special methods like <a href="https://en.wikipedia.org/wiki/Harmonic_balance"><strong>harmonic balance</strong></a> or <strong>shooting-Newton</strong> have been developed; see <span class="citation" data-cites="Kundert_RFSim">(<a href="#/references" role="doc-biblioref" onclick="">Kundert 1999</a>)</span> for an introduction. In the open-source domain, <code>Xyce</code> and <code>VACASK</code> offer a harmonic-balance analysis.</li>
 </ul>
 </section>
@@ -645,7 +732,6 @@ Table&nbsp;14: Discrete-time integration methods used in circuit simulation
 <li>Further analyses: matching (<code>dcmatch</code>, <code>acmatch</code>), stability (<code>stb</code>), pole-zero (<code>pz</code>), <span class="math inline">\(S\)</span>-parameters (<code>sp</code>), envelope following (<code>envlp</code>)</li>
 </ul>
 <aside class="notes">
-<p>Beyond the basic analyses (<code>.dc</code>, <code>.ac</code>, <code>.noise</code>, <code>.tran</code>), advanced circuit simulators offer analyses that capture large-signal noise effects, including frequency conversion and time-varying bias points:</p>
 <p>Commercial RF simulators (e.g., Cadence SpectreRF) offer a whole family of such analyses: periodic steady-state in the time domain (<code>pss</code>, with <code>pac</code>, <code>pstb</code>, <code>pnoise</code>, <code>pxf</code>, <code>psp</code>) for circuits with one periodic excitation; quasi-periodic steady-state (<code>qpss</code>, …) for circuits operating on multiple fundamental frequencies; and harmonic balance in the frequency domain (<code>hb</code>, <code>hbac</code>, <code>hbnoise</code>, …) for the natural inclusion of <span class="math inline">\(S\)</span>-parameters and frequency conversion. Additional analyses cover device matching (<code>dcmatch</code>, <code>acmatch</code>), stability (<code>stb</code>), pole-zero (<code>pz</code>), <span class="math inline">\(S\)</span>-parameters (<code>sp</code>), and envelope following (<code>envlp</code>).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -821,6 +907,24 @@ R_\mathrm{G,nqs} = \frac{1}{5 g_\mathrm{m}}
 <h3>Digital Simulation</h3>
 <ul>
 <li><strong>Event-driven</strong> simulators (like <code>GHDL</code> and <code>iVerilog</code>) evaluate a logic element only when one of its inputs changes, and support the full language semantics including delays and <code>X</code>/<code>Z</code> states. After synthesis and place-and-route, a <strong>gate-level simulation</strong> with delays back-annotated from an SDF file is possible, although timing is primarily verified by static timing analysis.</li>
+</ul>
+<aside class="notes">
+<p>Two main simulator types are in use:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Digital Simulation</h3>
+<ul>
 <li><strong>Cycle-based</strong> simulators (like <code>Verilator</code>) compile the design into a C++ model that is evaluated once per clock cycle, typically with two-state (<code>0</code>/<code>1</code>) logic and without delays; this is dramatically faster and well suited for large synchronous designs and long test runs (e.g., booting software on a CPU core).</li>
 </ul>
 </section>
@@ -833,7 +937,6 @@ R_\mathrm{G,nqs} = \frac{1}{5 g_\mathrm{m}}
 <li>Trades accuracy for speed</li>
 </ul>
 <aside class="notes">
-<p>Two main simulator types are in use:</p>
 <p>An intermediate method between analog and digital simulation is <strong>timing simulation</strong>: strongly simplified MOSFET models avoid the solution of nonlinear systems, matrix operations are minimized, and forward-Euler integration is used—trading accuracy for speed.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {

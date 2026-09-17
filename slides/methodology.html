@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -634,10 +634,27 @@ Mixed-signal/custom design flow with open-source tools: the schematic (xschem) i
 <ul>
 <li>An FPGA consists of programmable logic blocks (typically look-up tables (LUTs) paired with flip-flops), hard macros (like CPUs, DSP slices, memory blocks, or high-speed interfaces), and a programmable interconnect fabric.</li>
 <li>The flexibility is very high (the FPGA can be loaded with a new bit-stream at any time), and the performance can be high as well; however, power consumption and unit cost can be substantial.</li>
-<li>FPGAs can also be used as (more or less) real-time test vehicles for HDL code (for prototyping and software development) before committing to a costly mask set.</li>
 </ul>
 <aside class="notes">
 <p><a href="https://en.wikipedia.org/wiki/Field-programmable_gate_array">Field-programmable gate arrays</a> (FPGAs) are a good alternative to a custom digital IC, because the initial cost is very low, and the same HDL description can be used to program an FPGA or to create a semicustom digital design:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>FPGAs</h3>
+<ul>
+<li>FPGAs can also be used as (more or less) real-time test vehicles for HDL code (for prototyping and software development) before committing to a costly mask set.</li>
+</ul>
+<aside class="notes">
 <p>The choice between an FPGA and a custom IC is largely a question of volume: FPGAs win at low to medium volumes, where their high per-unit cost is outweighed by the avoided <a href="https://en.wikipedia.org/wiki/Non-recurring_engineering">NRE</a> (mask set and design effort) of a custom IC, while an ASIC becomes cheaper per piece once the volume is large enough to amortize its NRE. Many products therefore start on an FPGA and are migrated to an ASIC only once the volume and specification have stabilized.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {

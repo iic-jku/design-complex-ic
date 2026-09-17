@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -511,15 +511,54 @@ Figure&nbsp;70: Good dice per wafer versus die size for a 300 mm wafer (2 mm edg
 <p><span class="math display">\[
 R_\mathrm{die} = \frac{\$1500}{1900 \cdot 0.95} = \$0.83
 \]</span></p>
+<div class="fragment">
 <p>The total recurring cost per die is (using <a href="#/eq-recurring-cost" class="quarto-xref">Equation&nbsp;60</a>)</p>
+</div>
+<div class="fragment">
 <p><span class="math display">\[
 R_\mathrm{tot} = \$0.83 + \$0.75 = \$1.58
 \]</span></p>
+</div>
+<div class="fragment">
 <p>The required selling price is strongly dependent on the number of ICs sold (using <a href="#/eq-selling-price" class="quarto-xref">Equation&nbsp;57</a> and <a href="#/eq-total-cost" class="quarto-xref">Equation&nbsp;58</a>):</p>
+</div>
+<div class="fragment">
 <p><span class="math display">\[
 S_\mathrm{tot} = \frac{1}{1 - m} \left( R_\mathrm{tot} + \frac{F_\mathrm{tot}}{N_\mathrm{sold}} \right) = 2 \left( \$1.58 + \frac{\$5\,\text{M}}{N_\mathrm{sold}} \right)
 \]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>An Exemplary Calculation</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>IC Cost and Selling Price</strong></p>
+</div>
+<div class="callout-content">
 <p>The resulting selling price versus sales volume is plotted in <a href="#/fig-cost-example" class="quarto-xref">Figure&nbsp;71</a>: in the left region (low volume), the fixed cost <span class="math inline">\(F_\mathrm{tot}\)</span> dominates the selling price, whereas for larger volumes the recurring cost <span class="math inline">\(R_\mathrm{tot}\)</span> becomes crucial.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>An Exemplary Calculation</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>IC Cost and Selling Price</strong></p>
+</div>
+<div class="callout-content">
 <div id="cell-fig-cost-example" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div id="fig-cost-example" class="quarto-float quarto-figure quarto-figure-center">
@@ -531,7 +570,6 @@ S_\mathrm{tot} = \frac{1}{1 - m} \left( R_\mathrm{tot} + \frac{F_\mathrm{tot}}{N
 Figure&nbsp;71: Required selling price versus sales volume for this exemplary IC: at low volumes, the fixed costs dominate; at high volumes, the price approaches twice the recurring cost.
 </figcaption>
 </figure>
-</div>
 </div>
 </div>
 </div>

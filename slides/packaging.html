@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -252,7 +252,6 @@ Cross section of a wire-bonded lead-frame package: the die is glued to the paddl
 <ul>
 <li>A simple pad consisting only of a square of top metal may “<strong>lift off</strong>” during bonding due to insufficient adherence; a mechanically robust pad is formed from the two topmost metal layers, connected by many small vias, at the price of somewhat larger capacitance.</li>
 <li>Pads carrying RF signals can be shaped as octagons to reduce their capacitance (about 20 % reduction).</li>
-<li>In some processes, it is allowed to place circuitry (e.g., ESD protection) below the pads to save chip area—called pad-over-active-area (PoAA).</li>
 </ul>
 <aside class="notes">
 <p>A few notes on the bond pads themselves:</p>
@@ -267,6 +266,12 @@ Cross section of a wire-bonded lead-frame package: the die is glued to the paddl
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Chip-to-Package Connection</h3>
+<ul>
+<li>In some processes, it is allowed to place circuitry (e.g., ESD protection) below the pads to save chip area—called pad-over-active-area (PoAA).</li>
+</ul>
 </section>
 
 <section id="sec-packaging-types" class="title-slide slide level2 center" data-number="5.3">
@@ -395,11 +400,28 @@ Cross sections of important package families: (a) wire-bonded lead-frame package
 <ul>
 <li>A single monolithic die is limited by the reticle size of the lithography tool, and the yield drops rapidly with die area; several smaller dice yield better and can exceed the reticle limit in total.</li>
 <li>Each chiplet can be fabricated in the most suitable technology (<strong>heterogeneous integration</strong>), e.g., the compute logic in a leading-edge node, while I/O, analog, or RF functions stay in a mature, cheaper node.</li>
+</ul>
+<aside class="notes">
+<p>High-end systems like GPUs, AI accelerators, and server processors increasingly split a large SoC into several smaller dice, called <a href="https://en.wikipedia.org/wiki/Chiplet"><strong>chiplets</strong></a>, which are placed side by side on a <strong>silicon interposer</strong> (<a href="#/fig-package-types" class="quarto-xref">Figure&nbsp;55</a> (g)); a well-known example is TSMC’s CoWoS (chip-on-wafer-on-substrate). This approach is motivated by several factors:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>2.5D Integration with Chiplets and Silicon Interposer</h3>
+<ul>
 <li>Memory can be placed very close to the processor; a typical example is high-bandwidth memory (HBM), a stack of DRAM dice connected by through-silicon vias.</li>
 <li>Proven chiplets can be reused across products, reducing design effort.</li>
 </ul>
 <aside class="notes">
-<p>High-end systems like GPUs, AI accelerators, and server processors increasingly split a large SoC into several smaller dice, called <a href="https://en.wikipedia.org/wiki/Chiplet"><strong>chiplets</strong></a>, which are placed side by side on a <strong>silicon interposer</strong> (<a href="#/fig-package-types" class="quarto-xref">Figure&nbsp;55</a> (g)); a well-known example is TSMC’s CoWoS (chip-on-wafer-on-substrate). This approach is motivated by several factors:</p>
 <p>The interposer is a passive silicon die (or a large part of a wafer) that is fabricated with a back-end-of-line process. Its fine-pitch wiring (line width and spacing in the µm range) allows thousands of short, dense connections between the chiplets, which is not possible with laminate substrates. The chiplets are flipped and attached to the interposer with <strong>Cu pillars</strong> with a thin solder cap (sometimes called microbumps, pitch typically 40 to 50 µm). <a href="https://en.wikipedia.org/wiki/Through-silicon_via"><strong>Through-silicon vias (TSVs)</strong></a> lead the supply and external signals through the thinned interposer (thickness ca. 100 µm) to C4 bumps (pitch ca. 150 µm), which connect the interposer to a laminate substrate. The laminate then fans out to the BGA balls, just like a regular flip-chip package. Instead of a mold compound, such packages are typically covered by a metal lid, which is attached to the backside of the chiplets with a thermal interface material (TIM) and acts as a heat spreader.</p>
 <p>As the pitch grows by roughly an order of magnitude at each level (chiplet, interposer, laminate, PCB), this arrangement is a hierarchy of increasingly coarse wiring. Several variants exist to reduce cost: an organic RDL interposer instead of silicon, or small silicon bridges embedded in the laminate only below the chiplet edges (e.g., Intel EMIB). In <strong>3D integration</strong>, chiplets are stacked directly on top of each other using TSVs and hybrid bonding (Cu-to-Cu bonding without solder, pitch below 10 µm).</p>
 <p>Designing chiplet-based systems brings new challenges: the die-to-die interfaces need to be standardized to allow combining chiplets from different sources (e.g., <a href="https://en.wikipedia.org/wiki/UCIe">UCIe</a>, Universal Chiplet Interconnect Express), each chiplet must be tested before assembly (known-good die, as a single faulty chiplet ruins the whole expensive package), power delivery and heat removal must be co-designed with the package, and the mechanical stress and warpage of the large assembly must be controlled.</p>
@@ -605,14 +627,26 @@ L = L' \cdot l = 0.77\,\text{nH/mm} \cdot 2\,\text{mm} = 1.55\,\text{nH}
 X_L = 2 \pi f L = 9.7\,\Omega
 \]</span></p>
 </div>
-<div class="fragment">
-<p>If this bond wire carries the supply current of a digital block, a current step of <span class="math inline">\(\Delta i = 10\,\text{mA}\)</span> within <span class="math inline">\(\Delta t = 100\,\text{ps}\)</span> causes a supply bounce of</p>
 </div>
-<div class="fragment">
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Package Parasitics</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Example Calculation of the Bond-Wire Inductance</strong></p>
+</div>
+<div class="callout-content">
+<p>If this bond wire carries the supply current of a digital block, a current step of <span class="math inline">\(\Delta i = 10\,\text{mA}\)</span> within <span class="math inline">\(\Delta t = 100\,\text{ps}\)</span> causes a supply bounce of</p>
 <p><span class="math display">\[
 V = L \frac{\Delta i}{\Delta t} = 1.55\,\text{nH} \cdot \frac{10\,\text{mA}}{100\,\text{ps}} = 155\,\text{mV}
 \]</span></p>
-</div>
 <div class="fragment">
 <p>which is significant for a core supply voltage of about 1.2 V.</p>
 </div>
@@ -624,14 +658,25 @@ V = L \frac{\Delta i}{\Delta t} = 1.55\,\text{nH} \cdot \frac{10\,\text{mA}}{100
 L_\mathrm{m}' \approx 0.1 \ln \left[ 1 + \left( \frac{2 \cdot 300\,\mu\text{m}}{300\,\mu\text{m}} \right)^2 \right] \; \text{nH/mm} = 0.1 \ln (5) \; \text{nH/mm} = 0.16\,\text{nH/mm}
 \]</span></p>
 </div>
-<div class="fragment">
-<p>resulting in a mutual inductance of <span class="math inline">\(L_\mathrm{m} = L_\mathrm{m}' \cdot l = 0.32\,\text{nH}\)</span> between the two bond wires. The magnetic coupling factor is</p>
 </div>
-<div class="fragment">
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Package Parasitics</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Example Calculation of the Bond-Wire Inductance</strong></p>
+</div>
+<div class="callout-content">
+<p>resulting in a mutual inductance of <span class="math inline">\(L_\mathrm{m} = L_\mathrm{m}' \cdot l = 0.32\,\text{nH}\)</span> between the two bond wires. The magnetic coupling factor is</p>
 <p><span class="math display">\[
 k = \frac{L_\mathrm{m}}{\sqrt{L_1 L_2}} = \frac{L_\mathrm{m}}{L} = \frac{0.32\,\text{nH}}{1.55\,\text{nH}} = 0.21
 \]</span></p>
-</div>
 <div class="fragment">
 <p>As both bond wires carry currents in the same direction, the mutual inductance adds to the self-inductance of each wire, and the effective inductance of the parallel connection is</p>
 </div>
@@ -640,10 +685,22 @@ k = \frac{L_\mathrm{m}}{\sqrt{L_1 L_2}} = \frac{L_\mathrm{m}}{L} = \frac{0.32\,\
 L_\mathrm{eff} = \frac{L + L_\mathrm{m}}{2} = \frac{L}{2} (1 + k) = 0.94\,\text{nH}
 \]</span></p>
 </div>
-<div class="fragment">
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Package Parasitics</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Example Calculation of the Bond-Wire Inductance</strong></p>
+</div>
+<div class="callout-content">
 <p>Instead of halving the inductance to <span class="math inline">\(0.77\,\text{nH}\)</span>, the second bond wire reduces it only by 40 %, and the supply bounce for the same current step drops from <span class="math inline">\(155\,\text{mV}\)</span> to <span class="math inline">\(94\,\text{mV}\)</span>. A larger distance between the bond wires reduces <span class="math inline">\(k\)</span> and brings <span class="math inline">\(L_\mathrm{eff}\)</span> closer to <span class="math inline">\(L/2\)</span>. Conversely, if the two bond wires carry unrelated signals, the same coupling causes crosstalk: the current step of <span class="math inline">\(10\,\text{mA}\)</span> in <span class="math inline">\(100\,\text{ps}\)</span> in one bond wire induces a voltage of <span class="math inline">\(L_\mathrm{m} \, \Delta i / \Delta t = 32\,\text{mV}\)</span> in the other.</p>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -786,31 +843,6 @@ Table&nbsp;10: Typical package qualification tests
 <td style="text-align: left;">JESD22-A118</td>
 <td style="text-align: left;">Exposure of package and die to high temperature and humidity without bias.</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">High-temperature storage life (HTSL)</td>
-<td style="text-align: left;">JESD22-A103</td>
-<td style="text-align: left;">Storage at high temperature for thousands of hours (intermetallic growth).</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Wire bond pull and shear</td>
-<td style="text-align: left;">MIL-STD-883 (2011) / JESD22-B116</td>
-<td style="text-align: left;">Mechanical strength of the bond wires and their connections.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Solder ball shear</td>
-<td style="text-align: left;">JESD22-B117</td>
-<td style="text-align: left;">Mechanical strength of the solder balls of BGA and WLCSP packages.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Drop test</td>
-<td style="text-align: left;">JESD22-B111</td>
-<td style="text-align: left;">The assembled PCB is dropped repeatedly under standardized conditions.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Temperature cycling on board (TCoB)</td>
-<td style="text-align: left;">IPC-9701</td>
-<td style="text-align: left;">The assembled PCB is temperature-cycled to check the solder-joint reliability.</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -818,6 +850,62 @@ Table&nbsp;10: Typical package qualification tests
 </div>
 <aside class="notes">
 <p>In addition to the qualification of the silicon technology (see <a href="../dcic.html#sec-technology-qualification">Section&nbsp;3.10</a>), the package must be qualified to prove that the assembly of die, bond wires or bumps, substrate, and mold compound survives soldering, handling, and the thermal and environmental stress of its application over the intended lifetime. The framework is again set by JEDEC JESD47, and for automotive products by AEC-Q100, which groups these tests as <em>accelerated environment stress tests</em> and <em>package assembly integrity tests</em>. As for the silicon, a typical sample consists of three assembly lots of 77 parts per test, and zero failures are accepted. <a href="#/tbl-package-qualification" class="quarto-xref">Table&nbsp;10</a> lists typical tests.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Package Qualification</h3>
+<table class="caption-top">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 21%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Test (examples)</th>
+<th style="text-align: left;">Standard</th>
+<th style="text-align: left;">Motivation &amp; check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">High-temperature storage life (HTSL)</td>
+<td style="text-align: left;">JESD22-A103</td>
+<td style="text-align: left;">Storage at high temperature for thousands of hours (intermetallic growth).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wire bond pull and shear</td>
+<td style="text-align: left;">MIL-STD-883 (2011) / JESD22-B116</td>
+<td style="text-align: left;">Mechanical strength of the bond wires and their connections.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Solder ball shear</td>
+<td style="text-align: left;">JESD22-B117</td>
+<td style="text-align: left;">Mechanical strength of the solder balls of BGA and WLCSP packages.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Drop test</td>
+<td style="text-align: left;">JESD22-B111</td>
+<td style="text-align: left;">The assembled PCB is dropped repeatedly under standardized conditions.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Temperature cycling on board (TCoB)</td>
+<td style="text-align: left;">IPC-9701</td>
+<td style="text-align: left;">The assembled PCB is temperature-cycled to check the solder-joint reliability.</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
 <p>These tests fall into three groups: <strong>component-level stress tests</strong> (PC, TC, THB/HAST, UHAST, HTSL) that accelerate the degradation of the package, <strong>assembly integrity tests</strong> that check the mechanical quality of the interconnects directly, and <strong>board-level tests</strong> (drop, TCoB) that stress the solder joints between package and PCB. After each stress test, the parts are electrically tested against the datasheet at the read points; in addition, non-destructive inspection like <a href="https://en.wikipedia.org/wiki/Scanning_acoustic_microscope">scanning acoustic microscopy</a> (C-SAM) reveals delamination and cracks inside the package, and X-ray imaging shows deformed bond wires. Failing parts are analyzed further, e.g., by cross-sectioning.</p>
 <p><strong>Pre-conditioning (PC)</strong> is not a test on its own but the mandatory first step before TC, THB/HAST, and UHAST. The mold compound and the laminate are polymers that absorb moisture from the ambient air during storage. When the package is then soldered to the PCB, it is heated within seconds to a peak temperature of up to 260 °C for lead-free solder, and the absorbed water evaporates explosively. The vapor pressure can delaminate the mold compound from the die or the lead frame, crack the package, or break bond wires—the so-called <strong>popcorn effect</strong>. Pre-conditioning therefore reproduces the life of a part before it reaches the application: a bake to dry the parts, a moisture soak according to the targeted MSL, and three reflow cycles to simulate board assembly including a rework.</p>
 <p>The <strong>moisture sensitivity level (MSL)</strong> is determined according to J-STD-020 and states how long a package may be exposed to a factory environment (≤30 °C, 60 % RH) after opening its dry pack before it must be soldered. It ranges from MSL 1 (unlimited floor life, soaked at 85 °C and 85 % RH for 168 h) and MSL 3 (floor life of 168 h, a common target for plastic packages) to MSL 6 (parts must be baked right before soldering). Packages with MSL 2 and higher are shipped in sealed moisture-barrier bags with desiccant, and parts that exceeded their floor life have to be baked before use (J-STD-033).</p>

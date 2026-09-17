@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -316,9 +316,6 @@ Table&nbsp;8: Generic layer definition used in this text
 <li>Whether a device is NMOS or PMOS is decided by whether the <code>RX</code> shape is contained inside a <code>BP</code> region (<code>RX</code> plus <code>BP</code> is <span class="math inline">\(p^+\)</span>, <code>RX</code> without <code>BP</code> is <span class="math inline">\(n^+\)</span>).</li>
 <li>A <span class="math inline">\(p^+\)</span> substrate contact is created by drawing <code>RX</code> covered by <code>BP</code> (outside the n-well).</li>
 <li>An <span class="math inline">\(n^+\)</span> well contact is created by drawing plain <code>RX</code> located inside <code>NW</code>.</li>
-<li>The <code>NW</code> must surround the PMOS with sufficient margin.</li>
-<li>The layer <code>BP</code> is a pure marking layer, assisting mask generation and device extraction from the layout.</li>
-<li><code>CA</code> contacts connect source/drain/gate as well as the <span class="math inline">\(p^+\)</span>/<span class="math inline">\(n^+\)</span> contacts to <code>M1</code>.</li>
 </ul>
 <aside class="notes">
 <p><a href="#/fig-layout-mosfets" class="quarto-xref">Figure&nbsp;41</a> shows the layout (mask top view) of an NMOS and a PMOS transistor. The following observations can be made:</p>
@@ -333,6 +330,14 @@ Table&nbsp;8: Generic layer definition used in this text
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>NMOS and PMOS Transistors</h3>
+<ul>
+<li>The <code>NW</code> must surround the PMOS with sufficient margin.</li>
+<li>The layer <code>BP</code> is a pure marking layer, assisting mask generation and device extraction from the layout.</li>
+<li><code>CA</code> contacts connect source/drain/gate as well as the <span class="math inline">\(p^+\)</span>/<span class="math inline">\(n^+\)</span> contacts to <code>M1</code>.</li>
+</ul>
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS and PMOS Transistors</h3>
@@ -565,8 +570,6 @@ Figure&nbsp;44: Metal-oxide-metal (MOM) capacitors: (a) vertical sandwich capaci
 <ul>
 <li>The density of MOM capacitors scales with smaller design rules and the number of metal layers. The lower metal layers should be skipped if the parasitic capacitance to the substrate is a concern.</li>
 <li>The process may offer a specialized <strong>metal-insulator-metal (MIM)</strong> capacitor (density on the order of fF/µm²) using extra masks and processing steps, offering higher specific capacitance and low parasitics at extra cost.</li>
-<li>For high capacitance density, or where nonlinearity is not critical, the <strong>MOSFET gate capacitance</strong> can be used, as the gate oxide is tightly controlled in manufacturing.</li>
-<li>In IHP SG13, a MIM capacitor between <code>Metal5</code> and <code>TopMetal1</code> is available (ca. 1.5 fF/µm²); the MOM finger capacitor has ca. 0.3 fF/µm², so when using 4 metal layers the effective capacitance is comparable to the MIM capacitor.</li>
 </ul>
 <aside class="notes">
 <p>A few additional considerations for capacitors:</p>
@@ -581,6 +584,13 @@ Figure&nbsp;44: Metal-oxide-metal (MOM) capacitors: (a) vertical sandwich capaci
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Capacitors</h3>
+<ul>
+<li>For high capacitance density, or where nonlinearity is not critical, the <strong>MOSFET gate capacitance</strong> can be used, as the gate oxide is tightly controlled in manufacturing.</li>
+<li>In IHP SG13, a MIM capacitor between <code>Metal5</code> and <code>TopMetal1</code> is available (ca. 1.5 fF/µm²); the MOM finger capacitor has ca. 0.3 fF/µm², so when using 4 metal layers the effective capacitance is comparable to the MIM capacitor.</li>
+</ul>
 </section>
 <section id="diodes" class="slide level3" data-number="4.3.5">
 <h3><span class="header-section-number">4.3.5</span> Diodes</h3>
@@ -642,10 +652,27 @@ Figure&nbsp;45: Cross section of the vertical substrate PNP available in any CMO
 <li>The design rules are provided as a specification document and as a run set for layout verification tools (e.g., KLayout, Magic, Cadence Pegasus, or Siemens Calibre).</li>
 <li>The rules are either given in relative dimensions (“lambda rules”) for easy scaling, or in absolute dimensions (“micron rules”).</li>
 <li>Modern CMOS technologies typically involve several hundred to thousands of layout design rules.</li>
-<li>Consider the relatively large spacing rule between <code>RX</code> and <code>NW</code>: it pays off to <strong>group PMOS and NMOS transistors</strong> together, respectively!</li>
 </ul>
 <aside class="notes">
 <p>The <strong>design rules (DRs)</strong> are the interface between the mask designer (layout engineer) and the foundry. Complying with the layout design rules ensures manufacturability with a high yield:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Design Rules</h3>
+<ul>
+<li>Consider the relatively large spacing rule between <code>RX</code> and <code>NW</code>: it pays off to <strong>group PMOS and NMOS transistors</strong> together, respectively!</li>
+</ul>
+<aside class="notes">
 <p>The four basic geometric rule types—minimum width, minimum spacing, minimum enclosure, and minimum extension—are illustrated in <a href="#/fig-layout-drc" class="quarto-xref">Figure&nbsp;46</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -824,10 +851,6 @@ Figure&nbsp;49: Merged diffusion in a series connection of two equally sized MOS
 <ul>
 <li>The devices are constructed from <strong>identical unit devices</strong>: a MOSFET with width <span class="math inline">\(4W\)</span> matches a transistor with width <span class="math inline">\(2W\)</span> only if both are constructed from unit transistors of equal width (and equal <span class="math inline">\(L\)</span>—remember that <span class="math inline">\(V_\mathrm{th}= f(L)\)</span> due to SCE/RSCE)!</li>
 <li>The devices are oriented in the <strong>same direction</strong>, and the <strong>current flow</strong> in all matched devices has the same direction—avoid mirroring or “snaking”!</li>
-<li>The devices are <strong>surrounded by similar structures</strong>; to achieve this for edge devices, spend <strong>dummy elements</strong> (see <a href="#/fig-layout-dummies" class="quarto-xref">Figure&nbsp;50</a>).</li>
-<li>To combat process gradients, place the matched devices on the symmetry line of the gradient (if known), or use <strong>common-centroid</strong> arrangements (see <a href="#/fig-layout-common-centroid" class="quarto-xref">Figure&nbsp;52</a>).</li>
-<li>For ac symmetry, consider the wiring of <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>, and make the <strong>wiring parasitics</strong> as symmetrical as possible.</li>
-<li>Consider secondary effects: gate shadowing (implant variation due to topographical differences and tilted implant angle), mechanical stress from shallow-trench isolation, and non-uniform doping due to the <strong>well-proximity effect</strong> (dopants scattering off the well-mask edges cause doping variations, especially impacting PMOS).</li>
 </ul>
 <aside class="notes">
 <p>Asymmetries lead to mismatch, which introduces input-referred offsets and limits the minimum processable signal level; common-mode and power-supply rejection are degraded as well. Good matching of integrated devices can only be achieved if the following conditions are met:</p>
@@ -842,6 +865,20 @@ Figure&nbsp;49: Merged diffusion in a series connection of two equally sized MOS
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Matching</h3>
+<ul>
+<li>The devices are <strong>surrounded by similar structures</strong>; to achieve this for edge devices, spend <strong>dummy elements</strong> (see <a href="#/fig-layout-dummies" class="quarto-xref">Figure&nbsp;50</a>).</li>
+<li>To combat process gradients, place the matched devices on the symmetry line of the gradient (if known), or use <strong>common-centroid</strong> arrangements (see <a href="#/fig-layout-common-centroid" class="quarto-xref">Figure&nbsp;52</a>).</li>
+<li>For ac symmetry, consider the wiring of <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>, and make the <strong>wiring parasitics</strong> as symmetrical as possible.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Matching</h3>
+<ul>
+<li>Consider secondary effects: gate shadowing (implant variation due to topographical differences and tilted implant angle), mechanical stress from shallow-trench isolation, and non-uniform doping due to the <strong>well-proximity effect</strong> (dopants scattering off the well-mask edges cause doping variations, especially impacting PMOS).</li>
+</ul>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Matching</h3>
@@ -998,11 +1035,6 @@ Figure&nbsp;53: Precisely matched capacitor pair with <span class="math inline">
 <h3>Additional Layout and Mask Structures</h3>
 <ul>
 <li><strong>Seal ring:</strong> The seal ring runs along the circumference of the chip and seals the singulated die against moisture and other contamination. It also acts as a crack-stop, protecting the inner die from cracks formed while sawing the wafer into individual dice. Since the seal ring forms a closed metal loop around the chip, crosstalk considerations may suggest connecting it to a dedicated pin.</li>
-<li><strong>Scribe line (kerf):</strong> This is where the chip is cut with a diamond saw or a laser.</li>
-<li><strong>Alignment marks:</strong> Used to align the different masks during processing.</li>
-<li><strong>Critical-dimension structures:</strong> Measured after processing to verify proper polysilicon or metal etching, enabling closed-loop process control.</li>
-<li><strong>Vernier structures (“Nonius”):</strong> Closely spaced parallel lines on two different layers that allow judging the inter-layer alignment.</li>
-<li><strong>Test structures:</strong> Chains of contacts and vias, as well as test transistors, are used to evaluate contact resistance, transistor parameters, and other important process parameters. They are usually placed in the scribe lines or on dedicated <strong>process control monitor (PCM)</strong> test chips; the PCM measurement reports can often be obtained from the foundry.</li>
 </ul>
 <aside class="notes">
 <p>In addition to the final chip layout, further structures are placed on the masks (usually by the wafer fab):</p>
@@ -1018,6 +1050,21 @@ Figure&nbsp;53: Precisely matched capacitor pair with <span class="math inline">
           display:block!important;
       }</style></aside>
 </section>
+<section class="slide level3 unnumbered">
+<h3>Additional Layout and Mask Structures</h3>
+<ul>
+<li><strong>Scribe line (kerf):</strong> This is where the chip is cut with a diamond saw or a laser.</li>
+<li><strong>Alignment marks:</strong> Used to align the different masks during processing.</li>
+<li><strong>Critical-dimension structures:</strong> Measured after processing to verify proper polysilicon or metal etching, enabling closed-loop process control.</li>
+<li><strong>Vernier structures (“Nonius”):</strong> Closely spaced parallel lines on two different layers that allow judging the inter-layer alignment.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Additional Layout and Mask Structures</h3>
+<ul>
+<li><strong>Test structures:</strong> Chains of contacts and vias, as well as test transistors, are used to evaluate contact resistance, transistor parameters, and other important process parameters. They are usually placed in the scribe lines or on dedicated <strong>process control monitor (PCM)</strong> test chips; the PCM measurement reports can often be obtained from the foundry.</li>
+</ul>
+</section>
 
 <section id="sec-layout-checks" class="title-slide slide level2 center" data-number="4.7">
 <h2><span class="header-section-number">4.7</span> Layout Checks</h2>
@@ -1028,7 +1075,6 @@ Figure&nbsp;53: Precisely matched capacitor pair with <span class="math inline">
 <ul>
 <li><strong>DRC (design rule check):</strong> a program/run set that automatically checks the layout data for compliance with the design rules of the wafer fab. All flagged errors must be corrected; otherwise, manufacturing issues can occur.</li>
 <li><strong>LVS (layout versus schematic):</strong> a netlist extracted from the layout data is compared against the schematic netlist, checking connectivity of signals and power as well as device sizes (<span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of transistors, dimensions of <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>). Usually, all flagged errors must be corrected.</li>
-<li><strong>ERC (electrical rule check):</strong> additional checks not covered by DRC or LVS, such as floating MOSFET gates, floating wells, or antenna rules. Sometimes common mistakes (e.g., high-resistance connections) are covered in the ERC run set and checked automatically.</li>
 </ul>
 <aside class="notes">
 <p>Three automated checks safeguard the layout before tapeout:</p>
@@ -1043,6 +1089,12 @@ Figure&nbsp;53: Precisely matched capacitor pair with <span class="math inline">
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Layout Checks</h3>
+<ul>
+<li><strong>ERC (electrical rule check):</strong> additional checks not covered by DRC or LVS, such as floating MOSFET gates, floating wells, or antenna rules. Sometimes common mistakes (e.g., high-resistance connections) are covered in the ERC run set and checked automatically.</li>
+</ul>
 </section>
 
 <section id="sec-layout-extraction" class="title-slide slide level2 center" data-number="4.8">
@@ -1076,8 +1128,18 @@ Figure&nbsp;53: Precisely matched capacitor pair with <span class="math inline">
 <h3>Layout Extraction</h3>
 <ul>
 <li><strong>C-decoupled:</strong> The parasitic capacitance of each node’s wiring is added as a lumped capacitor to ground. There is almost no impact on simulation speed (no new nodes are introduced), but no crosstalk between nodes is captured. This extraction can be used on fairly large circuits to add a first level of realism.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Layout Extraction</h3>
+<ul>
 <li><strong>C-coupled:</strong> Parasitic capacitances to the substrate <em>and between nodes</em> are added; capacitive crosstalk is modeled, but no inductive effects. Moderate impact on simulation speed (more elements in the circuit matrix).</li>
 <li><strong>RC-extracted:</strong> Parasitic <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span> of the wiring are extracted and added to the netlist, yielding a realistic model of performance and crosstalk without inductive effects. This has a large impact on simulation speed, as many new nodes are introduced; this mode should be used for circuit blocks of moderate complexity.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Layout Extraction</h3>
+<ul>
 <li><strong>RLCK-extracted:</strong> Parasitic <span class="math inline">\(R\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(L\)</span>, and <span class="math inline">\(k\)</span> of the wiring are extracted, resulting in a very accurate simulation including the main crosstalk effects—but the circuit network gets much larger, impacting simulation time and convergence.</li>
 <li><strong>EM simulation:</strong> Highest accuracy; the resulting <span class="math inline">\(S\)</span>-parameters are either used directly in frequency-domain simulations or transformed into equivalent lumped-element circuits. Huge simulation-time impact, but valid to very high frequencies (&gt; 100 GHz); usually only suitable for individual circuit blocks.</li>
 </ul>

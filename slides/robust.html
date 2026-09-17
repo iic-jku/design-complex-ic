@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -175,10 +175,27 @@
 <li>Go for robust circuits and layouts that are insensitive to <strong>PVT</strong> (process, voltage, temperature) influences.</li>
 <li>Keep in mind that fabrication variations are normal; use the foundry-supplied <strong>corner models</strong> to check the design against parameter excursions and component mismatch.</li>
 <li>PCB, IC package, and on-chip <strong>wiring</strong> all add <span class="math inline">\(R\)</span>, <span class="math inline">\(L\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(k\)</span> <strong>parasitics</strong>—model them properly and include them in the circuit simulation.</li>
-<li>During all phases of design and layout, think about what could go wrong, and <strong>build in remedies for debug and fix</strong> (layout locations where a cut or short can easily be made by FIB or a metal redesign, spare elements, programmability).</li>
 </ol>
 <aside class="notes">
 <p>Better than debugging a failing IC is avoiding design issues up front! A good overall strategy for IC design is:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Robust Design</h3>
+<ol start="4" type="1">
+<li>During all phases of design and layout, think about what could go wrong, and <strong>build in remedies for debug and fix</strong> (layout locations where a cut or short can easily be made by FIB or a metal redesign, spare elements, programmability).</li>
+</ol>
+<aside class="notes">
 <p>This chapter follows these four points, and closes with structured methods and tools for the case where, despite all precautions, first silicon does not behave as expected.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -223,6 +240,11 @@
 <ul>
 <li>Use <strong>negative feedback</strong>: the closed-loop gain of an amplifier is set by the feedback network (a ratio again), and is largely independent of the poorly controlled open-loop gain.</li>
 <li>Derive bias currents from a well-defined reference (e.g., a bandgap voltage across a resistor, or a constant-<span class="math inline">\(g_\mathrm{m}\)</span> bias) instead of a plain supply-referenced resistor, so the circuit performance tracks with process and temperature in a controlled way.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Robust Circuits and Layouts</h3>
+<ul>
 <li>Prefer <strong>differential</strong> signal paths: supply noise, substrate coupling, and even-order distortion appear as common-mode disturbances and are rejected to first order.</li>
 <li>Where the achievable accuracy is not sufficient, plan for <strong>calibration</strong> or <strong>trimming</strong> (see <a href="../dcic.html#sec-testing-types">Section&nbsp;6.5</a>) instead of over-designing the circuit.</li>
 </ul>
@@ -332,6 +354,11 @@
 <ul>
 <li>For digital timing, the <strong>slow</strong> corner (SS, lowest supply, highest temperature) usually limits the maximum clock frequency (setup time), whereas the <strong>fast</strong> corner (FF, highest supply, lowest temperature) is critical for hold-time violations and leakage. In advanced low-voltage nodes, <em>temperature inversion</em> can make low temperature the slowest condition.</li>
 <li>The <strong>skewed</strong> corners SF and FS are critical for circuits relying on a balance between NMOS and PMOS, such as the switching threshold of an inverter, ratioed logic, or SRAM cells.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Models</h3>
+<ul>
 <li>Analog circuits can have their worst case in any corner, so no corner should be skipped.</li>
 </ul>
 </section>
@@ -409,10 +436,38 @@
 <ul>
 <li>If feedback-loop stability is a concern, make the compensation components (feedback <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) <strong>programmable</strong> (using register bits and transmission gates to switch components in and out).</li>
 <li>If there is a critical bias point in the circuit, make it <strong>observable</strong> (connect it to a test pad via a T-gate) or <strong>programmable</strong> (adapt voltages or currents by programming, metal redesign, or FIB).</li>
+</ul>
+<aside class="notes">
+<p>During the complete design phase, an important habit is “failure-mode thinking,” i.e., asking “<strong>what could go wrong?</strong>” (paranoia is a good trait in IC design). By anticipating potential issues, remedies and debug hooks can be built into the design. Some examples:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Failure-Mode Thinking</h3>
+<ul>
 <li>For complex logic functions, add <strong>spare logic gates</strong> nearby (a few NAND gates, inverters, latches, and delay elements) to allow fixing overlooked logic bugs in a metal-only redesign.</li>
 <li>If circuit sizing is uncertain, place <strong>spare elements</strong> (<span class="math inline">\(R\)</span>, <span class="math inline">\(C\)</span>, MOSFETs, logic gates) that can be connected in a metal redesign, or by FIB for a handful of repaired samples; often, dummy elements can double in this role.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Failure-Mode Thinking</h3>
+<ul>
 <li>If the risk is very high, implement multiple <strong>design variants</strong> of a circuit on one tape-out, so the best variant (based on measurements) can be selected and refined for the next tape-out.</li>
 <li>Route internal nodes that are hard to measure (bias voltages, reference clocks, the output of a sub-block) to an <strong>analog test bus</strong> or a test multiplexer, and provide <strong>bypass</strong> and <strong>loop-back</strong> modes, so each block of a signal chain can be characterized in isolation.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Failure-Mode Thinking</h3>
+<ul>
 <li>Make sure the circuit always reaches its intended operating point: self-biased circuits like bandgap references and current references can have a second, degenerate stable state (all currents zero) and need a <strong>start-up circuit</strong>. Power-up and power-down sequences, undefined reset states, and floating inputs of disabled blocks deserve dedicated simulations.</li>
 </ul>
 </section>
@@ -425,7 +480,6 @@
 <li>Mandatory, e.g., for automotive ICs</li>
 </ul>
 <aside class="notes">
-<p>During the complete design phase, an important habit is “failure-mode thinking,” i.e., asking “<strong>what could go wrong?</strong>” (paranoia is a good trait in IC design). By anticipating potential issues, remedies and debug hooks can be built into the design. Some examples:</p>
 <p>For larger projects, this informal habit can be formalized as a <a href="https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis"><strong>failure mode and effects analysis (FMEA)</strong></a>, in which potential failure modes are systematically listed and ranked by severity, likelihood, and detectability; FMEA is mandatory, e.g., for automotive ICs.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -450,8 +504,6 @@
 <li><strong>Reproduce</strong> the failure reliably and document the conditions (sample, supply, temperature, input signals); check whether all samples fail or only some (a design issue versus a production defect).</li>
 <li><strong>Isolate</strong> the failing block, e.g., using the test modes, bypass paths, and observable nodes built in during the design phase.</li>
 <li>Collect potential causes and form a <strong>hypothesis</strong> (the methods below help here).</li>
-<li><strong>Confirm</strong> the hypothesis by reproducing the failure in simulation, and by predicting a further observation that is then checked in the lab.</li>
-<li>Only then implement and verify the <strong>fix</strong>—first in simulation, then on silicon (e.g., by a FIB repair of a few samples) before the redesign is taped out.</li>
 </ol>
 <aside class="notes">
 <p>If first silicon fails, the pressure to find a quick fix is high, and the temptation is to change several things at once based on a first guess. A disciplined procedure is usually faster:</p>
@@ -466,6 +518,13 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Debugging of ICs</h3>
+<ol start="4" type="1">
+<li><strong>Confirm</strong> the hypothesis by reproducing the failure in simulation, and by predicting a further observation that is then checked in the lab.</li>
+<li>Only then implement and verify the <strong>fix</strong>—first in simulation, then on silicon (e.g., by a FIB repair of a few samples) before the redesign is taped out.</li>
+</ol>
 </section>
 <section id="the-fishbone-diagram" class="slide level3" data-number="10.5.1">
 <h3><span class="header-section-number">10.5.1</span> The Fishbone Diagram</h3>
@@ -572,7 +631,6 @@ Figure&nbsp;89: Fishbone (Ishikawa) diagram for structured root-cause analysis: 
 <li><strong>Micro-probing</strong>: fine needles (or FIB-created probe pads) contact internal nodes to measure voltages and waveforms directly.</li>
 <li><strong>Hot-spot detection</strong>: shorts, leaky junctions, and latched structures dissipate power locally, which can be localized by thermal imaging (e.g., lock-in thermography) or by <a href="https://en.wikipedia.org/wiki/Liquid_crystal">liquid-crystal</a> coatings changing their appearance with temperature.</li>
 <li><strong>Photon emission microscopy</strong>: forward-biased junctions, MOSFETs in saturation, and oxide breakdown emit weak light (mostly in the infrared), which can be detected, also through the backside of the die.</li>
-<li><strong>X-ray</strong> inspection and <strong>acoustic microscopy</strong> reveal package defects like broken bond wires, voids, or delamination non-destructively; afterwards, the die can be exposed by <strong>decapsulation</strong> and inspected optically or in a scanning electron microscope (SEM).</li>
 </ul>
 <aside class="notes">
 <p>Beyond electrical measurements at the pins, several physical failure-analysis techniques help to locate a fault on the die (a comprehensive overview is given in <span class="citation" data-cites="Gandhi_FADeskRef">(<a href="#/references" role="doc-biblioref" onclick="">Gandhi 2019</a>)</span>):</p>
@@ -587,6 +645,12 @@ Figure&nbsp;89: Fishbone (Ishikawa) diagram for structured root-cause analysis: 
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Failure Analysis</h3>
+<ul>
+<li><strong>X-ray</strong> inspection and <strong>acoustic microscopy</strong> reveal package defects like broken bond wires, voids, or delamination non-destructively; afterwards, the die can be exposed by <strong>decapsulation</strong> and inspected optically or in a scanning electron microscope (SEM).</li>
+</ul>
 </section>
 <section id="references" class="slide level3 unnumbered smaller scrollable">
 <h3>References</h3>

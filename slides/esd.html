@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -281,12 +281,6 @@ Typical discharge current waveforms of the ESD models (schematic representation)
 <ul>
 <li>The <strong>primary ESD element</strong> (typically a pair of large diodes to the rails, like <span class="math inline">\(D_{1,2}\)</span>, or a snapback device) provides the main low-ohmic path for a positive or negative ESD pulse.</li>
 <li>The <strong>series resistor</strong> <span class="math inline">\(R_\mathrm{in}\)</span> (typically around 500 Ω) limits the current into the <strong>secondary protection</strong>, which clamps the voltage at the gate oxide of the input receiver.</li>
-<li>The <strong>secondary protection</strong> (typically a gate-protected NMOS or a diode to the rails, like the shown <span class="math inline">\(D_{3,4}\)</span>) clamps the voltage at the input of the receiver, protecting the gate oxide from ESD stress.</li>
-<li>The <strong>power clamp</strong> between <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span> provides a discharge path between the rails, preventing an ESD-induced rise of the supply voltage from damaging core circuits.</li>
-<li>All diodes and clamps are reverse-biased (off) during normal operation. A positive ESD pulse at the pad is discharged via the upper diode and the power clamp to ground; a negative pulse is discharged via the lower diode.</li>
-<li>The <strong>receiver</strong> might implement additional functionality for the digital input, like Schmitt-trigger action or input filtering.</li>
-<li>The <strong>driver</strong> consists of large output devices (NMOS and PMOS) that provide the necessary drive strength for the digital output, while the series resistance and protection elements safeguard the driver during ESD events. Additional features might be a tri-state capability or slew-rate control. A (small) series resistance <span class="math inline">\(R_\mathrm{s}\)</span> in the drain path helps divert the ESD current into the protection devices, at the cost of degrading the driver in normal operation. Often, this series resistance is implemented by extending the drain region of the MOSFETs and blocking the silicide (recall the <code>OP</code> layer from <a href="../dcic.html#sec-layout-layers">Section&nbsp;4.2</a>), similar to the technique used for the RC-triggered power clamp.</li>
-<li>The <strong>layout of the protection elements</strong> is critical: they should be placed close to the pad to minimize parasitic inductance and resistance, ensuring a fast response to ESD events.</li>
 </ul>
 <aside class="notes">
 <p>In a CDM event, the <em>charge stored in the body of the IC</em> is discharged when some pin touches external ground; discharge currents of several amperes with rise times below a nanosecond are typical. HBM testing is standardized in ANSI/ESDA/JEDEC JS-001, CDM testing in JS-002.</p>
@@ -303,6 +297,33 @@ Typical discharge current waveforms of the ESD models (schematic representation)
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>ESD Protection Concept</h3>
+<ul>
+<li>The <strong>secondary protection</strong> (typically a gate-protected NMOS or a diode to the rails, like the shown <span class="math inline">\(D_{3,4}\)</span>) clamps the voltage at the input of the receiver, protecting the gate oxide from ESD stress.</li>
+<li>The <strong>power clamp</strong> between <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span> provides a discharge path between the rails, preventing an ESD-induced rise of the supply voltage from damaging core circuits.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>ESD Protection Concept</h3>
+<ul>
+<li>All diodes and clamps are reverse-biased (off) during normal operation. A positive ESD pulse at the pad is discharged via the upper diode and the power clamp to ground; a negative pulse is discharged via the lower diode.</li>
+<li>The <strong>receiver</strong> might implement additional functionality for the digital input, like Schmitt-trigger action or input filtering.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>ESD Protection Concept</h3>
+<ul>
+<li>The <strong>driver</strong> consists of large output devices (NMOS and PMOS) that provide the necessary drive strength for the digital output, while the series resistance and protection elements safeguard the driver during ESD events. Additional features might be a tri-state capability or slew-rate control. A (small) series resistance <span class="math inline">\(R_\mathrm{s}\)</span> in the drain path helps divert the ESD current into the protection devices, at the cost of degrading the driver in normal operation.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>ESD Protection Concept</h3>
+<ul>
+<li>Often, this series resistance is implemented by extending the drain region of the MOSFETs and blocking the silicide (recall the <code>OP</code> layer from <a href="../dcic.html#sec-layout-layers">Section&nbsp;4.2</a>), similar to the technique used for the RC-triggered power clamp.</li>
+<li>The <strong>layout of the protection elements</strong> is critical: they should be placed close to the pad to minimize parasitic inductance and resistance, ensuring a fast response to ESD events.</li>
+</ul>
 </section>
 <section class="slide level3 unnumbered">
 <h3>ESD Protection Concept</h3>
@@ -473,15 +494,37 @@ Figure&nbsp;85: The silicon-controlled rectifier (SCR) in CMOS: (a) the PNPN str
 <ul>
 <li><strong>Grounding of all conductors:</strong> benches, tools, equipment, chairs, and carts are bonded to a common ground point. The connections are deliberately <em>dissipative</em> rather than metallic (typically <span class="math inline">\(10^6 \ldots 10^9\,\Omega\)</span>), so that charge bleeds off slowly instead of flowing as a fast, damaging current pulse.</li>
 <li><strong>Personnel grounding:</strong> wrist straps (with an integrated 1 MΩ resistor for operator safety) at the bench, plus dissipative shoes and flooring while walking—walking across an insulating floor charges a person to several kV within a few steps.</li>
-<li><strong>Dissipative work surfaces and floors</strong>, avoiding both metal (discharge too fast) and plastic (charges up and cannot be discharged).</li>
-<li><strong>Ionizers</strong> neutralize the insulators that cannot be grounded at all—plastic housings, PCB base material, documents, clothing—by blowing ionized air across the workplace.</li>
-<li><strong>Humidity control</strong> (typically 40 … 60 % relative humidity) raises the surface conductivity of insulators and strongly reduces triboelectric charging; dry air in winter is a classic cause of field failures.</li>
-<li><strong>ESD-safe packaging:</strong> devices leave the EPA only inside shielding (Faraday) bags, conductive trays and tubes, or dissipative foam, and are unpacked only inside another EPA.</li>
-<li><strong>Marking, training, and auditing:</strong> the EPA boundary is marked, wrist straps and mats are verified regularly (typically per shift), and personnel is trained—an EPA is a <em>process</em>, not just a set of equipment.</li>
 </ul>
 <aside class="notes">
 <p>On-chip protection is dimensioned for the standardized qualification levels (a few kV HBM, several hundred volts CDM); it does not make a chip immune to the tens of kilovolts that a person or a machine accumulates during handling. Everything <em>outside</em> the chip therefore has to be controlled as well: wafer test, assembly, board manufacturing, and laboratory work are carried out inside an <strong>ESD-protected area (EPA)</strong>, as specified in IEC/EN 61340-5-1 and ANSI/ESD S20.20.</p>
 <p>The principle of an EPA is simple: no ungrounded conductor and no charged insulator is allowed near an unprotected device, and all conductive objects—the operator included—are kept at the <em>same potential</em>, so that no discharge can occur in the first place:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>ESD-Protected Areas</h3>
+<ul>
+<li><strong>Dissipative work surfaces and floors</strong>, avoiding both metal (discharge too fast) and plastic (charges up and cannot be discharged).</li>
+<li><strong>Ionizers</strong> neutralize the insulators that cannot be grounded at all—plastic housings, PCB base material, documents, clothing—by blowing ionized air across the workplace.</li>
+<li><strong>Humidity control</strong> (typically 40 … 60 % relative humidity) raises the surface conductivity of insulators and strongly reduces triboelectric charging; dry air in winter is a classic cause of field failures.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>ESD-Protected Areas</h3>
+<ul>
+<li><strong>ESD-safe packaging:</strong> devices leave the EPA only inside shielding (Faraday) bags, conductive trays and tubes, or dissipative foam, and are unpacked only inside another EPA.</li>
+<li><strong>Marking, training, and auditing:</strong> the EPA boundary is marked, wrist straps and mats are verified regularly (typically per shift), and personnel is trained—an EPA is a <em>process</em>, not just a set of equipment.</li>
+</ul>
+<aside class="notes">
 <p>ESD-sensitive devices and their packaging carry the <strong>ESD susceptibility symbol</strong>, whereas the EPA boundary and the protective equipment itself carry the <strong>ESD protective symbol</strong>, shown in <a href="#/fig-esd-symbols" class="quarto-xref">Figure&nbsp;86</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -609,7 +652,6 @@ Parasitic thyristor in a CMOS inverter, causing latch-up: the vertical PNP (PMOS
 <ul>
 <li>Physical <strong>separation</strong> of the diffusions/wells forming the parasitic BJTs lowers their current gain (shallow-trench isolation helps to increase the electrical distance without a large spacing penalty).</li>
 <li><strong>Reduce the parasitic resistances</strong> <span class="math inline">\(R_\mathrm{well}\)</span> and <span class="math inline">\(R_\mathrm{sub}\)</span> that develop the triggering base-emitter voltages: place many well and substrate ties, and/or use an <strong>epi-process</strong> with a highly doped substrate.</li>
-<li>Use <strong>guard rings</strong> around critical components (e.g., I/O drivers and any junction that may inject carriers) to collect stray charges before they can reach a parasitic base, as shown in <a href="#/fig-guard-rings" class="quarto-xref">Figure&nbsp;88</a>.</li>
 </ul>
 <aside class="notes">
 <p>Latch-up is prevented by weakening the parasitic bipolar transistors and their coupling:</p>
@@ -624,6 +666,12 @@ Parasitic thyristor in a CMOS inverter, causing latch-up: the vertical PNP (PMOS
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Latch-Up Prevention</h3>
+<ul>
+<li>Use <strong>guard rings</strong> around critical components (e.g., I/O drivers and any junction that may inject carriers) to collect stray charges before they can reach a parasitic base, as shown in <a href="#/fig-guard-rings" class="quarto-xref">Figure&nbsp;88</a>.</li>
+</ul>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Latch-Up Prevention</h3>
@@ -659,12 +707,29 @@ Guard rings for latch-up prevention (layout top view): the NMOS is surrounded by
 <h3>Latch-Up Prevention</h3>
 <ul>
 <li>For <strong>output buffers</strong>, the sources of the NMOS and PMOS have to be tied to <span class="math inline">\(V_\mathrm{SS}\)</span> and <span class="math inline">\(V_\mathrm{DD}\)</span> and their drains connected directly to the pad; guard rings (well and substrate ties) are required around every device directly tied to a pad, and <em>double</em> guard rings (an n-well isolator plus a <span class="math inline">\(p^+\)</span> isolator) have to be placed between the n-channel and p-channel buffers, as well as between the buffers and the internal circuitry.</li>
-<li>Rules <code>LU.a</code> and <code>LU.b</code> limit the maximum distance from any <span class="math inline">\(p^+\)</span> active area inside the n-well to an n-well tie, and from any <span class="math inline">\(n^+\)</span> active area inside the p-well to a substrate tie, to 20 µm—this is the rule-deck version of “place many well and substrate ties”.</li>
-<li>Rules <code>LU.c</code> to <code>LU.d1</code> limit how far a tie may extend beyond its contact (6 µm), which keeps the resistance of the tie itself low.</li>
 </ul>
 <aside class="notes">
 <p>Adopting these design practices helps to significantly reduce the risk of latch-up in CMOS circuits.</p>
 <p>Foundries cast these practices into their design rule manuals. IHP SG13G2, for example, dedicates Sec. 7.2 <em>Latch-up Guidelines</em> of the <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a> to the topic:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Latch-Up Prevention</h3>
+<ul>
+<li>Rules <code>LU.a</code> and <code>LU.b</code> limit the maximum distance from any <span class="math inline">\(p^+\)</span> active area inside the n-well to an n-well tie, and from any <span class="math inline">\(n^+\)</span> active area inside the p-well to a substrate tie, to 20 µm—this is the rule-deck version of “place many well and substrate ties”.</li>
+<li>Rules <code>LU.c</code> to <code>LU.d1</code> limit how far a tie may extend beyond its contact (6 µm), which keeps the resistance of the tie itself low.</li>
+</ul>
+<aside class="notes">
 <p>Beware: these latch-up rules are <em>not</em> checked by default in the SG13G2 DRC deck—the check has to be enabled explicitly.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {

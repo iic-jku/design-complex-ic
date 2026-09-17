@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -252,9 +252,30 @@ Cross section of an NMOS transistor for increasing gate voltage (drain and sourc
 <h3>MOSFET Operation in a Nutshell</h3>
 <ul>
 <li><strong>Flatband (a):</strong> When the gate is at a specific negative voltage (the flatband voltage <span class="math inline">\(V_\mathrm{fb}\)</span>), and all other terminals are at <span class="math inline">\(0\,\text{V}\)</span>, a depletion zone forms only around the drain and source junctions. No current can flow, since drain and source are <span class="math inline">\(n^+\)</span>-doped while the substrate is <span class="math inline">\(p\)</span>-type, so the two junctions form back-to-back diodes.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>MOSFET Operation in a Nutshell</h3>
+<ul>
 <li><strong>Zero gate voltage (b):</strong> When the gate voltage is increased to <span class="math inline">\(0\,\text{V}\)</span>, a depletion zone also forms below the gate. The <span class="math inline">\(p\)</span>-type acceptor ions in this region have captured an electron and are thus immobile, negatively charged sites (illustrated by the circled minus symbols)—still, no current can flow.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>MOSFET Operation in a Nutshell</h3>
+<ul>
 <li><strong>Below threshold (c):</strong> When the gate voltage increases further (but stays below the threshold voltage), the depletion zone below the gate deepens, reaching a maximum depletion width <span class="math inline">\(W_\mathrm{dep}\)</span> when <span class="math inline">\(V_\mathrm{GS}= V_\mathrm{th}\)</span>. There is still no conduction between drain and source, because there are no (or at least very few) free electrons in the channel region.</li>
-<li><strong>Inversion (d):</strong> When the gate voltage rises above the threshold voltage <span class="math inline">\(V_\mathrm{th}\)</span>, <strong>inversion</strong> occurs: a thin layer of free electrons forms directly below the gate oxide, creating a conducting channel of electrons between drain and source. The source of the electrons in the inversion layer is the <span class="math inline">\(n^+\)</span>-doped source region, which is connected to ground. The electrons are pulled from the source into the channel by the positive gate voltage, and they can now flow to the drain if a drain voltage is applied.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>MOSFET Operation in a Nutshell</h3>
+<ul>
+<li><strong>Inversion (d):</strong> When the gate voltage rises above the threshold voltage <span class="math inline">\(V_\mathrm{th}\)</span>, <strong>inversion</strong> occurs: a thin layer of free electrons forms directly below the gate oxide, creating a conducting channel of electrons between drain and source. The source of the electrons in the inversion layer is the <span class="math inline">\(n^+\)</span>-doped source region, which is connected to ground.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>MOSFET Operation in a Nutshell</h3>
+<ul>
+<li>The electrons are pulled from the source into the channel by the positive gate voltage, and they can now flow to the drain if a drain voltage is applied.</li>
 </ul>
 <aside class="notes">
 <p>Once the channel exists, the drain voltage determines the mode of conduction, as shown in <a href="#/fig-nmos-drain-sweep" class="quarto-xref">Figure&nbsp;5</a>:</p>
@@ -291,6 +312,11 @@ Figure&nbsp;5: Cross section of an NMOS transistor in inversion for increasing d
 <h3>MOSFET Operation in a Nutshell</h3>
 <ul>
 <li><strong>Triode (a):</strong> If a small voltage is applied between drain and source, a current flows, and the depletion zone around the drain widens. The drain current is a function of both <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>; the device operates in the <strong>triode</strong> region. The MOSFET operates like a <em>voltage-controlled resistor</em> in this region.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>MOSFET Operation in a Nutshell</h3>
+<ul>
 <li><strong>Saturation (b):</strong> If the drain-source voltage is increased beyond <span class="math inline">\(V_\mathrm{DS}&gt; V_\mathrm{GS}- V_\mathrm{th}\)</span>, the channel is pinched off at the drain side, and the drain current is (to first order) no longer a function of <span class="math inline">\(V_\mathrm{DS}\)</span>, only of <span class="math inline">\(V_\mathrm{GS}\)</span>—the device is now in <strong>saturation</strong>. The MOSFET operates like a <em>voltage-controlled current source</em> in this region.</li>
 </ul>
 </section>
@@ -534,17 +560,28 @@ Simplified energy-band diagram of the MOS structure (<span class="math inline">\
 V_\mathrm{th}= \Phi_\mathrm{fb}+ 2 \Phi_\mathrm{B}+ \frac{\sqrt{2 q N_\mathrm{a}\varepsilon_\mathrm{si}\cdot 2 \Phi_\mathrm{B}}}{C'_\mathrm{ox}} = 0.53\,\text{V}
 \]</span></p>
 </div>
-<div class="fragment">
-<p>Using these values, we can also calculate the depletion width <span class="math inline">\(W_\mathrm{dep}\)</span> in inversion, and the corresponding <span class="math inline">\(C'_\mathrm{dep}\)</span> (compare <span class="math inline">\(W_\mathrm{dep}\)</span> to <span class="math inline">\(t_\mathrm{ox}\)</span>, and <span class="math inline">\(C'_\mathrm{dep}\)</span> to <span class="math inline">\(C'_\mathrm{ox}\)</span>):</p>
 </div>
-<div class="fragment">
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>The MOS Capacitor and the Threshold Voltage</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Example Calculation of the Threshold Voltage</strong></p>
+</div>
+<div class="callout-content">
+<p>Using these values, we can also calculate the depletion width <span class="math inline">\(W_\mathrm{dep}\)</span> in inversion, and the corresponding <span class="math inline">\(C'_\mathrm{dep}\)</span> (compare <span class="math inline">\(W_\mathrm{dep}\)</span> to <span class="math inline">\(t_\mathrm{ox}\)</span>, and <span class="math inline">\(C'_\mathrm{dep}\)</span> to <span class="math inline">\(C'_\mathrm{ox}\)</span>):</p>
 <p><span class="math display">\[
 W_\mathrm{dep}= \sqrt{\frac{2 \varepsilon_\mathrm{si}\cdot 2 \Phi_\mathrm{B}}{q N_\mathrm{a}}} = 21.0\,\text{nm}
 \quad \text{and} \quad
 C'_\mathrm{dep}= \frac{\varepsilon_\mathrm{si}}{W_\mathrm{dep}} = 5.0\,\text{fF}/\mu\text{m}^2
 \]</span></p>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -901,10 +938,23 @@ V_\mathrm{th}= V_\mathrm{th0} + \gamma \left( \sqrt{2 \Phi_\mathrm{B}+ V_\mathrm
 V_\mathrm{th}= 0.53 + 0.58 \left( \sqrt{2 \cdot 0.50 + 0.5} - \sqrt{2 \cdot 0.50} \right) = 0.66\,\text{V}
 \]</span></p>
 </div>
-<div class="fragment">
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Body Effect</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Example Calculation of the Body Effect (NMOS)</strong></p>
+</div>
+<div class="callout-content">
 <p>In this case, the threshold voltage has been <strong>increased by 130 mV</strong>. Conversely, by tying the bulk to a higher potential than the source, the threshold voltage can also be <strong>decreased</strong>, but beware of the risk of forward-biasing the source-bulk pn-junction (see <a href="#/fig-cmos-cross-section" class="quarto-xref">Figure&nbsp;10</a>)!</p>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -1881,11 +1931,6 @@ Threshold-voltage shift <span class="math inline">\(\Delta V_\mathrm{th}\)</span
 <li>The device width is quantized, with <span class="math inline">\(W = W_\mathrm{F} + 2 H_\mathrm{F}\)</span> per fin (<span class="math inline">\(W_\mathrm{F}\)</span> is the width and <span class="math inline">\(H_\mathrm{F}\)</span> the height of the fin), so the circuit design style must be adapted (the design parameter is the number of fins <span class="math inline">\(N_\mathrm{F}\)</span> instead of <span class="math inline">\(W\)</span>).</li>
 <li>Drain and source are contacted at the ends of the fin, so the series resistances <span class="math inline">\(R_\mathrm{S}\)</span> and <span class="math inline">\(R_\mathrm{D}\)</span> are higher, degrading the transconductance due to series feedback: <span class="math inline">\(g_\mathrm{m,eff} = g_\mathrm{m}/ (1 + g_\mathrm{m}R_\mathrm{S})\)</span>.</li>
 <li>Since the subthreshold slope is improved (smaller), the leakage current is lower, which allows lowering <span class="math inline">\(V_\mathrm{th}\)</span> and <span class="math inline">\(V_\mathrm{DD}\)</span>.</li>
-<li>DIBL and thus <span class="math inline">\(g_\mathrm{ds}\)</span> are lower, so the MOSFET self-gain <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> is high.</li>
-<li>There is practically no body effect, and due to the low channel doping the mobility is high, leading to improved <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(\mu_\mathrm{n}\approx \mu_\mathrm{p}\)</span>.</li>
-<li>The silicon fins are isolated and surrounded by SiO<sub>2</sub>, so self-heating of the fin can be an issue.</li>
-<li>The 3D structure increases the coupling capacitance <span class="math inline">\(C_\mathrm{ov}\)</span>.</li>
-<li>A drawback is that SRAM and digital standard cells often use minimum-size transistors, and for yield reasons a minimum-sized FinFET requires two fins—a strong constraint when, e.g., the PMOS needs to be sized differently from the NMOS (the next step up is three fins, a large quantization step).</li>
 </ul>
 <aside class="notes">
 <p>Another alternative is to tilt the silicon channel by 90°, so that it sticks out of the wafer like a “fin,” and to wrap the gate around this fin on three sides: the <a href="https://en.wikipedia.org/wiki/Fin_field-effect_transistor"><strong>FinFET</strong></a> (or tri-gate MOSFET), shown in <a href="#/fig-utb-finfet" class="quarto-xref">Figure&nbsp;18</a> (b). FinFETs have a few important differences compared to bulk MOSFETs:</p>
@@ -1900,6 +1945,21 @@ Threshold-voltage shift <span class="math inline">\(\Delta V_\mathrm{th}\)</span
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Solving DIBL: FinFET and Nanosheet</h3>
+<ul>
+<li>DIBL and thus <span class="math inline">\(g_\mathrm{ds}\)</span> are lower, so the MOSFET self-gain <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> is high.</li>
+<li>There is practically no body effect, and due to the low channel doping the mobility is high, leading to improved <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(\mu_\mathrm{n}\approx \mu_\mathrm{p}\)</span>.</li>
+<li>The silicon fins are isolated and surrounded by SiO<sub>2</sub>, so self-heating of the fin can be an issue.</li>
+<li>The 3D structure increases the coupling capacitance <span class="math inline">\(C_\mathrm{ov}\)</span>.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Solving DIBL: FinFET and Nanosheet</h3>
+<ul>
+<li>A drawback is that SRAM and digital standard cells often use minimum-size transistors, and for yield reasons a minimum-sized FinFET requires two fins—a strong constraint when, e.g., the PMOS needs to be sized differently from the NMOS (the next step up is three fins, a large quantization step).</li>
+</ul>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Solving DIBL: FinFET and Nanosheet</h3>
@@ -2260,10 +2320,27 @@ Transconductance efficiency <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D
 <li>Choose either the bias current or the required <span class="math inline">\(g_\mathrm{m}\)</span>, and calculate the other one using <a href="#/eq-mosfet-ic-gm" class="quarto-xref">Equation&nbsp;43</a>.</li>
 <li>Using <a href="#/eq-mosfet-ic-id" class="quarto-xref">Equation&nbsp;42</a>, calculate <span class="math inline">\(I_\mathrm{S}\)</span> from the known <span class="math inline">\(I_\mathrm{D}\)</span>.</li>
 <li>Depending on the requirements for transistor speed (minimum <span class="math inline">\(L\)</span>), matching (large <span class="math inline">\(W \cdot L\)</span>), or small <span class="math inline">\(g_\mathrm{ds}\)</span> (large <span class="math inline">\(L\)</span>), choose the appropriate <span class="math inline">\(L\)</span>; use <a href="#/eq-mosfet-is" class="quarto-xref">Equation&nbsp;40</a> to calculate the corresponding <span class="math inline">\(W\)</span>.</li>
-<li>Finally, estimate <span class="math inline">\(f_\mathrm{T}\)</span> using <a href="#/eq-mosfet-ic-ft" class="quarto-xref">Equation&nbsp;44</a>. From <span class="math inline">\(f_\mathrm{T}\)</span>, the required bandwidth of the circuit can be estimated, and the sizing can be iterated if necessary.</li>
 </ol>
 <aside class="notes">
 <p>The design procedure using the inversion coefficient is as follows:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Sizing Procedure</h3>
+<ol start="5" type="1">
+<li>Finally, estimate <span class="math inline">\(f_\mathrm{T}\)</span> using <a href="#/eq-mosfet-ic-ft" class="quarto-xref">Equation&nbsp;44</a>. From <span class="math inline">\(f_\mathrm{T}\)</span>, the required bandwidth of the circuit can be estimated, and the sizing can be iterated if necessary.</li>
+</ol>
+<aside class="notes">
 <p>Now the most important transistor parameters (<span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, <span class="math inline">\(I_\mathrm{D}\)</span>, <span class="math inline">\(g_\mathrm{m}\)</span>, <span class="math inline">\(V_\mathrm{GS}\)</span>, and <span class="math inline">\(f_\mathrm{T}\)</span>) are selected and known.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {

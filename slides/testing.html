@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -281,6 +281,11 @@ Figure&nbsp;59: Structure of a mixed-signal automatic test equipment (ATE): the 
 <ul>
 <li><strong>Time is money:</strong> A tester plus handler can cost several million dollars, and one second of test time costs 3 to 5 cents. The test program needs a certain time (up to minutes) to cover all relevant functional blocks and critical parameters. Multi-site testing (testing 2/4/8 devices in parallel) reduces the effective test time per device.</li>
 <li><strong>The test socket introduces parasitics</strong> (<span class="math inline">\(R\)</span>, <span class="math inline">\(L\)</span>, <span class="math inline">\(C\)</span>) which impact performance and make precision measurements difficult.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Mixed-Signal Testing Challenges</h3>
+<ul>
 <li><strong>Accuracy</strong> is limited by interference, calibration, and measurement time.</li>
 <li><strong>Repeatability &amp; reproducibility (R&amp;R)</strong> are required to obtain the same test results across different testers, DIBs, and test sites.</li>
 </ul>
@@ -359,7 +364,6 @@ Figure&nbsp;61: Repeatability versus reproducibility: (a) repeatability is the s
 <li><strong>Assumptions</strong> made for particular tests, and why.</li>
 <li>A <strong>hardware setup</strong> diagram for each test.</li>
 <li>Identification of <strong>critical test parameters</strong>: not all parameters from the datasheet need to be (or can be) tested in production, due to test time or measurement error; such parameters are guaranteed by design and marked accordingly in the datasheet.</li>
-<li><strong>Binning information</strong>: devices might be binned into pass/fail or different pass grades (e.g., by maximum clock frequency). Continuity fails are binned separately, because they could be caused by contact issues of the handler or socket.</li>
 </ul>
 <aside class="notes">
 <p>The <strong>test plan</strong> is the governing document for generating the test program and contains:</p>
@@ -374,6 +378,12 @@ Figure&nbsp;61: Repeatability versus reproducibility: (a) repeatability is the s
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>The Test Plan</h3>
+<ul>
+<li><strong>Binning information</strong>: devices might be binned into pass/fail or different pass grades (e.g., by maximum clock frequency). Continuity fails are binned separately, because they could be caused by contact issues of the handler or socket.</li>
+</ul>
 </section>
 
 <section id="sec-testing-types" class="title-slide slide level2 center" data-number="6.5">
@@ -628,10 +638,6 @@ Limitation of the stuck-at fault model: a CMOS NAND gate with an open defect in 
 <ul>
 <li><strong>Each flip-flop</strong> is converted into a <strong>scan register</strong> (with a small area overhead): in <strong>mission mode</strong>, the flip-flops behave as usual; in <strong>scan mode</strong>, all flip-flops form a shift register, so their contents can be shifted in and out through dedicated pins.</li>
 <li>If each register can be observed and controlled this way, the test problem reduces to testing the combinational logic between the registers.</li>
-<li>During the production test, test patterns are shifted into the scan chains, one clock cycle is applied, and the captured result is shifted out and compared to the expected result (→ pass/fail). Digital pattern generators in the ATE hardware accelerate this.</li>
-<li>The patterns are generated automatically by software (<a href="https://en.wikipedia.org/wiki/Automatic_test_pattern_generation">ATPG</a>) from the design netlist, achieving high stuck-at fault coverage with a minimum number of patterns.</li>
-<li>To speed up testing further, multiple chains are operated in parallel (requiring test pins for the parallel chain inputs and outputs).</li>
-<li>An extension of scan is to use internal pattern generators (e.g., based on a pseudo-random number generator) as logic inputs, and to compress the outputs into a syndrome (e.g., a transition count or hash) that is compared to the expected syndrome → logic <strong>BIST</strong>.</li>
 </ul>
 <aside class="notes">
 <p>A manufacturing test would ideally check every node in the circuit, applying the smallest sequence of test vectors necessary to prove that each node is not stuck. To increase observability and controllability, i.e., <a href="https://en.wikipedia.org/wiki/Design_for_testing"><strong>design for test (DFT)</strong></a>, the <strong>scan-path test</strong> is introduced, shown in <a href="#/fig-scan-path" class="quarto-xref">Figure&nbsp;66</a>:</p>
@@ -646,6 +652,20 @@ Limitation of the stuck-at fault model: a CMOS NAND gate with an open defect in 
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Scan-Path Test</h3>
+<ul>
+<li>During the production test, test patterns are shifted into the scan chains, one clock cycle is applied, and the captured result is shifted out and compared to the expected result (→ pass/fail). Digital pattern generators in the ATE hardware accelerate this.</li>
+<li>The patterns are generated automatically by software (<a href="https://en.wikipedia.org/wiki/Automatic_test_pattern_generation">ATPG</a>) from the design netlist, achieving high stuck-at fault coverage with a minimum number of patterns.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Scan-Path Test</h3>
+<ul>
+<li>To speed up testing further, multiple chains are operated in parallel (requiring test pins for the parallel chain inputs and outputs).</li>
+<li>An extension of scan is to use internal pattern generators (e.g., based on a pseudo-random number generator) as logic inputs, and to compress the outputs into a syndrome (e.g., a transition count or hash) that is compared to the expected syndrome → logic <strong>BIST</strong>.</li>
+</ul>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Scan-Path Test</h3>
