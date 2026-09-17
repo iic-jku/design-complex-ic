@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
-<meta name="dcterms.date" content="2026-09-16">
+<meta name="dcterms.date" content="2026-09-17">
 
 <title>Design of Complex Integrated Circuits</title>
 <style>
@@ -611,6 +611,20 @@ window.Quarto = {
   <li><a href="#sec-simulation-digital" id="toc-sec-simulation-digital" class="nav-link" data-scroll-target="#sec-simulation-digital"><span class="header-section-number">11.7</span> Digital Simulation</a></li>
   <li><a href="#sec-simulation-mixed" id="toc-sec-simulation-mixed" class="nav-link" data-scroll-target="#sec-simulation-mixed"><span class="header-section-number">11.8</span> Mixed-Signal Simulation</a></li>
   </ul></li>
+  <li><a href="#sec-project" id="toc-sec-project" class="nav-link" data-scroll-target="#sec-project"><span class="header-section-number">12</span> Project Management</a>
+  <ul class="collapse">
+  <li><a href="#sec-project-goals" id="toc-sec-project-goals" class="nav-link" data-scroll-target="#sec-project-goals"><span class="header-section-number">12.1</span> Goals and Constraints</a></li>
+  <li><a href="#sec-project-phases" id="toc-sec-project-phases" class="nav-link" data-scroll-target="#sec-project-phases"><span class="header-section-number">12.2</span> Project Phases</a></li>
+  <li><a href="#sec-project-sow" id="toc-sec-project-sow" class="nav-link" data-scroll-target="#sec-project-sow"><span class="header-section-number">12.3</span> Statement of Work</a></li>
+  <li><a href="#sec-project-wbs" id="toc-sec-project-wbs" class="nav-link" data-scroll-target="#sec-project-wbs"><span class="header-section-number">12.4</span> Work Breakdown Structure</a></li>
+  <li><a href="#sec-project-estimation" id="toc-sec-project-estimation" class="nav-link" data-scroll-target="#sec-project-estimation"><span class="header-section-number">12.5</span> Effort Estimation</a></li>
+  <li><a href="#sec-project-gantt" id="toc-sec-project-gantt" class="nav-link" data-scroll-target="#sec-project-gantt"><span class="header-section-number">12.6</span> Scheduling</a></li>
+  <li><a href="#sec-project-raci" id="toc-sec-project-raci" class="nav-link" data-scroll-target="#sec-project-raci"><span class="header-section-number">12.7</span> Roles and Responsibilities</a></li>
+  <li><a href="#sec-project-risk" id="toc-sec-project-risk" class="nav-link" data-scroll-target="#sec-project-risk"><span class="header-section-number">12.8</span> Risk Management</a></li>
+  <li><a href="#sec-project-reviews" id="toc-sec-project-reviews" class="nav-link" data-scroll-target="#sec-project-reviews"><span class="header-section-number">12.9</span> Reviews and Tapeout Checklist</a></li>
+  <li><a href="#sec-project-tracking" id="toc-sec-project-tracking" class="nav-link" data-scroll-target="#sec-project-tracking"><span class="header-section-number">12.10</span> Tracking and Control</a></li>
+  <li><a href="#sec-project-team" id="toc-sec-project-team" class="nav-link" data-scroll-target="#sec-project-team"><span class="header-section-number">12.11</span> Team and Communication</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dcic.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -646,7 +660,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 16, 2026</p>
+      <p class="date">September 17, 2026</p>
     </div>
   </div>
   
@@ -3984,7 +3998,7 @@ Figure&nbsp;79: Mixed-signal/custom design flow with open-source tools: the sche
 </section>
 <section id="sec-esd" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Electrostatic Discharge and Latch-Up</h1>
-<p>This chapter covers two reliability hazards that every IC design must handle: <a href="https://en.wikipedia.org/wiki/Electrostatic_discharge"><strong>electrostatic discharge (ESD)</strong></a>, the sudden discharge of statically charged objects into the chip, and <a href="https://en.wikipedia.org/wiki/Latch-up"><strong>latch-up</strong></a>, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows <span class="citation" data-cites="Amerasekera_ESD">(<a href="#ref-Amerasekera_ESD" role="doc-biblioref">Amerasekera and Duvvury 2002</a>)</span>; overviews of ESD test methods and of protection structures can be found in <span class="citation" data-cites="Ker_2001 Ker_2002">(<a href="#ref-Ker_2001" role="doc-biblioref"><span class="nocase">Ker et al.</span> 2001</a>; <a href="#ref-Ker_2002" role="doc-biblioref">Ker and Chuang 2002</a>)</span>.</p>
+<p>This chapter covers two reliability hazards that every IC design must handle: <a href="https://en.wikipedia.org/wiki/Electrostatic_discharge"><strong>electrostatic discharge (ESD)</strong></a>, the sudden discharge of statically charged objects into the chip, and <a href="https://en.wikipedia.org/wiki/Latch-up"><strong>latch-up</strong></a>, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows <span class="citation" data-cites="Amerasekera_ESD">(<a href="#ref-Amerasekera_ESD" role="doc-biblioref">Amerasekera and Duvvury 2002</a>)</span>; overviews of ESD test methods and of protection structures can be found in <span class="citation" data-cites="Ker_2001 Ker_2002">(<a href="#ref-Ker_2001" role="doc-biblioref">Ker et al. 2001</a>; <a href="#ref-Ker_2002" role="doc-biblioref">Ker and Chuang 2002</a>)</span>.</p>
 <section id="sec-esd-basics" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="sec-esd-basics"><span class="header-section-number">9.1</span> Electrostatic Discharge</h2>
 <p>When an external object at a high potential (e.g., charged by the <a href="https://en.wikipedia.org/wiki/Triboelectric_effect">triboelectric effect</a> or by induction from an electric field) touches one of the connections of a circuit, the resulting <strong>electrostatic discharge</strong> produces a large transient voltage or current—for example, when ICs are handled by humans or by machines with faulty grounding. ESD can even occur without actual contact, as an arc across an air gap. Devices sustain two types of <em>permanent damage</em> as a result of ESD:</p>
@@ -4062,7 +4076,7 @@ Figure&nbsp;82: ESD protection of a bidirectional digital I/O pad: the primary d
 </section>
 <section id="analog-and-rf-pads" class="level3" data-number="9.1.3">
 <h3 data-number="9.1.3" class="anchored" data-anchor-id="analog-and-rf-pads"><span class="header-section-number">9.1.3</span> Analog and RF Pads</h3>
-<p><span class="math inline">\(V_\mathrm{DD}\)</span> pads and digital input-only or output-only pads are easily derived from the general I/O pad shown in <a href="#fig-esd-io-protection" class="quarto-xref">Figure&nbsp;82</a>. <strong>Analog input and output pads</strong> are more critical, since the series resistances (<span class="math inline">\(R_\mathrm{s}\)</span>, <span class="math inline">\(R_\mathrm{in}\)</span>) might be prohibitive for the intended circuit function; usually, special ESD protection tailored to the specific function is designed for analog pins. For <strong>high-frequency pads</strong>, ESD protection is <strong>highly critical</strong>: often no series resistance is acceptable at all, and the protection elements add parasitic capacitance that limits the bandwidth of the I/O. Since the size of an ESD element is determined by the required low resistance and thermal dissipation, RF I/Os often limit the ESD rating of an RFIC, and RF ESD protection is always custom-designed <span class="citation" data-cites="Ker_2000">(see, e.g., <a href="#ref-Ker_2000" role="doc-biblioref"><span class="nocase">Ker et al.</span> 2000</a>)</span>.</p>
+<p><span class="math inline">\(V_\mathrm{DD}\)</span> pads and digital input-only or output-only pads are easily derived from the general I/O pad shown in <a href="#fig-esd-io-protection" class="quarto-xref">Figure&nbsp;82</a>. <strong>Analog input and output pads</strong> are more critical, since the series resistances (<span class="math inline">\(R_\mathrm{s}\)</span>, <span class="math inline">\(R_\mathrm{in}\)</span>) might be prohibitive for the intended circuit function; usually, special ESD protection tailored to the specific function is designed for analog pins. For <strong>high-frequency pads</strong>, ESD protection is <strong>highly critical</strong>: often no series resistance is acceptable at all, and the protection elements add parasitic capacitance that limits the bandwidth of the I/O. Since the size of an ESD element is determined by the required low resistance and thermal dissipation, RF I/Os often limit the ESD rating of an RFIC, and RF ESD protection is always custom-designed <span class="citation" data-cites="Ker_2000">(see, e.g., <a href="#ref-Ker_2000" role="doc-biblioref">Ker et al. 2000</a>)</span>.</p>
 </section>
 <section id="snapback-devices-the-ggnmos" class="level3" data-number="9.1.4">
 <h3 data-number="9.1.4" class="anchored" data-anchor-id="snapback-devices-the-ggnmos"><span class="header-section-number">9.1.4</span> Snapback Devices: The ggNMOS</h3>
@@ -4622,6 +4636,487 @@ R_\mathrm{G,nqs} = \frac{1}{5 g_\mathrm{m}}
 <li><strong>Digital → analog (D2A):</strong> the IE is a voltage source with optional output resistance and finite transition times; the logic <code>0</code>/<code>1</code> levels are mapped to voltage levels.</li>
 <li><strong>Analog → digital (A2D):</strong> the IE is a comparator with adjustable thresholds for <code>0</code> and <code>1</code> (and <code>X</code> in between).</li>
 </ul>
+</section>
+</section>
+<section id="sec-project" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Project Management</h1>
+<p>Designing an integrated circuit is a complex process with many dependencies and interrelated tasks. Therefore, careful project planning is essential to ensure that all activities are coordinated and completed successfully.</p>
+<p>A project plan, in its simplest form, is an attempt at a timetable for all the activities which make up a project; as a minimum, it sets out <strong>“how,”</strong> <strong>“who does what,”</strong> and <strong>“when.”</strong> A more sophisticated plan also states <strong>“at which quality level,”</strong> <strong>“at what cost,”</strong> and <strong>“with which resources.”</strong> Planning is an iterative process, and the amount of detail included varies over time. The project plan is prepared and tracked by the project management, with the advice and assistance of the project sponsor, customer, project team, and other stakeholders. General introductions to the field are <span class="citation" data-cites="PMI_PMBOK">(<a href="#ref-PMI_PMBOK" role="doc-biblioref">Project Management Institute 2021</a>)</span> and <span class="citation" data-cites="Kerzner_PM">(<a href="#ref-Kerzner_PM" role="doc-biblioref">Kerzner 2022</a>)</span>.</p>
+<p>IC projects have a few properties that make planning both harder and more important than in many other engineering disciplines:</p>
+<ul>
+<li><strong>Tapeout is irreversible.</strong> Once the layout database is sent to the foundry, no change is possible until silicon returns, typically after two to four months of fabrication, packaging, and shipping. A bug found afterward costs a <strong>re-spin</strong>, i.e., new masks (see <a href="#sec-economy-nre" class="quarto-xref">Section&nbsp;7.2</a>) and another full fabrication cycle.</li>
+<li><strong>Deadlines are fixed from the outside.</strong> Prototypes are often fabricated on a <a href="https://en.wikipedia.org/wiki/Multi-project_wafer_service"><strong>multi-project wafer (MPW)</strong></a> shuttle with a small number of fixed tapeout dates per year; missing a shuttle delays the project by months, not by days.</li>
+<li><strong>Verification dominates.</strong> A large and growing fraction of the effort is not spent on designing but on verifying the design. Nevertheless, industry surveys show that only a minority of IC/ASIC projects achieve first-silicon success, and that most projects are behind schedule <span class="citation" data-cites="Foster_2024">(<a href="#ref-Foster_2024" role="doc-biblioref">Foster 2024</a>)</span>.</li>
+</ul>
+<p>Good project management cannot remove technical risk, but it makes the risk visible early and leaves enough time and budget to deal with it.</p>
+<section id="sec-project-goals" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="sec-project-goals"><span class="header-section-number">12.1</span> Goals and Constraints</h2>
+<p>Every project is bounded by the <strong>triple constraint</strong> of <em>scope</em> (what is delivered, including its quality), <em>time</em>, and <em>cost</em>. These three are coupled: adding functionality to an IC under a fixed tapeout date increases cost (more engineers, more licenses) or lowers quality (less verification); a fixed team and scope define the earliest realistic tapeout date. The project management has to make these trade-offs explicit and agree on them with the sponsor—a plan that silently assumes all three can be held at once is not a plan.</p>
+<p>Project goals should be formulated so that everybody can decide whether they are met. A widely used checklist is <strong>SMART</strong>: goals are <em>specific</em>, <em>measurable</em>, <em>achievable</em>, <em>relevant</em>, and <em>time-bound</em> (in the original proposal <span class="citation" data-cites="Doran_1981">(<a href="#ref-Doran_1981" role="doc-biblioref">Doran 1981</a>)</span>, the letters stood for <em>specific</em>, <em>measurable</em>, <em>assignable</em>, <em>realistic</em>, and <em>time-related</em>). “Design a low-power ADC” is not a goal; “tape out a 10 bit SAR ADC with <span class="math inline">\(\geq 9.5\)</span> bit ENOB at 1 MS/s and <span class="math inline">\(\leq 100\,\mu\text{W}\)</span> on the IHP SG13G2 shuttle of March” is.</p>
+<p>For an IC, the goals are condensed into the <strong>specification</strong>. The most expensive changes are those made late, as each change ripples through design, layout, verification, test program, and documentation. Therefore, the specification is reviewed and <strong>frozen</strong> at an early milestone; later changes are still possible, but go through a formal <strong>change request</strong> that assesses the impact on schedule and cost before the change is accepted.</p>
+</section>
+<section id="sec-project-phases" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="sec-project-phases"><span class="header-section-number">12.2</span> Project Phases</h2>
+<p>The technical work of an IC project follows the <strong>V-model</strong> <span class="citation" data-cites="Forsberg_Mooz_1991">(<a href="#ref-Forsberg_Mooz_1991" role="doc-biblioref">Forsberg and Mooz 1991</a>)</span>: on the descending branch, the system is decomposed from the specification over the architecture into blocks, which are designed and laid out; on the ascending branch, the blocks are verified and integrated, and the complete chip is verified against the specification. Each level of the descending branch defines the test criteria for the same level on the ascending branch—the block specification is the reference for block verification, and the chip specification the reference for silicon characterization. In contrast to software, the tip of the V contains the tapeout and fabrication, which cannot be iterated quickly.</p>
+<p><a href="#tbl-project-phases" class="quarto-xref">Table&nbsp;15</a> lists typical phases, each concluded by a milestone that marks a decision point (a <strong>gate</strong>) at which the results are reviewed before the next phase is started.</p>
+<div id="tbl-project-phases" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-project-phases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;15: Typical phases and milestones of an IC project
+</figcaption>
+<div aria-describedby="tbl-project-phases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 40%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Phase</th>
+<th style="text-align: left;">Main activities</th>
+<th style="text-align: left;">Milestone (gate)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Definition</td>
+<td style="text-align: left;">Requirements, feasibility, technology choice, budget</td>
+<td style="text-align: left;">Specification and project plan frozen</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Architecture</td>
+<td style="text-align: left;">System modeling, block partitioning, block specifications, test and debug concept</td>
+<td style="text-align: left;">Architecture review</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Design</td>
+<td style="text-align: left;">Schematic/RTL design, block simulation and verification</td>
+<td style="text-align: left;">Design review</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Layout</td>
+<td style="text-align: left;">Floor plan, block layout, P&amp;R, top-level assembly, PEX simulation</td>
+<td style="text-align: left;">Layout review</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tapeout</td>
+<td style="text-align: left;">DRC/LVS/ERC sign-off, final verification, database release</td>
+<td style="text-align: left;">Tapeout</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fabrication</td>
+<td style="text-align: left;">Test PCB, test program, lab setup (in parallel to the fab run)</td>
+<td style="text-align: left;">Silicon arrival</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Evaluation</td>
+<td style="text-align: left;">Functional test, characterization, debug</td>
+<td style="text-align: left;">Evaluation report</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Qualification</td>
+<td style="text-align: left;">Reliability tests, production test release (products only)</td>
+<td style="text-align: left;">Release to production</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>For the design phase itself, iterative (“agile”) ways of working have proven useful, especially for RTL and software, where regression tests can be run automatically. The hard gate at tapeout, however, remains; iterations have to converge before it.</p>
+</section>
+<section id="sec-project-sow" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="sec-project-sow"><span class="header-section-number">12.3</span> Statement of Work</h2>
+<p>Project goals are often collected in a <a href="https://en.wikipedia.org/wiki/Statement_of_work"><strong>statement of work (SOW)</strong></a>: specifications, cost, quality, deadlines, and project deliverables, plus a detailed description of the work (possibly in the form of a legal contract), containing:</p>
+<ol type="1">
+<li>Introduction/background</li>
+<li>Technical description</li>
+<li>Timeline and milestones</li>
+<li>Payment details</li>
+<li>Client expectations</li>
+</ol>
+<p>For the individual tasks within the project, the SOW defines the estimated duration, resources, and cost; measures of performance (what are suitable indicators?); risks and uncertainties; and the reporting procedure. The <strong>deliverables (milestones)</strong> are captured as a list of items or activities needed to meet the defined goals, together with when and how each item must be delivered. Equally important is what is <em>not</em> part of the work (e.g., “package qualification is not included”), as unclear boundaries are a frequent source of conflict with customers and partners.</p>
+</section>
+<section id="sec-project-wbs" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="sec-project-wbs"><span class="header-section-number">12.4</span> Work Breakdown Structure</h2>
+<p>To arrive at the individual work packages for the SOW, it is useful to employ a <a href="https://en.wikipedia.org/wiki/Work_breakdown_structure"><strong>work breakdown structure (WBS)</strong></a> to derive the tasks iteratively: the WBS breaks the project down into several deliverables; each deliverable consists of <strong>work packages (WPs)</strong>, and each work package can consist of several work units, as shown in <a href="#fig-wbs" class="quarto-xref">Figure&nbsp;91</a>.</p>
+<div id="cell-fig-wbs" class="cell" data-execution_count="90">
+<div class="cell-output cell-output-display">
+<div id="fig-wbs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wbs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-wbs-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-91" title="Figure&nbsp;91: Work breakdown structure (WBS): the project is broken down into deliverables, each deliverable into work packages (WP), and each work package into work units."><img src="dcic_files/figure-html/fig-wbs-output-1.png" width="662" height="355" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wbs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;91: Work breakdown structure (WBS): the project is broken down into deliverables, each deliverable into work packages (WP), and each work package into work units.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A few rules help to create a useful WBS <span class="citation" data-cites="PMI_WBS">(<a href="#ref-PMI_WBS" role="doc-biblioref">Project Management Institute 2019</a>)</span>:</p>
+<ul>
+<li><strong>100 % rule:</strong> the WBS contains the <em>complete</em> work of the project—no more and no less—and the children of each element add up to 100 % of the parent’s work. Work that does not appear in the WBS will not be planned, staffed, or budgeted.</li>
+<li><strong>Deliverable-oriented:</strong> the elements are outcomes (e.g., “bandgap reference, verified layout”), not activities or departments. This makes progress measurable.</li>
+<li><strong>Mutually exclusive:</strong> no work is contained in two elements, otherwise it is counted twice.</li>
+<li><strong>Adequate granularity:</strong> a work package is small enough to be estimated and assigned to one responsible person, and large enough to be worth tracking; a common heuristic is a size between one day and a few weeks of effort.</li>
+</ul>
+<p>Each work package is described in a short <strong>WBS dictionary</strong> entry: responsible person, content, inputs, deliverables, effort estimate, and completion criterion. The completion criterion (“done” means, e.g., “schematic reviewed, all corners and Monte-Carlo simulations pass, results documented”) prevents the familiar situation where a task stays “90 % complete” for weeks.</p>
+<p>In IC projects, a WBS built only from the circuit blocks misses a large part of the work. Typically forgotten are top-level verification and mixed-signal simulations, the pad ring and ESD concept (see <a href="#sec-esd" class="quarto-xref">Section&nbsp;9</a>), package selection and bonding diagram (see <a href="#sec-packaging" class="quarto-xref">Section&nbsp;5</a>), test PCB and test program (see <a href="#sec-testing-plan" class="quarto-xref">Section&nbsp;6.4</a>), tapeout checks, documentation, and project management itself.</p>
+</section>
+<section id="sec-project-estimation" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="sec-project-estimation"><span class="header-section-number">12.5</span> Effort Estimation</h2>
+<p>Estimates are needed for every work package. It is important to distinguish <strong>effort</strong> (person-days of work) from <strong>duration</strong> (calendar time): a work package with 10 person-days of effort does not finish in two weeks if the responsible designer also supports the lab and attends meetings. Plan with a realistic availability of 60 % to 80 % of the working time for project work.</p>
+<p>Single-value estimates hide the uncertainty. The <strong>three-point estimate</strong> of the <a href="https://en.wikipedia.org/wiki/Program_evaluation_and_review_technique">PERT</a> method <span class="citation" data-cites="Malcolm_1959">(<a href="#ref-Malcolm_1959" role="doc-biblioref">Malcolm et al. 1959</a>)</span> asks for an optimistic (<span class="math inline">\(t_o\)</span>), a most likely (<span class="math inline">\(t_m\)</span>), and a pessimistic (<span class="math inline">\(t_p\)</span>) duration, and approximates the expected duration and its standard deviation by</p>
+<p><span id="eq-project-pert"><span class="math display">\[
+t_e = \frac{t_o + 4 t_m + t_p}{6}, \qquad \sigma_t = \frac{t_p - t_o}{6}.
+\tag{72}\]</span></span></p>
+<p>For a bandgap reference with <span class="math inline">\(t_o = 5\)</span> days, <span class="math inline">\(t_m = 8\)</span> days, and <span class="math inline">\(t_p = 17\)</span> days, the expected duration is <span class="math inline">\(t_e = 9\)</span> days with <span class="math inline">\(\sigma_t = 2\)</span> days. Note that <span class="math inline">\(t_e &gt; t_m\)</span>: the duration distribution of engineering tasks is skewed, since there are many more ways for a task to take longer than planned than to finish early. For a sequence of independent tasks, the expected durations add up, and so do the variances <span class="math inline">\(\sigma_t^2\)</span>.</p>
+<p>Estimates improve with <strong>historical data</strong> (how long did the last PLL take?), with <strong>bottom-up</strong> estimation by the people doing the work, and when the pessimistic value explicitly includes the rework after a failed review. Three well-known observations should be kept in mind:</p>
+<ul>
+<li><strong>Brooks’s law</strong> <span class="citation" data-cites="Brooks_MMM">(<a href="#ref-Brooks_MMM" role="doc-biblioref">Brooks, Jr. 1995</a>)</span>: “Adding manpower to a late software project makes it later.” New team members need training by the experienced ones, and the communication overhead grows with the number of pairs, <span class="math inline">\(n(n-1)/2\)</span>, in a team of <span class="math inline">\(n\)</span> persons. The same holds for IC projects.</li>
+<li><strong>Parkinson’s law:</strong> work expands to fill the time available. Generous buffers hidden in every task are consumed; it is better to estimate tasks realistically and to hold an explicit <strong>project buffer</strong> before the tapeout.</li>
+<li><strong>Verification effort</strong> is regularly underestimated. It is not a phase at the end, but runs in parallel to the design from the first block on (see <a href="#sec-simulation" class="quarto-xref">Section&nbsp;11</a> and <a href="#sec-robust-corners" class="quarto-xref">Section&nbsp;10.2</a>).</li>
+</ul>
+</section>
+<section id="sec-project-gantt" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="sec-project-gantt"><span class="header-section-number">12.6</span> Scheduling</h2>
+<p>A <a href="https://en.wikipedia.org/wiki/Gantt_chart"><strong>Gantt chart</strong></a> is one way to visualize and maintain a project schedule; it is usually updated regularly during the project. The elements of a Gantt chart are:</p>
+<ol type="1">
+<li>Task names</li>
+<li>Start/finish dates or durations of the tasks</li>
+<li>Dependency relationships between the tasks</li>
+<li>Lag relationships (start-to-start, finish-to-start, etc.)</li>
+<li>Task responsibilities (who does it)</li>
+<li>Required resources</li>
+</ol>
+<p><a href="#fig-gantt" class="quarto-xref">Figure&nbsp;92</a> shows an exemplary Gantt chart with task groups, task progress, a milestone, and dependencies.</p>
+<div id="cell-fig-gantt" class="cell" data-execution_count="91">
+<div class="cell-output cell-output-display">
+<div id="fig-gantt" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gantt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="dcic_files/figure-html/fig-gantt-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-92" title="Figure&nbsp;92: Exemplary Gantt chart of a 16-week project: bars show the task durations, dark fill the completed fraction, the diamond a milestone, and the arrows finish-to-start dependencies."><img src="dcic_files/figure-html/fig-gantt-output-1.png" width="760" height="336" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gantt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;92: Exemplary Gantt chart of a 16-week project: bars show the task durations, dark fill the completed fraction, the diamond a milestone, and the arrows finish-to-start dependencies.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The Gantt chart shows <em>when</em> tasks happen, but not directly <em>which</em> tasks determine the end date. This is answered by the <a href="https://en.wikipedia.org/wiki/Critical_path_method"><strong>critical path method (CPM)</strong></a> <span class="citation" data-cites="Kelley_Walker_1959">(<a href="#ref-Kelley_Walker_1959" role="doc-biblioref">Kelley, Jr. and Walker 1959</a>)</span>. In a <strong>forward pass</strong> through the dependency network, the earliest start (ES) and earliest finish (EF <span class="math inline">\(=\)</span> ES <span class="math inline">\(+\)</span> duration) of each task are calculated, where ES is the maximum EF of all predecessors. In a <strong>backward pass</strong> from the project end, the latest finish (LF) and latest start (LS <span class="math inline">\(=\)</span> LF <span class="math inline">\(-\)</span> duration) are calculated, where LF is the minimum LS of all successors. The difference</p>
+<p><span id="eq-project-float"><span class="math display">\[
+\text{Float} = \text{LS} - \text{ES} = \text{LF} - \text{EF}
+\tag{73}\]</span></span></p>
+<p>is the time by which a task can slip without delaying the project. Tasks with zero float form the <strong>critical path</strong>; any delay on it delays the tapeout.</p>
+<p><a href="#tbl-project-cpm" class="quarto-xref">Table&nbsp;16</a> shows a simplified mixed-signal chip project (durations in weeks). The critical path is A–B–D–F–G with a total duration of 16 weeks, i.e., the analog design and layout set the tapeout date. The digital branch C–E has a float of 4 weeks; accelerating the digital work does not help the schedule at all, whereas every week gained in the analog design is a week gained for the project.</p>
+<div id="tbl-project-cpm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-project-cpm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;16: Critical path analysis of a simplified mixed-signal chip project (durations in weeks)
+</figcaption>
+<div aria-describedby="tbl-project-cpm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 24%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Task</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Duration</th>
+<th style="text-align: center;">Predecessors</th>
+<th style="text-align: center;">ES</th>
+<th style="text-align: center;">EF</th>
+<th style="text-align: center;">LS</th>
+<th style="text-align: center;">LF</th>
+<th style="text-align: center;">Float</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A</td>
+<td style="text-align: left;">Specification and architecture</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><strong>0</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: left;">Analog design</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;"><strong>0</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">C</td>
+<td style="text-align: left;">Digital RTL design and verification</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">D</td>
+<td style="text-align: left;">Analog layout</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;"><strong>0</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">E</td>
+<td style="text-align: left;">Digital synthesis and P&amp;R</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: left;">Top-level integration and verification</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">D, E</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;"><strong>0</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">G</td>
+<td style="text-align: left;">Sign-off and tapeout</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;"><strong>0</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>When the tapeout date is fixed by a shuttle, the schedule is best built <strong>backward</strong> from this date: the latest finish of the last task is the shuttle deadline, and a negative float in the backward pass immediately shows that the plan is not feasible and scope or resources have to be adjusted—<em>before</em> the project starts, not two weeks before the tapeout. Keep in mind that the critical path can move during the project, e.g., when the digital branch runs into problems and consumes its float, and that the CPM assumes unlimited resources: if B and C are done by the same designer, they cannot run in parallel.</p>
+</section>
+<section id="sec-project-raci" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="sec-project-raci"><span class="header-section-number">12.7</span> Roles and Responsibilities</h2>
+<p>Each work package needs exactly <em>one</em> person who is accountable for its completion. A <strong>responsibility assignment matrix</strong>, also called <a href="https://en.wikipedia.org/wiki/Responsibility_assignment_matrix"><strong>RACI matrix</strong></a>, maps the work packages to the team members, stating who is <em>responsible</em> (does the work), <em>accountable</em> (owns the result and approves it; exactly one per task), <em>consulted</em> (gives input before), and <em>informed</em> (is notified after). <a href="#tbl-project-raci" class="quarto-xref">Table&nbsp;17</a> shows an example.</p>
+<div id="tbl-project-raci" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-project-raci-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;17: Example RACI matrix of a small IC project (R: responsible, A: accountable, C: consulted, I: informed)
+</figcaption>
+<div aria-describedby="tbl-project-raci-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Work package</th>
+<th style="text-align: center;">Project lead</th>
+<th style="text-align: center;">Analog designer</th>
+<th style="text-align: center;">Digital designer</th>
+<th style="text-align: center;">Layout</th>
+<th style="text-align: center;">Test engineer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Chip specification</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">R</td>
+<td style="text-align: center;">R</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bandgap reference</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">A/R</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Digital control (RTL)</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A/R</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Top-level layout</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">A/R</td>
+<td style="text-align: center;">I</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tapeout sign-off</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">R</td>
+<td style="text-align: center;">R</td>
+<td style="text-align: center;">R</td>
+<td style="text-align: center;">I</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Test program</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">A/R</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The matrix makes gaps (a task without an owner) and overloads (one person responsible for everything critical) visible. The latter is a common risk in small IC teams, where a single expert is often the only one who knows a block well enough to debug it.</p>
+</section>
+<section id="sec-project-risk" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="sec-project-risk"><span class="header-section-number">12.8</span> Risk Management</h2>
+<p>A <strong>risk</strong> is an uncertain event that, if it occurs, affects the project goals. Risk management is a continuous loop of <em>identifying</em> risks, <em>assessing</em> them, planning <em>responses</em>, and <em>monitoring</em> them throughout the project <span class="citation" data-cites="PMI_PMBOK">(<a href="#ref-PMI_PMBOK" role="doc-biblioref">Project Management Institute 2021</a>)</span>. Risks are collected in a <strong>risk register</strong>; each risk is rated by its probability of occurrence <span class="math inline">\(P\)</span> and its impact <span class="math inline">\(I\)</span> (e.g., both on a scale from 1 to 5), and the product <span class="math inline">\(P \cdot I\)</span> is used to prioritize. The possible responses are to <em>avoid</em> the risk (change the plan so that it cannot occur), <em>mitigate</em> it (reduce <span class="math inline">\(P\)</span> or <span class="math inline">\(I\)</span>), <em>transfer</em> it (e.g., buy a silicon-proven IP block with a warranty), or <em>accept</em> it (with a contingency plan and budget reserve).</p>
+<p>Typical risks in IC projects and possible responses are listed in <a href="#tbl-project-risk" class="quarto-xref">Table&nbsp;18</a>.</p>
+<div id="tbl-project-risk" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-project-risk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;18: Example risk register of an IC project (<span class="math inline">\(P\)</span>: probability, <span class="math inline">\(I\)</span>: impact, both rated 1 to 5)
+</figcaption>
+<div aria-describedby="tbl-project-risk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Risk</th>
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(I\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \cdot I\)</span></th>
+<th style="text-align: left;">Response</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Functional bug found after tapeout</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: left;">Mitigate: verification plan with coverage metrics, reviews, spare cells and metal-fix options (see <a href="#sec-robust-debug" class="quarto-xref">Section&nbsp;10.5</a>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late or immature PDK or IP</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: left;">Mitigate: early test chip, qualified IP only, freeze PDK version</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Key designer leaves or is unavailable</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: left;">Mitigate: reviews, documentation, second person per critical block</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Performance missed due to layout parasitics</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: left;">Mitigate: parasitic estimates in early simulations, PEX simulations (see <a href="#sec-robust-parasitics" class="quarto-xref">Section&nbsp;10.3</a>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Shuttle date missed</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">Avoid: backward scheduling with buffer; accept: identify alternative shuttle</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Specification change by customer</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">Mitigate: specification freeze and change-request process</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The largest risk of an IC project, a non-functional first silicon, is best addressed with a combination of measures: thorough verification, design reviews by colleagues who did not design the block, a <strong>tapeout checklist</strong>, test chips for new circuit concepts, built-in observability and programmability (see <a href="#sec-robust" class="quarto-xref">Section&nbsp;10</a>), and a schedule and budget that already contain a realistic probability of a metal re-spin.</p>
+</section>
+<section id="sec-project-reviews" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="sec-project-reviews"><span class="header-section-number">12.9</span> Reviews and Tapeout Checklist</h2>
+<p><strong>Design reviews</strong> are the most effective and cheapest method to find errors before they reach silicon. A review is scheduled at each gate (<a href="#tbl-project-phases" class="quarto-xref">Table&nbsp;15</a>), prepared with documents distributed in advance, attended by experienced engineers who are not the authors of the design, and concluded with a written list of <strong>action items</strong>, each with an owner and a due date. The author presents the design intent, the specification versus simulation results over all corners, and the open issues; the reviewers ask the “what if” questions—What happens at power-up? What if the reference is not yet settled? What if the digital control sends an illegal state?</p>
+<p>Right before the tapeout, a <strong>tapeout checklist</strong> ensures that nothing is forgotten under time pressure. The items are collected over many projects and grow with every lesson learned; typical entries are:</p>
+<ul>
+<li>DRC, LVS, ERC, antenna, and density checks clean on the final database, all waivers documented and approved by the foundry (see <a href="#sec-layout-checks" class="quarto-xref">Section&nbsp;4.7</a>)</li>
+<li>Post-layout (PEX) simulations of all critical blocks over corners and temperature (see <a href="#sec-robust-corners" class="quarto-xref">Section&nbsp;10.2</a>)</li>
+<li>ESD and latch-up checks, pad ring and bonding diagram matched to the package (see <a href="#sec-esd" class="quarto-xref">Section&nbsp;9</a> and <a href="#sec-packaging" class="quarto-xref">Section&nbsp;5</a>)</li>
+<li>Seal ring, chip ID/revision marking, alignment and test structures present</li>
+<li>Top-level netlist and layout versions tagged in the version control system; the final GDSII checksum recorded</li>
+<li>Test concept and test PCB ready to start in parallel to the fabrication (see <a href="#sec-testing-plan" class="quarto-xref">Section&nbsp;6.4</a>)</li>
+</ul>
+</section>
+<section id="sec-project-tracking" class="level2" data-number="12.10">
+<h2 data-number="12.10" class="anchored" data-anchor-id="sec-project-tracking"><span class="header-section-number">12.10</span> Tracking and Control</h2>
+<p>A plan is only useful if the actual progress is regularly compared against it. Short, regular status meetings (weekly in most IC teams) track the progress of the work packages, the open action items, and the top risks. Progress should be measured by completed deliverables with a clear completion criterion (<a href="#sec-project-wbs" class="quarto-xref">Section&nbsp;12.4</a>), not by the fraction of time spent.</p>
+<p>A quantitative method that combines schedule and cost is <strong>earned value management (EVM)</strong> <span class="citation" data-cites="PMI_PMBOK">(<a href="#ref-PMI_PMBOK" role="doc-biblioref">Project Management Institute 2021</a>)</span>. At a status date, the <em>planned value</em> (PV) is the budget of the work scheduled until this date, the <em>earned value</em> (EV) is the budget of the work actually completed, and the <em>actual cost</em> (AC) is what has actually been spent. The schedule and cost performance indices</p>
+<p><span id="eq-project-evm"><span class="math display">\[
+\text{SPI} = \frac{\text{EV}}{\text{PV}}, \qquad \text{CPI} = \frac{\text{EV}}{\text{AC}}
+\tag{74}\]</span></span></p>
+<p>show a delay for SPI <span class="math inline">\(&lt; 1\)</span> and a cost overrun for CPI <span class="math inline">\(&lt; 1\)</span>. For example, if 40 person-weeks of work were planned until today, work worth 32 person-weeks has been completed, and 45 person-weeks have been spent, then SPI <span class="math inline">\(= 0.8\)</span> and CPI <span class="math inline">\(\approx 0.71\)</span>: the project is late <em>and</em> each completed work package costs more than estimated—a trend that rarely corrects itself without action.</p>
+<p>A simple and popular visualization in European companies is the <a href="https://de.wikipedia.org/wiki/Meilensteintrendanalyse"><strong>milestone trend analysis (MTA)</strong></a>: at every reporting date, the currently forecast date of each milestone is plotted. A horizontal line indicates a stable forecast, a rising line a milestone that keeps slipping—usually an early warning long before the milestone is officially missed.</p>
+<p>The technical data of the project need the same discipline: all design data (schematics, RTL, layouts, testbenches, scripts) are kept under <strong>version control</strong>, open issues are tracked in an <strong>issue tracker</strong>, and automated <strong>regression</strong> simulations show whether a change has broken something that worked before. Changes after the specification freeze go through the change-request process (<a href="#sec-project-goals" class="quarto-xref">Section&nbsp;12.1</a>). After the project, a short <strong>lessons-learned</strong> session collects what went well and what should be done differently; its results update the estimation data and the tapeout checklist for the next project.</p>
+</section>
+<section id="sec-project-team" class="level2" data-number="12.11">
+<h2 data-number="12.11" class="anchored" data-anchor-id="sec-project-team"><span class="header-section-number">12.11</span> Team and Communication</h2>
+<p>In the end, projects are carried out by people. <strong>Conway’s law</strong> <span class="citation" data-cites="Conway_1968">(<a href="#ref-Conway_1968" role="doc-biblioref">Conway 1968</a>)</span> states that organizations design systems whose structure mirrors their own communication structure. For ICs, this is visible at the interfaces between analog, digital, layout, and test teams: an interface between blocks that is not also an interface between people who talk regularly is a likely place for a bug. Interface specifications (pin lists, signal levels, timing, power-up sequence) should therefore be written down, owned, and reviewed by both sides.</p>
+<p>Productive design work requires long, uninterrupted periods of concentration; frequent context switches between projects and meetings reduce the effective capacity much more than the time spent in them suggests <span class="citation" data-cites="DeMarco_Peopleware">(<a href="#ref-DeMarco_Peopleware" role="doc-biblioref">DeMarco and Lister 2013</a>)</span>. A good project manager protects the team from unnecessary interruptions, resolves blocking issues quickly, and communicates bad news early—a delay announced three months before the tapeout leaves options, one announced three days before does not.</p>
 
 
 
@@ -4645,8 +5140,14 @@ Bagheri, Mehran, and Yannis Tsividis. 1985. <span>“A Small Signal Dc-to-High-F
 <div id="ref-Bhunia_HWSecurity" class="csl-entry" role="listitem">
 Bhunia, Swarup, and Mark Tehranipoor. 2018. <em>Hardware Security: A Hands-on Learning Approach</em>. Morgan Kaufmann.
 </div>
+<div id="ref-Brooks_MMM" class="csl-entry" role="listitem">
+Brooks, Jr., Frederick P. 1995. <em>The Mythical Man-Month: Essays on Software Engineering</em>. Anniversary. Addison-Wesley.
+</div>
 <div id="ref-Cheng_Hu_BSIM" class="csl-entry" role="listitem">
 Cheng, Yuhua, and Chenming Hu. 1999. <em><span>MOSFET</span> Modeling &amp; <span>BSIM3</span> User’s Guide</em>. Kluwer Academic Publishers.
+</div>
+<div id="ref-Conway_1968" class="csl-entry" role="listitem">
+Conway, Melvin E. 1968. <span>“How Do Committees Invent?”</span> <em>Datamation</em> 14 (4): 28–31.
 </div>
 <div id="ref-Craninckx_1995" class="csl-entry" role="listitem">
 Craninckx, Jan, and Michiel S. J. Steyaert. 1995. <span>“A 1.8-<span>GHz</span> <span>CMOS</span> Low-Phase-Noise Voltage-Controlled Oscillator with Prescaler.”</span> <em>IEEE Journal of Solid-State Circuits</em> 30 (12): 1474–82.
@@ -4654,8 +5155,20 @@ Craninckx, Jan, and Michiel S. J. Steyaert. 1995. <span>“A 1.8-<span>GHz</span
 <div id="ref-Deal_Grove" class="csl-entry" role="listitem">
 Deal, Bruce E., and Andrew S. Grove. 1965. <span>“General Relationship for the Thermal Oxidation of Silicon.”</span> <em>Journal of Applied Physics</em> 36 (12): 3770–78.
 </div>
+<div id="ref-DeMarco_Peopleware" class="csl-entry" role="listitem">
+DeMarco, Tom, and Timothy Lister. 2013. <em>Peopleware: Productive Projects and Teams</em>. 3rd ed. Addison-Wesley.
+</div>
 <div id="ref-Dennard_1974" class="csl-entry" role="listitem">
 Dennard, Robert H., Fritz H. Gaensslen, Hwa-Nien Yu, V. Leo Rideout, Ernest Bassous, and Andre R. LeBlanc. 1974. <span>“Design of Ion-Implanted <span>MOSFET</span>’s with Very Small Physical Dimensions.”</span> <em>IEEE Journal of Solid-State Circuits</em> 9 (5): 256–68.
+</div>
+<div id="ref-Doran_1981" class="csl-entry" role="listitem">
+Doran, George T. 1981. <span>“There’s a <span>S.M.A.R.T.</span> Way to Write Management’s Goals and Objectives.”</span> <em>Management Review</em> 70 (11): 35–36.
+</div>
+<div id="ref-Forsberg_Mooz_1991" class="csl-entry" role="listitem">
+Forsberg, Kevin, and Harold Mooz. 1991. <span>“The Relationship of System Engineering to the Project Cycle.”</span> <em>Proceedings of the First Annual Symposium of the National Council on Systems Engineering (NCOSE)</em>, 57–65. <a href="https://doi.org/10.1002/j.2334-5837.1991.tb01484.x">https://doi.org/10.1002/j.2334-5837.1991.tb01484.x</a>.
+</div>
+<div id="ref-Foster_2024" class="csl-entry" role="listitem">
+Foster, Harry D. 2024. <em>2024 <span>Siemens EDA</span> and <span>Wilson Research Group</span> <span>IC/ASIC</span> Functional Verification Trend Report</em>. White Paper. Siemens Digital Industries Software.
 </div>
 <div id="ref-Gajski_Kuhn_1983" class="csl-entry" role="listitem">
 Gajski, Daniel D., and Robert H. Kuhn. 1983. <span>“Guest Editors’ Introduction: New <span>VLSI</span> Tools.”</span> <em>Computer</em> 16 (12): 11–14. <a href="https://doi.org/10.1109/MC.1983.1654264">https://doi.org/10.1109/MC.1983.1654264</a>.
@@ -4687,14 +5200,20 @@ Ishikawa, Kaoru. 1976. <em>Guide to Quality Control</em>. Asian Productivity Org
 <div id="ref-Kahng_PhysicalDesign" class="csl-entry" role="listitem">
 Kahng, Andrew B., Jens Lienig, Igor L. Markov, and Jin Hu. 2022. <em>VLSI Physical Design: From Graph Partitioning to Timing Closure</em>. 2nd ed. Springer.
 </div>
-<div id="ref-Ker_2000" class="csl-entry" role="listitem">
-<span class="nocase">Ker, Ming-Dou et al.</span> 2000. <span>“<span>ESD</span> Protection Design on Analog Pin with Very Low Input Capacitance for High-Frequency or Current-Mode Applications.”</span> <em>IEEE Journal of Solid-State Circuits</em> 35 (8): 1194–99.
+<div id="ref-Kelley_Walker_1959" class="csl-entry" role="listitem">
+Kelley, Jr., James E., and Morgan R. Walker. 1959. <span>“Critical-Path Planning and Scheduling.”</span> <em>Proceedings of the Eastern Joint IRE-AIEE-ACM Computer Conference</em>, 160–73. <a href="https://doi.org/10.1145/1460299.1460318">https://doi.org/10.1145/1460299.1460318</a>.
 </div>
-<div id="ref-Ker_2001" class="csl-entry" role="listitem">
-<span class="nocase">Ker, Ming-Dou et al.</span> 2001. <span>“<span>ESD</span> Test Methods on Integrated Circuits: An Overview.”</span> <em>IEEE International Conference on Electronics, Circuits and Systems (ICECS)</em>.
+<div id="ref-Ker_2000" class="csl-entry" role="listitem">
+Ker, Ming-Dou, Tung-Yang Chen, Chung-Yu Wu, and Hun-Hsien Chang. 2000. <span>“<span>ESD</span> Protection Design on Analog Pin with Very Low Input Capacitance for High-Frequency or Current-Mode Applications.”</span> <em>IEEE Journal of Solid-State Circuits</em> 35 (8): 1194–99. <a href="https://doi.org/10.1109/4.859509">https://doi.org/10.1109/4.859509</a>.
 </div>
 <div id="ref-Ker_2002" class="csl-entry" role="listitem">
-Ker, Ming-Dou, and Chien-Hui Chuang. 2002. <span>“<span>ESD</span> Protection Circuits with Novel <span>MOS</span>-Bounded Diode Structures.”</span> <em>IEEE International Symposium on Circuits and Systems (ISCAS)</em>.
+Ker, Ming-Dou, and Che-Hao Chuang. 2002. <span>“<span>ESD</span> Protection Circuits with Novel <span>MOS</span>-Bounded Diode Structures.”</span> <em>IEEE International Symposium on Circuits and Systems (ISCAS)</em> 5: V-533-V-536. <a href="https://doi.org/10.1109/ISCAS.2002.1010758">https://doi.org/10.1109/ISCAS.2002.1010758</a>.
+</div>
+<div id="ref-Ker_2001" class="csl-entry" role="listitem">
+Ker, Ming-Dou, Jeng-Jie Peng, and Hsin-Chin Jiang. 2001. <span>“<span>ESD</span> Test Methods on Integrated Circuits: An Overview.”</span> <em>IEEE International Conference on Electronics, Circuits and Systems (ICECS)</em> 2: 1011–14. <a href="https://doi.org/10.1109/ICECS.2001.957647">https://doi.org/10.1109/ICECS.2001.957647</a>.
+</div>
+<div id="ref-Kerzner_PM" class="csl-entry" role="listitem">
+Kerzner, Harold. 2022. <em>Project Management: A Systems Approach to Planning, Scheduling, and Controlling</em>. 13th ed. Wiley.
 </div>
 <div id="ref-Kinget_2005" class="csl-entry" role="listitem">
 Kinget, Peter R. 2005. <span>“Device Mismatch and Tradeoffs in the Design of Analog Circuits.”</span> <em>IEEE Journal of Solid-State Circuits</em> 40 (6): 1212–24. <a href="https://doi.org/10.1109/JSSC.2005.848021">https://doi.org/10.1109/JSSC.2005.848021</a>.
@@ -4704,6 +5223,9 @@ Kundert, Kenneth S. 1995. <em>The Designer’s Guide to SPICE and Spectre</em>. 
 </div>
 <div id="ref-Kundert_RFSim" class="csl-entry" role="listitem">
 Kundert, Kenneth S. 1999. <span>“Introduction to <span>RF</span> Simulation and Its Application.”</span> <em>IEEE Journal of Solid-State Circuits</em> 34 (9): 1298–319.
+</div>
+<div id="ref-Malcolm_1959" class="csl-entry" role="listitem">
+Malcolm, D. G., J. H. Roseboom, C. E. Clark, and W. Fazar. 1959. <span>“Application of a Technique for Research and Development Program Evaluation.”</span> <em>Operations Research</em> 7 (5): 646–69. <a href="https://doi.org/10.1287/opre.7.5.646">https://doi.org/10.1287/opre.7.5.646</a>.
 </div>
 <div id="ref-DeMicheli_Synthesis" class="csl-entry" role="listitem">
 Micheli, Giovanni De. 1994. <em>Synthesis and Optimization of Digital Circuits</em>. McGraw-Hill.
@@ -4732,6 +5254,12 @@ Pozar, David M. 2011. <em>Microwave Engineering</em>. 4th ed. Wiley.
 <div id="ref-Pretl_Eberlein_2021" class="csl-entry" role="listitem">
 Pretl, Harald, and Matthias Eberlein. 2021. <span>“Fifty Nifty Variations of Two-Transistor Circuits: A Tribute to the Versatility of <span>MOSFETs</span>.”</span> <em>IEEE Solid-State Circuits Magazine</em> 13 (3): 38–46. <a href="https://doi.org/10.1109/MSSC.2021.3088968">https://doi.org/10.1109/MSSC.2021.3088968</a>.
 </div>
+<div id="ref-PMI_WBS" class="csl-entry" role="listitem">
+Project Management Institute. 2019. <em>Practice Standard for Work Breakdown Structures</em>. 3rd ed. Project Management Institute.
+</div>
+<div id="ref-PMI_PMBOK" class="csl-entry" role="listitem">
+Project Management Institute. 2021. <em>A Guide to the Project Management Body of Knowledge (<span>PMBOK</span> Guide) and the Standard for Project Management</em>. 7th ed. Project Management Institute.
+</div>
 <div id="ref-Razavi_Fundamentals" class="csl-entry" role="listitem">
 Razavi, Behzad. 2014. <em>Fundamentals of Microelectronics</em>. 2nd ed. Wiley.
 </div>
@@ -4739,13 +5267,13 @@ Razavi, Behzad. 2014. <em>Fundamentals of Microelectronics</em>. 2nd ed. Wiley.
 Razavi, Behzad. 2017. <em>Design of Analog CMOS Integrated Circuits</em>. 2nd ed. McGraw-Hill Education.
 </div>
 <div id="ref-Sansen_2015" class="csl-entry" role="listitem">
-Sansen, Willy. 2015. <span>“Minimum Power in Analog Amplifying Blocks: Presenting a Design Procedure.”</span> <em>IEEE Solid-State Circuits Magazine</em> 7 (4): 83–89. <a href="https://doi.org/10.1109/MSSC.2015.2474235">https://doi.org/10.1109/MSSC.2015.2474235</a>.
+Sansen, Willy. 2015. <span>“Minimum Power in Analog Amplifying Blocks: Presenting a Design Procedure.”</span> <em>IEEE Solid-State Circuits Magazine</em> 7 (4): 83–89. <a href="https://doi.org/10.1109/MSSC.2015.2474237">https://doi.org/10.1109/MSSC.2015.2474237</a>.
 </div>
 <div id="ref-Sansen_AnalogEssentials" class="csl-entry" role="listitem">
 Sansen, Willy M. C. 2006. <em>Analog Design Essentials</em>. Springer.
 </div>
 <div id="ref-Schmickl_2020" class="csl-entry" role="listitem">
-Schmickl, Stefan, Thomas Faseth, and Harald Pretl. 2020. <span>“A 350-<span class="nocase">nW</span> Low-Noise Amplifier with Reduced Flicker-Noise for Bio-Signal Acquisition.”</span> <em>Austrochip Workshop on Microelectronics</em>.
+Schmickl, Stefan, Tim Schumacher, Patrick Fath, Thomas Faseth, and Harald Pretl. 2020. <span>“A 350-<span class="nocase">nW</span> Low-Noise Amplifier with Reduced Flicker-Noise for Bio-Signal Acquisition.”</span> <em>Austrochip Workshop on Microelectronics</em>, 9–12. <a href="https://doi.org/10.1109/Austrochip51129.2020.9232981">https://doi.org/10.1109/Austrochip51129.2020.9232981</a>.
 </div>
 <div id="ref-Smith_ASIC" class="csl-entry" role="listitem">
 Smith, Michael John Sebastian. 1997. <em>Application-Specific Integrated Circuits</em>. Addison-Wesley.
@@ -4769,7 +5297,7 @@ Tsividis, Yannis, and Colin McAndrew. 2011. <em>Operation and Modeling of the MO
 Vries, Dirk K. de. 2005. <span>“Investigation of Gross Die Per Wafer Formulas.”</span> <em>IEEE Transactions on Semiconductor Manufacturing</em> 18 (1): 136–39. <a href="https://doi.org/10.1109/TSM.2004.836656">https://doi.org/10.1109/TSM.2004.836656</a>.
 </div>
 <div id="ref-Wang_VLSITest" class="csl-entry" role="listitem">
-Wang, Laung-Terng, Cheng-Wen Wu, and Xiaoqing Wen. 2006. <em>VLSI Test Principles and Architectures: Design for Testability</em>. Morgan Kaufmann.
+Wang, Laung-Terng, Cheng-Wen Wu, and Xiaoqing Wen, eds. 2006. <em>VLSI Test Principles and Architectures: Design for Testability</em>. Morgan Kaufmann.
 </div>
 <div id="ref-Wanlass_Sah_1963" class="csl-entry" role="listitem">
 Wanlass, Frank M., and Chih-Tang Sah. 1963. <span>“Nanowatt Logic Using Field-Effect Metal-Oxide Semiconductor Triodes.”</span> <em>IEEE International Solid-State Circuits Conference (ISSCC), Digest of Technical Papers</em>, 32–33.

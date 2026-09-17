@@ -259,11 +259,39 @@
     "text": "6.6 Process Capability Index\n\nFor analog test parameters, the variation over production must stay inside the test limits, which are derived from the datasheet limits minus guard bands: the lower specification limit (LSL) and the upper specification limit (USL)."
   },
   {
-    "objectID": "slides/index.html",
-    "href": "slides/index.html",
-    "title": "Lecture Slides",
+    "objectID": "slides/intro.html#sec-intro-scale",
+    "href": "slides/intro.html#sec-intro-scale",
+    "title": "Introduction",
+    "section": "1.1 How Small Is a Nanometer?",
+    "text": "1.1 How Small Is a Nanometer?"
+  },
+  {
+    "objectID": "slides/intro.html#sec-intro-history",
+    "href": "slides/intro.html#sec-intro-history",
+    "title": "Introduction",
+    "section": "1.2 A Brief History of Semiconductors",
+    "text": "1.2 A Brief History of Semiconductors"
+  },
+  {
+    "objectID": "slides/esd.html#sec-esd-basics",
+    "href": "slides/esd.html#sec-esd-basics",
+    "title": "Electrostatic Discharge and Latch-Up",
+    "section": "9.1 Electrostatic Discharge",
+    "text": "9.1 Electrostatic Discharge\n\nThis chapter covers two reliability hazards that every IC design must handle: electrostatic discharge (ESD), the sudden discharge of statically charged objects into the chip, and latch-up, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows (Amerasekera and Duvvury 2002); overviews of ESD test methods and of protection structures can be found in (Ker et al. 2001; Ker and Chuang 2002)."
+  },
+  {
+    "objectID": "slides/esd.html#sec-latchup",
+    "href": "slides/esd.html#sec-latchup",
+    "title": "Electrostatic Discharge and Latch-Up",
+    "section": "9.2 Latch-Up",
+    "text": "9.2 Latch-Up"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Design of Complex Integrated Circuits",
     "section": "",
-    "text": "Slide decks generated from the lecture notes, one per chapter. Press S for speaker notes, C for the chalkboard, and ? for all shortcuts.\n\nIntroduction\nThe MOSFET\nIC Technology\nThe Layout\nIC Packaging\nTesting\nEconomy of Integrated Circuits\nDesign Methodology\nElectrostatic Discharge and Latch-Up\nRobust Design\nSimulation of Integrated Circuits"
+    "text": "Design of Complex Integrated Circuits\n\n\n\nQuarto Publish\n\n\n(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)\nThis is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 (“VL Entwurf komplexer integrierter Schaltungen”). Follow this link to access the material.\nThe course covers how integrated circuits are built (MOSFET operation, CMOS technology, layout, packaging, testing, and the economics of chip making) and how they are designed (design methodology, ESD protection, latch-up, robust design techniques, and circuit simulation).\nAll course material is made publicly available and shared under the Apache-2.0 license.\nWe happily accept pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue!"
   },
   {
     "objectID": "dcic.html#sec-intro-scale",
@@ -742,6 +770,83 @@
     "text": "11.8 Mixed-Signal Simulation\nSimulating a large mixed-signal circuit (e.g., a complex SoC combining analog circuits and digital blocks) may require a coupled mixed-signal simulation, where parts of the design run in an analog circuit simulator and other parts in a digital simulator (ngspice offers an integrated event-driven digital simulation with XSPICE, and can co-simulate Verilog code compiled by Verilator or iVerilog through its d_cosim element):\n\nAn all-analog (transistor-level) simulation of the digital part is possible but usually too time-consuming.\nFor further speed-up, some analog circuits can be replaced by behavioral descriptions (e.g., in Verilog-AMS or VHDL-AMS).\n\nAt the interfaces between the analog and digital partitions, interface elements (IEs) are inserted (manually or automatically), converting between the signal representations:\n\nDigital → analog (D2A): the IE is a voltage source with optional output resistance and finite transition times; the logic 0/1 levels are mapped to voltage levels.\nAnalog → digital (A2D): the IE is a comparator with adjustable thresholds for 0 and 1 (and X in between)."
   },
   {
+    "objectID": "dcic.html#sec-project-goals",
+    "href": "dcic.html#sec-project-goals",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "12.1 Goals and Constraints",
+    "text": "12.1 Goals and Constraints\nEvery project is bounded by the triple constraint of scope (what is delivered, including its quality), time, and cost. These three are coupled: adding functionality to an IC under a fixed tapeout date increases cost (more engineers, more licenses) or lowers quality (less verification); a fixed team and scope define the earliest realistic tapeout date. The project management has to make these trade-offs explicit and agree on them with the sponsor—a plan that silently assumes all three can be held at once is not a plan.\nProject goals should be formulated so that everybody can decide whether they are met. A widely used checklist is SMART: goals are specific, measurable, achievable, relevant, and time-bound (in the original proposal (Doran 1981), the letters stood for specific, measurable, assignable, realistic, and time-related). “Design a low-power ADC” is not a goal; “tape out a 10 bit SAR ADC with \\(\\geq 9.5\\) bit ENOB at 1 MS/s and \\(\\leq 100\\,\\mu\\text{W}\\) on the IHP SG13G2 shuttle of March” is.\nFor an IC, the goals are condensed into the specification. The most expensive changes are those made late, as each change ripples through design, layout, verification, test program, and documentation. Therefore, the specification is reviewed and frozen at an early milestone; later changes are still possible, but go through a formal change request that assesses the impact on schedule and cost before the change is accepted."
+  },
+  {
+    "objectID": "dcic.html#sec-project-phases",
+    "href": "dcic.html#sec-project-phases",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "12.2 Project Phases",
+    "text": "12.2 Project Phases\nThe technical work of an IC project follows the V-model (Forsberg and Mooz 1991): on the descending branch, the system is decomposed from the specification over the architecture into blocks, which are designed and laid out; on the ascending branch, the blocks are verified and integrated, and the complete chip is verified against the specification. Each level of the descending branch defines the test criteria for the same level on the ascending branch—the block specification is the reference for block verification, and the chip specification the reference for silicon characterization. In contrast to software, the tip of the V contains the tapeout and fabrication, which cannot be iterated quickly.\nTable 15 lists typical phases, each concluded by a milestone that marks a decision point (a gate) at which the results are reviewed before the next phase is started.\n\n\n\nTable 15: Typical phases and milestones of an IC project\n\n\n\n\n\n\n\n\n\n\nPhase\nMain activities\nMilestone (gate)\n\n\n\n\nDefinition\nRequirements, feasibility, technology choice, budget\nSpecification and project plan frozen\n\n\nArchitecture\nSystem modeling, block partitioning, block specifications, test and debug concept\nArchitecture review\n\n\nDesign\nSchematic/RTL design, block simulation and verification\nDesign review\n\n\nLayout\nFloor plan, block layout, P&R, top-level assembly, PEX simulation\nLayout review\n\n\nTapeout\nDRC/LVS/ERC sign-off, final verification, database release\nTapeout\n\n\nFabrication\nTest PCB, test program, lab setup (in parallel to the fab run)\nSilicon arrival\n\n\nEvaluation\nFunctional test, characterization, debug\nEvaluation report\n\n\nQualification\nReliability tests, production test release (products only)\nRelease to production\n\n\n\n\n\n\nFor the design phase itself, iterative (“agile”) ways of working have proven useful, especially for RTL and software, where regression tests can be run automatically. The hard gate at tapeout, however, remains; iterations have to converge before it."
+  },
+  {
+    "objectID": "dcic.html#sec-project-sow",
+    "href": "dcic.html#sec-project-sow",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "12.3 Statement of Work",
+    "text": "12.3 Statement of Work\nProject goals are often collected in a statement of work (SOW): specifications, cost, quality, deadlines, and project deliverables, plus a detailed description of the work (possibly in the form of a legal contract), containing:\n\nIntroduction/background\nTechnical description\nTimeline and milestones\nPayment details\nClient expectations\n\nFor the individual tasks within the project, the SOW defines the estimated duration, resources, and cost; measures of performance (what are suitable indicators?); risks and uncertainties; and the reporting procedure. The deliverables (milestones) are captured as a list of items or activities needed to meet the defined goals, together with when and how each item must be delivered. Equally important is what is not part of the work (e.g., “package qualification is not included”), as unclear boundaries are a frequent source of conflict with customers and partners."
+  },
+  {
+    "objectID": "dcic.html#sec-project-wbs",
+    "href": "dcic.html#sec-project-wbs",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "12.4 Work Breakdown Structure",
+    "text": "12.4 Work Breakdown Structure\nTo arrive at the individual work packages for the SOW, it is useful to employ a work breakdown structure (WBS) to derive the tasks iteratively: the WBS breaks the project down into several deliverables; each deliverable consists of work packages (WPs), and each work package can consist of several work units, as shown in Figure 91.\n\n\n\n\n\n\n\n\nFigure 91: Work breakdown structure (WBS): the project is broken down into deliverables, each deliverable into work packages (WP), and each work package into work units.\n\n\n\n\n\nA few rules help to create a useful WBS (Project Management Institute 2019):\n\n100 % rule: the WBS contains the complete work of the project—no more and no less—and the children of each element add up to 100 % of the parent’s work. Work that does not appear in the WBS will not be planned, staffed, or budgeted.\nDeliverable-oriented: the elements are outcomes (e.g., “bandgap reference, verified layout”), not activities or departments. This makes progress measurable.\nMutually exclusive: no work is contained in two elements, otherwise it is counted twice.\nAdequate granularity: a work package is small enough to be estimated and assigned to one responsible person, and large enough to be worth tracking; a common heuristic is a size between one day and a few weeks of effort.\n\nEach work package is described in a short WBS dictionary entry: responsible person, content, inputs, deliverables, effort estimate, and completion criterion. The completion criterion (“done” means, e.g., “schematic reviewed, all corners and Monte-Carlo simulations pass, results documented”) prevents the familiar situation where a task stays “90 % complete” for weeks.\nIn IC projects, a WBS built only from the circuit blocks misses a large part of the work. Typically forgotten are top-level verification and mixed-signal simulations, the pad ring and ESD concept (see Section 9), package selection and bonding diagram (see Section 5), test PCB and test program (see Section 6.4), tapeout checks, documentation, and project management itself."
+  },
+  {
+    "objectID": "dcic.html#sec-project-estimation",
+    "href": "dcic.html#sec-project-estimation",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "12.5 Effort Estimation",
+    "text": "12.5 Effort Estimation\nEstimates are needed for every work package. It is important to distinguish effort (person-days of work) from duration (calendar time): a work package with 10 person-days of effort does not finish in two weeks if the responsible designer also supports the lab and attends meetings. Plan with a realistic availability of 60 % to 80 % of the working time for project work.\nSingle-value estimates hide the uncertainty. The three-point estimate of the PERT method (Malcolm et al. 1959) asks for an optimistic (\\(t_o\\)), a most likely (\\(t_m\\)), and a pessimistic (\\(t_p\\)) duration, and approximates the expected duration and its standard deviation by\n\\[\nt_e = \\frac{t_o + 4 t_m + t_p}{6}, \\qquad \\sigma_t = \\frac{t_p - t_o}{6}.\n\\tag{72}\\]\nFor a bandgap reference with \\(t_o = 5\\) days, \\(t_m = 8\\) days, and \\(t_p = 17\\) days, the expected duration is \\(t_e = 9\\) days with \\(\\sigma_t = 2\\) days. Note that \\(t_e &gt; t_m\\): the duration distribution of engineering tasks is skewed, since there are many more ways for a task to take longer than planned than to finish early. For a sequence of independent tasks, the expected durations add up, and so do the variances \\(\\sigma_t^2\\).\nEstimates improve with historical data (how long did the last PLL take?), with bottom-up estimation by the people doing the work, and when the pessimistic value explicitly includes the rework after a failed review. Three well-known observations should be kept in mind:\n\nBrooks’s law (Brooks, Jr. 1995): “Adding manpower to a late software project makes it later.” New team members need training by the experienced ones, and the communication overhead grows with the number of pairs, \\(n(n-1)/2\\), in a team of \\(n\\) persons. The same holds for IC projects.\nParkinson’s law: work expands to fill the time available. Generous buffers hidden in every task are consumed; it is better to estimate tasks realistically and to hold an explicit project buffer before the tapeout.\nVerification effort is regularly underestimated. It is not a phase at the end, but runs in parallel to the design from the first block on (see Section 11 and Section 10.2)."
+  },
+  {
+    "objectID": "dcic.html#sec-project-gantt",
+    "href": "dcic.html#sec-project-gantt",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "12.6 Scheduling",
+    "text": "12.6 Scheduling\nA Gantt chart is one way to visualize and maintain a project schedule; it is usually updated regularly during the project. The elements of a Gantt chart are:\n\nTask names\nStart/finish dates or durations of the tasks\nDependency relationships between the tasks\nLag relationships (start-to-start, finish-to-start, etc.)\nTask responsibilities (who does it)\nRequired resources\n\nFigure 92 shows an exemplary Gantt chart with task groups, task progress, a milestone, and dependencies.\n\n\n\n\n\n\n\n\nFigure 92: Exemplary Gantt chart of a 16-week project: bars show the task durations, dark fill the completed fraction, the diamond a milestone, and the arrows finish-to-start dependencies.\n\n\n\n\n\nThe Gantt chart shows when tasks happen, but not directly which tasks determine the end date. This is answered by the critical path method (CPM) (Kelley, Jr. and Walker 1959). In a forward pass through the dependency network, the earliest start (ES) and earliest finish (EF \\(=\\) ES \\(+\\) duration) of each task are calculated, where ES is the maximum EF of all predecessors. In a backward pass from the project end, the latest finish (LF) and latest start (LS \\(=\\) LF \\(-\\) duration) are calculated, where LF is the minimum LS of all successors. The difference\n\\[\n\\text{Float} = \\text{LS} - \\text{ES} = \\text{LF} - \\text{EF}\n\\tag{73}\\]\nis the time by which a task can slip without delaying the project. Tasks with zero float form the critical path; any delay on it delays the tapeout.\nTable 16 shows a simplified mixed-signal chip project (durations in weeks). The critical path is A–B–D–F–G with a total duration of 16 weeks, i.e., the analog design and layout set the tapeout date. The digital branch C–E has a float of 4 weeks; accelerating the digital work does not help the schedule at all, whereas every week gained in the analog design is a week gained for the project.\n\n\n\nTable 16: Critical path analysis of a simplified mixed-signal chip project (durations in weeks)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTask\nDescription\nDuration\nPredecessors\nES\nEF\nLS\nLF\nFloat\n\n\n\n\nA\nSpecification and architecture\n2\n–\n0\n2\n0\n2\n0\n\n\nB\nAnalog design\n6\nA\n2\n8\n2\n8\n0\n\n\nC\nDigital RTL design and verification\n4\nA\n2\n6\n6\n10\n4\n\n\nD\nAnalog layout\n4\nB\n8\n12\n8\n12\n0\n\n\nE\nDigital synthesis and P&R\n2\nC\n6\n8\n10\n12\n4\n\n\nF\nTop-level integration and verification\n3\nD, E\n12\n15\n12\n15\n0\n\n\nG\nSign-off and tapeout\n1\nF\n15\n16\n15\n16\n0\n\n\n\n\n\n\nWhen the tapeout date is fixed by a shuttle, the schedule is best built backward from this date: the latest finish of the last task is the shuttle deadline, and a negative float in the backward pass immediately shows that the plan is not feasible and scope or resources have to be adjusted—before the project starts, not two weeks before the tapeout. Keep in mind that the critical path can move during the project, e.g., when the digital branch runs into problems and consumes its float, and that the CPM assumes unlimited resources: if B and C are done by the same designer, they cannot run in parallel."
+  },
+  {
+    "objectID": "dcic.html#sec-project-raci",
+    "href": "dcic.html#sec-project-raci",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "12.7 Roles and Responsibilities",
+    "text": "12.7 Roles and Responsibilities\nEach work package needs exactly one person who is accountable for its completion. A responsibility assignment matrix, also called RACI matrix, maps the work packages to the team members, stating who is responsible (does the work), accountable (owns the result and approves it; exactly one per task), consulted (gives input before), and informed (is notified after). Table 17 shows an example.\n\n\n\nTable 17: Example RACI matrix of a small IC project (R: responsible, A: accountable, C: consulted, I: informed)\n\n\n\n\n\n\n\n\n\n\n\n\n\nWork package\nProject lead\nAnalog designer\nDigital designer\nLayout\nTest engineer\n\n\n\n\nChip specification\nA\nR\nR\nC\nC\n\n\nBandgap reference\nI\nA/R\n–\nC\nC\n\n\nDigital control (RTL)\nI\nC\nA/R\n–\nC\n\n\nTop-level layout\nI\nC\nC\nA/R\nI\n\n\nTapeout sign-off\nA\nR\nR\nR\nI\n\n\nTest program\nI\nC\nC\n–\nA/R\n\n\n\n\n\n\nThe matrix makes gaps (a task without an owner) and overloads (one person responsible for everything critical) visible. The latter is a common risk in small IC teams, where a single expert is often the only one who knows a block well enough to debug it."
+  },
+  {
+    "objectID": "dcic.html#sec-project-risk",
+    "href": "dcic.html#sec-project-risk",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "12.8 Risk Management",
+    "text": "12.8 Risk Management\nA risk is an uncertain event that, if it occurs, affects the project goals. Risk management is a continuous loop of identifying risks, assessing them, planning responses, and monitoring them throughout the project (Project Management Institute 2021). Risks are collected in a risk register; each risk is rated by its probability of occurrence \\(P\\) and its impact \\(I\\) (e.g., both on a scale from 1 to 5), and the product \\(P \\cdot I\\) is used to prioritize. The possible responses are to avoid the risk (change the plan so that it cannot occur), mitigate it (reduce \\(P\\) or \\(I\\)), transfer it (e.g., buy a silicon-proven IP block with a warranty), or accept it (with a contingency plan and budget reserve).\nTypical risks in IC projects and possible responses are listed in Table 18.\n\n\n\nTable 18: Example risk register of an IC project (\\(P\\): probability, \\(I\\): impact, both rated 1 to 5)\n\n\n\n\n\n\n\n\n\n\n\n\nRisk\n\\(P\\)\n\\(I\\)\n\\(P \\cdot I\\)\nResponse\n\n\n\n\nFunctional bug found after tapeout\n3\n5\n15\nMitigate: verification plan with coverage metrics, reviews, spare cells and metal-fix options (see Section 10.5)\n\n\nLate or immature PDK or IP\n3\n4\n12\nMitigate: early test chip, qualified IP only, freeze PDK version\n\n\nKey designer leaves or is unavailable\n2\n5\n10\nMitigate: reviews, documentation, second person per critical block\n\n\nPerformance missed due to layout parasitics\n3\n3\n9\nMitigate: parasitic estimates in early simulations, PEX simulations (see Section 10.3)\n\n\nShuttle date missed\n2\n4\n8\nAvoid: backward scheduling with buffer; accept: identify alternative shuttle\n\n\nSpecification change by customer\n2\n3\n6\nMitigate: specification freeze and change-request process\n\n\n\n\n\n\nThe largest risk of an IC project, a non-functional first silicon, is best addressed with a combination of measures: thorough verification, design reviews by colleagues who did not design the block, a tapeout checklist, test chips for new circuit concepts, built-in observability and programmability (see Section 10), and a schedule and budget that already contain a realistic probability of a metal re-spin."
+  },
+  {
+    "objectID": "dcic.html#sec-project-reviews",
+    "href": "dcic.html#sec-project-reviews",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "12.9 Reviews and Tapeout Checklist",
+    "text": "12.9 Reviews and Tapeout Checklist\nDesign reviews are the most effective and cheapest method to find errors before they reach silicon. A review is scheduled at each gate (Table 15), prepared with documents distributed in advance, attended by experienced engineers who are not the authors of the design, and concluded with a written list of action items, each with an owner and a due date. The author presents the design intent, the specification versus simulation results over all corners, and the open issues; the reviewers ask the “what if” questions—What happens at power-up? What if the reference is not yet settled? What if the digital control sends an illegal state?\nRight before the tapeout, a tapeout checklist ensures that nothing is forgotten under time pressure. The items are collected over many projects and grow with every lesson learned; typical entries are:\n\nDRC, LVS, ERC, antenna, and density checks clean on the final database, all waivers documented and approved by the foundry (see Section 4.7)\nPost-layout (PEX) simulations of all critical blocks over corners and temperature (see Section 10.2)\nESD and latch-up checks, pad ring and bonding diagram matched to the package (see Section 9 and Section 5)\nSeal ring, chip ID/revision marking, alignment and test structures present\nTop-level netlist and layout versions tagged in the version control system; the final GDSII checksum recorded\nTest concept and test PCB ready to start in parallel to the fabrication (see Section 6.4)"
+  },
+  {
+    "objectID": "dcic.html#sec-project-tracking",
+    "href": "dcic.html#sec-project-tracking",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "12.10 Tracking and Control",
+    "text": "12.10 Tracking and Control\nA plan is only useful if the actual progress is regularly compared against it. Short, regular status meetings (weekly in most IC teams) track the progress of the work packages, the open action items, and the top risks. Progress should be measured by completed deliverables with a clear completion criterion (Section 12.4), not by the fraction of time spent.\nA quantitative method that combines schedule and cost is earned value management (EVM) (Project Management Institute 2021). At a status date, the planned value (PV) is the budget of the work scheduled until this date, the earned value (EV) is the budget of the work actually completed, and the actual cost (AC) is what has actually been spent. The schedule and cost performance indices\n\\[\n\\text{SPI} = \\frac{\\text{EV}}{\\text{PV}}, \\qquad \\text{CPI} = \\frac{\\text{EV}}{\\text{AC}}\n\\tag{74}\\]\nshow a delay for SPI \\(&lt; 1\\) and a cost overrun for CPI \\(&lt; 1\\). For example, if 40 person-weeks of work were planned until today, work worth 32 person-weeks has been completed, and 45 person-weeks have been spent, then SPI \\(= 0.8\\) and CPI \\(\\approx 0.71\\): the project is late and each completed work package costs more than estimated—a trend that rarely corrects itself without action.\nA simple and popular visualization in European companies is the milestone trend analysis (MTA): at every reporting date, the currently forecast date of each milestone is plotted. A horizontal line indicates a stable forecast, a rising line a milestone that keeps slipping—usually an early warning long before the milestone is officially missed.\nThe technical data of the project need the same discipline: all design data (schematics, RTL, layouts, testbenches, scripts) are kept under version control, open issues are tracked in an issue tracker, and automated regression simulations show whether a change has broken something that worked before. Changes after the specification freeze go through the change-request process (Section 12.1). After the project, a short lessons-learned session collects what went well and what should be done differently; its results update the estimation data and the tapeout checklist for the next project."
+  },
+  {
+    "objectID": "dcic.html#sec-project-team",
+    "href": "dcic.html#sec-project-team",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "12.11 Team and Communication",
+    "text": "12.11 Team and Communication\nIn the end, projects are carried out by people. Conway’s law (Conway 1968) states that organizations design systems whose structure mirrors their own communication structure. For ICs, this is visible at the interfaces between analog, digital, layout, and test teams: an interface between blocks that is not also an interface between people who talk regularly is a likely place for a bug. Interface specifications (pin lists, signal levels, timing, power-up sequence) should therefore be written down, owned, and reviewed by both sides.\nProductive design work requires long, uninterrupted periods of concentration; frequent context switches between projects and meetings reduce the effective capacity much more than the time spent in them suggests (DeMarco and Lister 2013). A good project manager protects the team from unnecessary interruptions, resolves blocking issues quickly, and communicates bad news early—a delay announced three months before the tapeout leaves options, one announced three days before does not."
+  },
+  {
     "objectID": "dcic.html#footnotes",
     "href": "dcic.html#footnotes",
     "title": "Design of Complex Integrated Circuits",
@@ -749,39 +854,88 @@
     "text": "Footnotes\n\n\nThe mobility value used here is not fully consistent with the process constant \\(K_\\mathrm{n} = \\mu_\\mathrm{n}C'_\\mathrm{ox}= 280\\,\\mu\\text{A/V}^2\\) in Table 1, which (with \\(C'_\\mathrm{ox}= 17.3\\,\\text{fF/µm}^2\\)) would imply an effective \\(\\mu_\\mathrm{n}\\approx 160\\,\\text{cm}^2/(\\text{V}\\cdot\\text{s})\\). The effective mobility depends strongly on the vertical field and thus on bias; such spread between simple hand-calculation parameters is normal and is one more reason to verify all sizing choices by simulation.↩︎"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Design of Complex Integrated Circuits",
+    "objectID": "slides/index.html",
+    "href": "slides/index.html",
+    "title": "Lecture Slides",
     "section": "",
-    "text": "Design of Complex Integrated Circuits\n\n\n\nQuarto Publish\n\n\n(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)\nThis is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 (“VL Entwurf komplexer integrierter Schaltungen”). Follow this link to access the material.\nThe course covers how integrated circuits are built (MOSFET operation, CMOS technology, layout, packaging, testing, and the economics of chip making) and how they are designed (design methodology, ESD protection, latch-up, robust design techniques, and circuit simulation).\nAll course material is made publicly available and shared under the Apache-2.0 license.\nWe happily accept pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue!"
+    "text": "Slide decks generated from the lecture notes, one per chapter. Press S for speaker notes, C for the chalkboard, and ? for all shortcuts.\n\nIntroduction\nThe MOSFET\nIC Technology\nThe Layout\nIC Packaging\nTesting\nEconomy of Integrated Circuits\nDesign Methodology\nElectrostatic Discharge and Latch-Up\nRobust Design\nSimulation of Integrated Circuits\nProject Management"
   },
   {
-    "objectID": "slides/esd.html#sec-esd-basics",
-    "href": "slides/esd.html#sec-esd-basics",
-    "title": "Electrostatic Discharge and Latch-Up",
-    "section": "9.1 Electrostatic Discharge",
-    "text": "9.1 Electrostatic Discharge\n\nThis chapter covers two reliability hazards that every IC design must handle: electrostatic discharge (ESD), the sudden discharge of statically charged objects into the chip, and latch-up, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows (Amerasekera and Duvvury 2002); overviews of ESD test methods and of protection structures can be found in (Ker et al. 2001; Ker and Chuang 2002)."
+    "objectID": "slides/project.html#sec-project-goals",
+    "href": "slides/project.html#sec-project-goals",
+    "title": "Project Management",
+    "section": "12.1 Goals and Constraints",
+    "text": "12.1 Goals and Constraints"
   },
   {
-    "objectID": "slides/esd.html#sec-latchup",
-    "href": "slides/esd.html#sec-latchup",
-    "title": "Electrostatic Discharge and Latch-Up",
-    "section": "9.2 Latch-Up",
-    "text": "9.2 Latch-Up"
+    "objectID": "slides/project.html#sec-project-phases",
+    "href": "slides/project.html#sec-project-phases",
+    "title": "Project Management",
+    "section": "12.2 Project Phases",
+    "text": "12.2 Project Phases"
   },
   {
-    "objectID": "slides/intro.html#sec-intro-scale",
-    "href": "slides/intro.html#sec-intro-scale",
-    "title": "Introduction",
-    "section": "1.1 How Small Is a Nanometer?",
-    "text": "1.1 How Small Is a Nanometer?"
+    "objectID": "slides/project.html#sec-project-sow",
+    "href": "slides/project.html#sec-project-sow",
+    "title": "Project Management",
+    "section": "12.3 Statement of Work",
+    "text": "12.3 Statement of Work"
   },
   {
-    "objectID": "slides/intro.html#sec-intro-history",
-    "href": "slides/intro.html#sec-intro-history",
-    "title": "Introduction",
-    "section": "1.2 A Brief History of Semiconductors",
-    "text": "1.2 A Brief History of Semiconductors"
+    "objectID": "slides/project.html#sec-project-wbs",
+    "href": "slides/project.html#sec-project-wbs",
+    "title": "Project Management",
+    "section": "12.4 Work Breakdown Structure",
+    "text": "12.4 Work Breakdown Structure"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-estimation",
+    "href": "slides/project.html#sec-project-estimation",
+    "title": "Project Management",
+    "section": "12.5 Effort Estimation",
+    "text": "12.5 Effort Estimation"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-gantt",
+    "href": "slides/project.html#sec-project-gantt",
+    "title": "Project Management",
+    "section": "12.6 Scheduling",
+    "text": "12.6 Scheduling"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-raci",
+    "href": "slides/project.html#sec-project-raci",
+    "title": "Project Management",
+    "section": "12.7 Roles and Responsibilities",
+    "text": "12.7 Roles and Responsibilities"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-risk",
+    "href": "slides/project.html#sec-project-risk",
+    "title": "Project Management",
+    "section": "12.8 Risk Management",
+    "text": "12.8 Risk Management"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-reviews",
+    "href": "slides/project.html#sec-project-reviews",
+    "title": "Project Management",
+    "section": "12.9 Reviews and Tapeout Checklist",
+    "text": "12.9 Reviews and Tapeout Checklist"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-tracking",
+    "href": "slides/project.html#sec-project-tracking",
+    "title": "Project Management",
+    "section": "12.10 Tracking and Control",
+    "text": "12.10 Tracking and Control"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-team",
+    "href": "slides/project.html#sec-project-team",
+    "title": "Project Management",
+    "section": "12.11 Team and Communication",
+    "text": "12.11 Team and Communication"
   },
   {
     "objectID": "slides/technology.html#sec-technology-wafer",
