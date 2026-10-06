@@ -599,7 +599,7 @@ $$
 For short routes, this increased relative delay is offset by the length scaling, so that
 
 $$
-T^*_\mathrm{wire} \propto \left( \frac{l}{\alpha} \right)^2 \frac{T^*_\mathrm{wire}}{l^2} = T_\mathrm{wire}
+T^*_\mathrm{wire} \propto \left( \frac{l}{\alpha} \right)^2 \alpha^2 \frac{T_\mathrm{wire}}{l^2} = T_\mathrm{wire}
 $$
 
 For long routes, however, the wire delay increases significantly. To cope with this delay, other solutions are needed: using multiple wiring levels (lower metals levels scaled for density, higher ones un-scaled for speed), or adapting the architecture, e.g., pipelining long-range data transfers.
