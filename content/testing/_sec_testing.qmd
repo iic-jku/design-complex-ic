@@ -104,7 +104,7 @@ Since on-chip memories can be large, **memory testing can be costly**, requiring
 
 - Zero-one (write all zeros, read all zeros, write all ones, read all ones)—$\mathcal{O}(n)$.
 - Checkerboard (write alternating 0101…, read, write the complement 1010…, read)—$\mathcal{O}(n)$.
-- Walking 1/0 (consecutively fill the memory with ones/zeros and check)—$\mathcal{O}(n^2)$.
+- Walking 1/0 (write a background of zeros/ones, walk a single 1/0 through the memory, and read all cells after each step)—$\mathcal{O}(n^2)$.
 - ROM: read out and compute a checksum/CRC or hash—$\mathcal{O}(n)$.
 
 Applying these RAM tests can be done by external reads/writes (slow), by the internal CPU (faster), or by dedicated [**built-in self-test (BIST)**](https://en.wikipedia.org/wiki/Built-in_self-test) hardware (fastest, at the cost of extra silicon area). @fig-ram-bist shows the structure of a RAM BIST: a controller with pattern and address generators exercises the RAM, and a comparator checks the read-back data.
