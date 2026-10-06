@@ -557,12 +557,30 @@ Equivalent circuit of a single package connection from the PCB to the on-chip pa
 <p><span id="eq-ind-round-wire"><span class="math display">\[
 L' \approx 0.2 \ln \left( \frac{2h}{r} \right) \; \mathrm{nH/mm}
 \tag{52}\]</span></span></p>
-<p><span id="eq-ind-flat-trace"><span class="math display">\[
-L' \approx \frac{1.6}{0.72 + W/d} \; \mathrm{nH/mm}
-\tag{53}\]</span></span></p>
 <aside class="notes">
 <p>Simple approximations for the inductance of common package geometries are given below (higher accuracy requires EM simulation; the underlying transmission-line theory is covered in <span class="citation" data-cites="Pozar_RF">(<a href="#/references" role="doc-biblioref" onclick="">Pozar 2011</a>)</span>). For a <strong>round wire</strong> at height <span class="math inline">\(h\)</span> above a ground plane (wire radius <span class="math inline">\(r\)</span>):</p>
-<p>For a <strong>flat trace</strong> of width <span class="math inline">\(W\)</span> at height <span class="math inline">\(d\)</span> above a ground plane:</p>
+<p>For a <strong>flat trace</strong> of width <span class="math inline">\(W\)</span> at height <span class="math inline">\(d\)</span> above a ground plane, the closed-form microstrip impedance <span class="citation" data-cites="Pozar_RF">(<a href="#/references" role="doc-biblioref" onclick="">Pozar 2011</a>)</span> with <span class="math inline">\(\epsilon_\mathrm{r} = 1\)</span> gives <span class="math inline">\(L' = Z_0/c_0\)</span>:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Package Parasitics</h3>
+<p><span id="eq-ind-flat-trace"><span class="math display">\[
+\begin{aligned}
+L' &amp;\approx 0.2 \ln \left( \frac{8d}{W} + \frac{W}{4d} \right) \; \mathrm{nH/mm} &amp;&amp; \text{for } W/d \leq 1 \\
+L' &amp;\approx \frac{1.257}{W/d + 1.393 + 0.667 \ln (W/d + 1.444)} \; \mathrm{nH/mm} &amp;&amp; \text{for } W/d \geq 1
+\end{aligned}
+\tag{53}\]</span></span></p>
+<aside class="notes">
 <p>The <strong>mutual inductance of two round wires</strong> at distance <span class="math inline">\(d\)</span> and height <span class="math inline">\(h\)</span> above the ground plane:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
