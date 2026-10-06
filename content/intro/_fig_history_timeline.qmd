@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 events = [
     (1874, 'Braun discovers\nrectification (diode)', 0.5, 'center'),
     (1926, 'Lilienfeld patents\nthe FET', -0.5, 'center'),
-    (1947, 'First transistor (BJT)\nat Bell Labs', 1.0, 'center'),
+    (1947, 'First transistor (point\ncontact) at Bell Labs', 1.0, 'center'),
     (1958, 'Kilby: first\nsolid-state circuit', -1.0, 'right'),
     (1960, 'Noyce: first monolithic IC;\nKahng/Atalla: first MOSFET', 1.7,
      'right'),
