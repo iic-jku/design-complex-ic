@@ -91,7 +91,7 @@ The resistor types available in IHP SG13 are summarized in @tbl-ihp-resistors.
 
 ### Capacitors
 
-Linear capacitors can be implemented using the metal stack, either as **vertical sandwich capacitors** (parallel plates on adjacent metal layers) or as **finger capacitors** (exploiting the lateral coupling between interdigitated fingers on the same layers); both are shown in @fig-layout-mom-cap. Depending on the design rules, the vertical or the lateral coupling capacitance might be more area-effective; such metal-oxide-metal (MOM) capacitors come for free in any technology. Due to the very tight lateral pitch is nm CMOS technologies, finger capacitors are often preferred for capacitor implementation (when a linear capacitor is required).
+Linear capacitors can be implemented using the metal stack, either as **vertical sandwich capacitors** (parallel plates on adjacent metal layers) or as **finger capacitors** (exploiting the lateral coupling between interdigitated fingers on the same layers); both are shown in @fig-layout-mom-cap. Depending on the design rules, the vertical or the lateral coupling capacitance might be more area-effective; such metal-oxide-metal (MOM) capacitors come for free in any technology. Due to the very tight lateral pitch in nm CMOS technologies, finger capacitors are often preferred for capacitor implementation (when a linear capacitor is required).
 
 {{< include /content/layout/_fig_layout_mom_cap.qmd >}}
 
