@@ -1,0 +1,29 @@
+* Diode-connected NMOS in IHP SG13G2 for the inversion-coefficient plot
+* (fig-ic-ihp). The drain current is swept decade by decade from 1 pA to
+* 1 mA; per point we store VGS, gm, Vth, the intrinsic gate capacitance cgg,
+* and the gate overlap capacitances cgsol and cgdol (reported separately by
+* PSP, so the total gate capacitance is cgg + cgsol + cgdol).
+*
+* Run (e.g., in IIC-OSIC-TOOLS):  ngspice -b test_nmos_ic.spice
+* Output columns of test_nmos_ic.txt:
+*   ID  VGS  gm  Vth  cgg  cgsol  cgdol
+
+.lib cornerMOSlv.lib mos_tt
+
+I1 0 d 1n
+XM1 d d 0 0 sg13_lv_nmos w=1.3u l=0.13u ng=1 m=1
+
+.control
+save v(d) @n.xm1.nsg13_lv_nmos[gm] @n.xm1.nsg13_lv_nmos[vth] @n.xm1.nsg13_lv_nmos[cgg]
++ @n.xm1.nsg13_lv_nmos[cgsol] @n.xm1.nsg13_lv_nmos[cgdol]
+set wr_singlescale
+set appendwrite
+shell rm -f test_nmos_ic.txt
+foreach dec 1e-12 1e-11 1e-10 1e-09 1e-08 1e-07 1e-06 1e-05 1e-04
+  let istart = $dec
+  let istop = 10 * $dec
+  dc I1 $&istart $&istop $&istart
+  wrdata test_nmos_ic.txt v(d) @n.xm1.nsg13_lv_nmos[gm] @n.xm1.nsg13_lv_nmos[vth] @n.xm1.nsg13_lv_nmos[cgg] @n.xm1.nsg13_lv_nmos[cgsol] @n.xm1.nsg13_lv_nmos[cgdol]
+end
+.endc
+.end
