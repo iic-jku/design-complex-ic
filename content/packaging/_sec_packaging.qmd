@@ -148,7 +148,7 @@ $$
 L_\mathrm{m}' \approx 0.1 \ln \left[ 1 + \left( \frac{2h}{d} \right)^2 \right] \; \mathrm{nH/mm}
 $$ {#eq-ind-mutual}
 
-A typical bond wire has a radius of 12.5 µm and larger, and an inductance of roughly 1 nH/mm.
+A typical bond wire has a radius of 12.5 µm and larger, and an inductance of roughly 0.7 to 1 nH/mm, depending on its height above the ground plane.
 
 ::: {#nte-bond-wire-inductance .callout-note}
 ## Example Calculation of the Bond-Wire Inductance
@@ -221,7 +221,7 @@ Mutual inductance can even be used to advantage: routing a supply and its return
 
 ### Bond Wires as Circuit Elements
 
-Since a bond wire is a relatively high-$Q$ inductor (inductance ca. 1 nH/mm, low resistivity of Au or Al), some designs use it as a circuit element, e.g., in high-frequency $LC$ oscillators [@Craninckx_1995]. However, the mechanical tolerances of the bond-wire geometry translate into inductance tolerance, which must be taken into account. More generally, any conducting structure in a package can be used to form inductors, capacitors, or even antennas (e.g., in CSP or laminate packages).
+Since a bond wire is a relatively high-$Q$ inductor (inductance ca. 0.7 to 1 nH/mm, low resistivity of Au or Al), some designs use it as a circuit element, e.g., in high-frequency $LC$ oscillators [@Craninckx_1995]. However, the mechanical tolerances of the bond-wire geometry translate into inductance tolerance, which must be taken into account. More generally, any conducting structure in a package can be used to form inductors, capacitors, or even antennas (e.g., in CSP or laminate packages).
 
 ## Package Qualification {#sec-packaging-qualification}
 
