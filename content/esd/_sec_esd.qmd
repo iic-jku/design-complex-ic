@@ -171,4 +171,4 @@ Foundries cast these practices into their design rule manuals. IHP SG13G2, for e
 - Rules `LU.a` and `LU.b` limit the maximum distance from any $p^+$ active area inside the n-well to an n-well tie, and from any $n^+$ active area inside the p-well to a substrate tie, to 20 µm—this is the rule-deck version of "place many well and substrate ties".
 - Rules `LU.c` to `LU.d1` limit how far a tie may extend beyond its contact (6 µm), which keeps the resistance of the tie itself low.
 
-Beware: these latch-up rules are *not* checked by default in the SG13G2 DRC deck—the check has to be enabled explicitly.
+In the open-source SG13G2 KLayout DRC decks, the latch-up rules are checked by default (since IHP-Open-PDK commit `3b393f31`, March 2025): the maximal deck runs them unless `latchUpRules` is set to `false`, and the regular deck runs `LU.b` unless the `precheck_drc` option is set. Older versions of the layout-rule document still state otherwise, so check which rules your deck actually runs.
