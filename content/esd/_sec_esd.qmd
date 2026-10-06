@@ -16,7 +16,7 @@ limitations under the License.
 
 # Electrostatic Discharge and Latch-Up {#sec-esd}
 
-This chapter covers two reliability hazards that every IC design must handle: [**electrostatic discharge (ESD)**](https://en.wikipedia.org/wiki/Electrostatic_discharge), the sudden discharge of statically charged objects into the chip, and [**latch-up**](https://en.wikipedia.org/wiki/Latch-up), the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows [@Amerasekera_ESD]; overviews of ESD test methods and of protection structures can be found in [@Ker_2001; @Ker_2002].
+This chapter covers two reliability hazards that every IC design must handle: [**electrostatic discharge (ESD)**](https://en.wikipedia.org/wiki/Electrostatic_discharge), the sudden discharge of statically charged objects into the chip, and [**latch-up**](https://en.wikipedia.org/wiki/Latch-up), the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows [@Amerasekera_ESD]; overviews of ESD as a reliability concern, including protection structures, and of ESD test methods can be found in [@Duvvury_1993; @Ker_2001].
 
 ## Electrostatic Discharge {#sec-esd-basics}
 
