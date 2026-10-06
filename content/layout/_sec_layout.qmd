@@ -40,8 +40,8 @@ Different foundries use different layer names. The layer names defined in @tbl-l
 | `V1` | `Via1` | Via connecting `M1` to `M2` |
 | `M2` | `Metal2` | Second-level metal |
 | `V2` | `Via2` | Via connecting `M2` to `M3` |
-| `M3` | `Metal3` | Top metal, mostly aluminum, to facilitate wire-bond packages |
-| `PAD` | `Passiv` | Opening in the passivation to contact the top metal for pads |
+| `M3` | `Metal3` | Third-level metal (top metal of this generic stack; in SG13, the thick aluminum `TopMetal2` is the top metal and carries the bond pads) |
+| `PAD` | `Passiv` | Opening in the passivation to contact the top metal (in SG13, `TopMetal2`) for pads |
 : Generic layer definition used in this text {#tbl-layers}
 
 ## Devices {#sec-layout-devices}
