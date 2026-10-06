@@ -129,7 +129,7 @@ Ultimately, using these techniques, structures considerably smaller than the wav
 
 ### EUV Lithography
 
-EUV light at 13.5 nm is created by firing laser pulses at molten tin droplets. There are no transmissive lens materials for EUV, so the optics are constructed from reflective mirrors with about 30 % loss per mirror. A first-generation EUV scanner is a 180-tonne machine using 0.5 MW of electrical power to create roughly 200 W of optical power at the wafer, processing about 200 wafers per hour. Comparing the achievable resolution:
+EUV light at 13.5 nm is created by firing laser pulses at molten tin droplets. There are no transmissive lens materials for EUV, so the optics are constructed from reflective mirrors with about 30 % loss per mirror. A first-generation EUV scanner is a 180-tonne machine using 0.5 MW of electrical power to create roughly 200 W of EUV power at the intermediate focus of the source, processing about 200 wafers per hour. After about ten mirrors (and the reflective mask), each losing about 30 %, only a few watts arrive at the wafer ($0.7^{10} \approx 3\,\%$). Comparing the achievable resolution:
 
 - ArF immersion lithography: $\lambda = 193\,\text{nm}$, $\mathrm{NA} = 1.35$, $k_1 = 0.27$ (with PSM) $\Rightarrow$ $R \approx 40\,\text{nm}$.
 - First-generation EUV (NXE): $\lambda = 13.5\,\text{nm}$, $\mathrm{NA} = 0.33$, $k_1 = 0.32$ $\Rightarrow$ $R \approx 13\,\text{nm}$.
