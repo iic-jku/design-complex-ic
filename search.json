@@ -1,5 +1,82 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Design of Complex Integrated Circuits",
+    "section": "",
+    "text": "Design of Complex Integrated Circuits\n\n\n\nQuarto Publish\n\n\n(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)\nThis is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 (“VL Entwurf komplexer integrierter Schaltungen”). Follow this link to access the material.\nThe course covers how integrated circuits are built (MOSFET operation, CMOS technology, layout, packaging, testing, and the economics of chip making) and how they are designed (design methodology, ESD protection, latch-up, robust design techniques, and circuit simulation).\nAll course material is made publicly available and shared under the Apache-2.0 license.\nWe happily accept pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue!"
+  },
+  {
+    "objectID": "slides/economy.html#sec-economy-price",
+    "href": "slides/economy.html#sec-economy-price",
+    "title": "Economy of Integrated Circuits",
+    "section": "7.1 Selling Price and Total Cost",
+    "text": "7.1 Selling Price and Total Cost\n\nThe manufacturing of ICs is a large-scale business, requiring significant investment in research and development, and usually large volumes are built and sold. It is therefore rewarding to take a look at the economics of integrated circuits."
+  },
+  {
+    "objectID": "slides/economy.html#sec-economy-nre",
+    "href": "slides/economy.html#sec-economy-nre",
+    "title": "Economy of Integrated Circuits",
+    "section": "7.2 Non-Recurring Engineering Cost",
+    "text": "7.2 Non-Recurring Engineering Cost"
+  },
+  {
+    "objectID": "slides/economy.html#sec-economy-recurring",
+    "href": "slides/economy.html#sec-economy-recurring",
+    "title": "Economy of Integrated Circuits",
+    "section": "7.3 Recurring Cost",
+    "text": "7.3 Recurring Cost"
+  },
+  {
+    "objectID": "slides/economy.html#sec-economy-example",
+    "href": "slides/economy.html#sec-economy-example",
+    "title": "Economy of Integrated Circuits",
+    "section": "7.4 An Exemplary Calculation",
+    "text": "7.4 An Exemplary Calculation"
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-flow",
+    "href": "slides/testing.html#sec-testing-flow",
+    "title": "Testing",
+    "section": "6.1 Post-Silicon Production Flow",
+    "text": "6.1 Post-Silicon Production Flow\n\nIntegrated circuits must be tested for functionality and specification compliance before they are shipped. Defects introduced during manufacturing, as well as parameter variations, are unavoidable—not every IC on a wafer is a good device (the yield is below 100 %). Typical defect causes are doping errors and fluctuations, under- or over-etching, misalignment of layers, and contamination by particles. A comprehensive treatment of IC test is given in (Wang et al. 2006); the related field of hardware security and trust is covered in (Bhunia and Tehranipoor 2018)."
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-equipment",
+    "href": "slides/testing.html#sec-testing-equipment",
+    "title": "Testing",
+    "section": "6.2 Test Equipment",
+    "text": "6.2 Test Equipment"
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-challenges",
+    "href": "slides/testing.html#sec-testing-challenges",
+    "title": "Testing",
+    "section": "6.3 Mixed-Signal Testing Challenges",
+    "text": "6.3 Mixed-Signal Testing Challenges\n\nThe DIB is a custom-designed PCB that hosts the package socket (for testing packaged ICs) or connects to the probe card (for wafer testing). It also contains interface circuits that cannot be handled by the tester hardware resources (e.g., special components required by the DUT). Contact to the packaged DUT is made with spring-loaded “pogo pins” in the socket. For wafer probing, different probe-card types are used: cantilever probe cards (needles coming in at an angle), vertical (“buckling-beam” or “cobra”) probe cards, and membrane probe cards for high pin counts and fine pitches.\nHandlers (robotic pick-and-place or gravity-fed) insert the DUT into the test socket on the DIB. After the test, the ICs are sorted into bins (good = pass, bad = fail, possibly multiple pass grades). The handler can also provide a temperature-controlled environment for hot/cold testing in addition to room-temperature testing (the latter is preferred for cost reasons)."
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-plan",
+    "href": "slides/testing.html#sec-testing-plan",
+    "title": "Testing",
+    "section": "6.4 The Test Plan",
+    "text": "6.4 The Test Plan"
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-types",
+    "href": "slides/testing.html#sec-testing-types",
+    "title": "Testing",
+    "section": "6.5 Types of Tests",
+    "text": "6.5 Types of Tests"
+  },
+  {
+    "objectID": "slides/testing.html#sec-testing-cpk",
+    "href": "slides/testing.html#sec-testing-cpk",
+    "title": "Testing",
+    "section": "6.6 Process Capability Index",
+    "text": "6.6 Process Capability Index\n\nFor analog test parameters, the variation over production must stay inside the test limits, which are derived from the datasheet limits minus guard bands: the lower specification limit (LSL) and the upper specification limit (USL)."
+  },
+  {
     "objectID": "slides/simulation.html#sec-simulation-mna",
     "href": "slides/simulation.html#sec-simulation-mna",
     "title": "Simulation of Integrated Circuits",
@@ -56,88 +133,109 @@
     "text": "11.8 Mixed-Signal Simulation"
   },
   {
-    "objectID": "slides/economy.html#sec-economy-price",
-    "href": "slides/economy.html#sec-economy-price",
-    "title": "Economy of Integrated Circuits",
-    "section": "7.1 Selling Price and Total Cost",
-    "text": "7.1 Selling Price and Total Cost\n\nThe manufacturing of ICs is a large-scale business, requiring significant investment in research and development, and usually large volumes are built and sold. It is therefore rewarding to take a look at the economics of integrated circuits."
+    "objectID": "slides/methodology.html#sec-methodology-y",
+    "href": "slides/methodology.html#sec-methodology-y",
+    "title": "Design Methodology",
+    "section": "8.1 The Y-Diagram",
+    "text": "8.1 The Y-Diagram\n\nIn this chapter, basic knowledge of digital and analog circuit design is assumed; we discuss IC-specific design methodology topics which are usually not covered in entry-level courses. A comprehensive treatment of digital VLSI design and its methodology is given in (Weste and Harris 2011). We first introduce a mental model of the design space (the Y-diagram), then survey the available implementation styles and their trade-offs, and finally walk through the concrete design flows—the digital semicustom flow and the analog/mixed-signal custom flow—illustrated throughout with open-source EDA tools."
   },
   {
-    "objectID": "slides/economy.html#sec-economy-nre",
-    "href": "slides/economy.html#sec-economy-nre",
-    "title": "Economy of Integrated Circuits",
-    "section": "7.2 Non-Recurring Engineering Cost",
-    "text": "7.2 Non-Recurring Engineering Cost"
+    "objectID": "slides/methodology.html#sec-methodology-choices",
+    "href": "slides/methodology.html#sec-methodology-choices",
+    "title": "Design Methodology",
+    "section": "8.2 Digital Implementation Choices",
+    "text": "8.2 Digital Implementation Choices"
   },
   {
-    "objectID": "slides/economy.html#sec-economy-recurring",
-    "href": "slides/economy.html#sec-economy-recurring",
-    "title": "Economy of Integrated Circuits",
-    "section": "7.3 Recurring Cost",
-    "text": "7.3 Recurring Cost"
+    "objectID": "slides/methodology.html#sec-methodology-cells",
+    "href": "slides/methodology.html#sec-methodology-cells",
+    "title": "Design Methodology",
+    "section": "8.3 Cell-Based Design",
+    "text": "8.3 Cell-Based Design"
   },
   {
-    "objectID": "slides/economy.html#sec-economy-example",
-    "href": "slides/economy.html#sec-economy-example",
-    "title": "Economy of Integrated Circuits",
-    "section": "7.4 An Exemplary Calculation",
-    "text": "7.4 An Exemplary Calculation"
+    "objectID": "slides/methodology.html#sec-methodology-flow",
+    "href": "slides/methodology.html#sec-methodology-flow",
+    "title": "Design Methodology",
+    "section": "8.4 The Semicustom Design Flow",
+    "text": "8.4 The Semicustom Design Flow"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-tapeout",
-    "href": "slides/layout.html#sec-layout-tapeout",
-    "title": "The Layout",
-    "section": "4.1 Files and Tapeout",
-    "text": "4.1 Files and Tapeout\n\nThe layout is the 2D representation of the IC manufacturing data. While the schematic captures the electrical intent of a design, the layout captures its physical realization: in the layout tools, the design is drawn on several layers, which are the foundation for the generation of the photomasks used in IC production. Commercial layout tools are, e.g., Cadence Virtuoso, Siemens L-Edit, and open-source tools are Magic and KLayout. The layers are usually manipulated before the geometries are transferred to the masks (shrink, enlarge, invert, combination of several layers into one mask layer, optical proximity correction, etc.)."
+    "objectID": "slides/methodology.html#sec-methodology-custom",
+    "href": "slides/methodology.html#sec-methodology-custom",
+    "title": "Design Methodology",
+    "section": "8.5 The Mixed-Signal/Custom Flow",
+    "text": "8.5 The Mixed-Signal/Custom Flow"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-layers",
-    "href": "slides/layout.html#sec-layout-layers",
-    "title": "The Layout",
-    "section": "4.2 Generic Layer Definition",
-    "text": "4.2 Generic Layer Definition\n\nThe layout is checked for compliance with the wafer-fab design rules in the design rule check (DRC), and for conformance with the intended circuit in the layout-versus-schematic (LVS) check, where a netlist extracted from the layout is compared to the netlist of the original schematic. If all checks pass, the layout data is sent to mask production—this step is called tapeout. The mask house processes the layout data and produces the photomasks used by the wafer fab (depending on technology complexity, between 10 and 80 masks).\nThe standard file format for layout data is GDSII, a hierarchical database in a binary stream format. A newer format with more efficient storage is OASIS, but GDSII is still very common."
+    "objectID": "slides/methodology.html#sec-methodology-fpga",
+    "href": "slides/methodology.html#sec-methodology-fpga",
+    "title": "Design Methodology",
+    "section": "8.6 FPGAs",
+    "text": "8.6 FPGAs"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-devices",
-    "href": "slides/layout.html#sec-layout-devices",
-    "title": "The Layout",
-    "section": "4.3 Devices",
-    "text": "4.3 Devices"
+    "objectID": "slides/robust.html#sec-robust-circuits",
+    "href": "slides/robust.html#sec-robust-circuits",
+    "title": "Robust Design",
+    "section": "10.1 Robust Circuits and Layouts",
+    "text": "10.1 Robust Circuits and Layouts"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-drc",
-    "href": "slides/layout.html#sec-layout-drc",
-    "title": "The Layout",
-    "section": "4.4 Design Rules",
-    "text": "4.4 Design Rules"
+    "objectID": "slides/robust.html#sec-robust-corners",
+    "href": "slides/robust.html#sec-robust-corners",
+    "title": "Robust Design",
+    "section": "10.2 Corner Models",
+    "text": "10.2 Corner Models"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-analog",
-    "href": "slides/layout.html#sec-layout-analog",
-    "title": "The Layout",
-    "section": "4.5 Analog Layout Techniques",
-    "text": "4.5 Analog Layout Techniques\n\nThe complete layout rules of the open-source IHP SG13 PDK can be found in the SG13G2 layout rules document and serve as a practical example of a production DRC rule set."
+    "objectID": "slides/robust.html#sec-robust-parasitics",
+    "href": "slides/robust.html#sec-robust-parasitics",
+    "title": "Robust Design",
+    "section": "10.3 Include the Parasitics",
+    "text": "10.3 Include the Parasitics"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-additional",
-    "href": "slides/layout.html#sec-layout-additional",
-    "title": "The Layout",
-    "section": "4.6 Additional Layout and Mask Structures",
-    "text": "4.6 Additional Layout and Mask Structures"
+    "objectID": "slides/robust.html#sec-robust-failure-mode",
+    "href": "slides/robust.html#sec-robust-failure-mode",
+    "title": "Robust Design",
+    "section": "10.4 Failure-Mode Thinking",
+    "text": "10.4 Failure-Mode Thinking"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-checks",
-    "href": "slides/layout.html#sec-layout-checks",
-    "title": "The Layout",
-    "section": "4.7 Layout Checks",
-    "text": "4.7 Layout Checks"
+    "objectID": "slides/robust.html#sec-robust-debug",
+    "href": "slides/robust.html#sec-robust-debug",
+    "title": "Robust Design",
+    "section": "10.5 Debugging of ICs",
+    "text": "10.5 Debugging of ICs"
   },
   {
-    "objectID": "slides/layout.html#sec-layout-extraction",
-    "href": "slides/layout.html#sec-layout-extraction",
-    "title": "The Layout",
-    "section": "4.8 Layout Extraction",
-    "text": "4.8 Layout Extraction"
+    "objectID": "slides/esd.html#sec-esd-basics",
+    "href": "slides/esd.html#sec-esd-basics",
+    "title": "Electrostatic Discharge and Latch-Up",
+    "section": "9.1 Electrostatic Discharge",
+    "text": "9.1 Electrostatic Discharge\n\nThis chapter covers two reliability hazards that every IC design must handle: electrostatic discharge (ESD), the sudden discharge of statically charged objects into the chip, and latch-up, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows (Amerasekera and Duvvury 2002); overviews of ESD test methods and of protection structures can be found in (Ker et al. 2001; Ker and Chuang 2002)."
+  },
+  {
+    "objectID": "slides/esd.html#sec-latchup",
+    "href": "slides/esd.html#sec-latchup",
+    "title": "Electrostatic Discharge and Latch-Up",
+    "section": "9.2 Latch-Up",
+    "text": "9.2 Latch-Up"
+  },
+  {
+    "objectID": "slides/intro.html#sec-intro-scale",
+    "href": "slides/intro.html#sec-intro-scale",
+    "title": "Introduction",
+    "section": "1.1 How Small Is a Nanometer?",
+    "text": "1.1 How Small Is a Nanometer?"
+  },
+  {
+    "objectID": "slides/intro.html#sec-intro-history",
+    "href": "slides/intro.html#sec-intro-history",
+    "title": "Introduction",
+    "section": "1.2 A Brief History of Semiconductors",
+    "text": "1.2 A Brief History of Semiconductors"
   },
   {
     "objectID": "slides/mosfet.html#sec-mosfet-nutshell",
@@ -217,81 +315,256 @@
     "text": "2.11 Appendix: Silicon Material Properties"
   },
   {
-    "objectID": "slides/testing.html#sec-testing-flow",
-    "href": "slides/testing.html#sec-testing-flow",
-    "title": "Testing",
-    "section": "6.1 Post-Silicon Production Flow",
-    "text": "6.1 Post-Silicon Production Flow\n\nIntegrated circuits must be tested for functionality and specification compliance before they are shipped. Defects introduced during manufacturing, as well as parameter variations, are unavoidable—not every IC on a wafer is a good device (the yield is below 100 %). Typical defect causes are doping errors and fluctuations, under- or over-etching, misalignment of layers, and contamination by particles. A comprehensive treatment of IC test is given in (Wang et al. 2006); the related field of hardware security and trust is covered in (Bhunia and Tehranipoor 2018)."
-  },
-  {
-    "objectID": "slides/testing.html#sec-testing-equipment",
-    "href": "slides/testing.html#sec-testing-equipment",
-    "title": "Testing",
-    "section": "6.2 Test Equipment",
-    "text": "6.2 Test Equipment"
-  },
-  {
-    "objectID": "slides/testing.html#sec-testing-challenges",
-    "href": "slides/testing.html#sec-testing-challenges",
-    "title": "Testing",
-    "section": "6.3 Mixed-Signal Testing Challenges",
-    "text": "6.3 Mixed-Signal Testing Challenges\n\nThe DIB is a custom-designed PCB that hosts the package socket (for testing packaged ICs) or connects to the probe card (for wafer testing). It also contains interface circuits that cannot be handled by the tester hardware resources (e.g., special components required by the DUT). Contact to the packaged DUT is made with spring-loaded “pogo pins” in the socket. For wafer probing, different probe-card types are used: cantilever probe cards (needles coming in at an angle), vertical (“buckling-beam” or “cobra”) probe cards, and membrane probe cards for high pin counts and fine pitches.\nHandlers (robotic pick-and-place or gravity-fed) insert the DUT into the test socket on the DIB. After the test, the ICs are sorted into bins (good = pass, bad = fail, possibly multiple pass grades). The handler can also provide a temperature-controlled environment for hot/cold testing in addition to room-temperature testing (the latter is preferred for cost reasons)."
-  },
-  {
-    "objectID": "slides/testing.html#sec-testing-plan",
-    "href": "slides/testing.html#sec-testing-plan",
-    "title": "Testing",
-    "section": "6.4 The Test Plan",
-    "text": "6.4 The Test Plan"
-  },
-  {
-    "objectID": "slides/testing.html#sec-testing-types",
-    "href": "slides/testing.html#sec-testing-types",
-    "title": "Testing",
-    "section": "6.5 Types of Tests",
-    "text": "6.5 Types of Tests"
-  },
-  {
-    "objectID": "slides/testing.html#sec-testing-cpk",
-    "href": "slides/testing.html#sec-testing-cpk",
-    "title": "Testing",
-    "section": "6.6 Process Capability Index",
-    "text": "6.6 Process Capability Index\n\nFor analog test parameters, the variation over production must stay inside the test limits, which are derived from the datasheet limits minus guard bands: the lower specification limit (LSL) and the upper specification limit (USL)."
-  },
-  {
-    "objectID": "slides/intro.html#sec-intro-scale",
-    "href": "slides/intro.html#sec-intro-scale",
-    "title": "Introduction",
-    "section": "1.1 How Small Is a Nanometer?",
-    "text": "1.1 How Small Is a Nanometer?"
-  },
-  {
-    "objectID": "slides/intro.html#sec-intro-history",
-    "href": "slides/intro.html#sec-intro-history",
-    "title": "Introduction",
-    "section": "1.2 A Brief History of Semiconductors",
-    "text": "1.2 A Brief History of Semiconductors"
-  },
-  {
-    "objectID": "slides/esd.html#sec-esd-basics",
-    "href": "slides/esd.html#sec-esd-basics",
-    "title": "Electrostatic Discharge and Latch-Up",
-    "section": "9.1 Electrostatic Discharge",
-    "text": "9.1 Electrostatic Discharge\n\nThis chapter covers two reliability hazards that every IC design must handle: electrostatic discharge (ESD), the sudden discharge of statically charged objects into the chip, and latch-up, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows (Amerasekera and Duvvury 2002); overviews of ESD test methods and of protection structures can be found in (Ker et al. 2001; Ker and Chuang 2002)."
-  },
-  {
-    "objectID": "slides/esd.html#sec-latchup",
-    "href": "slides/esd.html#sec-latchup",
-    "title": "Electrostatic Discharge and Latch-Up",
-    "section": "9.2 Latch-Up",
-    "text": "9.2 Latch-Up"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Design of Complex Integrated Circuits",
+    "objectID": "slides/index.html",
+    "href": "slides/index.html",
+    "title": "Lecture Slides",
     "section": "",
-    "text": "Design of Complex Integrated Circuits\n\n\n\nQuarto Publish\n\n\n(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)\nThis is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 (“VL Entwurf komplexer integrierter Schaltungen”). Follow this link to access the material.\nThe course covers how integrated circuits are built (MOSFET operation, CMOS technology, layout, packaging, testing, and the economics of chip making) and how they are designed (design methodology, ESD protection, latch-up, robust design techniques, and circuit simulation).\nAll course material is made publicly available and shared under the Apache-2.0 license.\nWe happily accept pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue!"
+    "text": "Slide decks generated from the lecture notes, one per chapter. Press S for speaker notes, C for the chalkboard, and ? for all shortcuts.\n\nIntroduction\nThe MOSFET\nIC Technology\nThe Layout\nIC Packaging\nTesting\nEconomy of Integrated Circuits\nDesign Methodology\nElectrostatic Discharge and Latch-Up\nRobust Design\nSimulation of Integrated Circuits\nProject Management"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-wafer-prep",
+    "href": "slides/packaging.html#sec-packaging-wafer-prep",
+    "title": "IC Packaging",
+    "section": "5.1 From Wafer to Packaged IC",
+    "text": "5.1 From Wafer to Packaged IC\n\nThe finished wafer is not yet a usable product: the individual dice have to be separated, connected, and protected. This chapter covers the path from the processed wafer to the packaged integrated circuit, the most important package families, thermal design, and the electrical parasitics that packages introduce."
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-bonding",
+    "href": "slides/packaging.html#sec-packaging-bonding",
+    "title": "IC Packaging",
+    "section": "5.2 Chip-to-Package Connection",
+    "text": "5.2 Chip-to-Package Connection"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-types",
+    "href": "slides/packaging.html#sec-packaging-types",
+    "title": "IC Packaging",
+    "section": "5.3 Package Types",
+    "text": "5.3 Package Types"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-thermal",
+    "href": "slides/packaging.html#sec-packaging-thermal",
+    "title": "IC Packaging",
+    "section": "5.4 Thermal Design",
+    "text": "5.4 Thermal Design"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-parasitics",
+    "href": "slides/packaging.html#sec-packaging-parasitics",
+    "title": "IC Packaging",
+    "section": "5.5 Package Parasitics",
+    "text": "5.5 Package Parasitics"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-qualification",
+    "href": "slides/packaging.html#sec-packaging-qualification",
+    "title": "IC Packaging",
+    "section": "5.6 Package Qualification",
+    "text": "5.6 Package Qualification"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-tapeout",
+    "href": "slides/layout.html#sec-layout-tapeout",
+    "title": "The Layout",
+    "section": "4.1 Files and Tapeout",
+    "text": "4.1 Files and Tapeout\n\nThe layout is the 2D representation of the IC manufacturing data. While the schematic captures the electrical intent of a design, the layout captures its physical realization: in the layout tools, the design is drawn on several layers, which are the foundation for the generation of the photomasks used in IC production. Commercial layout tools are, e.g., Cadence Virtuoso, Siemens L-Edit, and open-source tools are Magic and KLayout. The layers are usually manipulated before the geometries are transferred to the masks (shrink, enlarge, invert, combination of several layers into one mask layer, optical proximity correction, etc.)."
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-layers",
+    "href": "slides/layout.html#sec-layout-layers",
+    "title": "The Layout",
+    "section": "4.2 Generic Layer Definition",
+    "text": "4.2 Generic Layer Definition\n\nThe layout is checked for compliance with the wafer-fab design rules in the design rule check (DRC), and for conformance with the intended circuit in the layout-versus-schematic (LVS) check, where a netlist extracted from the layout is compared to the netlist of the original schematic. If all checks pass, the layout data is sent to mask production—this step is called tapeout. The mask house processes the layout data and produces the photomasks used by the wafer fab (depending on technology complexity, between 10 and 80 masks).\nThe standard file format for layout data is GDSII, a hierarchical database in a binary stream format. A newer format with more efficient storage is OASIS, but GDSII is still very common."
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-devices",
+    "href": "slides/layout.html#sec-layout-devices",
+    "title": "The Layout",
+    "section": "4.3 Devices",
+    "text": "4.3 Devices"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-drc",
+    "href": "slides/layout.html#sec-layout-drc",
+    "title": "The Layout",
+    "section": "4.4 Design Rules",
+    "text": "4.4 Design Rules"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-analog",
+    "href": "slides/layout.html#sec-layout-analog",
+    "title": "The Layout",
+    "section": "4.5 Analog Layout Techniques",
+    "text": "4.5 Analog Layout Techniques\n\nThe complete layout rules of the open-source IHP SG13 PDK can be found in the SG13G2 layout rules document and serve as a practical example of a production DRC rule set."
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-additional",
+    "href": "slides/layout.html#sec-layout-additional",
+    "title": "The Layout",
+    "section": "4.6 Additional Layout and Mask Structures",
+    "text": "4.6 Additional Layout and Mask Structures"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-checks",
+    "href": "slides/layout.html#sec-layout-checks",
+    "title": "The Layout",
+    "section": "4.7 Layout Checks",
+    "text": "4.7 Layout Checks"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-extraction",
+    "href": "slides/layout.html#sec-layout-extraction",
+    "title": "The Layout",
+    "section": "4.8 Layout Extraction",
+    "text": "4.8 Layout Extraction"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-goals",
+    "href": "slides/project.html#sec-project-goals",
+    "title": "Project Management",
+    "section": "12.1 Goals and Constraints",
+    "text": "12.1 Goals and Constraints"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-phases",
+    "href": "slides/project.html#sec-project-phases",
+    "title": "Project Management",
+    "section": "12.2 Project Phases",
+    "text": "12.2 Project Phases"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-sow",
+    "href": "slides/project.html#sec-project-sow",
+    "title": "Project Management",
+    "section": "12.3 Statement of Work",
+    "text": "12.3 Statement of Work"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-wbs",
+    "href": "slides/project.html#sec-project-wbs",
+    "title": "Project Management",
+    "section": "12.4 Work Breakdown Structure",
+    "text": "12.4 Work Breakdown Structure"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-estimation",
+    "href": "slides/project.html#sec-project-estimation",
+    "title": "Project Management",
+    "section": "12.5 Effort Estimation",
+    "text": "12.5 Effort Estimation"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-gantt",
+    "href": "slides/project.html#sec-project-gantt",
+    "title": "Project Management",
+    "section": "12.6 Scheduling",
+    "text": "12.6 Scheduling"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-raci",
+    "href": "slides/project.html#sec-project-raci",
+    "title": "Project Management",
+    "section": "12.7 Roles and Responsibilities",
+    "text": "12.7 Roles and Responsibilities"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-risk",
+    "href": "slides/project.html#sec-project-risk",
+    "title": "Project Management",
+    "section": "12.8 Risk Management",
+    "text": "12.8 Risk Management"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-reviews",
+    "href": "slides/project.html#sec-project-reviews",
+    "title": "Project Management",
+    "section": "12.9 Reviews and Tapeout Checklist",
+    "text": "12.9 Reviews and Tapeout Checklist"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-tracking",
+    "href": "slides/project.html#sec-project-tracking",
+    "title": "Project Management",
+    "section": "12.10 Tracking and Control",
+    "text": "12.10 Tracking and Control"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-team",
+    "href": "slides/project.html#sec-project-team",
+    "title": "Project Management",
+    "section": "12.11 Team and Communication",
+    "text": "12.11 Team and Communication"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-wafer",
+    "href": "slides/technology.html#sec-technology-wafer",
+    "title": "IC Technology",
+    "section": "3.1 The Silicon Wafer",
+    "text": "3.1 The Silicon Wafer\n\nThis chapter walks through the manufacturing technology of integrated circuits: from the raw silicon wafer through the individual processing steps (doping, photolithography, etching, thin-film deposition, and interconnect formation) to a complete CMOS process flow. The treatment largely follows (Hu 2010)."
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-selective-doping",
+    "href": "slides/technology.html#sec-technology-selective-doping",
+    "title": "IC Technology",
+    "section": "3.2 Selective Doping",
+    "text": "3.2 Selective Doping"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-litho",
+    "href": "slides/technology.html#sec-technology-litho",
+    "title": "IC Technology",
+    "section": "3.3 Photolithography",
+    "text": "3.3 Photolithography"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-etching",
+    "href": "slides/technology.html#sec-technology-etching",
+    "title": "IC Technology",
+    "section": "3.4 Etching",
+    "text": "3.4 Etching"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-doping",
+    "href": "slides/technology.html#sec-technology-doping",
+    "title": "IC Technology",
+    "section": "3.5 Doping Techniques",
+    "text": "3.5 Doping Techniques"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-thin-film",
+    "href": "slides/technology.html#sec-technology-thin-film",
+    "title": "IC Technology",
+    "section": "3.6 Thin-Film Deposition",
+    "text": "3.6 Thin-Film Deposition"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-interconnect",
+    "href": "slides/technology.html#sec-technology-interconnect",
+    "title": "IC Technology",
+    "section": "3.7 Interconnects",
+    "text": "3.7 Interconnects"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-cmos-flow",
+    "href": "slides/technology.html#sec-technology-cmos-flow",
+    "title": "IC Technology",
+    "section": "3.8 An Exemplary CMOS Process Flow",
+    "text": "3.8 An Exemplary CMOS Process Flow\n\nThe classic dielectric between the metal layers is SiO2, but in order to reduce capacitive parasitics, low-k dielectrics (e.g., F- or C-doped SiO2) are used in modern processes. Between processing steps, CMP is used to planarize the surfaces."
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-ihp",
+    "href": "slides/technology.html#sec-technology-ihp",
+    "title": "IC Technology",
+    "section": "3.9 The Open-Source PDK IHP SG13",
+    "text": "3.9 The Open-Source PDK IHP SG13"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-qualification",
+    "href": "slides/technology.html#sec-technology-qualification",
+    "title": "IC Technology",
+    "section": "3.10 Technology Qualification",
+    "text": "3.10 Technology Qualification"
   },
   {
     "objectID": "dcic.html#sec-intro-scale",
@@ -852,278 +1125,5 @@
     "title": "Design of Complex Integrated Circuits",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nThe mobility value used here is not fully consistent with the process constant \\(K_\\mathrm{n} = \\mu_\\mathrm{n}C'_\\mathrm{ox}= 280\\,\\mu\\text{A/V}^2\\) in Table 1, which (with \\(C'_\\mathrm{ox}= 17.3\\,\\text{fF/µm}^2\\)) would imply an effective \\(\\mu_\\mathrm{n}\\approx 160\\,\\text{cm}^2/(\\text{V}\\cdot\\text{s})\\). The effective mobility depends strongly on the vertical field and thus on bias; such spread between simple hand-calculation parameters is normal and is one more reason to verify all sizing choices by simulation.↩︎"
-  },
-  {
-    "objectID": "slides/index.html",
-    "href": "slides/index.html",
-    "title": "Lecture Slides",
-    "section": "",
-    "text": "Slide decks generated from the lecture notes, one per chapter. Press S for speaker notes, C for the chalkboard, and ? for all shortcuts.\n\nIntroduction\nThe MOSFET\nIC Technology\nThe Layout\nIC Packaging\nTesting\nEconomy of Integrated Circuits\nDesign Methodology\nElectrostatic Discharge and Latch-Up\nRobust Design\nSimulation of Integrated Circuits\nProject Management"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-goals",
-    "href": "slides/project.html#sec-project-goals",
-    "title": "Project Management",
-    "section": "12.1 Goals and Constraints",
-    "text": "12.1 Goals and Constraints"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-phases",
-    "href": "slides/project.html#sec-project-phases",
-    "title": "Project Management",
-    "section": "12.2 Project Phases",
-    "text": "12.2 Project Phases"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-sow",
-    "href": "slides/project.html#sec-project-sow",
-    "title": "Project Management",
-    "section": "12.3 Statement of Work",
-    "text": "12.3 Statement of Work"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-wbs",
-    "href": "slides/project.html#sec-project-wbs",
-    "title": "Project Management",
-    "section": "12.4 Work Breakdown Structure",
-    "text": "12.4 Work Breakdown Structure"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-estimation",
-    "href": "slides/project.html#sec-project-estimation",
-    "title": "Project Management",
-    "section": "12.5 Effort Estimation",
-    "text": "12.5 Effort Estimation"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-gantt",
-    "href": "slides/project.html#sec-project-gantt",
-    "title": "Project Management",
-    "section": "12.6 Scheduling",
-    "text": "12.6 Scheduling"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-raci",
-    "href": "slides/project.html#sec-project-raci",
-    "title": "Project Management",
-    "section": "12.7 Roles and Responsibilities",
-    "text": "12.7 Roles and Responsibilities"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-risk",
-    "href": "slides/project.html#sec-project-risk",
-    "title": "Project Management",
-    "section": "12.8 Risk Management",
-    "text": "12.8 Risk Management"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-reviews",
-    "href": "slides/project.html#sec-project-reviews",
-    "title": "Project Management",
-    "section": "12.9 Reviews and Tapeout Checklist",
-    "text": "12.9 Reviews and Tapeout Checklist"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-tracking",
-    "href": "slides/project.html#sec-project-tracking",
-    "title": "Project Management",
-    "section": "12.10 Tracking and Control",
-    "text": "12.10 Tracking and Control"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-team",
-    "href": "slides/project.html#sec-project-team",
-    "title": "Project Management",
-    "section": "12.11 Team and Communication",
-    "text": "12.11 Team and Communication"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-wafer",
-    "href": "slides/technology.html#sec-technology-wafer",
-    "title": "IC Technology",
-    "section": "3.1 The Silicon Wafer",
-    "text": "3.1 The Silicon Wafer\n\nThis chapter walks through the manufacturing technology of integrated circuits: from the raw silicon wafer through the individual processing steps (doping, photolithography, etching, thin-film deposition, and interconnect formation) to a complete CMOS process flow. The treatment largely follows (Hu 2010)."
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-selective-doping",
-    "href": "slides/technology.html#sec-technology-selective-doping",
-    "title": "IC Technology",
-    "section": "3.2 Selective Doping",
-    "text": "3.2 Selective Doping"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-litho",
-    "href": "slides/technology.html#sec-technology-litho",
-    "title": "IC Technology",
-    "section": "3.3 Photolithography",
-    "text": "3.3 Photolithography"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-etching",
-    "href": "slides/technology.html#sec-technology-etching",
-    "title": "IC Technology",
-    "section": "3.4 Etching",
-    "text": "3.4 Etching"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-doping",
-    "href": "slides/technology.html#sec-technology-doping",
-    "title": "IC Technology",
-    "section": "3.5 Doping Techniques",
-    "text": "3.5 Doping Techniques"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-thin-film",
-    "href": "slides/technology.html#sec-technology-thin-film",
-    "title": "IC Technology",
-    "section": "3.6 Thin-Film Deposition",
-    "text": "3.6 Thin-Film Deposition"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-interconnect",
-    "href": "slides/technology.html#sec-technology-interconnect",
-    "title": "IC Technology",
-    "section": "3.7 Interconnects",
-    "text": "3.7 Interconnects"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-cmos-flow",
-    "href": "slides/technology.html#sec-technology-cmos-flow",
-    "title": "IC Technology",
-    "section": "3.8 An Exemplary CMOS Process Flow",
-    "text": "3.8 An Exemplary CMOS Process Flow\n\nThe classic dielectric between the metal layers is SiO2, but in order to reduce capacitive parasitics, low-k dielectrics (e.g., F- or C-doped SiO2) are used in modern processes. Between processing steps, CMP is used to planarize the surfaces."
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-ihp",
-    "href": "slides/technology.html#sec-technology-ihp",
-    "title": "IC Technology",
-    "section": "3.9 The Open-Source PDK IHP SG13",
-    "text": "3.9 The Open-Source PDK IHP SG13"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-qualification",
-    "href": "slides/technology.html#sec-technology-qualification",
-    "title": "IC Technology",
-    "section": "3.10 Technology Qualification",
-    "text": "3.10 Technology Qualification"
-  },
-  {
-    "objectID": "slides/robust.html#sec-robust-circuits",
-    "href": "slides/robust.html#sec-robust-circuits",
-    "title": "Robust Design",
-    "section": "10.1 Robust Circuits and Layouts",
-    "text": "10.1 Robust Circuits and Layouts"
-  },
-  {
-    "objectID": "slides/robust.html#sec-robust-corners",
-    "href": "slides/robust.html#sec-robust-corners",
-    "title": "Robust Design",
-    "section": "10.2 Corner Models",
-    "text": "10.2 Corner Models"
-  },
-  {
-    "objectID": "slides/robust.html#sec-robust-parasitics",
-    "href": "slides/robust.html#sec-robust-parasitics",
-    "title": "Robust Design",
-    "section": "10.3 Include the Parasitics",
-    "text": "10.3 Include the Parasitics"
-  },
-  {
-    "objectID": "slides/robust.html#sec-robust-failure-mode",
-    "href": "slides/robust.html#sec-robust-failure-mode",
-    "title": "Robust Design",
-    "section": "10.4 Failure-Mode Thinking",
-    "text": "10.4 Failure-Mode Thinking"
-  },
-  {
-    "objectID": "slides/robust.html#sec-robust-debug",
-    "href": "slides/robust.html#sec-robust-debug",
-    "title": "Robust Design",
-    "section": "10.5 Debugging of ICs",
-    "text": "10.5 Debugging of ICs"
-  },
-  {
-    "objectID": "slides/methodology.html#sec-methodology-y",
-    "href": "slides/methodology.html#sec-methodology-y",
-    "title": "Design Methodology",
-    "section": "8.1 The Y-Diagram",
-    "text": "8.1 The Y-Diagram\n\nIn this chapter, basic knowledge of digital and analog circuit design is assumed; we discuss IC-specific design methodology topics which are usually not covered in entry-level courses. A comprehensive treatment of digital VLSI design and its methodology is given in (Weste and Harris 2011). We first introduce a mental model of the design space (the Y-diagram), then survey the available implementation styles and their trade-offs, and finally walk through the concrete design flows—the digital semicustom flow and the analog/mixed-signal custom flow—illustrated throughout with open-source EDA tools."
-  },
-  {
-    "objectID": "slides/methodology.html#sec-methodology-choices",
-    "href": "slides/methodology.html#sec-methodology-choices",
-    "title": "Design Methodology",
-    "section": "8.2 Digital Implementation Choices",
-    "text": "8.2 Digital Implementation Choices"
-  },
-  {
-    "objectID": "slides/methodology.html#sec-methodology-cells",
-    "href": "slides/methodology.html#sec-methodology-cells",
-    "title": "Design Methodology",
-    "section": "8.3 Cell-Based Design",
-    "text": "8.3 Cell-Based Design"
-  },
-  {
-    "objectID": "slides/methodology.html#sec-methodology-flow",
-    "href": "slides/methodology.html#sec-methodology-flow",
-    "title": "Design Methodology",
-    "section": "8.4 The Semicustom Design Flow",
-    "text": "8.4 The Semicustom Design Flow"
-  },
-  {
-    "objectID": "slides/methodology.html#sec-methodology-custom",
-    "href": "slides/methodology.html#sec-methodology-custom",
-    "title": "Design Methodology",
-    "section": "8.5 The Mixed-Signal/Custom Flow",
-    "text": "8.5 The Mixed-Signal/Custom Flow"
-  },
-  {
-    "objectID": "slides/methodology.html#sec-methodology-fpga",
-    "href": "slides/methodology.html#sec-methodology-fpga",
-    "title": "Design Methodology",
-    "section": "8.6 FPGAs",
-    "text": "8.6 FPGAs"
-  },
-  {
-    "objectID": "slides/packaging.html#sec-packaging-wafer-prep",
-    "href": "slides/packaging.html#sec-packaging-wafer-prep",
-    "title": "IC Packaging",
-    "section": "5.1 From Wafer to Packaged IC",
-    "text": "5.1 From Wafer to Packaged IC\n\nThe finished wafer is not yet a usable product: the individual dice have to be separated, connected, and protected. This chapter covers the path from the processed wafer to the packaged integrated circuit, the most important package families, thermal design, and the electrical parasitics that packages introduce."
-  },
-  {
-    "objectID": "slides/packaging.html#sec-packaging-bonding",
-    "href": "slides/packaging.html#sec-packaging-bonding",
-    "title": "IC Packaging",
-    "section": "5.2 Chip-to-Package Connection",
-    "text": "5.2 Chip-to-Package Connection"
-  },
-  {
-    "objectID": "slides/packaging.html#sec-packaging-types",
-    "href": "slides/packaging.html#sec-packaging-types",
-    "title": "IC Packaging",
-    "section": "5.3 Package Types",
-    "text": "5.3 Package Types"
-  },
-  {
-    "objectID": "slides/packaging.html#sec-packaging-thermal",
-    "href": "slides/packaging.html#sec-packaging-thermal",
-    "title": "IC Packaging",
-    "section": "5.4 Thermal Design",
-    "text": "5.4 Thermal Design"
-  },
-  {
-    "objectID": "slides/packaging.html#sec-packaging-parasitics",
-    "href": "slides/packaging.html#sec-packaging-parasitics",
-    "title": "IC Packaging",
-    "section": "5.5 Package Parasitics",
-    "text": "5.5 Package Parasitics"
-  },
-  {
-    "objectID": "slides/packaging.html#sec-packaging-qualification",
-    "href": "slides/packaging.html#sec-packaging-qualification",
-    "title": "IC Packaging",
-    "section": "5.6 Package Qualification",
-    "text": "5.6 Package Qualification"
   }
 ]
