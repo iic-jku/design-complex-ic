@@ -133,10 +133,13 @@ $$
 L' \approx 0.2 \ln \left( \frac{2h}{r} \right) \; \mathrm{nH/mm}
 $$ {#eq-ind-round-wire}
 
-For a **flat trace** of width $W$ at height $d$ above a ground plane:
+For a **flat trace** of width $W$ at height $d$ above a ground plane, the closed-form microstrip impedance [@Pozar_RF] with $\epsilon_\mathrm{r} = 1$ gives $L' = Z_0/c_0$:
 
 $$
-L' \approx \frac{1.6}{0.72 + W/d} \; \mathrm{nH/mm}
+\begin{aligned}
+L' &\approx 0.2 \ln \left( \frac{8d}{W} + \frac{W}{4d} \right) \; \mathrm{nH/mm} && \text{for } W/d \leq 1 \\
+L' &\approx \frac{1.257}{W/d + 1.393 + 0.667 \ln (W/d + 1.444)} \; \mathrm{nH/mm} && \text{for } W/d \geq 1
+\end{aligned}
 $$ {#eq-ind-flat-trace}
 
 The **mutual inductance of two round wires** at distance $d$ and height $h$ above the ground plane:
