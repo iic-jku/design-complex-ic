@@ -104,7 +104,7 @@ $$
 Y = \left( \frac{1 - e^{- A D_0}}{A D_0} \right)^2 \approx e^{-A D_0}
 $$ {#eq-murphy-yield}
 
-@eq-murphy-yield shows that the die size is also a critical factor for yield! Combining @eq-dice-per-wafer and @eq-murphy-yield yields the number of *good dice per wafer*, depicted in @fig-good-die-per-wafer.
+The exponential on the right (the Poisson yield model) is a good approximation only for $A D_0 \ll 1$; at $A D_0 = 1$, it already underestimates the yield by about 8 %. @eq-murphy-yield shows that the die size is also a critical factor for yield! Combining @eq-dice-per-wafer and @eq-murphy-yield yields the number of *good dice per wafer*, depicted in @fig-good-die-per-wafer.
 
 {{< include /content/economy/_fig_good_die_per_wafer.qmd >}}
 

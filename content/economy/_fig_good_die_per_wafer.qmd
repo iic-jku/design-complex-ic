@@ -17,7 +17,7 @@ limitations under the License.
 ```{python}
 #| label: fig-good-die-per-wafer
 #| echo: false
-#| fig-cap: "Good dice per wafer versus die size for a 300 mm wafer (2 mm edge exclusion) and two defect densities, using the simplified Murphy yield model of @eq-murphy-yield."
+#| fig-cap: "Good dice per wafer versus die size for a 300 mm wafer (2 mm edge exclusion) and two defect densities, using the Murphy yield model of @eq-murphy-yield."
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -30,7 +30,8 @@ N = d * np.pi * (d / (4 * A) - 1 / np.sqrt(2 * A))
 for D0_cm2, style, label in [(0.01, '--', '$D_0 = 0.01\\,$cm$^{-2}$'),
                              (1.0, '-', '$D_0 = 1\\,$cm$^{-2}$')]:
     D0 = D0_cm2 / 100.0   # convert to mm^-2
-    ax.semilogy(A, N * np.exp(-A * D0), style, color='tab:blue', lw=2,
+    Y = ((1 - np.exp(-A * D0)) / (A * D0))**2   # Murphy yield model
+    ax.semilogy(A, N * Y, style, color='tab:blue', lw=2,
                 label=label)
 
 ax.set_xlabel('Die size $A$ (mm²)')
