@@ -17,7 +17,7 @@ limitations under the License.
 ```{python}
 #| label: fig-mosfet-ssm-simple
 #| echo: false
-#| fig-cap: "Simplified small-signal models of the MOSFET in saturation for hand calculations: $\\pi$-model (left), preferred when the input is at the gate, and $\\tau$-model (right), preferred when the input is at the source. In the $\\tau$-model, the current through the resistor $1/g_\\mathrm{m}$ equals $i_\\mathrm{ds}$, which is mirrored by the controlled source into the drain."
+#| fig-cap: "Simplified small-signal models of the MOSFET in saturation for hand calculations: $\\pi$-model (left), preferred when the input is at the gate, and T-model (right), preferred when the input is at the source. In the T-model, the current through the resistor $1/g_\\mathrm{m}$ equals $i_\\mathrm{ds}$, which is mirrored by the controlled source into the drain."
 
 import schemdraw as sd
 import schemdraw.elements as elm
