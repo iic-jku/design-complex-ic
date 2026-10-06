@@ -49,7 +49,7 @@ $$ {#eq-nre}
 
 **Engineering cost:** $E_\mathrm{tot}$ depends on the size of the design team (architecture, design, simulation, layout, timing, DRC & tapeout, test). It includes salaries, benefits, training, computers, and CAD tool licenses. License costs can be substantial in IC design; approximate yearly costs per seat are \$10k/yr for a digital front-end seat, \$1M/yr for a digital back-end seat, and \$100k/yr for an analog front-/back-end seat.
 
-**Prototype cost:** The mask cost depends heavily on the process technology and the used technology options (e.g., additional $\Vth$ flavors, analog options like precision resistors or MIM capacitors), which drive up the number of masking steps; see @tbl-mask-cost. A [**multi-project wafer (MPW)**](https://en.wikipedia.org/wiki/Multi-project_wafer_service), where multiple designs share a single reticle and thus the share also the mask cost, is a good alternative for prototypes. Also test fixtures (sockets, PCBs) and package tooling belong to $P_\mathrm{tot}$.
+**Prototype cost:** The mask cost depends heavily on the process technology and the used technology options (e.g., additional $\Vth$ flavors, analog options like precision resistors or MIM capacitors), which drive up the number of masking steps; see @tbl-mask-cost. A [**multi-project wafer (MPW)**](https://en.wikipedia.org/wiki/Multi-project_wafer_service), where multiple designs share a single reticle and thus also share the mask cost, is a good alternative for prototypes. Also test fixtures (sockets, PCBs) and package tooling belong to $P_\mathrm{tot}$.
 
 | Technology | Estimated mask-set cost |
 |:-----------|:---:|
