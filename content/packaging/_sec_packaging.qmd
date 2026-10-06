@@ -235,7 +235,7 @@ In addition to the qualification of the silicon technology (see @sec-technology-
 | Temperature humidity bias (THB) / biased HAST | JESD22-A101 / A110 | Corrosion and leakage under humidity, temperature, and applied voltage. |
 | Unbiased highly accelerated stress test (UHAST) | JESD22-A118 | Exposure of package and die to high temperature and humidity without bias. |
 | High-temperature storage life (HTSL) | JESD22-A103 | Storage at high temperature for thousands of hours (intermetallic growth). |
-| Wire bond pull and shear | MIL-STD-883 (2011) / JESD22-B116 | Mechanical strength of the bond wires and their connections. |
+| Wire bond pull and shear | MIL-STD-883 Method 2011 / JESD22-B116 | Mechanical strength of the bond wires and their connections. |
 | Solder ball shear | JESD22-B117 | Mechanical strength of the solder balls of BGA and WLCSP packages. |
 | Drop test | JESD22-B111 | The assembled PCB is dropped repeatedly under standardized conditions. |
 | Temperature cycling on board (TCoB) | IPC-9701 | The assembled PCB is temperature-cycled to check the solder-joint reliability. |
