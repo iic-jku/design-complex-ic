@@ -4222,7 +4222,7 @@ Figure&nbsp;88: Guard rings for latch-up prevention (layout top view): the NMOS 
 <li>Rules <code>LU.a</code> and <code>LU.b</code> limit the maximum distance from any <span class="math inline">\(p^+\)</span> active area inside the n-well to an n-well tie, and from any <span class="math inline">\(n^+\)</span> active area inside the p-well to a substrate tie, to 20 µm—this is the rule-deck version of “place many well and substrate ties”.</li>
 <li>Rules <code>LU.c</code> to <code>LU.d1</code> limit how far a tie may extend beyond its contact (6 µm), which keeps the resistance of the tie itself low.</li>
 </ul>
-<p>Beware: these latch-up rules are <em>not</em> checked by default in the SG13G2 DRC deck—the check has to be enabled explicitly.</p>
+<p>In the open-source SG13G2 KLayout DRC decks, the latch-up rules are checked by default (since IHP-Open-PDK commit <code>3b393f31</code>, March 2025): the maximal deck runs them unless <code>latchUpRules</code> is set to <code>false</code>, and the regular deck runs <code>LU.b</code> unless the <code>precheck_drc</code> option is set. Older versions of the layout-rule document still state otherwise, so check which rules your deck actually runs.</p>
 </section>
 </section>
 </section>
