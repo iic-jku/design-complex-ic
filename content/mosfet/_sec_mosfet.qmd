@@ -53,11 +53,13 @@ Throughout this text we will use typical parameters of a 0.13 µm CMOS process t
 | Nominal supply voltage | $\VDD$ | 1.2 V (digital) / **1.5 V** (analog) |
 | Minimum gate length | $L_\mathrm{min}$ | 130 nm |
 | Oxide thickness | $\tox$ | 2 nm |
-| Threshold voltage NMOS \| PMOS | $\Vth[,n]$ \| $\Vth[,p]$ | 0.5 V \| −0.47 V |
-| Maximum voltage | $|\VGS[,max]|$, $|\VDS[,max]|$ | 2 V |
+| Threshold voltage NMOS \| PMOS | $\Vth[,n]$ \| $\Vth[,p]$ | 0.5 V \| −0.47 V (W/L = 10 µm/0.13 µm) |
+| Maximum voltage | $|\VGS[,max]|$, $|\VDS[,max]|$ | 1.6 V (BV~DSS~ ≥ 2.0 V) |
 | Gate capacitance | $\Cox$ | 17.3 fF/µm² |
 | Process constant $K_\mathrm{n}$ \| $K_\mathrm{p}$ | $\mun \Cox$ \| $\mup \Cox$ | 280 µA/V² \| 130 µA/V² |
 : Typical parameters of the IHP SG13 130 nm CMOS technology {#tbl-ihp130-parameters}
+
+The threshold voltages in @tbl-ihp130-parameters are those of short-channel devices; long-channel devices ($W/L = 10\,\mu\text{m}/10\,\mu\text{m}$) have markedly lower values of about 0.20 V (NMOS) and −0.36 V (PMOS). This strong dependence of $\Vth$ on $L$ results from the reverse short-channel effect (RSCE), where halo implants raise $\Vth$ of short devices, counteracted at the shortest lengths by the short-channel effect (SCE), which lowers $\Vth$; both are discussed in @sec-mosfet-dibl. The maximum voltage is the reliability limit of the low-voltage devices set in the SG13G2 model cards (`VGS_MAX`, `VDS_MAX`); the drain-source breakdown voltage BV~DSS~ is higher, at 2.0 V minimum.
 
 ## Basic I/V Characteristic of the MOSFET {#sec-mosfet-iv}
 
@@ -655,7 +657,7 @@ As can be seen in @eq-mosfet-n-tox, to minimize $n$ (and thus the subthreshold s
 
 An alternative is needed to increase $\Cox$ without further reducing $\tox$: the introduction of alternative gate dielectrics with increased permittivity, the so-called [**high-k gate dielectrics**](https://en.wikipedia.org/wiki/High-kappa_dielectric). One suitable material is hafnium dioxide: while SiO~2~ has $\varepsilon_\mathrm{r} = 3.9$, HfO~2~ offers $\varepsilon_\mathrm{r} = 24$. However, there are potential manufacturing issues, like chemical reactions with the silicon substrate and the gate material, reliability concerns, and reduced surface mobility. Still, high-k dielectrics are now widely used in modern CMOS processes.
 
-### Drain-Induced Barrier Lowering (DIBL)
+### Drain-Induced Barrier Lowering (DIBL) {#sec-mosfet-dibl}
 
 In scaled MOSFETs, there exists another parasitic effect that lowers $\Vth$ as a function of $L$, called [**drain-induced barrier lowering (DIBL)**](https://en.wikipedia.org/wiki/Drain-induced_barrier_lowering). (Remember that lowering $\Vth$ has an exponential effect on the leakage current!) This lowering of $\Vth$ with *decreasing* $L$ is also called the short-channel effect (SCE). Note that there is also a *reverse* short-channel effect (RSCE), which *increases* $\Vth$ with decreasing $L$, caused by halo implants around drain and source in modern CMOS processes. Effectively, $\Vth = f(L)$ can be a wild function of the MOSFET length, so devices will only match if constructed with the same $L$! Note that $\Vth$ also depends on $\VDS$ due to DIBL, and on device $W$, as well as temperature, and other second-order effects, so ultimately $\Vth = f(L, W, \VDS, T)$!
 

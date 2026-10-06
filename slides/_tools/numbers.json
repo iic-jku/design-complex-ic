@@ -1016,6 +1016,11 @@
    "number": "2.3.1",
    "type": "sec"
   },
+  "sec-mosfet-dibl": {
+   "chapter": 2,
+   "number": "2.7.4",
+   "type": "sec"
+  },
   "sec-mosfet-ihp": {
    "chapter": 2,
    "number": "2.8",
