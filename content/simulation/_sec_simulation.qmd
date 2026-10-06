@@ -179,7 +179,7 @@ The ac framework also provides the noise analysis (`.noise` in SPICE): small-sig
 ::: {.content-visible when-format="revealjs"}
 - Noise sources added automatically: thermal (resistors), shot and flicker noise (active devices)
 - Transfer function of every source to the output (all at once via the adjoint network)
-- Contributions summed in power; divided by the gain $\rightarrow$ input-referred noise
+- Contributions summed in power; divided by $|A|^2$ $\rightarrow$ input-referred noise
 - Contribution list per device identifies the dominant noise sources
 - Based on `.ac` $\rightarrow$ **no** nonlinear noise (mixers, oscillators, sampled circuits)
 - Noiseless resistor: VCCS, or local temperature of 0 K
