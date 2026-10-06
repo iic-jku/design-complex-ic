@@ -360,12 +360,12 @@ Table&nbsp;1: Typical parameters of the IHP SG13 130 nm CMOS technology
 <tr class="even">
 <td style="text-align: left;">Threshold voltage NMOS | PMOS</td>
 <td style="text-align: center;"><span class="math inline">\(V_\mathrm{th,n}\)</span> | <span class="math inline">\(V_\mathrm{th,p}\)</span></td>
-<td style="text-align: center;">0.5 V | −0.47 V</td>
+<td style="text-align: center;">0.5 V | −0.47 V (W/L = 10 µm/0.13 µm)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Maximum voltage</td>
 <td style="text-align: center;"><span class="math inline">\(|V_\mathrm{GS,max}|\)</span>, <span class="math inline">\(|V_\mathrm{DS,max}|\)</span></td>
-<td style="text-align: center;">2 V</td>
+<td style="text-align: center;">1.6 V (BV<sub>DSS</sub> ≥ 2.0 V)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Gate capacitance</td>
@@ -384,6 +384,7 @@ Table&nbsp;1: Typical parameters of the IHP SG13 130 nm CMOS technology
 </div>
 <aside class="notes">
 <p>Throughout this text we will use typical parameters of a 0.13 µm CMOS process technology, specifically IHP SG13 <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">(process specification)</a>, for exemplary calculations. The key parameters are listed in <a href="#/tbl-ihp130-parameters" class="quarto-xref">Table&nbsp;1</a>.</p>
+<p>The threshold voltages in <a href="#/tbl-ihp130-parameters" class="quarto-xref">Table&nbsp;1</a> are those of short-channel devices; long-channel devices (<span class="math inline">\(W/L = 10\,\mu\text{m}/10\,\mu\text{m}\)</span>) have markedly lower values of about 0.20 V (NMOS) and −0.36 V (PMOS). This strong dependence of <span class="math inline">\(V_\mathrm{th}\)</span> on <span class="math inline">\(L\)</span> results from the reverse short-channel effect (RSCE), where halo implants raise <span class="math inline">\(V_\mathrm{th}\)</span> of short devices, counteracted at the shortest lengths by the short-channel effect (SCE), which lowers <span class="math inline">\(V_\mathrm{th}\)</span>; both are discussed in <a href="#/sec-mosfet-dibl" class="quarto-xref">Section&nbsp;2.7.4</a>. The maximum voltage is the reliability limit of the low-voltage devices set in the SG13G2 model cards (<code>VGS_MAX</code>, <code>VDS_MAX</code>); the drain-source breakdown voltage BV<sub>DSS</sub> is higher, at 2.0 V minimum.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1843,7 +1844,7 @@ Nominal core supply voltage versus CMOS technology node. Below roughly 90 nm, th
           display:block!important;
       }</style></aside>
 </section>
-<section id="drain-induced-barrier-lowering-dibl" class="slide level3" data-number="2.7.4">
+<section id="sec-mosfet-dibl" class="slide level3" data-number="2.7.4">
 <h3><span class="header-section-number">2.7.4</span> Drain-Induced Barrier Lowering (DIBL)</h3>
 <p><span id="eq-mosfet-dibl"><span class="math display">\[
 \Delta V_\mathrm{th}= - (V_\mathrm{DS}+ 0.4\,\text{V}) \, e^{-L/l_\mathrm{d}}

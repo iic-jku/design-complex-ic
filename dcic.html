@@ -403,7 +403,7 @@ window.Quarto = {
   <li><a href="#subthreshold-leakage" id="toc-subthreshold-leakage" class="nav-link" data-scroll-target="#subthreshold-leakage"><span class="header-section-number">2.7.1</span> Subthreshold Leakage</a></li>
   <li><a href="#subthreshold-slope" id="toc-subthreshold-slope" class="nav-link" data-scroll-target="#subthreshold-slope"><span class="header-section-number">2.7.2</span> Subthreshold Slope</a></li>
   <li><a href="#gate-oxide-leakage" id="toc-gate-oxide-leakage" class="nav-link" data-scroll-target="#gate-oxide-leakage"><span class="header-section-number">2.7.3</span> Gate Oxide Leakage</a></li>
-  <li><a href="#drain-induced-barrier-lowering-dibl" id="toc-drain-induced-barrier-lowering-dibl" class="nav-link" data-scroll-target="#drain-induced-barrier-lowering-dibl"><span class="header-section-number">2.7.4</span> Drain-Induced Barrier Lowering (DIBL)</a></li>
+  <li><a href="#sec-mosfet-dibl" id="toc-sec-mosfet-dibl" class="nav-link" data-scroll-target="#sec-mosfet-dibl"><span class="header-section-number">2.7.4</span> Drain-Induced Barrier Lowering (DIBL)</a></li>
   <li><a href="#solving-dibl-the-ultra-thin-body-mosfet" id="toc-solving-dibl-the-ultra-thin-body-mosfet" class="nav-link" data-scroll-target="#solving-dibl-the-ultra-thin-body-mosfet"><span class="header-section-number">2.7.5</span> Solving DIBL: The Ultra-Thin-Body MOSFET</a></li>
   <li><a href="#solving-dibl-finfet-and-nanosheet" id="toc-solving-dibl-finfet-and-nanosheet" class="nav-link" data-scroll-target="#solving-dibl-finfet-and-nanosheet"><span class="header-section-number">2.7.6</span> Solving DIBL: FinFET and Nanosheet</a></li>
   </ul></li>
@@ -856,12 +856,12 @@ Table&nbsp;1: Typical parameters of the IHP SG13 130 nm CMOS technology
 <tr class="even">
 <td style="text-align: left;">Threshold voltage NMOS | PMOS</td>
 <td style="text-align: center;"><span class="math inline">\(V_\mathrm{th,n}\)</span> | <span class="math inline">\(V_\mathrm{th,p}\)</span></td>
-<td style="text-align: center;">0.5 V | −0.47 V</td>
+<td style="text-align: center;">0.5 V | −0.47 V (W/L = 10 µm/0.13 µm)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Maximum voltage</td>
 <td style="text-align: center;"><span class="math inline">\(|V_\mathrm{GS,max}|\)</span>, <span class="math inline">\(|V_\mathrm{DS,max}|\)</span></td>
-<td style="text-align: center;">2 V</td>
+<td style="text-align: center;">1.6 V (BV<sub>DSS</sub> ≥ 2.0 V)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Gate capacitance</td>
@@ -878,6 +878,7 @@ Table&nbsp;1: Typical parameters of the IHP SG13 130 nm CMOS technology
 </div>
 </figure>
 </div>
+<p>The threshold voltages in <a href="#tbl-ihp130-parameters" class="quarto-xref">Table&nbsp;1</a> are those of short-channel devices; long-channel devices (<span class="math inline">\(W/L = 10\,\mu\text{m}/10\,\mu\text{m}\)</span>) have markedly lower values of about 0.20 V (NMOS) and −0.36 V (PMOS). This strong dependence of <span class="math inline">\(V_\mathrm{th}\)</span> on <span class="math inline">\(L\)</span> results from the reverse short-channel effect (RSCE), where halo implants raise <span class="math inline">\(V_\mathrm{th}\)</span> of short devices, counteracted at the shortest lengths by the short-channel effect (SCE), which lowers <span class="math inline">\(V_\mathrm{th}\)</span>; both are discussed in <a href="#sec-mosfet-dibl" class="quarto-xref">Section&nbsp;2.7.4</a>. The maximum voltage is the reliability limit of the low-voltage devices set in the SG13G2 model cards (<code>VGS_MAX</code>, <code>VDS_MAX</code>); the drain-source breakdown voltage BV<sub>DSS</sub> is higher, at 2.0 V minimum.</p>
 </section>
 </section>
 <section id="sec-mosfet-iv" class="level2" data-number="2.2">
@@ -1577,8 +1578,8 @@ Figure&nbsp;16: Nominal core supply voltage versus CMOS technology node. Below r
 </ul>
 <p>An alternative is needed to increase <span class="math inline">\(C'_\mathrm{ox}\)</span> without further reducing <span class="math inline">\(t_\mathrm{ox}\)</span>: the introduction of alternative gate dielectrics with increased permittivity, the so-called <a href="https://en.wikipedia.org/wiki/High-kappa_dielectric"><strong>high-k gate dielectrics</strong></a>. One suitable material is hafnium dioxide: while SiO<sub>2</sub> has <span class="math inline">\(\varepsilon_\mathrm{r} = 3.9\)</span>, HfO<sub>2</sub> offers <span class="math inline">\(\varepsilon_\mathrm{r} = 24\)</span>. However, there are potential manufacturing issues, like chemical reactions with the silicon substrate and the gate material, reliability concerns, and reduced surface mobility. Still, high-k dielectrics are now widely used in modern CMOS processes.</p>
 </section>
-<section id="drain-induced-barrier-lowering-dibl" class="level3" data-number="2.7.4">
-<h3 data-number="2.7.4" class="anchored" data-anchor-id="drain-induced-barrier-lowering-dibl"><span class="header-section-number">2.7.4</span> Drain-Induced Barrier Lowering (DIBL)</h3>
+<section id="sec-mosfet-dibl" class="level3" data-number="2.7.4">
+<h3 data-number="2.7.4" class="anchored" data-anchor-id="sec-mosfet-dibl"><span class="header-section-number">2.7.4</span> Drain-Induced Barrier Lowering (DIBL)</h3>
 <p>In scaled MOSFETs, there exists another parasitic effect that lowers <span class="math inline">\(V_\mathrm{th}\)</span> as a function of <span class="math inline">\(L\)</span>, called <a href="https://en.wikipedia.org/wiki/Drain-induced_barrier_lowering"><strong>drain-induced barrier lowering (DIBL)</strong></a>. (Remember that lowering <span class="math inline">\(V_\mathrm{th}\)</span> has an exponential effect on the leakage current!) This lowering of <span class="math inline">\(V_\mathrm{th}\)</span> with <em>decreasing</em> <span class="math inline">\(L\)</span> is also called the short-channel effect (SCE). Note that there is also a <em>reverse</em> short-channel effect (RSCE), which <em>increases</em> <span class="math inline">\(V_\mathrm{th}\)</span> with decreasing <span class="math inline">\(L\)</span>, caused by halo implants around drain and source in modern CMOS processes. Effectively, <span class="math inline">\(V_\mathrm{th}= f(L)\)</span> can be a wild function of the MOSFET length, so devices will only match if constructed with the same <span class="math inline">\(L\)</span>! Note that <span class="math inline">\(V_\mathrm{th}\)</span> also depends on <span class="math inline">\(V_\mathrm{DS}\)</span> due to DIBL, and on device <span class="math inline">\(W\)</span>, as well as temperature, and other second-order effects, so ultimately <span class="math inline">\(V_\mathrm{th}= f(L, W, V_\mathrm{DS}, T)\)</span>!</p>
 <p>The impact of <span class="math inline">\(L\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> on <span class="math inline">\(V_\mathrm{th}\)</span> can be modeled by</p>
 <p><span id="eq-mosfet-dibl"><span class="math display">\[
@@ -3085,7 +3086,7 @@ L' &amp;\approx \frac{1.257}{W/d + 1.393 + 0.667 \ln (W/d + 1.444)} \; \mathrm{n
 <p><span id="eq-ind-mutual"><span class="math display">\[
 L_\mathrm{m}' \approx 0.1 \ln \left[ 1 + \left( \frac{2h}{d} \right)^2 \right] \; \mathrm{nH/mm}
 \tag{54}\]</span></span></p>
-<p>A typical bond wire has a radius of 12.5 µm and larger, and an inductance of roughly 1 nH/mm.</p>
+<p>A typical bond wire has a radius of 12.5 µm and larger, and an inductance of roughly 0.7 to 1 nH/mm, depending on its height above the ground plane.</p>
 <div id="nte-bond-wire-inductance" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -3161,7 +3162,7 @@ Figure&nbsp;58: Reducing mutual coupling between bond wires (top view of a chip 
 </section>
 <section id="bond-wires-as-circuit-elements" class="level3" data-number="5.5.4">
 <h3 data-number="5.5.4" class="anchored" data-anchor-id="bond-wires-as-circuit-elements"><span class="header-section-number">5.5.4</span> Bond Wires as Circuit Elements</h3>
-<p>Since a bond wire is a relatively high-<span class="math inline">\(Q\)</span> inductor (inductance ca. 1 nH/mm, low resistivity of Au or Al), some designs use it as a circuit element, e.g., in high-frequency <span class="math inline">\(LC\)</span> oscillators <span class="citation" data-cites="Craninckx_1995">(<a href="#ref-Craninckx_1995" role="doc-biblioref">Craninckx and Steyaert 1995</a>)</span>. However, the mechanical tolerances of the bond-wire geometry translate into inductance tolerance, which must be taken into account. More generally, any conducting structure in a package can be used to form inductors, capacitors, or even antennas (e.g., in CSP or laminate packages).</p>
+<p>Since a bond wire is a relatively high-<span class="math inline">\(Q\)</span> inductor (inductance ca. 0.7 to 1 nH/mm, low resistivity of Au or Al), some designs use it as a circuit element, e.g., in high-frequency <span class="math inline">\(LC\)</span> oscillators <span class="citation" data-cites="Craninckx_1995">(<a href="#ref-Craninckx_1995" role="doc-biblioref">Craninckx and Steyaert 1995</a>)</span>. However, the mechanical tolerances of the bond-wire geometry translate into inductance tolerance, which must be taken into account. More generally, any conducting structure in a package can be used to form inductors, capacitors, or even antennas (e.g., in CSP or laminate packages).</p>
 </section>
 </section>
 <section id="sec-packaging-qualification" class="level2" data-number="5.6">
@@ -3674,16 +3675,16 @@ Figure&nbsp;69: Number of dice per wafer as a function of the die size, for the 
 <p><span id="eq-murphy-yield"><span class="math display">\[
 Y = \left( \frac{1 - e^{- A D_0}}{A D_0} \right)^2 \approx e^{-A D_0}
 \tag{63}\]</span></span></p>
-<p><a href="#eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a> shows that the die size is also a critical factor for yield! Combining <a href="#eq-dice-per-wafer" class="quarto-xref">Equation&nbsp;62</a> and <a href="#eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a> yields the number of <em>good dice per wafer</em>, depicted in <a href="#fig-good-die-per-wafer" class="quarto-xref">Figure&nbsp;70</a>.</p>
+<p>The exponential on the right (the Poisson yield model) is a good approximation only for <span class="math inline">\(A D_0 \ll 1\)</span>; at <span class="math inline">\(A D_0 = 1\)</span>, it already underestimates the yield by about 8 %. <a href="#eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a> shows that the die size is also a critical factor for yield! Combining <a href="#eq-dice-per-wafer" class="quarto-xref">Equation&nbsp;62</a> and <a href="#eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a> yields the number of <em>good dice per wafer</em>, depicted in <a href="#fig-good-die-per-wafer" class="quarto-xref">Figure&nbsp;70</a>.</p>
 <div id="cell-fig-good-die-per-wafer" class="cell" data-execution_count="69">
 <div class="cell-output cell-output-display">
 <div id="fig-good-die-per-wafer" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-good-die-per-wafer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="dcic_files/figure-html/fig-good-die-per-wafer-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-70" title="Figure&nbsp;70: Good dice per wafer versus die size for a 300 mm wafer (2 mm edge exclusion) and two defect densities, using the simplified Murphy yield model of Equation&nbsp;63."><img src="dcic_files/figure-html/fig-good-die-per-wafer-output-1.png" width="565" height="374" class="figure-img"></a>
+<a href="dcic_files/figure-html/fig-good-die-per-wafer-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-70" title="Figure&nbsp;70: Good dice per wafer versus die size for a 300 mm wafer (2 mm edge exclusion) and two defect densities, using the Murphy yield model of Equation&nbsp;63."><img src="dcic_files/figure-html/fig-good-die-per-wafer-output-1.png" width="565" height="374" class="figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-good-die-per-wafer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;70: Good dice per wafer versus die size for a 300 mm wafer (2 mm edge exclusion) and two defect densities, using the simplified Murphy yield model of <a href="#eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a>.
+Figure&nbsp;70: Good dice per wafer versus die size for a 300 mm wafer (2 mm edge exclusion) and two defect densities, using the Murphy yield model of <a href="#eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a>.
 </figcaption>
 </figure>
 </div>
@@ -3871,7 +3872,7 @@ Table&nbsp;13: Energy efficiency versus flexibility of digital design styles
 <ul>
 <li>Logic functions (AND, OR, NAND, NOR, INV, XOR, XNOR) with 2 and more inputs (usually up to 4).</li>
 <li>Complex gates (like combined AND-OR gates, half-adders, bit-shifter cells).</li>
-<li>Auxiliary cells (buffers to balance delays, tie cells to bias n-wells and substrate, decoupling cells, spacers, tri-state buffers, antenna diodes).</li>
+<li>Auxiliary cells (buffers to balance delays, tie-high/tie-low cells driving constant logic levels, well-tap cells to bias n-wells and substrate, decoupling cells, spacers, tri-state buffers, antenna diodes). Some libraries have no separate well-tap cells and place the taps inside each cell instead (e.g., <code>sg13g2_stdcell</code>).</li>
 <li>Storage elements (latches, flip-flops).</li>
 </ul>
 <p>The logic cells are available in different <strong>drive strengths</strong> to balance chip area versus propagation delay versus power consumption (active as well as leakage). The cells are thoroughly characterized for timing, power consumption, capacitive load, and leakage versus PVTL (process, voltage, temperature, load), and the results are stored in look-up tables used by the EDA tools.</p>

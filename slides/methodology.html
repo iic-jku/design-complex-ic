@@ -359,7 +359,7 @@ Table&nbsp;13: Energy efficiency versus flexibility of digital design styles
 <ul>
 <li>Logic functions (AND, OR, NAND, NOR, INV, XOR, XNOR) with 2 and more inputs (usually up to 4).</li>
 <li>Complex gates (like combined AND-OR gates, half-adders, bit-shifter cells).</li>
-<li>Auxiliary cells (buffers to balance delays, tie cells to bias n-wells and substrate, decoupling cells, spacers, tri-state buffers, antenna diodes).</li>
+<li>Auxiliary cells (buffers to balance delays, tie-high/tie-low cells driving constant logic levels, well-tap cells to bias n-wells and substrate, decoupling cells, spacers, tri-state buffers, antenna diodes). Some libraries have no separate well-tap cells and place the taps inside each cell instead (e.g., <code>sg13g2_stdcell</code>).</li>
 <li>Storage elements (latches, flip-flops).</li>
 </ul>
 <aside class="notes">

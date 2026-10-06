@@ -425,7 +425,7 @@ Y = \left( \frac{1 - e^{- A D_0}}{A D_0} \right)^2 \approx e^{-A D_0}
 \tag{63}\]</span></span></p>
 <aside class="notes">
 <p>The <a href="https://en.wikipedia.org/wiki/Semiconductor_device_fabrication#Device_yield">yield</a> <span class="math inline">\(Y\)</span> is the number of functional dice divided by the total number of dice per wafer (<span class="math inline">\(Y = 50\,\%\)</span> means that half of the produced ICs are defective). Wafer processing incurs a defect density per unit area (<span class="math inline">\(D_0 \approx 0.01\)</span> to <span class="math inline">\(1\,\text{cm}^{-2}\)</span>) in the silicon structures—this is why <a href="https://en.wikipedia.org/wiki/Cleanroom">clean rooms</a> and careful processing are essential. The defect density and the die area are related to the yield by Murphy’s model <span class="citation" data-cites="Murphy_1964">(<a href="#/references" role="doc-biblioref" onclick="">Murphy 1964</a>)</span>:</p>
-<p><a href="#/eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a> shows that the die size is also a critical factor for yield! Combining <a href="#/eq-dice-per-wafer" class="quarto-xref">Equation&nbsp;62</a> and <a href="#/eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a> yields the number of <em>good dice per wafer</em>, depicted in <a href="#/fig-good-die-per-wafer" class="quarto-xref">Figure&nbsp;70</a>.</p>
+<p>The exponential on the right (the Poisson yield model) is a good approximation only for <span class="math inline">\(A D_0 \ll 1\)</span>; at <span class="math inline">\(A D_0 = 1\)</span>, it already underestimates the yield by about 8 %. <a href="#/eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a> shows that the die size is also a critical factor for yield! Combining <a href="#/eq-dice-per-wafer" class="quarto-xref">Equation&nbsp;62</a> and <a href="#/eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a> yields the number of <em>good dice per wafer</em>, depicted in <a href="#/fig-good-die-per-wafer" class="quarto-xref">Figure&nbsp;70</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -448,7 +448,7 @@ Y = \left( \frac{1 - e^{- A D_0}}{A D_0} \right)^2 \approx e^{-A D_0}
 <img data-src="economy_files/figure-revealjs/fig-good-die-per-wafer-output-1.png" width="565" height="374">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-good-die-per-wafer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;70: Good dice per wafer versus die size for a 300 mm wafer (2 mm edge exclusion) and two defect densities, using the simplified Murphy yield model of <a href="#/eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a>.
+Figure&nbsp;70: Good dice per wafer versus die size for a 300 mm wafer (2 mm edge exclusion) and two defect densities, using the Murphy yield model of <a href="#/eq-murphy-yield" class="quarto-xref">Equation&nbsp;63</a>.
 </figcaption>
 </figure>
 </div>
