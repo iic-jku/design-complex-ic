@@ -145,7 +145,7 @@ $$
 L_\mathrm{m}' \approx 0.1 \ln \left[ 1 + \left( \frac{2h}{d} \right)^2 \right] \; \mathrm{nH/mm}
 $$ {#eq-ind-mutual}
 
-A typical bond wire has a radius of 12.5 µm and larger, and an inductance of roughly 1 nH/mm.
+A typical bond wire has a radius of 12.5 µm and larger, and an inductance of roughly 0.7 to 1 nH/mm, depending on its height above the ground plane.
 
 ::: {#nte-bond-wire-inductance .callout-note}
 ## Example Calculation of the Bond-Wire Inductance
