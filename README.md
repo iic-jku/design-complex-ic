@@ -3,7 +3,7 @@
 [![Quarto Publish](https://github.com/iic-jku/design-complex-ic/actions/workflows/quarto-publish.yml/badge.svg?branch=main)](https://github.com/iic-jku/design-complex-ic/actions/workflows/quarto-publish.yml)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-online-brightgreen)](https://iic-jku.github.io/design-complex-ic/dcic.html)
 
-**(c) 2017-2026 Harald Pretl, Institute for Integrated Circuits and Quantum Computing (IICQC), Johannes Kepler University, Linz (JKU)**
+**(c) 2017-2026 Harald Pretl and co-authors, Department for Integrated Circuits (ICD), Johannes Kepler University, Linz (JKU)**
 
 This is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 ("VL Entwurf komplexer integrierter Schaltungen").
 
