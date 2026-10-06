@@ -426,7 +426,7 @@ So far, we have only considered the dc operation of the MOSFET, but the physical
 
 - The oxide capacitance between the gate and the channel, $\Cgg = \Cox W L$.
 - The gate-drain and gate-source overlap capacitances $C_\mathrm{ov} = C'_\mathrm{ov} W$.
-- The junction capacitance between drain/source and substrate, $C_\mathrm{j} = C_\mathrm{j0} / (1 + V_\mathrm{DB | SB} / \PhiB)^m$ with $m \approx 0.3 \ldots 0.4$. $C_\mathrm{j0}$ is defined by the area and perimeter of the drain/source regions.
+- The junction capacitance between drain/source and substrate, $C_\mathrm{j} = C_\mathrm{j0} / (1 + V_\mathrm{DB | SB} / \Phi_\mathrm{bi})^m$ with the junction built-in potential $\Phi_\mathrm{bi} \approx 0.7 \ldots 0.8\,\text{V}$ and $m \approx 0.3 \ldots 0.4$. $C_\mathrm{j0}$ is defined by the area and perimeter of the drain/source regions.
 - The depletion capacitance between the channel (the inversion layer) and the substrate, $C_\mathrm{dep} = \Cdep W L$.
 
 To identify the dominant capacitive elements between gate-source ($\CGS$) and gate-drain ($\CGD$), we need to distinguish between the triode and the saturation region, see @tbl-mosfet-caps.
