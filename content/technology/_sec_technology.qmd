@@ -30,7 +30,7 @@ The ingot is then cut into [**wafers**](https://en.wikipedia.org/wiki/Wafer_(ele
 
 ### Doping
 
-The silicon atoms are spaced roughly 0.24 nm apart in the crystal lattice, resulting in about $5 \times 10^{22}\,\text{atoms/cm}^3$. The intrinsic carrier concentration is $n_\mathrm{i} = p_\mathrm{i} \approx 1.0 \times 10^{10}\,\text{cm}^{-3}$ at 300 K, with an exponential temperature dependence (older textbooks often quote $1.5 \times 10^{10}\,\text{cm}^{-3}$; the accepted measured value is $9.65 \times 10^{9}\,\text{cm}^{-3}$ [@Sproul_Green_1991]). By introducing doping materials in small quantities, the carrier concentration can be modulated strongly; see @tbl-doping ($\Nd$ and $\Na$ are given in $\text{cm}^{-3}$).
+The silicon atoms are spaced roughly 0.24 nm apart in the crystal lattice, resulting in about $5 \times 10^{22}\,\text{atoms/cm}^3$. The intrinsic carrier concentration is $n_\mathrm{i} = p_\mathrm{i} \approx 1.0 \times 10^{10}\,\text{cm}^{-3}$ at 300 K [@Sproul_Green_1991], with an exponential temperature dependence (older textbooks often quote $1.5 \times 10^{10}\,\text{cm}^{-3}$; a later reassessment that accounts for band-gap narrowing gives $9.65 \times 10^{9}\,\text{cm}^{-3}$ [@Altermatt_2003]). By introducing doping materials in small quantities, the carrier concentration can be modulated strongly; see @tbl-doping ($\Nd$ and $\Na$ are given in $\text{cm}^{-3}$).
 
 | | $n$-type (donor materials) | $p$-type (acceptor materials) |
 |:--|:--------------------------|:------------------------------|
