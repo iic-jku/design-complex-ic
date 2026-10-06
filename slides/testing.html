@@ -477,7 +477,7 @@ Continuity test: the tester forces a small current into the pin and measures the
 <ul>
 <li>Zero-one (write all zeros, read all zeros, write all ones, read all ones)—<span class="math inline">\(\mathcal{O}(n)\)</span>.</li>
 <li>Checkerboard (write alternating 0101…, read, write the complement 1010…, read)—<span class="math inline">\(\mathcal{O}(n)\)</span>.</li>
-<li>Walking 1/0 (consecutively fill the memory with ones/zeros and check)—<span class="math inline">\(\mathcal{O}(n^2)\)</span>.</li>
+<li>Walking 1/0 (write a background of zeros/ones, walk a single 1/0 through the memory, and read all cells after each step)—<span class="math inline">\(\mathcal{O}(n^2)\)</span>.</li>
 <li>ROM: read out and compute a checksum/CRC or hash—<span class="math inline">\(\mathcal{O}(n)\)</span>.</li>
 </ul>
 <aside class="notes">

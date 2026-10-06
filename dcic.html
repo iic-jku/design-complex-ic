@@ -732,7 +732,7 @@ Figure&nbsp;2: Timeline of key milestones in semiconductor history.
 </div>
 <p><strong>1874, the diode:</strong> Karl Ferdinand Braun discovers the <strong>rectifying effect</strong> of a particular type of mineral (galena, “Bleiglanz”). This effect is later exploited in radio receivers in the form of the <a href="https://en.wikipedia.org/wiki/Crystal_detector">crystal detector</a> (the “cat’s whisker”), which is the first semiconductor electronic device.</p>
 <p><strong>1926, the field-effect transistor (FET):</strong> <a href="https://en.wikipedia.org/wiki/Julius_Edgar_Lilienfeld">Julius Lilienfeld</a> patents the <strong>field-effect transistor</strong>. Unfortunately, it takes several decades before such a device can actually be manufactured, as surface charges at the semiconductor interface cause malfunction of the early devices. Only in 1960 do Dawon Kahng and Mohamed Atalla finally demonstrate the <a href="https://en.wikipedia.org/wiki/MOSFET">metal-oxide-semiconductor field-effect transistor</a> (MOSFET).</p>
-<p><strong>1947, the bipolar junction transistor (BJT):</strong> John Bardeen, William Shockley, and Walter Brattain demonstrate the first <strong>semiconductor transistor</strong> (using germanium) at Bell Labs. This was a big step towards the replacement of vacuum tubes. In the first <a href="https://en.wikipedia.org/wiki/Point-contact_transistor">point-contact transistor</a>, the bottom piece of germanium formed the base terminal, hence the name “base.”</p>
+<p><strong>1947, the point-contact transistor:</strong> John Bardeen, William Shockley, and Walter Brattain demonstrate the first <strong>semiconductor transistor</strong> (using germanium) at Bell Labs. This was a big step towards the replacement of vacuum tubes. In this first <a href="https://en.wikipedia.org/wiki/Point-contact_transistor">point-contact transistor</a>, the bottom piece of germanium formed the base terminal, hence the name “base.” Shockley conceived the <a href="https://en.wikipedia.org/wiki/Bipolar_junction_transistor">bipolar junction transistor (BJT)</a> in 1948; it was first built in 1950.</p>
 <p><strong>1958/1960, the first integrated circuit:</strong> After the first solid-state circuit demonstrated by Jack Kilby in 1958, Robert Noyce and his team at Fairchild build the first <strong>monolithic integrated circuit</strong> with pn-junction isolation in 1960: a flip-flop in transistor-resistor logic, integrated onto a wafer with 3 mm diameter.</p>
 <p><strong>1963, complementary MOS (CMOS):</strong> In an ISSCC paper, Frank Wanlass and Chih-Tang Sah of Fairchild Semiconductor show that logic built from p-channel and n-channel MOSFETs draws very little standby power—the invention of <a href="https://en.wikipedia.org/wiki/CMOS">CMOS</a> <span class="citation" data-cites="Wanlass_Sah_1963">(<a href="#ref-Wanlass_Sah_1963" role="doc-biblioref">Wanlass and Sah 1963</a>)</span>.</p>
 <p><strong>1964, analog integrated circuits:</strong> Robert J. Widlar, the “Father of Analog Integrated Circuits,” designs the first integrated operational amplifier, the µA702.</p>
@@ -3220,7 +3220,7 @@ Table&nbsp;10: Typical package qualification tests
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Wire bond pull and shear</td>
-<td style="text-align: left;">MIL-STD-883 (2011) / JESD22-B116</td>
+<td style="text-align: left;">MIL-STD-883 Method 2011 / JESD22-B116</td>
 <td style="text-align: left;">Mechanical strength of the bond wires and their connections.</td>
 </tr>
 <tr class="even">
@@ -3394,7 +3394,7 @@ Figure&nbsp;62: Continuity test: the tester forces a small current into the pin 
 <ul>
 <li>Zero-one (write all zeros, read all zeros, write all ones, read all ones)—<span class="math inline">\(\mathcal{O}(n)\)</span>.</li>
 <li>Checkerboard (write alternating 0101…, read, write the complement 1010…, read)—<span class="math inline">\(\mathcal{O}(n)\)</span>.</li>
-<li>Walking 1/0 (consecutively fill the memory with ones/zeros and check)—<span class="math inline">\(\mathcal{O}(n^2)\)</span>.</li>
+<li>Walking 1/0 (write a background of zeros/ones, walk a single 1/0 through the memory, and read all cells after each step)—<span class="math inline">\(\mathcal{O}(n^2)\)</span>.</li>
 <li>ROM: read out and compute a checksum/CRC or hash—<span class="math inline">\(\mathcal{O}(n)\)</span>.</li>
 </ul>
 <p>Applying these RAM tests can be done by external reads/writes (slow), by the internal CPU (faster), or by dedicated <a href="https://en.wikipedia.org/wiki/Built-in_self-test"><strong>built-in self-test (BIST)</strong></a> hardware (fastest, at the cost of extra silicon area). <a href="#fig-ram-bist" class="quarto-xref">Figure&nbsp;63</a> shows the structure of a RAM BIST: a controller with pattern and address generators exercises the RAM, and a comparator checks the read-back data.</p>
@@ -4002,7 +4002,7 @@ Figure&nbsp;79: Mixed-signal/custom design flow with open-source tools: the sche
 </section>
 <section id="sec-esd" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Electrostatic Discharge and Latch-Up</h1>
-<p>This chapter covers two reliability hazards that every IC design must handle: <a href="https://en.wikipedia.org/wiki/Electrostatic_discharge"><strong>electrostatic discharge (ESD)</strong></a>, the sudden discharge of statically charged objects into the chip, and <a href="https://en.wikipedia.org/wiki/Latch-up"><strong>latch-up</strong></a>, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows <span class="citation" data-cites="Amerasekera_ESD">(<a href="#ref-Amerasekera_ESD" role="doc-biblioref">Amerasekera and Duvvury 2002</a>)</span>; overviews of ESD test methods and of protection structures can be found in <span class="citation" data-cites="Ker_2001 Ker_2002">(<a href="#ref-Ker_2001" role="doc-biblioref">Ker et al. 2001</a>; <a href="#ref-Ker_2002" role="doc-biblioref">Ker and Chuang 2002</a>)</span>.</p>
+<p>This chapter covers two reliability hazards that every IC design must handle: <a href="https://en.wikipedia.org/wiki/Electrostatic_discharge"><strong>electrostatic discharge (ESD)</strong></a>, the sudden discharge of statically charged objects into the chip, and <a href="https://en.wikipedia.org/wiki/Latch-up"><strong>latch-up</strong></a>, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows <span class="citation" data-cites="Amerasekera_ESD">(<a href="#ref-Amerasekera_ESD" role="doc-biblioref">Amerasekera and Duvvury 2002</a>)</span>; overviews of ESD as a reliability concern, including protection structures, and of ESD test methods can be found in <span class="citation" data-cites="Duvvury_1993 Ker_2001">(<a href="#ref-Duvvury_1993" role="doc-biblioref">Duvvury and Amerasekera 1993</a>; <a href="#ref-Ker_2001" role="doc-biblioref">Ker et al. 2001</a>)</span>.</p>
 <section id="sec-esd-basics" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="sec-esd-basics"><span class="header-section-number">9.1</span> Electrostatic Discharge</h2>
 <p>When an external object at a high potential (e.g., charged by the <a href="https://en.wikipedia.org/wiki/Triboelectric_effect">triboelectric effect</a> or by induction from an electric field) touches one of the connections of a circuit, the resulting <strong>electrostatic discharge</strong> produces a large transient voltage or current—for example, when ICs are handled by humans or by machines with faulty grounding. ESD can even occur without actual contact, as an arc across an air gap. Devices sustain two types of <em>permanent damage</em> as a result of ESD:</p>
@@ -5171,6 +5171,9 @@ Dennard, Robert H., Fritz H. Gaensslen, Hwa-Nien Yu, V. Leo Rideout, Ernest Bass
 <div id="ref-Doran_1981" class="csl-entry" role="listitem">
 Doran, George T. 1981. <span>“There’s a <span>S.M.A.R.T.</span> Way to Write Management’s Goals and Objectives.”</span> <em>Management Review</em> 70 (11): 35–36.
 </div>
+<div id="ref-Duvvury_1993" class="csl-entry" role="listitem">
+Duvvury, Charvaka, and Ajith Amerasekera. 1993. <span>“<span>ESD</span>: A Pervasive Reliability Concern for <span>IC</span> Technologies.”</span> <em>Proceedings of the IEEE</em> 81 (5): 690–702. <a href="https://doi.org/10.1109/5.220901">https://doi.org/10.1109/5.220901</a>.
+</div>
 <div id="ref-Forsberg_Mooz_1991" class="csl-entry" role="listitem">
 Forsberg, Kevin, and Harold Mooz. 1991. <span>“The Relationship of System Engineering to the Project Cycle.”</span> <em>Proceedings of the First Annual Symposium of the National Council on Systems Engineering (NCOSE)</em>, 57–65. <a href="https://doi.org/10.1002/j.2334-5837.1991.tb01484.x">https://doi.org/10.1002/j.2334-5837.1991.tb01484.x</a>.
 </div>
@@ -5212,9 +5215,6 @@ Kelley, Jr., James E., and Morgan R. Walker. 1959. <span>“Critical-Path Planni
 </div>
 <div id="ref-Ker_2000" class="csl-entry" role="listitem">
 Ker, Ming-Dou, Tung-Yang Chen, Chung-Yu Wu, and Hun-Hsien Chang. 2000. <span>“<span>ESD</span> Protection Design on Analog Pin with Very Low Input Capacitance for High-Frequency or Current-Mode Applications.”</span> <em>IEEE Journal of Solid-State Circuits</em> 35 (8): 1194–99. <a href="https://doi.org/10.1109/4.859509">https://doi.org/10.1109/4.859509</a>.
-</div>
-<div id="ref-Ker_2002" class="csl-entry" role="listitem">
-Ker, Ming-Dou, and Che-Hao Chuang. 2002. <span>“<span>ESD</span> Protection Circuits with Novel <span>MOS</span>-Bounded Diode Structures.”</span> <em>IEEE International Symposium on Circuits and Systems (ISCAS)</em> 5: V-533-V-536. <a href="https://doi.org/10.1109/ISCAS.2002.1010758">https://doi.org/10.1109/ISCAS.2002.1010758</a>.
 </div>
 <div id="ref-Ker_2001" class="csl-entry" role="listitem">
 Ker, Ming-Dou, Jeng-Jie Peng, and Hsin-Chin Jiang. 2001. <span>“<span>ESD</span> Test Methods on Integrated Circuits: An Overview.”</span> <em>IEEE International Conference on Electronics, Circuits and Systems (ICECS)</em> 2: 1011–14. <a href="https://doi.org/10.1109/ICECS.2001.957647">https://doi.org/10.1109/ICECS.2001.957647</a>.
