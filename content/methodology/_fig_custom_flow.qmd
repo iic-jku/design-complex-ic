@@ -17,7 +17,7 @@ limitations under the License.
 ```{python}
 #| label: fig-custom-flow
 #| echo: false
-#| fig-cap: "Mixed-signal/custom design flow with open-source tools: the schematic (xschem) is simulated (ngspice), the layout is drawn (klayout, magic) and verified by DRC, extraction, and LVS (netgen); parasitic extraction (magic) feeds a back-annotated re-simulation, and after reliability checks the block is done. Failing checks loop back to the layout or the schematic."
+#| fig-cap: "Mixed-signal/custom design flow with open-source tools: the schematic (xschem) is simulated (ngspice), the layout is drawn (klayout, magic) and verified by DRC (klayout, magic), extraction (magic, klayout), and LVS (klayout, netgen); parasitic extraction (magic, klayout-pex) feeds a back-annotated re-simulation, and after reliability checks the block is done. Failing checks loop back to the layout or the schematic."
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, FancyArrowPatch, FancyBboxPatch
