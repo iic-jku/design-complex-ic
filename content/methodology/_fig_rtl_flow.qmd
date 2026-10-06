@@ -76,7 +76,7 @@ arr(ax, 0.5, 11.6, 0.8, 11.6)
 ax.text(1.0, 8.6, 'n', fontsize=8)
 
 # column 2
-box(ax, 7.0, 5.2, 'Simulation or formal\nverification (iverilog)')
+box(ax, 7.0, 5.2, 'Simulation (iverilog) or\nequivalence check (eqy)')
 box(ax, 7.0, 3.6, 'OK?', w=1.6, h=0.8, kind='dec')
 box(ax, 7.0, 2.0, 'Timing analysis\n(opensta)')
 arr(ax, 4.2, 5.2, 5.3, 5.2)
