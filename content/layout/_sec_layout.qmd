@@ -82,7 +82,7 @@ Diffusion resistors (@fig-layout-diff-resistor) use source/drain diffusions or w
 
 The resistor types available in IHP SG13 are summarized in @tbl-ihp-resistors.
 
-| Type | $R_\square$ (Ω/$\square$) | Process tolerance ($\pm 4 \sigma$) | Matching | Temp. coefficient |
+| Type | $R_\square$ (Ω/$\square$) | Process tolerance (about $\pm 3 \sigma$) | Matching | Temp. coefficient |
 |:-----|:---:|:---:|:---:|:---:|
 | Silicided $n^{++}$-poly (`rsil`) | 7 | ±12 % | 0.6 %µm | 0.3 %/K |
 | Blocked $p^+$-poly (`rppd`) | 260 | ±10 % | 1.5 %µm | 0.017 %/K |
