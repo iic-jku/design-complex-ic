@@ -92,7 +92,7 @@ $$
 N \approx d \pi \left( \frac{d}{4 A} - \frac{1}{\sqrt{2 A}} \right)
 $$ {#eq-dice-per-wafer}
 
-which is plotted in @fig-die-per-wafer for the standard wafer sizes.
+which is plotted in @fig-die-per-wafer for the standard wafer sizes. Note that $A$ is the *stepping area* of one die on the wafer, i.e., the die including its seal ring plus its share of the scribe lane, and is thus somewhat larger than the active circuit area.
 
 {{< include /content/economy/_fig_die_per_wafer.qmd >}}
 
