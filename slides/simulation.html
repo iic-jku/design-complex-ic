@@ -521,13 +521,13 @@ x_{n+1} = x_n - \left[ \frac{d}{dx} f(x_n) \right]^{-1} f(x_n)
 <ul>
 <li>Noise sources added automatically: thermal (resistors), shot and flicker noise (active devices)</li>
 <li>Transfer function of every source to the output (all at once via the adjoint network)</li>
-<li>Contributions summed in power; divided by the gain <span class="math inline">\(\rightarrow\)</span> input-referred noise</li>
+<li>Contributions summed in power; divided by <span class="math inline">\(|A|^2\)</span> <span class="math inline">\(\rightarrow\)</span> input-referred noise</li>
 <li>Contribution list per device identifies the dominant noise sources</li>
 <li>Based on <code>.ac</code> <span class="math inline">\(\rightarrow\)</span> <strong>no</strong> nonlinear noise (mixers, oscillators, sampled circuits)</li>
 <li>Noiseless resistor: VCCS, or local temperature of 0 K</li>
 </ul>
 <aside class="notes">
-<p>The ac framework also provides the noise analysis (<code>.noise</code> in SPICE): small-signal noise sources are added to the circuit automatically (thermal noise for resistors; additionally shot noise and flicker noise for active devices). By computing the transfer function of each noise source to an output port (efficiently done for all sources at once using the adjoint network), the noise contributions are summed in power at the output, and dividing by the gain yields the input-referred noise. The contribution list per device is a valuable design aid to identify the dominant noise sources. Since <code>.noise</code> is based on <code>.ac</code>, <strong>nonlinear</strong> noise effects (as in mixers, oscillators, or sampled circuits) can <strong>not</strong> be simulated this way. For modeling purposes, a <strong>noiseless resistor</strong> is sometimes needed: it can be built from a VCCS, or by setting the resistor’s local temperature to 0 K if the simulator supports it.</p>
+<p>The ac framework also provides the noise analysis (<code>.noise</code> in SPICE): small-signal noise sources are added to the circuit automatically (thermal noise for resistors; additionally shot noise and flicker noise for active devices). By computing the transfer function of each noise source to an output port (efficiently done for all sources at once using the adjoint network), the noise contributions are summed in power at the output, and dividing this output noise power by the squared magnitude of the gain <span class="math inline">\(|A|^2\)</span> (or the output noise voltage density by <span class="math inline">\(|A|\)</span>) yields the input-referred noise. The contribution list per device is a valuable design aid to identify the dominant noise sources. Since <code>.noise</code> is based on <code>.ac</code>, <strong>nonlinear</strong> noise effects (as in mixers, oscillators, or sampled circuits) can <strong>not</strong> be simulated this way. For modeling purposes, a <strong>noiseless resistor</strong> is sometimes needed: it can be built from a VCCS, or by setting the resistor’s local temperature to 0 K if the simulator supports it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
