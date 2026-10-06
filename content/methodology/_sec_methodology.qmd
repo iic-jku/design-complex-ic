@@ -62,7 +62,7 @@ Different types of cells can be used when designing ICs:
 
 - Logic functions (AND, OR, NAND, NOR, INV, XOR, XNOR) with 2 and more inputs (usually up to 4).
 - Complex gates (like combined AND-OR gates, half-adders, bit-shifter cells).
-- Auxiliary cells (buffers to balance delays, tie cells to bias n-wells and substrate, decoupling cells, spacers, tri-state buffers, antenna diodes).
+- Auxiliary cells (buffers to balance delays, tie-high/tie-low cells driving constant logic levels, well-tap cells to bias n-wells and substrate, decoupling cells, spacers, tri-state buffers, antenna diodes). Some libraries have no separate well-tap cells and place the taps inside each cell instead (e.g., `sg13g2_stdcell`).
 - Storage elements (latches, flip-flops).
 
 The logic cells are available in different **drive strengths** to balance chip area versus propagation delay versus power consumption (active as well as leakage). The cells are thoroughly characterized for timing, power consumption, capacitive load, and leakage versus PVTL (process, voltage, temperature, load), and the results are stored in look-up tables used by the EDA tools.
