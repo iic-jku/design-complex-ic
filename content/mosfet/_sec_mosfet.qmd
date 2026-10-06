@@ -53,11 +53,13 @@ Throughout this text we will use typical parameters of a 0.13 µm CMOS process t
 | Nominal supply voltage | $\VDD$ | 1.2 V (digital) / **1.5 V** (analog) |
 | Minimum gate length | $L_\mathrm{min}$ | 130 nm |
 | Oxide thickness | $\tox$ | 2 nm |
-| Threshold voltage NMOS \| PMOS | $\Vth[,n]$ \| $\Vth[,p]$ | 0.5 V \| −0.47 V |
-| Maximum voltage | $|\VGS[,max]|$, $|\VDS[,max]|$ | 2 V |
+| Threshold voltage NMOS \| PMOS | $\Vth[,n]$ \| $\Vth[,p]$ | 0.5 V \| −0.47 V (W/L = 10 µm/0.13 µm) |
+| Maximum voltage | $|\VGS[,max]|$, $|\VDS[,max]|$ | 1.6 V (BV~DSS~ ≥ 2.0 V) |
 | Gate capacitance | $\Cox$ | 17.3 fF/µm² |
 | Process constant $K_\mathrm{n}$ \| $K_\mathrm{p}$ | $\mun \Cox$ \| $\mup \Cox$ | 280 µA/V² \| 130 µA/V² |
 : Typical parameters of the IHP SG13 130 nm CMOS technology {#tbl-ihp130-parameters}
+
+The threshold voltages in @tbl-ihp130-parameters are those of short-channel devices; long-channel devices ($W/L = 10\,\mu\text{m}/10\,\mu\text{m}$) have markedly lower values of about 0.20 V (NMOS) and −0.36 V (PMOS). The maximum voltage is the reliability limit of the low-voltage devices set in the SG13G2 model cards (`VGS_MAX`, `VDS_MAX`); the drain-source breakdown voltage BV~DSS~ is higher, at 2.0 V minimum.
 
 ## Basic I/V Characteristic of the MOSFET {#sec-mosfet-iv}
 
