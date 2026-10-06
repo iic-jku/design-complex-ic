@@ -772,7 +772,7 @@ Plotting @eq-mosfet-ic-gm and @eq-mosfet-ic-ft versus $\IC$, as done in @fig-ic-
 
 {{< include /content/mosfet/_fig_ic_tradeoff.qmd >}}
 
-@fig-ic-ihp shows the same trade-off extracted from simulation data of an NMOS ($W/L = 1.3\,\mu\text{m}/0.13\,\mu\text{m}$) in IHP SG13. The simulation matches the analytical model well for $\gmid$; the simulated $\Ftran$ comes out higher than the simple model predicts, since the model pessimistically assumes the full $\frac{2}{3} \Cox W L$ gate capacitance at all bias points, while at high $\IC$ velocity saturation causes the simulated $\Ftran$ to flatten.
+@fig-ic-ihp shows the same trade-off extracted from simulation data of an NMOS ($W/L = 1.3\,\mu\text{m}/0.13\,\mu\text{m}$) in IHP SG13. The simulation matches the analytical model well for $\gmid$. The simulated $\Ftran$, however, lies below the simple model (by a factor of about 1.5 in weak and moderate inversion), since the model only considers the intrinsic gate capacitance $\frac{2}{3} \Cox W L$ and ignores the gate-source and gate-drain overlap capacitances, which are significant for a short-channel device; at high $\IC$, velocity saturation additionally causes the simulated $\Ftran$ to flatten, at about 80 GHz for this device. Note that the operating-point value `cgg` reported by the PSP model only contains the intrinsic part, while the overlaps are reported separately (`cgsol`, `cgdol`); using `cgg` alone would overestimate $\Ftran$ by a factor of about three (a peak of 250 GHz instead of 80 GHz).
 
 {{< include /content/mosfet/_fig_ic_ihp.qmd >}}
 
@@ -784,7 +784,7 @@ The design procedure using the inversion coefficient is as follows:
 2. Choose either the bias current or the required $\gm$, and calculate the other one using @eq-mosfet-ic-gm.
 3. Using @eq-mosfet-ic-id, calculate $I_\mathrm{S}$ from the known $\ID$.
 4. Depending on the requirements for transistor speed (minimum $L$), matching (large $W \cdot L$), or small $\gds$ (large $L$), choose the appropriate $L$; use @eq-mosfet-is to calculate the corresponding $W$.
-5. Finally, estimate $\Ftran$ using @eq-mosfet-ic-ft. From $\Ftran$, the required bandwidth of the circuit can be estimated, and the sizing can be iterated if necessary.
+5. Finally, estimate $\Ftran$ using @eq-mosfet-ic-ft (an optimistic estimate for short devices, see @fig-ic-ihp). From $\Ftran$, the required bandwidth of the circuit can be estimated, and the sizing can be iterated if necessary.
 
 Now the most important transistor parameters ($W$, $L$, $\ID$, $\gm$, $\VGS$, and $\Ftran$) are selected and known.
 
