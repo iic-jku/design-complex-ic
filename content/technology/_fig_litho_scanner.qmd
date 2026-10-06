@@ -144,7 +144,7 @@ ax.add_patch(FancyBboxPatch((430, 296), 460, 134, boxstyle='round,pad=0,'
 label(450, 321, 'What sets the limit', size=15, color='ink', weight='bold')
 label(450, 351, r'$R = k_1 \cdot \lambda\,/\,\mathrm{NA}$', size=17,
       color='ink')
-label(640, 351, r'$\mathrm{DOF} = k_2 \cdot \lambda\,/\,\mathrm{NA}^2$',
+label(640, 351, r'$\mathrm{DOF} = k_2 \cdot n \lambda\,/\,\mathrm{NA}^2$',
       size=17, color='ink')
 label(450, 380, r'Shorter $\lambda$ and larger NA both sharpen resolution, '
       'but depth of')
