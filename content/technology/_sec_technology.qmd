@@ -233,14 +233,14 @@ The following figures illustrate a simplified CMOS process flow, inspired by the
 
 ## The Open-Source PDK IHP SG13 {#sec-technology-ihp}
 
-IHP has open-sourced the [process design kit](https://en.wikipedia.org/wiki/Process_design_kit) (PDK) for a 130 nm [BiCMOS](https://en.wikipedia.org/wiki/BiCMOS) technology (the current generation is named SG13G2, referred to here simply as IHP SG13) under the Apache-2.0 license. The relevant files, including documentation, can be found at [github.com/IHP-GmbH/IHP-Open-PDK](https://github.com/IHP-GmbH/IHP-Open-PDK). This technology has a lot of interesting features:
+IHP has open-sourced the [process design kits](https://en.wikipedia.org/wiki/Process_design_kit) (PDKs) of its 130 nm technologies under the Apache-2.0 license. The relevant files, including documentation, can be found at [github.com/IHP-GmbH/IHP-Open-PDK](https://github.com/IHP-GmbH/IHP-Open-PDK). In this text we use the CMOS-only variant SG13CMOS5L (referred to here simply as IHP SG13), which shares its front-end and its MOSFET models with the [BiCMOS](https://en.wikipedia.org/wiki/BiCMOS) technology SG13G2 but uses a reduced metal stack. This technology has a lot of interesting features:
 
 - Support for internal 1.2 V/1.5 V core MOSFETs and 3.3 V I/O MOSFETs
-- An aluminum metal stack with 5 thin and 2 thick levels of metal (see @fig-metal-stack)
+- An aluminum metal stack with 4 thin and 1 thick level of metal (see @fig-metal-stack)
 - Silicided, standard, and high-sheet-rho poly resistors
-- A metal-insulator-metal (MIM) capacitor
-- A Schottky diode
-- Optional high-speed SiGe:C heterojunction bipolar transistors (HBTs)
+- A MOS varicap and a vertical PNP
+
+The BiCMOS sibling SG13G2 additionally offers high-speed SiGe:C heterojunction bipolar transistors (HBTs), a metal-insulator-metal (MIM) capacitor, a Schottky diode, and a metal stack with 5 thin and 2 thick levels of metal.
 
 {{< include /content/technology/_fig_metal_stack.qmd >}}
 

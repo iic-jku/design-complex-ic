@@ -43,7 +43,7 @@ Good project management cannot remove technical risk, but it makes the risk visi
 
 Every project is bounded by the **triple constraint** of *scope* (what is delivered, including its quality), *time*, and *cost*. These three are coupled: adding functionality to an IC under a fixed tapeout date increases cost (more engineers, more licenses) or lowers quality (less verification); a fixed team and scope define the earliest realistic tapeout date. The project management has to make these trade-offs explicit and agree on them with the sponsor—a plan that silently assumes all three can be held at once is not a plan.
 
-Project goals should be formulated so that everybody can decide whether they are met. A widely used checklist is **SMART**: goals are *specific*, *measurable*, *achievable*, *relevant*, and *time-bound* (in the original proposal [@Doran_1981], the letters stood for *specific*, *measurable*, *assignable*, *realistic*, and *time-related*). "Design a low-power ADC" is not a goal; "tape out a 10 bit SAR ADC with $\geq 9.5$ bit ENOB at 1 MS/s and $\leq 100\,\mu\text{W}$ on the IHP SG13G2 shuttle of March" is.
+Project goals should be formulated so that everybody can decide whether they are met. A widely used checklist is **SMART**: goals are *specific*, *measurable*, *achievable*, *relevant*, and *time-bound* (in the original proposal [@Doran_1981], the letters stood for *specific*, *measurable*, *assignable*, *realistic*, and *time-related*). "Design a low-power ADC" is not a goal; "tape out a 10 bit SAR ADC with $\geq 9.5$ bit ENOB at 1 MS/s and $\leq 100\,\mu\text{W}$ on the IHP SG13CMOS5L shuttle of March" is.
 
 For an IC, the goals are condensed into the **specification**. The most expensive changes are those made late, as each change ripples through design, layout, verification, test program, and documentation. Therefore, the specification is reviewed and **frozen** at an early milestone; later changes are still possible, but go through a formal **change request** that assesses the impact on schedule and cost before the change is accepted.
 
@@ -53,7 +53,7 @@ For an IC, the goals are condensed into the **specification**. The most expensiv
 - **Triple constraint:** scope (incl. quality), time, cost—coupled, trade-offs must be explicit
 - **SMART** goals: specific, measurable, achievable, relevant, time-bound
   - bad: "design a low-power ADC"
-  - good: "10 bit SAR ADC, ENOB ≥ 9.5 bit at 1 MS/s, ≤ 100 µW, on the March SG13G2 shuttle"
+  - good: "10 bit SAR ADC, ENOB ≥ 9.5 bit at 1 MS/s, ≤ 100 µW, on the March SG13CMOS5L shuttle"
 - The **specification** is reviewed and **frozen** early
 - Later changes via a formal **change request** (impact on schedule and cost)
 :::

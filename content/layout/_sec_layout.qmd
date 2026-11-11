@@ -40,8 +40,8 @@ Different foundries use different layer names. The layer names defined in @tbl-l
 | `V1` | `Via1` | Via connecting `M1` to `M2` |
 | `M2` | `Metal2` | Second-level metal |
 | `V2` | `Via2` | Via connecting `M2` to `M3` |
-| `M3` | `Metal3` | Third-level metal (top metal of this generic stack; in SG13, the thick aluminum `TopMetal2` is the top metal and carries the bond pads) |
-| `PAD` | `Passiv` | Opening in the passivation to contact the top metal (in SG13, `TopMetal2`) for pads |
+| `M3` | `Metal3` | Third-level metal (top metal of this generic stack; in SG13CMOS5L, the thick aluminum `TopMetal1` is the top metal and carries the bond pads) |
+| `PAD` | `Passiv` | Opening in the passivation to contact the top metal (in SG13CMOS5L, `TopMetal1`) for pads |
 : Generic layer definition used in this text {#tbl-layers}
 
 ## Devices {#sec-layout-devices}
@@ -100,7 +100,7 @@ A few additional considerations for capacitors:
 - The density of MOM capacitors scales with smaller design rules and the number of metal layers. The lower metal layers should be skipped if the parasitic capacitance to the substrate is a concern.
 - The process may offer a specialized **metal-insulator-metal (MIM)** capacitor (density on the order of fF/µm²) using extra masks and processing steps, offering higher specific capacitance and low parasitics at extra cost.
 - For high capacitance density, or where nonlinearity is not critical, the **MOSFET gate capacitance** can be used, as the gate oxide is tightly controlled in manufacturing.
-- In IHP SG13, a MIM capacitor between `Metal5` and `TopMetal1` is available (ca. 1.5 fF/µm²); the MOM finger capacitor has ca. 0.3 fF/µm², so when using 4 metal layers the effective capacitance is comparable to the MIM capacitor.
+- IHP SG13CMOS5L offers no MIM capacitor, so MOM or MOS capacitors are used instead. Its PDK provides the MOM finger capacitor `cap_cmomf` on `Metal1` to `Metal4` with ca. 0.3 fF/µm² per metal layer (1.29 fF/µm² for all four layers); the model is simulation-derived and not yet validated on silicon. Using all 4 thin metal layers, a MOM capacitor thus comes close to the ca. 1.5 fF/µm² of the MIM capacitor between `Metal5` and `TopMetal1` in the BiCMOS sibling SG13G2.
 
 ### Diodes
 
@@ -135,7 +135,7 @@ If a metal interconnect with a large area is tied to the small gate of a MOSFET,
 
 {{< include /content/layout/_fig_layout_antenna.qmd >}}
 
-The complete layout rules of the open-source IHP SG13 PDK can be found in the [SG13G2 layout rules document](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf) and serve as a practical example of a production DRC rule set.
+The complete layout rules of the open-source IHP SG13 PDK can be found in the [SG13CMOS5L layout rules document](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13cmos5l/libs.doc/doc/SG13CMOS5L_os_layout_rules.pdf) and serve as a practical example of a production DRC rule set.
 
 ## Analog Layout Techniques {#sec-layout-analog}
 

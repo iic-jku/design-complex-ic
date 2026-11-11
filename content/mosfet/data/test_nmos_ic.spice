@@ -1,4 +1,4 @@
-* Diode-connected NMOS in IHP SG13G2 for the inversion-coefficient plot
+* Diode-connected NMOS in IHP SG13CMOS5L for the inversion-coefficient plot
 * (fig-ic-ihp). The drain current is swept decade by decade from 1 pA to
 * 1 mA; per point we store VGS, gm, Vth, the intrinsic gate capacitance cgg,
 * and the gate overlap capacitances cgsol and cgdol (reported separately by

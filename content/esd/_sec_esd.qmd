@@ -165,10 +165,10 @@ Latch-up is prevented by weakening the parasitic bipolar transistors and their c
 
 Adopting these design practices helps to significantly reduce the risk of latch-up in CMOS circuits.
 
-Foundries cast these practices into their design rule manuals. IHP SG13G2, for example, dedicates Sec. 7.2 *Latch-up Guidelines* of the [SG13G2 layout rules](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf) to the topic:
+Foundries cast these practices into their design rule manuals. IHP SG13CMOS5L, for example, dedicates Sec. 7.2 *Latch-up Guidelines* of the [SG13CMOS5L layout rules](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13cmos5l/libs.doc/doc/SG13CMOS5L_os_layout_rules.pdf) to the topic:
 
 - For **output buffers**, the sources of the NMOS and PMOS have to be tied to $\VSS$ and $\VDD$ and their drains connected directly to the pad; guard rings (well and substrate ties) are required around every device directly tied to a pad, and *double* guard rings (an n-well isolator plus a $p^+$ isolator) have to be placed between the n-channel and p-channel buffers, as well as between the buffers and the internal circuitry.
 - Rules `LU.a` and `LU.b` limit the maximum distance from any $p^+$ active area inside the n-well to an n-well tie, and from any $n^+$ active area inside the p-well to a substrate tie, to 20 µm—this is the rule-deck version of "place many well and substrate ties".
 - Rules `LU.c` to `LU.d1` limit how far a tie may extend beyond its contact (6 µm), which keeps the resistance of the tie itself low.
 
-In the open-source SG13G2 KLayout DRC decks, the latch-up rules are checked by default (since IHP-Open-PDK commit `3b393f31`, March 2025): the maximal deck runs them unless `latchUpRules` is set to `false`, and the regular deck runs `LU.b` unless the `precheck_drc` option is set. Older versions of the layout-rule document still state otherwise, so check which rules your deck actually runs.
+In the open-source KLayout DRC decks, the latch-up rules are checked by default: the maximal deck runs them unless `latchUpRules` is set to `false`, and the regular deck runs `LU.b` unless the `precheck_drc` option is set. The layout-rule documents still state otherwise, so check which rules your deck actually runs.

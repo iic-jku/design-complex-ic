@@ -13,12 +13,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-The included figure figures/ihp-sg13g2-cross-section.png is Fig. 1.1.1 of the
-SG13G2 Process Specification Rev. 1.2 (2023_12_20),
-Copyright 2023 IHP PDK Authors, licensed under the Apache License,
+The included figure figures/ihp-sg13cmos5l-cross-section.png is Fig. 1.1 of the
+SG13CMOS5L Process Specification Rev. 0.2 (2025-12-15),
+Copyright 2024 IHP PDK Authors, licensed under the Apache License,
 Version 2.0, and taken from https://github.com/IHP-GmbH/IHP-Open-PDK
-(ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf). The only change made
-is a crop of the figure out of the surrounding page.
+(ihp-sg13cmos5l/libs.doc/doc/SG13CMOS5L_os_process_spec.pdf). The only change
+made is a crop of the figure out of the surrounding page.
 :::
 
-![Cross-section of the IHP SG13 technology (not to scale): five thin metal layers (Metal1 to Metal5) for dense routing and two thick top metal layers (TopMetal1, TopMetal2) for power routing, inductors, and low-loss RF interconnects, with the MIM capacitor embedded between Metal5 and TopMetal1. The FEOL devices are shown at the bottom, and the numbers give the layer and dielectric thicknesses. Source: Fig. 1.1.1 of the *SG13G2 Process Specification Rev. 1.2*, Copyright 2023 IHP PDK Authors, licensed under Apache-2.0, taken from [IHP-Open-PDK](https://github.com/IHP-GmbH/IHP-Open-PDK) and cropped out of the original page.](/content/technology/figures/ihp-sg13g2-cross-section.png){#fig-metal-stack}
+![Cross-section of the IHP SG13CMOS5L technology (not to scale): four thin metal layers (Metal1 to Metal4) for dense routing and one 2 µm thick top metal layer (TopMetal1) for power routing, inductors, and bond pads, covered by the oxide/nitride passivation. The FEOL devices are shown at the bottom, and the numbers give the layer and dielectric thicknesses. Source: Fig. 1.1 of the *SG13CMOS5L Process Specification Rev. 0.2*, Copyright 2024 IHP PDK Authors, licensed under Apache-2.0, taken from [IHP-Open-PDK](https://github.com/IHP-GmbH/IHP-Open-PDK) and cropped out of the original page.](/content/technology/figures/ihp-sg13cmos5l-cross-section.png){#fig-metal-stack}

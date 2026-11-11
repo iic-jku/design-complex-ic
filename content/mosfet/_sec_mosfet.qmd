@@ -46,7 +46,7 @@ Once the channel exists, the drain voltage determines the mode of conduction, as
 
 ### An Exemplary 130 nm Process Technology
 
-Throughout this text we will use typical parameters of a 0.13 µm CMOS process technology, specifically IHP SG13 [(process specification)](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf), for exemplary calculations. The key parameters are listed in @tbl-ihp130-parameters.
+Throughout this text we will use typical parameters of a 0.13 µm CMOS process technology, specifically IHP SG13CMOS5L [(process specification)](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13cmos5l/libs.doc/doc/SG13CMOS5L_os_process_spec.pdf), for exemplary calculations. The key parameters are listed in @tbl-ihp130-parameters.
 
 | Parameter | Symbol | Typical value |
 |:----------|:-----:|:-------------:|
@@ -59,7 +59,7 @@ Throughout this text we will use typical parameters of a 0.13 µm CMOS process t
 | Process constant $K_\mathrm{n}$ \| $K_\mathrm{p}$ | $\mun \Cox$ \| $\mup \Cox$ | 280 µA/V² \| 130 µA/V² |
 : Typical parameters of the IHP SG13 130 nm CMOS technology {#tbl-ihp130-parameters}
 
-The threshold voltages in @tbl-ihp130-parameters are those of short-channel devices; long-channel devices ($W/L = 10\,\mu\text{m}/10\,\mu\text{m}$) have markedly lower values of about 0.20 V (NMOS) and −0.36 V (PMOS). This strong dependence of $\Vth$ on $L$ results from the reverse short-channel effect (RSCE), where halo implants raise $\Vth$ of short devices, counteracted at the shortest lengths by the short-channel effect (SCE), which lowers $\Vth$; both are discussed in @sec-mosfet-dibl. The maximum voltage is the reliability limit of the low-voltage devices set in the SG13G2 model cards (`VGS_MAX`, `VDS_MAX`); the drain-source breakdown voltage BV~DSS~ is higher, at 2.0 V minimum.
+The threshold voltages in @tbl-ihp130-parameters are those of short-channel devices; long-channel devices ($W/L = 10\,\mu\text{m}/10\,\mu\text{m}$) have markedly lower values of about 0.20 V (NMOS) and −0.36 V (PMOS). This strong dependence of $\Vth$ on $L$ results from the reverse short-channel effect (RSCE), where halo implants raise $\Vth$ of short devices, counteracted at the shortest lengths by the short-channel effect (SCE), which lowers $\Vth$; both are discussed in @sec-mosfet-dibl. The maximum voltage is the reliability limit of the low-voltage devices set in the model cards (shared by SG13CMOS5L and SG13G2) (`VGS_MAX`, `VDS_MAX`); the drain-source breakdown voltage BV~DSS~ is higher, at 2.0 V minimum.
 
 ## Basic I/V Characteristic of the MOSFET {#sec-mosfet-iv}
 
