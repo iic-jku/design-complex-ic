@@ -44,6 +44,10 @@ Different foundries use different layer names. The layer names defined in @tbl-l
 | `PAD` | `Passiv` | Opening in the passivation to contact the top metal (in SG13CMOS5L, `TopMetal1`) for pads |
 : Generic layer definition used in this text {#tbl-layers}
 
+::: {.callout-note title="About Two-Letter Layer Codes"}
+A layout’s layer names come from the foundry. Many still use the two-letter mask codes that IBM introduced decades ago, and they reflect IBM’s processes of the 1970s and 80s. `RX` stands for recessed oxide. IBM isolated transistors with a LOCOS-type field oxide grown down into the silicon, and the `RX` mask defined the active regions between those oxide areas. The name stayed when shallow trench isolation replaced LOCOS, so today `RX` simply means “active area.” `PC` stands for polysilicon conductor, because poly was used for wiring as well as gates. `BP` is the block P implant mask: the resist blocks the P+ implant everywhere except the openings, and N+ is usually whatever active area `BP` doesn’t cover. `NW` is the N-well. `OP` marks the silicide-block regions used for unsilicided resistors and ESD devices. `CA` is the first contact level, usually read as contact to active.
+:::
+
 ## Devices {#sec-layout-devices}
 
 ### NMOS and PMOS Transistors
