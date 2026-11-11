@@ -7,174 +7,6 @@
     "text": "Design of Complex Integrated Circuits\n\n\n\nQuarto Publish\n\n\n(c) 2017-2026 Harald Pretl and co-authors, Department for Integrated Circuits (ICD), Johannes Kepler University, Linz (JKU)\nThis is the material for a graduate-level course on the design of complex integrated circuits, held at JKU under course number 336.048 (“VL Entwurf komplexer integrierter Schaltungen”). Follow this link to access the material.\nThe course covers how integrated circuits are built (MOSFET operation, CMOS technology, layout, packaging, testing, and the economics of chip making) and how they are designed (design methodology, ESD protection, latch-up, robust design techniques, circuit simulation, and project management).\nAll course material is made publicly available and shared under the Apache-2.0 license.\nWe happily accept pull requests to fix typos or add content! If you want to discuss something that is not clear, please open an issue!"
   },
   {
-    "objectID": "slides/economy.html#sec-economy-price",
-    "href": "slides/economy.html#sec-economy-price",
-    "title": "Economy of Integrated Circuits",
-    "section": "7.1 Selling Price and Total Cost",
-    "text": "7.1 Selling Price and Total Cost\n\nThe manufacturing of ICs is a large-scale business, requiring significant investment in research and development, and usually large volumes are built and sold. It is therefore rewarding to take a look at the economics of integrated circuits."
-  },
-  {
-    "objectID": "slides/economy.html#sec-economy-nre",
-    "href": "slides/economy.html#sec-economy-nre",
-    "title": "Economy of Integrated Circuits",
-    "section": "7.2 Non-Recurring Engineering Cost",
-    "text": "7.2 Non-Recurring Engineering Cost"
-  },
-  {
-    "objectID": "slides/economy.html#sec-economy-recurring",
-    "href": "slides/economy.html#sec-economy-recurring",
-    "title": "Economy of Integrated Circuits",
-    "section": "7.3 Recurring Cost",
-    "text": "7.3 Recurring Cost"
-  },
-  {
-    "objectID": "slides/economy.html#sec-economy-example",
-    "href": "slides/economy.html#sec-economy-example",
-    "title": "Economy of Integrated Circuits",
-    "section": "7.4 An Exemplary Calculation",
-    "text": "7.4 An Exemplary Calculation"
-  },
-  {
-    "objectID": "slides/testing.html#sec-testing-flow",
-    "href": "slides/testing.html#sec-testing-flow",
-    "title": "Testing",
-    "section": "6.1 Post-Silicon Production Flow",
-    "text": "6.1 Post-Silicon Production Flow\n\nIntegrated circuits must be tested for functionality and specification compliance before they are shipped. Defects introduced during manufacturing, as well as parameter variations, are unavoidable—not every IC on a wafer is a good device (the yield is below 100 %). Typical defect causes are doping errors and fluctuations, under- or over-etching, misalignment of layers, and contamination by particles. A comprehensive treatment of IC test is given in (Wang et al. 2006); the related field of hardware security and trust is covered in (Bhunia and Tehranipoor 2018)."
-  },
-  {
-    "objectID": "slides/testing.html#sec-testing-equipment",
-    "href": "slides/testing.html#sec-testing-equipment",
-    "title": "Testing",
-    "section": "6.2 Test Equipment",
-    "text": "6.2 Test Equipment"
-  },
-  {
-    "objectID": "slides/testing.html#sec-testing-challenges",
-    "href": "slides/testing.html#sec-testing-challenges",
-    "title": "Testing",
-    "section": "6.3 Mixed-Signal Testing Challenges",
-    "text": "6.3 Mixed-Signal Testing Challenges\n\nThe DIB is a custom-designed PCB that hosts the package socket (for testing packaged ICs) or connects to the probe card (for wafer testing). It also contains interface circuits that cannot be handled by the tester hardware resources (e.g., special components required by the DUT). Contact to the packaged DUT is made with spring-loaded “pogo pins” in the socket. For wafer probing, different probe-card types are used: cantilever probe cards (needles coming in at an angle), vertical (“buckling-beam” or “cobra”) probe cards, and membrane probe cards for high pin counts and fine pitches.\nHandlers (robotic pick-and-place or gravity-fed) insert the DUT into the test socket on the DIB. After the test, the ICs are sorted into bins (good = pass, bad = fail, possibly multiple pass grades). The handler can also provide a temperature-controlled environment for hot/cold testing in addition to room-temperature testing (the latter is preferred for cost reasons)."
-  },
-  {
-    "objectID": "slides/testing.html#sec-testing-plan",
-    "href": "slides/testing.html#sec-testing-plan",
-    "title": "Testing",
-    "section": "6.4 The Test Plan",
-    "text": "6.4 The Test Plan"
-  },
-  {
-    "objectID": "slides/testing.html#sec-testing-types",
-    "href": "slides/testing.html#sec-testing-types",
-    "title": "Testing",
-    "section": "6.5 Types of Tests",
-    "text": "6.5 Types of Tests"
-  },
-  {
-    "objectID": "slides/testing.html#sec-testing-cpk",
-    "href": "slides/testing.html#sec-testing-cpk",
-    "title": "Testing",
-    "section": "6.6 Process Capability Index",
-    "text": "6.6 Process Capability Index\n\nFor analog test parameters, the variation over production must stay inside the test limits, which are derived from the datasheet limits minus guard bands: the lower specification limit (LSL) and the upper specification limit (USL)."
-  },
-  {
-    "objectID": "slides/simulation.html#sec-simulation-mna",
-    "href": "slides/simulation.html#sec-simulation-mna",
-    "title": "Simulation of Integrated Circuits",
-    "section": "11.1 Formulating the Circuit Equations",
-    "text": "11.1 Formulating the Circuit Equations"
-  },
-  {
-    "objectID": "slides/simulation.html#sec-simulation-dc",
-    "href": "slides/simulation.html#sec-simulation-dc",
-    "title": "Simulation of Integrated Circuits",
-    "section": "11.2 DC Simulation",
-    "text": "11.2 DC Simulation"
-  },
-  {
-    "objectID": "slides/simulation.html#sec-simulation-ac",
-    "href": "slides/simulation.html#sec-simulation-ac",
-    "title": "Simulation of Integrated Circuits",
-    "section": "11.3 AC Simulation",
-    "text": "11.3 AC Simulation"
-  },
-  {
-    "objectID": "slides/simulation.html#sec-simulation-tran",
-    "href": "slides/simulation.html#sec-simulation-tran",
-    "title": "Simulation of Integrated Circuits",
-    "section": "11.4 Transient Simulation",
-    "text": "11.4 Transient Simulation"
-  },
-  {
-    "objectID": "slides/simulation.html#sec-simulation-advanced",
-    "href": "slides/simulation.html#sec-simulation-advanced",
-    "title": "Simulation of Integrated Circuits",
-    "section": "11.5 Advanced Simulation Modes",
-    "text": "11.5 Advanced Simulation Modes"
-  },
-  {
-    "objectID": "slides/simulation.html#sec-simulation-models",
-    "href": "slides/simulation.html#sec-simulation-models",
-    "title": "Simulation of Integrated Circuits",
-    "section": "11.6 Device Models",
-    "text": "11.6 Device Models"
-  },
-  {
-    "objectID": "slides/simulation.html#sec-simulation-digital",
-    "href": "slides/simulation.html#sec-simulation-digital",
-    "title": "Simulation of Integrated Circuits",
-    "section": "11.7 Digital Simulation",
-    "text": "11.7 Digital Simulation"
-  },
-  {
-    "objectID": "slides/simulation.html#sec-simulation-mixed",
-    "href": "slides/simulation.html#sec-simulation-mixed",
-    "title": "Simulation of Integrated Circuits",
-    "section": "11.8 Mixed-Signal Simulation",
-    "text": "11.8 Mixed-Signal Simulation"
-  },
-  {
-    "objectID": "slides/methodology.html#sec-methodology-y",
-    "href": "slides/methodology.html#sec-methodology-y",
-    "title": "Design Methodology",
-    "section": "8.1 The Y-Diagram",
-    "text": "8.1 The Y-Diagram\n\nIn this chapter, basic knowledge of digital and analog circuit design is assumed; we discuss IC-specific design methodology topics which are usually not covered in entry-level courses. A comprehensive treatment of digital VLSI design and its methodology is given in (Weste and Harris 2011). We first introduce a mental model of the design space (the Y-diagram), then survey the available implementation styles and their trade-offs, and finally walk through the concrete design flows—the digital semicustom flow and the analog/mixed-signal custom flow—illustrated throughout with open-source EDA tools."
-  },
-  {
-    "objectID": "slides/methodology.html#sec-methodology-choices",
-    "href": "slides/methodology.html#sec-methodology-choices",
-    "title": "Design Methodology",
-    "section": "8.2 Digital Implementation Choices",
-    "text": "8.2 Digital Implementation Choices"
-  },
-  {
-    "objectID": "slides/methodology.html#sec-methodology-cells",
-    "href": "slides/methodology.html#sec-methodology-cells",
-    "title": "Design Methodology",
-    "section": "8.3 Cell-Based Design",
-    "text": "8.3 Cell-Based Design"
-  },
-  {
-    "objectID": "slides/methodology.html#sec-methodology-flow",
-    "href": "slides/methodology.html#sec-methodology-flow",
-    "title": "Design Methodology",
-    "section": "8.4 The Semicustom Design Flow",
-    "text": "8.4 The Semicustom Design Flow"
-  },
-  {
-    "objectID": "slides/methodology.html#sec-methodology-custom",
-    "href": "slides/methodology.html#sec-methodology-custom",
-    "title": "Design Methodology",
-    "section": "8.5 The Mixed-Signal/Custom Flow",
-    "text": "8.5 The Mixed-Signal/Custom Flow"
-  },
-  {
-    "objectID": "slides/methodology.html#sec-methodology-fpga",
-    "href": "slides/methodology.html#sec-methodology-fpga",
-    "title": "Design Methodology",
-    "section": "8.6 FPGAs",
-    "text": "8.6 FPGAs"
-  },
-  {
     "objectID": "slides/robust.html#sec-robust-circuits",
     "href": "slides/robust.html#sec-robust-circuits",
     "title": "Robust Design",
@@ -210,20 +42,6 @@
     "text": "10.5 Debugging of ICs"
   },
   {
-    "objectID": "slides/esd.html#sec-esd-basics",
-    "href": "slides/esd.html#sec-esd-basics",
-    "title": "Electrostatic Discharge and Latch-Up",
-    "section": "9.1 Electrostatic Discharge",
-    "text": "9.1 Electrostatic Discharge\n\nThis chapter covers two reliability hazards that every IC design must handle: electrostatic discharge (ESD), the sudden discharge of statically charged objects into the chip, and latch-up, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows (Amerasekera and Duvvury 2002); overviews of ESD as a reliability concern, including protection structures, and of ESD test methods can be found in (Duvvury and Amerasekera 1993; Ker et al. 2001)."
-  },
-  {
-    "objectID": "slides/esd.html#sec-latchup",
-    "href": "slides/esd.html#sec-latchup",
-    "title": "Electrostatic Discharge and Latch-Up",
-    "section": "9.2 Latch-Up",
-    "text": "9.2 Latch-Up"
-  },
-  {
     "objectID": "slides/intro.html#sec-intro-scale",
     "href": "slides/intro.html#sec-intro-scale",
     "title": "Introduction",
@@ -236,6 +54,55 @@
     "title": "Introduction",
     "section": "1.2 A Brief History of Semiconductors",
     "text": "1.2 A Brief History of Semiconductors"
+  },
+  {
+    "objectID": "slides/index.html",
+    "href": "slides/index.html",
+    "title": "Lecture Slides",
+    "section": "",
+    "text": "Slide decks generated from the lecture notes, one per chapter. Press S for speaker notes, C for the chalkboard, and ? for all shortcuts.\n\nIntroduction\nThe MOSFET\nIC Technology\nThe Layout\nIC Packaging\nTesting\nEconomy of Integrated Circuits\nDesign Methodology\nElectrostatic Discharge and Latch-Up\nRobust Design\nSimulation of Integrated Circuits\nProject Management"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-wafer-prep",
+    "href": "slides/packaging.html#sec-packaging-wafer-prep",
+    "title": "IC Packaging",
+    "section": "5.1 From Wafer to Packaged IC",
+    "text": "5.1 From Wafer to Packaged IC\n\nThe finished wafer is not yet a usable product: the individual dice have to be separated, connected, and protected. This chapter covers the path from the processed wafer to the packaged integrated circuit, the most important package families, thermal design, and the electrical parasitics that packages introduce."
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-bonding",
+    "href": "slides/packaging.html#sec-packaging-bonding",
+    "title": "IC Packaging",
+    "section": "5.2 Chip-to-Package Connection",
+    "text": "5.2 Chip-to-Package Connection"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-types",
+    "href": "slides/packaging.html#sec-packaging-types",
+    "title": "IC Packaging",
+    "section": "5.3 Package Types",
+    "text": "5.3 Package Types"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-thermal",
+    "href": "slides/packaging.html#sec-packaging-thermal",
+    "title": "IC Packaging",
+    "section": "5.4 Thermal Design",
+    "text": "5.4 Thermal Design"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-parasitics",
+    "href": "slides/packaging.html#sec-packaging-parasitics",
+    "title": "IC Packaging",
+    "section": "5.5 Package Parasitics",
+    "text": "5.5 Package Parasitics"
+  },
+  {
+    "objectID": "slides/packaging.html#sec-packaging-qualification",
+    "href": "slides/packaging.html#sec-packaging-qualification",
+    "title": "IC Packaging",
+    "section": "5.6 Package Qualification",
+    "text": "5.6 Package Qualification"
   },
   {
     "objectID": "slides/mosfet.html#sec-mosfet-nutshell",
@@ -315,256 +182,46 @@
     "text": "2.11 Appendix: Silicon Material Properties"
   },
   {
-    "objectID": "slides/index.html",
-    "href": "slides/index.html",
-    "title": "Lecture Slides",
-    "section": "",
-    "text": "Slide decks generated from the lecture notes, one per chapter. Press S for speaker notes, C for the chalkboard, and ? for all shortcuts.\n\nIntroduction\nThe MOSFET\nIC Technology\nThe Layout\nIC Packaging\nTesting\nEconomy of Integrated Circuits\nDesign Methodology\nElectrostatic Discharge and Latch-Up\nRobust Design\nSimulation of Integrated Circuits\nProject Management"
+    "objectID": "slides/testing.html#sec-testing-flow",
+    "href": "slides/testing.html#sec-testing-flow",
+    "title": "Testing",
+    "section": "6.1 Post-Silicon Production Flow",
+    "text": "6.1 Post-Silicon Production Flow\n\nIntegrated circuits must be tested for functionality and specification compliance before they are shipped. Defects introduced during manufacturing, as well as parameter variations, are unavoidable—not every IC on a wafer is a good device (the yield is below 100 %). Typical defect causes are doping errors and fluctuations, under- or over-etching, misalignment of layers, and contamination by particles. A comprehensive treatment of IC test is given in (Wang et al. 2006); the related field of hardware security and trust is covered in (Bhunia and Tehranipoor 2018)."
   },
   {
-    "objectID": "slides/packaging.html#sec-packaging-wafer-prep",
-    "href": "slides/packaging.html#sec-packaging-wafer-prep",
-    "title": "IC Packaging",
-    "section": "5.1 From Wafer to Packaged IC",
-    "text": "5.1 From Wafer to Packaged IC\n\nThe finished wafer is not yet a usable product: the individual dice have to be separated, connected, and protected. This chapter covers the path from the processed wafer to the packaged integrated circuit, the most important package families, thermal design, and the electrical parasitics that packages introduce."
+    "objectID": "slides/testing.html#sec-testing-equipment",
+    "href": "slides/testing.html#sec-testing-equipment",
+    "title": "Testing",
+    "section": "6.2 Test Equipment",
+    "text": "6.2 Test Equipment"
   },
   {
-    "objectID": "slides/packaging.html#sec-packaging-bonding",
-    "href": "slides/packaging.html#sec-packaging-bonding",
-    "title": "IC Packaging",
-    "section": "5.2 Chip-to-Package Connection",
-    "text": "5.2 Chip-to-Package Connection"
+    "objectID": "slides/testing.html#sec-testing-challenges",
+    "href": "slides/testing.html#sec-testing-challenges",
+    "title": "Testing",
+    "section": "6.3 Mixed-Signal Testing Challenges",
+    "text": "6.3 Mixed-Signal Testing Challenges\n\nThe DIB is a custom-designed PCB that hosts the package socket (for testing packaged ICs) or connects to the probe card (for wafer testing). It also contains interface circuits that cannot be handled by the tester hardware resources (e.g., special components required by the DUT). Contact to the packaged DUT is made with spring-loaded “pogo pins” in the socket. For wafer probing, different probe-card types are used: cantilever probe cards (needles coming in at an angle), vertical (“buckling-beam” or “cobra”) probe cards, and membrane probe cards for high pin counts and fine pitches.\nHandlers (robotic pick-and-place or gravity-fed) insert the DUT into the test socket on the DIB. After the test, the ICs are sorted into bins (good = pass, bad = fail, possibly multiple pass grades). The handler can also provide a temperature-controlled environment for hot/cold testing in addition to room-temperature testing (the latter is preferred for cost reasons)."
   },
   {
-    "objectID": "slides/packaging.html#sec-packaging-types",
-    "href": "slides/packaging.html#sec-packaging-types",
-    "title": "IC Packaging",
-    "section": "5.3 Package Types",
-    "text": "5.3 Package Types"
+    "objectID": "slides/testing.html#sec-testing-plan",
+    "href": "slides/testing.html#sec-testing-plan",
+    "title": "Testing",
+    "section": "6.4 The Test Plan",
+    "text": "6.4 The Test Plan"
   },
   {
-    "objectID": "slides/packaging.html#sec-packaging-thermal",
-    "href": "slides/packaging.html#sec-packaging-thermal",
-    "title": "IC Packaging",
-    "section": "5.4 Thermal Design",
-    "text": "5.4 Thermal Design"
+    "objectID": "slides/testing.html#sec-testing-types",
+    "href": "slides/testing.html#sec-testing-types",
+    "title": "Testing",
+    "section": "6.5 Types of Tests",
+    "text": "6.5 Types of Tests"
   },
   {
-    "objectID": "slides/packaging.html#sec-packaging-parasitics",
-    "href": "slides/packaging.html#sec-packaging-parasitics",
-    "title": "IC Packaging",
-    "section": "5.5 Package Parasitics",
-    "text": "5.5 Package Parasitics"
-  },
-  {
-    "objectID": "slides/packaging.html#sec-packaging-qualification",
-    "href": "slides/packaging.html#sec-packaging-qualification",
-    "title": "IC Packaging",
-    "section": "5.6 Package Qualification",
-    "text": "5.6 Package Qualification"
-  },
-  {
-    "objectID": "slides/layout.html#sec-layout-tapeout",
-    "href": "slides/layout.html#sec-layout-tapeout",
-    "title": "The Layout",
-    "section": "4.1 Files and Tapeout",
-    "text": "4.1 Files and Tapeout\n\nThe layout is the 2D representation of the IC manufacturing data. While the schematic captures the electrical intent of a design, the layout captures its physical realization: in the layout tools, the design is drawn on several layers, which are the foundation for the generation of the photomasks used in IC production. Commercial layout tools are, e.g., Cadence Virtuoso, Siemens L-Edit, and open-source tools are Magic and KLayout. The layers are usually manipulated before the geometries are transferred to the masks (shrink, enlarge, invert, combination of several layers into one mask layer, optical proximity correction, etc.)."
-  },
-  {
-    "objectID": "slides/layout.html#sec-layout-layers",
-    "href": "slides/layout.html#sec-layout-layers",
-    "title": "The Layout",
-    "section": "4.2 Generic Layer Definition",
-    "text": "4.2 Generic Layer Definition\n\nThe layout is checked for compliance with the wafer-fab design rules in the design rule check (DRC), and for conformance with the intended circuit in the layout-versus-schematic (LVS) check, where a netlist extracted from the layout is compared to the netlist of the original schematic. If all checks pass, the layout data is sent to mask production—this step is called tapeout. The mask house processes the layout data and produces the photomasks used by the wafer fab (depending on technology complexity, between 10 and 80 masks).\nThe standard file format for layout data is GDSII, a hierarchical database in a binary stream format. A newer format with more efficient storage is OASIS, but GDSII is still very common."
-  },
-  {
-    "objectID": "slides/layout.html#sec-layout-devices",
-    "href": "slides/layout.html#sec-layout-devices",
-    "title": "The Layout",
-    "section": "4.3 Devices",
-    "text": "4.3 Devices"
-  },
-  {
-    "objectID": "slides/layout.html#sec-layout-drc",
-    "href": "slides/layout.html#sec-layout-drc",
-    "title": "The Layout",
-    "section": "4.4 Design Rules",
-    "text": "4.4 Design Rules"
-  },
-  {
-    "objectID": "slides/layout.html#sec-layout-analog",
-    "href": "slides/layout.html#sec-layout-analog",
-    "title": "The Layout",
-    "section": "4.5 Analog Layout Techniques",
-    "text": "4.5 Analog Layout Techniques\n\nThe complete layout rules of the open-source IHP SG13 PDK can be found in the SG13G2 layout rules document and serve as a practical example of a production DRC rule set."
-  },
-  {
-    "objectID": "slides/layout.html#sec-layout-additional",
-    "href": "slides/layout.html#sec-layout-additional",
-    "title": "The Layout",
-    "section": "4.6 Additional Layout and Mask Structures",
-    "text": "4.6 Additional Layout and Mask Structures"
-  },
-  {
-    "objectID": "slides/layout.html#sec-layout-checks",
-    "href": "slides/layout.html#sec-layout-checks",
-    "title": "The Layout",
-    "section": "4.7 Layout Checks",
-    "text": "4.7 Layout Checks"
-  },
-  {
-    "objectID": "slides/layout.html#sec-layout-extraction",
-    "href": "slides/layout.html#sec-layout-extraction",
-    "title": "The Layout",
-    "section": "4.8 Layout Extraction",
-    "text": "4.8 Layout Extraction"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-goals",
-    "href": "slides/project.html#sec-project-goals",
-    "title": "Project Management",
-    "section": "12.1 Goals and Constraints",
-    "text": "12.1 Goals and Constraints"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-phases",
-    "href": "slides/project.html#sec-project-phases",
-    "title": "Project Management",
-    "section": "12.2 Project Phases",
-    "text": "12.2 Project Phases"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-sow",
-    "href": "slides/project.html#sec-project-sow",
-    "title": "Project Management",
-    "section": "12.3 Statement of Work",
-    "text": "12.3 Statement of Work"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-wbs",
-    "href": "slides/project.html#sec-project-wbs",
-    "title": "Project Management",
-    "section": "12.4 Work Breakdown Structure",
-    "text": "12.4 Work Breakdown Structure"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-estimation",
-    "href": "slides/project.html#sec-project-estimation",
-    "title": "Project Management",
-    "section": "12.5 Effort Estimation",
-    "text": "12.5 Effort Estimation"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-gantt",
-    "href": "slides/project.html#sec-project-gantt",
-    "title": "Project Management",
-    "section": "12.6 Scheduling",
-    "text": "12.6 Scheduling"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-raci",
-    "href": "slides/project.html#sec-project-raci",
-    "title": "Project Management",
-    "section": "12.7 Roles and Responsibilities",
-    "text": "12.7 Roles and Responsibilities"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-risk",
-    "href": "slides/project.html#sec-project-risk",
-    "title": "Project Management",
-    "section": "12.8 Risk Management",
-    "text": "12.8 Risk Management"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-reviews",
-    "href": "slides/project.html#sec-project-reviews",
-    "title": "Project Management",
-    "section": "12.9 Reviews and Tapeout Checklist",
-    "text": "12.9 Reviews and Tapeout Checklist"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-tracking",
-    "href": "slides/project.html#sec-project-tracking",
-    "title": "Project Management",
-    "section": "12.10 Tracking and Control",
-    "text": "12.10 Tracking and Control"
-  },
-  {
-    "objectID": "slides/project.html#sec-project-team",
-    "href": "slides/project.html#sec-project-team",
-    "title": "Project Management",
-    "section": "12.11 Team and Communication",
-    "text": "12.11 Team and Communication"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-wafer",
-    "href": "slides/technology.html#sec-technology-wafer",
-    "title": "IC Technology",
-    "section": "3.1 The Silicon Wafer",
-    "text": "3.1 The Silicon Wafer\n\nThis chapter walks through the manufacturing technology of integrated circuits: from the raw silicon wafer through the individual processing steps (doping, photolithography, etching, thin-film deposition, and interconnect formation) to a complete CMOS process flow. The treatment largely follows (Hu 2010)."
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-selective-doping",
-    "href": "slides/technology.html#sec-technology-selective-doping",
-    "title": "IC Technology",
-    "section": "3.2 Selective Doping",
-    "text": "3.2 Selective Doping"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-litho",
-    "href": "slides/technology.html#sec-technology-litho",
-    "title": "IC Technology",
-    "section": "3.3 Photolithography",
-    "text": "3.3 Photolithography"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-etching",
-    "href": "slides/technology.html#sec-technology-etching",
-    "title": "IC Technology",
-    "section": "3.4 Etching",
-    "text": "3.4 Etching"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-doping",
-    "href": "slides/technology.html#sec-technology-doping",
-    "title": "IC Technology",
-    "section": "3.5 Doping Techniques",
-    "text": "3.5 Doping Techniques"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-thin-film",
-    "href": "slides/technology.html#sec-technology-thin-film",
-    "title": "IC Technology",
-    "section": "3.6 Thin-Film Deposition",
-    "text": "3.6 Thin-Film Deposition"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-interconnect",
-    "href": "slides/technology.html#sec-technology-interconnect",
-    "title": "IC Technology",
-    "section": "3.7 Interconnects",
-    "text": "3.7 Interconnects"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-cmos-flow",
-    "href": "slides/technology.html#sec-technology-cmos-flow",
-    "title": "IC Technology",
-    "section": "3.8 An Exemplary CMOS Process Flow",
-    "text": "3.8 An Exemplary CMOS Process Flow\n\nThe classic dielectric between the metal layers is SiO2, but in order to reduce capacitive parasitics, low-k dielectrics (e.g., F- or C-doped SiO2) are used in modern processes. Between processing steps, CMP is used to planarize the surfaces."
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-ihp",
-    "href": "slides/technology.html#sec-technology-ihp",
-    "title": "IC Technology",
-    "section": "3.9 The Open-Source PDK IHP SG13",
-    "text": "3.9 The Open-Source PDK IHP SG13"
-  },
-  {
-    "objectID": "slides/technology.html#sec-technology-qualification",
-    "href": "slides/technology.html#sec-technology-qualification",
-    "title": "IC Technology",
-    "section": "3.10 Technology Qualification",
-    "text": "3.10 Technology Qualification"
+    "objectID": "slides/testing.html#sec-testing-cpk",
+    "href": "slides/testing.html#sec-testing-cpk",
+    "title": "Testing",
+    "section": "6.6 Process Capability Index",
+    "text": "6.6 Process Capability Index\n\nFor analog test parameters, the variation over production must stay inside the test limits, which are derived from the datasheet limits minus guard bands: the lower specification limit (LSL) and the upper specification limit (USL)."
   },
   {
     "objectID": "dcic.html#sec-intro-scale",
@@ -585,7 +242,7 @@
     "href": "dcic.html#sec-mosfet-nutshell",
     "title": "Design of Complex Integrated Circuits",
     "section": "2.1 MOSFET Operation in a Nutshell",
-    "text": "2.1 MOSFET Operation in a Nutshell\nThe basic MOSFET structure consists of a gate (terminal \\(G\\)) that is insulated from a doped semiconductor and controls the surface charge in the semiconductor channel below, between the source (terminal \\(S\\)) and the drain (terminal \\(D\\)). The source provides the charge carriers, and an electric field pulls them toward the drain (hence a semiconductor device based on drift current). The electric potential of the semiconductor bulk (terminal \\(B\\)) acts on the channel as well and is the fourth terminal of the MOSFET. Ideally, the effect of the bulk is negligible.\nTwo complementary flavors of the device exist: the \\(n\\)-type MOSFET (“NMOS”) has \\(n^+\\)-doped source/drain regions on a \\(p\\)-type substrate and usually an \\(n^{++}\\)-doped gate, while the \\(p\\)-type MOSFET (“PMOS”) has \\(p^+\\)-doped source/drain regions in an \\(n\\)-type well and usually a \\(p^{++}\\)-doped gate.\n\n\n\n\n\n\nNoteDoping Notation\n\n\n\nIn the doping notation, \\(+\\) indicates a higher doping concentration than the surrounding material, while \\(++\\) indicates an even higher doping concentration. For example, \\(n^+\\)-doped regions have a higher electron concentration than the \\(n\\)-type substrate, and \\(n^{++}\\)-doped gates have an even higher electron concentration than the \\(n^+\\)-doped source/drain regions.\n\n\nTo understand the operation of the NMOS transistor, it is instructive to follow the conditions in the semiconductor while the gate voltage is swept upwards, as illustrated in Figure 4:\n\n\n\n\n\n\n\n\nFigure 4: Cross section of an NMOS transistor for increasing gate voltage (drain and source grounded): (a) flatband condition, (b) gate at 0 V, (c) gate below the threshold voltage, and (d) inversion. The dashed line marks the depletion-region boundary, circled minus signs are ionized acceptors, plus signs are holes, and the dark blue layer in (d) is the electron inversion layer.\n\n\n\n\n\n\nFlatband (a): When the gate is at a specific negative voltage (the flatband voltage \\(V_\\mathrm{fb}\\)), and all other terminals are at \\(0\\,\\text{V}\\), a depletion zone forms only around the drain and source junctions. No current can flow, since drain and source are \\(n^+\\)-doped while the substrate is \\(p\\)-type, so the two junctions form back-to-back diodes.\nZero gate voltage (b): When the gate voltage is increased to \\(0\\,\\text{V}\\), a depletion zone also forms below the gate. The \\(p\\)-type acceptor ions in this region have captured an electron and are thus immobile, negatively charged sites (illustrated by the circled minus symbols)—still, no current can flow.\nBelow threshold (c): When the gate voltage increases further (but stays below the threshold voltage), the depletion zone below the gate deepens, reaching a maximum depletion width \\(W_\\mathrm{dep}\\) when \\(V_\\mathrm{GS}= V_\\mathrm{th}\\). There is still no conduction between drain and source, because there are no (or at least very few) free electrons in the channel region.\nInversion (d): When the gate voltage rises above the threshold voltage \\(V_\\mathrm{th}\\), inversion occurs: a thin layer of free electrons forms directly below the gate oxide, creating a conducting channel of electrons between drain and source. The source of the electrons in the inversion layer is the \\(n^+\\)-doped source region, which is connected to ground. The electrons are pulled from the source into the channel by the positive gate voltage, and they can now flow to the drain if a drain voltage is applied.\n\nOnce the channel exists, the drain voltage determines the mode of conduction, as shown in Figure 5:\n\n\n\n\n\n\n\n\nFigure 5: Cross section of an NMOS transistor in inversion for increasing drain voltage: (a) triode region, where the inversion layer extends from source to drain, and (b) saturation, where the channel is pinched off at the drain side.\n\n\n\n\n\n\nTriode (a): If a small voltage is applied between drain and source, a current flows, and the depletion zone around the drain widens. The drain current is a function of both \\(V_\\mathrm{GS}\\) and \\(V_\\mathrm{DS}\\); the device operates in the triode region. The MOSFET operates like a voltage-controlled resistor in this region.\nSaturation (b): If the drain-source voltage is increased beyond \\(V_\\mathrm{DS}&gt; V_\\mathrm{GS}- V_\\mathrm{th}\\), the channel is pinched off at the drain side, and the drain current is (to first order) no longer a function of \\(V_\\mathrm{DS}\\), only of \\(V_\\mathrm{GS}\\)—the device is now in saturation. The MOSFET operates like a voltage-controlled current source in this region.\n\n\n2.1.1 An Exemplary 130 nm Process Technology\nThroughout this text we will use typical parameters of a 0.13 µm CMOS process technology, specifically IHP SG13 (process specification), for exemplary calculations. The key parameters are listed in Table 1.\n\n\n\nTable 1: Typical parameters of the IHP SG13 130 nm CMOS technology\n\n\n\n\n\n\n\n\n\n\nParameter\nSymbol\nTypical value\n\n\n\n\nNominal supply voltage\n\\(V_\\mathrm{DD}\\)\n1.2 V (digital) / 1.5 V (analog)\n\n\nMinimum gate length\n\\(L_\\mathrm{min}\\)\n130 nm\n\n\nOxide thickness\n\\(t_\\mathrm{ox}\\)\n2 nm\n\n\nThreshold voltage NMOS | PMOS\n\\(V_\\mathrm{th,n}\\) | \\(V_\\mathrm{th,p}\\)\n0.5 V | −0.47 V (W/L = 10 µm/0.13 µm)\n\n\nMaximum voltage\n\\(|V_\\mathrm{GS,max}|\\), \\(|V_\\mathrm{DS,max}|\\)\n1.6 V (BVDSS ≥ 2.0 V)\n\n\nGate capacitance\n\\(C'_\\mathrm{ox}\\)\n17.3 fF/µm²\n\n\nProcess constant \\(K_\\mathrm{n}\\) | \\(K_\\mathrm{p}\\)\n\\(\\mu_\\mathrm{n}C'_\\mathrm{ox}\\) | \\(\\mu_\\mathrm{p}C'_\\mathrm{ox}\\)\n280 µA/V² | 130 µA/V²\n\n\n\n\n\n\nThe threshold voltages in Table 1 are those of short-channel devices; long-channel devices (\\(W/L = 10\\,\\mu\\text{m}/10\\,\\mu\\text{m}\\)) have markedly lower values of about 0.20 V (NMOS) and −0.36 V (PMOS). This strong dependence of \\(V_\\mathrm{th}\\) on \\(L\\) results from the reverse short-channel effect (RSCE), where halo implants raise \\(V_\\mathrm{th}\\) of short devices, counteracted at the shortest lengths by the short-channel effect (SCE), which lowers \\(V_\\mathrm{th}\\); both are discussed in Section 2.7.4. The maximum voltage is the reliability limit of the low-voltage devices set in the SG13G2 model cards (VGS_MAX, VDS_MAX); the drain-source breakdown voltage BVDSS is higher, at 2.0 V minimum."
+    "text": "2.1 MOSFET Operation in a Nutshell\nThe basic MOSFET structure consists of a gate (terminal \\(G\\)) that is insulated from a doped semiconductor and controls the surface charge in the semiconductor channel below, between the source (terminal \\(S\\)) and the drain (terminal \\(D\\)). The source provides the charge carriers, and an electric field pulls them toward the drain (hence a semiconductor device based on drift current). The electric potential of the semiconductor bulk (terminal \\(B\\)) acts on the channel as well and is the fourth terminal of the MOSFET. Ideally, the effect of the bulk is negligible.\nTwo complementary flavors of the device exist: the \\(n\\)-type MOSFET (“NMOS”) has \\(n^+\\)-doped source/drain regions on a \\(p\\)-type substrate and usually an \\(n^{++}\\)-doped gate, while the \\(p\\)-type MOSFET (“PMOS”) has \\(p^+\\)-doped source/drain regions in an \\(n\\)-type well and usually a \\(p^{++}\\)-doped gate.\n\n\n\n\n\n\nNoteDoping Notation\n\n\n\nIn the doping notation, \\(+\\) indicates a higher doping concentration than the surrounding material, while \\(++\\) indicates an even higher doping concentration. For example, \\(n^+\\)-doped regions have a higher electron concentration than the \\(n\\)-type substrate, and \\(n^{++}\\)-doped gates have an even higher electron concentration than the \\(n^+\\)-doped source/drain regions.\n\n\nTo understand the operation of the NMOS transistor, it is instructive to follow the conditions in the semiconductor while the gate voltage is swept upwards, as illustrated in Figure 4:\n\n\n\n\n\n\n\n\nFigure 4: Cross section of an NMOS transistor for increasing gate voltage (drain and source grounded): (a) flatband condition, (b) gate at 0 V, (c) gate below the threshold voltage, and (d) inversion. The dashed line marks the depletion-region boundary, circled minus signs are ionized acceptors, plus signs are holes, and the dark blue layer in (d) is the electron inversion layer.\n\n\n\n\n\n\nFlatband (a): When the gate is at a specific negative voltage (the flatband voltage \\(V_\\mathrm{fb}\\)), and all other terminals are at \\(0\\,\\text{V}\\), a depletion zone forms only around the drain and source junctions. No current can flow, since drain and source are \\(n^+\\)-doped while the substrate is \\(p\\)-type, so the two junctions form back-to-back diodes.\nZero gate voltage (b): When the gate voltage is increased to \\(0\\,\\text{V}\\), a depletion zone also forms below the gate. The \\(p\\)-type acceptor ions in this region have captured an electron and are thus immobile, negatively charged sites (illustrated by the circled minus symbols)—still, no current can flow.\nBelow threshold (c): When the gate voltage increases further (but stays below the threshold voltage), the depletion zone below the gate deepens, reaching a maximum depletion width \\(W_\\mathrm{dep}\\) when \\(V_\\mathrm{GS}= V_\\mathrm{th}\\). There is still no conduction between drain and source, because there are no (or at least very few) free electrons in the channel region.\nInversion (d): When the gate voltage rises above the threshold voltage \\(V_\\mathrm{th}\\), inversion occurs: a thin layer of free electrons forms directly below the gate oxide, creating a conducting channel of electrons between drain and source. The source of the electrons in the inversion layer is the \\(n^+\\)-doped source region, which is connected to ground. The electrons are pulled from the source into the channel by the positive gate voltage, and they can now flow to the drain if a drain voltage is applied.\n\nOnce the channel exists, the drain voltage determines the mode of conduction, as shown in Figure 5:\n\n\n\n\n\n\n\n\nFigure 5: Cross section of an NMOS transistor in inversion for increasing drain voltage: (a) triode region, where the inversion layer extends from source to drain, and (b) saturation, where the channel is pinched off at the drain side.\n\n\n\n\n\n\nTriode (a): If a small voltage is applied between drain and source, a current flows, and the depletion zone around the drain widens. The drain current is a function of both \\(V_\\mathrm{GS}\\) and \\(V_\\mathrm{DS}\\); the device operates in the triode region. The MOSFET operates like a voltage-controlled resistor in this region.\nSaturation (b): If the drain-source voltage is increased beyond \\(V_\\mathrm{DS}&gt; V_\\mathrm{GS}- V_\\mathrm{th}\\), the channel is pinched off at the drain side, and the drain current is (to first order) no longer a function of \\(V_\\mathrm{DS}\\), only of \\(V_\\mathrm{GS}\\)—the device is now in saturation. The MOSFET operates like a voltage-controlled current source in this region.\n\n\n2.1.1 An Exemplary 130 nm Process Technology\nThroughout this text we will use typical parameters of a 0.13 µm CMOS process technology, specifically IHP SG13CMOS5L (process specification), for exemplary calculations. The key parameters are listed in Table 1.\n\n\n\nTable 1: Typical parameters of the IHP SG13 130 nm CMOS technology\n\n\n\n\n\n\n\n\n\n\nParameter\nSymbol\nTypical value\n\n\n\n\nNominal supply voltage\n\\(V_\\mathrm{DD}\\)\n1.2 V (digital) / 1.5 V (analog)\n\n\nMinimum gate length\n\\(L_\\mathrm{min}\\)\n130 nm\n\n\nOxide thickness\n\\(t_\\mathrm{ox}\\)\n2 nm\n\n\nThreshold voltage NMOS | PMOS\n\\(V_\\mathrm{th,n}\\) | \\(V_\\mathrm{th,p}\\)\n0.5 V | −0.47 V (W/L = 10 µm/0.13 µm)\n\n\nMaximum voltage\n\\(|V_\\mathrm{GS,max}|\\), \\(|V_\\mathrm{DS,max}|\\)\n1.6 V (BVDSS ≥ 2.0 V)\n\n\nGate capacitance\n\\(C'_\\mathrm{ox}\\)\n17.3 fF/µm²\n\n\nProcess constant \\(K_\\mathrm{n}\\) | \\(K_\\mathrm{p}\\)\n\\(\\mu_\\mathrm{n}C'_\\mathrm{ox}\\) | \\(\\mu_\\mathrm{p}C'_\\mathrm{ox}\\)\n280 µA/V² | 130 µA/V²\n\n\n\n\n\n\nThe threshold voltages in Table 1 are those of short-channel devices; long-channel devices (\\(W/L = 10\\,\\mu\\text{m}/10\\,\\mu\\text{m}\\)) have markedly lower values of about 0.20 V (NMOS) and −0.36 V (PMOS). This strong dependence of \\(V_\\mathrm{th}\\) on \\(L\\) results from the reverse short-channel effect (RSCE), where halo implants raise \\(V_\\mathrm{th}\\) of short devices, counteracted at the shortest lengths by the short-channel effect (SCE), which lowers \\(V_\\mathrm{th}\\); both are discussed in Section 2.7.4. The maximum voltage is the reliability limit of the low-voltage devices set in the model cards (shared by SG13CMOS5L and SG13G2) (VGS_MAX, VDS_MAX); the drain-source breakdown voltage BVDSS is higher, at 2.0 V minimum."
   },
   {
     "objectID": "dcic.html#sec-mosfet-iv",
@@ -718,7 +375,7 @@
     "href": "dcic.html#sec-technology-ihp",
     "title": "Design of Complex Integrated Circuits",
     "section": "3.9 The Open-Source PDK IHP SG13",
-    "text": "3.9 The Open-Source PDK IHP SG13\nIHP has open-sourced the process design kit (PDK) for a 130 nm BiCMOS technology (the current generation is named SG13G2, referred to here simply as IHP SG13) under the Apache-2.0 license. The relevant files, including documentation, can be found at github.com/IHP-GmbH/IHP-Open-PDK. This technology has a lot of interesting features:\n\nSupport for internal 1.2 V/1.5 V core MOSFETs and 3.3 V I/O MOSFETs\nAn aluminum metal stack with 5 thin and 2 thick levels of metal (see Figure 40)\nSilicided, standard, and high-sheet-rho poly resistors\nA metal-insulator-metal (MIM) capacitor\nA Schottky diode\nOptional high-speed SiGe:C heterojunction bipolar transistors (HBTs)\n\n\n\n\n\n\n\nFigure 40: Cross-section of the IHP SG13 technology (not to scale): five thin metal layers (Metal1 to Metal5) for dense routing and two thick top metal layers (TopMetal1, TopMetal2) for power routing, inductors, and low-loss RF interconnects, with the MIM capacitor embedded between Metal5 and TopMetal1. The FEOL devices are shown at the bottom, and the numbers give the layer and dielectric thicknesses. Source: Fig. 1.1.1 of the SG13G2 Process Specification Rev. 1.2, Copyright 2023 IHP PDK Authors, licensed under Apache-2.0, taken from IHP-Open-PDK and cropped out of the original page."
+    "text": "3.9 The Open-Source PDK IHP SG13\nIHP has open-sourced the process design kits (PDKs) of its 130 nm technologies under the Apache-2.0 license. The relevant files, including documentation, can be found at github.com/IHP-GmbH/IHP-Open-PDK. In this text we use the CMOS-only variant SG13CMOS5L (referred to here simply as IHP SG13), which shares its front-end and its MOSFET models with the BiCMOS technology SG13G2 but uses a reduced metal stack. This technology has a lot of interesting features:\n\nSupport for internal 1.2 V/1.5 V core MOSFETs and 3.3 V I/O MOSFETs\nAn aluminum metal stack with 4 thin and 1 thick level of metal (see Figure 40)\nSilicided, standard, and high-sheet-rho poly resistors\nA MOS varicap and a vertical PNP\n\nThe BiCMOS sibling SG13G2 additionally offers high-speed SiGe:C heterojunction bipolar transistors (HBTs), a metal-insulator-metal (MIM) capacitor, a Schottky diode, and a metal stack with 5 thin and 2 thick levels of metal.\n\n\n\n\n\n\nFigure 40: Cross-section of the IHP SG13CMOS5L technology (not to scale): four thin metal layers (Metal1 to Metal4) for dense routing and one 2 µm thick top metal layer (TopMetal1) for power routing, inductors, and bond pads, covered by the oxide/nitride passivation. The FEOL devices are shown at the bottom, and the numbers give the layer and dielectric thicknesses. Source: Fig. 1.1 of the SG13CMOS5L Process Specification Rev. 0.2, Copyright 2024 IHP PDK Authors, licensed under Apache-2.0, taken from IHP-Open-PDK and cropped out of the original page."
   },
   {
     "objectID": "dcic.html#sec-technology-qualification",
@@ -739,21 +396,21 @@
     "href": "dcic.html#sec-layout-layers",
     "title": "Design of Complex Integrated Circuits",
     "section": "4.2 Generic Layer Definition",
-    "text": "4.2 Generic Layer Definition\nDifferent foundries use different layer names. The layer names defined in Table 8 are quite typical for a basic CMOS process technology and are used for the remainder of the text; the corresponding IHP SG13 names are given for reference.\n\n\n\nTable 8: Generic layer definition used in this text\n\n\n\n\n\n\n\n\n\n\nLayer name\nIHP SG13\nPurpose\n\n\n\n\nRX\nActiv\n\\(n^+\\) (RX) or \\(p^+\\) (RX in BP) diffusion regions (e.g., S/D of MOSFETs)\n\n\nPC\nGatPoly\nPolysilicon gate\n\n\nNW\nNWell\n\\(n\\)-well region\n\n\nBP\npSD\n\\(p\\)-implant marker (i.e., blocks the \\(n\\)-implant)\n\n\nOP\nSalBlock\nSilicide blocking over PC and RX\n\n\nCA\nCont\nContact (connects RX or PC to M1)\n\n\nM1\nMetal1\nFirst-level metal\n\n\nV1\nVia1\nVia connecting M1 to M2\n\n\nM2\nMetal2\nSecond-level metal\n\n\nV2\nVia2\nVia connecting M2 to M3\n\n\nM3\nMetal3\nThird-level metal (top metal of this generic stack; in SG13, the thick aluminum TopMetal2 is the top metal and carries the bond pads)\n\n\nPAD\nPassiv\nOpening in the passivation to contact the top metal (in SG13, TopMetal2) for pads"
+    "text": "4.2 Generic Layer Definition\nDifferent foundries use different layer names. The layer names defined in Table 8 are quite typical for a basic CMOS process technology and are used for the remainder of the text; the corresponding IHP SG13 names are given for reference.\n\n\n\nTable 8: Generic layer definition used in this text\n\n\n\n\n\n\n\n\n\n\nLayer name\nIHP SG13\nPurpose\n\n\n\n\nRX\nActiv\n\\(n^+\\) (RX) or \\(p^+\\) (RX in BP) diffusion regions (e.g., S/D of MOSFETs)\n\n\nPC\nGatPoly\nPolysilicon gate\n\n\nNW\nNWell\n\\(n\\)-well region\n\n\nBP\npSD\n\\(p\\)-implant marker (i.e., blocks the \\(n\\)-implant)\n\n\nOP\nSalBlock\nSilicide blocking over PC and RX\n\n\nCA\nCont\nContact (connects RX or PC to M1)\n\n\nM1\nMetal1\nFirst-level metal\n\n\nV1\nVia1\nVia connecting M1 to M2\n\n\nM2\nMetal2\nSecond-level metal\n\n\nV2\nVia2\nVia connecting M2 to M3\n\n\nM3\nMetal3\nThird-level metal (top metal of this generic stack; in SG13CMOS5L, the thick aluminum TopMetal1 is the top metal and carries the bond pads)\n\n\nPAD\nPassiv\nOpening in the passivation to contact the top metal (in SG13CMOS5L, TopMetal1) for pads"
   },
   {
     "objectID": "dcic.html#sec-layout-devices",
     "href": "dcic.html#sec-layout-devices",
     "title": "Design of Complex Integrated Circuits",
     "section": "4.3 Devices",
-    "text": "4.3 Devices\n\n4.3.1 NMOS and PMOS Transistors\nFigure 41 shows the layout (mask top view) of an NMOS and a PMOS transistor. The following observations can be made:\n\nThe MOSFET is created by the intersection of RX and PC; this intersection defines \\(W\\) and \\(L\\) of the transistor. The areas of RX not covered by PC become the source and drain regions.\nWhether a device is NMOS or PMOS is decided by whether the RX shape is contained inside a BP region (RX plus BP is \\(p^+\\), RX without BP is \\(n^+\\)).\nA \\(p^+\\) substrate contact is created by drawing RX covered by BP (outside the n-well).\nAn \\(n^+\\) well contact is created by drawing plain RX located inside NW.\nThe NW must surround the PMOS with sufficient margin.\nThe layer BP is a pure marking layer, assisting mask generation and device extraction from the layout.\nCA contacts connect source/drain/gate as well as the \\(p^+\\)/\\(n^+\\) contacts to M1.\n\n\n\n\n\n\n\n\n\nFigure 41: Layout (mask top view) of an NMOS (left) and a PMOS transistor (right). The transistor channel is formed where PC crosses RX; the BP marker turns the diffusion \\(p^+\\), and the NW well surrounds the PMOS. The area where PC overlaps RX is the actual transistor channel, defining its \\(W\\) and \\(L\\). Next to each transistor sits the corresponding substrate or well contact. Note that BP acts as a marking layer, whereas RX, PC, and NW define the actual device regions on the silicon.\n\n\n\n\n\n\n\n4.3.2 Polysilicon Resistor\nThe polysilicon resistor (Figure 42) uses the gate material (PC) as a resistive device. Since the gate poly is normally covered by silicide to lower its resistance, the silicide is suppressed with an OP shape; the intersection of OP with PC precisely defines the \\(L\\) and \\(W\\) of the resistor. Note that the existence of OP is a process option and might not be available in every technology. The gate polysilicon can be either \\(p\\)- or \\(n\\)-type; \\(p\\)-type poly resistors are often preferred, as they offer a lower temperature coefficient (thus the PC is marked with BP).\nThe resistance value of the polysilicon resistor is given by (\\(R_\\square\\) is the sheet resistance in Ω/\\(\\square\\))\n\\[\nR = \\rho \\frac{L}{t \\cdot W} = R_\\square \\frac{L}{W}\n\\tag{48}\\]\n\n\n\n\n\n\n\n\nFigure 42: Layout of a polysilicon resistor: the silicide on the PC strip is blocked by the OP shape, whose intersection with PC defines the resistor body of length \\(L\\) and width \\(W\\); the BP marker selects \\(p\\)-type poly. The silicided ends are contacted with CA and M1.\n\n\n\n\n\nNote that modern FinFET technologies might not support traditional planar polysilicon resistors, as the gate material is used to form the fins rather than a continuous sheet. In this case, often a metal resistor implemented in the back-end layers is used as an alternative.\n\n\n4.3.3 Diffusion Resistor\nDiffusion resistors (Figure 43) use source/drain diffusions or wells (with or without silicide) and are available in basically all silicon technologies, but they are usually inferior to polysilicon resistors: they have larger tolerances and a relatively high voltage coefficient, which can cause nonlinearity, and the nonlinear parasitic junction capacitance to the substrate can be critical as well. In older technology nodes (&gt; 0.25 µm), the matching of diffusion resistors was better than that of poly resistors. One clear advantage of diffusion resistors is reduced self-heating, as the resistor body is embedded in the silicon substrate, whereas poly resistors are isolated from the substrate by SiO2. So resistor with increased power dissipation can benefit from this property.\n\n\n\n\n\n\n\n\nFigure 43: Layout of a diffusion (n-well) resistor: the resistive body is the NW strip, contacted at both ends by \\(n^+\\) diffusions (RX); the OP shape blocks the silicide over the body. The parasitic junction to the substrate makes this resistor nonlinear with the applied voltage.\n\n\n\n\n\nThe resistor types available in IHP SG13 are summarized in Table 9.\n\n\n\nTable 9: Resistor types available in IHP SG13\n\n\n\n\n\n\n\n\n\n\n\n\nType\n\\(R_\\square\\) (Ω/\\(\\square\\))\nProcess tolerance (about \\(\\pm 3 \\sigma\\))\nMatching\nTemp. coefficient\n\n\n\n\nSilicided \\(n^{++}\\)-poly (rsil)\n7\n±12 %\n0.6 %µm\n0.3 %/K\n\n\nBlocked \\(p^+\\)-poly (rppd)\n260\n±10 %\n1.5 %µm\n0.017 %/K\n\n\nBlocked compensated poly (rhigh)\n1360\n±15 %\n4.8 %µm\n−0.23 %/K\n\n\n\n\n\n\n\n\n4.3.4 Capacitors\nLinear capacitors can be implemented using the metal stack, either as vertical sandwich capacitors (parallel plates on adjacent metal layers) or as finger capacitors (exploiting the lateral coupling between interdigitated fingers on the same layers); both are shown in Figure 44. Depending on the design rules, the vertical or the lateral coupling capacitance might be more area-effective; such metal-oxide-metal (MOM) capacitors come for free in any technology. Due to the very tight lateral pitch in nm CMOS technologies, finger capacitors are often preferred for capacitor implementation (when a linear capacitor is required).\n\n\n\n\n\n\n\n\nFigure 44: Metal-oxide-metal (MOM) capacitors: (a) vertical sandwich capacitor (cross section) using the plate capacitance between stacked metal layers, with alternating layers connected to the two terminals by via stacks; (b) finger capacitor (top view) using the lateral coupling capacitance between interdigitated fingers drawn in a single metal layer.\n\n\n\n\n\nA few additional considerations for capacitors:\n\nThe density of MOM capacitors scales with smaller design rules and the number of metal layers. The lower metal layers should be skipped if the parasitic capacitance to the substrate is a concern.\nThe process may offer a specialized metal-insulator-metal (MIM) capacitor (density on the order of fF/µm²) using extra masks and processing steps, offering higher specific capacitance and low parasitics at extra cost.\nFor high capacitance density, or where nonlinearity is not critical, the MOSFET gate capacitance can be used, as the gate oxide is tightly controlled in manufacturing.\nIn IHP SG13, a MIM capacitor between Metal5 and TopMetal1 is available (ca. 1.5 fF/µm²); the MOM finger capacitor has ca. 0.3 fF/µm², so when using 4 metal layers the effective capacitance is comparable to the MIM capacitor.\n\n\n\n4.3.5 Diodes\nDiodes are formed by the available pn-junctions (\\(n^+\\) in substrate, \\(p^+\\) in n-well, n-well in substrate). They are intended mainly for reverse-biased operation, as the forward operation is usually not modeled accurately and should be avoided. Note that forward operation might inject charge into parasitic structures and cause latch-up (see Section 9.2)! Applications of reverse-biased diodes include ESD protection structures, antenna diodes, and varactors.\n\n\n4.3.6 Bipolar Junction Transistors\nHigh-performance BJTs are available in bipolar and BiCMOS technologies, but at increased wafer cost compared to pure CMOS. In standard CMOS, a parasitic vertical substrate PNP can be implemented (Figure 45): the \\(p^+\\) diffusion in the n-well forms the emitter, the n-well the base, and the common \\(p\\)-substrate the collector. The performance is limited (\\(\\beta \\approx 1 \\ldots 10\\)), and the collector is tied to the substrate potential. Such a structure is mainly used in bandgap reference circuits where collector and base are shorted to \\(V_\\mathrm{SS}\\) (ground), and the foundry usually supplies a fixed layout template that shall not be modified.\n\n\n\n\n\n\n\n\nFigure 45: Cross section of the vertical substrate PNP available in any CMOS technology: the \\(p^+\\) diffusion in the n-well is the emitter, the n-well is the base, and the common \\(p\\)-substrate is the collector (contacted at the surface and tied to \\(V_\\mathrm{SS}\\))."
+    "text": "4.3 Devices\n\n4.3.1 NMOS and PMOS Transistors\nFigure 41 shows the layout (mask top view) of an NMOS and a PMOS transistor. The following observations can be made:\n\nThe MOSFET is created by the intersection of RX and PC; this intersection defines \\(W\\) and \\(L\\) of the transistor. The areas of RX not covered by PC become the source and drain regions.\nWhether a device is NMOS or PMOS is decided by whether the RX shape is contained inside a BP region (RX plus BP is \\(p^+\\), RX without BP is \\(n^+\\)).\nA \\(p^+\\) substrate contact is created by drawing RX covered by BP (outside the n-well).\nAn \\(n^+\\) well contact is created by drawing plain RX located inside NW.\nThe NW must surround the PMOS with sufficient margin.\nThe layer BP is a pure marking layer, assisting mask generation and device extraction from the layout.\nCA contacts connect source/drain/gate as well as the \\(p^+\\)/\\(n^+\\) contacts to M1.\n\n\n\n\n\n\n\n\n\nFigure 41: Layout (mask top view) of an NMOS (left) and a PMOS transistor (right). The transistor channel is formed where PC crosses RX; the BP marker turns the diffusion \\(p^+\\), and the NW well surrounds the PMOS. The area where PC overlaps RX is the actual transistor channel, defining its \\(W\\) and \\(L\\). Next to each transistor sits the corresponding substrate or well contact. Note that BP acts as a marking layer, whereas RX, PC, and NW define the actual device regions on the silicon.\n\n\n\n\n\n\n\n4.3.2 Polysilicon Resistor\nThe polysilicon resistor (Figure 42) uses the gate material (PC) as a resistive device. Since the gate poly is normally covered by silicide to lower its resistance, the silicide is suppressed with an OP shape; the intersection of OP with PC precisely defines the \\(L\\) and \\(W\\) of the resistor. Note that the existence of OP is a process option and might not be available in every technology. The gate polysilicon can be either \\(p\\)- or \\(n\\)-type; \\(p\\)-type poly resistors are often preferred, as they offer a lower temperature coefficient (thus the PC is marked with BP).\nThe resistance value of the polysilicon resistor is given by (\\(R_\\square\\) is the sheet resistance in Ω/\\(\\square\\))\n\\[\nR = \\rho \\frac{L}{t \\cdot W} = R_\\square \\frac{L}{W}\n\\tag{48}\\]\n\n\n\n\n\n\n\n\nFigure 42: Layout of a polysilicon resistor: the silicide on the PC strip is blocked by the OP shape, whose intersection with PC defines the resistor body of length \\(L\\) and width \\(W\\); the BP marker selects \\(p\\)-type poly. The silicided ends are contacted with CA and M1.\n\n\n\n\n\nNote that modern FinFET technologies might not support traditional planar polysilicon resistors, as the gate material is used to form the fins rather than a continuous sheet. In this case, often a metal resistor implemented in the back-end layers is used as an alternative.\n\n\n4.3.3 Diffusion Resistor\nDiffusion resistors (Figure 43) use source/drain diffusions or wells (with or without silicide) and are available in basically all silicon technologies, but they are usually inferior to polysilicon resistors: they have larger tolerances and a relatively high voltage coefficient, which can cause nonlinearity, and the nonlinear parasitic junction capacitance to the substrate can be critical as well. In older technology nodes (&gt; 0.25 µm), the matching of diffusion resistors was better than that of poly resistors. One clear advantage of diffusion resistors is reduced self-heating, as the resistor body is embedded in the silicon substrate, whereas poly resistors are isolated from the substrate by SiO2. So resistor with increased power dissipation can benefit from this property.\n\n\n\n\n\n\n\n\nFigure 43: Layout of a diffusion (n-well) resistor: the resistive body is the NW strip, contacted at both ends by \\(n^+\\) diffusions (RX); the OP shape blocks the silicide over the body. The parasitic junction to the substrate makes this resistor nonlinear with the applied voltage.\n\n\n\n\n\nThe resistor types available in IHP SG13 are summarized in Table 9.\n\n\n\nTable 9: Resistor types available in IHP SG13\n\n\n\n\n\n\n\n\n\n\n\n\nType\n\\(R_\\square\\) (Ω/\\(\\square\\))\nProcess tolerance (about \\(\\pm 3 \\sigma\\))\nMatching\nTemp. coefficient\n\n\n\n\nSilicided \\(n^{++}\\)-poly (rsil)\n7\n±12 %\n0.6 %µm\n0.3 %/K\n\n\nBlocked \\(p^+\\)-poly (rppd)\n260\n±10 %\n1.5 %µm\n0.017 %/K\n\n\nBlocked compensated poly (rhigh)\n1360\n±15 %\n4.8 %µm\n−0.23 %/K\n\n\n\n\n\n\n\n\n4.3.4 Capacitors\nLinear capacitors can be implemented using the metal stack, either as vertical sandwich capacitors (parallel plates on adjacent metal layers) or as finger capacitors (exploiting the lateral coupling between interdigitated fingers on the same layers); both are shown in Figure 44. Depending on the design rules, the vertical or the lateral coupling capacitance might be more area-effective; such metal-oxide-metal (MOM) capacitors come for free in any technology. Due to the very tight lateral pitch in nm CMOS technologies, finger capacitors are often preferred for capacitor implementation (when a linear capacitor is required).\n\n\n\n\n\n\n\n\nFigure 44: Metal-oxide-metal (MOM) capacitors: (a) vertical sandwich capacitor (cross section) using the plate capacitance between stacked metal layers, with alternating layers connected to the two terminals by via stacks; (b) finger capacitor (top view) using the lateral coupling capacitance between interdigitated fingers drawn in a single metal layer.\n\n\n\n\n\nA few additional considerations for capacitors:\n\nThe density of MOM capacitors scales with smaller design rules and the number of metal layers. The lower metal layers should be skipped if the parasitic capacitance to the substrate is a concern.\nThe process may offer a specialized metal-insulator-metal (MIM) capacitor (density on the order of fF/µm²) using extra masks and processing steps, offering higher specific capacitance and low parasitics at extra cost.\nFor high capacitance density, or where nonlinearity is not critical, the MOSFET gate capacitance can be used, as the gate oxide is tightly controlled in manufacturing.\nIHP SG13CMOS5L offers no MIM capacitor, so MOM or MOS capacitors are used instead. Its PDK provides the MOM finger capacitor cap_cmomf on Metal1 to Metal4 with ca. 0.3 fF/µm² per metal layer (1.29 fF/µm² for all four layers); the model is simulation-derived and not yet validated on silicon. Using all 4 thin metal layers, a MOM capacitor thus comes close to the ca. 1.5 fF/µm² of the MIM capacitor between Metal5 and TopMetal1 in the BiCMOS sibling SG13G2.\n\n\n\n4.3.5 Diodes\nDiodes are formed by the available pn-junctions (\\(n^+\\) in substrate, \\(p^+\\) in n-well, n-well in substrate). They are intended mainly for reverse-biased operation, as the forward operation is usually not modeled accurately and should be avoided. Note that forward operation might inject charge into parasitic structures and cause latch-up (see Section 9.2)! Applications of reverse-biased diodes include ESD protection structures, antenna diodes, and varactors.\n\n\n4.3.6 Bipolar Junction Transistors\nHigh-performance BJTs are available in bipolar and BiCMOS technologies, but at increased wafer cost compared to pure CMOS. In standard CMOS, a parasitic vertical substrate PNP can be implemented (Figure 45): the \\(p^+\\) diffusion in the n-well forms the emitter, the n-well the base, and the common \\(p\\)-substrate the collector. The performance is limited (\\(\\beta \\approx 1 \\ldots 10\\)), and the collector is tied to the substrate potential. Such a structure is mainly used in bandgap reference circuits where collector and base are shorted to \\(V_\\mathrm{SS}\\) (ground), and the foundry usually supplies a fixed layout template that shall not be modified.\n\n\n\n\n\n\n\n\nFigure 45: Cross section of the vertical substrate PNP available in any CMOS technology: the \\(p^+\\) diffusion in the n-well is the emitter, the n-well is the base, and the common \\(p\\)-substrate is the collector (contacted at the surface and tied to \\(V_\\mathrm{SS}\\))."
   },
   {
     "objectID": "dcic.html#sec-layout-drc",
     "href": "dcic.html#sec-layout-drc",
     "title": "Design of Complex Integrated Circuits",
     "section": "4.4 Design Rules",
-    "text": "4.4 Design Rules\nThe design rules (DRs) are the interface between the mask designer (layout engineer) and the foundry. Complying with the layout design rules ensures manufacturability with a high yield:\n\nThe design rules are provided as a specification document and as a run set for layout verification tools (e.g., KLayout, Magic, Cadence Pegasus, or Siemens Calibre).\nThe rules are either given in relative dimensions (“lambda rules”) for easy scaling, or in absolute dimensions (“micron rules”).\nModern CMOS technologies typically involve several hundred to thousands of layout design rules.\nConsider the relatively large spacing rule between RX and NW: it pays off to group PMOS and NMOS transistors together, respectively!\n\nThe four basic geometric rule types—minimum width, minimum spacing, minimum enclosure, and minimum extension—are illustrated in Figure 46.\n\n\n\n\n\n\n\n\nFigure 46: The four basic geometric design-rule types: (a) minimum width of a shape, (b) minimum spacing between shapes, (c) minimum enclosure of one shape by another (e.g., RX in NW), and (d) minimum extension of one shape beyond another (e.g., the poly endcap over RX).\n\n\n\n\n\n\n4.4.1 Density Rules\nDensity rules require a minimum and a maximum layer density within a specified area; this is needed to avoid over-polishing during CMP and to achieve uniform etch rates. For example, M1 might require 30 % minimum and 70 % maximum fill in any 1 mm × 1 mm window. For digital chips, density rules are satisfied automatically by fill programs. For analog chips, layout engineers have to add dummy structures manually (effort!) or with a fill program after the layout is finished; note that fill structures can cause asymmetries or reduced quality factor in inductors. Metal fill can also be put to good use as a ground plane.\n\n\n4.4.2 Antenna Rules\nIf a metal interconnect with a large area is tied to the small gate of a MOSFET, the metal area acts as an “antenna” during plasma etching: it collects ions and can rise to a high potential, and the gate oxide may break down! The remedies, shown in Figure 47, are either a discontinuity in the charge-collecting metal (routing briefly through a higher metal layer, which is patterned only after the lower layer has been etched) or an antenna diode connected to the gate node (the processing is done at high temperatures, where the diode is quite conductive in either polarity, harmlessly draining the collected charge).\n\n\n\n\n\n\n\n\nFigure 47: The antenna effect and its fixes (cross sections): (a) a long M1 wire connected to a gate collects charge during plasma etching and can destroy the gate oxide; (b) breaking the M1 wire and bridging with M2 limits the charge collected while M1 is etched; (c) an antenna diode drains the collected charge harmlessly into the substrate.\n\n\n\n\n\nThe complete layout rules of the open-source IHP SG13 PDK can be found in the SG13G2 layout rules document and serve as a practical example of a production DRC rule set."
+    "text": "4.4 Design Rules\nThe design rules (DRs) are the interface between the mask designer (layout engineer) and the foundry. Complying with the layout design rules ensures manufacturability with a high yield:\n\nThe design rules are provided as a specification document and as a run set for layout verification tools (e.g., KLayout, Magic, Cadence Pegasus, or Siemens Calibre).\nThe rules are either given in relative dimensions (“lambda rules”) for easy scaling, or in absolute dimensions (“micron rules”).\nModern CMOS technologies typically involve several hundred to thousands of layout design rules.\nConsider the relatively large spacing rule between RX and NW: it pays off to group PMOS and NMOS transistors together, respectively!\n\nThe four basic geometric rule types—minimum width, minimum spacing, minimum enclosure, and minimum extension—are illustrated in Figure 46.\n\n\n\n\n\n\n\n\nFigure 46: The four basic geometric design-rule types: (a) minimum width of a shape, (b) minimum spacing between shapes, (c) minimum enclosure of one shape by another (e.g., RX in NW), and (d) minimum extension of one shape beyond another (e.g., the poly endcap over RX).\n\n\n\n\n\n\n4.4.1 Density Rules\nDensity rules require a minimum and a maximum layer density within a specified area; this is needed to avoid over-polishing during CMP and to achieve uniform etch rates. For example, M1 might require 30 % minimum and 70 % maximum fill in any 1 mm × 1 mm window. For digital chips, density rules are satisfied automatically by fill programs. For analog chips, layout engineers have to add dummy structures manually (effort!) or with a fill program after the layout is finished; note that fill structures can cause asymmetries or reduced quality factor in inductors. Metal fill can also be put to good use as a ground plane.\n\n\n4.4.2 Antenna Rules\nIf a metal interconnect with a large area is tied to the small gate of a MOSFET, the metal area acts as an “antenna” during plasma etching: it collects ions and can rise to a high potential, and the gate oxide may break down! The remedies, shown in Figure 47, are either a discontinuity in the charge-collecting metal (routing briefly through a higher metal layer, which is patterned only after the lower layer has been etched) or an antenna diode connected to the gate node (the processing is done at high temperatures, where the diode is quite conductive in either polarity, harmlessly draining the collected charge).\n\n\n\n\n\n\n\n\nFigure 47: The antenna effect and its fixes (cross sections): (a) a long M1 wire connected to a gate collects charge during plasma etching and can destroy the gate oxide; (b) breaking the M1 wire and bridging with M2 limits the charge collected while M1 is etched; (c) an antenna diode drains the collected charge harmlessly into the substrate.\n\n\n\n\n\nThe complete layout rules of the open-source IHP SG13 PDK can be found in the SG13CMOS5L layout rules document and serve as a practical example of a production DRC rule set."
   },
   {
     "objectID": "dcic.html#sec-layout-analog",
@@ -914,14 +571,14 @@
     "href": "dcic.html#sec-methodology-cells",
     "title": "Design of Complex Integrated Circuits",
     "section": "8.3 Cell-Based Design",
-    "text": "8.3 Cell-Based Design\nDifferent types of cells can be used when designing ICs:\n\nA high-level description (e.g., in VHDL or SystemVerilog) can be synthesized and automatically placed and routed using standard logic cells.\nHard macro modules (like SRAM or IO cells) can be used to construct larger designs.\nSoft macro modules (provided as a synthesizable high-level description or RTL) can be integrated as well.\n\n\n8.3.1 Standard Cell Library\nStandard-cell libraries (SCLs) are offered by IP vendors or foundries; a detailed treatment of standard cells and semicustom design is given in (Smith 1997). The following cell types are usually available:\n\nLogic functions (AND, OR, NAND, NOR, INV, XOR, XNOR) with 2 and more inputs (usually up to 4).\nComplex gates (like combined AND-OR gates, half-adders, bit-shifter cells).\nAuxiliary cells (buffers to balance delays, tie-high/tie-low cells driving constant logic levels, well-tap cells to bias n-wells and substrate, decoupling cells, spacers, tri-state buffers, antenna diodes). Some libraries have no separate well-tap cells and place the taps inside each cell instead (e.g., sg13g2_stdcell).\nStorage elements (latches, flip-flops).\n\nThe logic cells are available in different drive strengths to balance chip area versus propagation delay versus power consumption (active as well as leakage). The cells are thoroughly characterized for timing, power consumption, capacitive load, and leakage versus PVTL (process, voltage, temperature, load), and the results are stored in look-up tables used by the EDA tools.\nAs an example, Figure 74 shows the transistor-level schematic of a NAND2 standard cell; in the IHP SG13 open PDK, this cell is available in two drive strengths (nand2_1 and nand2_2). Also, various latches and flip-flops are provided, with and without scan-chain support, with optional set and reset, and in different drive strengths (e.g., the scan flip-flop sdfbbp_1 with inverted asynchronous set and reset).\n\n\n\n\n\n\n\n\nFigure 74: Transistor-level schematic of a NAND2 standard cell: two parallel PMOS pull-up transistors and two stacked NMOS pull-down transistors. Different drive strengths of the cell simply scale the transistor widths.\n\n\n\n\n\nFigure 75 shows the typical layout organization of a standard cell: all the cells have a common height, power is distributed on horizontal \\(V_\\mathrm{DD}\\)/\\(V_\\mathrm{SS}\\) rails at the top and bottom (abutting with the neighbors), the n-well spans the upper half (PMOS devices), and the signal terminals are placed on a routing grid. The height of the cells is fixed to ensure uniformity and ease of placement in rows and is usually given in terms of track height (i.e., the number of routing tracks that fit within the cell height). The width of the cells can vary depending on the complexity and drive strength of the cell, but is based on a grid structure to facilitate routing and alignment with neighboring cells.\n\n\n\n\n\n\n\n\nFigure 75: Typical layout organization of a standard cell (shown: an inverter): fixed cell height with horizontal \\(V_\\mathrm{DD}\\)/\\(V_\\mathrm{SS}\\) rails in M1 at top and bottom, the n-well with the PMOS in the upper half, the NMOS in the lower half, a shared vertical poly gate as input, and the output on M1.\n\n\n\n\n\n\n\n8.3.2 Hard Macros\nUsually read-only memories (ROM), random-access memories (RAM), and one-time programmable (OTP) memories like e-fuses are available as hard macros, created by module generators (“memory compilers”). SRAM generators often provide plenty of options, like the number of rows and columns, with or without repair, built-in self-test (BIST), single- or dual-port, and high-performance or low-leakage variants.\nIO cells (input/output cells for interfacing with the external pins of the chip, providing the necessary voltage level shifting, drive strength, and protection circuitry) are often provided as hard macros as well, for example the sg13g2_io library in the IHP SG13G2 open PDK. From these IO cells the padring is constructed, which surrounds the core logic and provides the interface to the external pins."
+    "text": "8.3 Cell-Based Design\nDifferent types of cells can be used when designing ICs:\n\nA high-level description (e.g., in VHDL or SystemVerilog) can be synthesized and automatically placed and routed using standard logic cells.\nHard macro modules (like SRAM or IO cells) can be used to construct larger designs.\nSoft macro modules (provided as a synthesizable high-level description or RTL) can be integrated as well.\n\n\n8.3.1 Standard Cell Library\nStandard-cell libraries (SCLs) are offered by IP vendors or foundries; a detailed treatment of standard cells and semicustom design is given in (Smith 1997). The following cell types are usually available:\n\nLogic functions (AND, OR, NAND, NOR, INV, XOR, XNOR) with 2 and more inputs (usually up to 4).\nComplex gates (like combined AND-OR gates, half-adders, bit-shifter cells).\nAuxiliary cells (buffers to balance delays, tie-high/tie-low cells driving constant logic levels, well-tap cells to bias n-wells and substrate, decoupling cells, spacers, tri-state buffers, antenna diodes). Some libraries have no separate well-tap cells and place the taps inside each cell instead (e.g., sg13cmos5l_stdcell).\nStorage elements (latches, flip-flops).\n\nThe logic cells are available in different drive strengths to balance chip area versus propagation delay versus power consumption (active as well as leakage). The cells are thoroughly characterized for timing, power consumption, capacitive load, and leakage versus PVTL (process, voltage, temperature, load), and the results are stored in look-up tables used by the EDA tools.\nAs an example, Figure 74 shows the transistor-level schematic of a NAND2 standard cell; in the IHP SG13 open PDK, this cell is available in two drive strengths (nand2_1 and nand2_2). Also, various latches and flip-flops are provided, with and without scan-chain support, with optional set and reset, and in different drive strengths (e.g., the scan flip-flop sdfbbp_1 with inverted asynchronous set and reset).\n\n\n\n\n\n\n\n\nFigure 74: Transistor-level schematic of a NAND2 standard cell: two parallel PMOS pull-up transistors and two stacked NMOS pull-down transistors. Different drive strengths of the cell simply scale the transistor widths.\n\n\n\n\n\nFigure 75 shows the typical layout organization of a standard cell: all the cells have a common height, power is distributed on horizontal \\(V_\\mathrm{DD}\\)/\\(V_\\mathrm{SS}\\) rails at the top and bottom (abutting with the neighbors), the n-well spans the upper half (PMOS devices), and the signal terminals are placed on a routing grid. The height of the cells is fixed to ensure uniformity and ease of placement in rows and is usually given in terms of track height (i.e., the number of routing tracks that fit within the cell height). The width of the cells can vary depending on the complexity and drive strength of the cell, but is based on a grid structure to facilitate routing and alignment with neighboring cells.\n\n\n\n\n\n\n\n\nFigure 75: Typical layout organization of a standard cell (shown: an inverter): fixed cell height with horizontal \\(V_\\mathrm{DD}\\)/\\(V_\\mathrm{SS}\\) rails in M1 at top and bottom, the n-well with the PMOS in the upper half, the NMOS in the lower half, a shared vertical poly gate as input, and the output on M1.\n\n\n\n\n\n\n\n8.3.2 Hard Macros\nUsually read-only memories (ROM), random-access memories (RAM), and one-time programmable (OTP) memories like e-fuses are available as hard macros, created by module generators (“memory compilers”). SRAM generators often provide plenty of options, like the number of rows and columns, with or without repair, built-in self-test (BIST), single- or dual-port, and high-performance or low-leakage variants.\nIO cells (input/output cells for interfacing with the external pins of the chip, providing the necessary voltage level shifting, drive strength, and protection circuitry) are often provided as hard macros as well, for example the sg13cmos5l_io library in the IHP SG13CMOS5L open PDK. From these IO cells the padring is constructed, which surrounds the core logic and provides the interface to the external pins."
   },
   {
     "objectID": "dcic.html#sec-methodology-flow",
     "href": "dcic.html#sec-methodology-flow",
     "title": "Design of Complex Integrated Circuits",
     "section": "8.4 The Semicustom Design Flow",
-    "text": "8.4 The Semicustom Design Flow\nFigure 76 shows the semicustom design flow at a high level: the design is captured in an HDL, synthesized to a gate-level netlist, and physically implemented by floorplanning, placement, and routing (RTL2GDS). Simulation accompanies every step (pre-layout simulation of the HDL and the netlist, post-layout simulation with extracted parasitics), and design iterations loop back to earlier stages when timing, power, or functionality goals are not met. The flow is conventionally divided into a front-end part, which turns the behavioral description into a verified gate-level netlist, and a back-end part, which turns that netlist into manufacturable layout; both are detailed in the following subsections. Because a decision made late in the flow—such as a routing detour that adds delay—can invalidate an assumption made earlier, reaching design closure, where timing, power, area, and signal-integrity constraints are met simultaneously, usually takes several of these iterations.\n\n\n\n\n\n\n\n\nFigure 76: High-level semicustom design flow: from design capture in an HDL through logic synthesis, floorplanning, placement, and routing to tapeout. Pre- and post-layout simulations verify the design; failed checks lead to design iterations back to earlier steps.\n\n\n\n\n\n\n8.4.1 RTL Synthesis\nThe front-end part of the flow transforms the behavioral description into a verified gate-level netlist, as shown in Figure 77. The behavioral description (VHDL, SystemVerilog) is first verified by simulation; after RTL synthesis and library mapping, the resulting netlist is verified again (by simulation or formal equivalence checking), followed by static timing analysis. Test logic (scan chains, see Section 6.5) is inserted, and the netlist is checked once more, together with a power analysis, before it is handed to physical synthesis. The algorithms behind logic synthesis and optimization are covered in depth in (Micheli 1994). In the open-source flow, the corresponding tools are iverilog or verilator (simulation), eqy (formal equivalence checking), yosys (synthesis), abc (logic optimization and mapping), opensta (timing and power analysis), fault (test insertion), and gtkwave (waveform viewing).\n\n\n\n\n\n\n\n\nFigure 77: RTL synthesis flow with open-source tools: the behavioral description is verified by simulation, synthesized and mapped to the standard-cell library, and re-verified; static timing analysis, test-logic insertion, and power analysis complete the front-end before physical synthesis. Failed checks loop back to the behavioral description.\n\n\n\n\n\n\n\n8.4.2 Standard-Cell Place and Route\nThe back-end part of the flow, shown in Figure 78, turns the netlist into manufacturable layout: placement and routing (openroad) use the library and technology descriptions (LEF), producing the design in DEF format; parasitic extraction (openrcx) generates a SPEF file used for accurate post-layout timing analysis (opensta); after noise and reliability checks pass, the final layout database is streamed out as GDSII (klayout, magic) and sent to the manufacturer. The algorithms of physical design—partitioning, floorplanning, placement, routing, and timing closure—are treated comprehensively in (Kahng et al. 2022).\n\n\n\n\n\n\n\n\nFigure 78: Standard-cell place-and-route flow with open-source tools: placement and routing (openroad) use the library and technology data (LEF); parasitic extraction (openrcx) delivers a SPEF file for post-layout timing analysis (opensta); after timing, noise, and reliability checks pass, the layout is streamed out as GDSII (klayout, magic) and sent to the manufacturer. Timing failures loop back to placement.\n\n\n\n\n\n\n\n8.4.3 The Open-Source RTL-to-GDS Flow\nIn recent years, open-source tools have made a huge step forward, so that a complete behavioral (SystemVerilog) to GDSII flow is freely available with OpenROAD and the integrated LibreLane flow. Together with the IHP SG13 open-source PDK—including its open standard-cell library (sg13g2_stdcell)—everything needed for a digital tapeout is now openly available. This has dramatically lowered the barrier to entry for chip design: students, researchers, and hobbyists can take a design all the way from RTL to a manufacturable layout without any commercial tool licenses, and low-cost multi-project wafer shuttle runs make it feasible to obtain real silicon."
+    "text": "8.4 The Semicustom Design Flow\nFigure 76 shows the semicustom design flow at a high level: the design is captured in an HDL, synthesized to a gate-level netlist, and physically implemented by floorplanning, placement, and routing (RTL2GDS). Simulation accompanies every step (pre-layout simulation of the HDL and the netlist, post-layout simulation with extracted parasitics), and design iterations loop back to earlier stages when timing, power, or functionality goals are not met. The flow is conventionally divided into a front-end part, which turns the behavioral description into a verified gate-level netlist, and a back-end part, which turns that netlist into manufacturable layout; both are detailed in the following subsections. Because a decision made late in the flow—such as a routing detour that adds delay—can invalidate an assumption made earlier, reaching design closure, where timing, power, area, and signal-integrity constraints are met simultaneously, usually takes several of these iterations.\n\n\n\n\n\n\n\n\nFigure 76: High-level semicustom design flow: from design capture in an HDL through logic synthesis, floorplanning, placement, and routing to tapeout. Pre- and post-layout simulations verify the design; failed checks lead to design iterations back to earlier steps.\n\n\n\n\n\n\n8.4.1 RTL Synthesis\nThe front-end part of the flow transforms the behavioral description into a verified gate-level netlist, as shown in Figure 77. The behavioral description (VHDL, SystemVerilog) is first verified by simulation; after RTL synthesis and library mapping, the resulting netlist is verified again (by simulation or formal equivalence checking), followed by static timing analysis. Test logic (scan chains, see Section 6.5) is inserted, and the netlist is checked once more, together with a power analysis, before it is handed to physical synthesis. The algorithms behind logic synthesis and optimization are covered in depth in (Micheli 1994). In the open-source flow, the corresponding tools are iverilog or verilator (simulation), eqy (formal equivalence checking), yosys (synthesis), abc (logic optimization and mapping), opensta (timing and power analysis), fault (test insertion), and gtkwave (waveform viewing).\n\n\n\n\n\n\n\n\nFigure 77: RTL synthesis flow with open-source tools: the behavioral description is verified by simulation, synthesized and mapped to the standard-cell library, and re-verified; static timing analysis, test-logic insertion, and power analysis complete the front-end before physical synthesis. Failed checks loop back to the behavioral description.\n\n\n\n\n\n\n\n8.4.2 Standard-Cell Place and Route\nThe back-end part of the flow, shown in Figure 78, turns the netlist into manufacturable layout: placement and routing (openroad) use the library and technology descriptions (LEF), producing the design in DEF format; parasitic extraction (openrcx) generates a SPEF file used for accurate post-layout timing analysis (opensta); after noise and reliability checks pass, the final layout database is streamed out as GDSII (klayout, magic) and sent to the manufacturer. The algorithms of physical design—partitioning, floorplanning, placement, routing, and timing closure—are treated comprehensively in (Kahng et al. 2022).\n\n\n\n\n\n\n\n\nFigure 78: Standard-cell place-and-route flow with open-source tools: placement and routing (openroad) use the library and technology data (LEF); parasitic extraction (openrcx) delivers a SPEF file for post-layout timing analysis (opensta); after timing, noise, and reliability checks pass, the layout is streamed out as GDSII (klayout, magic) and sent to the manufacturer. Timing failures loop back to placement.\n\n\n\n\n\n\n\n8.4.3 The Open-Source RTL-to-GDS Flow\nIn recent years, open-source tools have made a huge step forward, so that a complete behavioral (SystemVerilog) to GDSII flow is freely available with OpenROAD and the integrated LibreLane flow. Together with the IHP SG13 open-source PDK—including its open standard-cell library (sg13cmos5l_stdcell)—everything needed for a digital tapeout is now openly available. This has dramatically lowered the barrier to entry for chip design: students, researchers, and hobbyists can take a design all the way from RTL to a manufacturable layout without any commercial tool licenses, and low-cost multi-project wafer shuttle runs make it feasible to obtain real silicon."
   },
   {
     "objectID": "dcic.html#sec-methodology-custom",
@@ -949,7 +606,7 @@
     "href": "dcic.html#sec-latchup",
     "title": "Design of Complex Integrated Circuits",
     "section": "9.2 Latch-Up",
-    "text": "9.2 Latch-Up\nLatch-up is the creation of a low-impedance path between the power-supply rails (\\(V_\\mathrm{DD}\\) to \\(V_\\mathrm{SS}\\)) by triggering the parasitic SCR formed by the complementary devices in CMOS, shown in Figure 87 and already discussed in Section 9.1.6. The vertical PNP (emitter = PMOS source in the n-well, base = n-well, collector = substrate) and the lateral NPN (emitter = NMOS source, base = substrate, collector = n-well) form a PNPN structure between the rails, with the well and substrate resistances \\(R_\\mathrm{well}\\) and \\(R_\\mathrm{sub}\\) completing the classic thyristor equivalent circuit.\n\n\n\n\n\n\n\n\nFigure 87: Parasitic thyristor in a CMOS inverter, causing latch-up: the vertical PNP (PMOS source = emitter, n-well = base, substrate = collector) and the lateral NPN (NMOS source = emitter, substrate = base, n-well = collector) are cross-coupled through the well resistance \\(R_\\mathrm{well}\\) and the substrate resistance \\(R_\\mathrm{sub}\\). Injected charge that develops \\(\\approx 0.7\\,\\)V across either resistance triggers the loop.\n\n\n\n\n\nLatch-up is triggered by a current or voltage stimulus on an input, output, or I/O pin (injecting carriers into wells or substrate), or by an over-voltage on the supply pin. Two cases are distinguished:\n\nTransient latch-up: the low-impedance state persists only while the stimulus is applied.\nTrue latch-up: the state remains after the stimulus is removed and can only be ended by a power-supply shutdown—use a current limit on the power supply when testing ICs in the lab! The large current can destroy the chip by overheating and electromigration.\n\n\n9.2.1 Latch-Up Testing\nLatch-up testing is a standard procedure during IC qualification (JEDEC JESD78): a current-limited (typically 100 mA), 10 ms pulse is applied to all pads, with the voltage compliance constrained to 1.5× the maximum supply voltage above ground and to a defined negative value below ground; additionally, a supply over-voltage test is applied. After each stimulus, the supply current is monitored to detect a latched state.\n\n\n9.2.2 Latch-Up Prevention\nLatch-up is prevented by weakening the parasitic bipolar transistors and their coupling:\n\nPhysical separation of the diffusions/wells forming the parasitic BJTs lowers their current gain (shallow-trench isolation helps to increase the electrical distance without a large spacing penalty).\nReduce the parasitic resistances \\(R_\\mathrm{well}\\) and \\(R_\\mathrm{sub}\\) that develop the triggering base-emitter voltages: place many well and substrate ties, and/or use an epi-process with a highly doped substrate.\nUse guard rings around critical components (e.g., I/O drivers and any junction that may inject carriers) to collect stray charges before they can reach a parasitic base, as shown in Figure 88.\n\n\n\n\n\n\n\n\n\nFigure 88: Guard rings for latch-up prevention (layout top view): the NMOS is surrounded by a grounded \\(p^+\\) guard ring, the PMOS by an \\(n^+\\) guard ring tied to \\(V_\\mathrm{DD}\\) inside the n-well. The rings collect injected minority and majority carriers before they can act as base current for the parasitic bipolar transistors.\n\n\n\n\n\nAdopting these design practices helps to significantly reduce the risk of latch-up in CMOS circuits.\nFoundries cast these practices into their design rule manuals. IHP SG13G2, for example, dedicates Sec. 7.2 Latch-up Guidelines of the SG13G2 layout rules to the topic:\n\nFor output buffers, the sources of the NMOS and PMOS have to be tied to \\(V_\\mathrm{SS}\\) and \\(V_\\mathrm{DD}\\) and their drains connected directly to the pad; guard rings (well and substrate ties) are required around every device directly tied to a pad, and double guard rings (an n-well isolator plus a \\(p^+\\) isolator) have to be placed between the n-channel and p-channel buffers, as well as between the buffers and the internal circuitry.\nRules LU.a and LU.b limit the maximum distance from any \\(p^+\\) active area inside the n-well to an n-well tie, and from any \\(n^+\\) active area inside the p-well to a substrate tie, to 20 µm—this is the rule-deck version of “place many well and substrate ties”.\nRules LU.c to LU.d1 limit how far a tie may extend beyond its contact (6 µm), which keeps the resistance of the tie itself low.\n\nIn the open-source SG13G2 KLayout DRC decks, the latch-up rules are checked by default (since IHP-Open-PDK commit 3b393f31, March 2025): the maximal deck runs them unless latchUpRules is set to false, and the regular deck runs LU.b unless the precheck_drc option is set. Older versions of the layout-rule document still state otherwise, so check which rules your deck actually runs."
+    "text": "9.2 Latch-Up\nLatch-up is the creation of a low-impedance path between the power-supply rails (\\(V_\\mathrm{DD}\\) to \\(V_\\mathrm{SS}\\)) by triggering the parasitic SCR formed by the complementary devices in CMOS, shown in Figure 87 and already discussed in Section 9.1.6. The vertical PNP (emitter = PMOS source in the n-well, base = n-well, collector = substrate) and the lateral NPN (emitter = NMOS source, base = substrate, collector = n-well) form a PNPN structure between the rails, with the well and substrate resistances \\(R_\\mathrm{well}\\) and \\(R_\\mathrm{sub}\\) completing the classic thyristor equivalent circuit.\n\n\n\n\n\n\n\n\nFigure 87: Parasitic thyristor in a CMOS inverter, causing latch-up: the vertical PNP (PMOS source = emitter, n-well = base, substrate = collector) and the lateral NPN (NMOS source = emitter, substrate = base, n-well = collector) are cross-coupled through the well resistance \\(R_\\mathrm{well}\\) and the substrate resistance \\(R_\\mathrm{sub}\\). Injected charge that develops \\(\\approx 0.7\\,\\)V across either resistance triggers the loop.\n\n\n\n\n\nLatch-up is triggered by a current or voltage stimulus on an input, output, or I/O pin (injecting carriers into wells or substrate), or by an over-voltage on the supply pin. Two cases are distinguished:\n\nTransient latch-up: the low-impedance state persists only while the stimulus is applied.\nTrue latch-up: the state remains after the stimulus is removed and can only be ended by a power-supply shutdown—use a current limit on the power supply when testing ICs in the lab! The large current can destroy the chip by overheating and electromigration.\n\n\n9.2.1 Latch-Up Testing\nLatch-up testing is a standard procedure during IC qualification (JEDEC JESD78): a current-limited (typically 100 mA), 10 ms pulse is applied to all pads, with the voltage compliance constrained to 1.5× the maximum supply voltage above ground and to a defined negative value below ground; additionally, a supply over-voltage test is applied. After each stimulus, the supply current is monitored to detect a latched state.\n\n\n9.2.2 Latch-Up Prevention\nLatch-up is prevented by weakening the parasitic bipolar transistors and their coupling:\n\nPhysical separation of the diffusions/wells forming the parasitic BJTs lowers their current gain (shallow-trench isolation helps to increase the electrical distance without a large spacing penalty).\nReduce the parasitic resistances \\(R_\\mathrm{well}\\) and \\(R_\\mathrm{sub}\\) that develop the triggering base-emitter voltages: place many well and substrate ties, and/or use an epi-process with a highly doped substrate.\nUse guard rings around critical components (e.g., I/O drivers and any junction that may inject carriers) to collect stray charges before they can reach a parasitic base, as shown in Figure 88.\n\n\n\n\n\n\n\n\n\nFigure 88: Guard rings for latch-up prevention (layout top view): the NMOS is surrounded by a grounded \\(p^+\\) guard ring, the PMOS by an \\(n^+\\) guard ring tied to \\(V_\\mathrm{DD}\\) inside the n-well. The rings collect injected minority and majority carriers before they can act as base current for the parasitic bipolar transistors.\n\n\n\n\n\nAdopting these design practices helps to significantly reduce the risk of latch-up in CMOS circuits.\nFoundries cast these practices into their design rule manuals. IHP SG13CMOS5L, for example, dedicates Sec. 7.2 Latch-up Guidelines of the SG13CMOS5L layout rules to the topic:\n\nFor output buffers, the sources of the NMOS and PMOS have to be tied to \\(V_\\mathrm{SS}\\) and \\(V_\\mathrm{DD}\\) and their drains connected directly to the pad; guard rings (well and substrate ties) are required around every device directly tied to a pad, and double guard rings (an n-well isolator plus a \\(p^+\\) isolator) have to be placed between the n-channel and p-channel buffers, as well as between the buffers and the internal circuitry.\nRules LU.a and LU.b limit the maximum distance from any \\(p^+\\) active area inside the n-well to an n-well tie, and from any \\(n^+\\) active area inside the p-well to a substrate tie, to 20 µm—this is the rule-deck version of “place many well and substrate ties”.\nRules LU.c to LU.d1 limit how far a tie may extend beyond its contact (6 µm), which keeps the resistance of the tie itself low.\n\nIn the open-source KLayout DRC decks, the latch-up rules are checked by default: the maximal deck runs them unless latchUpRules is set to false, and the regular deck runs LU.b unless the precheck_drc option is set. The layout-rule documents still state otherwise, so check which rules your deck actually runs."
   },
   {
     "objectID": "dcic.html#sec-robust-circuits",
@@ -1047,7 +704,7 @@
     "href": "dcic.html#sec-project-goals",
     "title": "Design of Complex Integrated Circuits",
     "section": "12.1 Goals and Constraints",
-    "text": "12.1 Goals and Constraints\nEvery project is bounded by the triple constraint of scope (what is delivered, including its quality), time, and cost. These three are coupled: adding functionality to an IC under a fixed tapeout date increases cost (more engineers, more licenses) or lowers quality (less verification); a fixed team and scope define the earliest realistic tapeout date. The project management has to make these trade-offs explicit and agree on them with the sponsor—a plan that silently assumes all three can be held at once is not a plan.\nProject goals should be formulated so that everybody can decide whether they are met. A widely used checklist is SMART: goals are specific, measurable, achievable, relevant, and time-bound (in the original proposal (Doran 1981), the letters stood for specific, measurable, assignable, realistic, and time-related). “Design a low-power ADC” is not a goal; “tape out a 10 bit SAR ADC with \\(\\geq 9.5\\) bit ENOB at 1 MS/s and \\(\\leq 100\\,\\mu\\text{W}\\) on the IHP SG13G2 shuttle of March” is.\nFor an IC, the goals are condensed into the specification. The most expensive changes are those made late, as each change ripples through design, layout, verification, test program, and documentation. Therefore, the specification is reviewed and frozen at an early milestone; later changes are still possible, but go through a formal change request that assesses the impact on schedule and cost before the change is accepted."
+    "text": "12.1 Goals and Constraints\nEvery project is bounded by the triple constraint of scope (what is delivered, including its quality), time, and cost. These three are coupled: adding functionality to an IC under a fixed tapeout date increases cost (more engineers, more licenses) or lowers quality (less verification); a fixed team and scope define the earliest realistic tapeout date. The project management has to make these trade-offs explicit and agree on them with the sponsor—a plan that silently assumes all three can be held at once is not a plan.\nProject goals should be formulated so that everybody can decide whether they are met. A widely used checklist is SMART: goals are specific, measurable, achievable, relevant, and time-bound (in the original proposal (Doran 1981), the letters stood for specific, measurable, assignable, realistic, and time-related). “Design a low-power ADC” is not a goal; “tape out a 10 bit SAR ADC with \\(\\geq 9.5\\) bit ENOB at 1 MS/s and \\(\\leq 100\\,\\mu\\text{W}\\) on the IHP SG13CMOS5L shuttle of March” is.\nFor an IC, the goals are condensed into the specification. The most expensive changes are those made late, as each change ripples through design, layout, verification, test program, and documentation. Therefore, the specification is reviewed and frozen at an early milestone; later changes are still possible, but go through a formal change request that assesses the impact on schedule and cost before the change is accepted."
   },
   {
     "objectID": "dcic.html#sec-project-phases",
@@ -1125,5 +782,348 @@
     "title": "Design of Complex Integrated Circuits",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nThe mobility value used here is not fully consistent with the process constant \\(K_\\mathrm{n} = \\mu_\\mathrm{n}C'_\\mathrm{ox}= 280\\,\\mu\\text{A/V}^2\\) in Table 1, which (with \\(C'_\\mathrm{ox}= 17.3\\,\\text{fF/µm}^2\\)) would imply an effective \\(\\mu_\\mathrm{n}\\approx 160\\,\\text{cm}^2/(\\text{V}\\cdot\\text{s})\\). The effective mobility depends strongly on the vertical field and thus on bias; such spread between simple hand-calculation parameters is normal and is one more reason to verify all sizing choices by simulation.↩︎"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-tapeout",
+    "href": "slides/layout.html#sec-layout-tapeout",
+    "title": "The Layout",
+    "section": "4.1 Files and Tapeout",
+    "text": "4.1 Files and Tapeout\n\nThe layout is the 2D representation of the IC manufacturing data. While the schematic captures the electrical intent of a design, the layout captures its physical realization: in the layout tools, the design is drawn on several layers, which are the foundation for the generation of the photomasks used in IC production. Commercial layout tools are, e.g., Cadence Virtuoso, Siemens L-Edit, and open-source tools are Magic and KLayout. The layers are usually manipulated before the geometries are transferred to the masks (shrink, enlarge, invert, combination of several layers into one mask layer, optical proximity correction, etc.)."
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-layers",
+    "href": "slides/layout.html#sec-layout-layers",
+    "title": "The Layout",
+    "section": "4.2 Generic Layer Definition",
+    "text": "4.2 Generic Layer Definition\n\nThe layout is checked for compliance with the wafer-fab design rules in the design rule check (DRC), and for conformance with the intended circuit in the layout-versus-schematic (LVS) check, where a netlist extracted from the layout is compared to the netlist of the original schematic. If all checks pass, the layout data is sent to mask production—this step is called tapeout. The mask house processes the layout data and produces the photomasks used by the wafer fab (depending on technology complexity, between 10 and 80 masks).\nThe standard file format for layout data is GDSII, a hierarchical database in a binary stream format. A newer format with more efficient storage is OASIS, but GDSII is still very common."
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-devices",
+    "href": "slides/layout.html#sec-layout-devices",
+    "title": "The Layout",
+    "section": "4.3 Devices",
+    "text": "4.3 Devices"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-drc",
+    "href": "slides/layout.html#sec-layout-drc",
+    "title": "The Layout",
+    "section": "4.4 Design Rules",
+    "text": "4.4 Design Rules"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-analog",
+    "href": "slides/layout.html#sec-layout-analog",
+    "title": "The Layout",
+    "section": "4.5 Analog Layout Techniques",
+    "text": "4.5 Analog Layout Techniques\n\nThe complete layout rules of the open-source IHP SG13 PDK can be found in the SG13CMOS5L layout rules document and serve as a practical example of a production DRC rule set."
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-additional",
+    "href": "slides/layout.html#sec-layout-additional",
+    "title": "The Layout",
+    "section": "4.6 Additional Layout and Mask Structures",
+    "text": "4.6 Additional Layout and Mask Structures"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-checks",
+    "href": "slides/layout.html#sec-layout-checks",
+    "title": "The Layout",
+    "section": "4.7 Layout Checks",
+    "text": "4.7 Layout Checks"
+  },
+  {
+    "objectID": "slides/layout.html#sec-layout-extraction",
+    "href": "slides/layout.html#sec-layout-extraction",
+    "title": "The Layout",
+    "section": "4.8 Layout Extraction",
+    "text": "4.8 Layout Extraction"
+  },
+  {
+    "objectID": "slides/esd.html#sec-esd-basics",
+    "href": "slides/esd.html#sec-esd-basics",
+    "title": "Electrostatic Discharge and Latch-Up",
+    "section": "9.1 Electrostatic Discharge",
+    "text": "9.1 Electrostatic Discharge\n\nThis chapter covers two reliability hazards that every IC design must handle: electrostatic discharge (ESD), the sudden discharge of statically charged objects into the chip, and latch-up, the unwanted triggering of parasitic bipolar structures in CMOS. The treatment of ESD follows (Amerasekera and Duvvury 2002); overviews of ESD as a reliability concern, including protection structures, and of ESD test methods can be found in (Duvvury and Amerasekera 1993; Ker et al. 2001)."
+  },
+  {
+    "objectID": "slides/esd.html#sec-latchup",
+    "href": "slides/esd.html#sec-latchup",
+    "title": "Electrostatic Discharge and Latch-Up",
+    "section": "9.2 Latch-Up",
+    "text": "9.2 Latch-Up"
+  },
+  {
+    "objectID": "slides/economy.html#sec-economy-price",
+    "href": "slides/economy.html#sec-economy-price",
+    "title": "Economy of Integrated Circuits",
+    "section": "7.1 Selling Price and Total Cost",
+    "text": "7.1 Selling Price and Total Cost\n\nThe manufacturing of ICs is a large-scale business, requiring significant investment in research and development, and usually large volumes are built and sold. It is therefore rewarding to take a look at the economics of integrated circuits."
+  },
+  {
+    "objectID": "slides/economy.html#sec-economy-nre",
+    "href": "slides/economy.html#sec-economy-nre",
+    "title": "Economy of Integrated Circuits",
+    "section": "7.2 Non-Recurring Engineering Cost",
+    "text": "7.2 Non-Recurring Engineering Cost"
+  },
+  {
+    "objectID": "slides/economy.html#sec-economy-recurring",
+    "href": "slides/economy.html#sec-economy-recurring",
+    "title": "Economy of Integrated Circuits",
+    "section": "7.3 Recurring Cost",
+    "text": "7.3 Recurring Cost"
+  },
+  {
+    "objectID": "slides/economy.html#sec-economy-example",
+    "href": "slides/economy.html#sec-economy-example",
+    "title": "Economy of Integrated Circuits",
+    "section": "7.4 An Exemplary Calculation",
+    "text": "7.4 An Exemplary Calculation"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-goals",
+    "href": "slides/project.html#sec-project-goals",
+    "title": "Project Management",
+    "section": "12.1 Goals and Constraints",
+    "text": "12.1 Goals and Constraints"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-phases",
+    "href": "slides/project.html#sec-project-phases",
+    "title": "Project Management",
+    "section": "12.2 Project Phases",
+    "text": "12.2 Project Phases"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-sow",
+    "href": "slides/project.html#sec-project-sow",
+    "title": "Project Management",
+    "section": "12.3 Statement of Work",
+    "text": "12.3 Statement of Work"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-wbs",
+    "href": "slides/project.html#sec-project-wbs",
+    "title": "Project Management",
+    "section": "12.4 Work Breakdown Structure",
+    "text": "12.4 Work Breakdown Structure"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-estimation",
+    "href": "slides/project.html#sec-project-estimation",
+    "title": "Project Management",
+    "section": "12.5 Effort Estimation",
+    "text": "12.5 Effort Estimation"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-gantt",
+    "href": "slides/project.html#sec-project-gantt",
+    "title": "Project Management",
+    "section": "12.6 Scheduling",
+    "text": "12.6 Scheduling"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-raci",
+    "href": "slides/project.html#sec-project-raci",
+    "title": "Project Management",
+    "section": "12.7 Roles and Responsibilities",
+    "text": "12.7 Roles and Responsibilities"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-risk",
+    "href": "slides/project.html#sec-project-risk",
+    "title": "Project Management",
+    "section": "12.8 Risk Management",
+    "text": "12.8 Risk Management"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-reviews",
+    "href": "slides/project.html#sec-project-reviews",
+    "title": "Project Management",
+    "section": "12.9 Reviews and Tapeout Checklist",
+    "text": "12.9 Reviews and Tapeout Checklist"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-tracking",
+    "href": "slides/project.html#sec-project-tracking",
+    "title": "Project Management",
+    "section": "12.10 Tracking and Control",
+    "text": "12.10 Tracking and Control"
+  },
+  {
+    "objectID": "slides/project.html#sec-project-team",
+    "href": "slides/project.html#sec-project-team",
+    "title": "Project Management",
+    "section": "12.11 Team and Communication",
+    "text": "12.11 Team and Communication"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-wafer",
+    "href": "slides/technology.html#sec-technology-wafer",
+    "title": "IC Technology",
+    "section": "3.1 The Silicon Wafer",
+    "text": "3.1 The Silicon Wafer\n\nThis chapter walks through the manufacturing technology of integrated circuits: from the raw silicon wafer through the individual processing steps (doping, photolithography, etching, thin-film deposition, and interconnect formation) to a complete CMOS process flow. The treatment largely follows (Hu 2010)."
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-selective-doping",
+    "href": "slides/technology.html#sec-technology-selective-doping",
+    "title": "IC Technology",
+    "section": "3.2 Selective Doping",
+    "text": "3.2 Selective Doping"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-litho",
+    "href": "slides/technology.html#sec-technology-litho",
+    "title": "IC Technology",
+    "section": "3.3 Photolithography",
+    "text": "3.3 Photolithography"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-etching",
+    "href": "slides/technology.html#sec-technology-etching",
+    "title": "IC Technology",
+    "section": "3.4 Etching",
+    "text": "3.4 Etching"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-doping",
+    "href": "slides/technology.html#sec-technology-doping",
+    "title": "IC Technology",
+    "section": "3.5 Doping Techniques",
+    "text": "3.5 Doping Techniques"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-thin-film",
+    "href": "slides/technology.html#sec-technology-thin-film",
+    "title": "IC Technology",
+    "section": "3.6 Thin-Film Deposition",
+    "text": "3.6 Thin-Film Deposition"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-interconnect",
+    "href": "slides/technology.html#sec-technology-interconnect",
+    "title": "IC Technology",
+    "section": "3.7 Interconnects",
+    "text": "3.7 Interconnects"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-cmos-flow",
+    "href": "slides/technology.html#sec-technology-cmos-flow",
+    "title": "IC Technology",
+    "section": "3.8 An Exemplary CMOS Process Flow",
+    "text": "3.8 An Exemplary CMOS Process Flow\n\nThe classic dielectric between the metal layers is SiO2, but in order to reduce capacitive parasitics, low-k dielectrics (e.g., F- or C-doped SiO2) are used in modern processes. Between processing steps, CMP is used to planarize the surfaces."
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-ihp",
+    "href": "slides/technology.html#sec-technology-ihp",
+    "title": "IC Technology",
+    "section": "3.9 The Open-Source PDK IHP SG13",
+    "text": "3.9 The Open-Source PDK IHP SG13"
+  },
+  {
+    "objectID": "slides/technology.html#sec-technology-qualification",
+    "href": "slides/technology.html#sec-technology-qualification",
+    "title": "IC Technology",
+    "section": "3.10 Technology Qualification",
+    "text": "3.10 Technology Qualification"
+  },
+  {
+    "objectID": "slides/simulation.html#sec-simulation-mna",
+    "href": "slides/simulation.html#sec-simulation-mna",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.1 Formulating the Circuit Equations",
+    "text": "11.1 Formulating the Circuit Equations"
+  },
+  {
+    "objectID": "slides/simulation.html#sec-simulation-dc",
+    "href": "slides/simulation.html#sec-simulation-dc",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.2 DC Simulation",
+    "text": "11.2 DC Simulation"
+  },
+  {
+    "objectID": "slides/simulation.html#sec-simulation-ac",
+    "href": "slides/simulation.html#sec-simulation-ac",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.3 AC Simulation",
+    "text": "11.3 AC Simulation"
+  },
+  {
+    "objectID": "slides/simulation.html#sec-simulation-tran",
+    "href": "slides/simulation.html#sec-simulation-tran",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.4 Transient Simulation",
+    "text": "11.4 Transient Simulation"
+  },
+  {
+    "objectID": "slides/simulation.html#sec-simulation-advanced",
+    "href": "slides/simulation.html#sec-simulation-advanced",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.5 Advanced Simulation Modes",
+    "text": "11.5 Advanced Simulation Modes"
+  },
+  {
+    "objectID": "slides/simulation.html#sec-simulation-models",
+    "href": "slides/simulation.html#sec-simulation-models",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.6 Device Models",
+    "text": "11.6 Device Models"
+  },
+  {
+    "objectID": "slides/simulation.html#sec-simulation-digital",
+    "href": "slides/simulation.html#sec-simulation-digital",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.7 Digital Simulation",
+    "text": "11.7 Digital Simulation"
+  },
+  {
+    "objectID": "slides/simulation.html#sec-simulation-mixed",
+    "href": "slides/simulation.html#sec-simulation-mixed",
+    "title": "Simulation of Integrated Circuits",
+    "section": "11.8 Mixed-Signal Simulation",
+    "text": "11.8 Mixed-Signal Simulation"
+  },
+  {
+    "objectID": "slides/methodology.html#sec-methodology-y",
+    "href": "slides/methodology.html#sec-methodology-y",
+    "title": "Design Methodology",
+    "section": "8.1 The Y-Diagram",
+    "text": "8.1 The Y-Diagram\n\nIn this chapter, basic knowledge of digital and analog circuit design is assumed; we discuss IC-specific design methodology topics which are usually not covered in entry-level courses. A comprehensive treatment of digital VLSI design and its methodology is given in (Weste and Harris 2011). We first introduce a mental model of the design space (the Y-diagram), then survey the available implementation styles and their trade-offs, and finally walk through the concrete design flows—the digital semicustom flow and the analog/mixed-signal custom flow—illustrated throughout with open-source EDA tools."
+  },
+  {
+    "objectID": "slides/methodology.html#sec-methodology-choices",
+    "href": "slides/methodology.html#sec-methodology-choices",
+    "title": "Design Methodology",
+    "section": "8.2 Digital Implementation Choices",
+    "text": "8.2 Digital Implementation Choices"
+  },
+  {
+    "objectID": "slides/methodology.html#sec-methodology-cells",
+    "href": "slides/methodology.html#sec-methodology-cells",
+    "title": "Design Methodology",
+    "section": "8.3 Cell-Based Design",
+    "text": "8.3 Cell-Based Design"
+  },
+  {
+    "objectID": "slides/methodology.html#sec-methodology-flow",
+    "href": "slides/methodology.html#sec-methodology-flow",
+    "title": "Design Methodology",
+    "section": "8.4 The Semicustom Design Flow",
+    "text": "8.4 The Semicustom Design Flow"
+  },
+  {
+    "objectID": "slides/methodology.html#sec-methodology-custom",
+    "href": "slides/methodology.html#sec-methodology-custom",
+    "title": "Design Methodology",
+    "section": "8.5 The Mixed-Signal/Custom Flow",
+    "text": "8.5 The Mixed-Signal/Custom Flow"
+  },
+  {
+    "objectID": "slides/methodology.html#sec-methodology-fpga",
+    "href": "slides/methodology.html#sec-methodology-fpga",
+    "title": "Design Methodology",
+    "section": "8.6 FPGAs",
+    "text": "8.6 FPGAs"
   }
 ]

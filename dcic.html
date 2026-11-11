@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
-<meta name="dcterms.date" content="2026-10-14">
+<meta name="dcterms.date" content="2026-11-11">
 
 <title>Design of Complex Integrated Circuits</title>
 <style>
@@ -60,18 +60,19 @@ div.csl-indent {
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e7b4535bb9f81c5a0a19056beabb1668.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-a3b81a2a417e140af123b784fcc878c5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-e7b4535bb9f81c5a0a19056beabb1668.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-67c19ae4ccf12187c21e9a49606d88c4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-7161d6debfbbeb18c199e9e749415f29.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-67c19ae4ccf12187c21e9a49606d88c4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -135,7 +136,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -158,6 +159,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -187,13 +189,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -287,6 +295,7 @@ window.Quarto = {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -301,15 +310,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Design of Complex Integrated Circuits</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -343,8 +351,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -353,7 +362,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active" data-toc-expanded="2">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -629,7 +638,7 @@ window.Quarto = {
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dcic.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -660,7 +669,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 14, 2026</p>
+      <p class="date">November 11, 2026</p>
     </div>
   </div>
   
@@ -762,7 +771,7 @@ Figure&nbsp;3: Moore’s law: the number of components per integrated circuit ve
 <h2 data-number="2.1" class="anchored" data-anchor-id="sec-mosfet-nutshell"><span class="header-section-number">2.1</span> MOSFET Operation in a Nutshell</h2>
 <p>The basic MOSFET structure consists of a gate (terminal <span class="math inline">\(G\)</span>) that is insulated from a doped semiconductor and controls the surface charge in the semiconductor channel below, between the source (terminal <span class="math inline">\(S\)</span>) and the drain (terminal <span class="math inline">\(D\)</span>). The source provides the charge carriers, and an electric field pulls them toward the drain (hence a semiconductor device based on drift current). The electric potential of the semiconductor bulk (terminal <span class="math inline">\(B\)</span>) acts on the channel as well and is the fourth terminal of the MOSFET. Ideally, the effect of the bulk is negligible.</p>
 <p>Two complementary flavors of the device exist: the <span class="math inline">\(n\)</span>-type MOSFET (“NMOS”) has <span class="math inline">\(n^+\)</span>-doped source/drain regions on a <span class="math inline">\(p\)</span>-type substrate and usually an <span class="math inline">\(n^{++}\)</span>-doped gate, while the <span class="math inline">\(p\)</span>-type MOSFET (“PMOS”) has <span class="math inline">\(p^+\)</span>-doped source/drain regions in an <span class="math inline">\(n\)</span>-type well and usually a <span class="math inline">\(p^{++}\)</span>-doped gate.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Doping Notation">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -817,7 +826,7 @@ Figure&nbsp;5: Cross section of an NMOS transistor in inversion for increasing d
 </ul>
 <section id="an-exemplary-130-nm-process-technology" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="an-exemplary-130-nm-process-technology"><span class="header-section-number">2.1.1</span> An Exemplary 130 nm Process Technology</h3>
-<p>Throughout this text we will use typical parameters of a 0.13 µm CMOS process technology, specifically IHP SG13 <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">(process specification)</a>, for exemplary calculations. The key parameters are listed in <a href="#tbl-ihp130-parameters" class="quarto-xref">Table&nbsp;1</a>.</p>
+<p>Throughout this text we will use typical parameters of a 0.13 µm CMOS process technology, specifically IHP SG13CMOS5L <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13cmos5l/libs.doc/doc/SG13CMOS5L_os_process_spec.pdf">(process specification)</a>, for exemplary calculations. The key parameters are listed in <a href="#tbl-ihp130-parameters" class="quarto-xref">Table&nbsp;1</a>.</p>
 <div id="tbl-ihp130-parameters" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ihp130-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -878,7 +887,7 @@ Table&nbsp;1: Typical parameters of the IHP SG13 130 nm CMOS technology
 </div>
 </figure>
 </div>
-<p>The threshold voltages in <a href="#tbl-ihp130-parameters" class="quarto-xref">Table&nbsp;1</a> are those of short-channel devices; long-channel devices (<span class="math inline">\(W/L = 10\,\mu\text{m}/10\,\mu\text{m}\)</span>) have markedly lower values of about 0.20 V (NMOS) and −0.36 V (PMOS). This strong dependence of <span class="math inline">\(V_\mathrm{th}\)</span> on <span class="math inline">\(L\)</span> results from the reverse short-channel effect (RSCE), where halo implants raise <span class="math inline">\(V_\mathrm{th}\)</span> of short devices, counteracted at the shortest lengths by the short-channel effect (SCE), which lowers <span class="math inline">\(V_\mathrm{th}\)</span>; both are discussed in <a href="#sec-mosfet-dibl" class="quarto-xref">Section&nbsp;2.7.4</a>. The maximum voltage is the reliability limit of the low-voltage devices set in the SG13G2 model cards (<code>VGS_MAX</code>, <code>VDS_MAX</code>); the drain-source breakdown voltage BV<sub>DSS</sub> is higher, at 2.0 V minimum.</p>
+<p>The threshold voltages in <a href="#tbl-ihp130-parameters" class="quarto-xref">Table&nbsp;1</a> are those of short-channel devices; long-channel devices (<span class="math inline">\(W/L = 10\,\mu\text{m}/10\,\mu\text{m}\)</span>) have markedly lower values of about 0.20 V (NMOS) and −0.36 V (PMOS). This strong dependence of <span class="math inline">\(V_\mathrm{th}\)</span> on <span class="math inline">\(L\)</span> results from the reverse short-channel effect (RSCE), where halo implants raise <span class="math inline">\(V_\mathrm{th}\)</span> of short devices, counteracted at the shortest lengths by the short-channel effect (SCE), which lowers <span class="math inline">\(V_\mathrm{th}\)</span>; both are discussed in <a href="#sec-mosfet-dibl" class="quarto-xref">Section&nbsp;2.7.4</a>. The maximum voltage is the reliability limit of the low-voltage devices set in the model cards (shared by SG13CMOS5L and SG13G2) (<code>VGS_MAX</code>, <code>VDS_MAX</code>); the drain-source breakdown voltage BV<sub>DSS</sub> is higher, at 2.0 V minimum.</p>
 </section>
 </section>
 <section id="sec-mosfet-iv" class="level2" data-number="2.2">
@@ -2349,22 +2358,21 @@ Figure&nbsp;39: CMOS process, steps 9 to 11—back-end: (a) inter-layer dielectr
 </section>
 <section id="sec-technology-ihp" class="level2" data-number="3.9">
 <h2 data-number="3.9" class="anchored" data-anchor-id="sec-technology-ihp"><span class="header-section-number">3.9</span> The Open-Source PDK IHP SG13</h2>
-<p>IHP has open-sourced the <a href="https://en.wikipedia.org/wiki/Process_design_kit">process design kit</a> (PDK) for a 130 nm <a href="https://en.wikipedia.org/wiki/BiCMOS">BiCMOS</a> technology (the current generation is named SG13G2, referred to here simply as IHP SG13) under the Apache-2.0 license. The relevant files, including documentation, can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK">github.com/IHP-GmbH/IHP-Open-PDK</a>. This technology has a lot of interesting features:</p>
+<p>IHP has open-sourced the <a href="https://en.wikipedia.org/wiki/Process_design_kit">process design kits</a> (PDKs) of its 130 nm technologies under the Apache-2.0 license. The relevant files, including documentation, can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK">github.com/IHP-GmbH/IHP-Open-PDK</a>. In this text we use the CMOS-only variant SG13CMOS5L (referred to here simply as IHP SG13), which shares its front-end and its MOSFET models with the <a href="https://en.wikipedia.org/wiki/BiCMOS">BiCMOS</a> technology SG13G2 but uses a reduced metal stack. This technology has a lot of interesting features:</p>
 <ul>
 <li>Support for internal 1.2 V/1.5 V core MOSFETs and 3.3 V I/O MOSFETs</li>
-<li>An aluminum metal stack with 5 thin and 2 thick levels of metal (see <a href="#fig-metal-stack" class="quarto-xref">Figure&nbsp;40</a>)</li>
+<li>An aluminum metal stack with 4 thin and 1 thick level of metal (see <a href="#fig-metal-stack" class="quarto-xref">Figure&nbsp;40</a>)</li>
 <li>Silicided, standard, and high-sheet-rho poly resistors</li>
-<li>A metal-insulator-metal (MIM) capacitor</li>
-<li>A Schottky diode</li>
-<li>Optional high-speed SiGe:C heterojunction bipolar transistors (HBTs)</li>
+<li>A MOS varicap and a vertical PNP</li>
 </ul>
+<p>The BiCMOS sibling SG13G2 additionally offers high-speed SiGe:C heterojunction bipolar transistors (HBTs), a metal-insulator-metal (MIM) capacitor, a Schottky diode, and a metal stack with 5 thin and 2 thick levels of metal.</p>
 <div id="fig-metal-stack" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-metal-stack-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./content/technology/figures/ihp-sg13g2-cross-section.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40" title="Figure&nbsp;40: Cross-section of the IHP SG13 technology (not to scale): five thin metal layers (Metal1 to Metal5) for dense routing and two thick top metal layers (TopMetal1, TopMetal2) for power routing, inductors, and low-loss RF interconnects, with the MIM capacitor embedded between Metal5 and TopMetal1. The FEOL devices are shown at the bottom, and the numbers give the layer and dielectric thicknesses. Source: Fig. 1.1.1 of the SG13G2 Process Specification Rev.&nbsp;1.2, Copyright 2023 IHP PDK Authors, licensed under Apache-2.0, taken from IHP-Open-PDK and cropped out of the original page."><img src="./content/technology/figures/ihp-sg13g2-cross-section.png" class="img-fluid figure-img"></a>
+<a href="./content/technology/figures/ihp-sg13cmos5l-cross-section.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40" title="Figure&nbsp;40: Cross-section of the IHP SG13CMOS5L technology (not to scale): four thin metal layers (Metal1 to Metal4) for dense routing and one 2 µm thick top metal layer (TopMetal1) for power routing, inductors, and bond pads, covered by the oxide/nitride passivation. The FEOL devices are shown at the bottom, and the numbers give the layer and dielectric thicknesses. Source: Fig. 1.1 of the SG13CMOS5L Process Specification Rev.&nbsp;0.2, Copyright 2024 IHP PDK Authors, licensed under Apache-2.0, taken from IHP-Open-PDK and cropped out of the original page."><img src="./content/technology/figures/ihp-sg13cmos5l-cross-section.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-metal-stack-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;40: Cross-section of the IHP SG13 technology (not to scale): five thin metal layers (Metal1 to Metal5) for dense routing and two thick top metal layers (TopMetal1, TopMetal2) for power routing, inductors, and low-loss RF interconnects, with the MIM capacitor embedded between Metal5 and TopMetal1. The FEOL devices are shown at the bottom, and the numbers give the layer and dielectric thicknesses. Source: Fig. 1.1.1 of the <em>SG13G2 Process Specification Rev.&nbsp;1.2</em>, Copyright 2023 IHP PDK Authors, licensed under Apache-2.0, taken from <a href="https://github.com/IHP-GmbH/IHP-Open-PDK">IHP-Open-PDK</a> and cropped out of the original page.
+Figure&nbsp;40: Cross-section of the IHP SG13CMOS5L technology (not to scale): four thin metal layers (Metal1 to Metal4) for dense routing and one 2 µm thick top metal layer (TopMetal1) for power routing, inductors, and bond pads, covered by the oxide/nitride passivation. The FEOL devices are shown at the bottom, and the numbers give the layer and dielectric thicknesses. Source: Fig. 1.1 of the <em>SG13CMOS5L Process Specification Rev.&nbsp;0.2</em>, Copyright 2024 IHP PDK Authors, licensed under Apache-2.0, taken from <a href="https://github.com/IHP-GmbH/IHP-Open-PDK">IHP-Open-PDK</a> and cropped out of the original page.
 </figcaption>
 </figure>
 </div>
@@ -2515,12 +2523,12 @@ Table&nbsp;8: Generic layer definition used in this text
 <tr class="odd">
 <td style="text-align: center;"><code>M3</code></td>
 <td style="text-align: left;"><code>Metal3</code></td>
-<td style="text-align: left;">Third-level metal (top metal of this generic stack; in SG13, the thick aluminum <code>TopMetal2</code> is the top metal and carries the bond pads)</td>
+<td style="text-align: left;">Third-level metal (top metal of this generic stack; in SG13CMOS5L, the thick aluminum <code>TopMetal1</code> is the top metal and carries the bond pads)</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><code>PAD</code></td>
 <td style="text-align: left;"><code>Passiv</code></td>
-<td style="text-align: left;">Opening in the passivation to contact the top metal (in SG13, <code>TopMetal2</code>) for pads</td>
+<td style="text-align: left;">Opening in the passivation to contact the top metal (in SG13CMOS5L, <code>TopMetal1</code>) for pads</td>
 </tr>
 </tbody>
 </table>
@@ -2671,7 +2679,7 @@ Figure&nbsp;44: Metal-oxide-metal (MOM) capacitors: (a) vertical sandwich capaci
 <li>The density of MOM capacitors scales with smaller design rules and the number of metal layers. The lower metal layers should be skipped if the parasitic capacitance to the substrate is a concern.</li>
 <li>The process may offer a specialized <strong>metal-insulator-metal (MIM)</strong> capacitor (density on the order of fF/µm²) using extra masks and processing steps, offering higher specific capacitance and low parasitics at extra cost.</li>
 <li>For high capacitance density, or where nonlinearity is not critical, the <strong>MOSFET gate capacitance</strong> can be used, as the gate oxide is tightly controlled in manufacturing.</li>
-<li>In IHP SG13, a MIM capacitor between <code>Metal5</code> and <code>TopMetal1</code> is available (ca. 1.5 fF/µm²); the MOM finger capacitor has ca. 0.3 fF/µm², so when using 4 metal layers the effective capacitance is comparable to the MIM capacitor.</li>
+<li>IHP SG13CMOS5L offers no MIM capacitor, so MOM or MOS capacitors are used instead. Its PDK provides the MOM finger capacitor <code>cap_cmomf</code> on <code>Metal1</code> to <code>Metal4</code> with ca. 0.3 fF/µm² per metal layer (1.29 fF/µm² for all four layers); the model is simulation-derived and not yet validated on silicon. Using all 4 thin metal layers, a MOM capacitor thus comes close to the ca. 1.5 fF/µm² of the MIM capacitor between <code>Metal5</code> and <code>TopMetal1</code> in the BiCMOS sibling SG13G2.</li>
 </ul>
 </section>
 <section id="diodes" class="level3" data-number="4.3.5">
@@ -2742,7 +2750,7 @@ Figure&nbsp;47: The antenna effect and its fixes (cross sections): (a) a long <c
 </div>
 </div>
 </div>
-<p>The complete layout rules of the open-source IHP SG13 PDK can be found in the <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules document</a> and serve as a practical example of a production DRC rule set.</p>
+<p>The complete layout rules of the open-source IHP SG13 PDK can be found in the <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13cmos5l/libs.doc/doc/SG13CMOS5L_os_layout_rules.pdf">SG13CMOS5L layout rules document</a> and serve as a practical example of a production DRC rule set.</p>
 </section>
 </section>
 <section id="sec-layout-analog" class="level2" data-number="4.5">
@@ -2903,7 +2911,7 @@ Figure&nbsp;53: Precisely matched capacitor pair with <span class="math inline">
 <li><strong>RLCK-extracted:</strong> Parasitic <span class="math inline">\(R\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(L\)</span>, and <span class="math inline">\(k\)</span> of the wiring are extracted, resulting in a very accurate simulation including the main crosstalk effects—but the circuit network gets much larger, impacting simulation time and convergence.</li>
 <li><strong>EM simulation:</strong> Highest accuracy; the resulting <span class="math inline">\(S\)</span>-parameters are either used directly in frequency-domain simulations or transformed into equivalent lumped-element circuits. Huge simulation-time impact, but valid to very high frequencies (&gt; 100 GHz); usually only suitable for individual circuit blocks.</li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled" title="Parasitic Extraction with KLayout-PEX">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -3872,11 +3880,11 @@ Table&nbsp;13: Energy efficiency versus flexibility of digital design styles
 <ul>
 <li>Logic functions (AND, OR, NAND, NOR, INV, XOR, XNOR) with 2 and more inputs (usually up to 4).</li>
 <li>Complex gates (like combined AND-OR gates, half-adders, bit-shifter cells).</li>
-<li>Auxiliary cells (buffers to balance delays, tie-high/tie-low cells driving constant logic levels, well-tap cells to bias n-wells and substrate, decoupling cells, spacers, tri-state buffers, antenna diodes). Some libraries have no separate well-tap cells and place the taps inside each cell instead (e.g., <code>sg13g2_stdcell</code>).</li>
+<li>Auxiliary cells (buffers to balance delays, tie-high/tie-low cells driving constant logic levels, well-tap cells to bias n-wells and substrate, decoupling cells, spacers, tri-state buffers, antenna diodes). Some libraries have no separate well-tap cells and place the taps inside each cell instead (e.g., <code>sg13cmos5l_stdcell</code>).</li>
 <li>Storage elements (latches, flip-flops).</li>
 </ul>
 <p>The logic cells are available in different <strong>drive strengths</strong> to balance chip area versus propagation delay versus power consumption (active as well as leakage). The cells are thoroughly characterized for timing, power consumption, capacitive load, and leakage versus PVTL (process, voltage, temperature, load), and the results are stored in look-up tables used by the EDA tools.</p>
-<p>As an example, <a href="#fig-nand2-schematic" class="quarto-xref">Figure&nbsp;74</a> shows the transistor-level schematic of a NAND2 standard cell; in the IHP SG13 open PDK, this cell is available in two drive strengths (<a href="https://github.com/IHP-GmbH/IHP-Open-PDK/tree/main/ihp-sg13g2/libs.ref/sg13g2_stdcell"><code>nand2_1</code> and <code>nand2_2</code></a>). Also, various latches and flip-flops are provided, with and without scan-chain support, with optional set and reset, and in different drive strengths (e.g., the scan flip-flop <code>sdfbbp_1</code> with inverted asynchronous set and reset).</p>
+<p>As an example, <a href="#fig-nand2-schematic" class="quarto-xref">Figure&nbsp;74</a> shows the transistor-level schematic of a NAND2 standard cell; in the IHP SG13 open PDK, this cell is available in two drive strengths (<a href="https://github.com/IHP-GmbH/IHP-Open-PDK/tree/main/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell"><code>nand2_1</code> and <code>nand2_2</code></a>). Also, various latches and flip-flops are provided, with and without scan-chain support, with optional set and reset, and in different drive strengths (e.g., the scan flip-flop <code>sdfbbp_1</code> with inverted asynchronous set and reset).</p>
 <div id="cell-fig-nand2-schematic" class="cell" data-execution_count="73">
 <div class="cell-output cell-output-display">
 <div id="fig-nand2-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3910,7 +3918,7 @@ Figure&nbsp;75: Typical layout organization of a standard cell (shown: an invert
 <section id="hard-macros" class="level3" data-number="8.3.2">
 <h3 data-number="8.3.2" class="anchored" data-anchor-id="hard-macros"><span class="header-section-number">8.3.2</span> Hard Macros</h3>
 <p>Usually read-only memories (ROM), random-access memories (RAM), and one-time programmable (OTP) memories like e-fuses are available as hard macros, created by <strong>module generators</strong> (“memory compilers”). SRAM generators often provide plenty of options, like the number of rows and columns, with or without repair, built-in self-test (BIST), single- or dual-port, and high-performance or low-leakage variants.</p>
-<p>IO cells (input/output cells for interfacing with the external pins of the chip, providing the necessary voltage level shifting, drive strength, and protection circuitry) are often provided as hard macros as well, for example the <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/tree/main/ihp-sg13g2/libs.ref/sg13g2_io"><code>sg13g2_io</code></a> library in the IHP SG13G2 open PDK. From these IO cells the padring is constructed, which surrounds the core logic and provides the interface to the external pins.</p>
+<p>IO cells (input/output cells for interfacing with the external pins of the chip, providing the necessary voltage level shifting, drive strength, and protection circuitry) are often provided as hard macros as well, for example the <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/tree/main/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io"><code>sg13cmos5l_io</code></a> library in the IHP SG13CMOS5L open PDK. From these IO cells the padring is constructed, which surrounds the core logic and provides the interface to the external pins.</p>
 </section>
 </section>
 <section id="sec-methodology-flow" class="level2" data-number="8.4">
@@ -3968,7 +3976,7 @@ Figure&nbsp;78: Standard-cell place-and-route flow with open-source tools: place
 </section>
 <section id="the-open-source-rtl-to-gds-flow" class="level3" data-number="8.4.3">
 <h3 data-number="8.4.3" class="anchored" data-anchor-id="the-open-source-rtl-to-gds-flow"><span class="header-section-number">8.4.3</span> The Open-Source RTL-to-GDS Flow</h3>
-<p>In recent years, open-source tools have made a huge step forward, so that a complete behavioral (SystemVerilog) to GDSII flow is freely available with <a href="https://github.com/The-OpenROAD-Project/OpenROAD">OpenROAD</a> and the integrated <a href="https://github.com/librelane/librelane">LibreLane</a> flow. Together with the IHP SG13 open-source PDK—including its open standard-cell library (<a href="https://github.com/IHP-GmbH/IHP-Open-PDK/tree/main/ihp-sg13g2/libs.ref/sg13g2_stdcell">sg13g2_stdcell</a>)—everything needed for a digital tapeout is now openly available. This has dramatically lowered the barrier to entry for chip design: students, researchers, and hobbyists can take a design all the way from RTL to a manufacturable layout without any commercial tool licenses, and low-cost <a href="https://en.wikipedia.org/wiki/Multi-project_wafer_service">multi-project wafer</a> shuttle runs make it feasible to obtain real silicon.</p>
+<p>In recent years, open-source tools have made a huge step forward, so that a complete behavioral (SystemVerilog) to GDSII flow is freely available with <a href="https://github.com/The-OpenROAD-Project/OpenROAD">OpenROAD</a> and the integrated <a href="https://github.com/librelane/librelane">LibreLane</a> flow. Together with the IHP SG13 open-source PDK—including its open standard-cell library (<a href="https://github.com/IHP-GmbH/IHP-Open-PDK/tree/main/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell">sg13cmos5l_stdcell</a>)—everything needed for a digital tapeout is now openly available. This has dramatically lowered the barrier to entry for chip design: students, researchers, and hobbyists can take a design all the way from RTL to a manufacturable layout without any commercial tool licenses, and low-cost <a href="https://en.wikipedia.org/wiki/Multi-project_wafer_service">multi-project wafer</a> shuttle runs make it feasible to obtain real silicon.</p>
 </section>
 </section>
 <section id="sec-methodology-custom" class="level2" data-number="8.5">
@@ -4220,13 +4228,13 @@ Figure&nbsp;88: Guard rings for latch-up prevention (layout top view): the NMOS 
 </div>
 </div>
 <p>Adopting these design practices helps to significantly reduce the risk of latch-up in CMOS circuits.</p>
-<p>Foundries cast these practices into their design rule manuals. IHP SG13G2, for example, dedicates Sec. 7.2 <em>Latch-up Guidelines</em> of the <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a> to the topic:</p>
+<p>Foundries cast these practices into their design rule manuals. IHP SG13CMOS5L, for example, dedicates Sec. 7.2 <em>Latch-up Guidelines</em> of the <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13cmos5l/libs.doc/doc/SG13CMOS5L_os_layout_rules.pdf">SG13CMOS5L layout rules</a> to the topic:</p>
 <ul>
 <li>For <strong>output buffers</strong>, the sources of the NMOS and PMOS have to be tied to <span class="math inline">\(V_\mathrm{SS}\)</span> and <span class="math inline">\(V_\mathrm{DD}\)</span> and their drains connected directly to the pad; guard rings (well and substrate ties) are required around every device directly tied to a pad, and <em>double</em> guard rings (an n-well isolator plus a <span class="math inline">\(p^+\)</span> isolator) have to be placed between the n-channel and p-channel buffers, as well as between the buffers and the internal circuitry.</li>
 <li>Rules <code>LU.a</code> and <code>LU.b</code> limit the maximum distance from any <span class="math inline">\(p^+\)</span> active area inside the n-well to an n-well tie, and from any <span class="math inline">\(n^+\)</span> active area inside the p-well to a substrate tie, to 20 µm—this is the rule-deck version of “place many well and substrate ties”.</li>
 <li>Rules <code>LU.c</code> to <code>LU.d1</code> limit how far a tie may extend beyond its contact (6 µm), which keeps the resistance of the tie itself low.</li>
 </ul>
-<p>In the open-source SG13G2 KLayout DRC decks, the latch-up rules are checked by default (since IHP-Open-PDK commit <code>3b393f31</code>, March 2025): the maximal deck runs them unless <code>latchUpRules</code> is set to <code>false</code>, and the regular deck runs <code>LU.b</code> unless the <code>precheck_drc</code> option is set. Older versions of the layout-rule document still state otherwise, so check which rules your deck actually runs.</p>
+<p>In the open-source KLayout DRC decks, the latch-up rules are checked by default: the maximal deck runs them unless <code>latchUpRules</code> is set to <code>false</code>, and the regular deck runs <code>LU.b</code> unless the <code>precheck_drc</code> option is set. The layout-rule documents still state otherwise, so check which rules your deck actually runs.</p>
 </section>
 </section>
 </section>
@@ -4656,7 +4664,7 @@ R_\mathrm{G,nqs} = \frac{1}{5 g_\mathrm{m}}
 <section id="sec-project-goals" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="sec-project-goals"><span class="header-section-number">12.1</span> Goals and Constraints</h2>
 <p>Every project is bounded by the <strong>triple constraint</strong> of <em>scope</em> (what is delivered, including its quality), <em>time</em>, and <em>cost</em>. These three are coupled: adding functionality to an IC under a fixed tapeout date increases cost (more engineers, more licenses) or lowers quality (less verification); a fixed team and scope define the earliest realistic tapeout date. The project management has to make these trade-offs explicit and agree on them with the sponsor—a plan that silently assumes all three can be held at once is not a plan.</p>
-<p>Project goals should be formulated so that everybody can decide whether they are met. A widely used checklist is <strong>SMART</strong>: goals are <em>specific</em>, <em>measurable</em>, <em>achievable</em>, <em>relevant</em>, and <em>time-bound</em> (in the original proposal <span class="citation" data-cites="Doran_1981">(<a href="#ref-Doran_1981" role="doc-biblioref">Doran 1981</a>)</span>, the letters stood for <em>specific</em>, <em>measurable</em>, <em>assignable</em>, <em>realistic</em>, and <em>time-related</em>). “Design a low-power ADC” is not a goal; “tape out a 10 bit SAR ADC with <span class="math inline">\(\geq 9.5\)</span> bit ENOB at 1 MS/s and <span class="math inline">\(\leq 100\,\mu\text{W}\)</span> on the IHP SG13G2 shuttle of March” is.</p>
+<p>Project goals should be formulated so that everybody can decide whether they are met. A widely used checklist is <strong>SMART</strong>: goals are <em>specific</em>, <em>measurable</em>, <em>achievable</em>, <em>relevant</em>, and <em>time-bound</em> (in the original proposal <span class="citation" data-cites="Doran_1981">(<a href="#ref-Doran_1981" role="doc-biblioref">Doran 1981</a>)</span>, the letters stood for <em>specific</em>, <em>measurable</em>, <em>assignable</em>, <em>realistic</em>, and <em>time-related</em>). “Design a low-power ADC” is not a goal; “tape out a 10 bit SAR ADC with <span class="math inline">\(\geq 9.5\)</span> bit ENOB at 1 MS/s and <span class="math inline">\(\leq 100\,\mu\text{W}\)</span> on the IHP SG13CMOS5L shuttle of March” is.</p>
 <p>For an IC, the goals are condensed into the <strong>specification</strong>. The most expensive changes are those made late, as each change ripples through design, layout, verification, test program, and documentation. Therefore, the specification is reviewed and <strong>frozen</strong> at an early milestone; later changes are still possible, but go through a formal <strong>change request</strong> that assesses the impact on schedule and cost before the change is accepted.</p>
 </section>
 <section id="sec-project-phases" class="level2" data-number="12.2">
@@ -5317,30 +5325,65 @@ Weste, Neil H. E., and David Money Harris. 2011. <em>CMOS VLSI Design: A Circuit
 <ol>
 <li id="fn1"><p>The mobility value used here is not fully consistent with the process constant <span class="math inline">\(K_\mathrm{n} = \mu_\mathrm{n}C'_\mathrm{ox}= 280\,\mu\text{A/V}^2\)</span> in <a href="#tbl-ihp130-parameters" class="quarto-xref">Table&nbsp;1</a>, which (with <span class="math inline">\(C'_\mathrm{ox}= 17.3\,\text{fF/µm}^2\)</span>) would imply an effective <span class="math inline">\(\mu_\mathrm{n}\approx 160\,\text{cm}^2/(\text{V}\cdot\text{s})\)</span>. The effective mobility depends strongly on the vertical field and thus on bias; such spread between simple hand-calculation parameters is normal and is one more reason to verify all sizing choices by simulation.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2026,
+</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><div class="code-copy-outer-scaffold"><pre class="sourceCode quarto-appendix-bibtex code-with-copy"><code class="sourceCode bibtex">@online{pretl2026,
   author = {Pretl, Harald},
   title = {Design of {Complex} {Integrated} {Circuits}},
-  date = {2026-10-14},
+  date = {2026-11-11},
   url = {https://iic-jku.github.io/design-complex-ic},
   langid = {en-US}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2026" class="csl-entry quarto-appendix-citeas" role="listitem">
+</code></pre><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald. 2026. <span>“Design of Complex Integrated
-Circuits.”</span> October 14. <a href="https://iic-jku.github.io/design-complex-ic">https://iic-jku.github.io/design-complex-ic</a>.
+Circuits.”</span> November 11. <a href="https://iic-jku.github.io/design-complex-ic">https://iic-jku.github.io/design-complex-ic</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -5419,7 +5462,8 @@ Circuits.”</span> October 14. <a href="https://iic-jku.github.io/design-comple
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -5428,8 +5472,69 @@ Circuits.”</span> October 14. <a href="https://iic-jku.github.io/design-comple
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -5443,6 +5548,7 @@ Circuits.”</span> October 14. <a href="https://iic-jku.github.io/design-comple
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -5605,44 +5711,54 @@ Circuits.”</span> October 14. <a href="https://iic-jku.github.io/design-comple
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -5740,6 +5856,9 @@ Circuits.”</span> October 14. <a href="https://iic-jku.github.io/design-comple
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">

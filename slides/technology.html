@@ -7,13 +7,13 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.19">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <title>Design of Complex Integrated Circuits – IC Technology</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-108d7594e3aa95dbecf5138aa9cd9f30.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-3bb3caf0b958c5be0bbd85ee16d9678b.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -306,7 +306,6 @@ Resistivity of silicon at 300 K as a function of the doping concentration, calcu
 </section>
 <section class="slide level3 unnumbered">
 <h3>Doping</h3>
-<div id="nte-wafer-resistivity">
 <div id="nte-wafer-resistivity" class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -317,7 +316,6 @@ Resistivity of silicon at 300 K as a function of the doping concentration, calcu
 </div>
 <div class="callout-content">
 <p>Let us assume a <span class="math inline">\(p\)</span>-type wafer with 50 Ω cm resistivity (as used in IHP SG13 CMOS). Using <a href="#/fig-resistivity" class="quarto-xref">Figure&nbsp;26</a>, we find <span class="math inline">\(N_\mathrm{a}= p_0 \approx 2.7 \times 10^{14}\,\text{cm}^{-3}\)</span>, which results in <span class="math inline">\(n_0 \approx n_\mathrm{i}^2 / N_\mathrm{a}= 3.7 \times 10^{5}\,\text{cm}^{-3}\)</span>. This doping concentration equates to about one acceptor atom per 180 million silicon atoms!</p>
-</div>
 </div>
 </div>
 </div>
@@ -1025,14 +1023,13 @@ Figure&nbsp;39: CMOS process, steps 9 to 11—back-end: (a) inter-layer dielectr
 <h3>The Open-Source PDK IHP SG13</h3>
 <ul>
 <li>Support for internal 1.2 V/1.5 V core MOSFETs and 3.3 V I/O MOSFETs</li>
-<li>An aluminum metal stack with 5 thin and 2 thick levels of metal (see <a href="#/fig-metal-stack" class="quarto-xref">Figure&nbsp;40</a>)</li>
+<li>An aluminum metal stack with 4 thin and 1 thick level of metal (see <a href="#/fig-metal-stack" class="quarto-xref">Figure&nbsp;40</a>)</li>
 <li>Silicided, standard, and high-sheet-rho poly resistors</li>
-<li>A metal-insulator-metal (MIM) capacitor</li>
-<li>A Schottky diode</li>
-<li>Optional high-speed SiGe:C heterojunction bipolar transistors (HBTs)</li>
+<li>A MOS varicap and a vertical PNP</li>
 </ul>
 <aside class="notes">
-<p>IHP has open-sourced the <a href="https://en.wikipedia.org/wiki/Process_design_kit">process design kit</a> (PDK) for a 130 nm <a href="https://en.wikipedia.org/wiki/BiCMOS">BiCMOS</a> technology (the current generation is named SG13G2, referred to here simply as IHP SG13) under the Apache-2.0 license. The relevant files, including documentation, can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK">github.com/IHP-GmbH/IHP-Open-PDK</a>. This technology has a lot of interesting features:</p>
+<p>IHP has open-sourced the <a href="https://en.wikipedia.org/wiki/Process_design_kit">process design kits</a> (PDKs) of its 130 nm technologies under the Apache-2.0 license. The relevant files, including documentation, can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK">github.com/IHP-GmbH/IHP-Open-PDK</a>. In this text we use the CMOS-only variant SG13CMOS5L (referred to here simply as IHP SG13), which shares its front-end and its MOSFET models with the <a href="https://en.wikipedia.org/wiki/BiCMOS">BiCMOS</a> technology SG13G2 but uses a reduced metal stack. This technology has a lot of interesting features:</p>
+<p>The BiCMOS sibling SG13G2 additionally offers high-speed SiGe:C heterojunction bipolar transistors (HBTs), a metal-insulator-metal (MIM) capacitor, a Schottky diode, and a metal stack with 5 thin and 2 thick levels of metal.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1048,10 +1045,10 @@ Figure&nbsp;39: CMOS process, steps 9 to 11—back-end: (a) inter-layer dielectr
 <section class="slide level3 unnumbered">
 <h3>The Open-Source PDK IHP SG13</h3>
 
-<img data-src="../content/technology/figures/ihp-sg13g2-cross-section.png" class="r-stretch quarto-figure-center" id="fig-metal-stack"><p class="caption">
-Figure&nbsp;40: Cross-section of the IHP SG13 technology (not to scale): five thin metal layers (Metal1 to Metal5) for dense routing and two thick top metal layers (TopMetal1, TopMetal2) for power routing, inductors, and low-loss RF interconnects, with the MIM capacitor embedded between Metal5 and TopMetal1.
+<img data-src="../content/technology/figures/ihp-sg13cmos5l-cross-section.png" class="r-stretch quarto-figure-center" id="fig-metal-stack"><p class="caption">
+Figure&nbsp;40: Cross-section of the IHP SG13CMOS5L technology (not to scale): four thin metal layers (Metal1 to Metal4) for dense routing and one 2 µm thick top metal layer (TopMetal1) for power routing, inductors, and bond pads, covered by the oxide/nitride passivation.
 </p><aside class="notes">
-Cross-section of the IHP SG13 technology (not to scale): five thin metal layers (Metal1 to Metal5) for dense routing and two thick top metal layers (TopMetal1, TopMetal2) for power routing, inductors, and low-loss RF interconnects, with the MIM capacitor embedded between Metal5 and TopMetal1. The FEOL devices are shown at the bottom, and the numbers give the layer and dielectric thicknesses. Source: Fig. 1.1.1 of the <em>SG13G2 Process Specification Rev.&nbsp;1.2</em>, Copyright 2023 IHP PDK Authors, licensed under Apache-2.0, taken from <a href="https://github.com/IHP-GmbH/IHP-Open-PDK">IHP-Open-PDK</a> and cropped out of the original page.
+Cross-section of the IHP SG13CMOS5L technology (not to scale): four thin metal layers (Metal1 to Metal4) for dense routing and one 2 µm thick top metal layer (TopMetal1) for power routing, inductors, and bond pads, covered by the oxide/nitride passivation. The FEOL devices are shown at the bottom, and the numbers give the layer and dielectric thicknesses. Source: Fig. 1.1 of the <em>SG13CMOS5L Process Specification Rev.&nbsp;0.2</em>, Copyright 2024 IHP PDK Authors, licensed under Apache-2.0, taken from <a href="https://github.com/IHP-GmbH/IHP-Open-PDK">IHP-Open-PDK</a> and cropped out of the original page.
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1201,7 +1198,7 @@ Sproul, Alistair B., and Martin A. Green. 1991. <span>“Improved Value for the 
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"numbers":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu","numbers":true},
 'chalkboard': {"buttons":true},
 'smaller': false,
  
@@ -1457,7 +1454,8 @@ Sproul, Alistair B., and Martin A. Green. 1991. <span>“Improved Value for the 
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -1466,8 +1464,69 @@ Sproul, Alistair B., and Martin A. Green. 1991. <span>“Improved Value for the 
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -1481,6 +1540,7 @@ Sproul, Alistair B., and Martin A. Green. 1991. <span>“Improved Value for the 
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;
